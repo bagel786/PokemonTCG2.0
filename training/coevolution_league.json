@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "source": "Co-evolution training league. Weights favour learned archetypes; heuristic-only decks are coverage. Evaluation matrix stays in meta_league.json.",
+  "opponents": [
+    {
+      "name": "grimmsnarl_marnie",
+      "deck": "freshstart/decklists/grimmsnarl_marnie.deck.csv",
+      "model": "artifacts/coevo_run_02/round_001/grimmsnarl_marnie_challenger.npz",
+      "meta_weight": 54,
+      "train_weight": 15,
+      "evaluate": true,
+      "plan": "Pressure Impidimp/Morgrem before Punk Up; preserve Grass attackers and respect bench snipe."
+    },
+    {
+      "name": "team_rockets_mewtwo_ex",
+      "deck": "freshstart/decklists/team_rockets_mewtwo_ex.deck.csv",
+      "meta_weight": 14,
+      "train_weight": 10,
+      "evaluate": true,
+      "plan": "Deny the fourth Rocket Pokemon or KO Mewtwo with Dark damage; account for effect immunity."
+    },
+    {
+      "name": "alakazam_dudunsparce",
+      "deck": "freshstart/decklists/alakazam_dudunsparce.deck.csv",
+      "meta_weight": 10,
+      "train_weight": 10,
+      "evaluate": true,
+      "plan": "Attack its hand and Stage-2 setup; use effect protection against Powerful Hand counters."
+    },
+    {
+      "name": "kangaskhan_crustle",
+      "deck": "freshstart/decklists/kangaskhan_crustle.deck.csv",
+      "meta_weight": 8,
+      "train_weight": 12,
+      "evaluate": true,
+      "plan": "Keep a non-ex damage attacker or effect-ignoring attack for Crustle and Cornerstone Ogerpon."
+    },
+    {
+      "name": "dragapult_ex",
+      "deck": "freshstart/decklists/dragapult_ex.deck.csv",
+      "meta_weight": 4,
+      "train_weight": 9,
+      "evaluate": true,
+      "plan": "Protect the bench, diversify energy, and remove Dreepy before Phantom Dive spread comes online."
+    },
+    {
+      "name": "cynthias_garchomp_ex",
+      "deck": "freshstart/decklists/cynthias_garchomp_ex.deck.csv",
+      "meta_weight": 4,
+      "train_weight": 8,
+      "evaluate": true,
+      "plan": "Exploit the post-Buster energy rebuild turn and target Roserade/Gabite engines."
+    },
+    {
+      "name": "mega_kangaskhan_toolbox",
+      "deck": "freshstart/decklists/mega_kangaskhan_toolbox.deck.csv",
+      "meta_weight": 2,
+      "train_weight": 3,
+      "evaluate": true,
+      "plan": "Optimize prize trades and remove free-pivot Latias or the matchup-specific attacker first."
+    },
+    {
+      "name": "mega_lopunny_ex",
+      "deck": "freshstart/decklists/mega_lopunny_ex.deck.csv",
+      "meta_weight": 2,
+      "train_weight": 3,
+      "evaluate": true,
+      "plan": "Deny the bench-to-active pivot bonus and exploit Fighting weakness."
+    },
+    {
+      "name": "dipplin_thwackey",
+      "deck": "freshstart/decklists/dipplin_thwackey.deck.csv",
+      "meta_weight": 2,
+      "train_weight": 3,
+      "evaluate": true,
+      "plan": "Replace Festival Grounds immediately; without it, damage and Thwackey tutoring collapse."
+    },
+    {
+      "name": "mega_starmie_froslass",
+      "deck": "freshstart/decklists/mega_starmie_froslass.deck.csv",
+      "meta_weight": 2,
+      "train_weight": 3,
+      "evaluate": true,
+      "plan": "Keep hand size controlled against Froslass and avoid vulnerable bench targets against Starmie."
+    },
+    {
+      "name": "alakazam_2_7_external",
+      "deck": "freshstart/elite_submissions/alakazam_2_7/deck.csv",
+      "submission": "freshstart/elite_submissions/alakazam_2_7",
+      "submission_env": {
+        "NO_LETHAL": "1"
+      },
+      "meta_weight": 0,
+      "train_weight": 4,
+      "evaluate": false,
+      "plan": "Historical low/high-800s Alakazam specialist; fast learned direct policy."
+    },
+    {
+      "name": "alakazam_2_4a_external_fast",
+      "deck": "freshstart/elite_submissions/alakazam_2_4a/deck.csv",
+      "submission": "freshstart/elite_submissions/alakazam_2_4a",
+      "submission_env": {
+        "DIRECT_POLICY": "1",
+        "NO_LETHAL": "1"
+      },
+      "meta_weight": 0,
+      "train_weight": 4,
+      "evaluate": false,
+      "plan": "Historical Alakazam specialist in learned-prior mode; original rollout mode is reserved for evaluation."
+    },
+    {
+      "name": "grimmsnarl_5k_frozen",
+      "deck": "freshstart/decklists/grimmsnarl_marnie.deck.csv",
+      "model": "artifacts/overnight_grim_20260730/grim_selected.npz",
+      "meta_weight": 0,
+      "train_weight": 35,
+      "evaluate": false,
+      "plan": "Frozen submitted 5k PPO incumbent ported to v3. Strong opponent that never trains, so the population has real strength to climb toward."
+    }
+  ]
+}

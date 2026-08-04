@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "purpose": "Single-learner Grimmsnarl 10k PPO generation",
+  "opponents": [
+    {
+      "name": "live_grimmsnarl_mirror",
+      "deck": "freshstart/decklists/grimmsnarl_marnie.deck.csv",
+      "model": "artifacts/overnight_grim_20260730/grim_selected.npz",
+      "train_weight": 50
+    },
+    {
+      "name": "previous_grimmsnarl_snapshot",
+      "deck": "freshstart/decklists/grimmsnarl_marnie.deck.csv",
+      "model": "artifacts/grimmsnarl_bc_500.npz",
+      "train_weight": 20
+    },
+    {
+      "name": "alakazam_2_7_fast",
+      "deck": "freshstart/elite_submissions/alakazam_2_7/deck.csv",
+      "submission": "freshstart/elite_submissions/alakazam_2_7",
+      "submission_env": {"NO_LETHAL": "1"},
+      "train_weight": 15
+    },
+    {
+      "name": "alakazam_2_4a_fast",
+      "deck": "freshstart/elite_submissions/alakazam_2_4a/deck.csv",
+      "submission": "freshstart/elite_submissions/alakazam_2_4a",
+      "submission_env": {"DIRECT_POLICY": "1", "NO_LETHAL": "1"},
+      "train_weight": 5
+    },
+    {"name": "mewtwo_meta", "deck": "freshstart/decklists/team_rockets_mewtwo_ex.deck.csv", "train_weight": 2.5},
+    {"name": "crustle_meta", "deck": "freshstart/decklists/kangaskhan_crustle.deck.csv", "train_weight": 2.0},
+    {"name": "dragapult_meta", "deck": "freshstart/decklists/dragapult_ex.deck.csv", "train_weight": 1.5},
+    {"name": "garchomp_meta", "deck": "freshstart/decklists/cynthias_garchomp_ex.deck.csv", "train_weight": 1.0},
+    {"name": "toolbox_meta", "deck": "freshstart/decklists/mega_kangaskhan_toolbox.deck.csv", "train_weight": 1.0},
+    {"name": "lopunny_meta", "deck": "freshstart/decklists/mega_lopunny_ex.deck.csv", "train_weight": 0.5},
+    {"name": "dipplin_meta", "deck": "freshstart/decklists/dipplin_thwackey.deck.csv", "train_weight": 0.5},
+    {"name": "starmie_meta", "deck": "freshstart/decklists/mega_starmie_froslass.deck.csv", "train_weight": 0.5}
+  ]
+}

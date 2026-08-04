@@ -1,0 +1,31 @@
+Mega Lucario ex — observed variant 2
+
+Reconstructed from 21 of the 66 cached Lucario opponent replays used by the
+Lucario sparring curriculum. This variant trades one Riolu, Boss's Orders, and
+Basic Fighting Energy from the primary list for two Poke Pad and one additional
+Gravity Mountain.
+
+-- Basic Pokemon --
+3x 677 Riolu
+3x 676 Solrock
+2x 673 Makuhita
+2x 674 Hariyama
+2x 675 Lunatone
+
+-- Mega Pokemon ex --
+4x 678 Mega Lucario ex
+
+-- Trainer --
+4x 1102 Dusk Ball
+2x 1123 Switch
+4x 1141 Premium Power Pro
+4x 1142 Fighting Gong
+4x 1152 Poke Pad
+1x 1159 Hero's Cape
+2x 1182 Boss's Orders
+4x 1192 Carmine
+4x 1227 Lillie's Determination
+2x 1252 Gravity Mountain
+
+-- Basic Energy --
+13x 6 Basic {F} Energy

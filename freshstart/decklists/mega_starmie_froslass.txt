@@ -1,0 +1,43 @@
+Mega Starmie ex / Mega Froslass ex
+played by stardom — leaderboard rank 162, team score 979.6 (2026-07-29)
+
+(A leaderboard score is the team's — the higher-rated of their two live submissions,
+which may be a different deck than this one.)
+
+-- Basic Pokémon --
+3x  860   Snorunt
+3x  1030  Staryu
+1x  117   Cornerstone Mask Ogerpon ex
+1x  414   Team Rocket's Articuno
+
+-- Stage 1 Pokémon --
+3x  861   Mega Froslass ex
+3x  1031  Mega Starmie ex
+
+-- Stage 2 Pokémon --
+2x  666   Cinderace
+
+-- Pokémon Tool --
+1x  1159  Hero’s Cape
+
+-- Supporter --
+4x  1227  Lillie's Determination
+4x  1229  Wally's Compassion
+3x  1225  Hilda
+2x  1182  Boss’s Orders
+2x  1197  Xerosic’s Machinations
+1x  1189  Salvatore
+1x  1224  Cheren
+
+-- Item --
+4x  1086  Buddy-Buddy Poffin
+3x  1121  Ultra Ball
+3x  1122  Pokégear 3.0
+3x  1145  Mega Signal
+
+-- Stadium --
+4x  1262  Surfing Beach
+
+-- Basic Energy --
+8x  3     Basic {W} Energy
+1x  6     Basic {F} Energy

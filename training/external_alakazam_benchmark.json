@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "source": "User-provided historical Kaggle submissions",
+  "opponents": [
+    {
+      "name": "alakazam_2_7_authentic",
+      "deck": "freshstart/elite_submissions/alakazam_2_7/deck.csv",
+      "submission": "freshstart/elite_submissions/alakazam_2_7",
+      "meta_weight": 1,
+      "train_weight": 1,
+      "evaluate": true
+    },
+    {
+      "name": "alakazam_2_4a_authentic",
+      "deck": "freshstart/elite_submissions/alakazam_2_4a/deck.csv",
+      "submission": "freshstart/elite_submissions/alakazam_2_4a",
+      "meta_weight": 1,
+      "train_weight": 1,
+      "evaluate": true
+    }
+  ]
+}

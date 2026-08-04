@@ -1,0 +1,34 @@
+Mega Lucario ex
+Reconstructed from live opponent replays (2026-08-02): the exact 60-card list
+appeared 28 of 66 observed opponent-Lucario games across cached submissions
+55198084/55198075/55189658/55180261/55171235/55114709/55180215/55149662/55189662.
+A second variant appeared 21 of 66 times (not used here).
+
+-- Basic Pokemon --
+4x  677   Riolu
+3x  676   Solrock
+2x  673   Makuhita
+2x  674   Hariyama
+2x  675   Lunatone
+
+-- Mega Pokemon ex --
+4x  678   Mega Lucario ex
+
+-- Supporter --
+4x  1192  Carmine
+4x  1227  Lillie's Determination
+3x  1182  Boss's Orders
+
+-- Item --
+4x  1102  Dusk Ball
+4x  1141  Premium Power Pro
+4x  1142  Fighting Gong
+2x  1123  Switch
+2x  1152  Poke Pad
+1x  1159  Hero's Cape
+
+-- Stadium --
+1x  1252  Gravity Mountain
+
+-- Basic Energy --
+14x 6     Basic {F} Energy

@@ -1,0 +1,44 @@
+Cynthia's Garchomp ex
+played by junlee789 — leaderboard rank 70, team score 1033.9 (2026-07-29)
+Yudai Ueno runs this same 60-card list at rank 147 / 987.4.
+
+(A leaderboard score is the team's — the higher-rated of their two live submissions,
+which may be a different deck than this one.)
+
+-- Basic Pokémon --
+4x  341   Cynthia's Roselia
+4x  379   Cynthia's Gible
+2x  387   Cynthia's Spiritomb
+
+-- Stage 1 Pokémon --
+4x  380   Cynthia's Gabite
+3x  342   Cynthia's Roserade
+
+-- Stage 2 Pokémon --
+3x  381   Cynthia's Garchomp ex
+
+-- Pokémon Tool --
+3x  1173  Cynthia's Power Weight
+
+-- Supporter --
+4x  1227  Lillie's Determination
+3x  1225  Hilda
+2x  1182  Boss’s Orders
+1x  1197  Xerosic’s Machinations
+1x  1203  Surfer
+
+-- Item --
+4x  1086  Buddy-Buddy Poffin
+4x  1142  Fighting Gong
+4x  1152  Poké Pad
+2x  1097  Night Stretcher
+1x  1080  Unfair Stamp
+
+-- Stadium --
+2x  1261  Forest of Vitality
+
+-- Basic Energy --
+5x  6     Basic {F} Energy
+
+-- Special Energy --
+4x  20    Rock Fighting Energy

@@ -1,0 +1,15 @@
+{
+  "archive": "/Users/safiullahbaig/Projects/pokemonTCG2.0/grimmsnarl_replay_refresh_challenger.tar.gz",
+  "bytes": 4694365,
+  "sha256": "e7038dafde9e5683b4ad4776be8b8ad663aaa4940ecb057060bc5da89154cee7",
+  "deck": "grimmsnarl",
+  "deck_sha256": "92b92bac9f9163ecff933b3dc39294d2cc154c8684f3c8497877661419ebc59d",
+  "model": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/5k_replay_refresh_20260802/full/candidates/lr1e-04_seed20260803/policy_weights.npz",
+  "model_sha256": "1482f3490c7444a29b63512be988e55bf7eae5685f76211e5941b3fe0d7d320a",
+  "prior": "/Users/safiullahbaig/Projects/pokemonTCG2.0/freshstart/submission_template/elite_prior.json",
+  "prior_sha256": "b8c34d7151f5d0f0277cc5467c4dc70583b0dbdf77eba401792c7b3487ff8f96",
+  "specialist_model": null,
+  "specialist_model_sha256": null,
+  "engine_linux_sha256": "d16244a3157fc55c3314f08dcc7c5179168697d78c105b95c7debd556b764bb7",
+  "members": 27
+}

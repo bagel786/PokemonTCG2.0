@@ -1,0 +1,8 @@
+.venv/
+artifacts/
+data/replays/
+data/processed/
+*.pyc
+__pycache__/
+.DS_Store
+

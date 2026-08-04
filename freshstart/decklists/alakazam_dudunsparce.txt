@@ -1,0 +1,43 @@
+Alakazam / Dudunsparce
+played by Pushu? — leaderboard rank 140, team score 992.2 (2026-07-29)
+
+(A leaderboard score is the team's — the higher-rated of their two live submissions,
+which may be a different deck than this one.)
+
+-- Basic Pokémon --
+4x  741   Abra
+3x  305   Dunsparce
+1x  140   Fezandipiti ex
+1x  343   Shaymin
+
+-- Stage 1 Pokémon --
+4x  742   Kadabra
+2x  66    Dudunsparce
+
+-- Stage 2 Pokémon --
+4x  743   Alakazam
+
+-- Supporter --
+4x  1225  Hilda
+4x  1231  Dawn
+3x  1182  Boss’s Orders
+3x  1197  Xerosic’s Machinations
+1x  1184  Lana’s Aid
+
+-- Item --
+4x  1081  Enhanced Hammer
+4x  1086  Buddy-Buddy Poffin
+4x  1152  Poké Pad
+3x  1079  Rare Candy
+1x  1097  Night Stretcher
+1x  1129  Sacred Ash
+
+-- Stadium --
+2x  1266  Nighttime Mine
+
+-- Basic Energy --
+2x  5     Basic {P} Energy
+
+-- Special Energy --
+4x  19    Telepath Psychic Energy
+1x  13    Enriching Energy

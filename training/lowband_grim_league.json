@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "purpose": "Low-band exposure curriculum: add Mega Lucario ex + Iono/Bellibolt ex (never before in any Grim league) while anchoring hard on frozen 5k reference and Alakazam externals to prevent forgetting. Weights sum to 100.",
+  "opponents": [
+    {
+      "name": "grim_5k_mirror",
+      "archetype": "grimmsnarl_mirror",
+      "strength_tier": "reference",
+      "deck": "freshstart/decklists/grimmsnarl_marnie.deck.csv",
+      "model": "artifacts/grimmsnarl_5k_reference.npz",
+      "train_weight": 40
+    },
+    {
+      "name": "grim_refresh_snapshot",
+      "archetype": "grimmsnarl_mirror",
+      "strength_tier": "reference",
+      "deck": "freshstart/decklists/grimmsnarl_marnie.deck.csv",
+      "model": "artifacts/5k_replay_refresh_20260802/full/candidates/lr1e-04_seed20260803/policy_weights.npz",
+      "train_weight": 15
+    },
+    {
+      "name": "alakazam_2_7_fast",
+      "archetype": "alakazam",
+      "strength_tier": "external_submission",
+      "deck": "freshstart/elite_submissions/alakazam_2_7/deck.csv",
+      "submission": "freshstart/elite_submissions/alakazam_2_7",
+      "submission_env": {"NO_LETHAL": "1"},
+      "train_weight": 8
+    },
+    {
+      "name": "alakazam_2_4a_fast",
+      "archetype": "alakazam",
+      "strength_tier": "external_submission",
+      "deck": "freshstart/elite_submissions/alakazam_2_4a/deck.csv",
+      "submission": "freshstart/elite_submissions/alakazam_2_4a",
+      "submission_env": {"DIRECT_POLICY": "1", "NO_LETHAL": "1"},
+      "train_weight": 4
+    },
+    {
+      "name": "lucario_ppo",
+      "archetype": "mega_lucario_ex",
+      "strength_tier": "weak_adversary",
+      "deck": "freshstart/decklists/mega_lucario_ex.deck.csv",
+      "model": "artifacts/lucario_pilot/lucario_ppo2.npz",
+      "train_weight": 9
+    },
+    {
+      "name": "lucario_heuristic",
+      "archetype": "mega_lucario_ex",
+      "strength_tier": "heuristic",
+      "deck": "freshstart/decklists/mega_lucario_ex.deck.csv",
+      "train_weight": 6
+    },
+    {
+      "name": "bellibolt_bc",
+      "archetype": "iono_bellibolt_ex",
+      "strength_tier": "weak_adversary",
+      "deck": "freshstart/decklists/iono_bellibolt_ex.deck.csv",
+      "model": "artifacts/bellibolt_bootstrap_20260803/bc/initialized_seed20260804/policy_weights.npz",
+      "train_weight": 7
+    },
+    {
+      "name": "bellibolt_heuristic",
+      "archetype": "iono_bellibolt_ex",
+      "strength_tier": "heuristic",
+      "deck": "freshstart/decklists/iono_bellibolt_ex.deck.csv",
+      "train_weight": 5
+    },
+    {"name": "dragapult_meta", "archetype": "dragapult", "deck": "freshstart/decklists/dragapult_ex.deck.csv", "train_weight": 2.0},
+    {"name": "mewtwo_meta", "archetype": "mewtwo", "deck": "freshstart/decklists/team_rockets_mewtwo_ex.deck.csv", "train_weight": 1.5},
+    {"name": "crustle_meta", "archetype": "crustle", "deck": "freshstart/decklists/kangaskhan_crustle.deck.csv", "train_weight": 1.0},
+    {"name": "garchomp_meta", "archetype": "garchomp", "deck": "freshstart/decklists/cynthias_garchomp_ex.deck.csv", "train_weight": 0.75},
+    {"name": "starmie_meta", "archetype": "starmie", "deck": "freshstart/decklists/mega_starmie_froslass.deck.csv", "train_weight": 0.75}
+  ]
+}

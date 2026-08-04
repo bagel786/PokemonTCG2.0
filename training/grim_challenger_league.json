@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "purpose": "Bounded post-5k Grimmsnarl challenger generation against strong policies",
+  "opponents": [
+    {
+      "name": "current_grimmsnarl_ppo_mirror",
+      "deck": "freshstart/decklists/grimmsnarl_marnie.deck.csv",
+      "model": "artifacts/overnight_grim_20260730/grim_selected.npz",
+      "train_weight": 45
+    },
+    {
+      "name": "grimmsnarl_bc_snapshot",
+      "deck": "freshstart/decklists/grimmsnarl_marnie.deck.csv",
+      "model": "artifacts/overnight_grim_20260730/grim_bc_best.npz",
+      "train_weight": 15
+    },
+    {
+      "name": "alakazam_2_7_lethal_search",
+      "deck": "freshstart/elite_submissions/alakazam_2_7/deck.csv",
+      "submission": "freshstart/elite_submissions/alakazam_2_7",
+      "submission_env": {},
+      "train_weight": 25
+    },
+    {
+      "name": "alakazam_2_4a_direct_lethal_search",
+      "deck": "freshstart/elite_submissions/alakazam_2_4a/deck.csv",
+      "submission": "freshstart/elite_submissions/alakazam_2_4a",
+      "submission_env": {
+        "DIRECT_POLICY": "1"
+      },
+      "train_weight": 10
+    },
+    {
+      "name": "mewtwo_meta_coverage",
+      "deck": "freshstart/decklists/team_rockets_mewtwo_ex.deck.csv",
+      "train_weight": 1
+    },
+    {
+      "name": "crustle_meta_coverage",
+      "deck": "freshstart/decklists/kangaskhan_crustle.deck.csv",
+      "train_weight": 1
+    },
+    {
+      "name": "dragapult_meta_coverage",
+      "deck": "freshstart/decklists/dragapult_ex.deck.csv",
+      "train_weight": 1
+    },
+    {
+      "name": "garchomp_bc_coverage",
+      "deck": "freshstart/decklists/cynthias_garchomp_ex.deck.csv",
+      "model": "artifacts/garchomp_bc_500.npz",
+      "train_weight": 1
+    },
+    {
+      "name": "toolbox_meta_coverage",
+      "deck": "freshstart/decklists/mega_kangaskhan_toolbox.deck.csv",
+      "train_weight": 1
+    }
+  ]
+}

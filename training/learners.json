@@ -1,0 +1,65 @@
+{
+  "comment": "Round 4 (Gen-5) learners: Grimmsnarl sparred champion + Gen-4 round_002 challengers with asymmetric compute allocation and Seat-1 over-sampling.",
+  "learners": [
+    {
+      "name": "grimmsnarl_marnie",
+      "deck": "freshstart/decklists/grimmsnarl_marnie.deck.csv",
+      "marker_card": 648,
+      "model": "artifacts/sparring_gen4/grimmsnarl_gen4_sparred.npz",
+      "games": 10000,
+      "seat_1_ratio": 0.60,
+      "turn1_bench_reward": 0.05,
+      "bc_weight": 0.25
+    },
+    {
+      "name": "kangaskhan_crustle",
+      "deck": "freshstart/decklists/kangaskhan_crustle.deck.csv",
+      "marker_card": 345,
+      "model": "artifacts/coevo_run_03/round_002/kangaskhan_crustle_challenger.npz",
+      "games": 2000,
+      "seat_1_ratio": 0.50,
+      "turn1_bench_reward": 0.0,
+      "bc_weight": 0.10
+    },
+    {
+      "name": "alakazam_dudunsparce",
+      "deck": "freshstart/decklists/alakazam_dudunsparce.deck.csv",
+      "marker_card": 743,
+      "model": "artifacts/coevo_run_03/round_002/alakazam_dudunsparce_challenger.npz",
+      "games": 2000,
+      "seat_1_ratio": 0.50,
+      "turn1_bench_reward": 0.0,
+      "bc_weight": 0.10
+    },
+    {
+      "name": "team_rockets_mewtwo_ex",
+      "deck": "freshstart/decklists/team_rockets_mewtwo_ex.deck.csv",
+      "marker_card": 431,
+      "model": "artifacts/coevo_run_03/round_002/team_rockets_mewtwo_ex_challenger.npz",
+      "games": 2000,
+      "seat_1_ratio": 0.50,
+      "turn1_bench_reward": 0.0,
+      "bc_weight": 0.10
+    },
+    {
+      "name": "dragapult_ex",
+      "deck": "freshstart/decklists/dragapult_ex.deck.csv",
+      "marker_card": 121,
+      "model": "artifacts/coevo_run_03/round_002/dragapult_ex_challenger.npz",
+      "games": 2000,
+      "seat_1_ratio": 0.50,
+      "turn1_bench_reward": 0.0,
+      "bc_weight": 0.10
+    },
+    {
+      "name": "cynthias_garchomp_ex",
+      "deck": "freshstart/decklists/cynthias_garchomp_ex.deck.csv",
+      "marker_card": 381,
+      "model": "artifacts/coevo_run_03/round_002/cynthias_garchomp_ex_challenger.npz",
+      "games": 2000,
+      "seat_1_ratio": 0.50,
+      "turn1_bench_reward": 0.0,
+      "bc_weight": 0.10
+    }
+  ]
+}

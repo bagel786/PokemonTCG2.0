@@ -1,0 +1,18 @@
+#cloud-config
+package_update: true
+packages:
+  - build-essential
+  - git
+  - python3
+  - python3-venv
+  - python3-pip
+  - unzip
+  - zstd
+runcmd:
+  - [bash, -lc, "python3 -m venv /opt/ptcg-venv"]
+  - [bash, -lc, "/opt/ptcg-venv/bin/pip install --upgrade pip uv kaggle"]
+  - [bash, -lc, "mkdir -p /mnt/ptcg && chown azureuser:azureuser /mnt/ptcg"]
+  - [bash, -lc, "sudo -u azureuser -H /opt/ptcg-venv/bin/uv venv --python 3.11 /mnt/ptcg/kaggle-venv"]
+  - [bash, -lc, "sudo -u azureuser -H /opt/ptcg-venv/bin/uv pip install --python /mnt/ptcg/kaggle-venv/bin/python 'kaggle>=2.2.3'"]
+  - [bash, -lc, "/opt/ptcg-venv/bin/pip install 'numpy>=2.0'"]
+  - [bash, -lc, "/opt/ptcg-venv/bin/pip install --index-url https://download.pytorch.org/whl/cpu 'torch>=2.3'"]

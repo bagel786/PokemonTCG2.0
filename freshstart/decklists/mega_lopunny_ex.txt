@@ -1,0 +1,34 @@
+Mega Lopunny ex / Dudunsparce
+played by lmaffei — leaderboard rank 44, team score 1077.3 (2026-07-29)
+
+(A leaderboard score is the team's — the higher-rated of their two live submissions,
+which may be a different deck than this one.)
+
+-- Basic Pokémon --
+4x  848   Buneary
+4x  305   Dunsparce
+1x  174   Fan Rotom
+
+-- Stage 1 Pokémon --
+4x  66    Dudunsparce
+3x  849   Mega Lopunny ex
+
+-- Pokémon Tool --
+4x  1174  Air Balloon
+
+-- Supporter --
+4x  1225  Hilda
+4x  1229  Wally's Compassion
+4x  1182  Boss’s Orders
+4x  1227  Lillie's Determination
+
+-- Item --
+4x  1122  Pokégear 3.0
+4x  1121  Ultra Ball
+4x  1152  Poké Pad
+4x  1086  Buddy-Buddy Poffin
+
+-- Special Energy --
+4x  11    Mist Energy
+3x  14    Spiky Energy
+1x  13    Enriching Energy

@@ -1,0 +1,42 @@
+{
+  "competition": "pokemon-tcg-ai-battle",
+  "remote_root": "sample_submission/sample_submission/cg",
+  "files": {
+    "__init__.py": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "api.py": {
+      "bytes": 26933,
+      "sha256": "593f1298e52a635f90f8f505a52113e9af114f444c293404e37906f18ee06ced"
+    },
+    "game.py": {
+      "bytes": 2225,
+      "sha256": "3bd3d4f4a369a11e6d2f5da9094cf15ebc410a2221835e6417b7cff4883f1fc2"
+    },
+    "sim.py": {
+      "bytes": 2273,
+      "sha256": "1555f57f5d22bf4c09d70e0e667a916e575e68c9dd1de9ead34ba5e7e4968655"
+    },
+    "utils.py": {
+      "bytes": 1970,
+      "sha256": "60f29665cee0a88525d6f0383bc45959a6262d16fe35ef380aece1e0ea13c49b"
+    },
+    "cg.dll": {
+      "bytes": 1525248,
+      "sha256": "eae88634e26dc31d94150a4d8202fc9d32596b8c688ef67e14cb4088cd4d5771"
+    },
+    "libcg-arm64.so": {
+      "bytes": 1296464,
+      "sha256": "1670740b73fab46586fd25c0a1f96608ea75b1f39381d66a0b8d9486bea6d4a2"
+    },
+    "libcg.dylib": {
+      "bytes": 1245544,
+      "sha256": "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30"
+    },
+    "libcg.so": {
+      "bytes": 1342400,
+      "sha256": "d16244a3157fc55c3314f08dcc7c5179168697d78c105b95c7debd556b764bb7"
+    }
+  }
+}

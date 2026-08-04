@@ -1,0 +1,41 @@
+Dragapult ex (spread + energy denial)
+played by flg — leaderboard rank 1, team score 1190.9 (2026-07-29)
+
+(A leaderboard score is the team's — the higher-rated of their two live submissions,
+which may be a different deck than this one.)
+
+-- Basic Pokémon --
+4x  119   Dreepy
+2x  112   Munkidori
+2x  235   Budew
+1x  140   Fezandipiti ex
+1x  1071  Meowth ex
+
+-- Stage 1 Pokémon --
+4x  120   Drakloak
+
+-- Stage 2 Pokémon --
+3x  121   Dragapult ex
+
+-- Supporter --
+4x  1227  Lillie's Determination
+3x  1182  Boss’s Orders
+3x  1198  Crispin
+1x  1213  Judge
+1x  1231  Dawn
+
+-- Item --
+4x  1086  Buddy-Buddy Poffin
+4x  1120  Crushing Hammer
+4x  1121  Ultra Ball
+4x  1152  Poké Pad
+2x  1097  Night Stretcher
+1x  1080  Unfair Stamp
+
+-- Stadium --
+2x  1246  Jamming Tower
+
+-- Basic Energy --
+4x  2     Basic {R} Energy
+4x  5     Basic {P} Energy
+2x  7     Basic {D} Energy

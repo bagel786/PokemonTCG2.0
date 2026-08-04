@@ -1,0 +1,39 @@
+Mega Kangaskhan ex / Ogerpon toolbox
+played by James Cox & Henry Chao — leaderboard rank 2, team score 1188.1 (2026-07-29)
+
+(A leaderboard score is the team's — the higher-rated of their two live submissions,
+which may be a different deck than this one.)
+
+-- Basic Pokémon --
+3x  756   Mega Kangaskhan ex
+3x  1071  Meowth ex
+3x  96    Teal Mask Ogerpon ex
+2x  184   Latias ex
+2x  63    Raging Bolt ex
+1x  108   Wellspring Mask Ogerpon ex
+1x  140   Fezandipiti ex
+1x  272   Lillie’s Clefairy ex
+1x  978   Passimian
+
+-- Supporter --
+4x  1198  Crispin
+2x  1205  Cyrano
+2x  1182  Boss’s Orders
+2x  1197  Xerosic’s Machinations
+
+-- Item --
+4x  1121  Ultra Ball
+4x  1116  Energy Switch
+2x  1098  Glass Trumpet
+2x  1097  Night Stretcher
+1x  1088  Prime Catcher
+
+-- Stadium --
+4x  1250  Area Zero Underdepths
+
+-- Basic Energy --
+9x  1     Basic {G} Energy
+2x  4     Basic {L} Energy
+2x  6     Basic {F} Energy
+2x  3     Basic {W} Energy
+1x  5     Basic {P} Energy

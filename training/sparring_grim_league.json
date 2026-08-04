@@ -1,0 +1,67 @@
+{
+  "version": 2,
+  "source": "Dual-anchored sparring league (Rule 1: 60% 5k Incumbent, 20% Historical Elite Bots, 20% Diverse Meta Archetypes)",
+  "opponents": [
+    {
+      "name": "grimmsnarl_5k_frozen",
+      "deck": "freshstart/decklists/grimmsnarl_marnie.deck.csv",
+      "model": "artifacts/overnight_grim_20260730/grim_selected.npz",
+      "meta_weight": 54,
+      "train_weight": 60,
+      "evaluate": true,
+      "plan": "Frozen 5k PPO incumbent. Sparring mirror target to maintain 48-52% mirror parity."
+    },
+    {
+      "name": "alakazam_2_7_fast",
+      "deck": "freshstart/elite_submissions/alakazam_2_7/deck.csv",
+      "submission": "freshstart/elite_submissions/alakazam_2_7",
+      "submission_env": {"NO_LETHAL": "1"},
+      "meta_weight": 10,
+      "train_weight": 15,
+      "evaluate": true,
+      "plan": "Historical elite direct-policy Alakazam bot anchor."
+    },
+    {
+      "name": "alakazam_2_4a_fast",
+      "deck": "freshstart/elite_submissions/alakazam_2_4a/deck.csv",
+      "submission": "freshstart/elite_submissions/alakazam_2_4a",
+      "submission_env": {"DIRECT_POLICY": "1", "NO_LETHAL": "1"},
+      "meta_weight": 10,
+      "train_weight": 5,
+      "evaluate": true,
+      "plan": "Historical elite determinized rollout Alakazam bot anchor."
+    },
+    {
+      "name": "team_rockets_mewtwo_ex",
+      "deck": "freshstart/decklists/team_rockets_mewtwo_ex.deck.csv",
+      "meta_weight": 14,
+      "train_weight": 7,
+      "evaluate": true,
+      "plan": "Diverse meta anchor: Rocket Pokemon synergy & Mewtwo aggression."
+    },
+    {
+      "name": "kangaskhan_crustle",
+      "deck": "freshstart/decklists/kangaskhan_crustle.deck.csv",
+      "meta_weight": 8,
+      "train_weight": 5,
+      "evaluate": true,
+      "plan": "Diverse meta anchor: Wall/stall mechanics."
+    },
+    {
+      "name": "dragapult_ex",
+      "deck": "freshstart/decklists/dragapult_ex.deck.csv",
+      "meta_weight": 4,
+      "train_weight": 4,
+      "evaluate": true,
+      "plan": "Diverse meta anchor: Bench snipe spread damage."
+    },
+    {
+      "name": "cynthias_garchomp_ex",
+      "deck": "freshstart/decklists/cynthias_garchomp_ex.deck.csv",
+      "meta_weight": 4,
+      "train_weight": 4,
+      "evaluate": true,
+      "plan": "Diverse meta anchor: Stage-2 search and Dragon Buster acceleration."
+    }
+  ]
+}
