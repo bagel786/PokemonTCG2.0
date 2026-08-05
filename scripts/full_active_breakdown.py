@@ -174,6 +174,7 @@ def analyze_sub_full(sub_id: int, label: str):
                                 turn_snaps.append(snap)
 
         res_str = "WIN " if won else "LOSS"
+        our_init_s = f"{our_init:.1f}" if our_init is not None else "N/A"
         our_elo_s = f"{our_upd:.1f}" if our_upd is not None else "N/A"
         opp_elo_s = f"{opp_init:.1f}" if opp_init is not None else "N/A"
         went_first_s = "Went 1st" if first_player == our_idx else "Went 2nd"
@@ -184,7 +185,7 @@ def analyze_sub_full(sub_id: int, label: str):
         total_turns = final_snap.get("turn", 0)
         
         print(f"\n--------------------------------------------------------------------------------")
-        print(f"Game #{idx:02d} | Episode {ep_id} | {res_str} | ELO: {our_init:.1f} -> {our_elo_s} ({delta:+5.1f})")
+        print(f"Game #{idx:02d} | Episode {ep_id} | {res_str} | ELO: {our_init_s} -> {our_elo_s} ({delta:+5.1f})")
         print(f"Opponent: {opp_name} (Sub {opp_sub}, ELO {opp_elo_s}) | Archetype: {opp_arch}")
         print(f"Seat: Seat {our_idx} ({went_first_s}) | Turns: {total_turns} | Final Prizes: Us {our_prizes_taken}/6 - Opp {opp_prizes_taken}/6")
         

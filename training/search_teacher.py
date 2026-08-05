@@ -418,3 +418,120 @@ class SearchTeacherAgent:
             "search_error_counts": dict(self.error_counts),
             "last_search_error": self.last_error,
         }
+
+
+def evaluate_disagreement_record(
+    record: dict,
+    config: SearchConfig,
+    hero_deck: list[int],
+    opp_deck: list[int],
+    model: NumpyPolicyModel | None = None,
+    opponent_model: NumpyPolicyModel | None = None,
+) -> dict:
+    """Evaluate paired counterfactual advantage between elite action and d842 action on common random numbers."""
+    elite_action = record.get("elite_action") or record.get("action", [])
+    d842_action = record.get("d842_action", [])
+    obs_raw = record.get("observation") or record.get("obs_dict")
+    
+    if obs_raw is None:
+        # If raw observation dict is not directly attached, return neutral
+        return {
+            "record": record,
+            "advantage": 0.0,
+            "informative_worlds": 0,
+            "retained": False,
+            "error": "missing raw observation dict for determinization",
+        }
+
+    obs = to_observation_class(obs_raw) if not hasattr(obs_raw, "current") else obs_raw
+    if obs.current is None or obs.select is None:
+        return {
+            "record": record,
+            "advantage": 0.0,
+            "informative_worlds": 0,
+            "retained": False,
+            "error": "inactive select observation",
+        }
+
+    hero_seat = int(obs.current.yourIndex)
+    if model is None:
+        model = NumpyPolicyModel(ROOT / "artifacts" / "overnight_grim_20260730" / "grim_selected.npz")
+    if opponent_model is None:
+        opponent_model = model
+
+    scores_elite = []
+    scores_d842 = []
+    informative_worlds = 0
+    errors = 0
+
+    for world_idx in range(config.determinizations):
+        root = None
+        try:
+            rng = random.Random(config.seed + world_idx * 10_007 + int(record.get("step", 0)) * 31)
+            kwargs = determinize_known_matchup(obs, hero_deck, opp_deck, rng)
+            root = search_begin(obs, **kwargs)
+
+            # 1. Roll out elite action
+            child_e = None
+            try:
+                child_e = search_step(root.searchId, elite_action)
+                s_e = rollout_to_outcome(child_e, hero_seat, model, opponent_model, config.rollout_steps)
+            finally:
+                if child_e is not None:
+                    try:
+                        search_release(child_e.searchId)
+                    except Exception:
+                        pass
+
+            # 2. Roll out d842 action
+            child_d = None
+            try:
+                child_d = search_step(root.searchId, d842_action)
+                s_d = rollout_to_outcome(child_d, hero_seat, model, opponent_model, config.rollout_steps)
+            finally:
+                if child_d is not None:
+                    try:
+                        search_release(child_d.searchId)
+                    except Exception:
+                        pass
+
+            scores_elite.append(s_e)
+            scores_d842.append(s_d)
+            if s_e != s_d:
+                informative_worlds += 1
+
+        except Exception as exc:
+            errors += 1
+        finally:
+            if root is not None:
+                try:
+                    search_release(root.searchId)
+                except Exception:
+                    pass
+            try:
+                search_end()
+            except Exception:
+                pass
+
+    n = len(scores_elite)
+    if n == 0 or errors > 0:
+        return {
+            "record": record,
+            "advantage": 0.0,
+            "informative_worlds": informative_worlds,
+            "retained": False,
+            "errors": errors,
+        }
+
+    mean_advantage = (sum(scores_elite) - sum(scores_d842)) / n
+    retained = (mean_advantage >= 0.50 and informative_worlds >= max(1, config.determinizations // 2) and errors == 0)
+
+    return {
+        "record": record,
+        "advantage": mean_advantage,
+        "informative_worlds": informative_worlds,
+        "retained": retained,
+        "elite_scores": scores_elite,
+        "d842_scores": scores_d842,
+        "errors": errors,
+    }

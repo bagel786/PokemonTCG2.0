@@ -25,11 +25,20 @@ MATCH_THRESHOLD = 0.35
 
 
 def auth_header() -> str:
-    blob = json.loads((Path(os.environ["HOME"]) / ".kaggle" / "kaggle.json").read_text())
-    if "access_token" in blob:
-        return "Bearer " + blob["access_token"]
-    pair = f"{blob['username']}:{blob['key']}".encode()
-    return "Basic " + base64.b64encode(pair).decode()
+    kaggle_json = Path.home() / ".kaggle" / "kaggle.json"
+    if kaggle_json.exists():
+        blob = json.loads(kaggle_json.read_text())
+        if "access_token" in blob:
+            return "Bearer " + blob["access_token"]
+        pair = f"{blob['username']}:{blob['key']}".encode()
+        return "Basic " + base64.b64encode(pair).decode()
+    import kaggle
+    token = kaggle.api.config_values.get("token")
+    if token:
+        return "Bearer " + token
+    u = kaggle.api.config_values.get("username", "")
+    k = kaggle.api.config_values.get("key", "")
+    return "Basic " + base64.b64encode(f"{u}:{k}".encode()).decode()
 
 
 def list_episodes(submission_id: int) -> list[dict]:

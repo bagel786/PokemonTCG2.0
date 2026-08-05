@@ -18,7 +18,7 @@ KAGGLE = "/Users/safiullahbaig/Library/Python/3.11/bin/kaggle"
 EPISODE_SERVICE = "https://www.kaggle.com/api/i/competitions.EpisodeService/ListEpisodes"
 
 def auth_header() -> str:
-    blob = json.loads((Path(os.environ["HOME"]) / ".kaggle" / "kaggle.json").read_text())
+    blob = json.loads((Path.home() / ".kaggle" / "kaggle.json").read_text())
     if "access_token" in blob:
         return "Bearer " + blob["access_token"]
     u = blob["username"]

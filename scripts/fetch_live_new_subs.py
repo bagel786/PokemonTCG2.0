@@ -12,8 +12,8 @@ KAGGLE = "/Users/safiullahbaig/Library/Python/3.11/bin/kaggle"
 EPISODE_SERVICE = "https://www.kaggle.com/api/i/competitions.EpisodeService/ListEpisodes"
 
 
-def get_cookie():
-    blob = json.loads((Path(os.environ["HOME"]) / ".kaggle" / "kaggle.json").read_text())
+def auth_header() -> str:
+    blob = json.loads((Path.home() / ".kaggle" / "kaggle.json").read_text())
     return blob["key"]
 
 
