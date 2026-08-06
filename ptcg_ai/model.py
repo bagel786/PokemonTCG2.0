@@ -86,10 +86,21 @@ class NeuralPolicy:
             minimum = int(obs.select.minCount)
             maximum = min(int(obs.select.maxCount), len(count_logits) - 1)
             desired = minimum + int(np.argmax(count_logits[minimum : maximum + 1]))
-            # Invariant: Never skip benching during setup if basic Pokémon are available in hand
-            context_val = getattr(obs.select, "context", None)
-            if (context_val == 2 or str(context_val).endswith("SETUP_BENCH_POKEMON")) and obs.select.maxCount > 0:
-                desired = max(1, min(int(obs.select.maxCount), desired or 1))
+        # Invariant 1: Never skip benching during setup if basic Pokémon are available in hand
+        context_val = getattr(obs.select, "context", None)
+        if (context_val == 2 or str(context_val).endswith("SETUP_BENCH_POKEMON")) and obs.select.maxCount > 0:
+            desired = max(1, min(int(obs.select.maxCount), desired or 1))
+
+        # Invariant 2: Always promote 320 HP Grimmsnarl ex to Active (Context 4: TO_ACTIVE) when available
+        if context_val == 4 or str(context_val).endswith("TO_ACTIVE"):
+            from .view import option_source_card
+            for opt_idx, opt in enumerate(obs.select.option):
+                c = option_source_card(obs, opt)
+                if c is not None and getattr(c, "id", None) == 648:
+                    if opt_idx in ranked:
+                        ranked.remove(opt_idx)
+                        ranked.insert(0, opt_idx)
+                    break
         
         greedy_action = sanitize_selection(obs.select, ranked, desired)
 
@@ -115,6 +126,18 @@ class NeuralPolicy:
                     
                     search_act = self.search_policy.evaluate_candidates(obs, candidates, opp_deck)
                     if search_act is not None:
+                        # Safety rail: never let 1-ply search convert a productive
+                        # greedy move into a turn-ending pass. Passing the turn is
+                        # catastrophic and the (saturated) value head cannot be
+                        # trusted to justify it over an available action.
+                        def _is_pass(action):
+                            return (
+                                len(action) == 1
+                                and int(obs.select.option[action[0]].type) == 14  # OptionType.END
+                            )
+
+                        if _is_pass(search_act) and not _is_pass(greedy_action):
+                            return greedy_action
                         return search_act
             except Exception:
                 pass

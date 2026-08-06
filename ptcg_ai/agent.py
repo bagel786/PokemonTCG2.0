@@ -14,6 +14,10 @@ from .safety import emergency_selection
 
 LUCARIO_PUBLIC_CARD_IDS = frozenset({677, 678})
 
+# Grimmsnarl mirror: opponent Impidimp (646) -> Morgrem (647) -> Grimmsnarl ex (648).
+# Seeing any of these in the OPPONENT's public zones means they are on the mirror deck.
+GRIMMSNARL_MIRROR_PUBLIC_CARD_IDS = frozenset({646, 647, 648})
+
 
 def _public_card_ids(obs) -> set[int]:
     """Return opponent card IDs visible to the acting player."""
@@ -49,12 +53,22 @@ def lucario_publicly_detected(obs) -> bool:
     return bool(_public_card_ids(obs) & LUCARIO_PUBLIC_CARD_IDS)
 
 
+def grimmsnarl_mirror_publicly_detected(obs) -> bool:
+    """Detect a Grimmsnarl mirror from the opponent's public cards only.
+
+    Reads only the opponent's active/bench/discard/attached cards and public
+    logs (via ``_public_card_ids``); never inspects a hidden hand or deck.
+    """
+    return bool(_public_card_ids(obs) & GRIMMSNARL_MIRROR_PUBLIC_CARD_IDS)
+
+
 class CompetitionAgent:
     def __init__(
         self,
         deck_path: str | os.PathLike[str] | None = None,
         model_path: str | os.PathLike[str] | None = None,
         specialist_model_path: str | os.PathLike[str] | None = None,
+        mirror_model_path: str | os.PathLike[str] | None = None,
     ):
         self.deck_path = Path(deck_path) if deck_path else self._find("deck.csv")
         self.deck = [int(line) for line in self.deck_path.read_text().splitlines() if line.strip()]
@@ -98,15 +112,38 @@ class CompetitionAgent:
                 if specialist_model_path is not None
                 else None
             )
+
+            # Grimmsnarl-mirror specialist: greedy, search DISABLED (no search_policy
+            # passed), legality sanitization + setup-bench floor retained by NeuralPolicy,
+            # emergency fallback via __call__. Dormant when no mirror_specialist.npz is
+            # bundled, which keeps non-mirror behavior byte-identical to v2.2.
+            mirror_model_path = (
+                Path(mirror_model_path)
+                if mirror_model_path
+                else self._optional_find("mirror_specialist.npz")
+            )
+            self.mirror_specialist = (
+                NeuralPolicy(mirror_model_path, fallback)
+                if mirror_model_path is not None
+                else None
+            )
         else:
             self.policy = fallback
             self.specialist = None
+            self.mirror_specialist = None
         self.lucario_routed = False
+        self.mirror_routed = False
         self.errors = 0
 
     @staticmethod
     def _find(filename: str) -> Path:
-        candidates = [Path(filename), Path("/kaggle_simulations/agent") / filename]
+        root = Path(__file__).resolve().parent.parent
+        candidates = [
+            Path(filename),
+            root / filename,
+            Path(__file__).resolve().parent / filename,
+            Path("/kaggle_simulations/agent") / filename,
+        ]
         for candidate in candidates:
             if candidate.exists():
                 return candidate
@@ -114,18 +151,34 @@ class CompetitionAgent:
 
     @staticmethod
     def _optional_find(filename: str) -> Path | None:
-        for candidate in [Path(filename), Path("/kaggle_simulations/agent") / filename]:
+        root = Path(__file__).resolve().parent.parent
+        candidates = [
+            Path(filename),
+            root / filename,
+            Path(__file__).resolve().parent / filename,
+            Path("/kaggle_simulations/agent") / filename,
+        ]
+        for candidate in candidates:
             if candidate.exists():
                 return candidate
         return None
 
     def __call__(self, obs_dict: dict) -> list[int]:
-        obs = to_observation_class(obs_dict)
-        if obs.select is None:
+        if not obs_dict or obs_dict.get("select") is None:
             self.errors = 0
             self.lucario_routed = False
+            self.mirror_routed = False
             return list(self.deck)
+        obs = to_observation_class(obs_dict)
         try:
+            # Grimmsnarl-mirror specialist takes precedence once the mirror is
+            # publicly revealed; the latch holds for the rest of the game and is
+            # reset above during the deck-handshake observation.
+            if self.mirror_specialist is not None and (
+                self.mirror_routed or grimmsnarl_mirror_publicly_detected(obs)
+            ):
+                self.mirror_routed = True
+                return self.mirror_specialist.choose(obs)
             if self.specialist is not None and (
                 self.lucario_routed or lucario_publicly_detected(obs)
             ):

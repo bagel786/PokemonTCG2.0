@@ -15,8 +15,19 @@ from pathlib import Path
 
 VALIDATION = r'''
 import importlib.util, json, os, sys, time
+from pathlib import Path
 from cg.game import battle_start, battle_select, battle_finish
 from cg.api import to_observation_class
+
+# Kaggle's agent loader may execute main.py without defining __file__.  Exercise
+# that path before the conventional import so a locally valid module cannot die
+# during the remote validation handshake.
+source=Path("main.py").read_text(encoding="utf-8")
+exec_namespace={"__name__":"submission_entry"}
+exec(compile(source,"main.py","exec"),exec_namespace)
+exec_deck=exec_namespace["agent"]({"select":None,"logs":[],"current":None,"search_begin_input":None})
+assert len(exec_deck)==60
+
 spec=importlib.util.spec_from_file_location("submission_main", "main.py")
 module=importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
 deck=module.agent({"select":None,"logs":[],"current":None,"search_begin_input":None})
