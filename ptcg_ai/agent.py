@@ -69,10 +69,25 @@ class CompetitionAgent:
         self.fallback = fallback
         model_path = Path(model_path) if model_path else self._optional_find("policy_weights.npz")
         policy_mode = os.environ.get("PTCG_POLICY", "auto").lower()
+        search_mode = os.environ.get("PTCG_SEARCH", "1").lower()
         if model_path is not None and policy_mode != "heuristic":
             from .model import NeuralPolicy
+            
+            search_policy = None
+            if search_mode not in ("0", "false", "off", "no"):
+                try:
+                    from .search import OnePlySearchPolicy
+                    search_policy = OnePlySearchPolicy(
+                        model=None,  # set below after model init or inside NeuralPolicy
+                        hero_deck=self.deck,
+                    )
+                except Exception:
+                    search_policy = None
 
-            self.policy = NeuralPolicy(model_path, fallback)
+            self.policy = NeuralPolicy(model_path, fallback, search_policy=search_policy)
+            if search_policy is not None:
+                search_policy.model = self.policy.model
+
             specialist_model_path = (
                 Path(specialist_model_path)
                 if specialist_model_path

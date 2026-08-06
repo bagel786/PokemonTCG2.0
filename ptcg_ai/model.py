@@ -61,9 +61,10 @@ class NumpyPolicyModel:
 
 
 class NeuralPolicy:
-    def __init__(self, path: str | Path, fallback):
+    def __init__(self, path: str | Path, fallback, search_policy=None):
         self.model = NumpyPolicyModel(path)
         self.fallback = fallback
+        self.search_policy = search_policy
         # ponytail: PTCG_TEMP unset/<=0 keeps exact greedy (slot A). >0 = Gumbel-top-k
         # sample for a decorrelated, higher-variance twin (slot B) under best-of-2.
         self.temp = float(os.environ.get("PTCG_TEMP", "0") or 0)
@@ -85,4 +86,37 @@ class NeuralPolicy:
             minimum = int(obs.select.minCount)
             maximum = min(int(obs.select.maxCount), len(count_logits) - 1)
             desired = minimum + int(np.argmax(count_logits[minimum : maximum + 1]))
-        return sanitize_selection(obs.select, ranked, desired)
+            # Invariant: Never skip benching during setup if basic Pokémon are available in hand
+            context_val = getattr(obs.select, "context", None)
+            if (context_val == 2 or str(context_val).endswith("SETUP_BENCH_POKEMON")) and obs.select.maxCount > 0:
+                desired = max(1, min(int(obs.select.maxCount), desired or 1))
+        
+        greedy_action = sanitize_selection(obs.select, ranked, desired)
+
+        # Selective 1-ply lookahead when search policy is configured
+        if self.search_policy is not None and self.search_policy.should_search(logits, count_logits, obs.select):
+            try:
+                from .agent import _public_card_ids
+                opp_ids = _public_card_ids(obs)
+                _name, opp_deck, jaccard = self.search_policy.registry.match(opp_ids)
+                if opp_deck is not None and jaccard >= self.search_policy.jaccard_threshold:
+                    candidates = [greedy_action]
+                    # Generate alternative candidates from next-best ranked options
+                    if len(ranked) >= 2 and desired >= 1:
+                        alt_ranked = [ranked[1]] + [r for r in ranked if r != ranked[1]]
+                        alt_act = sanitize_selection(obs.select, alt_ranked, desired)
+                        if alt_act != greedy_action:
+                            candidates.append(alt_act)
+                    if len(ranked) >= 3 and desired >= 1:
+                        alt_ranked_3 = [ranked[2]] + [r for r in ranked if r != ranked[2]]
+                        alt_act_3 = sanitize_selection(obs.select, alt_ranked_3, desired)
+                        if alt_act_3 != greedy_action and alt_act_3 not in candidates:
+                            candidates.append(alt_act_3)
+                    
+                    search_act = self.search_policy.evaluate_candidates(obs, candidates, opp_deck)
+                    if search_act is not None:
+                        return search_act
+            except Exception:
+                pass
+
+        return greedy_action
