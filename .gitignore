@@ -2,7 +2,13 @@
 .codex_tmp/
 artifacts/
 data/grim_daily_v3/
+data/grim_daily_v4/
+data/grim_daily_v5/
+data/grim_daily_v5_causal/
 data/grim_behavior_*/
+data/grim_breakthrough_*/
+data/grim_strength_*/
+data/grim_source_clones_*/
 data/replays/
 data/processed/
 *.pyc
