@@ -22,13 +22,13 @@ CONFIG = {
     "fan": {
         "team": "flg",
         "replays": ROOT / "artifacts" / "flg_grim_corpus_v5_causal" / "replays" / "55290684",
-        "candidate": ROOT / "artifacts" / "wave1_push" / "extracted_fan_v1",
+        "candidate": ROOT / "artifacts" / "wave1_push" / "extracted_fan_v2",
         "allowed": {"fan_attach", "fan_retain_no_target", "fan_energy", "fan_sink_known", "fan_sink_unknown"},
     },
     "tempo": {
         "team": "Larps",
         "replays": ROOT / "artifacts" / "recovery_ladder" / "replays" / "55323436",
-        "candidate": ROOT / "artifacts" / "wave1_push" / "extracted_tempo_v1",
+        "candidate": ROOT / "artifacts" / "wave1_push" / "extracted_tempo_v2",
         "allowed": {
             "tempo_setup_active", "tempo_setup_bench_imp", "tempo_poffin_targets",
             "tempo_gym_search", "tempo_petrel_search", "tempo_candy_target",

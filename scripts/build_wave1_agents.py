@@ -99,7 +99,8 @@ os.environ["PTCG_TACTICAL_SHIELD"] = "1"
 os.environ["PTCG_WAVE1_RAIL"] = {mode!r}
 
 def _find_deck():
-    candidates = [Path("deck.csv"), Path(__file__).resolve().parent / "deck.csv", Path("/kaggle_simulations/agent/deck.csv")]
+    # Kaggle executes main.py as raw source and does not define __file__.
+    candidates = [Path("deck.csv"), Path("/kaggle_simulations/agent/deck.csv")]
     for candidate in candidates:
         if candidate.exists():
             return candidate
@@ -182,11 +183,13 @@ def sterile_validate(archive: Path, mode: str) -> dict:
         code = (
             "import json, pathlib, sys\n"
             f"sys.path.insert(0, {str(stage)!r})\n"
-            "import main\n"
-            "deck=main.agent({'select':None,'current':None,'logs':[]})\n"
+            "namespace={'__name__':'submission_entry'}\n"
+            "source=pathlib.Path('main.py').read_text(encoding='utf-8')\n"
+            "exec(compile(source,'main.py','exec'),namespace)\n"
+            "deck=namespace['agent']({'select':None,'current':None,'logs':[]})\n"
             "assert len(deck)==60\n"
-            f"assert main._AGENT.policy.wave1_rail.mode == {mode!r}\n"
-            "print(json.dumps({'deck':len(deck),'mode':main._AGENT.policy.wave1_rail.mode}))\n"
+            f"assert namespace['_AGENT'].policy.wave1_rail.mode == {mode!r}\n"
+            "print(json.dumps({'deck':len(deck),'mode':namespace['_AGENT'].policy.wave1_rail.mode}))\n"
         )
         env = dict(os.environ)
         env.pop("PYTHONPATH", None)

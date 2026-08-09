@@ -57,7 +57,10 @@ def main() -> int:
     api = KaggleApi()
     api.authenticate()
     existing = api.competition_submissions(COMPETITION, page_size=100)
-    descriptions = {str(getattr(row, "description", "")) for row in existing}
+    descriptions = {
+        str(getattr(row, "description", "")) for row in existing
+        if "ERROR" not in status_name(row) and "FAILED" not in status_name(row)
+    }
     if any(value.startswith("wave1-topgrim-") for value in descriptions):
         raise SystemExit("refusing duplicate Wave-1 upload")
     today_utc = dt.datetime.now(dt.timezone.utc).date()
@@ -68,10 +71,13 @@ def main() -> int:
     if used_today > 3:
         raise SystemExit(f"need two daily submissions but {used_today}/5 are already used")
 
+    prior_ledger = json.loads(LEDGER.read_text(encoding="utf-8")) if LEDGER.exists() else {}
+    prior_submissions = list(prior_ledger.get("prior_submissions", [])) + list(prior_ledger.get("submissions", []))
     ledger = {
         "competition": COMPETITION,
         "qualification_manifest_sha256": sha256(QUALIFICATION),
         "upload_started_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
+        "prior_submissions": prior_submissions,
         "submissions": [],
     }
     for position, mode in enumerate(("fan", "tempo"), 1):
@@ -99,7 +105,13 @@ def main() -> int:
         }
         ledger["submissions"].append(entry)
         LEDGER.write_text(json.dumps(ledger, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-        validated = wait_for_validation(api, submission_id)
+        try:
+            validated = wait_for_validation(api, submission_id)
+        except Exception as error:
+            entry["status"] = "ERROR"
+            entry["validation_error"] = str(error)
+            LEDGER.write_text(json.dumps(ledger, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+            raise
         entry["status"] = "COMPLETE"
         entry["public_score_at_validation"] = getattr(validated, "public_score", None)
         entry["validated_utc"] = dt.datetime.now(dt.timezone.utc).isoformat()
