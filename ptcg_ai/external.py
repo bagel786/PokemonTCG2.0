@@ -27,7 +27,8 @@ class ExternalSubmissionAgent:
         package_name = f"_ptcg_external_{token}"
         main_name = f"{package_name}_main"
         self._owned_module_names.update((package_name, main_name))
-        package_dir = self.directory / "agent"
+        import_name = "agent" if (self.directory / "agent" / "__init__.py").exists() else "ptcg_ai"
+        package_dir = self.directory / import_name
         package_spec = importlib.util.spec_from_file_location(
             package_name,
             package_dir / "__init__.py",
@@ -42,13 +43,15 @@ class ExternalSubmissionAgent:
         previous_modules = {
             name: module
             for name, module in sys.modules.items()
-            if name == "agent" or name.startswith("agent.")
+            if name == import_name or name.startswith(import_name + ".")
         }
         for name in previous_modules:
             sys.modules.pop(name, None)
         previous_env = dict(os.environ)
-        sys.modules["agent"] = package
+        previous_cwd = Path.cwd()
+        sys.modules[import_name] = package
         os.environ.update({key: str(value) for key, value in env.items()})
+        os.chdir(self.directory)
         try:
             main_spec = importlib.util.spec_from_file_location(main_name, self.directory / "main.py")
             if main_spec is None or main_spec.loader is None:
@@ -59,13 +62,14 @@ class ExternalSubmissionAgent:
             return module
         finally:
             for name in list(sys.modules):
-                if name == "agent" or name.startswith("agent."):
+                if name == import_name or name.startswith(import_name + "."):
                     sys.modules.pop(name, None)
             sys.modules.update(previous_modules)
             # Submission imports may use setdefault or otherwise mutate process
             # configuration. Keep those values inside the loaded module only.
             os.environ.clear()
             os.environ.update(previous_env)
+            os.chdir(previous_cwd)
 
     def close(self) -> None:
         """Release uniquely named modules after an isolated game completes."""
@@ -91,7 +95,9 @@ class ExternalSubmissionAgent:
     def __call__(self, obs: dict) -> list[int]:
         try:
             # Avoid the submission's cwd-sensitive deck lookup.
-            return self.module.decide(obs, self.deck)
+            if hasattr(self.module, "decide"):
+                return self.module.decide(obs, self.deck)
+            return self.module.agent(obs)
         except Exception:
             self.errors += 1
             return self._fallback(obs)

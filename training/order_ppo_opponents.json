@@ -1,0 +1,20 @@
+{
+  "description": "Frozen 5k+ outcome-PPO collection mixture; holdouts are intentionally absent.",
+  "opponents": [
+    {"id": "owned_d842", "path": "artifacts/recovery_final/opponents/d842", "weight": 0.175},
+    {"id": "owned_r0", "path": "artifacts/recovery_r0_package/extracted/r0_play_binding", "weight": 0.175},
+    {"id": "owned_a2", "path": "artifacts/recovery_probes/extracted/a2", "weight": 0.175},
+    {"id": "owned_master_v1", "path": "artifacts/recovery_final/opponents/master_v1", "weight": 0.175},
+    {"id": "authentic_alakazam_2_4a", "path": "freshstart/elite_submissions/alakazam_2_4a", "weight": 0.20},
+    {"id": "curriculum_lucario", "path": "artifacts/recovery_final/opponents/lucario", "weight": 0.025},
+    {"id": "curriculum_crustle", "path": "artifacts/recovery_final/opponents/crustle", "weight": 0.020},
+    {"id": "curriculum_ogerpon", "path": "artifacts/recovery_final/opponents/ogerpon", "weight": 0.020},
+    {"id": "curriculum_bellibolt", "path": "artifacts/recovery_final/opponents/bellibolt", "weight": 0.020},
+    {"id": "curriculum_starmie_froslass", "path": "artifacts/recovery_final/opponents/starmie_froslass", "weight": 0.015}
+  ],
+  "untouched_holdouts": [
+    "artifacts/recovery_final/opponents/replay_refresh",
+    "artifacts/recovery_final/opponents/v2_2",
+    "freshstart/elite_submissions/alakazam_2_7"
+  ]
+}

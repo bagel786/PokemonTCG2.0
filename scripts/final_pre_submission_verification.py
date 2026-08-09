@@ -103,6 +103,7 @@ with tempfile.TemporaryDirectory(prefix="final_sterile_audit_", ignore_cleanup_e
     print(f"\n[Audit 5/5] Pass-Blunder Historical Defense:")
     print(f"  * Total Replay Decisions Tested: {total_decisions}")
     print(f"  * Unprovoked Passes With Attack: {passes_with_attack}")
+    assert passes_with_attack == 0, f"FAIL: detected {passes_with_attack} pass blunders"
     print(f"  * RESULT: ZERO PASS BLUNDERS DETECTED")
 
 print("\n" + "=" * 80)

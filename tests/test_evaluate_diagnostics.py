@@ -2,11 +2,18 @@ import unittest
 from types import SimpleNamespace
 from unittest.mock import patch
 
-from training.evaluate import capture_initial_first_player, external_diagnostics
+from ptcg_ai.external import ExternalSubmissionAgent
+from training.evaluate import capture_initial_first_player, external_diagnostics, policy_error_count
 from training.seat_adjusted import newcombe_difference, structural_lift
 
 
 class EvaluateDiagnosticsTests(unittest.TestCase):
+    def test_external_policy_errors_include_internal_fallbacks(self):
+        agent = object.__new__(ExternalSubmissionAgent)
+        agent.errors = 2
+        agent.module = SimpleNamespace(_AGENT=SimpleNamespace(errors=3))
+        self.assertEqual(policy_error_count(agent), 5)
+
     def test_external_numeric_diagnostics_exclude_strings_and_bools(self):
         fake = SimpleNamespace(
             module=SimpleNamespace(

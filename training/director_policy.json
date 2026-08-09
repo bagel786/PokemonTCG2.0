@@ -1,0 +1,25 @@
+{
+  "enabled": true,
+  "trigger": "first_high_impact",
+  "horizon": "turn_reply",
+  "max_root_actions": 12,
+  "max_interior_actions": 6,
+  "beam_width": 6,
+  "max_nodes_per_world": 300,
+  "max_native_steps": 3600,
+  "min_complete_worlds": 8,
+  "target_worlds": 12,
+  "cvar_alpha": 0.25,
+  "stop_expand_seconds": 260.0,
+  "stop_engine_seconds": 280.0,
+  "cleanup_seconds": 295.0,
+  "hard_timeout_seconds": 300.0,
+  "minimum_overage_reserve_seconds": 120.0,
+  "seed_salt": "grim-director-v1",
+  "routed_fallback": "a2",
+  "artifact_hashes": {
+    "r0": "AC0E9B174AE99911AD9E04F82E912E43AB7E9FFA130D297C04FEDCF34247058B",
+    "a2": "0958BD8847266EFBC38658D62B9AC4DCD62A9AAED3D1098F093A677AFCBFED4C",
+    "d842": "3ECB0BBF119E23C31905E39E19ECA8F6145104AAEFFC0A5675D2FE03855BB458"
+  }
+}

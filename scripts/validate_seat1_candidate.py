@@ -9,7 +9,10 @@ import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 EVAL_SCRIPT = ROOT / "training" / "evaluate.py"
+
+from training.evaluation_schema import load_evaluation
 
 CANDIDATE_MODEL = ROOT / "artifacts" / "seat1_data" / "candidate_seat1_boosted.npz"
 CONTROL_MODEL = ROOT / "artifacts" / "overnight_grim_20260730" / "grim_selected.npz"
@@ -62,11 +65,11 @@ def main():
         "--seed", "20260805",
     ]
     subprocess.run(cmd_mirror, check=True)
-    mirror_data = json.loads(mirror_out.read_text())
+    mirror_data = load_evaluation(mirror_out)
 
-    overall_mirror_wr = mirror_data.get("win_rate_a", 0.5) * 100
-    seat_0_wr = mirror_data.get("seat_0_win_rate_a", 0.5) * 100
-    seat_1_wr = mirror_data.get("seat_1_win_rate_a", 0.5) * 100
+    overall_mirror_wr = mirror_data["win_rate_a"] * 100
+    seat_0_wr = mirror_data["seat_results_a"]["0"]["win_rate"] * 100
+    seat_1_wr = mirror_data["seat_results_a"]["1"]["win_rate"] * 100
 
     log(f"Mirror Overall Win Rate: {overall_mirror_wr:.2f}% (Target: >= 52.0%)")
     log(f"  - Going First  (Seat 0): {seat_0_wr:.2f}%")
@@ -109,9 +112,9 @@ def main():
             "--seed", "20260805",
         ]
         subprocess.run(cmd_meta, check=True)
-        meta_data = json.loads(meta_out.read_text())
-        wr = meta_data.get("win_rate_a", 0.5) * 100
-        errors = meta_data.get("errors", 0)
+        meta_data = load_evaluation(meta_out)
+        wr = meta_data["win_rate_a"] * 100
+        errors = meta_data["hero_policy_errors"] + meta_data["opponent_policy_errors"]
         passed = wr >= 98.0 and errors == 0
         if not passed:
             all_meta_pass = False

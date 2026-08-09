@@ -40,6 +40,7 @@ from ptcg_ai.features import MAX_SELECT_COUNT, V2_COUNT_CLASSES
 from ptcg_ai.model import NumpyPolicyModel
 from ptcg_ai.safety import sanitize_selection
 from training.lucario_data import deterministic_gzip_text, load_deck, sha256_file
+from training.evaluation_schema import load_evaluation
 from training.search_teacher import SearchConfig, evaluate_disagreement_record
 from training.train_bc import (
     PolicyNet,
@@ -357,9 +358,9 @@ def step_3_mirror_screening_and_gating(
             "--seed", "20260805",
         ]
         subprocess.run(cmd, check=True)
-        data = json.loads(res_file.read_text())
-        win_rate = data.get("win_rate_a", 0.5)
-        log(f"  Candidate {name} 500-game Win Rate vs d842: {win_rate * 100:.2f}% (Seat 0: {data.get('seat_0_win_rate_a', 0)*100:.2f}%, Seat 1: {data.get('seat_1_win_rate_a', 0)*100:.2f}%)")
+        data = load_evaluation(res_file)
+        win_rate = data["win_rate_a"]
+        log(f"  Candidate {name} 500-game Win Rate vs d842: {win_rate * 100:.2f}% (Seat 0: {data['seat_results_a']['0']['win_rate']*100:.2f}%, Seat 1: {data['seat_results_a']['1']['win_rate']*100:.2f}%)")
         screen_results[name] = {"win_rate": win_rate, "data": data, "path": model_path}
 
     best_name = max(screen_results, key=lambda k: screen_results[k]["win_rate"])
@@ -382,11 +383,11 @@ def step_3_mirror_screening_and_gating(
         "--seed", "20260805",
     ]
     subprocess.run(cmd, check=True)
-    gate_data = json.loads(gate_file.read_text())
-    win_rate = gate_data.get("win_rate_a", 0.5)
-    seat0 = gate_data.get("seat_0_win_rate_a", 0.5)
-    seat1 = gate_data.get("seat_1_win_rate_a", 0.5)
-    errors = gate_data.get("errors", 0)
+    gate_data = load_evaluation(gate_file)
+    win_rate = gate_data["win_rate_a"]
+    seat0 = gate_data["seat_results_a"]["0"]["win_rate"]
+    seat1 = gate_data["seat_results_a"]["1"]["win_rate"]
+    errors = gate_data["hero_policy_errors"] + gate_data["opponent_policy_errors"]
 
     log(f"50k Gate Results for {best_name}:")
     log(f"  Overall Win Rate: {win_rate * 100:.3f}%")
@@ -395,6 +396,7 @@ def step_3_mirror_screening_and_gating(
     log(f"  Engine Errors:    {errors}")
 
     passed = (win_rate >= 0.500) and (errors == 0) and (seat0 >= 0.45) and (seat1 >= 0.45)
+    gate_data["promotion_result"] = "passed" if passed else "failed"
     log(f"Promotion Gate Status: {'PASSED (PROMOTED)' if passed else 'FAILED (RETAINING CONTROL)'}")
 
     return best_name, best_path, gate_data
@@ -404,8 +406,11 @@ def step_4_package_winning_agent(
     model_path: Path,
     deck_path: Path,
     out_dir: Path,
+    promotion_result: str,
 ) -> Path:
     log("=== STEP 4: Packaging Promoted Agent for Kaggle Submission ===")
+    if promotion_result != "passed":
+        raise RuntimeError("refusing to package: promotion result is not explicitly passed")
     pkg_dir = out_dir / "kaggle_submission_package"
     if pkg_dir.exists():
         shutil.rmtree(pkg_dir)
@@ -485,16 +490,22 @@ def main():
     )
 
     # Step 4: Packaging
+    if gate_data.get("promotion_result") != "passed":
+        log("Promotion failed; retaining d842 and producing no candidate package.")
+        return 1
+
     submission_tar = step_4_package_winning_agent(
         model_path=best_model,
         deck_path=GRIM_DECK_PATH,
         out_dir=OUT_DIR / "final_submission",
+        promotion_result=gate_data["promotion_result"],
     )
 
     log("=== OVERNIGHT PIPELINE COMPLETED SUCCESSFULLY! ===")
     log(f"Final Model: {best_model}")
     log(f"Submission Package: {submission_tar}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

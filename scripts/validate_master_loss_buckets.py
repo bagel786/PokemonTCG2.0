@@ -7,9 +7,12 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+
+from training.evaluation_schema import load_evaluation
 
 DECK_PATH = ROOT / "freshstart" / "decklists" / "grimmsnarl_marnie.deck.csv"
 MODEL_PATH = ROOT / "artifacts" / "loss_buckets_model" / "master_loss_buckets_policy.npz"
@@ -26,6 +29,7 @@ def log(msg: str):
         f.write(line + "\n")
 
 def run_matchup(model_a: Path, model_b: Path, games: int, workers: int = 8) -> dict:
+    output = OUT_DIR / f"eval_{model_a.stem}_vs_{model_b.stem}_{games}_{time.time_ns()}.json"
     cmd = [
         sys.executable,
         "-m",
@@ -36,19 +40,10 @@ def run_matchup(model_a: Path, model_b: Path, games: int, workers: int = 8) -> d
         "--model-b", str(model_b),
         "--games", str(games),
         "--workers", str(workers),
+        "--output", str(output),
     ]
-    res = subprocess.run(cmd, capture_output=True, text=True)
-    stdout = res.stdout.strip()
-    import ast
-    for line in reversed(res.stdout.splitlines()):
-        line = line.strip()
-        if line.startswith("{") and "win_rate_a" in line:
-            try:
-                return ast.literal_eval(line)
-            except Exception:
-                pass
-    log(f"Parse fallback failed.\nSTDOUT: {res.stdout}\nSTDERR: {res.stderr}")
-    return {"wins_a": 0, "games": games, "win_rate_a": 0.0}
+    subprocess.run(cmd, check=True)
+    return load_evaluation(output)
 
 def main():
     OUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -92,7 +87,11 @@ def main():
     log(f"  * Win Rate vs 5k Control      : {wr2:.2f}% (Threshold: >= 50.0%)")
     log(f"  * Seat-1 Win Rate vs 5k       : {s1_wr2:.2f}% (Threshold: >= 48.0%)")
 
-    passed = (wr1 >= 49.0) and (wr2 >= 50.0) and (s1_wr2 >= 45.0)
+    errors = sum(
+        result["hero_policy_errors"] + result["opponent_policy_errors"]
+        for result in (res_g1, res_g2, res_g3)
+    )
+    passed = (wr1 >= 50.0) and (wr2 >= 50.0) and (s1_wr2 >= 48.0) and errors == 0
     if passed:
         log(f"STATUS: >>> ALL GATES PASSED! Master Model verified for deployment. <<<")
     else:

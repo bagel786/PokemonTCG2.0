@@ -1,0 +1,21 @@
+{
+  "schema": "outcome_psro_v1",
+  "iterations": 3,
+  "minimum_games_per_iteration": 20000,
+  "balance_actual_order": true,
+  "initial_population": [
+    "artifacts/recovery_r0_package/extracted/r0_play_binding",
+    "artifacts/recovery_probes/extracted/a2",
+    "artifacts/recovery_final/opponents/d842",
+    "artifacts/recovery_final/opponents/master_v1",
+    "artifacts/recovery_final/opponents/replay_refresh",
+    "artifacts/recovery_final/opponents/v2_2"
+  ],
+  "behavior_clones_allowed": false,
+  "snapshot_admission": {
+    "worst_lineage_lower_bound": 0.0,
+    "actual_first_lower_bound": 0.0,
+    "actual_second_lower_bound": 0.0,
+    "policy_errors": 0
+  }
+}

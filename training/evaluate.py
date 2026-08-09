@@ -8,6 +8,7 @@ import json
 import math
 import multiprocessing as mp
 import random
+import time
 import sys
 from pathlib import Path
 
@@ -21,6 +22,7 @@ from cg.api import to_observation_class
 from cg.game import battle_finish, battle_select, battle_start
 from ptcg_ai.agent import CompetitionAgent
 from ptcg_ai.external import ExternalSubmissionAgent
+from training.evaluation_schema import build_provenance
 
 
 def external_diagnostics(agent):
@@ -38,6 +40,21 @@ def external_diagnostics(agent):
     return numeric(runtime), numeric(search)
 
 
+def policy_error_count(agent) -> int:
+    """Count adapter failures plus failures swallowed inside a submission."""
+    errors = int(getattr(agent, "errors", 0) or 0)
+    if isinstance(agent, ExternalSubmissionAgent):
+        inner = getattr(agent.module, "_AGENT", None)
+        errors += int(getattr(inner, "errors", 0) or 0)
+    return errors
+
+
+def competition_telemetry(agent) -> dict:
+    inner = getattr(agent.module, "_AGENT", None) if isinstance(agent, ExternalSubmissionAgent) else agent
+    route = getattr(inner, "route_telemetry", {})
+    return dict(route) if isinstance(route, dict) else {}
+
+
 def capture_initial_first_player(current, captured=None):
     """Capture valid opening metadata once; never replace it from a later state."""
     if captured in (0, 1):
@@ -48,7 +65,8 @@ def capture_initial_first_player(current, captured=None):
 
 def run_game_diagnostic(task):
     index, deck_a_path, model_a, deck_b_path, model_b, *external = task
-    seed = int(external[2]) if len(external) > 2 else 0
+    seed = int(external[4]) if len(external) > 4 else 0
+    max_decisions = int(external[5]) if len(external) > 5 else 0
     random.seed(seed + index)
     try:
         import numpy as np
@@ -60,13 +78,18 @@ def run_game_diagnostic(task):
     deck_b = [int(line) for line in Path(deck_b_path).read_text().splitlines() if line.strip()]
     seat_a = index % 2
     decks = [deck_a, deck_b] if seat_a == 0 else [deck_b, deck_a]
-    opponent = (
+    hero = (
         ExternalSubmissionAgent(external[0], external[1] if len(external) > 1 else {})
         if external and external[0]
+        else CompetitionAgent(deck_a_path, model_a or None)
+    )
+    opponent = (
+        ExternalSubmissionAgent(external[2], external[3] if len(external) > 3 else {})
+        if len(external) > 2 and external[2]
         else CompetitionAgent(deck_b_path, model_b or None)
     )
     agents = {
-        seat_a: CompetitionAgent(deck_a_path, model_a or None),
+        seat_a: hero,
         1 - seat_a: opponent,
     }
     raw, start = battle_start(decks[0], decks[1])
@@ -88,18 +111,22 @@ def run_game_diagnostic(task):
                     "seat_a": seat_a,
                     "hero_went_first": bool(initial_first_player == seat_a),
                     "initial_first_player": initial_first_player,
-                    "hero_errors": agents[seat_a].errors,
-                    "opponent_errors": agents[1 - seat_a].errors,
+                    "hero_errors": policy_error_count(agents[seat_a]),
+                    "opponent_errors": policy_error_count(agents[1 - seat_a]),
                     "opponent_runtime_stats": runtime_stats,
                     "opponent_search_stats": search_stats,
+                    "hero_telemetry": competition_telemetry(agents[seat_a]),
                     "decisions": decisions,
                 }
             raw = battle_select(agents[obs.current.yourIndex](raw))
             decisions += 1
+            if max_decisions and decisions >= max_decisions:
+                raise RuntimeError(f"game exceeded fail-closed decision cap: {max_decisions}")
     finally:
         battle_finish()
-        if isinstance(opponent, ExternalSubmissionAgent):
-            opponent.close()
+        for agent in (hero, opponent):
+            if isinstance(agent, ExternalSubmissionAgent):
+                agent.close()
 
 
 def run_game(task):
@@ -122,13 +149,23 @@ def main() -> int:
     parser.add_argument("--model-a", default="")
     parser.add_argument("--deck-b", required=True)
     parser.add_argument("--model-b", default="")
+    parser.add_argument("--submission-a", default="", help="authentic submission directory for player A")
+    parser.add_argument("--submission-env-a", default="{}", help="JSON environment overrides for player A")
     parser.add_argument("--submission-b", default="", help="authentic submission directory for player B")
     parser.add_argument("--submission-env-b", default="{}", help="JSON environment overrides for player B")
+    parser.add_argument("--opponent-name", default="", help="stable opponent identifier recorded in the shard")
     parser.add_argument("--games", type=int, default=2000)
     parser.add_argument("--workers", type=int, default=max(1, (mp.cpu_count() or 2) - 1))
-    parser.add_argument("--seed", type=int, default=20260729, help="paired per-game Python/NumPy seed schedule")
+    parser.add_argument(
+        "--seed", type=int, default=20260729,
+        help="Python/NumPy schedule only; engine std::random_device remains independent/unpaired",
+    )
+    parser.add_argument("--max-decisions", type=int, default=0, help="fail a game at this decision count; 0 disables")
     parser.add_argument("--output", help="optional JSON result path")
     args = parser.parse_args()
+    started = time.time()
+    submission_a = str(Path(args.submission_a).resolve()) if args.submission_a else ""
+    submission_env_a = {str(key): str(value) for key, value in json.loads(args.submission_env_a).items()}
     submission_b = str(Path(args.submission_b).resolve()) if args.submission_b else ""
     submission_env_b = {str(key): str(value) for key, value in json.loads(args.submission_env_b).items()}
     tasks = [
@@ -138,9 +175,12 @@ def main() -> int:
             args.model_a,
             str(Path(args.deck_b).resolve()),
             args.model_b,
+            submission_a,
+            submission_env_a,
             submission_b,
             submission_env_b,
             args.seed,
+            args.max_decisions,
         )
         for index in range(args.games)
     ]
@@ -177,16 +217,24 @@ def main() -> int:
             if complete % 500 == 0:
                 print({"complete": complete, "win_rate_a": wins / complete})
     lower, upper = wilson(wins, args.games)
+    opponent_name = args.opponent_name or (Path(submission_b).name if submission_b else Path(args.deck_b).stem)
     result = {
         "games": args.games,
         "wins_a": wins,
         "win_rate_a": wins / args.games,
         "wilson_95": [lower, upper],
+        "overall": {
+            "games": args.games,
+            "wins": wins,
+            "win_rate": wins / args.games,
+            "wilson_95": [lower, upper],
+        },
         "deck_a": args.deck_a,
         "model_a": args.model_a or "heuristic",
         "deck_b": args.deck_b,
         "model_b": args.model_b or "heuristic",
         "submission_b": submission_b or None,
+        "submission_a": submission_a or None,
         "hero_policy_errors": hero_errors,
         "opponent_policy_errors": opponent_errors,
         "seat_results_a": {
@@ -211,6 +259,26 @@ def main() -> int:
             "python_numpy_seed_schedule": args.seed,
             "paired_deals": False,
         },
+        "opponent_results_a": {
+            opponent_name: {
+                "games": args.games,
+                "wins": wins,
+                "win_rate": wins / args.games,
+                "wilson_95": [lower, upper],
+            }
+        },
+        "artifact_provenance": build_provenance(
+            root=ROOT,
+            deck_a=args.deck_a,
+            model_a=args.model_a or None,
+            deck_b=args.deck_b,
+            model_b=args.model_b or None,
+            submission_a=submission_a or None,
+            submission_b=submission_b or None,
+            engine_path=ROOT / "vendor" / "cg" / "libcg.so",
+            seed=args.seed,
+        ),
+        "elapsed_seconds": time.time() - started,
         "opponent_runtime_stats": opponent_runtime_stats,
         "opponent_search_stats": opponent_search_stats,
         "decisions": decisions,

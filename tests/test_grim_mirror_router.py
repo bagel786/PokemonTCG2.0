@@ -1,7 +1,7 @@
 """Acceptance tests for the Grimmsnarl-mirror public-information router.
 
-Covers the plan's router requirements: detection per identifier (646/647/648),
-permanent latch, game reset, no private-information access, search-disabled
+Covers the router requirements: one-card Marnie-line detection, legacy latch,
+game reset, no private-information access, search-disabled
 greedy specialist wiring, and non-mirror parity (dormant when no specialist is
 bundled -> behavior is exactly the v2.2 base policy).
 """
@@ -26,9 +26,13 @@ DECK = ROOT / "freshstart" / "decklists" / "grimmsnarl_marnie.deck.csv"
 
 @pytest.mark.parametrize("mirror_id", [646, 647, 648])
 def test_detects_each_mirror_identifier(mirror_id):
-    assert grimmsnarl_mirror_publicly_detected(observation(opponent_cards=[mirror_id]))
-    assert grimmsnarl_mirror_publicly_detected(observation(opponent_bench=[mirror_id]))
-    assert grimmsnarl_mirror_publicly_detected(observation(opponent_discard=[mirror_id]))
+    assert grimmsnarl_mirror_publicly_detected(observation(opponent_cards=[mirror_id, 112]))
+    assert grimmsnarl_mirror_publicly_detected(observation(opponent_bench=[mirror_id, 860]))
+    assert grimmsnarl_mirror_publicly_detected(observation(opponent_discard=[mirror_id, 104]))
+
+
+def test_single_marnie_line_card_routes():
+    assert grimmsnarl_mirror_publicly_detected(observation(opponent_cards=[648]))
 
 
 def test_no_detection_on_neutral_or_own_cards():
@@ -42,8 +46,8 @@ def test_never_inspects_private_zones():
     assert not grimmsnarl_mirror_publicly_detected(
         observation(opponent_hand=[648], opponent_deck=[646, 647])
     )
-    # Same identifiers, but now publicly visible -> detected.
-    assert grimmsnarl_mirror_publicly_detected(observation(opponent_cards=[648]))
+    # Same line identifier plus a public corroborator -> detected.
+    assert grimmsnarl_mirror_publicly_detected(observation(opponent_cards=[648, 112]))
 
 
 def test_mirror_and_lucario_detectors_are_disjoint():
@@ -64,7 +68,7 @@ def _fake_agent(monkeypatch, *, has_mirror=True):
             return [0]
 
     agent = CompetitionAgent.__new__(CompetitionAgent)
-    agent.deck = [1] * 60
+    agent.deck = [646, 647, 648, 112, 104, 860, 100, 999]
     agent.policy = Policy("base")
     agent.specialist = Policy("lucario")
     agent.mirror_specialist = Policy("mirror") if has_mirror else None
@@ -79,7 +83,7 @@ def test_mirror_router_latches_for_rest_of_game(monkeypatch):
     agent, calls = _fake_agent(monkeypatch)
 
     assert agent(observation(opponent_cards=[100])) == [0]      # pre-reveal -> base
-    assert agent(observation(opponent_cards=[646])) == [0]      # reveal -> mirror
+    assert agent(observation(opponent_cards=[646, 112])) == [0] # corroborated reveal -> mirror
     assert agent(observation(opponent_cards=[100])) == [0]      # latched -> mirror
     assert agent(observation(opponent_bench=[999])) == [0]      # still latched
     assert calls == ["base", "mirror", "mirror", "mirror"]
@@ -88,27 +92,27 @@ def test_mirror_router_latches_for_rest_of_game(monkeypatch):
 def test_mirror_latch_resets_on_deck_handshake(monkeypatch):
     agent, calls = _fake_agent(monkeypatch)
 
-    assert agent(observation(opponent_cards=[647])) == [0]
+    assert agent(observation(opponent_cards=[647, 104])) == [0]
     assert agent.mirror_routed
     # Deck-handshake observation (select is None) resets latches for the next game.
-    assert agent(observation(select=False)) == [1] * 60
+    assert agent(observation(select=False)) == agent.deck
     assert not agent.mirror_routed
     assert agent(observation(opponent_cards=[100])) == [0]
     assert calls == ["mirror", "base"]
 
 
-def test_mirror_takes_precedence_over_lucario(monkeypatch):
-    """If somehow both are present, the mirror specialist wins the route."""
+def test_incompatible_lucario_card_prevents_exact_mirror_route(monkeypatch):
+    """A revealed card outside the exact list rejects the mirror signature."""
     agent, calls = _fake_agent(monkeypatch)
-    assert agent(observation(opponent_cards=[648, 677])) == [0]
-    assert calls == ["mirror"]
+    assert agent(observation(opponent_cards=[648, 112, 677])) == [0]
+    assert calls == ["lucario"]
 
 
 def test_dormant_when_no_specialist_is_base_policy(monkeypatch):
     """No mirror_specialist bundled -> mirror reveal still routes to base (v2.2 parity)."""
     agent, calls = _fake_agent(monkeypatch, has_mirror=False)
-    assert agent(observation(opponent_cards=[648])) == [0]
-    assert agent(observation(opponent_cards=[646])) == [0]
+    assert agent(observation(opponent_cards=[648, 112])) == [0]
+    assert agent(observation(opponent_cards=[646, 104])) == [0]
     assert calls == ["base", "base"]
     assert not agent.mirror_routed
 

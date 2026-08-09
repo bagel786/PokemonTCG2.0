@@ -9,6 +9,7 @@ import numpy as np
 
 from .features import MAX_SELECT_COUNT, encode_observation
 from .safety import sanitize_selection
+from .tactical_shield import ShieldTelemetry, apply_tactical_shield
 
 
 class NumpyPolicyModel:
@@ -69,6 +70,10 @@ class NeuralPolicy:
         # sample for a decorrelated, higher-variance twin (slot B) under best-of-2.
         self.temp = float(os.environ.get("PTCG_TEMP", "0") or 0)
         self._rng = np.random.default_rng()
+        self.tactical_shield = os.environ.get("PTCG_TACTICAL_SHIELD", "0").lower() in (
+            "1", "true", "on", "yes"
+        )
+        self.shield_telemetry = ShieldTelemetry()
 
     def choose(self, obs) -> list[int]:
         features = encode_observation(obs, self.model.feature_version)
@@ -87,20 +92,9 @@ class NeuralPolicy:
             maximum = min(int(obs.select.maxCount), len(count_logits) - 1)
             desired = minimum + int(np.argmax(count_logits[minimum : maximum + 1]))
         # Invariant 1: Never skip benching during setup if basic Pokémon are available in hand
-        context_val = getattr(obs.select, "context", None)
-        if (context_val == 2 or str(context_val).endswith("SETUP_BENCH_POKEMON")) and obs.select.maxCount > 0:
-            desired = max(1, min(int(obs.select.maxCount), desired or 1))
-
-        # Invariant 2: Always promote 320 HP Grimmsnarl ex to Active (Context 4: TO_ACTIVE) when available
-        if context_val == 4 or str(context_val).endswith("TO_ACTIVE"):
-            from .view import option_source_card
-            for opt_idx, opt in enumerate(obs.select.option):
-                c = option_source_card(obs, opt)
-                if c is not None and getattr(c, "id", None) == 648:
-                    if opt_idx in ranked:
-                        ranked.remove(opt_idx)
-                        ranked.insert(0, opt_idx)
-                    break
+        if self.tactical_shield:
+            ranked, desired, intervention = apply_tactical_shield(obs, ranked, desired)
+            self.shield_telemetry.record(intervention)
         
         greedy_action = sanitize_selection(obs.select, ranked, desired)
 

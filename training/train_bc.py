@@ -28,7 +28,13 @@ from ptcg_ai.features import (
     CARD_LIMIT,
     MAX_SELECT_COUNT,
     OPTION_NUMERIC_SIZE,
+    ENTITY_NUMERIC_SIZE,
+    EVENT_HISTORY_LENGTH,
+    EVENT_NUMERIC_SIZE,
     V3_OPTION_NUMERIC_SIZE,
+    V4_GLOBAL_SIZE,
+    V4_OPTION_NUMERIC_SIZE,
+    V5_GLOBAL_SIZE,
     V1_GLOBAL_SIZE,
     V1_ZONE_COUNT,
     V2_GLOBAL_SIZE,
@@ -45,7 +51,11 @@ def replay_split(row: dict) -> str:
     """Return an explicit audited split when present, else the legacy hash split."""
     explicit = row.get("split")
     if explicit is not None:
-        if explicit not in {"train", "validation", "holdout", "unseen_team", "temporal"}:
+        if explicit not in {
+            "train", "validation", "holdout", "unseen_team", "temporal",
+            "team_holdout", "temporal_holdout", "policy_holdout",
+            "policy_identity_holdout",
+        }:
             raise ValueError(f"invalid replay split {explicit!r}")
         return explicit
     return "validation" if split_bucket(row.get("episode_id", "")) == 0 else "train"
@@ -64,8 +74,9 @@ def iter_rows(paths, shuffle_files=True, required_card=0, validation=False, feat
                 row_version = int(row.get("features", {}).get("feature_version", 1))
                 if feature_version and row_version != feature_version:
                     continue
-                requested_split = "validation" if validation else "train"
-                if replay_split(row) == requested_split:
+                split = replay_split(row)
+                selected = split != "train" if validation else split == "train"
+                if selected:
                     configured = float((team_weights or {}).get(row.get("team"), 1.0))
                     row["sample_weight"] = 1.0 if validation else float(row.get("sample_weight", 1.0)) * configured
                     yield row
@@ -121,11 +132,16 @@ def collate(rows):
     weights = []
     record_options = []
     record_actions = []
+    record_rejected_actions = []
     feature_versions = set()
+    entity_rows = []
+    event_rows = []
     for record_index, row in enumerate(rows):
         features = row["features"]
         feature_versions.add(int(features.get("feature_version", 1)))
         globals_.append(features["global"])
+        entity_rows.append(features.get("entities", []))
+        event_rows.append(features.get("events", []))
         token_offsets.append(len(token_values))
         token_values.extend(features["tokens"] or [0])
         selected = set(row["action"])
@@ -146,6 +162,10 @@ def collate(rows):
         values.append(float(row["reward"] > 0))
         weights.append(float(row.get("sample_weight", 1.0)))
         record_actions.append([int(index) for index in row["action"]])
+        rejected = row.get("rejected_action")
+        record_rejected_actions.append(
+            [int(index) for index in rejected] if isinstance(rejected, list) else None
+        )
     if len(feature_versions) != 1:
         raise ValueError(f"a batch cannot mix feature schemas: {sorted(feature_versions)}")
     feature_version = next(iter(feature_versions))
@@ -153,6 +173,60 @@ def collate(rows):
     counts = [min(count_maximum, value) for value in counts]
     long = lambda value: torch.tensor(value, dtype=torch.long)
     floating = lambda value: torch.tensor(value, dtype=torch.float32)
+    maximum_entities = max(1, max((len(row) for row in entity_rows), default=0))
+    entity_card = []
+    entity_serial = []
+    entity_owner = []
+    entity_zone = []
+    entity_slot = []
+    entity_type = []
+    entity_numeric = []
+    entity_mask = []
+    for row in entity_rows:
+        padded = list(row) + [None] * (maximum_entities - len(row))
+        entity_card.append([int(item["card_id"]) if item else 0 for item in padded])
+        entity_serial.append([int(item["serial"]) if item else 0 for item in padded])
+        entity_owner.append([int(item["owner"]) if item else 0 for item in padded])
+        entity_zone.append([int(item["zone"]) if item else 0 for item in padded])
+        entity_slot.append([int(item["slot"]) if item else 0 for item in padded])
+        entity_type.append([int(item["entity_type"]) if item else 0 for item in padded])
+        entity_numeric.append([
+            list(item["numeric"]) if item else [0.0] * ENTITY_NUMERIC_SIZE for item in padded
+        ])
+        entity_mask.append([bool(item) for item in padded])
+    source_entity = []
+    target_entity = []
+    for row in rows:
+        for option in row["features"]["options"]:
+            source_entity.append(int(option.get("source_entity", -1)))
+            target_entity.append(int(option.get("target_entity", -1)))
+    event_context = []
+    event_type = []
+    event_source = []
+    event_source_serial = []
+    event_target = []
+    event_target_serial = []
+    event_attack = []
+    event_position = []
+    event_numeric = []
+    event_mask = []
+    for row in event_rows:
+        clipped = list(row)[-EVENT_HISTORY_LENGTH:]
+        padded = clipped + [None] * (EVENT_HISTORY_LENGTH - len(clipped))
+        event_context.append([int(item.get("context", 0)) if item else 0 for item in padded])
+        event_type.append([int(item.get("option_type", 0)) if item else 0 for item in padded])
+        event_source.append([int(item.get("source_card", 0)) if item else 0 for item in padded])
+        event_source_serial.append([int(item.get("source_serial", 0)) if item else 0 for item in padded])
+        event_target.append([int(item.get("target_card", 0)) if item else 0 for item in padded])
+        event_target_serial.append([int(item.get("target_serial", 0)) if item else 0 for item in padded])
+        event_attack.append([int(item.get("attack_id", 0)) if item else 0 for item in padded])
+        event_position.append([int(item.get("position", index)) if item else index for index, item in enumerate(padded)])
+        event_numeric.append([
+            (list(item.get("numeric", [])) + [0.0] * EVENT_NUMERIC_SIZE)[:EVENT_NUMERIC_SIZE]
+            if item else [0.0] * EVENT_NUMERIC_SIZE
+            for item in padded
+        ])
+        event_mask.append([bool(item) for item in padded])
     return {
         "global": floating(globals_),
         "tokens": long(token_values),
@@ -165,6 +239,26 @@ def collate(rows):
         "area": long(options["area"]),
         "in_area": long(options["in_area"]),
         "numeric": floating(options["numeric"]),
+        "source_entity": long(source_entity),
+        "target_entity": long(target_entity),
+        "entity_card": long(entity_card),
+        "entity_serial": long(entity_serial),
+        "entity_owner": long(entity_owner),
+        "entity_zone": long(entity_zone),
+        "entity_slot": long(entity_slot),
+        "entity_type": long(entity_type),
+        "entity_numeric": floating(entity_numeric),
+        "entity_mask": torch.tensor(entity_mask, dtype=torch.bool),
+        "event_context": long(event_context),
+        "event_type": long(event_type),
+        "event_source": long(event_source),
+        "event_source_serial": long(event_source_serial),
+        "event_target": long(event_target),
+        "event_target_serial": long(event_target_serial),
+        "event_attack": long(event_attack),
+        "event_position": long(event_position),
+        "event_numeric": floating(event_numeric),
+        "event_mask": torch.tensor(event_mask, dtype=torch.bool),
         "option_record": long(option_record),
         "selected": floating(option_selected),
         "counts": long(counts),
@@ -172,6 +266,7 @@ def collate(rows):
         "weights": floating(weights),
         "record_options": record_options,
         "record_actions": record_actions,
+        "record_rejected_actions": record_rejected_actions,
         "feature_version": feature_version,
     }
 
@@ -181,7 +276,7 @@ class PolicyNet(nn.Module):
         super().__init__()
         self.feature_version = int(feature_version)
         zone_count = V2_ZONE_COUNT if self.feature_version >= 2 else V1_ZONE_COUNT
-        global_size = V2_GLOBAL_SIZE if self.feature_version >= 2 else V1_GLOBAL_SIZE
+        global_size = V5_GLOBAL_SIZE if self.feature_version >= 5 else V4_GLOBAL_SIZE if self.feature_version >= 4 else V2_GLOBAL_SIZE if self.feature_version >= 2 else V1_GLOBAL_SIZE
         self.state_embedding = nn.EmbeddingBag(CARD_LIMIT * zone_count, 64, mode="sum" if self.feature_version >= 2 else "mean")
         self.card_embedding = nn.Embedding(CARD_LIMIT, 32)
         self.attack_embedding = nn.Embedding(ATTACK_LIMIT, 16)
@@ -189,7 +284,11 @@ class PolicyNet(nn.Module):
         self.context_embedding = nn.Embedding(64, 16)
         self.area_embedding = nn.Embedding(16, 8)
         self.global_linear = nn.Linear(global_size, 64)
-        numeric_size = V3_OPTION_NUMERIC_SIZE if self.feature_version >= 3 else OPTION_NUMERIC_SIZE
+        numeric_size = (
+            V4_OPTION_NUMERIC_SIZE if self.feature_version >= 4
+            else V3_OPTION_NUMERIC_SIZE if self.feature_version >= 3
+            else OPTION_NUMERIC_SIZE
+        )
         self.numeric_linear = nn.Linear(numeric_size, 32)
         self.option_linear = nn.Linear(280, 128)
         self.score = nn.Linear(128, 1)
@@ -355,7 +454,7 @@ def main() -> int:
     parser.add_argument("--learning-rate", type=float, default=3e-4)
     parser.add_argument("--require-card", type=int, default=0, help="train only decks containing this card ID")
     parser.add_argument("--seed", type=int, default=20260729)
-    parser.add_argument("--feature-version", type=int, choices=(1, 2, 3), default=2)
+    parser.add_argument("--feature-version", type=int, choices=(1, 2, 3, 4, 5), default=2)
     parser.add_argument("--team-ranks", help="ordered newline-delimited team names used for rank weighting")
     parser.add_argument("--early-stop-patience", type=int, default=2)
     parser.add_argument("--initial-model", help="optional compatible checkpoint for supervised fine-tuning")

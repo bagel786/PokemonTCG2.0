@@ -6,7 +6,7 @@ from collections import Counter
 from functools import lru_cache
 from typing import Iterable
 
-from cg.api import AreaType, Card, Observation, Option, Pokemon, all_attack, all_card_data
+from cg.api import AreaType, Card, Observation, Option, OptionType, Pokemon, all_attack, all_card_data
 
 
 @lru_cache(maxsize=1)
@@ -50,6 +50,17 @@ def resolve_area_card(obs: Observation, area, index, player_index=None):
 
 def option_source_card(obs: Observation, option: Option):
     """Return the card directly selected or played by an option."""
+    # MAIN/PLAY options identify a card only by its hand index.  The engine
+    # deliberately omits ``area`` and ``playerIndex`` for this option type.
+    # Treating the missing area as an unknown zone made every PLAY option look
+    # like card zero to schema 2/3 models.
+    if option.type == OptionType.PLAY:
+        return resolve_area_card(
+            obs,
+            AreaType.HAND,
+            option.index,
+            obs.current.yourIndex if obs.current is not None else None,
+        )
     return resolve_area_card(
         obs,
         option.area,
