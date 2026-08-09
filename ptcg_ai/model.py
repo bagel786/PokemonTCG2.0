@@ -10,6 +10,7 @@ import numpy as np
 from .features import MAX_SELECT_COUNT, encode_observation
 from .safety import sanitize_selection
 from .tactical_shield import ShieldTelemetry, apply_tactical_shield
+from .wave1_rails import Wave1Rail
 
 
 class NumpyPolicyModel:
@@ -74,6 +75,7 @@ class NeuralPolicy:
             "1", "true", "on", "yes"
         )
         self.shield_telemetry = ShieldTelemetry()
+        self.wave1_rail = Wave1Rail(os.environ.get("PTCG_WAVE1_RAIL", "off"))
 
     def choose(self, obs) -> list[int]:
         features = encode_observation(obs, self.model.feature_version)
@@ -92,6 +94,7 @@ class NeuralPolicy:
             maximum = min(int(obs.select.maxCount), len(count_logits) - 1)
             desired = minimum + int(np.argmax(count_logits[minimum : maximum + 1]))
         # Invariant 1: Never skip benching during setup if basic Pokémon are available in hand
+        ranked, desired, _ = self.wave1_rail.apply(obs, ranked, desired)
         if self.tactical_shield:
             ranked, desired, intervention = apply_tactical_shield(obs, ranked, desired)
             self.shield_telemetry.record(intervention)
