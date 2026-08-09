@@ -335,10 +335,10 @@ def _apply_setup(obs, ranked: list[int], desired: int):
     return None
 
 
-def _apply_early_search(obs, ranked: list[int], desired: int):
+def _apply_early_search(obs, ranked: list[int], desired: int, max_ordinal: int = 2):
     state = obs.current
     ordinal = _own_turn_ordinal(state)
-    if ordinal not in (1, 2):
+    if ordinal < 1 or ordinal > max_ordinal:
         return None
     select = obs.select
     me = state.players[state.yourIndex]
@@ -366,7 +366,7 @@ def _apply_early_search(obs, ranked: list[int], desired: int):
 
     if _effect_id(obs) == SPIKEMUTH_GYM and _context_is(select, int(SelectContext.TO_HAND), "TO_HAND"):
         target = None
-        if ordinal == 2 and old_imps and RARE_CANDY in hand and MARNIES_GRIMMSNARL_EX not in hand:
+        if ordinal >= 2 and old_imps and RARE_CANDY in hand and MARNIES_GRIMMSNARL_EX not in hand:
             target = MARNIES_GRIMMSNARL_EX
         elif ordinal == 1:
             if MARNIES_IMPIDIMP not in board_ids and len(_cards(me, "bench")) < int(me.benchMax):
@@ -381,7 +381,7 @@ def _apply_early_search(obs, ranked: list[int], desired: int):
         if choices:
             return _ranked_with(ranked, choices), max(1, int(select.minCount)), "tempo_gym_search"
 
-    if _effect_id(obs) == TEAM_ROCKETS_PETREL and ordinal == 2 and _context_is(
+    if _effect_id(obs) == TEAM_ROCKETS_PETREL and ordinal >= 2 and _context_is(
         select, int(SelectContext.TO_HAND), "TO_HAND"
     ):
         target = None
@@ -393,7 +393,7 @@ def _apply_early_search(obs, ranked: list[int], desired: int):
         if choices:
             return _ranked_with(ranked, choices), max(1, int(select.minCount)), "tempo_petrel_search"
 
-    if _effect_id(obs) == RARE_CANDY and ordinal == 2 and _context_is(
+    if _effect_id(obs) == RARE_CANDY and ordinal >= 2 and _context_is(
         select, int(SelectContext.EVOLVE), "EVOLVE"
     ):
         choices = []
@@ -414,7 +414,7 @@ def _apply_early_search(obs, ranked: list[int], desired: int):
     if not _context_is(select, int(SelectContext.MAIN), "MAIN"):
         return None
 
-    if ordinal == 2 and old_imps:
+    if ordinal >= 2 and old_imps:
         candy = RARE_CANDY in hand
         grim = MARNIES_GRIMMSNARL_EX in hand
         candy_play = _play_option(obs, RARE_CANDY)
@@ -435,7 +435,7 @@ def _apply_early_search(obs, ranked: list[int], desired: int):
             if petrel is not None and not bool(state.supporterPlayed):
                 return _ranked_with(ranked, [petrel]), desired, "tempo_petrel_for_candy"
 
-    if ordinal == 2 and not old_imps:
+    if ordinal >= 2 and not old_imps:
         morgrem = []
         for index in ranked:
             option = select.option[index]
@@ -485,6 +485,33 @@ def _apply_early_search(obs, ranked: list[int], desired: int):
             if alternatives:
                 return alternatives + [lillie], desired, "tempo_preserve_candy_package"
     return None
+
+
+def _apply_attack_floor(obs, ranked: list[int], desired: int):
+    """Prevent the observed repeated pass with a ready Shadow Bullet.
+
+    This is intentionally narrower than an "always attack" rule: it only
+    overrides END when the active Pokemon is Grimmsnarl ex and Shadow Bullet is
+    explicitly legal.  It therefore covers the live Crustle and historical
+    Bellibolt pass loops without changing ordinary development choices.
+    """
+    if not _context_is(obs.select, int(SelectContext.MAIN), "MAIN") or not ranked:
+        return None
+    me = obs.current.players[obs.current.yourIndex]
+    active = _cards(me, "active")
+    if not active or int(active[0].id) != MARNIES_GRIMMSNARL_EX:
+        return None
+    first = obs.select.option[ranked[0]]
+    if int(first.type) != int(OptionType.END):
+        return None
+    attacks = [
+        index for index in ranked
+        if int(obs.select.option[index].type) == int(OptionType.ATTACK)
+        and int(getattr(obs.select.option[index], "attackId", 0) or 0) == SHADOW_BULLET
+    ]
+    if not attacks:
+        return None
+    return _ranked_with(ranked, [attacks[0]]), 1, "floor_shadow_over_end"
 
 
 def _fan_attach_key(obs, index: int):
@@ -651,7 +678,7 @@ class Wave1Rail:
 
     def __init__(self, mode: str = "off") -> None:
         mode = str(mode or "off").strip().lower()
-        if mode not in {"off", "tempo", "fan"}:
+        if mode not in {"off", "tempo", "fan", "floor"}:
             raise ValueError(f"unknown Wave-1 rail mode: {mode}")
         self.mode = mode
         self.counts: Counter[str] = Counter()
@@ -666,10 +693,28 @@ class Wave1Rail:
                 or _apply_munk_source(obs, ranked, desired)
                 or _apply_early_search(obs, ranked, desired)
             )
+        elif self.mode == "floor":
+            result = (
+                _apply_setup(obs, ranked, desired)
+                or _apply_punk_up(obs, ranked, desired)
+                or _apply_munk_source(obs, ranked, desired)
+                or _apply_early_search(obs, ranked, desired, max_ordinal=3)
+                or _apply_attack_floor(obs, ranked, desired)
+            )
         elif self.mode == "fan":
             result = _apply_fan(obs, ranked, desired)
         if result is None:
             self.last_intervention = None
+            return list(ranked), desired, None
+        new_ranked, new_desired, reason = result
+        self.last_intervention = reason
+        self.counts[reason] += 1
+        return new_ranked, new_desired, reason
+
+    def apply_post_shield(self, obs, ranked: list[int], desired: int):
+        """Apply invariants which must remain final after tactical shielding."""
+        result = _apply_attack_floor(obs, ranked, desired) if self.mode == "floor" else None
+        if result is None:
             return list(ranked), desired, None
         new_ranked, new_desired, reason = result
         self.last_intervention = reason

@@ -27,7 +27,7 @@ sys.path.insert(0, str(ROOT))
 from scripts.crawl_grim_daily import classify, load_archetype_catalog
 
 COMPETITION = "pokemon-tcg-ai-battle"
-EPISODE_URL = "https://www.kaggle.com/api/i/competitions.EpisodeService/ShowEpisode"
+EPISODE_URL = "https://www.kaggle.com/api/i/competitions.EpisodeService/ListEpisodes"
 AZURE = shutil.which("az.cmd") or shutil.which("az.bat") or shutil.which("az") or "az"
 AZURE_WORKERS = (
     ("ptcg-train-south-rg", "ptcg-train"),
@@ -49,22 +49,28 @@ def enum_text(value: object) -> str:
     return str(value).split(".")[-1]
 
 
-def show_episode(api, episode_id: int) -> dict:
+def list_episode_details(api, submission_id: int) -> dict[int, dict]:
     username = api.config_values.get("username", "")
     key = api.config_values.get("key", "")
     auth = base64.b64encode(f"{username}:{key}".encode()).decode()
     request = urllib.request.Request(
         EPISODE_URL,
-        data=json.dumps({"id": int(episode_id)}).encode(),
+        data=json.dumps({"submissionId": int(submission_id)}).encode(),
         headers={"Content-Type": "application/json", "Authorization": f"Basic {auth}"},
     )
     with urllib.request.urlopen(request, timeout=30) as response:
-        return json.loads(response.read().decode())
+        payload = json.loads(response.read().decode())
+    return {int(row["id"]): row for row in payload.get("episodes") or []}
 
 
 def rated_games(api, submission_id: int, cached: dict[int, dict]) -> tuple[list[dict], int]:
     games: list[dict] = []
     excluded = 0
+    try:
+        fresh_details = list_episode_details(api, submission_id)
+        cached.update(fresh_details)
+    except Exception:
+        fresh_details = {}
     for episode in api.competition_list_episodes(submission_id):
         matching = [agent for agent in episode.agents if int(agent.submission_id) == submission_id]
         if len(matching) == 2:
@@ -78,17 +84,7 @@ def rated_games(api, submission_id: int, cached: dict[int, dict]) -> tuple[list[
             continue
         opponent = opponents[0]
         episode_id = int(episode.id)
-        detail = cached.get(episode_id)
-        if detail is None:
-            # The list endpoint commonly exposes a just-finished episode several
-            # minutes before ShowEpisode does.  Preserve the result now and fill
-            # frozen rating metadata on a later poll instead of losing the whole
-            # monitoring snapshot to that transient 404.
-            try:
-                detail = show_episode(api, episode_id)
-                cached[episode_id] = detail
-            except Exception:
-                detail = {}
+        detail = cached.get(episode_id, {})
         agents = detail.get("agents") or []
         hero_detail = next(
             (row for row in agents if int(row.get("submissionId", -1)) == submission_id), {}

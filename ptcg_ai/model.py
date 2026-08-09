@@ -98,6 +98,7 @@ class NeuralPolicy:
         if self.tactical_shield:
             ranked, desired, intervention = apply_tactical_shield(obs, ranked, desired)
             self.shield_telemetry.record(intervention)
+        ranked, desired, _ = self.wave1_rail.apply_post_shield(obs, ranked, desired)
         
         greedy_action = sanitize_selection(obs.select, ranked, desired)
 

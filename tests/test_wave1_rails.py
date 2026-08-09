@@ -10,6 +10,7 @@ from ptcg_ai.card_ids import (
     MARNIES_MORGREM,
     MUNKIDORI,
     RARE_CANDY,
+    SHADOW_BULLET,
 )
 from ptcg_ai.wave1_rails import Wave1Rail
 
@@ -174,3 +175,47 @@ def test_non_trigger_state_is_identical_to_a2_ordering():
     assert ranked == [0]
     assert desired == 1
     assert reason is None
+
+
+def test_floor_forces_legal_shadow_bullet_over_end():
+    me = player(active=[pokemon(MARNIES_GRIMMSNARL_EX, energies=[EnergyType.DARKNESS] * 2)])
+    select = selection(SelectContext.MAIN, [
+        Option(OptionType.ATTACK, attackId=SHADOW_BULLET),
+        Option(OptionType.END),
+    ])
+    ranked, desired, reason = Wave1Rail("floor").apply(observation(select, me, turn=7), [1, 0], 1)
+    assert ranked[0] == 0
+    assert desired == 1
+    assert reason == "floor_shadow_over_end"
+    ranked, desired, reason = Wave1Rail("floor").apply_post_shield(
+        observation(select, me, turn=7), [1, 0], 1
+    )
+    assert ranked[0] == 0
+    assert desired == 1
+    assert reason == "floor_shadow_over_end"
+
+
+def test_floor_does_not_force_non_shadow_attack():
+    me = player(active=[pokemon(MARNIES_GRIMMSNARL_EX, energies=[EnergyType.DARKNESS])])
+    select = selection(SelectContext.MAIN, [
+        Option(OptionType.ATTACK, attackId=934),
+        Option(OptionType.END),
+    ])
+    ranked, desired, reason = Wave1Rail("floor").apply(observation(select, me, turn=7), [1, 0], 1)
+    assert ranked == [1, 0]
+    assert desired == 1
+    assert reason is None
+
+
+def test_floor_extends_candy_conversion_through_third_own_turn():
+    imp = pokemon(MARNIES_IMPIDIMP, appeared=False)
+    me = player(hand=[card(LILLIES_DETERMINATION), card(RARE_CANDY, 2), card(MARNIES_GRIMMSNARL_EX, 3)], active=[imp])
+    select = selection(SelectContext.MAIN, [
+        Option(OptionType.PLAY, index=0),
+        Option(OptionType.PLAY, index=1),
+        Option(OptionType.END),
+    ])
+    # turn 5 is the third own turn for the first player.
+    ranked, _, reason = Wave1Rail("floor").apply(observation(select, me, turn=5), [0, 2, 1], 1)
+    assert ranked[0] == 1
+    assert reason == "tempo_play_candy"

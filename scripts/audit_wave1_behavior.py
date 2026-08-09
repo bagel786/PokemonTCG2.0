@@ -40,6 +40,21 @@ CONFIG = {
             "munk_damage_source", "munk_damage_count",
         },
     },
+    "floor": {
+        "team": "Larps",
+        "replays": ROOT / "data" / "replays" / "55307529",
+        "candidate": ROOT / "artifacts" / "wave1_push" / "extracted_floor_v1",
+        "allowed": {
+            "tempo_setup_active", "tempo_setup_bench_imp", "tempo_poffin_targets",
+            "tempo_gym_search", "tempo_petrel_search", "tempo_candy_target",
+            "tempo_play_candy", "tempo_use_gym_for_grim", "tempo_play_gym_for_grim",
+            "tempo_petrel_for_gym", "tempo_petrel_for_candy", "tempo_take_morgrem",
+            "tempo_play_poffin", "tempo_play_pad_before_draw", "tempo_play_gym",
+            "tempo_use_gym", "tempo_bench_basic_before_draw", "tempo_preserve_candy_package",
+            "punk_up_activate", "punk_up_energy_count", "punk_up_target",
+            "munk_damage_source", "munk_damage_count", "floor_shadow_over_end",
+        },
+    },
 }
 BASE = ROOT / "artifacts" / "recovery_probes" / "extracted" / "a2"
 
@@ -75,6 +90,8 @@ def main() -> int:
     try:
         for replay_path in sorted(config["replays"].glob("*.json")):
             replay = json.loads(replay_path.read_text(encoding="utf-8"))
+            if not isinstance(replay, dict) or "steps" not in replay:
+                continue
             teams = list((replay.get("info") or {}).get("TeamNames") or [])
             if config["team"] not in teams:
                 continue

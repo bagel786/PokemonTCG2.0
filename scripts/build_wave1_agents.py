@@ -83,6 +83,13 @@ def patch_model(stage: Path) -> None:
         apply_anchor,
         "        ranked, desired, _ = self.wave1_rail.apply(obs, ranked, desired)\n" + apply_anchor,
     )
+    post_anchor = "        self.shield_telemetry.record(intervention)\n"
+    if source.count(post_anchor) != 1:
+        raise RuntimeError("A2 model post-shield layout changed; refusing ambiguous Wave-1 patch")
+    source = source.replace(
+        post_anchor,
+        post_anchor + "        ranked, desired, _ = self.wave1_rail.apply_post_shield(obs, ranked, desired)\n",
+    )
     model.write_text(source, encoding="utf-8")
 
 
