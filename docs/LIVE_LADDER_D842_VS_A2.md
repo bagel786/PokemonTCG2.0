@@ -1,15 +1,15 @@
 # Live ladder comparison: d842 exact (55397271) vs A2 ordered (55399728)
 
-Generated 2026-08-10 17:46 UTC from `data/replays/*/episodes_metadata.json`. Regenerate with:
+Generated 2026-08-10 18:19 UTC from `data/replays/*/episodes_metadata.json`. Regenerate with:
 
 ```powershell
 python scripts/fetch_submission_games.py --submission 55397271 55399728
-python scripts/build_live_comparison_report.py 55397271 55399728 --out docs/LIVE_LADDER_D842_VS_A2.md
+python scripts/build_live_comparison_report.py 55397271 55399728 --out docs\LIVE_LADDER_D842_VS_A2.md
 ```
 
 ## Verdict
 
-The **77.8-point public-score gap is not evidence of a strength difference.** Two shipments of the byte-identical d842 agent differ by at least that much **67% of the time** (15 shipments, sd 122.3). The live win-rate gap is not significant (permutation p = 0.26), and the two agents faced **1 shared opponent(s) out of 82** distinct opponents — effectively disjoint fields.
+The **84.7-point public-score gap is not evidence of a strength difference.** Two shipments of the byte-identical d842 agent differ by at least that much **60% of the time** (5 shipments, sd 88.5). The live win-rate gap is not significant (permutation p = 0.26), and the two agents faced **1 shared opponent(s) out of 83** distinct opponents — effectively disjoint fields.
 
 Offline evidence, which has ~350x the sample size, favours A2 by roughly +25 Elo. Gate on that, not on public score.
 
@@ -17,16 +17,16 @@ Offline evidence, which has ~350x the sample size, favours A2 by roughly +25 Elo
 
 | | d842 exact (55397271) | A2 ordered (55399728) |
 |---|---|---|
-| Rated public games | 43 | 40 |
-| Window (UTC) | 2026-08-10 05:12 → 2026-08-10 15:18 | 2026-08-10 07:12 → 2026-08-10 16:47 |
-| **Win rate** | **69.8%** [54.9, 81.4] | **57.5%** [42.2, 71.5] |
-| Actually first | 68.8% (n=16) | 65.0% (n=20) |
+| Rated public games | 44 | 40 |
+| Window (UTC) | 2026-08-10 05:12 → 2026-08-10 17:43 | 2026-08-10 07:12 → 2026-08-10 16:47 |
+| **Win rate** | **70.5%** [55.8, 81.8] | **57.5%** [42.2, 71.5] |
+| Actually first | 70.6% (n=17) | 65.0% (n=20) |
 | Actually second | 70.4% (n=27) | 50.0% (n=20) |
-| Mean opponent rating | 733.7 | 742.5 |
-| Median opponent rating | 764.6 | 759.8 |
-| Final public score | 853.8 | 776.0 |
-| Performance rating (opponent-adjusted) | 889.7 | 800.8 |
-| Distinct opponents | 43 | 40 |
+| Mean opponent rating | 736.5 | 742.5 |
+| Median opponent rating | 765.3 | 759.8 |
+| Final public score | 860.8 | 776.0 |
+| Performance rating (opponent-adjusted) | 898.6 | 800.8 |
+| Distinct opponents | 44 | 40 |
 
 Win rates are Wilson 95% CIs. Performance rating is the Elo at which observed score equals expectation against the actual opponents faced; unlike public score it does not reward an easy draw.
 
@@ -34,28 +34,27 @@ Win rates are Wilson 95% CIs. Performance rating is the Elo at which observed sc
 
 | Test | Result |
 |---|---|
-| Overall win-rate gap | +12.3 pts, permutation p = **0.26** |
-| Opponent-adjusted gap | permutation p = **0.30** |
-| First-seat gap | +3.8 pts, p = 1.00 |
+| Overall win-rate gap | +13.0 pts, permutation p = **0.26** |
+| Opponent-adjusted gap | permutation p = **0.26** |
+| First-seat gap | +5.6 pts, p = 0.74 |
 | Second-seat gap | +20.4 pts, p = 0.23 |
-| Games/arm to resolve a 12.3-pt gap at 80% power | **480** |
+| Games/arm to resolve a 13.0-pt gap at 80% power | **428** |
 
 Nothing here is significant. Both arms are roughly an order of magnitude too small.
 
 ## The empirical null: reships of the identical agent
 
-`grimmsnarl_5k_reference` is the same d842 bytes shipped 15 times:
+`grimmsnarl_5k_reference` is the same d842 bytes shipped 5 times:
 
 ```
-   492.6   660.1   664.6   665.3   700.8   714.4   810.0   818.7
-   823.4   826.9   839.3   860.7   866.5   906.3   969.7
+   665.3   700.8   823.4   839.3   860.7
 ```
 
-- mean **774.6**, sd **122.3**, range 492.6–969.7 (spread 477.1)
-- median absolute gap between two reships: **142.8**
-- P(gap >= 77.8 | same agent) = **67%**
+- mean **777.9**, sd **88.5**, range 665.3–860.7 (spread 195.4)
+- median absolute gap between two reships: **130.6**
+- P(gap >= 84.7 | same agent) = **60%**
 
-A2 ordered's 776.0 sits essentially on d842's own 15-ship mean of 774.6. The 853.8 run was a favourable draw, not a better agent.
+A2 ordered's 776.0 sits essentially on d842's own 5-ship mean of 777.9. The 860.8 run was a favourable draw, not a better agent.
 
 ## Win rate by opponent rating band
 
@@ -65,7 +64,7 @@ A2 ordered's 776.0 sits essentially on d842's own 15-ship mean of 774.6. The 853
 |---|---|---|---|
 | 0–700 | 78.6% (n=14) | 100.0% (n=6) | 62.5% (n=8) |
 | 700–800 | 76.5% (n=17) | 40.0% (n=5) | 91.7% (n=12) |
-| 800–900 | 50.0% (n=12) | 60.0% (n=5) | 42.9% (n=7) |
+| 800–900 | 53.8% (n=13) | 66.7% (n=6) | 42.9% (n=7) |
 
 **A2 ordered (55399728)**
 
@@ -80,9 +79,9 @@ Both profiles are **non-monotone** in opponent strength — win rate does not fa
 
 ## Why the live comparison cannot settle it
 
-1. **Disjoint fields.** 1 shared opponent(s) out of 82. The two agents were scored against different populations.
-2. **Different pacing.** d842 exact played 43 games in 2026-08-10 05:12→2026-08-10 15:18; A2 ordered played 40 in 2026-08-10 07:12→2026-08-10 16:47. Games are front-loaded during the high-sigma burn-in, so equal game counts are not equal information.
-3. **Sample size.** ~480 games per arm are needed; there are 43 and 40.
+1. **Disjoint fields.** 1 shared opponent(s) out of 83. The two agents were scored against different populations.
+2. **Different pacing.** d842 exact played 44 games in 2026-08-10 05:12→2026-08-10 17:43; A2 ordered played 40 in 2026-08-10 07:12→2026-08-10 16:47. Games are front-loaded during the high-sigma burn-in, so equal game counts are not equal information.
+3. **Sample size.** ~428 games per arm are needed; there are 44 and 40.
 
 ## Offline evidence (for contrast)
 
@@ -105,10 +104,10 @@ Regenerate the full per-game tables with `python scripts/loss_buckets_live.py <s
 |---|---|---|
 | Longest loss streak | 3 | 6 |
 | Longest win streak | 8 | 5 |
-| Runs vs expected | 19 vs 19.1 | 14 vs 20.6 |
-| Wald-Wolfowitz p | **0.959** | **0.032** |
+| Runs vs expected | 19 vs 19.3 | 14 vs 20.6 |
+| Wald-Wolfowitz p | **0.907** | **0.032** |
 
-A2 ordered's results are **clustered beyond chance** (p = 0.032); d842 exact's are not (p = 0.959). The streaks you can see in the A2 run are real, not pattern-matching on noise.
+A2 ordered's results are **clustered beyond chance** (p = 0.032); d842 exact's are not (p = 0.907). The streaks you can see in the A2 run are real, not pattern-matching on noise.
 
 ### Phase breakdown
 
@@ -116,21 +115,21 @@ A2 ordered's results are **clustered beyond chance** (p = 0.032); d842 exact's a
 
 | Games | W-L | WR | Mean opp | Rating end | Net | Mean rating move |
 |---|---|---|---|---|---|---|
-| 1-7 bad start | 3-4 | 42.9% | 616 | 568.2 | -31.8 | 72.0 |
-| 8-15 eight-win run | 8-0 | 100.0% | 690 | 793.4 | +225.1 | 28.1 |
-| 16-32 churn | 10-7 | 58.8% | 779 | 806.4 | -3.5 | 11.4 |
-| 33-43 climb to peak | 9-2 | 81.8% | 771 | 853.8 | +46.2 | 6.8 |
+| 1-11 | 7-4 | 63.6% | 632 | 711.9 | +111.9 | 58.9 |
+| 12-22 | 9-2 | 81.8% | 748 | 827.5 | +115.6 | 15.7 |
+| 23-33 | 5-6 | 45.5% | 791 | 798.4 | -42.9 | 10.1 |
+| 34-44 | 10-1 | 90.9% | 775 | 860.8 | +54.4 | 6.6 |
 
 **A2 ordered**
 
 | Games | W-L | WR | Mean opp | Rating end | Net | Mean rating move |
 |---|---|---|---|---|---|---|
-| 1-8 climb to 953 | 7-1 | 87.5% | 748 | 953.0 | +353.0 | 60.5 |
-| 9-14 the crash | 0-6 | 0.0% | 788 | 747.6 | -205.4 | 34.2 |
-| 15-32 churn | 10-8 | 55.6% | 722 | 748.4 | +0.8 | 14.4 |
-| 33-40 tail | 6-2 | 75.0% | 749 | 776.0 | +27.6 | 8.6 |
+| 1-10 | 7-3 | 70.0% | 753 | 824.3 | +224.3 | 58.4 |
+| 11-20 | 5-5 | 50.0% | 723 | 780.5 | -93.8 | 21.5 |
+| 21-30 | 5-5 | 50.0% | 768 | 775.8 | -4.7 | 12.3 |
+| 31-40 | 6-4 | 60.0% | 726 | 776.0 | +0.2 | 9.6 |
 
-**The mean-rating-move column is the whole story.** TrueSkill sigma collapses as games accumulate, so early games are worth several times more than late ones. A2 ordered peaked at 953.0 after 8 games, then lost 6 straight while moves were still worth ~34 points each (-205.4). It then went 16-10 (61.5%) over the remaining 26 games and earned only +28.5 for it — at the late rate (~9 points) it would need ~16 consecutive wins to return to its peak. d842 exact had the mirror-image luck: it opened **3-4**, worse than A2, but its recovery — an 8-0 run — landed while moves were still worth ~28 points each, banking +225.1. Both agents were volatile. Only one was volatile at the right time, and that is the entire 78-point gap.
+**The mean-rating-move column is the whole story.** TrueSkill sigma collapses as games accumulate, so early games are worth several times more than late ones. A2 ordered peaked at 953.0 after 8 games, then lost 6 straight while moves were still worth ~34 points each (-205.4). It then went 16-10 (61.5%) over the remaining 26 games and earned only +28.5 for it — at the late rate (~9 points) it would need ~16 consecutive wins to return to its peak. d842 exact had the mirror-image luck: it opened **3-4**, worse than A2, but its recovery — an 8-0 run — landed while moves were still worth ~28 points each, banking +225.1. Both agents were volatile. Only one was volatile at the right time, and that is the entire 85-point gap.
 
 ### Loss quality
 
@@ -138,8 +137,8 @@ A2 ordered's results are **clustered beyond chance** (p = 0.032); d842 exact's a
 |---|---|---|
 | Losses | 13 | 17 |
 | Mean loss margin (prizes) | +1.62 | **+1.24** |
-| Mean win margin (prizes) | +1.77 | **+2.17** |
-| Margin quality (win − loss) | +0.15 | **+0.94** |
+| Mean win margin (prizes) | +1.74 | **+2.17** |
+| Margin quality (win − loss) | +0.13 | **+0.94** |
 | Blowout losses (>=4 prizes) | 3/13 | **0/17** |
 | Shutout losses (0 prizes taken) | 2 | **0** |
 | Close losses (<=1 prize) | 8/13 | 10/17 |
@@ -153,14 +152,14 @@ Prize margins are read from the last recorded position, which lags the finish: t
 | Opponent deck | d842 exact | A2 ordered |
 |---|---|---|
 | Alakazam | 6/9 (67%) | 6/12 (50%) |
-| Grimmsnarl ex (mirror) | 8/12 (67%) | 2/4 (50%) |
+| Grimmsnarl ex (mirror) | 9/13 (69%) | 2/4 (50%) |
 | Mega Lucario ex | 2/5 (40%) | 4/6 (67%) |
 | Archaludon ex | 5/5 (100%) | 1/3 (33%) |
 | Mega Kangaskhan ex | 1/3 (33%) | 2/3 (67%) |
 | Cynthia's Garchomp ex | — | 2/3 (67%) |
 | Crustle | — | 1/3 (33%) |
 
-**Alakazam is the single largest slice of the field** — 21% of d842 exact's games and 30% of A2 ordered's, consistent with the 2026-08-08 census that flagged it as a priority matchup. It is also the biggest single bucket of A2 losses (6 of 17). A2 is 6/12 there against d842's 6/9. Pooled across both agents the matchup is 12/21, so treat the per-agent split as suggestive only — but Alakazam is where the offline work should point.
+**Alakazam is the single largest slice of the field** — 20% of d842 exact's games and 30% of A2 ordered's, consistent with the 2026-08-08 census that flagged it as a priority matchup. It is also the biggest single bucket of A2 losses (6 of 17). A2 is 6/12 there against d842's 6/9. Pooled across both agents the matchup is 12/21, so treat the per-agent split as suggestive only — but Alakazam is where the offline work should point.
 
 ### Free wins
 

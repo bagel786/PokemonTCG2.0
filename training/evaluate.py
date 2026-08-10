@@ -52,6 +52,9 @@ def policy_error_count(agent) -> int:
 def competition_telemetry(agent) -> dict:
     inner = getattr(agent.module, "_AGENT", None) if isinstance(agent, ExternalSubmissionAgent) else agent
     route = getattr(inner, "route_telemetry", {})
+    if not isinstance(route, dict) or not route:
+        policy = getattr(inner, "policy", None)
+        route = getattr(policy, "telemetry", {})
     return dict(route) if isinstance(route, dict) else {}
 
 
@@ -192,6 +195,7 @@ def main() -> int:
     first_order_wins = {"first": 0, "second": 0}
     opponent_runtime_stats = {}
     opponent_search_stats = {}
+    hero_telemetry = {}
 
     def merge_stats(total, current):
         for key, value in current.items():
@@ -214,6 +218,7 @@ def main() -> int:
             first_order_wins[order] += result["win"]
             merge_stats(opponent_runtime_stats, result["opponent_runtime_stats"])
             merge_stats(opponent_search_stats, result["opponent_search_stats"])
+            merge_stats(hero_telemetry, result["hero_telemetry"])
             if complete % 500 == 0:
                 print({"complete": complete, "win_rate_a": wins / complete})
     lower, upper = wilson(wins, args.games)
@@ -281,6 +286,7 @@ def main() -> int:
         "elapsed_seconds": time.time() - started,
         "opponent_runtime_stats": opponent_runtime_stats,
         "opponent_search_stats": opponent_search_stats,
+        "hero_telemetry": hero_telemetry,
         "decisions": decisions,
     }
     if args.output:

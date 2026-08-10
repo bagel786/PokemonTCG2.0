@@ -45,7 +45,10 @@ for game in range(games):
   battle_finish()
 errors=getattr(getattr(module,"_AGENT",None),"errors",0)
 latencies.sort()
-print(json.dumps({"games":games,"decisions":decisions,"policy_errors":errors,"latency_p99_ms":1000*latencies[min(len(latencies)-1,int(len(latencies)*.99))],"latency_max_ms":1000*max(latencies)}))
+at=lambda q: 1000*latencies[min(len(latencies)-1,int(len(latencies)*q))]
+print(json.dumps({"games":games,"decisions":decisions,"policy_errors":errors,
+ "latency_p50_ms":at(.50),"latency_p95_ms":at(.95),"latency_p99_ms":at(.99),
+ "latency_max_ms":1000*max(latencies)}))
 assert errors==0
 '''
 
