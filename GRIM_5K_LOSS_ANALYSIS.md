@@ -3,8 +3,8 @@
 **Date:** 2026-08-09
 **Scope:** every submission shipping the exact original Grim deck that has local replays, plus
 live submission 55389103.
-**Supersedes:** `LOSS_PATTERN_REPORT_55389103.md`, `GRIM_5K_LOSS_BUCKET_SURVEY.md` (both folded
-in below).
+**Supersedes:** `LOSS_PATTERN_REPORT_55389103.md` (folded in below; file removed 2026-08-10) and
+`GRIM_5K_LOSS_BUCKET_SURVEY.md` (folded in below).
 
 ## Reproduce
 

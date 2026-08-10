@@ -1,8 +1,9 @@
 # 5k Grimmsnarl Loss-Bucket Survey — Search-Addressable Failure Modes
 
 **Question:** across all past 5k Grimmsnarl submissions, are there other loss buckets like the
-Active-slot defect in [LOSS_PATTERN_REPORT_55389103.md](LOSS_PATTERN_REPORT_55389103.md), and
-could a properly implemented 1-ply search fix them?
+Active-slot defect (originally `LOSS_PATTERN_REPORT_55389103.md`, now folded into
+[GRIM_5K_LOSS_ANALYSIS.md](GRIM_5K_LOSS_ANALYSIS.md)), and could a properly implemented
+1-ply search fix them?
 
 **Short answer:** yes, they exist and they are real — but they are **small**. A correct 1-ply
 search cleanly addresses about **7% of losses**. Extending it to multi-action sequences within a

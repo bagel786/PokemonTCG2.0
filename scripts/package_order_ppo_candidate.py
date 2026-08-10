@@ -55,6 +55,7 @@ def deterministic_archive(stage: Path, output: Path) -> None:
 
 def build(args: argparse.Namespace) -> dict:
     control = Path(args.control).resolve()
+    base = Path(args.base).resolve() if args.base else control
     first = Path(args.policy_first).resolve()
     second = Path(args.policy_second).resolve()
     if sha256(control) != CONTROL_HASH:
@@ -65,8 +66,11 @@ def build(args: argparse.Namespace) -> dict:
     with tempfile.TemporaryDirectory(prefix="order-ppo-package-", dir=output.parent) as temporary:
         stage = Path(temporary) / "stage"
         stage.mkdir()
-        safe_extract(control, stage)
-        exact_model = stage / "policy_weights.npz"
+        safe_extract(base, stage)
+        control_stage = Path(temporary) / "control"
+        control_stage.mkdir()
+        safe_extract(control, control_stage)
+        exact_model = control_stage / "policy_weights.npz"
         exact_hash = sha256(exact_model)
         shutil.copyfile(exact_model, stage / "policy_d842_exact.npz")
         shutil.copyfile(first, stage / "policy_first.npz")
@@ -106,6 +110,7 @@ def build(args: argparse.Namespace) -> dict:
         "archive": str(output),
         "archive_sha256": sha256(output),
         "control_archive_sha256": CONTROL_HASH,
+        "runtime_base_archive_sha256": sha256(base),
         "deck_unchanged": True,
         "deterministic_archive": True,
         "no_r0_director_d1_search": True,
@@ -119,6 +124,7 @@ def build(args: argparse.Namespace) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--control", default="grimmsnarl_5k_reference.tar.gz")
+    parser.add_argument("--base", default="", help="optional runtime base archive (for example A2 shield)")
     parser.add_argument("--policy-first", required=True)
     parser.add_argument("--policy-second", required=True)
     parser.add_argument("--output", default="artifacts/order_ppo/5k_plus.tar.gz")
