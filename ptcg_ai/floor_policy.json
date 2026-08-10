@@ -1,0 +1,22 @@
+{
+  "controller_version": 1,
+  "enabled_rule_ids": [
+    "setup",
+    "conversion",
+    "recovery",
+    "resources",
+    "matchups",
+    "prize_conversion",
+    "final_invariants"
+  ],
+  "hidden_information": false,
+  "policy_status": "development_candidate",
+  "route_signatures": {
+    "bellibolt": [269],
+    "disruption": [104, 245, 361, 743, 861, 1031],
+    "fast_pressure": [673, 674, 675, 676, 677, 678],
+    "mirror": [646, 647, 648],
+    "wall": [345, 533]
+  },
+  "search_at_runtime": false
+}

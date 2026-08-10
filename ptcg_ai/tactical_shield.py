@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from collections import Counter
 
-from cg.api import OptionType
+from cg.api import OptionType, SelectContext, SelectType
 
 from .prevention import attack_nullified
 from .view import card_table, option_source_card
@@ -20,6 +20,10 @@ def _context_is(select, numeric: int, name: str) -> bool:
 
 def _option_type(option) -> int:
     return int(getattr(option, "type", -1))
+
+
+def _select_type(select) -> int:
+    return int(getattr(select, "type", -1))
 
 
 def _productive_attacks(obs, ranked: list[int]) -> list[int]:
@@ -59,7 +63,14 @@ def apply_tactical_shield(obs, ranked: list[int], desired: int) -> tuple[list[in
         if basic and desired < 1:
             return basic + [i for i in ranked if i not in basic], 1, "setup_bench_basic"
 
-    if desired == 1 and ranked:
+    # ATTACK options also appear in effect prompts such as DISABLE_ATTACK.
+    # These invariants are valid only for the actor's legal main-action menu.
+    if (
+        desired == 1
+        and ranked
+        and _select_type(select) == int(SelectType.MAIN)
+        and _context_is(select, int(SelectContext.MAIN), "MAIN")
+    ):
         chosen = ranked[0]
         chosen_option = select.option[chosen]
         productive = _productive_attacks(obs, ranked)

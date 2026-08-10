@@ -8,17 +8,22 @@ import hashlib
 import json
 import shutil
 import subprocess
+import sys
 import tarfile
 import threading
 import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+from training.azure_guard import AzureRunSafety, synchronous_azure_deallocator
+
 AZURE = shutil.which("az.cmd") or shutil.which("az") or "az"
 KEY = ROOT / ".codex_tmp" / "azure_recovery_ed25519"
 OUTPUT = ROOT / "artifacts" / "recovery_training_azure"
 REMOTE = "/mnt/ptcg-recovery-training"
-SPEND_CAP_USD = 140.0
+SPEND_CAP_USD = 100.0
 RATE_USD_PER_WORKER_HOUR = 0.50
 WORKERS = (
     {"name": "ptcg-train", "rg": "ptcg-train-south-rg", "ip": "20.225.52.72"},
@@ -89,30 +94,42 @@ def build_bundle() -> tuple[Path, str]:
     return bundle, sha256(bundle)
 
 
-def start_and_prepare(worker: dict, bundle: Path, bundle_hash: str) -> None:
-    run([AZURE, "vm", "start", "-g", worker["rg"], "-n", worker["name"], "--no-wait"], timeout=120)
-    last_error = None
-    for _ in range(40):
-        try:
-            ssh(worker, "true", timeout=15)
-            break
-        except Exception as exc:  # VM boot/SSH readiness is transient.
-            last_error = exc
-            time.sleep(10)
-    else:
-        raise RuntimeError(f"worker did not become SSH-ready: {worker['name']}: {last_error}")
-    remote_bundle = f"/tmp/recovery-training-{bundle_hash}.tar.gz"
-    scp(worker, bundle, remote_bundle)
-    command = (
-        f"sudo mkdir -p {REMOTE} && sudo chown azureuser:azureuser {REMOTE} && "
-        f"rm -rf {REMOTE}/training {REMOTE}/ptcg_ai {REMOTE}/vendor "
-        f"{REMOTE}/artifacts {REMOTE}/data && "
-        f"tar -xzf {remote_bundle} -C {REMOTE} && "
-        "$HOME/ptcg-venv/bin/pip install -q --index-url "
-        "https://download.pytorch.org/whl/cpu torch && "
-        f"cd {REMOTE} && test \"$(sha256sum {remote_bundle} | cut -d' ' -f1)\" = {bundle_hash}"
-    )
-    ssh(worker, command, timeout=3600)
+def start_and_prepare(
+    worker: dict,
+    bundle: Path,
+    bundle_hash: str,
+    safety: AzureRunSafety,
+) -> None:
+    reservation = safety.reserve(worker_seconds=2 * 3600, label=f"prepare:{worker['name']}")
+    try:
+        # Record before the request: Azure can accept a start even if the local
+        # CLI later times out or disconnects.
+        safety.mark_start_requested(worker)
+        run([AZURE, "vm", "start", "-g", worker["rg"], "-n", worker["name"], "--no-wait"], timeout=120)
+        last_error = None
+        for _ in range(40):
+            try:
+                ssh(worker, "true", timeout=15)
+                break
+            except Exception as exc:  # VM boot/SSH readiness is transient.
+                last_error = exc
+                time.sleep(10)
+        else:
+            raise RuntimeError(f"worker did not become SSH-ready: {worker['name']}: {last_error}")
+        remote_bundle = f"/tmp/recovery-training-{bundle_hash}.tar.gz"
+        scp(worker, bundle, remote_bundle)
+        command = (
+            f"sudo mkdir -p {REMOTE} && sudo chown azureuser:azureuser {REMOTE} && "
+            f"rm -rf {REMOTE}/training {REMOTE}/ptcg_ai {REMOTE}/vendor "
+            f"{REMOTE}/artifacts {REMOTE}/data && "
+            f"tar -xzf {remote_bundle} -C {REMOTE} && "
+            "$HOME/ptcg-venv/bin/pip install -q --index-url "
+            "https://download.pytorch.org/whl/cpu torch && "
+            f"cd {REMOTE} && test \"$(sha256sum {remote_bundle} | cut -d' ' -f1)\" = {bundle_hash}"
+        )
+        ssh(worker, command, timeout=3600)
+    finally:
+        safety.release(reservation)
 
 
 def task_queue() -> list[dict]:
@@ -123,44 +140,38 @@ def task_queue() -> list[dict]:
     ]
 
 
-def run_task(worker: dict, task: dict, started: float) -> dict:
-    projected = (time.time() - started + 6 * 3600) / 3600 * len(WORKERS) * RATE_USD_PER_WORKER_HOUR
-    if projected >= SPEND_CAP_USD:
-        raise RuntimeError(f"projected spend ${projected:.2f} exceeds ${SPEND_CAP_USD:.2f}")
+def run_task(worker: dict, task: dict, safety: AzureRunSafety) -> dict:
     label = f"{task['family']}_seed_{task['seed']}"
-    command = (
-        f"cd {REMOTE} && export PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 && "
-        f"timeout 21600s $HOME/ptcg-venv/bin/python training/train_recovery_candidates.py "
-        "--skip-assembly --output-dir artifacts/recovery_training "
-        "--validation data/grim_daily_v3/splits/validation.jsonl.gz "
-        "--anchor artifacts/recovery_schema3/d842_schema3_zero_init.npz "
-        f"--families {task['family']} --seeds {task['seed']} --epochs 3 --batch-size 256 "
-        f">/tmp/{label}.log 2>&1"
-    )
-    ssh(worker, command, timeout=22000)
-    local_dir = OUTPUT / label
-    local_dir.mkdir(parents=True, exist_ok=True)
-    remote_model = f"{REMOTE}/artifacts/recovery_training/{task['family']}/seed_{task['seed']}/policy_weights.npz"
-    scp(worker, remote_model, local_dir / "policy_weights.npz", from_remote=True)
-    scp(worker, f"{REMOTE}/artifacts/recovery_training/training_manifest.json", local_dir / "training_manifest.json", from_remote=True)
-    scp(worker, f"/tmp/{label}.log", local_dir / "training.log", from_remote=True)
-    report = json.loads((local_dir / "training_manifest.json").read_text())["runs"][0]
-    if report["sha256"] != sha256(local_dir / "policy_weights.npz"):
-        raise RuntimeError(f"model hash mismatch after Azure transfer: {label}")
-    return {
-        "label": label,
-        "worker": worker["name"],
-        "model": str((local_dir / "policy_weights.npz").resolve()),
-        "model_sha256": report["sha256"],
-        "report": report,
-    }
-
-
-def deallocate(worker: dict) -> None:
-    subprocess.run(
-        [AZURE, "vm", "deallocate", "-g", worker["rg"], "-n", worker["name"], "--no-wait"],
-        cwd=ROOT, check=False,
-    )
+    reservation = safety.reserve(worker_seconds=6 * 3600, label=f"train:{label}")
+    try:
+        command = (
+            f"cd {REMOTE} && export PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 && "
+            f"timeout 21600s $HOME/ptcg-venv/bin/python training/train_recovery_candidates.py "
+            "--skip-assembly --output-dir artifacts/recovery_training "
+            "--validation data/grim_daily_v3/splits/validation.jsonl.gz "
+            "--anchor artifacts/recovery_schema3/d842_schema3_zero_init.npz "
+            f"--families {task['family']} --seeds {task['seed']} --epochs 3 --batch-size 256 "
+            f">/tmp/{label}.log 2>&1"
+        )
+        ssh(worker, command, timeout=22000)
+        local_dir = OUTPUT / label
+        local_dir.mkdir(parents=True, exist_ok=True)
+        remote_model = f"{REMOTE}/artifacts/recovery_training/{task['family']}/seed_{task['seed']}/policy_weights.npz"
+        scp(worker, remote_model, local_dir / "policy_weights.npz", from_remote=True)
+        scp(worker, f"{REMOTE}/artifacts/recovery_training/training_manifest.json", local_dir / "training_manifest.json", from_remote=True)
+        scp(worker, f"/tmp/{label}.log", local_dir / "training.log", from_remote=True)
+        report = json.loads((local_dir / "training_manifest.json").read_text())["runs"][0]
+        if report["sha256"] != sha256(local_dir / "policy_weights.npz"):
+            raise RuntimeError(f"model hash mismatch after Azure transfer: {label}")
+        return {
+            "label": label,
+            "worker": worker["name"],
+            "model": str((local_dir / "policy_weights.npz").resolve()),
+            "model_sha256": report["sha256"],
+            "report": report,
+        }
+    finally:
+        safety.release(reservation)
 
 
 def main() -> int:
@@ -176,27 +187,35 @@ def main() -> int:
         "spend_cap_usd": SPEND_CAP_USD,
         "results": [],
     }
+    safety = AzureRunSafety(
+        workers=WORKERS,
+        manifest_path=OUTPUT / "azure_safety_manifest.json",
+        rate_usd_per_worker_hour=RATE_USD_PER_WORKER_HOUR,
+        spend_cap_usd=SPEND_CAP_USD,
+        deallocate_worker=synchronous_azure_deallocator(AZURE, cwd=ROOT),
+    )
     try:
-        with concurrent.futures.ThreadPoolExecutor(max_workers=len(WORKERS)) as pool:
-            list(pool.map(lambda worker: start_and_prepare(worker, bundle, bundle_hash), WORKERS))
-        tasks = iter(task_queue())
-        lock = threading.Lock()
+        with safety:
+            with concurrent.futures.ThreadPoolExecutor(max_workers=len(WORKERS)) as pool:
+                list(pool.map(lambda worker: start_and_prepare(worker, bundle, bundle_hash, safety), WORKERS))
+            tasks = iter(task_queue())
+            lock = threading.Lock()
 
-        def worker_loop(worker: dict) -> list[dict]:
-            completed = []
-            while True:
-                with lock:
-                    try:
-                        task = next(tasks)
-                    except StopIteration:
-                        return completed
-                completed.append(run_task(worker, task, started))
+            def worker_loop(worker: dict) -> list[dict]:
+                completed = []
+                while True:
+                    with lock:
+                        try:
+                            task = next(tasks)
+                        except StopIteration:
+                            return completed
+                    completed.append(run_task(worker, task, safety))
 
-        with concurrent.futures.ThreadPoolExecutor(max_workers=len(WORKERS)) as pool:
-            for results in pool.map(worker_loop, WORKERS):
-                state["results"].extend(results)
-        if len(state["results"]) != 6:
-            raise RuntimeError("training farm returned an incomplete candidate set")
+            with concurrent.futures.ThreadPoolExecutor(max_workers=len(WORKERS)) as pool:
+                for results in pool.map(worker_loop, WORKERS):
+                    state["results"].extend(results)
+            if len(state["results"]) != 6:
+                raise RuntimeError("training farm returned an incomplete candidate set")
         state["status"] = "complete"
         return 0
     except Exception as exc:
@@ -205,13 +224,13 @@ def main() -> int:
         raise
     finally:
         state["ended_unix"] = time.time()
-        state["conservative_estimated_spend_usd"] = (
-            (state["ended_unix"] - started) / 3600 * len(WORKERS) * RATE_USD_PER_WORKER_HOUR
-        )
+        safety_report = safety.report()
+        state["actual_elapsed_worker_seconds"] = safety_report["actual_elapsed_worker_seconds"]
+        state["conservative_estimated_spend_usd"] = safety_report["estimated_incremental_spend_usd"]
+        state["all_workers_deallocated"] = safety_report["all_workers_deallocated"]
+        state["azure_safety_manifest"] = str((OUTPUT / "azure_safety_manifest.json").resolve())
         OUTPUT.mkdir(parents=True, exist_ok=True)
         (OUTPUT / "training_farm_manifest.json").write_text(json.dumps(state, indent=2), encoding="utf-8")
-        for worker in WORKERS:
-            deallocate(worker)
 
 
 if __name__ == "__main__":
