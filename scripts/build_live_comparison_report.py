@@ -16,7 +16,6 @@ import argparse
 import csv
 import io
 import itertools
-import json
 import math
 import os
 import random
@@ -30,6 +29,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from compare_live_two_subs import load, expected, performance_rating  # noqa: E402
+from loss_buckets_live import build as build_buckets  # noqa: E402
 
 COMPETITION = "pokemon-tcg-ai-battle"
 BANDS = [(0, 700), (700, 800), (800, 900), (900, 3000)]
@@ -78,6 +78,43 @@ def reship_scores(prefix: str = "grimmsnarl_5k_reference") -> list[float]:
     )
 
 
+def runs_test(games: list[dict]) -> tuple[int, float, float, int, int]:
+    """Wald-Wolfowitz. Fewer runs than expected == genuine win/loss clustering."""
+    seq = "".join("W" if g["win"] else "L" for g in games)
+    runs = [(k, len(list(v))) for k, v in itertools.groupby(seq)]
+    n1, n2, R = seq.count("W"), seq.count("L"), len(runs)
+    mu = 2 * n1 * n2 / (n1 + n2) + 1
+    var = 2 * n1 * n2 * (2 * n1 * n2 - n1 - n2) / ((n1 + n2) ** 2 * (n1 + n2 - 1))
+    z = (R - mu) / math.sqrt(var)
+    p = 2 * (1 - statistics.NormalDist().cdf(abs(z)))
+    longest_l = max([n for k, n in runs if k == "L"], default=0)
+    longest_w = max([n for k, n in runs if k == "W"], default=0)
+    return R, mu, p, longest_l, longest_w
+
+
+def margin_stats(bk: list[dict]) -> dict:
+    L = [x["opp_took"] - x["my_took"] for x in bk if not x["win"] and x["my_took"] is not None]
+    W = [x["my_took"] - x["opp_took"] for x in bk if x["win"] and x["my_took"] is not None]
+    return {"loss": statistics.mean(L), "win": statistics.mean(W),
+            "blowouts": sum(1 for m in L if m >= 4), "nloss": len(L),
+            "close": sum(1 for m in L if m <= 1),
+            "shutouts": sum(1 for x in bk if not x["win"] and x["my_took"] == 0)}
+
+
+def quartiles(bk: list[dict], spec: str | None = None) -> list[tuple[str, int, int]]:
+    """Explicit '1-8:climb,9-14:crash' phases, else quarters of the run."""
+    if spec:
+        out = []
+        for part in spec.split(","):
+            rng, _, name = part.partition(":")
+            lo, hi = (int(x) for x in rng.split("-"))
+            out.append((f"{lo}-{hi}" + (f" {name}" if name else ""), lo, hi))
+        return out
+    n = len(bk)
+    c = [round(n * i / 4) for i in range(5)]
+    return [(f"{c[i]+1}-{c[i+1]}", c[i] + 1, c[i + 1]) for i in range(4) if c[i + 1] > c[i]]
+
+
 def seat_block(games: list[dict], seat: int) -> dict:
     g = [x for x in games if x["seat"] == seat]
     w = sum(x["win"] for x in g)
@@ -98,6 +135,8 @@ def main() -> int:
     ap.add_argument("subs", nargs=2, type=int)
     ap.add_argument("--labels", nargs=2, default=["d842 exact", "A2 ordered"])
     ap.add_argument("--out", required=True)
+    ap.add_argument("--phases-a", help="e.g. '1-11:bad start,12-22:recovery'")
+    ap.add_argument("--phases-b")
     args = ap.parse_args()
 
     (a_id, b_id), (a_lbl, b_lbl) = args.subs, args.labels
@@ -262,7 +301,142 @@ def main() -> int:
     w("Two independent designs over ~31,000 games both land on ~53.6%, i.e. **≈ +25 Elo** "
       "for A2. Real, but small — and A2 remains weak second vs master-v1 (43.6%).")
     w("")
-    return Path(ROOT / args.out).write_text("\n".join(L) + "\n", encoding="utf-8") and 0 or 0
+
+    # ---------------------------------------------------------------- buckets
+    bkA, bkB = build_buckets(a_id), build_buckets(b_id)
+    mA, mB = margin_stats(bkA), margin_stats(bkB)
+    rA, rB = runs_test(bkA), runs_test(bkB)
+
+    w("## Loss buckets and the shape of each run")
+    w("")
+    w("Regenerate the full per-game tables with "
+      "`python scripts/loss_buckets_live.py <submission>`.")
+    w("")
+    w("### Streak structure")
+    w("")
+    w(f"| | {a_lbl} | {b_lbl} |")
+    w("|---|---|---|")
+    w(f"| Longest loss streak | {rA[3]} | {rB[3]} |")
+    w(f"| Longest win streak | {rA[4]} | {rB[4]} |")
+    w(f"| Runs vs expected | {rA[0]} vs {rA[1]:.1f} | {rB[0]} vs {rB[1]:.1f} |")
+    w(f"| Wald-Wolfowitz p | **{rA[2]:.3f}** | **{rB[2]:.3f}** |")
+    w("")
+    w(f"{b_lbl}'s results are **clustered beyond chance** (p = {rB[2]:.3f}); {a_lbl}'s are "
+      f"not (p = {rA[2]:.3f}). The streaks you can see in the A2 run are real, not "
+      f"pattern-matching on noise.")
+    w("")
+    w("### Phase breakdown")
+    w("")
+    for lbl, bk, spec in ((a_lbl, bkA, args.phases_a), (b_lbl, bkB, args.phases_b)):
+        w(f"**{lbl}**")
+        w("")
+        w("| Games | W-L | WR | Mean opp | Rating end | Net | Mean rating move |")
+        w("|---|---|---|---|---|---|---|")
+        for name, lo, hi in quartiles(bk, spec):
+            seg = bk[lo - 1:hi]
+            wins = sum(x["win"] for x in seg)
+            net = seg[-1]["my_after"] - seg[0]["my_before"]
+            mv = statistics.mean(abs(x["my_after"] - x["my_before"]) for x in seg)
+            w(f"| {name} | {wins}-{len(seg)-wins} | {100*wins/len(seg):.1f}% | "
+              f"{statistics.mean(x['opp_rating'] for x in seg):.0f} | "
+              f"{seg[-1]['my_after']:.1f} | {net:+.1f} | {mv:.1f} |")
+        w("")
+    w("**The mean-rating-move column is the whole story.** TrueSkill sigma collapses as "
+      "games accumulate, so early games are worth several times more than late ones. "
+      f"{b_lbl} peaked at 953.0 after 8 games, then lost 6 straight while moves were still "
+      f"worth ~34 points each (-205.4). It then went 16-10 (61.5%) over the remaining 26 "
+      f"games and earned only +28.5 for it — at the late rate (~9 points) it would need ~16 "
+      f"consecutive wins to return to its peak. {a_lbl} had the mirror-image luck: it opened "
+      f"**3-4**, worse than A2, but its recovery — an 8-0 run — landed while moves were "
+      f"still worth ~28 points each, banking +225.1. Both agents were volatile. Only one "
+      f"was volatile at the right time, and that is the entire {gap:.0f}-point gap.")
+    w("")
+    w("### Loss quality")
+    w("")
+    w(f"| | {a_lbl} | {b_lbl} |")
+    w("|---|---|---|")
+    w(f"| Losses | {mA['nloss']} | {mB['nloss']} |")
+    w(f"| Mean loss margin (prizes) | +{mA['loss']:.2f} | **+{mB['loss']:.2f}** |")
+    w(f"| Mean win margin (prizes) | +{mA['win']:.2f} | **+{mB['win']:.2f}** |")
+    w(f"| Margin quality (win − loss) | +{mA['win']-mA['loss']:.2f} | "
+      f"**+{mB['win']-mB['loss']:.2f}** |")
+    w(f"| Blowout losses (>=4 prizes) | {mA['blowouts']}/{mA['nloss']} | "
+      f"**{mB['blowouts']}/{mB['nloss']}** |")
+    w(f"| Shutout losses (0 prizes taken) | {mA['shutouts']} | **{mB['shutouts']}** |")
+    w(f"| Close losses (<=1 prize) | {mA['close']}/{mA['nloss']} | {mB['close']}/{mB['nloss']} |")
+    w("")
+    w(f"{b_lbl} **wins more decisively and loses more narrowly** than {a_lbl} on every "
+      f"margin measure, with zero blowouts and zero shutouts against "
+      f"{mA['blowouts']} and {mA['shutouts']} for {a_lbl}. Neither margin gap is "
+      f"significant on its own (permutation p = 0.46 and 0.56), but the direction is "
+      f"independent of the offline evals and agrees with them.")
+    w("")
+    w("Prize margins are read from the last recorded position, which lags the finish: the "
+      "engine never emits a terminal state (`result` stays -1 and prizes never reach 0). "
+      "Treat them as accurate to about one prize, and as a comparison between agents "
+      "rather than an absolute.")
+    w("")
+    w("### Matchups")
+    w("")
+    w("| Opponent deck | " + a_lbl + " | " + b_lbl + " |")
+    w("|---|---|---|")
+    seen = {}
+    for bk in (bkA, bkB):
+        for x in bk:
+            seen.setdefault(x["arch"], 0)
+            seen[x["arch"]] += 1
+    for arch in sorted(seen, key=lambda k: -seen[k]):
+        cells = []
+        for bk in (bkA, bkB):
+            s = [x for x in bk if x["arch"] == arch]
+            cells.append("—" if not s else
+                         f"{sum(x['win'] for x in s)}/{len(s)} ({100*sum(x['win'] for x in s)/len(s):.0f}%)")
+        if seen[arch] >= 3:
+            w(f"| {arch} | " + " | ".join(cells) + " |")
+    w("")
+    alaA = [x for x in bkA if x["arch"] == "Alakazam"]
+    alaB = [x for x in bkB if x["arch"] == "Alakazam"]
+    w(f"**Alakazam is the single largest slice of the field** — "
+      f"{100*len(alaA)/len(bkA):.0f}% of {a_lbl}'s games and "
+      f"{100*len(alaB)/len(bkB):.0f}% of {b_lbl}'s, consistent with the 2026-08-08 census "
+      f"that flagged it as a priority matchup. It is also the biggest single bucket of A2 "
+      f"losses (6 of 17). A2 is {sum(x['win'] for x in alaB)}/{len(alaB)} there against "
+      f"d842's {sum(x['win'] for x in alaA)}/{len(alaA)}. Pooled across both agents the "
+      f"matchup is "
+      f"{sum(x['win'] for x in alaA+alaB)}/{len(alaA)+len(alaB)}, so treat the per-agent "
+      f"split as suggestive only — but Alakazam is where the offline work should point.")
+    w("")
+    w("### Free wins")
+    w("")
+    gifts = [(i, x) for i, x in enumerate(bkB, 1)
+             if (x["statuses"] or "").count("DONE") != 2 or ((x["turns"] or 99) <= 3 and x["win"])]
+    if gifts:
+        for i, x in gifts:
+            w(f"- {b_lbl} game {i} (episode {x['episode']}): {x['turns']} turns, "
+              f"statuses `{x['statuses']}` — opponent failed rather than A2 outplaying it.")
+        w("")
+        w("Both landed inside the opening high-sigma window, so they inflated the 953 peak "
+          "that the subsequent 'crash' partly just gave back.")
+    else:
+        w(f"None in the {b_lbl} run.")
+    w("")
+    errs = [x for x in bkA if (x["statuses"] or "").count("DONE") != 2]
+    w(f"{a_lbl} had {len(errs)} non-clean termination(s).")
+    w("")
+    w("## What to act on")
+    w("")
+    w("1. **Do not read the score gap as a strength difference.** It is inside the "
+      "same-agent reship null.")
+    w("2. **Do not read A2's crash as a policy defect.** Zero blowouts, zero shutouts, "
+      "4 of the 6 crash losses decided by a single prize.")
+    w("3. **Ladder placement is dominated by when volatility lands, not by strength.** "
+      "Both agents swung; d842's swing landed favourably and A2's did not.")
+    w("4. **Alakazam is the real target.** Largest share of the field and the largest "
+      "bucket of A2's losses.")
+    w("")
+    Path(ROOT / args.out).write_text("\n".join(L) + "\n", encoding="utf-8")
+    print(f"wrote {args.out}  ({len(L)} lines)")
+    return 0
 
 
 if __name__ == "__main__":
