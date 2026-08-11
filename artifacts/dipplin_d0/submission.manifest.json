@@ -1,0 +1,196 @@
+{
+  "deck": {
+    "card_count": 60,
+    "deck_csv_sha256": "269BC5808A0DB862C7AFE8F2DAAA3D0B3B6E3C68BD651DD515D14F9D85392326",
+    "deck_id": "291b0afd6ead",
+    "newline_terminated": true
+  },
+  "deployment": {
+    "cloud_started": false,
+    "games_run_by_packager": false,
+    "uploaded": false
+  },
+  "engine": {
+    "linux_amd64_member": "cg/libcg.so",
+    "linux_amd64_sha256": "FFD89BF923525A3E6FEB5E6201E96A866C0F456895499ED5C4A566303CAAE67C",
+    "official_template_file_sha256": {
+      "__init__.py": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "api.py": "593F1298E52A635F90F8F505A52113E9AF114F444C293404E37906F18EE06CED",
+      "cg.dll": "9EA2B0A751029689BFF3DDCCB5F29A98EDD46961DAD264490ED121EF704FB500",
+      "game.py": "3BD3D4F4A369A11E6D2F5DA9094CF15EBC410A2221835E6417B7CFF4883F1FC2",
+      "libcg-arm64.so": "030B4728CE9FB9E90B75830B7CF7236F71859732A05EC4A377078EEE0421BBE5",
+      "libcg.dylib": "77BB978A8129B094452679E0DAF0DA69593AFDA7331685F4642C0D4A94D39D82",
+      "libcg.so": "FFD89BF923525A3E6FEB5E6201E96A866C0F456895499ED5C4A566303CAAE67C",
+      "sim.py": "1555F57F5D22BF4C09D70E0E667A916E575E68C9DD1DE9EAD34BA5E7E4968655",
+      "utils.py": "60F29665CEE0A88525D6F0383BC45959A6262D16FE35EF380AECE1E0EA13C49B"
+    },
+    "source": "/Users/safiullahbaig/Projects/pokemonTCG2.0/freshstart/submission_template/cg"
+  },
+  "output": {
+    "archive": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/dipplin_d0/submission.tar.gz",
+    "archive_bytes": 2005515,
+    "archive_sha256": "6555215D6A18FB46C2AF0BB058CCCD054B65905B224D1CF00FAA311C1138BCE0",
+    "extracted_tree_sha256": "36EB255CB3F26FFA88771D35D634AF5FA9E195C15FFBA1D1322DD7B2FB86D0E4",
+    "file_manifest": {
+      "cg/__init__.py": {
+        "bytes": 0,
+        "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+      },
+      "cg/api.py": {
+        "bytes": 26933,
+        "sha256": "593F1298E52A635F90F8F505A52113E9AF114F444C293404E37906F18EE06CED"
+      },
+      "cg/cg.dll": {
+        "bytes": 1525248,
+        "sha256": "9EA2B0A751029689BFF3DDCCB5F29A98EDD46961DAD264490ED121EF704FB500"
+      },
+      "cg/game.py": {
+        "bytes": 2225,
+        "sha256": "3BD3D4F4A369A11E6D2F5DA9094CF15EBC410A2221835E6417B7CFF4883F1FC2"
+      },
+      "cg/libcg-arm64.so": {
+        "bytes": 1300584,
+        "sha256": "030B4728CE9FB9E90B75830B7CF7236F71859732A05EC4A377078EEE0421BBE5"
+      },
+      "cg/libcg.dylib": {
+        "bytes": 1245544,
+        "sha256": "77BB978A8129B094452679E0DAF0DA69593AFDA7331685F4642C0D4A94D39D82"
+      },
+      "cg/libcg.so": {
+        "bytes": 1342400,
+        "sha256": "FFD89BF923525A3E6FEB5E6201E96A866C0F456895499ED5C4A566303CAAE67C"
+      },
+      "cg/sim.py": {
+        "bytes": 2273,
+        "sha256": "1555F57F5D22BF4C09D70E0E667A916E575E68C9DD1DE9EAD34BA5E7E4968655"
+      },
+      "cg/utils.py": {
+        "bytes": 1970,
+        "sha256": "60F29665CEE0A88525D6F0383BC45959A6262D16FE35EF380AECE1E0EA13C49B"
+      },
+      "deck.csv": {
+        "bytes": 237,
+        "sha256": "269BC5808A0DB862C7AFE8F2DAAA3D0B3B6E3C68BD651DD515D14F9D85392326"
+      },
+      "main.py": {
+        "bytes": 270,
+        "sha256": "4AA6DC031628DD65A18570C8097F58A3D8CF9851B20249331C1634455DA30D2D"
+      },
+      "ptcg_ai/__init__.py": {
+        "bytes": 390,
+        "sha256": "36BE9FEE3CC86FC94D00589ED21772D206A9DE876A50926F80925B9CE5DADAA7"
+      },
+      "ptcg_ai/dipplin/__init__.py": {
+        "bytes": 1425,
+        "sha256": "6CC412A8BB7464FB97480B6F935D4C3CE817104B6C00B2EB6698E8DE1B5EBDA2"
+      },
+      "ptcg_ai/dipplin/cards.py": {
+        "bytes": 3576,
+        "sha256": "7CB20A410C36CDB1CBB043677D824610DC13CD00617173AD606BA5C6F7CD01C1"
+      },
+      "ptcg_ai/dipplin/damage.py": {
+        "bytes": 15158,
+        "sha256": "04EE842DCBD730AAE9EEAB9C758A9505034DA14AE64B45D5CC736AAA60B26C1D"
+      },
+      "ptcg_ai/dipplin/plan.py": {
+        "bytes": 12086,
+        "sha256": "32D8ADF3BD9F66D250FD462930D913A6292F3858BE804791299B553471378687"
+      },
+      "ptcg_ai/dipplin/policy.py": {
+        "bytes": 37101,
+        "sha256": "68BFA67A26CFCF37C88A897FC9D6DD7E091066C5BBF75304A61182EAC0753EF8"
+      },
+      "ptcg_ai/dipplin/resolvers.py": {
+        "bytes": 24111,
+        "sha256": "4949B2368F90B7BB5C58E0E70F62EB3D89E41274FCD73420AC0F88012EBE61B1"
+      },
+      "ptcg_ai/dipplin/snapshot.py": {
+        "bytes": 43327,
+        "sha256": "6C2B361F66E3B5C3FCAFC0523A988E94492254FFC07BE392D65D6C7B0608286C"
+      },
+      "ptcg_ai/dipplin/telemetry.py": {
+        "bytes": 7078,
+        "sha256": "24B53F9ACB9C30D5A7481C77576EB2FA11E0C643201D18B6AADF1AF251831039"
+      },
+      "ptcg_ai/safety.py": {
+        "bytes": 1591,
+        "sha256": "A3AC87CDD07907EB62910BB156E500BAB5604D95EB67E4AAFA6B2C2C4CC91C44"
+      }
+    },
+    "manifest": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/dipplin_d0/submission.manifest.json",
+    "member_count": 21
+  },
+  "runtime": {
+    "d1_disable_environment": null,
+    "direct_entrypoint": true,
+    "family": "dedicated_dipplin",
+    "grim_runtime_included": false,
+    "learned_weights_included": false,
+    "runtime_source_members": [
+      "cg/__init__.py",
+      "cg/api.py",
+      "cg/game.py",
+      "cg/sim.py",
+      "cg/utils.py",
+      "main.py",
+      "ptcg_ai/__init__.py",
+      "ptcg_ai/dipplin/__init__.py",
+      "ptcg_ai/dipplin/cards.py",
+      "ptcg_ai/dipplin/damage.py",
+      "ptcg_ai/dipplin/plan.py",
+      "ptcg_ai/dipplin/policy.py",
+      "ptcg_ai/dipplin/resolvers.py",
+      "ptcg_ai/dipplin/snapshot.py",
+      "ptcg_ai/dipplin/telemetry.py",
+      "ptcg_ai/safety.py"
+    ],
+    "runtime_source_tree_sha256": "20EDCB444A7F6BD2D709BDDDE2F85A493FB8B361AB660200F395DC99744720C1",
+    "search_default": false
+  },
+  "schema_version": 1,
+  "status": "packaged",
+  "variant": "d0",
+  "verification": {
+    "archive_structure": {
+      "gzip_filename_empty": true,
+      "gzip_mtime_zero": true,
+      "member_count": 21,
+      "normalized_tar_metadata": true,
+      "passed": true,
+      "portable_member_names": true,
+      "regular_files_only": true,
+      "sorted_members": true
+    },
+    "deterministic_double_build": true,
+    "first_archive_sha256": "6555215D6A18FB46C2AF0BB058CCCD054B65905B224D1CF00FAA311C1138BCE0",
+    "fresh_stage_count": 2,
+    "linux_amd64_complete_game": {
+      "complete_game_attempted": false,
+      "complete_game_verified": false,
+      "eligible_build_host": false,
+      "host_machine": "arm64",
+      "host_system": "Darwin",
+      "reason": "build host is Darwin/arm64, not Linux/amd64",
+      "required_for_release": true,
+      "status": "pending_external_complete_game"
+    },
+    "safe_archive_extraction": true,
+    "second_archive_sha256": "6555215D6A18FB46C2AF0BB058CCCD054B65905B224D1CF00FAA311C1138BCE0",
+    "sterile_import": {
+      "agent_class": "DipplinCompetitionAgent",
+      "agent_module": "ptcg_ai.dipplin.policy",
+      "bytecode_disabled": true,
+      "cache_free_after_import": true,
+      "command_flags": [
+        "-I",
+        "-B"
+      ],
+      "deck_card_count": 60,
+      "deck_csv_sha256": "269BC5808A0DB862C7AFE8F2DAAA3D0B3B6E3C68BD651DD515D14F9D85392326",
+      "deck_id": "291b0afd6ead",
+      "isolated_python": true,
+      "passed": true,
+      "search_enabled": false
+    }
+  }
+}
