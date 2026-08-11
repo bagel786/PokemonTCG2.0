@@ -248,11 +248,11 @@ class FestivalD0Planner:
         engine_count = sum(_card_id(card) in {GROOKEY, THWACKEY} for card in in_play)
         priorities: list[int] = []
         if applin_count < 2:
-            priorities.extend((APPLIN_GRASS, APPLIN_DRAGON))
+            priorities.extend((APPLIN_DRAGON, APPLIN_GRASS))
         if engine_count < 1:
             priorities.append(GROOKEY)
         if applin_count < 2:
-            priorities.extend((APPLIN_GRASS, APPLIN_DRAGON))
+            priorities.extend((APPLIN_DRAGON, APPLIN_GRASS))
         if engine_count < 2:
             priorities.append(GROOKEY)
         # Shaymin is a conditional fifth body.  In the Grim/Shadow Bullet line
@@ -377,20 +377,52 @@ class FestivalD0Planner:
         hero, opponent = _players(obs)
         active = _active(hero)
         active_id = _card_id(active)
-        turn = _int(getattr(getattr(obs, "current", None), "turn", None), 0)
         ready_bench = [
             card
             for card in (getattr(hero, "bench", None) or [])
             if _card_id(card) == DIPPLIN and _energy_count(card) >= 1
         ]
+        retreat = self._option_indices(obs, OptionType.RETREAT)
+        if active_id not in {DIPPLIN, APPLIN_GRASS, APPLIN_DRAGON} and ready_bench and retreat:
+            return SelectionIntent(tuple(retreat), 1, "retreat_to_attacker", "restore the Festival attack loop")
+        do_wave_now = self._attack(obs, DO_THE_WAVE)
+        if do_wave_now and not plan.festival_active:
+            festival_now = self._play(obs, FESTIVAL)
+            if festival_now:
+                return SelectionIntent(tuple(festival_now), 1, "festival_for_attack", "unlock the second Festival strike")
 
-        # Tier 0: the qualitatively different opening line.  Quick Sign can be
-        # used by the starting player on turn one, so its energy and attack are
-        # ahead of every ordinary setup action.
+        # MAIN sequencing is behavior-cloned from 88 public rank-34 pilot
+        # replays.  It sees only this public state and already-legal options;
+        # every effect/search/promotion prompt remains under the explicit,
+        # parent-aware resolver and all output still crosses the safety boundary.
+        from .imitation import rank_main_options
+
+        learned, margin = rank_main_options(obs, plan)
+        if learned:
+            if plan.festival_active:
+                learned = [index for index in learned if option_card_id(obs, index) != FESTIVAL]
+            if do_wave_now:
+                non_end = [
+                    index for index in learned
+                    if _int(getattr(obs.select.option[index], "type", None)) != int(OptionType.END)
+                ]
+                learned = non_end or do_wave_now
+            return SelectionIntent(
+                tuple(learned),
+                1,
+                "expert_main",
+                f"public replay behavior ranker margin={margin:.3f}",
+            )
+
+        turn = _int(getattr(getattr(obs, "current", None), "turn", None), 0)
+
+        # Quick Sign is an opening search attack, but it ends the turn.  The
+        # rank-34 replay corpus consistently takes every permanent setup action
+        # first (Poffin/Pad/Bug Set, Basics, legal Evolutions) and attacks only
+        # after the board is developed.  Merely having Quick Sign legal must not
+        # suppress those actions.
         quick_sign = self._attack(obs, QUICK_SIGN)
-        if active_id == VOLBEAT and quick_sign and (turn == 1 or not ready_bench):
-            return SelectionIntent(tuple(quick_sign), 1, "quick_sign_attack", "establish two exact board lines")
-        if active_id == VOLBEAT and turn == 1:
+        if active_id == VOLBEAT and turn == 1 and not quick_sign:
             energy = self._attachments(obs, GRASS_ENERGY, {VOLBEAT})
             if energy:
                 return SelectionIntent(tuple(energy), 1, "quick_sign_energy", "enable turn-one Quick Sign")
@@ -399,7 +431,6 @@ class FestivalD0Planner:
                 return SelectionIntent(tuple(bug_set), 1, "quick_sign_bug_set", "look for the missing Grass Energy")
 
         # Tier 1: escape a support Active when an attack-ready Dipplin waits.
-        retreat = self._option_indices(obs, OptionType.RETREAT)
         if active_id not in {DIPPLIN, APPLIN_GRASS, APPLIN_DRAGON} and ready_bench and retreat:
             return SelectionIntent(tuple(retreat), 1, "retreat_to_attacker", "restore the Festival attack loop")
         if active_id not in {DIPPLIN, APPLIN_GRASS, APPLIN_DRAGON} and ready_bench:
@@ -430,6 +461,23 @@ class FestivalD0Planner:
                 if festival:
                     return SelectionIntent(tuple(festival), 1, "festival_for_attack", "unlock the second Festival strike")
 
+            # Boom Boom Groove is a once-per-turn deterministic card.  The old
+            # policy attacked with a legal Do the Wave before establishing or
+            # using the engine; in the audited pilot replays this is the single
+            # largest attack-timing disagreement.  Establish a Bench Thwackey,
+            # then exhaust the ability before committing to damage.
+            thwackey_count = sum(
+                _card_id(card) == THWACKEY
+                for card in list(getattr(hero, "active", None) or []) + list(getattr(hero, "bench", None) or [])
+                if card is not None
+            )
+            bench_thwackey = [
+                index
+                for index in self._evolutions(obs, THWACKEY, {GROOKEY})
+                if _serial(option_target(obs, obs.select.option[index])) != _serial(active)
+            ] if thwackey_count < 2 else []
+            if bench_thwackey:
+                return SelectionIntent(tuple(bench_thwackey), 1, "evolve_thwackey_before_attack", "establish tutor before ending the turn")
             if self._boss_improves(obs, plan):
                 return SelectionIntent(tuple(self._play(obs, BOSS)), 1, "boss_prize_line", "strictly better completed-turn prizes")
 
@@ -476,6 +524,24 @@ class FestivalD0Planner:
             if replacement_energy:
                 return SelectionIntent(tuple(replacement_energy), 1, "energy_replacement", "current attacker already complete")
 
+            # Free Pokemon search and the two-card Hilda line are development,
+            # not post-attack recovery.  The original D0 deferred them until no
+            # attack existed, while the audited pilot used them before damage to
+            # turn a brittle single attacker into a sustained prize chain.
+            if not plan.replacement_attacker_ready or not plan.thwackey_serials:
+                poke_pad = self._play(obs, POKE_PAD)
+                if poke_pad:
+                    return SelectionIntent(tuple(poke_pad), 1, "poke_pad_before_attack", "complete replacement or engine before attacking")
+                bug_set = self._play(obs, BUG_SET)
+                if bug_set:
+                    return SelectionIntent(tuple(bug_set), 1, "bug_set_before_attack", "convert free search before attacking")
+                hilda = self._play(obs, HILDA)
+                if hilda and any(
+                    missing in plan.missing_prerequisites
+                    for missing in ("replacement_dipplin", "replacement_energy", "current_energy")
+                ):
+                    return SelectionIntent(tuple(hilda), 1, "hilda_before_attack", "secure evolution plus Energy replacement")
+
             # Shuffle/draw precedes Boom Boom Groove unless a known permanent
             # above was available.  This avoids tutoring a card then shuffling it.
             stamp = self._play(obs, UNFAIR_STAMP)
@@ -487,8 +553,8 @@ class FestivalD0Planner:
                 return SelectionIntent(tuple(lillie), 1, "lillie_before_tutor", "refresh depleted hand before tutor")
 
             thwackey = self._ability(obs, THWACKEY)
-            if thwackey and self._actionable_prerequisites(plan, hero):
-                return SelectionIntent(tuple(thwackey), 1, "thwackey_after_draw", "fetch exact remaining prerequisite")
+            if thwackey:
+                return SelectionIntent(tuple(thwackey), 1, "thwackey_before_attack", "exhaust deterministic tutor before attacking")
 
             if productive_do_wave:
                 return SelectionIntent(tuple(do_wave), 1, "productive_do_the_wave", "attack outranks END")
@@ -677,6 +743,10 @@ class DipplinCompetitionAgent:
     ) -> None:
         telemetry = self.telemetry
         resolver = proposal.intent.resolver
+        selected_options = [obs.select.option[index] for index in final if 0 <= index < len(obs.select.option)]
+        selected_card_ids = [option_card_id(obs, index) for index in final if 0 <= index < len(obs.select.option)]
+        selected_attack_ids = [_int(getattr(option, "attackId", None)) for option in selected_options]
+        took_do_wave = DO_THE_WAVE in selected_attack_ids
         telemetry.increment("decisions")
         telemetry.record_phase(proposal.plan.phase)
         if not proposal.intent.known_context:
@@ -696,13 +766,13 @@ class DipplinCompetitionAgent:
             telemetry.increment("quick_sign_offered")
         if resolver == "quick_sign":
             telemetry.record_quick_sign([option_card_id(obs, index) for index in final])
-        if resolver == "festival_for_attack" or resolver == "festival_near_attack":
+        if resolver == "festival_for_attack" or resolver == "festival_near_attack" or FESTIVAL in selected_card_ids:
             telemetry.increment("festival_plays")
         if resolver == "lillie_before_tutor":
             telemetry.increment("lillie_before_tutor")
         if resolver == "thwackey" and final:
             telemetry.record_thwackey_tutor(option_card_id(obs, final[0]))
-        if resolver.startswith("energy_") and final:
+        if (resolver.startswith("energy_") or any(_int(getattr(option, "type", None)) == int(OptionType.ATTACH) and option_card_id(obs, index) == GRASS_ENERGY for index, option in zip(final, selected_options))) and final:
             target = option_target(obs, obs.select.option[final[0]])
             telemetry.record_energy_attachment(
                 _card_id(target),
@@ -715,11 +785,13 @@ class DipplinCompetitionAgent:
         if resolver == "black_belt_threshold":
             telemetry.increment("black_belt_uses")
             telemetry.increment("black_belt_threshold_crossing_uses")
-        if resolver == "boss_prize_line":
+        if resolver == "boss_prize_line" or BOSS in selected_card_ids:
             telemetry.increment("boss_uses")
+        if resolver == "expert_main":
+            telemetry.increment("expert_main_decisions")
         if proposal.plan.productive_attack_legal:
             telemetry.increment("productive_attacks_offered")
-        if resolver == "productive_do_the_wave":
+        if resolver == "productive_do_the_wave" or took_do_wave:
             telemetry.increment("productive_attacks_taken")
             telemetry.increment("first_festival_attacks")
             telemetry.increment("festival_attack_windows")

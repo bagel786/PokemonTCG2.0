@@ -322,9 +322,9 @@ class PromptResolver:
         # paths are illegal for the starting player and do not qualify.
         volbeat_path = GRASS_ENERGY in hand_ids or BUG_SET in hand_ids
         priorities = (
-            (VOLBEAT, APPLIN_GRASS, APPLIN_DRAGON, GROOKEY, SHAYMIN)
+            (VOLBEAT, APPLIN_DRAGON, APPLIN_GRASS, GROOKEY, SHAYMIN)
             if volbeat_path
-            else (APPLIN_GRASS, APPLIN_DRAGON, GROOKEY, SHAYMIN, VOLBEAT)
+            else (APPLIN_DRAGON, APPLIN_GRASS, GROOKEY, SHAYMIN, VOLBEAT)
         )
         return SelectionIntent(tuple(_rank_by_ids(obs, priorities)), 1, "setup_active", "state-aware opening pivot")
 
@@ -345,7 +345,7 @@ class PromptResolver:
                     return
 
         if applin_count == 0:
-            take_one((APPLIN_GRASS, APPLIN_DRAGON))
+            take_one((APPLIN_DRAGON, APPLIN_GRASS))
             applin_count += int(bool(useful))
         if engine_count == 0:
             before = len(useful)
@@ -353,14 +353,14 @@ class PromptResolver:
             engine_count += int(len(useful) > before)
         if applin_count < 2:
             before = len(useful)
-            take_one((APPLIN_GRASS, APPLIN_DRAGON))
+            take_one((APPLIN_DRAGON, APPLIN_GRASS))
             applin_count += int(len(useful) > before)
         if engine_count < 2:
             take_one((GROOKEY,))
         take_one((SHAYMIN,))
         if counts.get(VOLBEAT, 0) == 0:
             take_one((VOLBEAT,))
-        ranked = _rank_by_ids(obs, (APPLIN_GRASS, APPLIN_DRAGON, GROOKEY, SHAYMIN, VOLBEAT))
+        ranked = _rank_by_ids(obs, (APPLIN_DRAGON, APPLIN_GRASS, GROOKEY, SHAYMIN, VOLBEAT))
         useful.extend(index for index in ranked if index not in useful and option_card_id(obs, index) != VOLBEAT)
         desired = min(int(obs.select.maxCount), len(useful))
         return SelectionIntent(tuple(useful), desired, "setup_bench", "Applin plus Grookey composition")
@@ -383,19 +383,26 @@ class PromptResolver:
                     useful.append(choices.pop(0))
                     return
 
-        # Composition is sequential: first attacker, first engine, replacement,
-        # then redundant engine.  A flat rank could select two copies of one ID
-        # and reproduce the plateau policy's brittle board.
-        if applin_count == 0:
-            take_one((APPLIN_GRASS, APPLIN_DRAGON))
-        if engine_count == 0:
+        # Quick Sign's two slots establish the prize-trading chain first.  The
+        # live rank-34 pilot overwhelmingly chose Dragon Applin pairs here and
+        # obtained Grookey through the four Poffin/Pad lines; the former
+        # attacker+engine rule left only one attacker in 78% of attack windows.
+        if name == "quick_sign":
+            while applin_count + sum(option_card_id(obs, i) in {APPLIN_GRASS, APPLIN_DRAGON} for i in useful) < 2:
+                before = len(useful)
+                take_one((APPLIN_DRAGON, APPLIN_GRASS))
+                if len(useful) == before:
+                    break
+        elif applin_count == 0:
+            take_one((APPLIN_DRAGON, APPLIN_GRASS))
+        if engine_count == 0 and len(useful) < 2:
             take_one((GROOKEY,))
         if applin_count + sum(option_card_id(obs, i) in {APPLIN_GRASS, APPLIN_DRAGON} for i in useful) < 2:
-            take_one((APPLIN_GRASS, APPLIN_DRAGON))
+            take_one((APPLIN_DRAGON, APPLIN_GRASS))
         if engine_count + sum(option_card_id(obs, i) == GROOKEY for i in useful) < 2:
             take_one((GROOKEY,))
         take_one((SHAYMIN,))
-        remaining = _rank_by_ids(obs, (APPLIN_GRASS, APPLIN_DRAGON, GROOKEY, SHAYMIN))
+        remaining = _rank_by_ids(obs, (APPLIN_DRAGON, APPLIN_GRASS, GROOKEY, SHAYMIN))
         useful.extend(index for index in remaining if index not in useful and option_card_id(obs, index) in {APPLIN_GRASS, APPLIN_DRAGON, GROOKEY, SHAYMIN})
         desired = min(int(obs.select.maxCount), 2, len(useful))
         return SelectionIntent(tuple(useful), desired, name, "fill missing attacker and engine lines")
@@ -487,12 +494,30 @@ class PromptResolver:
             card = option_source(obs, obs.select.option[index])
             hp = max(0, _int(getattr(card, "hp", None), 0))
             prize = _prize_value(card)
-            # Public complete-turn approximation: exact KO tier first, then
-            # prize value, then preserve damage efficiency.
-            per_hit = max(0, 20 * plan.bench_count)
-            ko_one = int(per_hit >= hp > 0)
-            ko_two = int(per_hit * 2 >= hp > 0)
-            return (ko_one * prize, ko_two * prize, prize, -hp)
+            # Use the same audited damage pipeline as the main-action Boss
+            # predicate.  The old raw 20*bench approximation ignored weakness,
+            # resistance, tools, and prevention, so it could correctly decide
+            # to play Boss and then select the wrong target.
+            from .damage import project_do_the_wave
+
+            hero = _hero(obs)
+            active = (_in_play(hero) or [None])[0]
+            stadium = list(getattr(obs.current, "stadium", None) or [])
+            stadium_id = _int(getattr(stadium[0], "id", None)) if stadium else None
+            projection = project_do_the_wave(
+                active,
+                card,
+                bench_count=plan.bench_count,
+                black_belt_used=plan.black_belt_used,
+                stadium_id=stadium_id,
+                festival_active=plan.festival_active,
+            )
+            return (
+                int(projection.ko) * prize,
+                int(projection.turn_ko) * prize,
+                prize if projection.productive else 0,
+                -hp,
+            )
 
         ranked = sorted(range(len(obs.select.option)), key=lambda i: (score(i), -i), reverse=True)
         return SelectionIntent(tuple(ranked), 1, "boss", "maximize complete-turn prizes")
@@ -504,8 +529,8 @@ class PromptResolver:
             energy = len(getattr(card, "energies", None) or [])
             values = {
                 DIPPLIN: 1000 + 100 * int(energy >= 1),
-                APPLIN_GRASS: 800,
-                APPLIN_DRAGON: 780,
+                APPLIN_DRAGON: 800,
+                APPLIN_GRASS: 780,
                 VOLBEAT: 450,
                 GROOKEY: 300,
                 THWACKEY: 100,

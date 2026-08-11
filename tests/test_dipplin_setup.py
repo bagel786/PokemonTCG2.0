@@ -83,7 +83,7 @@ def test_setup_active_avoids_stranded_volbeat_without_energy_or_search_path():
     action = DipplinCompetitionAgent(search_enabled=False)(raw)
 
     _assert_legal(raw, action)
-    assert _selected_ids(raw, action) == [APPLIN_GRASS]
+    assert _selected_ids(raw, action) == [APPLIN_DRAGON]
 
 
 def test_setup_bench_builds_attacker_and_engine_without_redundant_volbeat():
@@ -109,7 +109,7 @@ def test_setup_bench_builds_attacker_and_engine_without_redundant_volbeat():
     assert VOLBEAT not in chosen
 
 
-def test_quick_sign_chooses_one_applin_and_one_grookey():
+def test_quick_sign_chooses_two_applin_before_engine():
     raw = _fixture("quick_sign_two_targets")
 
     action = DipplinCompetitionAgent(search_enabled=False)(raw)
@@ -117,8 +117,7 @@ def test_quick_sign_chooses_one_applin_and_one_grookey():
 
     _assert_legal(raw, action)
     assert len(chosen) == 2
-    assert GROOKEY in chosen
-    assert len({APPLIN_GRASS, APPLIN_DRAGON}.intersection(chosen)) == 1
+    assert chosen == [APPLIN_DRAGON, APPLIN_DRAGON]
     assert SHAYMIN not in chosen
     assert VOLBEAT not in chosen
 

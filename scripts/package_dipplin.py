@@ -52,6 +52,7 @@ D0_DIPPLIN_MODULES = frozenset(
         "__init__.py",
         "cards.py",
         "damage.py",
+        "imitation.py",
         "plan.py",
         "policy.py",
         "resolvers.py",
@@ -283,6 +284,7 @@ def _stage_sources(variant: str) -> dict[str, Path | bytes]:
     }
     deck, _, _, _ = _deck_bytes()
     sources["deck.csv"] = deck
+    sources["ptcg_ai/dipplin/imitation_weights.json"] = ROOT / "ptcg_ai" / "dipplin" / "imitation_weights.json"
     for member in sorted(modules):
         sources[f"ptcg_ai/dipplin/{member}"] = _validated_source(ROOT / "ptcg_ai" / "dipplin" / member)
     for member, expected_hash in sorted(OFFICIAL_CG_SHA256.items()):
@@ -585,7 +587,7 @@ def build_package(
                 "direct_entrypoint": True,
                 "search_default": normalized_variant == "d1",
                 "d1_disable_environment": "PTCG_DIPPLIN_SEARCH=0" if normalized_variant == "d1" else None,
-                "learned_weights_included": False,
+                "learned_weights_included": True,
                 "grim_runtime_included": False,
                 "runtime_source_tree_sha256": first["runtime_source_tree_sha256"],
                 "runtime_source_members": first["runtime_source_members"],

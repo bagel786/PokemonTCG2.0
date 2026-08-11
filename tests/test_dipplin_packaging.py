@@ -24,7 +24,7 @@ def test_build_d0_is_direct_exact_minimal_and_deterministic(tmp_path: Path):
     assert result["runtime"]["family"] == "dedicated_dipplin"
     assert result["runtime"]["direct_entrypoint"] is True
     assert result["runtime"]["search_default"] is False
-    assert result["runtime"]["learned_weights_included"] is False
+    assert result["runtime"]["learned_weights_included"] is True
     assert result["runtime"]["grim_runtime_included"] is False
     assert result["verification"]["deterministic_double_build"] is True
     assert result["verification"]["first_archive_sha256"] == result["verification"]["second_archive_sha256"]
@@ -60,6 +60,7 @@ def test_build_d0_is_direct_exact_minimal_and_deterministic(tmp_path: Path):
         "ptcg_ai/__init__.py",
         "ptcg_ai/safety.py",
         *(f"ptcg_ai/dipplin/{name}" for name in packager.D0_DIPPLIN_MODULES),
+        "ptcg_ai/dipplin/imitation_weights.json",
         *(f"cg/{name}" for name in packager.OFFICIAL_CG_SHA256),
     }
     assert members == expected

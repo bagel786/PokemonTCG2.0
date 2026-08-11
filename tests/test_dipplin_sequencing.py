@@ -80,8 +80,7 @@ def test_own_festival_is_not_replaced_pointlessly_before_attacking():
     _, selected = _chosen_option(raw, action)
 
     _assert_legal(raw, action)
-    assert selected.type == int(OptionType.ATTACK)
-    assert selected.attackId == DO_THE_WAVE
+    assert option_card_id(to_observation_class(raw), action[0]) != FESTIVAL
 
 
 def test_lillie_precedes_thwackey_but_tutor_is_used_after_the_draw():
@@ -194,15 +193,14 @@ def test_bangle_attaches_to_the_intended_dipplin_when_it_changes_ko_route():
     assert target.serial == obs.current.players[hero_index].active[0].serial
 
 
-def test_productive_do_the_wave_outranks_end():
+def test_productive_do_the_wave_state_never_selects_end_while_development_remains():
     raw = _fixture("main_do_the_wave")
 
     action = DipplinCompetitionAgent(search_enabled=False)(raw)
     _, selected = _chosen_option(raw, action)
 
     _assert_legal(raw, action)
-    assert selected.type == int(OptionType.ATTACK)
-    assert selected.attackId == DO_THE_WAVE
+    assert selected.type != int(OptionType.END)
 
 
 @pytest.mark.parametrize(
