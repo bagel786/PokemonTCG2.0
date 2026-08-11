@@ -160,6 +160,38 @@ def test_first_thwackey_tutor_fetches_the_exact_missing_attack_energy():
     assert _selected_ids(raw, action) == [GRASS_ENERGY]
 
 
+def test_dragon_applin_find_a_friend_fetches_next_turn_dipplin():
+    raw = _fixture("boom_boom_groove")
+    hero_index = raw["current"]["yourIndex"]
+    raw["current"]["players"][hero_index]["active"] = [
+        _pokemon(APPLIN_DRAGON, 979, player=hero_index)
+    ]
+    raw["select"]["effect"] = _card(APPLIN_DRAGON, 980, hero_index)
+    raw["select"]["deck"] = [
+        _card(THWACKEY, 981, hero_index),
+        _card(DIPPLIN, 982, hero_index),
+        _card(GROOKEY, 983, hero_index),
+    ]
+    raw["select"]["option"] = [
+        {
+            "type": int(OptionType.CARD),
+            "area": int(AreaType.DECK),
+            "index": index,
+            "playerIndex": hero_index,
+        }
+        for index in range(3)
+    ]
+    raw["select"]["minCount"] = 1
+    raw["select"]["maxCount"] = 1
+
+    agent = DipplinCompetitionAgent(search_enabled=False)
+    action = agent(raw)
+
+    _assert_legal(raw, action)
+    assert _selected_ids(raw, action) == [DIPPLIN]
+    assert agent.route_telemetry.get("unknown_contexts", 0.0) == 0.0
+
+
 def test_two_thwackey_activations_are_committed_by_distinct_lineage_serials():
     first = _fixture("main_two_thwackey_abilities")
     first_options = first["select"]["option"]

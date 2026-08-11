@@ -15,12 +15,14 @@ over-budget return is discarded, never promoted.
 
 from __future__ import annotations
 
+import base64
 import hashlib
 import json
 import math
 import os
 import random
 import time
+import zlib
 from collections import Counter
 from dataclasses import dataclass, replace
 from enum import Enum
@@ -53,8 +55,10 @@ from .cards import (
     POKE_PAD,
     QUICK_SIGN,
     SACRED_ASH,
+    SHAYMIN,
     THWACKEY,
     UNFAIR_STAMP,
+    VOLBEAT,
 )
 from .damage import project_do_the_wave
 from .snapshot import PlanMemory, PlanSnapshot
@@ -76,10 +80,14 @@ METRIC_FIELDS = (
     "avoid_exposed_fragile_bench",
 )
 
-# Damage alone, hand cosmetics, and resource-count cosmetics may break a fully
-# identical proof tie, but may never *create* an override.  These fields are the
-# actual completed-turn/prize/readiness proof criteria.
-LOAD_BEARING_INDICES = frozenset(range(9))
+# Merely ending with Festival in play or another Thwackey available is setup,
+# not a completed-turn tactical gain.  Earlier versions admitted those ties and
+# mostly overrode END/ATTACH/PLAY with Festival; intervention games then won
+# materially less often than D0-only games.  Require an actual prize, attack,
+# KO, or attacker-readiness improvement before setup/resource fields may break
+# a tie.  This remains opponent-agnostic and is derived solely from the public
+# completed-turn state.
+LOAD_BEARING_INDICES = frozenset(range(5))
 
 _RANDOM_OR_DECK_TOUCH_CARDS = frozenset(
     {
@@ -144,7 +152,7 @@ class D1Config:
     max_native_calls_per_decision: int = 272
     soft_timeout_seconds: float = 0.45
     hard_timeout_seconds: float = 1.50
-    max_searches_per_game: int = 8
+    max_searches_per_game: int = 16
     max_opponent_promotions: int = 5
     seed_salt: str = "festival-d1-public-v1"
 
@@ -445,6 +453,23 @@ def _candidate_category(obs: Any, option: Any) -> tuple[str, tuple[int, ...]] | 
         return "prize", (900, int(card_id == BOSS), -card_id)
     if option_type == int(OptionType.ATTACH) and card_id == BRAVE_BANGLE:
         return "prize", (850, int(target_id == DIPPLIN), int(target_is_active))
+    if option_type == int(OptionType.PLAY) and card_id in {
+        APPLIN_DRAGON,
+        APPLIN_GRASS,
+        GROOKEY,
+        SHAYMIN,
+        VOLBEAT,
+    }:
+        # A Basic is a deterministic +20 Do-the-Wave modifier as well as a
+        # replacement/engine resource.  When an attack is already legal it is
+        # a genuine completed-turn prize candidate, not mere board cosmetics.
+        attack_available = any(
+            _integer(getattr(candidate, "type", None)) == int(OptionType.ATTACK)
+            and _integer(getattr(candidate, "attackId", None)) == DO_THE_WAVE
+            for candidate in (getattr(obs.select, "option", None) or [])
+        )
+        category = "prize" if attack_available else "replacement"
+        return category, (825, int(card_id in {APPLIN_DRAGON, APPLIN_GRASS}), -card_id)
     if option_type == int(OptionType.PLAY) and card_id == FESTIVAL:
         return "enable", (900, 0, 0)
     if option_type == int(OptionType.RETREAT):
@@ -705,7 +730,18 @@ def determinize_public_world(
 # Filled below from the audited data/meta/top_decklists.json snapshot.  Keeping
 # a compiled fallback is necessary because submission archives intentionally do
 # not ship repository data paths.  Runtime never reads an evaluator opponent.
-_COMPILED_PUBLIC_DECKS: tuple[tuple[str, tuple[int, ...]], ...] = ()
+_COMPILED_PUBLIC_DECKS_B85 = """c-rk*S#In&47^Le{h^H#b(SC>wk6;H2t!GBYqi^*^m`Kw24)qKAia?0Qj|YGKhO)uW~n#E#K-h$rvBngC2&zeE8V~pzz0yX2+oYH2*ck{_hd~;T!hb);U^G1;X#7io`mU1aw4z|eSJ-zAASW8^ov<7r*Oao6PHtXr^B=k#ub|+gA64nqj&?+KvwAE!3T5_9xm*&c<dBzTztiY$ibdsP#Ox362-`XMm}>~{JhQ-899ZE^TOmFoA4^5>hKUSq(X#E*wX?vj~M%krX;$l0}=;~!eLZJIa}Hw3=&1yp0vso1EZPsTKa{}xKUu}8$G`;nAO?nrmBv3_`jWOPucH8=Ac+A>OmpDo2(El+}@DcEro~*As;k|3dHi^(RuVrZb~ZSmH(~nW0Vyk-x9sGeXx~z?=5(W2!(^3+AqPfN$L$XL<V_Qft;+t3z&#Ik>E=7G%OccQBIrKIGDUwI68KZlp@RGH7?vU=7C}&rgXu6#T0p@g{?u+s=+g;0}BZelo0%07{Z%$H0UWe8mq;U_UbuH7o{V`fT(3#v`4Qkhtx1iQ-xu+Fkqxo4WNPnUE#c=cD*B#>`9rPntoExmh%BK%#)&z3YZZc^RveJ=%Y6RlWL06^)ftzkPIhC6AfwZ#h{3WdXPEmDVHGulS9JgLb{BtV7To@3)*a!6($Ok*+Riw)rcC<K!>$tue6zgimbV+kyI$qQ0gHF%7N2VLgtWVr6z-DI$IDNZ`Wftl<J#BSreQhOeV&~EfSqa5NOQ{t>j&8<k$8R>-2)!&6>^pmL}V)q*P>~Tu7#JU=fm9xM6lOoJCmbI0<;npFD)lis^jTG`WFzRVliq=(OCn4H&72#m$}5Y1s0@6k`o|4N98``p5(^DJ>($&ShyTRZpX`h}wzk0mbHt6-5EiQr$NpmBq@OBZUf1%-jE4Ts35I!ObaPo45Ctm2OqBf?cjFc|U1n*4es}>9RT8+F72gD-0I3sTo$|m*9TAzCOBTIZ3Wp*=D6xc6_s+?5!_tu=N^yvC!V$YSVrX3Kz9%;ko|nHS=c*NByK+a?KcPI8_WNxy;p4H@IkNN>Dpshb~|mU<J;Z=&2Z^d_dRR-9W6`p2pQ9VhlD7v}lFC?Ed;O;pwt}ch7H@*f;F?(oqXh!ZKXeZ?@5Iwb0+vM`vr$Z_-OEo}GE!Q&t+_R9&Tk^G6g`48@Bw3xM7LHEyuFq3_{flw=b%(AW}Wu;R933PAW01Ytxawymk<Wbzp6Y{#8=&`K?h0x(qA*dJmrI4InkijuIh+Vfd&bZh*H@5%H3pzo5&S!mdlTiEp&czFo417N5Yelh?~M!~oXoJ)qJp%}fD*M4TJeA_7aH=Y*B_sjzHdIl$rbmH=n(Lg)BqMLrMnO;1nP~X%{#j;`f!sg9Uu8cY*Ihc$}e7B1ut>Pq0#&CS^B<tMuctVvjBc3$#7bNxg)XFU+rrBbUMd3Kg3@EJ1k{4C=Rbre;=(}s@8+3He38t0Qa&=A#QRIZ$FWRl>qFyfOxA?Mz&=3N`O$s<B2oDbdWSk`7tOBq+w#tVR!y_tvoJ<T4rgC23$x$!jLG7aecG6iMPXWIE0iG#C;{"""
+
+
+def _compiled_public_decks() -> tuple[tuple[str, tuple[int, ...]], ...]:
+    rows = json.loads(zlib.decompress(base64.b85decode(_COMPILED_PUBLIC_DECKS_B85)).decode("ascii"))
+    parsed = tuple((str(deck_id), tuple(map(int, cards))) for deck_id, cards in rows)
+    if len(parsed) != 30 or any(len(cards) != 60 for _deck_id, cards in parsed):
+        raise D1Error("compiled public belief snapshot is invalid")
+    return parsed
+
+
+_COMPILED_PUBLIC_DECKS = _compiled_public_decks()
 
 
 def _load_public_decks(path: Path | None = None) -> tuple[tuple[str, tuple[int, ...]], ...]:
@@ -1356,6 +1392,17 @@ class FestivalD1Search:
             candidates = generate_root_candidates(obs, fallback, self.config.max_candidates)
         except Exception:
             return self._abstain(fallback, "semantic_capture")
+        # Tainted alternatives cannot poison a deterministic comparison.  If
+        # D0 itself touches hidden deck order, preserve it without spending the
+        # bounded search budget.
+        if _action_touches_rng_or_hidden_deck(obs, fallback):
+            return self._abstain(fallback, "baseline_rng_or_hidden_deck")
+        candidates = tuple(
+            candidate
+            for candidate in candidates
+            if candidate.is_baseline
+            or not _action_touches_rng_or_hidden_deck(obs, candidate.original_action)
+        )
         if len(candidates) < 2:
             return fallback
         beliefs = compatible_public_beliefs(
@@ -1455,6 +1502,15 @@ class FestivalD1Search:
             self._increment("d1_overrides")
             self._increment("d0_d1_disagreements")
             self._increment(f"d1_override_category_{winner.category}")
+            baseline_option = obs.select.option[int(fallback[0])]
+            winner_option = obs.select.option[int(result[0])]
+            baseline_card = _option_card_id(obs, baseline_option)
+            winner_card = _option_card_id(obs, winner_option)
+            baseline_type = _integer(getattr(baseline_option, "type", None))
+            winner_type = _integer(getattr(winner_option, "type", None))
+            self._increment(
+                f"d1_override_transition_t{baseline_type}_c{baseline_card}_to_t{winner_type}_c{winner_card}"
+            )
             return result
         except D1Timeout:
             reason = "timeout"

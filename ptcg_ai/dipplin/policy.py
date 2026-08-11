@@ -752,6 +752,26 @@ class DipplinCompetitionAgent:
         if not proposal.intent.known_context:
             telemetry.increment("unknown_contexts")
             telemetry.increment("legal_fallbacks")
+            select = obs.select
+            effect = getattr(select, "effect", None)
+            context_card = getattr(select, "contextCard", None)
+            option_types = "_".join(
+                str(value)
+                for value in sorted(
+                    {
+                        _int(getattr(option, "type", None))
+                        for option in (getattr(select, "option", None) or [])
+                    }
+                )
+            ) or "none"
+            telemetry.increment(
+                "unknown_prompt_"
+                f"t{_int(getattr(select, 'type', None))}_"
+                f"c{_int(getattr(select, 'context', None))}_"
+                f"e{_int(getattr(effect, 'id', None))}_"
+                f"cc{_int(getattr(context_card, 'id', None))}_"
+                f"o{option_types}"
+            )
         if resolver == "is_first":
             selected = obs.select.option[final[0]] if final else None
             telemetry.record_go_first(

@@ -231,6 +231,8 @@ class PromptResolver:
             return SelectionIntent(tuple(range(len(select.option))), int(select.minCount), "attack_prompt", "no known Festival attack")
 
         if select_type == int(SelectType.CARD):
+            if parent == APPLIN_DRAGON and context == int(SelectContext.TO_HAND):
+                return self._find_a_friend(obs, plan)
             if parent == VOLBEAT:
                 return self._board_search(obs, plan, "quick_sign")
             if parent == POFFIN:
@@ -465,6 +467,35 @@ class PromptResolver:
         priorities = ([] if has_applin_line else [APPLIN_GRASS, APPLIN_DRAGON])
         priorities += list(tutor_prerequisite_order(plan)) + [DIPPLIN, APPLIN_GRASS, APPLIN_DRAGON, THWACKEY, GROOKEY, SHAYMIN, VOLBEAT]
         return SelectionIntent(tuple(_rank_by_ids(obs, priorities)), 1 if obs.select.option else 0, "poke_pad", "exact missing non-rule Pokemon")
+
+    def _find_a_friend(self, obs: Any, plan: MacroPlan) -> SelectionIntent:
+        """Resolve Dragon Applin's post-attack one-Pokemon deck search.
+
+        This prompt is emitted as CARD/TO_HAND with the attacking Applin as the
+        effect owner.  Treating it as a generic unknown selected the engine's
+        first deck entry in roughly one game out of seven.  The attack has
+        already ended the turn, so prioritize next-turn evolution, then the
+        missing attacker/Thwackey lines exposed by the public board.
+        """
+
+        counts = _board_counts(obs)
+        has_applin = any(counts.get(card_id, 0) for card_id in (APPLIN_GRASS, APPLIN_DRAGON))
+        has_grookey = counts.get(GROOKEY, 0) > 0
+        priorities: list[int] = []
+        if has_applin:
+            priorities.append(DIPPLIN)
+        if has_grookey:
+            priorities.append(THWACKEY)
+        priorities.extend(tutor_prerequisite_order(plan))
+        priorities.extend(
+            (DIPPLIN, THWACKEY, APPLIN_DRAGON, APPLIN_GRASS, GROOKEY, SHAYMIN, VOLBEAT)
+        )
+        return SelectionIntent(
+            tuple(_rank_by_ids(obs, priorities)),
+            1 if obs.select.option else 0,
+            "find_a_friend",
+            "next-turn evolution before missing attacker and engine lines",
+        )
 
     def _thwackey(self, obs: Any, plan: MacroPlan) -> SelectionIntent:
         from .cards import BOSS, HILDA, LILLIE, NIGHT_STRETCHER
