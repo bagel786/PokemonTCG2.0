@@ -18,11 +18,17 @@ sys.path.insert(0, str(ROOT / "freshstart" / "submission_template"))
 if (ROOT / "vendor" / "cg").exists():
     sys.path.insert(0, str(ROOT / "vendor"))
 
+from cg import sim as cg_sim
 from cg.api import to_observation_class
 from cg.game import battle_finish, battle_select, battle_start
 from ptcg_ai.agent import CompetitionAgent
 from ptcg_ai.external import ExternalSubmissionAgent
 from training.evaluation_schema import build_provenance
+
+
+def loaded_engine_path() -> Path:
+    """Return the native binary path selected and loaded by cg.sim."""
+    return Path(cg_sim.lib_path).resolve()
 
 
 def external_diagnostics(agent):
@@ -47,6 +53,11 @@ def policy_error_count(agent) -> int:
         inner = getattr(agent.module, "_AGENT", None)
         errors += int(getattr(inner, "errors", 0) or 0)
     return errors
+
+
+def evaluation_exit_code(hero_errors: int, opponent_errors: int) -> int:
+    """Fail closed if either adapter or packaged agent reported a fallback."""
+    return int(bool(hero_errors or opponent_errors))
 
 
 def competition_telemetry(agent) -> dict:
@@ -199,6 +210,12 @@ def main() -> int:
 
     def merge_stats(total, current):
         for key, value in current.items():
+            # Route telemetry also carries audit metadata such as ``None``
+            # activation steps and lists of public evidence.  Gameplay
+            # aggregation is numeric-only; attempting to add those fields made
+            # otherwise valid evaluations crash before producing a report.
+            if not isinstance(value, (int, float)) or isinstance(value, bool):
+                continue
             if key.endswith("_max"):
                 total[key] = max(total.get(key, 0.0), value)
             else:
@@ -223,6 +240,19 @@ def main() -> int:
                 print({"complete": complete, "win_rate_a": wins / complete})
     lower, upper = wilson(wins, args.games)
     opponent_name = args.opponent_name or (Path(submission_b).name if submission_b else Path(args.deck_b).stem)
+    provenance = build_provenance(
+        root=ROOT,
+        deck_a=args.deck_a,
+        model_a=args.model_a or None,
+        deck_b=args.deck_b,
+        model_b=args.model_b or None,
+        submission_a=submission_a or None,
+        submission_b=submission_b or None,
+        engine_path=loaded_engine_path(),
+        seed=args.seed,
+        submission_env_a=submission_env_a,
+        submission_env_b=submission_env_b,
+    )
     result = {
         "games": args.games,
         "wins_a": wins,
@@ -272,17 +302,7 @@ def main() -> int:
                 "wilson_95": [lower, upper],
             }
         },
-        "artifact_provenance": build_provenance(
-            root=ROOT,
-            deck_a=args.deck_a,
-            model_a=args.model_a or None,
-            deck_b=args.deck_b,
-            model_b=args.model_b or None,
-            submission_a=submission_a or None,
-            submission_b=submission_b or None,
-            engine_path=ROOT / "vendor" / "cg" / "libcg.so",
-            seed=args.seed,
-        ),
+        "artifact_provenance": provenance,
         "elapsed_seconds": time.time() - started,
         "opponent_runtime_stats": opponent_runtime_stats,
         "opponent_search_stats": opponent_search_stats,
@@ -294,7 +314,7 @@ def main() -> int:
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
     print(result)
-    return 0
+    return evaluation_exit_code(hero_errors, opponent_errors)
 
 
 if __name__ == "__main__":

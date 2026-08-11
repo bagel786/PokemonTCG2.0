@@ -4,6 +4,8 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
+import json
 import os
 import random
 import sys
@@ -51,7 +53,7 @@ def evaluate_model(
     model: PolicyNet,
     val_path: Path,
     device: torch.device,
-    max_records: int = 10000,
+    max_records: int = 0,
     batch_size: int = 256,
 ) -> tuple[float, float, float]:
     model.eval()
@@ -93,7 +95,14 @@ def train_v2(
     kd_weight: float = 0.50,
     value_weight: float = 0.20,
     max_train_records: int = 0,
+    max_validation_records: int = 0,
+    seed: int = 20260811,
+    trainable_modules: tuple[str, ...] = (),
+    feature_version: int = 0,
 ):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
     out_dir.mkdir(parents=True, exist_ok=True)
     log_file = out_dir / "training_v2.log"
     log_file.write_text("")
@@ -102,29 +111,60 @@ def train_v2(
     log(f"Base Model: {base_model_path}", log_file)
     log(f"Teacher Model: {teacher_model_path}", log_file)
     log(f"Train Data: {train_data_path}", log_file)
-    log(f"Hyperparameters: epochs={epochs}, batch_size={batch_size}, lr={lr}, kd={kd_weight}, value_weight={value_weight}", log_file)
+    if not feature_version:
+        with np.load(base_model_path, allow_pickle=False) as arrays:
+            feature_version = int(np.asarray(arrays.get("model_schema_version", 1)).item())
+    if feature_version not in (1, 2, 3, 4, 5):
+        raise ValueError(f"unsupported feature version: {feature_version}")
+    log(
+        f"Hyperparameters: epochs={epochs}, batch_size={batch_size}, lr={lr}, "
+        f"kd={kd_weight}, value_weight={value_weight}, seed={seed}, "
+        f"feature_version={feature_version}, "
+        f"trainable_modules={','.join(trainable_modules) if trainable_modules else 'all'}",
+        log_file,
+    )
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     log(f"Compute Device: {device}", log_file)
 
-    student = PolicyNet(feature_version=2).to(device)
+    student = PolicyNet(feature_version=feature_version).to(device)
     load_npz_weights(student, base_model_path)
     log("Loaded student base weights.", log_file)
 
-    teacher = PolicyNet(feature_version=2).to(device)
+    known_modules = {name for name, _ in student.named_children()}
+    if trainable_modules:
+        unknown = set(trainable_modules) - known_modules
+        if unknown:
+            raise ValueError(f"unknown trainable modules: {sorted(unknown)}")
+        for name, parameter in student.named_parameters():
+            parameter.requires_grad = name.split(".", 1)[0] in trainable_modules
+    trainable_parameters = [parameter for parameter in student.parameters() if parameter.requires_grad]
+    if not trainable_parameters:
+        raise ValueError("at least one model parameter must be trainable")
+
+    teacher = PolicyNet(feature_version=feature_version).to(device)
     load_npz_weights(teacher, teacher_model_path)
     teacher.eval()
     for param in teacher.parameters():
         param.requires_grad = False
     log("Loaded frozen teacher weights for KL distillation anchoring.", log_file)
 
+    pre_acc = 0.0
     if val_data_path.exists():
-        pre_loss, pre_acc, pre_verr = evaluate_model(student, val_data_path, device, max_records=8000, batch_size=batch_size)
+        pre_loss, pre_acc, pre_verr = evaluate_model(
+            student,
+            val_data_path,
+            device,
+            max_records=max_validation_records,
+            batch_size=batch_size,
+        )
         log(f"Pre-training Validation: Loss={pre_loss:.4f} | Top-1 Acc={pre_acc:.2f}% | Value BCE={pre_verr:.4f}", log_file)
 
-    optimizer = torch.optim.AdamW(student.parameters(), lr=lr, weight_decay=1e-4)
-    best_val_acc = 0.0
+    optimizer = torch.optim.AdamW(trainable_parameters, lr=lr, weight_decay=1e-4)
+    best_val_acc = pre_acc
     out_weights = out_dir / "policy_weights.npz"
+    export_npz(student, out_weights)
+    log(f"Saved baseline checkpoint to {out_weights}", log_file)
 
     for epoch in range(1, epochs + 1):
         student.train()
@@ -137,7 +177,13 @@ def train_v2(
         total_decisions = 0
         t0 = time.time()
 
-        for batch in iter_batches([train_data_path], batch_size, max_records=max_train_records, validation=False, feature_version=2):
+        for batch in iter_batches(
+            [train_data_path],
+            batch_size,
+            max_records=max_train_records,
+            validation=False,
+            feature_version=feature_version,
+        ):
             batch = move(batch, device)
             optimizer.zero_grad()
 
@@ -164,7 +210,7 @@ def train_v2(
 
             loss = opt_loss + 0.25 * cnt_loss + kd_weight * kd_loss + value_weight * val_loss
             loss.backward()
-            torch.nn.utils.clip_grad_norm_(student.parameters(), 1.0)
+            torch.nn.utils.clip_grad_norm_(trainable_parameters, 1.0)
             optimizer.step()
 
             running_loss += float(loss.item())
@@ -187,7 +233,13 @@ def train_v2(
 
         # Validation at epoch end
         if val_data_path.exists():
-            v_loss, v_acc, v_verr = evaluate_model(student, val_data_path, device, max_records=10000, batch_size=batch_size)
+            v_loss, v_acc, v_verr = evaluate_model(
+                student,
+                val_data_path,
+                device,
+                max_records=max_validation_records,
+                batch_size=batch_size,
+            )
             log(f"=== Epoch {epoch} Validation: Loss={v_loss:.4f} | Top-1 Acc={v_acc:.2f}% | Value BCE={v_verr:.4f} ===", log_file)
             if v_acc > best_val_acc:
                 best_val_acc = v_acc
@@ -197,7 +249,27 @@ def train_v2(
             export_npz(student, out_weights)
             log(f"-> Exported model checkpoint to {out_weights}", log_file)
 
-    log(f"Training completed successfully! Final model saved to {out_weights}", log_file)
+    digest = hashlib.sha256(out_weights.read_bytes()).hexdigest()
+    summary = {
+        "base_model": str(base_model_path),
+        "teacher_model": str(teacher_model_path),
+        "train_data": str(train_data_path),
+        "validation_data": str(val_data_path),
+        "seed": seed,
+        "epochs": epochs,
+        "batch_size": batch_size,
+        "learning_rate": lr,
+        "kd_weight": kd_weight,
+        "value_weight": value_weight,
+        "max_train_records": max_train_records,
+        "max_validation_records": max_validation_records,
+        "trainable_modules": list(trainable_modules) if trainable_modules else "all",
+        "feature_version": feature_version,
+        "best_validation_top1_percent": best_val_acc,
+        "output_sha256": digest,
+    }
+    (out_dir / "training_summary.json").write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n")
+    log(f"Training completed successfully! Best model saved to {out_weights} ({digest})", log_file)
     return out_weights
 
 
@@ -214,6 +286,14 @@ def main():
     parser.add_argument("--kd-weight", type=float, default=0.50, help="Distillation weight")
     parser.add_argument("--value-weight", type=float, default=0.20, help="Value loss weight")
     parser.add_argument("--max-records", type=int, default=0, help="Max records (0=all)")
+    parser.add_argument("--max-validation-records", type=int, default=0, help="Max validation records (0=all)")
+    parser.add_argument("--seed", type=int, default=20260811)
+    parser.add_argument("--feature-version", type=int, choices=(1, 2, 3, 4, 5), default=0)
+    parser.add_argument(
+        "--trainable-modules",
+        default="",
+        help="Comma-separated child modules to update; empty updates the full network",
+    )
     args = parser.parse_args()
 
     train_v2(
@@ -228,6 +308,10 @@ def main():
         kd_weight=args.kd_weight,
         value_weight=args.value_weight,
         max_train_records=args.max_records,
+        max_validation_records=args.max_validation_records,
+        seed=args.seed,
+        trainable_modules=tuple(value.strip() for value in args.trainable_modules.split(",") if value.strip()),
+        feature_version=args.feature_version,
     )
 
 

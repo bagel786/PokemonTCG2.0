@@ -48,8 +48,19 @@ extern "C" {
     return ApiBattleStart(cards);
   }
 
+  // Local evaluation-only entry point.  Unlike BattleStart, every gameplay
+  // shuffle, random selection, and coin draw uses the seeded Game::rng.
+  GAME_API StartData BattleStartSeeded(int* cards, uint32_t seed) {
+    return ApiBattleStartSeeded(cards, seed);
+  }
   GAME_API ApiData* AgentStart() {
     return ApiAgentStart();
+  }
+
+  // Local evaluation-only reset for matched counterfactual search branches.
+  // Production clients do not call or package this entry point.
+  GAME_API int SearchSetSeed(ApiData* data, uint32_t seed) {
+    return ApiSearchSetSeed(data, seed);
   }
 
   GAME_API void BattleFinish(ApiData* data) {

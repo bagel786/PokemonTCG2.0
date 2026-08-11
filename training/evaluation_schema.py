@@ -12,6 +12,19 @@ from pathlib import Path
 from typing import Any, Mapping
 
 
+BEHAVIOR_PTCG_ENV_KEYS = (
+    "PTCG_DIRECTOR_ARM",
+    "PTCG_DIRECTOR_HORIZON",
+    "PTCG_DIRECTOR_SWAP_FALLBACK",
+    "PTCG_DIRECTOR_TRIGGER",
+    "PTCG_POLICY",
+    "PTCG_SEARCH",
+    "PTCG_TACTICAL_SHIELD",
+    "PTCG_TEMP",
+    "PTCG_WAVE1_RAIL",
+)
+
+
 class EvaluationSchemaError(ValueError):
     """Raised when an evaluation result is absent, malformed, or inconsistent."""
 
@@ -76,6 +89,26 @@ def submission_schema(path: Path | None) -> int | str | None:
     return "external:" + ",".join(named) if named else "external:nonstandard"
 
 
+def runtime_environment(
+    submission_env_a: Mapping[str, Any] | None = None,
+    submission_env_b: Mapping[str, Any] | None = None,
+) -> dict[str, dict[str, str]]:
+    """Capture process policy controls and exact per-submission overrides."""
+    return {
+        "process_ptcg": {
+            key: os.environ[key]
+            for key in BEHAVIOR_PTCG_ENV_KEYS
+            if key in os.environ
+        },
+        "submission_a_overrides": {
+            str(key): str(value) for key, value in sorted((submission_env_a or {}).items())
+        },
+        "submission_b_overrides": {
+            str(key): str(value) for key, value in sorted((submission_env_b or {}).items())
+        },
+    }
+
+
 def build_provenance(
     *,
     root: Path,
@@ -87,6 +120,8 @@ def build_provenance(
     submission_b: str | Path | None,
     engine_path: str | Path,
     seed: int,
+    submission_env_a: Mapping[str, Any] | None = None,
+    submission_env_b: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     submission_a_path = Path(submission_a) if submission_a else None
     submission_b_path = Path(submission_b) if submission_b else None
@@ -109,7 +144,9 @@ def build_provenance(
         "artifact_b_sha256": sha256_path(submission_b_path) if submission_b_path else sha256_file(model_b) if model_b else "heuristic",
         "artifact_a_schema": submission_schema(submission_a_path) if submission_a_path else model_schema(model_a) if model_a else "heuristic",
         "artifact_b_schema": submission_schema(submission_b_path) if submission_b_path else model_schema(model_b) if model_b else "heuristic",
+        "engine_binary": Path(engine_path).name,
         "engine_sha256": sha256_file(engine_path),
+        "runtime_environment": runtime_environment(submission_env_a, submission_env_b),
     }
 
 
@@ -198,7 +235,9 @@ def validate_evaluation_result(result: Mapping[str, Any]) -> dict[str, Any]:
         "seed",
         "deck_a_sha256",
         "deck_b_sha256",
+        "engine_binary",
         "engine_sha256",
+        "runtime_environment",
         "artifact_a_sha256",
         "artifact_b_sha256",
         "artifact_a_schema",
@@ -208,6 +247,11 @@ def validate_evaluation_result(result: Mapping[str, Any]) -> dict[str, Any]:
             raise EvaluationSchemaError(f"missing artifact provenance: {key}")
     if provenance["source_commit"] == "unknown":
         raise EvaluationSchemaError("source commit is unknown")
+    runtime = _required(provenance, "runtime_environment", Mapping)
+    for key in ("process_ptcg", "submission_a_overrides", "submission_b_overrides"):
+        value = _required(runtime, key, Mapping)
+        if not all(isinstance(name, str) and isinstance(setting, str) for name, setting in value.items()):
+            raise EvaluationSchemaError(f"runtime environment {key!r} must contain string pairs")
 
     normalized = dict(result)
     normalized["games"] = games

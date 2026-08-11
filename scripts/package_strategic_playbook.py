@@ -20,6 +20,21 @@ DEFAULT_A2 = ROOT / "artifacts" / "recovery_probes" / "extracted" / "a2" / "poli
 DEFAULT_D842 = ROOT / "artifacts" / "recovery_probes" / "extracted" / "control" / "policy_weights.npz"
 DEFAULT_OUTPUT = ROOT / "artifacts" / "strategic_playbook" / "grimmsnarl_strategic_playbook.tar.gz"
 
+FOCUSED_ROUTE_OBJECTIVES = {
+    "grim": [
+        "closeout_prize_route", "deny_evolution_engine",
+    ],
+    "alakazam": [
+        "closeout_prize_route", "deny_evolution_engine", "pressure_primary_attacker",
+    ],
+    "lopunny": ["closeout_prize_route", "pressure_primary_attacker"],
+    "dragapult": [
+        "closeout_prize_route", "deny_evolution_engine", "pressure_primary_attacker",
+    ],
+    "crustle": ["closeout_prize_route", "deny_stadium_engine", "deny_evolution_engine"],
+    "kangaskhan_generic": ["closeout_prize_route", "pressure_primary_attacker"],
+}
+
 
 def sha256(path: Path) -> str:
     digest = hashlib.sha256()
@@ -69,6 +84,11 @@ def main() -> int:
     parser.add_argument("--extract", type=Path, default=ROOT / "artifacts" / "strategic_playbook" / "extracted")
     parser.add_argument("--preference-logit-margin", type=float, default=.75)
     parser.add_argument("--enable-one-prize-hypotheses", action="store_true")
+    parser.add_argument(
+        "--focused-actual-second",
+        action="store_true",
+        help="build the lean actual-second target/stadium/evolution overlay",
+    )
     args = parser.parse_args()
     require_schema2(args.a2)
     require_schema2(args.d842)
@@ -83,12 +103,37 @@ def main() -> int:
         "actual_second_build_logit_margin": .60,
         "commit_logit_margin": .50,
         "target_commit_logit_margin": 2.0,
+        "enable_build_commitments": False,
+        "enable_count_overrides": False,
         "enable_one_prize_hypotheses": args.enable_one_prize_hypotheses,
         "hidden_information": False,
         "search": False,
         "tactical_shield_application_count": 1,
         "sanitizer_application_count": 1,
     }
+    if args.focused_actual_second:
+        config.update({
+            "name": "grimmsnarl_strategic_v2_focused_second",
+            "architecture": "actual_second_public_matchup_target_overlay_over_full_a2",
+            "fallback": "full_a2",
+            "actual_second_only": True,
+            "preserve_is_first_a2": True,
+            "enabled_routes": sorted(FOCUSED_ROUTE_OBJECTIVES),
+            "allowed_route_statuses": ["provisional", "high_confidence", "locked"],
+            "route_objectives": FOCUSED_ROUTE_OBJECTIVES,
+            "require_main_for_plan": True,
+            "require_owned_nested_prompts": True,
+            "max_root_overrides_per_turn": 1,
+            "enable_build_commitments": False,
+            "enable_count_overrides": False,
+            "enable_setup_count_overrides": False,
+            "enable_one_prize_hypotheses": False,
+            "build_suppresses_attack": False,
+            "build_suppresses_optional_support": False,
+            "commit_logit_margin": 1.25,
+            "target_commit_logit_margin": 2.0,
+            "preference_logit_margin": .75,
+        })
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="strategic-playbook-", dir=args.output.parent) as temporary:
         temporary = Path(temporary)
@@ -104,6 +149,10 @@ def main() -> int:
         )
         (stage / "main.py").write_text(
             '"""Persistent strategic Grimmsnarl competition entry point."""\n\n'
+            "import os\n"
+            'os.environ["PTCG_TEMP"] = "0"\n'
+            'os.environ["PTCG_SEARCH"] = "0"\n'
+            'os.environ["PTCG_TACTICAL_SHIELD"] = "1"\n\n'
             "from ptcg_ai.strategic_playbook import StrategicPlaybookAgent\n\n"
             "_AGENT = StrategicPlaybookAgent()\n\n"
             "def agent(obs_dict: dict) -> list[int]:\n    return _AGENT(obs_dict)\n",

@@ -35,7 +35,13 @@ def result(wins=6000, games=10000, *, seed=1, model="candidate", errors=0, bundl
             "model_a_sha256": model,
             "deck_b_sha256": "deck-b",
             "model_b_sha256": "control",
+            "engine_binary": "libcg.so",
             "engine_sha256": "engine",
+            "runtime_environment": {
+                "process_ptcg": {},
+                "submission_a_overrides": {},
+                "submission_b_overrides": {},
+            },
             "artifact_a_sha256": model,
             "artifact_b_sha256": "control",
             "artifact_a_schema": 2,

@@ -408,6 +408,8 @@ class StrategicPolicy:
         self.router.reset()
         self.shield_telemetry = ShieldTelemetry()
         self.plan: GamePlanState | None = None
+        self.root_override_turn = -1
+        self.root_overrides_this_turn = 0
         self.telemetry: Counter[str] = Counter()
         self.objective_events: list[dict] = []
         self.turn_traces: list[dict] = []
@@ -423,6 +425,33 @@ class StrategicPolicy:
         if summary.ready_attacker_count == 0 or summary.ready_replacement_count == 0:
             return Phase.STABILIZE
         return Phase.PRESSURE
+
+    def _strategy_enabled(self, summary: PublicSummary) -> bool:
+        """Return whether the hand-authored controller may act in this state.
+
+        The focused profile deliberately waits for the real first-player latch,
+        keeps actual-first behavior on A2, and refuses to invent a plan for an
+        unknown or out-of-scope matchup.  The router still observes every public
+        state so a route can become eligible later in the game.
+        """
+        if bool(self.config.get("actual_second_only", False)) and not summary.actual_second:
+            return False
+        enabled = self.config.get("enabled_routes")
+        if enabled is not None and summary.route not in {str(value) for value in enabled}:
+            return False
+        allowed_statuses = self.config.get("allowed_route_statuses")
+        if allowed_statuses is not None and summary.route_status not in {
+            str(value) for value in allowed_statuses
+        }:
+            return False
+        return True
+
+    def _objective_allowed(self, summary: PublicSummary, objective: Objective) -> bool:
+        matrix = self.config.get("route_objectives")
+        if not isinstance(matrix, dict):
+            return True
+        allowed = matrix.get(summary.route, ())
+        return objective.value in {str(value) for value in allowed}
 
     def _opponent(self, summary: PublicSummary) -> list[PublicPokemon]:
         return ([summary.opponent_active] if summary.opponent_active else []) + summary.opponent_bench
@@ -481,13 +510,27 @@ class StrategicPolicy:
     def _escape_verified(self, obs, summary: PublicSummary) -> bool:
         if not summary.ready_replacement_count or summary.own_active is None:
             return False
-        if _has_option(obs, OptionType.RETREAT):
-            return True
-        return summary.own_active.attack_deficit == 1 and any(
-            _option_type(option) == int(OptionType.ATTACH)
-            and getattr(option, "inPlayArea", None) == AreaType.ACTIVE
-            for option in obs.select.option
+        # A direct retreat is observable and mechanically complete.  The old
+        # attach-then-retreat branch compared attack deficit with retreat cost,
+        # which are unrelated quantities, and had no staged subgoal tracking.
+        return _has_option(obs, OptionType.RETREAT)
+
+    def _current_attack_can_ko(self, obs, summary: PublicSummary, target: PublicPokemon) -> bool:
+        return bool(
+            summary.own_active
+            and summary.own_active.ready
+            and any(
+                _option_type(option) == int(OptionType.ATTACK)
+                and not attack_nullified(obs, option)
+                and self._attack_damage(obs, option, target) >= target.hp
+                for option in obs.select.option
+            )
         )
+
+    @staticmethod
+    def _primary_is_invested_or_immediate(summary: PublicSummary, target: PublicPokemon) -> bool:
+        active = bool(summary.opponent_active and target.serial == summary.opponent_active.serial)
+        return active or target.damage > 0 or target.energy > 0 or target.ready
 
     def _breakpoint_available(self, summary: PublicSummary) -> bool:
         return bool(
@@ -498,37 +541,77 @@ class StrategicPolicy:
 
     def _select_objective(self, obs, summary: PublicSummary) -> tuple[Objective, Enforcement, str, TargetRef | None, int]:
         phase = self._phase(summary)
-        if self._winning_attack(obs, summary) is not None:
+        if (self._objective_allowed(summary, Objective.CLOSEOUT_PRIZE_ROUTE)
+                and self._winning_attack(obs, summary) is not None):
             target = _target_ref(summary.opponent_active, "closeout", (summary.opponent_active.card_id,))
             return Objective.CLOSEOUT_PRIZE_ROUTE, Enforcement.HARD, "public immediate winning attack", target, summary.own_turn_ordinal
-        if phase == Phase.RECOVERY and self._escape_verified(obs, summary):
+        if (self._objective_allowed(summary, Objective.ESCAPE_DEAD_ACTIVE)
+                and phase == Phase.RECOVERY and self._escape_verified(obs, summary)):
             return Objective.ESCAPE_DEAD_ACTIVE, Enforcement.HARD, "verified dead-Active escape sequence", None, summary.own_turn_ordinal
         route = ROUTES.get(summary.route)
-        if route and summary.current_stadium in route.deny_stadiums and _has_option(obs, OptionType.PLAY, SPIKEMUTH):
+        if (self._objective_allowed(summary, Objective.DENY_STADIUM_ENGINE)
+                and route and summary.current_stadium in route.deny_stadiums
+                and _has_option(obs, OptionType.PLAY, SPIKEMUTH)):
             return Objective.DENY_STADIUM_ENGINE, Enforcement.COMMIT, "replace route-critical opposing Stadium", None, summary.own_turn_ordinal
-        if summary.ready_attacker_count == 0:
+        first_development = any(
+            self._development_action(obs, summary, index, False)
+            for index in range(len(obs.select.option))
+        )
+        if (self._objective_allowed(summary, Objective.BUILD_FIRST_ATTACKER)
+                and bool(self.config.get("enable_build_commitments", False))
+                and summary.ready_attacker_count == 0 and first_development):
             return Objective.BUILD_FIRST_ATTACKER, Enforcement.COMMIT, "no ready Grimmsnarl attacker", None, summary.own_turn_ordinal
         credible_threat = summary.publicly_ready_opponent_attackers > 0 or bool(summary.own_active and summary.own_active.damage)
-        if summary.ready_replacement_count == 0 and credible_threat:
+        replacement_development = any(
+            self._development_action(obs, summary, index, True)
+            for index in range(len(obs.select.option))
+        )
+        if (self._objective_allowed(summary, Objective.BUILD_REPLACEMENT_ATTACKER)
+                and bool(self.config.get("enable_build_commitments", False))
+                and summary.ready_replacement_count == 0 and credible_threat
+                and replacement_development):
             return Objective.BUILD_REPLACEMENT_ATTACKER, Enforcement.COMMIT, "no ready replacement into public threat", None, summary.own_turn_ordinal
-        if self._breakpoint_available(summary):
+        if (self._objective_allowed(summary, Objective.CONVERT_DAMAGE_BREAKPOINT)
+                and self._breakpoint_available(summary)):
             target = _target_ref(summary.opponent_active, "primary", (96,))
             return Objective.CONVERT_DAMAGE_BREAKPOINT, Enforcement.COMMIT, "Munkidori 30 plus Shadow Bullet 180 reaches 210", target, summary.own_turn_ordinal
-        evolution = self._pick_target(summary, "evolution")
-        if evolution and (summary.opponent_active and evolution.serial == summary.opponent_active.serial or _has_option(obs, OptionType.PLAY, BOSS_ORDERS)):
-            return Objective.DENY_EVOLUTION_ENGINE, Enforcement.COMMIT, "reachable route-critical pre-evolution", evolution, summary.own_turn_ordinal
-        if route and route.hand_size and 861 in summary.opponent_ids and summary.own_active and summary.own_hand_count * 50 >= summary.own_active.hp:
+        if (self._objective_allowed(summary, Objective.MANAGE_HAND_SIZE)
+                and route and route.hand_size and 861 in summary.opponent_ids
+                and summary.own_active and summary.own_hand_count * 50 >= summary.own_active.hp):
             return Objective.MANAGE_HAND_SIZE, Enforcement.PREFERENCE, "public Mega Froslass hand-size lethal", None, summary.own_turn_ordinal
-        primary = self._pick_target(summary, "primary")
-        if primary:
-            return Objective.PRESSURE_PRIMARY_ATTACKER, Enforcement.COMMIT, "damaged, Energy-loaded, or central primary attacker", primary, summary.own_turn_ordinal + 1
-        support = self._pick_target(summary, "support")
+        primary = self._pick_target(summary, "primary") if self._objective_allowed(
+            summary, Objective.PRESSURE_PRIMARY_ATTACKER
+        ) else None
+        resolved_primary = self._resolve_target(summary, primary)
+        if (summary.route != "crustle" and summary.ready_attacker_count > 0
+                and resolved_primary is not None
+                and self._primary_is_invested_or_immediate(summary, resolved_primary)):
+            return Objective.PRESSURE_PRIMARY_ATTACKER, Enforcement.COMMIT, "visible invested or immediately relevant primary attacker", primary, summary.own_turn_ordinal + 1
+        evolution = self._pick_target(summary, "evolution") if self._objective_allowed(
+            summary, Objective.DENY_EVOLUTION_ENGINE
+        ) else None
+        if evolution:
+            resolved_evolution = self._resolve_target(summary, evolution)
+            target_is_active = bool(
+                resolved_evolution and summary.opponent_active
+                and resolved_evolution.serial == summary.opponent_active.serial
+            )
+            boss_is_legal = _has_option(obs, OptionType.PLAY, BOSS_ORDERS)
+            if (resolved_evolution and self._current_attack_can_ko(obs, summary, resolved_evolution)
+                    and (target_is_active or boss_is_legal)):
+                return Objective.DENY_EVOLUTION_ENGINE, Enforcement.COMMIT, "verified current-turn evolution KO", evolution, summary.own_turn_ordinal
+        support = self._pick_target(summary, "support") if self._objective_allowed(
+            summary, Objective.DENY_SUPPORT_ENGINE
+        ) else None
         if support and summary.publicly_ready_opponent_attackers:
             return Objective.DENY_SUPPORT_ENGINE, Enforcement.PREFERENCE, "public support is enabling a ready attacker", support, summary.own_turn_ordinal
-        if route and route.spread and any(p.hp <= 60 for p in summary.own_bench):
+        if (self._objective_allowed(summary, Objective.MANAGE_SPREAD_LIABILITY)
+                and route and route.spread and any(p.hp <= 60 for p in summary.own_bench)):
             return Objective.MANAGE_SPREAD_LIABILITY, Enforcement.PREFERENCE, "low-HP Bench liability in public spread route", None, summary.own_turn_ordinal
         # The one-Prize Morgrem hypotheses remain disabled unless explicitly certified.
-        if bool(self.config.get("enable_one_prize_hypotheses", False)) and summary.route in {"crustle", "dipplin"} and summary.morgrem_count:
+        if (self._objective_allowed(summary, Objective.PRESERVE_ONE_PRIZE_ATTACKER)
+                and bool(self.config.get("enable_one_prize_hypotheses", False))
+                and summary.route in {"crustle", "dipplin"} and summary.morgrem_count):
             return Objective.PRESERVE_ONE_PRIZE_ATTACKER, Enforcement.PREFERENCE, "certified route-specific one-Prize mapping", None, summary.own_turn_ordinal
         return Objective.DEFAULT_A2, Enforcement.PREFERENCE, "no visible strategic precondition", None, summary.own_turn_ordinal
 
@@ -552,8 +635,20 @@ class StrategicPolicy:
                                       "reason": why, "target_serial": self.plan.target_serial})
 
     def _ensure_plan(self, obs, summary: PublicSummary) -> None:
+        if not self._strategy_enabled(summary):
+            self.plan = None
+            return
         if self.plan is None:
+            if bool(self.config.get("require_main_for_plan", False)) and not _is_main(obs):
+                return
             self._start_plan(obs, summary)
+            self.turn_traces.append({"turn": summary.own_turn_ordinal, "route": summary.route, "decisions": []})
+            return
+        if summary.route != self.plan.route:
+            if bool(self.config.get("require_main_for_plan", False)) and not _is_main(obs):
+                self.plan = None
+                return
+            self._start_plan(obs, summary, reason="public route changed")
             self.turn_traces.append({"turn": summary.own_turn_ordinal, "route": summary.route, "decisions": []})
             return
         new_turn = summary.own_turn_ordinal != self.plan.selected_on_turn
@@ -569,6 +664,8 @@ class StrategicPolicy:
                 self.plan.target_serial = resolved.serial
                 self.plan.objective_changes_this_turn = 0
                 self.plan.fallback_prompts_this_turn = 0
+                self.plan.subgoals.pop("owned_sequence", None)
+                self.plan.subgoals.pop("initiated_target_sequence", None)
                 self.telemetry["cross_turn_commitments"] += 1
             else:
                 self._start_plan(obs, summary, reason=f"turn {previous_turn} objective expired or completed")
@@ -626,13 +723,9 @@ class StrategicPolicy:
             return "protected_tera_bench"
         if _effect_id(obs) == MUNKIDORI and target_benched and summary.current_stadium == BATTLE_CAGE:
             return "battle_cage_counter_prevention"
-        target_own_support = (_option_owner(obs, option) == obs.current.yourIndex and target_id in SUPPORT)
-        if self.plan and self.plan.objective != Objective.ESCAPE_DEAD_ACTIVE and target_own_support:
-            if option_type == int(OptionType.ATTACH) or int(obs.select.context) == int(SelectContext.ATTACH_FROM):
-                own = ([summary.own_active] if summary.own_active else []) + summary.own_bench
-                munkidori_enabled = target_id == MUNKIDORI and summary.ready_attacker_count > 0 and any(p.damage >= 10 for p in own)
-                if not munkidori_enabled:
-                    return "stranded_energy_on_support"
+        # Energy sequencing on support Pokemon is strategic, not mechanically
+        # impossible.  In particular, proactive Darkness on Munkidori enables
+        # Adrena-Brain on a later turn.  Leave those choices to A2.
         return None
 
     def _development_action(self, obs, summary: PublicSummary, index: int, replacement: bool) -> bool:
@@ -674,14 +767,17 @@ class StrategicPolicy:
         if self._mechanically_forbidden(obs, summary, index):
             return "forbidden", self._mechanically_forbidden(obs, summary, index) or "forbidden"
 
+        if (bool(self.config.get("require_owned_nested_prompts", False))
+                and not _is_main(obs)
+                and not plan.subgoals.get("owned_sequence", False)):
+            return "neutral", "unowned_nested_prompt"
+
         objective = plan.objective
         if objective == Objective.DEFAULT_A2:
             return "neutral", "a2"
         if objective == Objective.CLOSEOUT_PRIZE_ROUTE:
             if index == self._winning_attack(obs, summary):
                 return "advancing", "immediate_win"
-            if kind == int(OptionType.PLAY) and source_id == BOSS_ORDERS:
-                return "advancing", "boss_closeout_target"
         if objective == Objective.ESCAPE_DEAD_ACTIVE:
             if kind == int(OptionType.RETREAT):
                 return "advancing", "escape_retreat"
@@ -710,9 +806,11 @@ class StrategicPolicy:
                     return "advancing", "punk_up_attacker"
             if context in {int(SelectContext.TO_ACTIVE), int(SelectContext.SWITCH)} and selected_id in GRIM_LINE and _ready(selected):
                 return "advancing", "promote_ready_attacker"
-            if _is_main(obs) and kind in {int(OptionType.ATTACK), int(OptionType.END)} and development_available:
+            if (bool(self.config.get("build_suppresses_attack", True)) and _is_main(obs)
+                    and kind in {int(OptionType.ATTACK), int(OptionType.END)} and development_available):
                 return "contradicting", "required_development_before_attack"
-            if _is_main(obs) and kind == int(OptionType.PLAY) and source_id in SUPPORT:
+            if (bool(self.config.get("build_suppresses_optional_support", True))
+                    and _is_main(obs) and kind == int(OptionType.PLAY) and source_id in SUPPORT):
                 return "contradicting", "delay_optional_support"
         if objective == Objective.DENY_STADIUM_ENGINE:
             if kind == int(OptionType.PLAY) and source_id == SPIKEMUTH:
@@ -732,10 +830,21 @@ class StrategicPolicy:
                     for candidate in obs.select.option
                 )
             )
-            if kind == int(OptionType.PLAY) and source_id == BOSS_ORDERS and target_is_benched and boss_converts_to_ko:
-                return "advancing", "boss_committed_target"
+            boss_pressures_central_attacker = bool(
+                plan.objective == Objective.PRESSURE_PRIMARY_ATTACKER
+                and summary.route in {"grim", "lopunny", "kangaskhan_generic"}
+                and resolved and resolved.prizes >= 2
+                and (resolved.damage > 0 or resolved.energy > 0 or resolved.ready)
+                and summary.own_active and summary.own_active.ready
+            )
+            if (kind == int(OptionType.PLAY) and source_id == BOSS_ORDERS and target_is_benched
+                    and (boss_converts_to_ko or boss_pressures_central_attacker)):
+                reason = "boss_committed_target" if boss_converts_to_ko else "boss_invested_primary"
+                return "advancing", reason
             if context in {int(SelectContext.SWITCH), int(SelectContext.EFFECT_TARGET), int(SelectContext.DAMAGE),
                            int(SelectContext.DAMAGE_COUNTER), int(SelectContext.DAMAGE_COUNTER_ANY)}:
+                if target_is_benched and not plan.subgoals.get("initiated_target_sequence", False):
+                    return "neutral", "unowned_target_sequence"
                 if _option_owner(obs, option) != obs.current.yourIndex:
                     return ("advancing", "committed_target") if self._matches_target(selected, plan) else ("contradicting", "abandon_committed_target")
             # The attack itself ends the turn and is not target-specific.  A2
@@ -780,10 +889,17 @@ class StrategicPolicy:
         maximum = min(maximum, len(count_logits) - 1)
         desired = minimum + int(np.argmax(count_logits[minimum:maximum + 1]))
         route = ROUTES.get(summary.route)
-        if int(obs.select.context) == int(SelectContext.SETUP_BENCH_POKEMON):
+        owns_prompt = bool(self.plan and self.plan.subgoals.get("owned_sequence", False))
+        count_control_allowed = (
+            not bool(self.config.get("require_owned_nested_prompts", False)) or owns_prompt
+        )
+        if (bool(self.config.get("enable_setup_count_overrides", self.config.get("enable_count_overrides", False)))
+                and count_control_allowed
+                and int(obs.select.context) == int(SelectContext.SETUP_BENCH_POKEMON)):
             width = route.useful_width if route else (3 if summary.actual_second else 2)
             return min(maximum, max(minimum, width))
-        if _effect_id(obs) == GRIMMSNARL and int(obs.select.context) == int(SelectContext.ATTACH_TO):
+        if (bool(self.config.get("enable_count_overrides", False)) and count_control_allowed
+                and _effect_id(obs) == GRIMMSNARL and int(obs.select.context) == int(SelectContext.ATTACH_TO)):
             own = ([summary.own_active] if summary.own_active else []) + summary.own_bench
             deficits = [min(2, p.attack_deficit) for p in own if p.card_id in GRIM_LINE and p.attack_deficit < 99]
             useful = sum(deficits)
@@ -811,9 +927,37 @@ class StrategicPolicy:
         if len(logits) == 0:
             return []
         summary = build_public_summary(obs, self.router)
+        if summary.own_turn_ordinal != self.root_override_turn:
+            self.root_override_turn = summary.own_turn_ordinal
+            self.root_overrides_this_turn = 0
         self._ensure_plan(obs, summary)
-        assert self.plan is not None
         base_ranked = np.argsort(-logits).astype(int).tolist()
+        if self.plan is None:
+            minimum, maximum = int(obs.select.minCount), int(obs.select.maxCount)
+            maximum = min(maximum, len(count_logits) - 1)
+            desired = maximum if minimum == maximum else minimum + int(np.argmax(count_logits[minimum:maximum + 1]))
+            ranked, desired, shield_reason = apply_tactical_shield(obs, base_ranked, desired)
+            self.shield_telemetry.record(shield_reason)
+            result = sanitize_selection(obs.select, ranked, desired)
+            selected = result[0] if result else -1
+            self.telemetry["decisions"] += 1
+            self.telemetry[f"route:{summary.route}"] += 1
+            self.telemetry[f"order:{summary.actual_order}"] += 1
+            self.telemetry["a2_passthrough"] += 1
+            self.last = {
+                "route": summary.route, "confidence": summary.route_confidence,
+                "route_status": summary.route_status, "phase": "a2_passthrough",
+                "objective": Objective.DEFAULT_A2.value, "enforcement": Enforcement.PREFERENCE.value,
+                "target_serial": None, "objective_reason": "controller out of scope",
+                "actual_second": summary.actual_second, "changed_top": False,
+                "a2_top": base_ranked[0] if base_ranked else None,
+                "controller_top": base_ranked[0] if base_ranked else None,
+                "selected": selected, "semantic": {}, "shield": shield_reason,
+            }
+            return result
+        if _is_main(obs):
+            self.plan.subgoals.pop("owned_sequence", None)
+            self.plan.subgoals.pop("initiated_target_sequence", None)
         development_available = any(
             self._development_action(obs, summary, i, self.plan.objective == Objective.BUILD_REPLACEMENT_ATTACKER)
             for i in range(len(obs.select.option))
@@ -841,11 +985,18 @@ class StrategicPolicy:
             else:
                 margin = float(self.config.get("commit_logit_margin", 1.0))
             commit_allowed = gap <= margin
+        root_budget_exhausted = bool(
+            _is_main(obs)
+            and self.plan.enforcement != Enforcement.HARD
+            and self.root_overrides_this_turn >= int(self.config.get("max_root_overrides_per_turn", 1_000_000))
+        )
+        if root_budget_exhausted:
+            commit_allowed = False
         if self.plan.enforcement == Enforcement.HARD and advancing:
             ranked = advancing + neutral + contradicting + forbidden
         elif self.plan.enforcement == Enforcement.COMMIT and advancing and commit_allowed:
             ranked = advancing + neutral + contradicting + forbidden
-        elif self.plan.enforcement == Enforcement.PREFERENCE:
+        elif self.plan.enforcement == Enforcement.PREFERENCE and not root_budget_exhausted:
             margin = float(self.config.get("preference_logit_margin", .75))
             scores = np.asarray(logits, dtype=np.float32).copy()
             for i in advancing:
@@ -869,8 +1020,20 @@ class StrategicPolicy:
         result = sanitize_selection(obs.select, ranked, desired)
         selected = result[0] if result else -1
         category, reason = classified.get(selected, ("none", "none"))
+        if category == "advancing" and reason in {
+            "boss_committed_target", "boss_invested_primary", "boss_closeout_target",
+        }:
+            self.plan.subgoals["initiated_target_sequence"] = True
         semantic = self._action_semantic(obs, selected, category, reason) if selected >= 0 else {}
         changed = bool(result and base_ranked and selected != base_ranked[0])
+        if changed and _is_main(obs):
+            self.root_overrides_this_turn += 1
+            selected_type = _option_type(obs.select.option[selected])
+            if selected_type in {
+                int(OptionType.PLAY), int(OptionType.ABILITY), int(OptionType.ATTACK),
+                int(OptionType.EVOLVE), int(OptionType.RETREAT),
+            }:
+                self.plan.subgoals["owned_sequence"] = True
         self.telemetry["decisions"] += 1
         self.telemetry[f"route:{summary.route}"] += 1
         self.telemetry[f"objective_decision:{self.plan.objective.value}"] += 1
@@ -913,7 +1076,8 @@ class StrategicPlaybookAgent:
             raise ValueError("deck must contain exactly 60 cards")
         self.config = json.loads(_find("strategic_config.json").read_text(encoding="utf-8"))
         self.policy = StrategicPolicy(self.config)
-        self.exact = CompetitionAgent(self.deck_path, _find("policy_d842.npz"))
+        fallback_name = "policy_a2.npz" if self.config.get("fallback") == "full_a2" else "policy_d842.npz"
+        self.exact = CompetitionAgent(self.deck_path, _find(fallback_name))
         self.errors = 0
 
     def __call__(self, obs_dict: dict) -> list[int]:
@@ -923,7 +1087,8 @@ class StrategicPlaybookAgent:
             self.policy.reset()
             return list(self.deck)
         obs = to_observation_class(obs_dict)
-        if int(obs.select.context) == int(SelectContext.IS_FIRST):
+        if (not bool(self.config.get("preserve_is_first_a2", False))
+                and int(obs.select.context) == int(SelectContext.IS_FIRST)):
             yes = [i for i, option in enumerate(obs.select.option) if _option_type(option) == int(OptionType.YES)]
             if len(yes) == 1:
                 return sanitize_selection(obs.select, yes, 1)

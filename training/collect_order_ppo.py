@@ -22,7 +22,9 @@ from cg.api import OptionType, SelectContext, to_observation_class
 from cg.game import battle_finish, battle_select, battle_start
 from ptcg_ai.external import ExternalSubmissionAgent
 from ptcg_ai.features import encode_observation
+from ptcg_ai.model import NumpyPolicyModel
 from ptcg_ai.safety import sanitize_selection
+from ptcg_ai.tactical_shield import apply_tactical_shield
 from training.azure_guard import enforce_azure_workload
 from training.order_ppo import complete_action_logprob, sha256
 from training.train_bc import PolicyNet, collate, load_npz_weights
@@ -68,7 +70,7 @@ def _sample_complete_action(
 
 
 class TorchSchema2Chooser:
-    def __init__(self, model_path: Path, seed: int, temperature: float) -> None:
+    def __init__(self, model_path: Path, seed: int, temperature: float, tactical_shield: bool = False) -> None:
         self.model_path = model_path
         self.policy_hash = sha256(model_path)
         self.model = PolicyNet(feature_version=2)
@@ -77,13 +79,84 @@ class TorchSchema2Chooser:
         self.generator = torch.Generator(device="cpu")
         self.generator.manual_seed(seed)
         self.temperature = temperature
+        self.chooser_name = "torch_schema2_policy"
+        self.tactical_shield = tactical_shield
 
-    def choose(self, obs) -> tuple[list[int], float, bool, dict[str, Any]]:
+    def choose(self, obs) -> tuple[list[int], float, bool, bool, dict[str, Any]]:
         features = encode_observation(obs, feature_version=2).to_json()
         action, logprob, postprocessed = _sample_complete_action(
             self.model, features, obs.select, self.generator, self.temperature
         )
-        return action, logprob, postprocessed, features
+        shield_modified = False
+        if self.tactical_shield:
+            row = {"features": features, "action": [], "reward": 0.0, "sample_weight": 1.0}
+            batch = collate([row])
+            with torch.no_grad():
+                logits, _counts, _ = self.model(batch)
+            ranked = list(action) + [
+                index for index in torch.argsort(logits, descending=True).tolist() if index not in action
+            ]
+            ranked, desired, _reason = apply_tactical_shield(obs, ranked, len(action))
+            shielded = sanitize_selection(obs.select, ranked, desired)
+            shield_modified = shielded != action
+            action = shielded
+        return action, logprob, postprocessed, shield_modified, features
+
+
+class NumpySchema2Chooser:
+    """Competition-runtime-equivalent sampler used for fast local rollouts."""
+
+    def __init__(self, model_path: Path, seed: int, temperature: float, tactical_shield: bool = False) -> None:
+        self.model_path = model_path
+        self.policy_hash = sha256(model_path)
+        self.model = NumpyPolicyModel(model_path)
+        if self.model.feature_version != 2:
+            raise ValueError("order PPO requires an exact schema-2 actor")
+        self.generator = np.random.default_rng(seed)
+        self.temperature = temperature
+        self.chooser_name = "numpy_schema2_runtime_policy"
+        self.tactical_shield = tactical_shield
+
+    @staticmethod
+    def _probabilities(values: np.ndarray, temperature: float) -> np.ndarray:
+        shifted = np.asarray(values, dtype=np.float64) / temperature
+        shifted -= float(np.max(shifted))
+        probability = np.exp(shifted)
+        return probability / float(probability.sum())
+
+    def choose(self, obs) -> tuple[list[int], float, bool, bool, dict[str, Any]]:
+        encoded = encode_observation(obs, feature_version=2)
+        features = encoded.to_json()
+        logits, counts, _ = self.model.predict(encoded)
+        minimum, maximum = int(obs.select.minCount), int(obs.select.maxCount)
+        logprob = 0.0
+        if minimum == maximum:
+            count = minimum
+        else:
+            probability = self._probabilities(counts[minimum:maximum + 1], self.temperature)
+            offset = int(self.generator.choice(len(probability), p=probability))
+            count = minimum + offset
+            logprob += float(np.log(max(1e-30, probability[offset])))
+        available = list(range(len(logits)))
+        sampled: list[int] = []
+        for _ in range(count):
+            probability = self._probabilities(logits[available], self.temperature)
+            local = int(self.generator.choice(len(probability), p=probability))
+            logprob += float(np.log(max(1e-30, probability[local])))
+            sampled.append(available.pop(local))
+        sanitized = sanitize_selection(obs.select, sampled, count)
+        postprocessed = sanitized != sampled
+        shield_modified = False
+        if self.tactical_shield:
+            ranked = list(sanitized) + [
+                index for index in np.argsort(-logits, kind="stable").astype(int).tolist()
+                if index not in sanitized
+            ]
+            ranked, desired, _reason = apply_tactical_shield(obs, ranked, len(sanitized))
+            shielded = sanitize_selection(obs.select, ranked, desired)
+            shield_modified = shielded != sanitized
+            sanitized = shielded
+        return sanitized, logprob, postprocessed, shield_modified, features
 
 
 def collect_game(
@@ -141,14 +214,14 @@ def collect_game(
                 observed_order = "first" if latched_first_player == physical_seat else "second"
                 if observed_order != actual_order:
                     raise RuntimeError("hero decision has wrong actual order")
-                action, old_logprob, postprocessed, features = chooser.choose(obs)
+                action, old_logprob, postprocessed, shield_modified, features = chooser.choose(obs)
                 records.append({
                     "episode_id": episode_id,
                     "opponent_id": opponent_id,
                     "features": features,
                     "action": action,
                     "choice": action,
-                    "chooser": "torch_schema2_policy",
+                    "chooser": chooser.chooser_name,
                     "old_logprob": old_logprob,
                     "behavior_temperature": chooser.temperature,
                     "policy_hash": chooser.policy_hash,
@@ -156,9 +229,9 @@ def collect_game(
                     "actual_order": actual_order,
                     "terminal_reward": 0.0,
                     "forced_order_decision": False,
-                    "shield_modified": False,
+                    "shield_modified": shield_modified,
                     "postprocessed": postprocessed,
-                    "trainable": not postprocessed,
+                    "trainable": not postprocessed and not shield_modified,
                     "step": decisions,
                 })
             else:
@@ -195,13 +268,32 @@ def main() -> int:
     parser.add_argument("--shard-count", type=int, default=1)
     parser.add_argument("--shard-index", type=int, default=0)
     parser.add_argument("--temperature", type=float, default=0.70)
+    parser.add_argument(
+        "--numpy-runtime",
+        action="store_true",
+        help="sample with the exported NumPy runtime (log-prob parity is checked by the trainer)",
+    )
+    parser.add_argument(
+        "--tactical-shield",
+        action="store_true",
+        help="apply the deployed A2 tactical shield; shield-modified choices are excluded from PPO",
+    )
     parser.add_argument("--seed", type=int, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--allow-local-smoke", action="store_true")
+    parser.add_argument(
+        "--allow-local-screen",
+        action="store_true",
+        help="explicitly permit a bounded <=10k-game fast local strength screen",
+    )
     args = parser.parse_args()
     if args.shard_count < 1 or not 0 <= args.shard_index < args.shard_count:
         raise ValueError("shard-index must be in [0, shard-count)")
-    enforce_azure_workload(allow_local_smoke=args.allow_local_smoke, workload_size=args.games)
+    execution_host = enforce_azure_workload(
+        allow_local_smoke=args.allow_local_smoke or args.allow_local_screen,
+        workload_size=args.games,
+        maximum_local_smoke=10_000 if args.allow_local_screen else 200,
+    )
     if abs(args.temperature - 0.70) > 1e-12:
         raise ValueError("this program is locked to behavior temperature 0.70")
     hero_deck = [int(line) for line in args.deck.read_text().splitlines() if line.strip()]
@@ -213,7 +305,11 @@ def main() -> int:
         (global_index, spec) for global_index, spec in enumerate(full_schedule)
         if global_index % args.shard_count == args.shard_index
     ]
-    chooser = TorchSchema2Chooser(args.actor, args.seed, args.temperature)
+    chooser = (
+        NumpySchema2Chooser(args.actor, args.seed, args.temperature, args.tactical_shield)
+        if args.numpy_runtime
+        else TorchSchema2Chooser(args.actor, args.seed, args.temperature, args.tactical_shield)
+    )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     games = wins = decisions = excluded = 0
     seat_games = {"0": 0, "1": 0}
@@ -252,6 +348,9 @@ def main() -> int:
         "opponent_games": opponent_games,
         "behavior_temperature": args.temperature,
         "policy_hash": chooser.policy_hash,
+        "chooser": chooser.chooser_name,
+        "execution_host": execution_host,
+        "tactical_shield": args.tactical_shield,
         "terminal_reward_only": True,
         "seed": args.seed,
         "generation_games": args.games,

@@ -1,0 +1,17 @@
+{
+  "description": "Fast local A2 outcome-policy feasibility mixture; authentic search opponents and holdouts are intentionally excluded from training.",
+  "opponents": [
+    {"id": "owned_a2", "path": "artifacts/recovery_probes/extracted/a2", "weight": 0.45},
+    {"id": "owned_d842", "path": "artifacts/recovery_final/opponents/d842", "weight": 0.15},
+    {"id": "owned_master_v1", "path": "artifacts/recovery_final/opponents/master_v1", "weight": 0.15},
+    {"id": "owned_r0", "path": "artifacts/recovery_r0_package/extracted/r0_play_binding", "weight": 0.10},
+    {"id": "owned_replay_refresh", "path": "artifacts/recovery_final/opponents/replay_refresh", "weight": 0.075},
+    {"id": "owned_v2_2", "path": "artifacts/recovery_final/opponents/v2_2", "weight": 0.075}
+  ],
+  "untouched_holdouts": [
+    "freshstart/elite_submissions/alakazam_2_4a",
+    "freshstart/elite_submissions/alakazam_2_7",
+    "artifacts/recovery_final/opponents/lucario",
+    "artifacts/recovery_final/opponents/crustle"
+  ]
+}

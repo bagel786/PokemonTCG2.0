@@ -22,15 +22,14 @@ struct SerialData {
 	int selectPlayer;
 };
 
-inline StartData ApiBattleStart(int* cards) {
+inline StartData ApiBattleStartConfigured(int* cards, uint32_t seed, bool deviceRand) {
 	ApiData* data = new ApiData();
 	data->apiDataType = 1;
 
-	std::random_device rd;
 	GameConfig config = {};
-	config.seed = rd();
+	config.seed = seed;
 	config.recordLog = true;
-	config.deviceRand = true;
+	config.deviceRand = deviceRand;
 	for (int i = 0; i < 2; i++) {
 		std::unordered_map<std::u8string, int> nameCount;
 		bool aceSpec = false;
@@ -74,13 +73,29 @@ inline StartData ApiBattleStart(int* cards) {
 	}
 
 	data->init(config);
-	std::seed_seq seq{ rd(), rd(), rd(), rd() };
-	data->game.rng = std::mt19937(seq);
+	if (deviceRand) {
+		std::random_device rd;
+		std::seed_seq seq{ rd(), rd(), rd(), rd() };
+		data->game.rng = std::mt19937(seq);
+	} else {
+		// Game::init historically treats zero as "choose a random seed".  The
+		// deterministic API treats every uint32_t, including zero, literally.
+		data->game.config.seed = seed;
+		data->game.rng = std::mt19937(seed);
+	}
 	data->start();
 	data->next();
 	return { data, -1, 0 };
 }
 
+inline StartData ApiBattleStart(int* cards) {
+	std::random_device rd;
+	return ApiBattleStartConfigured(cards, rd(), true);
+}
+
+inline StartData ApiBattleStartSeeded(int* cards, uint32_t seed) {
+	return ApiBattleStartConfigured(cards, seed, false);
+}
 inline ApiData* ApiAgentStart() {
 	ApiData* data = new ApiData();
 	data->apiDataType = 2;
@@ -90,6 +105,20 @@ inline ApiData* ApiAgentStart() {
 	data->game.rng = std::mt19937(config.seed);
 	data->state.game = &data->game;
 	return data;
+}
+
+inline int ApiSearchSetSeed(ApiData* data, uint32_t seed) {
+	if (data->apiDataType != 2) {
+		return 30;
+	}
+	// Search states all reference the owning ApiData::game.  Reset both the
+	// search arena and that shared RNG before beginning each counterfactual arm
+	// so paired branches start from the same random stream.
+	data->search.clear();
+	data->game.config.seed = seed;
+	data->game.config.deviceRand = false;
+	data->game.rng = std::mt19937(seed);
+	return 0;
 }
 
 inline void ApiBattleFinish(ApiData* data) {

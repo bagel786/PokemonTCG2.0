@@ -3,7 +3,13 @@ from types import SimpleNamespace
 from unittest.mock import patch
 
 from ptcg_ai.external import ExternalSubmissionAgent
-from training.evaluate import capture_initial_first_player, external_diagnostics, policy_error_count
+from training.evaluate import (
+    capture_initial_first_player,
+    evaluation_exit_code,
+    external_diagnostics,
+    loaded_engine_path,
+    policy_error_count,
+)
 from training.seat_adjusted import newcombe_difference, structural_lift
 
 
@@ -13,6 +19,21 @@ class EvaluateDiagnosticsTests(unittest.TestCase):
         agent.errors = 2
         agent.module = SimpleNamespace(_AGENT=SimpleNamespace(errors=3))
         self.assertEqual(policy_error_count(agent), 5)
+
+    def test_outer_or_inner_opponent_error_fails_evaluation(self):
+        outer = object.__new__(ExternalSubmissionAgent)
+        outer.errors = 1
+        outer.module = SimpleNamespace(_AGENT=SimpleNamespace(errors=0))
+        inner = object.__new__(ExternalSubmissionAgent)
+        inner.errors = 0
+        inner.module = SimpleNamespace(_AGENT=SimpleNamespace(errors=1))
+        self.assertEqual(evaluation_exit_code(0, policy_error_count(outer)), 1)
+        self.assertEqual(evaluation_exit_code(0, policy_error_count(inner)), 1)
+        self.assertEqual(evaluation_exit_code(0, 0), 0)
+
+    def test_engine_path_comes_from_loaded_cg_module(self):
+        with patch("training.evaluate.cg_sim.lib_path", "C:/engine/cg.dll"):
+            self.assertEqual(loaded_engine_path().name, "cg.dll")
 
     def test_external_numeric_diagnostics_exclude_strings_and_bools(self):
         fake = SimpleNamespace(

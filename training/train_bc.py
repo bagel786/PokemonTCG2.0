@@ -143,7 +143,8 @@ def collate(rows):
         entity_rows.append(features.get("entities", []))
         event_rows.append(features.get("events", []))
         token_offsets.append(len(token_values))
-        token_values.extend(features["tokens"] or [0])
+        feature_tokens = features["tokens"]
+        token_values.extend(feature_tokens if len(feature_tokens) else [0])
         selected = set(row["action"])
         start = len(option_record)
         for option_index, option in enumerate(features["options"]):
@@ -172,7 +173,10 @@ def collate(rows):
     count_maximum = V2_COUNT_CLASSES - 1 if feature_version >= 2 else MAX_SELECT_COUNT - 1
     counts = [min(count_maximum, value) for value in counts]
     long = lambda value: torch.tensor(value, dtype=torch.long)
-    floating = lambda value: torch.tensor(value, dtype=torch.float32)
+    # ``order_ppo`` keeps large audited rollout matrices as compact NumPy
+    # arrays.  Normalizing rectangular floating inputs here avoids the very
+    # slow list-of-arrays conversion path while preserving ordinary list input.
+    floating = lambda value: torch.as_tensor(np.asarray(value), dtype=torch.float32)
     maximum_entities = max(1, max((len(row) for row in entity_rows), default=0))
     entity_card = []
     entity_serial = []

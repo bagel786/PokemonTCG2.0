@@ -65,6 +65,28 @@ def policy():
     return StrategicPolicy({"router_minimum": .55, "preference_logit_margin": .75}, model=NS(feature_version=2))
 
 
+def focused_policy():
+    objectives = {
+        "grim": ["closeout_prize_route", "deny_evolution_engine"],
+        "alakazam": ["closeout_prize_route", "deny_evolution_engine", "pressure_primary_attacker"],
+        "lopunny": ["closeout_prize_route", "pressure_primary_attacker"],
+        "dragapult": ["closeout_prize_route", "deny_evolution_engine", "pressure_primary_attacker"],
+        "crustle": ["closeout_prize_route", "deny_stadium_engine", "deny_evolution_engine"],
+        "kangaskhan_generic": ["closeout_prize_route", "pressure_primary_attacker"],
+    }
+    return StrategicPolicy({
+        "router_minimum": .55,
+        "actual_second_only": True,
+        "enabled_routes": list(objectives),
+        "allowed_route_statuses": ["provisional", "high_confidence", "locked"],
+        "route_objectives": objectives,
+        "require_main_for_plan": True,
+        "require_owned_nested_prompts": True,
+        "enable_build_commitments": False,
+        "enable_count_overrides": False,
+    }, model=NS(feature_version=2))
+
+
 def ready_grim(serial=10, *, hp=320):
     return pokemon(GRIMMSNARL, serial, hp=hp, max_hp=320, energies=[EnergyType.DARKNESS] * 2)
 
@@ -92,6 +114,113 @@ def test_router_adds_archaludon_and_refines_generic_kangaskhan():
     arch_obs = observation(selection(SelectContext.MAIN, [Option(OptionType.END)]), me,
                            player(active=[pokemon(169, player=1)]))
     assert arch.update(arch_obs)[0] == "archaludon"
+
+
+def test_focused_profile_is_actual_second_only_and_waits_for_a_supported_route():
+    controller = focused_policy()
+    me = player(active=[ready_grim()])
+    grim = player(active=[pokemon(GRIMMSNARL, player=1)])
+    actual_first = observation(
+        selection(SelectContext.MAIN, [Option(OptionType.END)]), me, grim, first=0, own=0,
+    )
+    first_summary = build_public_summary(actual_first, controller.router)
+    controller._ensure_plan(actual_first, first_summary)
+    assert not first_summary.actual_second
+    assert controller.plan is None
+
+    controller.reset()
+    unknown = observation(
+        selection(SelectContext.MAIN, [Option(OptionType.END)]), me,
+        player(active=[pokemon(999, player=1)]), first=1, own=0,
+    )
+    unknown_summary = build_public_summary(unknown, controller.router)
+    controller._ensure_plan(unknown, unknown_summary)
+    assert unknown_summary.actual_second
+    assert controller.plan is None
+
+    controller.reset()
+    actual_second = observation(
+        selection(SelectContext.MAIN, [Option(OptionType.END)]), me, grim, first=1, own=0,
+    )
+    second_summary = build_public_summary(actual_second, controller.router)
+    controller._ensure_plan(actual_second, second_summary)
+    assert second_summary.actual_second
+    assert controller.plan is not None
+    assert controller.plan.route == "grim"
+
+
+def test_focused_profile_does_not_restore_generic_build_control():
+    controller = focused_policy()
+    me = player(active=[pokemon(IMPIDIMP)], hand=[card(13)])
+    opponent = player(active=[pokemon(GRIMMSNARL, player=1)])
+    obs = observation(
+        selection(SelectContext.MAIN, [Option(OptionType.PLAY, index=0), Option(OptionType.END)]),
+        me, opponent, first=1, own=0,
+    )
+    _, plan = plan_for(controller, obs)
+    assert plan.objective == Objective.DEFAULT_A2
+
+
+def test_focused_profile_leaves_mirror_primary_pressure_to_a2():
+    controller = focused_policy()
+    me = player(hand=[card(BOSS_ORDERS)], active=[ready_grim()])
+    opponent = player(
+        active=[pokemon(646, player=1)],
+        bench=[pokemon(GRIMMSNARL, 42, hp=180, max_hp=320,
+                       energies=[EnergyType.DARKNESS] * 2, player=1)],
+    )
+    obs = observation(selection(SelectContext.MAIN, [
+        Option(OptionType.PLAY, index=0), Option(OptionType.ATTACK, attackId=SHADOW_BULLET),
+    ]), me, opponent, first=1, own=0)
+    _, plan = plan_for(controller, obs)
+    assert plan.objective != Objective.PRESSURE_PRIMARY_ATTACKER
+
+
+def test_focused_profile_never_hijacks_an_unowned_nested_prompt():
+    controller = focused_policy()
+    me = player(hand=[card(BOSS_ORDERS)], active=[ready_grim()])
+    opponent = player(active=[pokemon(646, player=1)], bench=[pokemon(GRIMMSNARL, 42, player=1)])
+    main = observation(
+        selection(SelectContext.MAIN, [Option(OptionType.PLAY, index=0), Option(OptionType.ATTACK, attackId=SHADOW_BULLET)]),
+        me, opponent, first=1, own=0,
+    )
+    plan_for(controller, main)
+    nested = observation(selection(SelectContext.SWITCH, [
+        Option(OptionType.CARD, area=AreaType.BENCH, index=0, playerIndex=1),
+    ], effect=card(BOSS_ORDERS)), me, opponent, first=1, own=0)
+    summary = build_public_summary(nested, controller.router)
+    controller._ensure_plan(nested, summary)
+    assert classify(controller, nested, summary, 0) == ("neutral", "unowned_nested_prompt")
+
+
+def test_immediate_closeout_does_not_promote_boss_over_the_winning_attack():
+    controller = focused_policy()
+    me = player(hand=[card(BOSS_ORDERS)], active=[ready_grim()], prizes=1)
+    opponent = player(active=[pokemon(646, hp=180, max_hp=180, player=1)], bench=[pokemon(GRIMMSNARL, 42, player=1)])
+    obs = observation(selection(SelectContext.MAIN, [
+        Option(OptionType.PLAY, index=0), Option(OptionType.ATTACK, attackId=SHADOW_BULLET),
+    ]), me, opponent, first=1, own=0)
+    summary, plan = plan_for(controller, obs)
+    assert plan.objective == Objective.CLOSEOUT_PRIZE_ROUTE
+    assert classify(controller, obs, summary, 0)[0] == "neutral"
+    assert classify(controller, obs, summary, 1)[0] == "advancing"
+
+
+def test_focused_lopunny_route_can_boss_an_invested_three_prize_primary():
+    controller = focused_policy()
+    me = player(hand=[card(BOSS_ORDERS)], active=[ready_grim()])
+    opponent = player(
+        active=[pokemon(66, player=1)],
+        bench=[pokemon(849, 42, hp=330, max_hp=330, energies=[EnergyType.DARKNESS] * 3, player=1)],
+    )
+    obs = observation(selection(SelectContext.MAIN, [
+        Option(OptionType.PLAY, index=0), Option(OptionType.ATTACK, attackId=SHADOW_BULLET),
+    ]), me, opponent, first=1, own=0)
+    summary, plan = plan_for(controller, obs)
+    assert plan.route == "lopunny"
+    assert plan.objective == Objective.PRESSURE_PRIMARY_ATTACKER
+    assert plan.target_serial == 42
+    assert classify(controller, obs, summary, 0) == ("advancing", "boss_invested_primary")
 
 
 def test_dead_active_sequence_is_hard_and_persists_across_prompts():
@@ -130,16 +259,22 @@ def test_lucario_target_commitment_rejects_irrelevant_solrock():
         pokemon(678, 42, hp=150, max_hp=330, energies=[EnergyType.FIGHTING], player=1),
         pokemon(676, 43, player=1),
     ])
-    main = observation(selection(SelectContext.MAIN, [Option(OptionType.PLAY, index=0)]), me, opponent, turn=5)
-    _, plan = plan_for(controller, main)
+    main = observation(selection(SelectContext.MAIN, [
+        Option(OptionType.PLAY, index=0),
+        Option(OptionType.ATTACK, attackId=SHADOW_BULLET),
+    ]), me, opponent, turn=5)
+    summary, plan = plan_for(controller, main)
     assert plan.objective == Objective.PRESSURE_PRIMARY_ATTACKER
     assert plan.target_serial == 42
+    assert classify(controller, main, summary, 0)[0] == "advancing"
     target = observation(selection(SelectContext.SWITCH, [
         Option(OptionType.CARD, area=AreaType.BENCH, index=0, playerIndex=1),
         Option(OptionType.CARD, area=AreaType.BENCH, index=1, playerIndex=1),
     ], effect=card(BOSS_ORDERS)), me, opponent, turn=5)
     summary = build_public_summary(target, controller.router)
     controller._ensure_plan(target, summary)
+    assert classify(controller, target, summary, 0)[0] == "neutral"
+    controller.plan.subgoals["initiated_target_sequence"] = True
     assert classify(controller, target, summary, 0)[0] == "advancing"
     assert classify(controller, target, summary, 1)[0] == "contradicting"
 
@@ -164,7 +299,34 @@ def test_crustle_nullifies_grim_attack_and_one_prize_plan_stays_disabled():
     ]), me, opponent, turn=5)
     summary, plan = plan_for(controller, obs)
     assert plan.objective != Objective.PRESERVE_ONE_PRIZE_ATTACKER
+    assert plan.objective != Objective.PRESSURE_PRIMARY_ATTACKER
     assert controller._mechanically_forbidden(obs, summary, 0) == "nullified_attack"
+
+
+def test_proactive_munkidori_energy_is_not_mislabeled_mechanically_forbidden():
+    controller = policy()
+    me = player(hand=[card(DARK_ENERGY)], active=[pokemon(IMPIDIMP)], bench=[pokemon(MUNKIDORI, 12)])
+    obs = observation(selection(SelectContext.MAIN, [
+        Option(OptionType.ATTACH, index=0, inPlayArea=AreaType.BENCH, inPlayIndex=0),
+        Option(OptionType.END),
+    ]), me, turn=3)
+    summary, _ = plan_for(controller, obs)
+    assert controller._mechanically_forbidden(obs, summary, 0) is None
+
+
+def test_build_and_count_overrides_are_disabled_until_ablation_certifies_them():
+    controller = policy()
+    me = player(active=[pokemon(IMPIDIMP)], bench=[])
+    main = observation(selection(SelectContext.MAIN, [Option(OptionType.END)]), me, turn=1)
+    _, plan = plan_for(controller, main)
+    assert plan.objective != Objective.BUILD_FIRST_ATTACKER
+
+    setup = observation(selection(SelectContext.SETUP_BENCH_POKEMON, [
+        Option(OptionType.CARD, area=AreaType.HAND, index=i, playerIndex=0) for i in range(4)
+    ], minimum=0, maximum=4), me, turn=0)
+    summary = build_public_summary(setup, controller.router)
+    controller._ensure_plan(setup, summary)
+    assert controller._desired_count(setup, summary, np.zeros(8)) == 0
 
 
 def test_ogerpon_180_plus_30_breakpoint_selects_conversion():
@@ -182,6 +344,7 @@ def test_ogerpon_180_plus_30_breakpoint_selects_conversion():
 
 def test_punk_up_count_funds_real_deficits_not_mechanical_maximum():
     controller = policy()
+    controller.config["enable_count_overrides"] = True
     me = player(active=[pokemon(GRIMMSNARL, energies=[EnergyType.DARKNESS])],
                 bench=[pokemon(MORGREM, 2)])
     obs = observation(selection(SelectContext.ATTACH_TO, [
@@ -235,7 +398,10 @@ def test_archaludon_duraludon_is_evolution_denial_target():
     controller = policy()
     me = player(hand=[card(BOSS_ORDERS)], active=[ready_grim()], bench=[ready_grim(11)])
     opponent = player(active=[pokemon(57, player=1)], bench=[pokemon(169, 42, player=1)])
-    obs = observation(selection(SelectContext.MAIN, [Option(OptionType.PLAY, index=0)]), me, opponent, turn=5)
+    obs = observation(selection(SelectContext.MAIN, [
+        Option(OptionType.PLAY, index=0),
+        Option(OptionType.ATTACK, attackId=SHADOW_BULLET),
+    ]), me, opponent, turn=5)
     _, plan = plan_for(controller, obs)
     assert plan.route == "archaludon"
     assert plan.objective == Objective.DENY_EVOLUTION_ENGINE
