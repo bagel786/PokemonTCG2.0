@@ -17,14 +17,18 @@ from cg.api import AreaType, CardType, OptionType, SelectContext, SelectType, al
 from .cards import (
     APPLIN_DRAGON,
     APPLIN_GRASS,
+    BLACK_BELT,
     BOSS,
+    BRAVE_BANGLE,
     BROCK,
     BUG_SET,
     DIPPLIN,
     DO_THE_WAVE,
+    FESTIVAL,
     GRASS_ENERGY,
     GROOKEY,
     HILDA,
+    LILLIE,
     NIGHT_STRETCHER,
     POFFIN,
     POKE_PAD,
@@ -32,7 +36,9 @@ from .cards import (
     SACRED_ASH,
     SHAYMIN,
     THWACKEY,
+    UNFAIR_STAMP,
     VOLBEAT,
+    XEROSIC,
 )
 from .plan import MacroPlan, tutor_prerequisite_order
 
@@ -231,6 +237,8 @@ class PromptResolver:
             return SelectionIntent(tuple(range(len(select.option))), int(select.minCount), "attack_prompt", "no known Festival attack")
 
         if select_type == int(SelectType.CARD):
+            if parent == XEROSIC:
+                return self._xerosic_discard(obs, plan)
             if parent == APPLIN_DRAGON and context == int(SelectContext.TO_HAND):
                 return self._find_a_friend(obs, plan)
             if parent == VOLBEAT:
@@ -319,6 +327,85 @@ class PromptResolver:
         # This is deliberately not a generic TO_HAND resolver.  An unknown
         # composite contract is sent to the agent's fail-closed boundary.
         return SelectionIntent((), int(select.minCount), "unknown", f"type={select_type},context={context},effect={parent}", False)
+
+    def _xerosic_discard(self, obs: Any, plan: MacroPlan) -> SelectionIntent:
+        """Discard the least load-bearing cards while preserving a 3-card line.
+
+        Xerosic's prompt exposes only legal cards from our own hand.  The old
+        unknown-context fallback selected them in engine order, which routinely
+        threw away the exact evolution, Energy, or Stadium needed next turn.
+        Values below express general Dipplin requirements and visible
+        redundancy; they never depend on the opposing deck or agent identity.
+        """
+
+        board = _board_counts(obs)
+        hand_ids = [option_card_id(obs, index) for index in range(len(obs.select.option))]
+        hand_counts: dict[int, int] = {}
+        for card_id in hand_ids:
+            hand_counts[card_id] = hand_counts.get(card_id, 0) + 1
+
+        missing = set(plan.missing_prerequisites)
+        needs_dipplin = bool({"active_dipplin", "replacement_dipplin"} & missing)
+        needs_energy = bool({"current_energy", "replacement_energy"} & missing)
+        needs_applin = "replacement_applin" in missing
+        needs_engine = "thwackey" in missing
+        needs_festival = "festival" in missing
+
+        def keep_value(index: int) -> tuple[int, int, int]:
+            card_id = hand_ids[index]
+            copies = hand_counts.get(card_id, 1)
+            on_board = board.get(card_id, 0)
+            duplicate_penalty = 12 * max(0, copies - 1) + 8 * max(0, on_board - 1)
+            value = {
+                VOLBEAT: 12,
+                SHAYMIN: 16,
+                GROOKEY: 28,
+                THWACKEY: 34,
+                APPLIN_DRAGON: 38,
+                APPLIN_GRASS: 40,
+                DIPPLIN: 48,
+                GRASS_ENERGY: 52,
+                FESTIVAL: 46,
+                BOSS: 44,
+                BROCK: 30,
+                BLACK_BELT: 42,
+                BRAVE_BANGLE: 48,
+                UNFAIR_STAMP: 62,
+                # Lillie is the best rebuild after being reduced to three.
+                LILLIE: 100,
+                HILDA: 66,
+                POFFIN: 58,
+                POKE_PAD: 64,
+                BUG_SET: 56,
+                NIGHT_STRETCHER: 60,
+                SACRED_ASH: 34,
+            }.get(card_id, 36)
+            if card_id == DIPPLIN and needs_dipplin:
+                value = 96
+            elif card_id in {APPLIN_DRAGON, APPLIN_GRASS} and needs_applin:
+                value = 90
+            elif card_id == GRASS_ENERGY and needs_energy:
+                value = 94
+            elif card_id == THWACKEY and needs_engine:
+                value = 92
+            elif card_id == GROOKEY and needs_engine and board.get(GROOKEY, 0) == 0:
+                value = 86
+            elif card_id == FESTIVAL and needs_festival:
+                value = 95
+            elif card_id == HILDA and (needs_dipplin or needs_energy or needs_engine):
+                value = 88
+            # Only one copy of a requirement needs premium protection.  Extra
+            # identical cards become natural discard candidates.
+            value -= duplicate_penalty
+            return (value, -card_id, -index)
+
+        ranked = sorted(range(len(obs.select.option)), key=keep_value)
+        return SelectionIntent(
+            tuple(ranked),
+            int(obs.select.minCount),
+            "xerosic_discard",
+            "discard redundant cards while preserving the next attack line",
+        )
 
     def _setup_active(self, obs: Any) -> SelectionIntent:
         hand_ids = [_int(getattr(card, "id", None)) for card in (getattr(_hero(obs), "hand", None) or [])]

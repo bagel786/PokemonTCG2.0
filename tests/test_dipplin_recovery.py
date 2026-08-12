@@ -4,14 +4,20 @@ import json
 from copy import deepcopy
 from pathlib import Path
 
-from cg.api import OptionType, to_observation_class
+from cg.api import AreaType, OptionType, SelectContext, SelectType, to_observation_class
 
 from ptcg_ai.dipplin.cards import (
     APPLIN_DRAGON,
     DIPPLIN,
     EXACT_DECK,
+    FESTIVAL,
+    GRASS_ENERGY,
+    HILDA,
+    LILLIE,
     NIGHT_STRETCHER,
     SACRED_ASH,
+    VOLBEAT,
+    XEROSIC,
 )
 from ptcg_ai.dipplin.policy import DipplinCompetitionAgent
 from ptcg_ai.dipplin.resolvers import option_card_id, option_source
@@ -129,6 +135,50 @@ def test_unknown_optional_prompt_fails_closed_without_exception():
     assert action == []
     assert agent.errors == 0
     assert agent.route_telemetry["unknown_contexts"] == 1.0
+
+
+def test_xerosic_discards_redundancy_and_preserves_the_attack_rebuild():
+    raw = _fixture("night_stretcher")
+    hero_index = raw["current"]["yourIndex"]
+    hero = raw["current"]["players"][hero_index]
+    # This public board is missing a replacement Dipplin.  Hilda and Dipplin
+    # are direct routes to it; Lillie is the strongest generic three-card
+    # rebuild after Xerosic reduces the hand.
+    hand_ids = [VOLBEAT, VOLBEAT, HILDA, DIPPLIN, GRASS_ENERGY, FESTIVAL, LILLIE]
+    hero["hand"] = [
+        {"id": card_id, "serial": 800 + index, "playerIndex": hero_index}
+        for index, card_id in enumerate(hand_ids)
+    ]
+    hero["handCount"] = len(hand_ids)
+    raw["select"].update(
+        {
+            "type": int(SelectType.CARD),
+            "context": int(SelectContext.DISCARD),
+            "minCount": 4,
+            "maxCount": 4,
+            "effect": {"id": XEROSIC, "serial": 999, "playerIndex": 1 - hero_index},
+            "contextCard": None,
+            "option": [
+                {
+                    "type": int(OptionType.CARD),
+                    "area": int(AreaType.HAND),
+                    "index": index,
+                    "playerIndex": hero_index,
+                }
+                for index in range(len(hand_ids))
+            ],
+        }
+    )
+
+    agent = DipplinCompetitionAgent(search_enabled=False)
+    action = agent(raw)
+    discarded = _selected_ids(raw, action)
+    kept = [card_id for index, card_id in enumerate(hand_ids) if index not in action]
+
+    _assert_legal(raw, action)
+    assert discarded.count(VOLBEAT) == 2
+    assert set(kept) == {HILDA, DIPPLIN, LILLIE}
+    assert agent.route_telemetry["unknown_contexts"] == 0.0
 
 
 def test_every_public_prompt_fixture_produces_a_legal_selection():
