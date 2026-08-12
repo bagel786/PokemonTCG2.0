@@ -269,8 +269,6 @@ class FestivalD0Planner:
                         continue
                     result.append(index)
                     break
-        if 121 in set(plan.opponent_visible_ids) and plan.fragile_bench_count >= 2:
-            result = [index for index in result if option_card_id(obs, index) not in {APPLIN_GRASS, APPLIN_DRAGON}]
         return result
 
     @staticmethod
@@ -319,9 +317,19 @@ class FestivalD0Planner:
             return False
         _, opponent = _players(obs)
         current = _active(opponent)
-        baseline = self._outcome_key(self._projection(obs, plan, current))
+
+        def completed_turn_prizes(card: Any) -> int:
+            projection = self._projection(obs, plan, card)
+            if projection.ko or projection.turn_ko:
+                return projection.prize_value
+            return 0
+
+        # Boss is a once-per-turn Supporter and changes the target permanently.
+        # Require a strictly larger completed-turn prize floor, rather than
+        # pulling a valuable target that this turn cannot actually KO.
+        baseline = completed_turn_prizes(current)
         return any(
-            self._outcome_key(self._projection(obs, plan, card)) > baseline
+            completed_turn_prizes(card) > baseline
             for card in (getattr(opponent, "bench", None) or [])
             if card is not None
         )

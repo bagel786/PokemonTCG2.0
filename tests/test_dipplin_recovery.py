@@ -82,6 +82,21 @@ def test_trapped_volbeat_retreats_to_attack_ready_dipplin():
     assert selected.type == int(OptionType.RETREAT)
 
 
+def test_post_retreat_switch_context_promotes_attack_ready_dipplin():
+    raw = _fixture("promotion_after_ko")
+    raw["select"]["context"] = 3  # SelectContext.SWITCH is non-strict.
+    raw["select"]["effect"] = None
+    raw["select"]["contextCard"] = None
+
+    action = DipplinCompetitionAgent(search_enabled=False)(raw)
+    obs = to_observation_class(raw)
+    promoted = option_source(obs, obs.select.option[action[0]])
+
+    _assert_legal(raw, action)
+    assert promoted.id == DIPPLIN
+    assert promoted.energies
+
+
 def test_handshake_reset_clears_persistent_turn_memory():
     agent = DipplinCompetitionAgent(search_enabled=False)
     second_attack = _fixture("festival_second_attack")

@@ -251,9 +251,12 @@ class PromptResolver:
                 return self._night_stretcher(obs, plan)
             if parent == SACRED_ASH:
                 return self._sacred_ash(obs, plan)
-            if parent == BOSS or context == int(SelectContext.SWITCH):
+            # SWITCH is reused for both Boss's Orders (opponent target) and
+            # the player's own post-RETREAT promotion.  The effect identity,
+            # not the non-strict context number, distinguishes those prompts.
+            if parent == BOSS:
                 return self._boss(obs, plan)
-            if context == int(SelectContext.TO_ACTIVE):
+            if context in {int(SelectContext.SWITCH), int(SelectContext.TO_ACTIVE)}:
                 return self._promotion(obs, plan)
             if context == int(SelectContext.TO_HAND) and parent is None:
                 return SelectionIntent(tuple(range(len(select.option))), max(1, int(select.minCount)), "prize", "face-down prize choice")
@@ -326,7 +329,11 @@ class PromptResolver:
         priorities = (
             (VOLBEAT, APPLIN_DRAGON, APPLIN_GRASS, GROOKEY, SHAYMIN)
             if volbeat_path
-            else (APPLIN_DRAGON, APPLIN_GRASS, GROOKEY, SHAYMIN, VOLBEAT)
+            # With no known turn-one Energy path, an Applin remains the best
+            # development Active.  Volbeat is still a better support fallback
+            # than Shaymin: both retreat for one, but a later Energy converts
+            # Volbeat into two exact Basic searches instead of a dead Active.
+            else (APPLIN_DRAGON, APPLIN_GRASS, GROOKEY, VOLBEAT, SHAYMIN)
         )
         return SelectionIntent(tuple(_rank_by_ids(obs, priorities)), 1, "setup_active", "state-aware opening pivot")
 

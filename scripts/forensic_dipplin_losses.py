@@ -107,6 +107,30 @@ def _decision(obs: Any, hero: DipplinCompetitionAgent, action: list[int]) -> dic
     }
 
 
+def _external_decision(obs: Any, action: list[int]) -> dict[str, Any]:
+    """Capture an isolated package action without importing its private policy."""
+
+    semantic = semantic_final_action(obs, action, "external_package", "isolated runtime")
+    plan = build_macro_plan(obs)
+    return {
+        "state": _state(obs, int(obs.current.yourIndex)),
+        "select_type": int(obs.select.type),
+        "context": int(obs.select.context),
+        "action": list(action),
+        "kind": semantic.kind,
+        "card_id": semantic.card_id,
+        "target_lineage": semantic.target_lineage,
+        "attack_id": semantic.attack_id,
+        "resolver": "external_package",
+        "reason": "isolated runtime",
+        "phase": str(plan.phase.value),
+        "own_turn_ordinal": plan.own_turn_ordinal,
+        "missing": list(plan.missing_prerequisites),
+        "festival_active": plan.festival_active,
+        "replacement_ready": plan.replacement_attacker_ready,
+    }
+
+
 def _classify(trace: list[dict[str, Any]]) -> tuple[str, list[str]]:
     decisions = [item for item in trace if item.get("actor") == "hero"]
     resolvers = [str(item["decision"]["resolver"]) for item in decisions]
@@ -152,8 +176,13 @@ def run_game(
     go_first: bool,
     cap: int,
     opponent_env: dict[str, str] | None = None,
+    hero_submission: Path | None = None,
 ) -> dict[str, Any]:
-    hero = DipplinCompetitionAgent(search_enabled=False, go_first=go_first)
+    hero = (
+        ExternalSubmissionAgent(hero_submission, {})
+        if hero_submission is not None
+        else DipplinCompetitionAgent(search_enabled=False, go_first=go_first)
+    )
     opponent = ExternalSubmissionAgent(opponent_path, dict(opponent_env or {}))
     decks = [list(hero.deck), list(opponent.deck)] if hero_seat == 0 else [list(opponent.deck), list(hero.deck)]
     raw, started = battle_start(decks[0], decks[1])
@@ -186,7 +215,12 @@ def run_game(
             actor = int(obs.current.yourIndex)
             if actor == hero_seat:
                 action = hero(raw)
-                item = {"step": step, "actor": "hero", "decision": _decision(obs, hero, action)}
+                decision = (
+                    _external_decision(obs, action)
+                    if hero_submission is not None
+                    else _decision(obs, hero, action)
+                )
+                item = {"step": step, "actor": "hero", "decision": decision}
             else:
                 action = opponent(raw)
                 item = {"step": step, "actor": "opponent", "state": _state(obs, hero_seat), "action": list(action)}
@@ -195,6 +229,8 @@ def run_game(
         raise RuntimeError(f"decision cap {cap} exceeded")
     finally:
         battle_finish()
+        if isinstance(hero, ExternalSubmissionAgent):
+            hero.close()
         opponent.close()
 
 
@@ -204,6 +240,7 @@ def main() -> None:
     parser.add_argument("--games-per-order", type=int, default=20)
     parser.add_argument("--max-decisions", type=int, default=2000)
     parser.add_argument("--opponent-env", default="{}", help="JSON object of explicit opponent environment overrides")
+    parser.add_argument("--hero-submission", type=Path, help="optional extracted isolated hero package for diagnostics")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     opponent_env = json.loads(args.opponent_env)
@@ -223,6 +260,7 @@ def main() -> None:
                     go_first=go_first,
                     cap=args.max_decisions,
                     opponent_env=opponent_env,
+                    hero_submission=args.hero_submission,
                 )
             )
     losses = [row for row in rows if row["outcome"] == "loss"]
