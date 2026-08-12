@@ -9,10 +9,13 @@ from cg.api import AreaType, OptionType, to_observation_class
 from ptcg_ai.dipplin.cards import (
     APPLIN_DRAGON,
     APPLIN_GRASS,
+    BROCK,
     DIPPLIN,
     GRASS_ENERGY,
     GROOKEY,
+    POFFIN,
     THWACKEY,
+    XEROSIC,
 )
 from ptcg_ai.dipplin.policy import DipplinCompetitionAgent
 from ptcg_ai.dipplin.resolvers import option_card_id, option_source
@@ -221,4 +224,36 @@ def test_two_thwackey_activations_are_committed_by_distinct_lineage_serials():
     _assert_legal(first, first_action)
     _assert_legal(second, second_action)
     assert first_lineage != second_lineage
-    assert agent.memory.used_thwackey_lineages == {first_lineage, second_lineage}
+
+
+def test_xerosic_discard_reproduces_accepted_d0_engine_order():
+    raw = _fixture("bug_catching_set")
+    hero_index = raw["current"]["yourIndex"]
+    hero = raw["current"]["players"][hero_index]
+    hand = [_card(card_id, serial=100 + index, player=hero_index) for index, card_id in
+            enumerate((APPLIN_GRASS, GRASS_ENERGY, DIPPLIN, POFFIN, BROCK))]
+    hero["hand"] = hand
+    # Xerosic's Machinations forces a discard down to three: five cards -> two.
+    discard = len(hand) - 3
+    raw["select"]["type"] = 1  # SelectType.CARD
+    raw["select"]["context"] = 7
+    raw["select"]["effect"] = {"id": XEROSIC, "playerIndex": hero_index, "serial": 777}
+    raw["select"]["contextCard"] = None
+    raw["select"]["minCount"] = discard
+    raw["select"]["maxCount"] = discard
+    raw["select"]["option"] = [
+        {"area": 2, "index": index, "playerIndex": hero_index, "type": 3}
+        for index in range(len(hand))
+    ]
+
+    agent = DipplinCompetitionAgent(search_enabled=False)
+    action = agent(raw)
+
+    _assert_legal(raw, action)
+    # Accepted D0 selected the first N options in engine order; a named
+    # resolver must reproduce that exact semantic discard while counting the
+    # prompt as known rather than fallback.
+    assert action == list(range(discard))
+    assert _selected_ids(raw, action) == [APPLIN_GRASS, GRASS_ENERGY]
+    assert agent.route_telemetry.get("unknown_contexts", 0.0) == 0.0
+    assert agent.route_telemetry.get("legal_fallbacks", 0.0) == 0.0

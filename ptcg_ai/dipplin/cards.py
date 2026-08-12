@@ -40,9 +40,7 @@ HILDA = 1225
 LILLIE = 1227
 FESTIVAL = 1245
 
-# Public opposing effect handled by the prompt resolver.  This is not a deck
-# member: Xerosic makes the affected player choose cards from their own hand to
-# discard, so a competition agent must understand the resulting CARD prompt.
+# Opponent supporter that forces us to discard our own hand down to three.
 XEROSIC = 1197
 
 # Attacks used by the exact list.
@@ -138,3 +136,4 @@ if len(EXACT_DECK) != 60 or Counter(EXACT_DECK) != EXACT_COUNTS:
     raise AssertionError("audited Dipplin deck identity is internally inconsistent")
 if deck_csv_sha256() != DECK_CSV_SHA256 or deck_multiset_sha256() != DECK_MULTISET_SHA256:
     raise AssertionError("audited Dipplin deck hash is internally inconsistent")
+

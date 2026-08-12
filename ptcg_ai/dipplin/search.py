@@ -90,6 +90,26 @@ METRIC_FIELDS = (
 LOAD_BEARING_INDICES = frozenset(range(5))
 DISRUPTION_OVERRIDE_CARDS = frozenset({BOSS, BLACK_BELT})
 
+# CONTINUITY_PROOF admissibility (SS 15): a candidate may override D0 for
+# replacement continuity ONLY when every world shows an identical completed-turn
+# tactical result, baseline has no ready replacement, candidate has one, the
+# current-turn/resources do not regress, and the root directly builds the
+# replacement line.  This deliberately keeps the earlier five metrics load
+# bearing so generic board setup can never masquerade as a gain.
+_CONTINUITY_EQUAL_INDICES = frozenset(range(5))
+_REPLACEMENT_READY_INDEX = METRIC_FIELDS.index("replacement_attacker_ready")
+_CONTINUITY_NO_REGRESS_INDICES = frozenset(
+    {
+        METRIC_FIELDS.index("current_attacker_ready"),
+        METRIC_FIELDS.index("festival_active"),
+        METRIC_FIELDS.index("remaining_core_attacker_resources"),
+        METRIC_FIELDS.index("avoid_exposed_fragile_bench"),
+    }
+)
+_CONTINUITY_ROOT_CARDS = frozenset(
+    {NIGHT_STRETCHER, POFFIN, POKE_PAD, SACRED_ASH, BROCK, HILDA, THWACKEY}
+)
+
 _RANDOM_OR_DECK_TOUCH_CARDS = frozenset(
     {
         UNFAIR_STAMP,
@@ -1181,6 +1201,64 @@ def _override_is_causally_admissible(
     return any(tactical) if direct else all(tactical)
 
 
+def _continuity_root_causal(obs: Any, candidate: RootCandidate) -> bool:
+    """Does the root directly build the replacement line (SS 15)?
+
+    Only Energy onto a bench Applin/Dipplin, a bench Applin->Dipplin evolution,
+    and search/recover actions for a replacement component qualify.  Generic
+    Stadium play, extra non-attacker Basics, and plain draw are excluded.
+    """
+    option = obs.select.option[int(candidate.original_action[0])]
+    option_type = _integer(getattr(option, "type", None))
+    card_id = _option_card_id(obs, option)
+    target = _option_target(obs, option)
+    target_id = _integer(getattr(target, "id", None))
+    target_is_active = _integer(getattr(option, "inPlayArea", None)) == int(AreaType.ACTIVE)
+    if option_type == int(OptionType.ATTACK):
+        return False
+    if option_type == int(OptionType.ATTACH) and card_id == GRASS_ENERGY:
+        return (not target_is_active) and target_id in {APPLIN_DRAGON, APPLIN_GRASS, DIPPLIN}
+    if option_type == int(OptionType.EVOLVE):
+        return (not target_is_active) and card_id == DIPPLIN and target_id in {
+            APPLIN_DRAGON,
+            APPLIN_GRASS,
+        }
+    return card_id in _CONTINUITY_ROOT_CARDS
+
+
+def _continuity_proof_admissible(
+    candidate: RootCandidate,
+    obs: Any,
+    candidate_worlds: Sequence[Sequence[float]],
+    baseline_worlds: Sequence[Sequence[float]],
+) -> bool:
+    """Strict SS 15 CONTINUITY_PROOF admissibility check.
+
+    True only when, in EVERY valid public world: the five load-bearing tactical
+    results are equal to baseline, current attacker/Festival/core-attacker
+    resources/fragile bench do not regress, baseline has no ready replacement
+    and the candidate has one, and the root is directly continuity-causal.
+    """
+    if not _continuity_root_causal(obs, candidate):
+        return False
+    for candidate_metric, baseline_metric in zip(candidate_worlds, baseline_worlds):
+        if any(
+            float(candidate_metric[index]) != float(baseline_metric[index])
+            for index in _CONTINUITY_EQUAL_INDICES
+        ):
+            return False
+        if any(
+            float(candidate_metric[index]) < float(baseline_metric[index])
+            for index in _CONTINUITY_NO_REGRESS_INDICES
+        ):
+            return False
+        if float(baseline_metric[_REPLACEMENT_READY_INDEX]) != 0.0:
+            return False
+        if float(candidate_metric[_REPLACEMENT_READY_INDEX]) != 1.0:
+            return False
+    return True
+
+
 class _WorldRunner:
     def __init__(
         self,
@@ -1690,15 +1768,33 @@ class FestivalD1Search:
                     _lex_compare(candidate_metric, baseline_metric)
                     for candidate_metric, baseline_metric in zip(candidate_worlds, baseline_worlds)
                 ]
-                if all(value >= 0 for value in comparisons) and any(
-                    _strict_load_bearing(candidate_metric, baseline_metric)
-                    for candidate_metric, baseline_metric in zip(candidate_worlds, baseline_worlds)
-                ) and _override_is_causally_admissible(
-                    candidate,
-                    obs,
-                    candidate_worlds,
-                    baseline_worlds,
-                ):
+                lex_no_regression = all(value >= 0 for value in comparisons)
+                tactical = (
+                    lex_no_regression
+                    and any(
+                        _strict_load_bearing(candidate_metric, baseline_metric)
+                        for candidate_metric, baseline_metric in zip(candidate_worlds, baseline_worlds)
+                    )
+                    and _override_is_causally_admissible(
+                        candidate,
+                        obs,
+                        candidate_worlds,
+                        baseline_worlds,
+                    )
+                )
+                self._increment("d1_continuity_proof_checked")
+                continuity = (
+                    lex_no_regression
+                    and _continuity_proof_admissible(
+                        candidate,
+                        obs,
+                        candidate_worlds,
+                        baseline_worlds,
+                    )
+                )
+                if tactical or continuity:
+                    if continuity:
+                        self._increment("d1_continuity_proof_admitted")
                     admitted.append(candidate)
             if not admitted:
                 self._increment("d1_searches_completed")
