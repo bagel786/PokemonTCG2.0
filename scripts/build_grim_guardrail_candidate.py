@@ -61,6 +61,7 @@ RUNTIME_DEPENDENCIES = (
     "prevention.json",
     "tactical_shield.py",
     "grim_guardrails.py",
+    "grim_variance_floor.py",
     "grim_runtime_policy.py",
 )
 FORBIDDEN_RUNTIME_FILES = frozenset(
@@ -241,9 +242,21 @@ def patch_model_and_agent(stage: str | Path) -> dict[str, dict[str, str]]:
         + "from .grim_runtime_policy import GrimRuntimePolicy, SearchDisabledProof\n",
     )
     source = source.replace(
+        "from .grim_runtime_policy import GrimRuntimePolicy, SearchDisabledProof\n",
+        "from .grim_runtime_policy import GrimRuntimePolicy, SearchDisabledProof\n"
+        "from .grim_variance_floor import GrimVarianceConfig, GrimVarianceFloorDirector\n",
+    )
+    source = source.replace(
         init_anchor,
         init_anchor
         + "        self.runtime_policy = GrimRuntimePolicy(proof=SearchDisabledProof())\n",
+    )
+    source = source.replace(
+        "        self.runtime_policy = GrimRuntimePolicy(proof=SearchDisabledProof())\n",
+        "        self.runtime_policy = GrimRuntimePolicy(proof=SearchDisabledProof())\n"
+        "        self.runtime_policy.guardrail = GrimVarianceFloorDirector(\n"
+        "            GrimVarianceConfig(punk_up_floor=True, dead_active_escape=True)\n"
+        "        )\n",
     )
     source = source.replace(
         choose_anchor,
@@ -335,7 +348,7 @@ def stage_candidate(base_archive: str | Path, destination: str | Path) -> dict[s
             **frozen,
         },
         "runtime": {
-            "guardrail": "GrimGuardrailDirector",
+            "guardrail": "GrimVarianceFloorDirector(B3)",
             "coordinator": "GrimRuntimePolicy",
             "tactical_allowlist": ["end_with_productive_attack", "nullified_attack"],
             "broad_floor_controller": False,
