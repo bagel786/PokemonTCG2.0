@@ -19,10 +19,20 @@ if (ROOT / "vendor" / "cg").exists():
     sys.path.insert(0, str(ROOT / "vendor"))
 
 from cg import sim as cg_sim
-from cg.api import to_observation_class
+from cg.api import OptionType, to_observation_class
 from cg.game import battle_finish, battle_select, battle_start
+from ptcg_ai.card_ids import (
+    FROSLASS_VARIANTS,
+    MARNIES_GRIMMSNARL_EX,
+    MARNIES_IMPIDIMP,
+    MARNIES_MORGREM,
+    MUNKIDORI,
+    SNORUNT,
+    SHADOW_BULLET,
+)
 from ptcg_ai.agent import CompetitionAgent
 from ptcg_ai.external import ExternalSubmissionAgent
+from ptcg_ai.prevention import attack_nullified
 from training.evaluation_schema import build_provenance
 
 
@@ -63,10 +73,15 @@ def evaluation_exit_code(hero_errors: int, opponent_errors: int) -> int:
 def competition_telemetry(agent) -> dict:
     inner = getattr(agent.module, "_AGENT", None) if isinstance(agent, ExternalSubmissionAgent) else agent
     route = getattr(inner, "route_telemetry", {})
-    if not isinstance(route, dict) or not route:
-        policy = getattr(inner, "policy", None)
-        route = getattr(policy, "telemetry", {})
-    return dict(route) if isinstance(route, dict) else {}
+    result = dict(route) if isinstance(route, dict) else {}
+    policy = getattr(inner, "policy", None)
+    runtime = getattr(policy, "runtime_policy", None)
+    telemetry = getattr(runtime, "telemetry", None)
+    if callable(telemetry):
+        telemetry = telemetry()
+    if isinstance(telemetry, dict):
+        result["runtime_policy"] = telemetry
+    return result
 
 
 def capture_initial_first_player(current, captured=None):
@@ -75,6 +90,203 @@ def capture_initial_first_player(current, captured=None):
         return captured
     value = getattr(current, "firstPlayer", -1) if current is not None else -1
     return int(value) if value in (0, 1) else None
+
+
+GRIM_LINE = frozenset({MARNIES_IMPIDIMP, MARNIES_MORGREM, MARNIES_GRIMMSNARL_EX})
+DEAD_SUPPORT = frozenset({MUNKIDORI, SNORUNT, *FROSLASS_VARIANTS})
+
+
+def _own_turn_ordinal(turn: int, seat: int, first_player: int | None) -> int:
+    if first_player not in (0, 1) or turn <= 0:
+        return 0
+    return (turn + 1) // 2 if seat == first_player else turn // 2
+
+
+def _energy_count(pokemon) -> int:
+    energies = getattr(pokemon, "energies", None)
+    if energies is not None:
+        return len(energies)
+    return len(getattr(pokemon, "energyCards", None) or [])
+
+
+def _board(player) -> list:
+    return [card for card in (player.active or []) + (player.bench or []) if card is not None]
+
+
+def _ready_attackers(player) -> int:
+    return sum(
+        int(
+            int(card.id) == MARNIES_IMPIDIMP and _energy_count(card) >= 1
+            or int(card.id) == MARNIES_MORGREM and _energy_count(card) >= 2
+            or int(card.id) == MARNIES_GRIMMSNARL_EX and _energy_count(card) >= 2
+        )
+        for card in _board(player)
+    )
+
+
+def _new_game_metrics() -> dict:
+    return {
+        "ever_attacked": False,
+        "total_attacks": 0,
+        "shadow_bullet_attacks": 0,
+        "first_productive_attack_own_turn": None,
+        "first_grim_own_turn": None,
+        "first_ready_grim_own_turn": None,
+        "board_width_after_own_turn": {"1": 0, "2": 0},
+        "marnies_bodies_after_own_turn": {"1": 0, "2": 0},
+        "energy_after_own_turn": {"2": 0, "3": 0, "4": 0},
+        "ready_attackers_after_own_turn": {"2": 0, "3": 0, "4": 0},
+        "late_dead_support_active_turns": 0,
+        "dead_support_active_with_ready_bench_grim": 0,
+        "trapped_support_active_turns": 0,
+        "illegal_actions": 0,
+    }
+
+
+def _record_hero_action(metrics: dict, obs, action: list[int], hero_seat: int, first_player: int | None) -> None:
+    if obs.current is None or int(obs.current.yourIndex) != hero_seat:
+        return
+    player = obs.current.players[hero_seat]
+    ordinal = _own_turn_ordinal(int(obs.current.turn), hero_seat, first_player)
+    board = _board(player)
+    board_ids = {int(card.id) for card in board}
+    if metrics["first_grim_own_turn"] is None and MARNIES_GRIMMSNARL_EX in board_ids and ordinal > 0:
+        metrics["first_grim_own_turn"] = ordinal
+    if metrics["first_ready_grim_own_turn"] is None and any(
+        int(card.id) == MARNIES_GRIMMSNARL_EX and _energy_count(card) >= 2 for card in board
+    ):
+        metrics["first_ready_grim_own_turn"] = ordinal
+    if ordinal in (1, 2):
+        key = str(ordinal)
+        metrics["board_width_after_own_turn"][key] = max(
+            metrics["board_width_after_own_turn"][key], len(board)
+        )
+        metrics["marnies_bodies_after_own_turn"][key] = max(
+            metrics["marnies_bodies_after_own_turn"][key],
+            sum(int(card.id) in GRIM_LINE for card in board),
+        )
+    if ordinal in (2, 3, 4):
+        key = str(ordinal)
+        metrics["energy_after_own_turn"][key] = max(
+            metrics["energy_after_own_turn"][key],
+            sum(_energy_count(card) for card in board),
+        )
+        metrics["ready_attackers_after_own_turn"][key] = max(
+            metrics["ready_attackers_after_own_turn"][key], _ready_attackers(player)
+        )
+
+    active = (player.active or [None])[0]
+    if active is not None and int(active.id) in DEAD_SUPPORT and ordinal >= 4:
+        metrics["late_dead_support_active_turns"] += 1
+        ready_bench = any(
+            int(card.id) == MARNIES_GRIMMSNARL_EX and _energy_count(card) >= 2
+            for card in (player.bench or [])
+        )
+        if ready_bench:
+            metrics["dead_support_active_with_ready_bench_grim"] += 1
+            if not any(int(option.type) == int(OptionType.RETREAT) for option in obs.select.option):
+                metrics["trapped_support_active_turns"] += 1
+
+    for index in action:
+        if not isinstance(index, int) or not 0 <= index < len(obs.select.option):
+            metrics["illegal_actions"] += 1
+            continue
+        option = obs.select.option[index]
+        if int(option.type) != int(OptionType.ATTACK):
+            continue
+        metrics["ever_attacked"] = True
+        metrics["total_attacks"] += 1
+        if int(getattr(option, "attackId", 0) or 0) == SHADOW_BULLET:
+            metrics["shadow_bullet_attacks"] += 1
+        if metrics["first_productive_attack_own_turn"] is None:
+            try:
+                productive = not attack_nullified(obs, option)
+            except Exception:
+                productive = False
+            if productive:
+                metrics["first_productive_attack_own_turn"] = ordinal
+
+
+def _finish_game_metrics(metrics: dict, obs, hero_seat: int, first_player: int | None) -> dict:
+    state = obs.current
+    hero = state.players[hero_seat]
+    opponent = state.players[1 - hero_seat]
+    hero_prizes = 6 - len(hero.prize or [])
+    opponent_prizes = 6 - len(opponent.prize or [])
+    loss = int(state.result != hero_seat)
+    public_margin = opponent_prizes - hero_prizes
+    result = dict(metrics)
+    result.update(
+        {
+            "win": int(state.result == hero_seat),
+            "actual_order": "first" if first_player == hero_seat else "second",
+            "physical_seat": hero_seat,
+            "prizes_taken": hero_prizes,
+            "prizes_conceded": opponent_prizes,
+            "zero_attack_game": int(not metrics["ever_attacked"]),
+            "zero_prize_game": int(hero_prizes == 0),
+            "blowout_loss": int(loss and public_margin >= 4),
+            "catastrophic_floor_game": int(
+                not metrics["ever_attacked"] or hero_prizes == 0 or loss and public_margin >= 4
+            ),
+        }
+    )
+    return result
+
+
+def summarize_game_metrics(rows: list[dict], *, include_order: bool = True) -> dict:
+    """Aggregate floor mechanisms without treating intervention games as causal."""
+
+    games = len(rows)
+    if not games:
+        return {"games": 0}
+
+    def rate(key: str) -> float:
+        return sum(int(row.get(key, 0)) for row in rows) / games
+
+    result = {
+        "games": games,
+        "wins": sum(int(row.get("win", 0)) for row in rows),
+        "win_rate": sum(int(row.get("win", 0)) for row in rows) / games,
+        "zero_attack_rate": rate("zero_attack_game"),
+        "zero_prize_rate": rate("zero_prize_game"),
+        "blowout_loss_rate": rate("blowout_loss"),
+        "catastrophic_floor_rate": rate("catastrophic_floor_game"),
+        "total_attacks": sum(int(row.get("total_attacks", 0)) for row in rows),
+        "policy_errors": sum(int(row.get("policy_errors", 0)) for row in rows),
+        "illegal_actions": sum(int(row.get("illegal_actions", 0)) for row in rows),
+        "mean_first_productive_attack_own_turn": (
+            sum(
+                int(row["first_productive_attack_own_turn"])
+                for row in rows
+                if row.get("first_productive_attack_own_turn") is not None
+            )
+            / sum(row.get("first_productive_attack_own_turn") is not None for row in rows)
+            if any(row.get("first_productive_attack_own_turn") is not None for row in rows)
+            else None
+        ),
+    }
+    if include_order:
+        result["by_actual_order"] = {
+            order: summarize_game_metrics(
+                [row for row in rows if row.get("actual_order") == order],
+                include_order=False,
+            )
+            for order in ("first", "second")
+        }
+    return result
+
+
+def _game_intervention_counts(telemetry: dict) -> dict[str, int]:
+    runtime = telemetry.get("runtime_policy", {}) if isinstance(telemetry, dict) else {}
+    guardrail = runtime.get("guardrail", {}) if isinstance(runtime, dict) else {}
+    counts: dict[str, int] = {}
+    for field in ("interventions", "variance_interventions"):
+        values = guardrail.get(field, {}) if isinstance(guardrail, dict) else {}
+        if isinstance(values, dict):
+            for reason, count in values.items():
+                counts[str(reason)] = counts.get(str(reason), 0) + int(count)
+    return counts
 
 
 def run_game_diagnostic(task):
@@ -112,6 +324,7 @@ def run_game_diagnostic(task):
     try:
         decisions = 0
         initial_first_player = None
+        game_metrics = _new_game_metrics()
         while True:
             obs = to_observation_class(raw)
             # Terminal observations are not a reliable source of setup metadata:
@@ -120,6 +333,10 @@ def run_game_diagnostic(task):
             initial_first_player = capture_initial_first_player(obs.current, initial_first_player)
             if obs.current is not None and obs.current.result != -1:
                 runtime_stats, search_stats = external_diagnostics(opponent)
+                game_metrics = _finish_game_metrics(
+                    game_metrics, obs, seat_a, initial_first_player
+                )
+                game_metrics["policy_errors"] = policy_error_count(agents[seat_a])
                 return {
                     "win": int(obs.current.result == seat_a),
                     "seat_a": seat_a,
@@ -130,9 +347,14 @@ def run_game_diagnostic(task):
                     "opponent_runtime_stats": runtime_stats,
                     "opponent_search_stats": search_stats,
                     "hero_telemetry": competition_telemetry(agents[seat_a]),
+                    "game_metrics": game_metrics,
                     "decisions": decisions,
                 }
-            raw = battle_select(agents[obs.current.yourIndex](raw))
+            acting_seat = int(obs.current.yourIndex)
+            action = agents[acting_seat](raw)
+            if acting_seat == seat_a:
+                _record_hero_action(game_metrics, obs, action, seat_a, initial_first_player)
+            raw = battle_select(action)
             decisions += 1
             if max_decisions and decisions >= max_decisions:
                 raise RuntimeError(f"game exceeded fail-closed decision cap: {max_decisions}")
@@ -207,6 +429,8 @@ def main() -> int:
     opponent_runtime_stats = {}
     opponent_search_stats = {}
     hero_telemetry = {}
+    game_metrics_rows = []
+    intervention_counts = {}
 
     def merge_stats(total, current):
         for key, value in current.items():
@@ -236,6 +460,9 @@ def main() -> int:
             merge_stats(opponent_runtime_stats, result["opponent_runtime_stats"])
             merge_stats(opponent_search_stats, result["opponent_search_stats"])
             merge_stats(hero_telemetry, result["hero_telemetry"])
+            game_metrics_rows.append(result["game_metrics"])
+            for reason, count in _game_intervention_counts(result["hero_telemetry"]).items():
+                intervention_counts[reason] = intervention_counts.get(reason, 0) + count
             if complete % 500 == 0:
                 print({"complete": complete, "win_rate_a": wins / complete})
     lower, upper = wilson(wins, args.games)
@@ -307,6 +534,9 @@ def main() -> int:
         "opponent_runtime_stats": opponent_runtime_stats,
         "opponent_search_stats": opponent_search_stats,
         "hero_telemetry": hero_telemetry,
+        "game_metrics": summarize_game_metrics(game_metrics_rows),
+        "games_detail": game_metrics_rows,
+        "intervention_counts": dict(sorted(intervention_counts.items())),
         "decisions": decisions,
     }
     if args.output:

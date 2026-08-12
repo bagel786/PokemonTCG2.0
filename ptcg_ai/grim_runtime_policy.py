@@ -152,10 +152,16 @@ class GrimRuntimePolicy:
     def telemetry(self) -> dict[str, Any]:
         """Return named in-memory telemetry; actions and option indices are omitted."""
 
+        guardrail_telemetry = getattr(self.guardrail, "telemetry", None)
+        if callable(guardrail_telemetry):
+            guardrail_telemetry = guardrail_telemetry()
+        if not isinstance(guardrail_telemetry, Mapping):
+            guardrail_telemetry = {}
         return {
             "calls": int(self._calls),
             "outcomes": dict(sorted(self._outcomes.items())),
             "reasons": dict(sorted(self._reasons.items())),
+            "guardrail": dict(guardrail_telemetry),
             "last": dict(self._last),
         }
 

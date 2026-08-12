@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from types import SimpleNamespace as NS
+from unittest.mock import patch
 
 from cg.api import AreaType, EnergyType, Option, OptionType, SelectContext, SelectType
 
@@ -259,13 +260,38 @@ def test_dead_support_false_positive_guards():
 
 def test_dead_support_direct_retreat_promotes_ready_grim():
     director = GrimVarianceFloorDirector(config=config(escape=True))
+    me = player(
+        active=[pokemon(MUNKIDORI, serial=1)],
+        bench=[pokemon(SNORUNT, serial=3), ready_grim(2)],
+    )
     obs = dead_support_main(
-        player(active=[pokemon(MUNKIDORI, serial=1)], bench=[ready_grim(2)]),
+        me,
         [Option(OptionType.END), Option(OptionType.RETREAT)],
     )
     ranked, _, reason = director.apply(obs, [0, 1], 1)
     assert ranked[0] == 1
     assert reason == "variance_floor:dead_support_retreat_to_ready_grim"
+    director.commit(obs, [ranked[0]])
+    assert director.telemetry()["variance_state"]["escape_stage"] == "promote"
+
+    # The ready Grim is now option 0, but d842's semantic ranking puts the
+    # other bench support first.  The wrapper must resolve the target anew.
+    promote = observation(
+        selection(
+            SelectContext.TO_ACTIVE,
+            [
+                Option(OptionType.CARD, area=AreaType.BENCH, index=1, playerIndex=0),
+                Option(OptionType.CARD, area=AreaType.BENCH, index=0, playerIndex=0),
+            ],
+            select_type=SelectType.CARD,
+        ),
+        me,
+    )
+    ranked, _, reason = director.apply(promote, [1, 0], 1)
+    assert (ranked[0], reason) == (0, "variance_floor:escape_promote_ready_grim")
+    assert promote.select.option[ranked[0]].index == 1
+    director.commit(promote, [ranked[0]])
+    assert director.telemetry()["variance_state"]["escape_pending"] is False
 
 
 def test_attach_escape_then_semantic_retreat_and_promotion_with_reordered_indices():
@@ -341,6 +367,88 @@ def test_escape_state_clears_on_reset_turn_change_target_loss_malformed_and_alte
     director.commit(attach, [0])
     director.apply(None, [0], 1)
     assert director.telemetry()["variance_state"]["escape_pending"] is False
+
+
+def test_escape_fails_closed_for_used_retreat_attack_and_disappearing_grim():
+    for retreated in (True,):
+        director = GrimVarianceFloorDirector(config=config(escape=True))
+        obs = observation(
+            selection(
+                SelectContext.MAIN,
+                [Option(OptionType.RETREAT), Option(OptionType.END)],
+                select_type=SelectType.MAIN,
+            ),
+            player(active=[pokemon(MUNKIDORI)], bench=[ready_grim(2)]),
+            retreated=retreated,
+        )
+        assert director.apply(obs, [1, 0], 1) == ([1, 0], 1, None)
+
+    director = GrimVarianceFloorDirector(config=config(escape=True))
+    productive = dead_support_main(
+        player(active=[pokemon(MUNKIDORI)], bench=[ready_grim(2)]),
+        [Option(OptionType.END), Option(OptionType.ATTACK, attackId=SHADOW_BULLET)],
+    )
+    assert director.apply(productive, [0, 1], 1) == ([0, 1], 1, None)
+
+    me = player(active=[pokemon(MUNKIDORI, serial=1)], bench=[ready_grim(2)])
+    direct = dead_support_main(me, [Option(OptionType.END), Option(OptionType.RETREAT)])
+    ranked, _, _ = director.apply(direct, [0, 1], 1)
+    director.commit(direct, [ranked[0]])
+    me.bench.clear()
+    promote = observation(
+        selection(
+            SelectContext.TO_ACTIVE,
+            [Option(OptionType.CARD, area=AreaType.BENCH, index=0, playerIndex=0)],
+            select_type=SelectType.CARD,
+        ),
+        me,
+    )
+    assert director.apply(promote, [0], 1) == ([0], 1, None)
+    assert director.telemetry()["variance_state"]["escape_pending"] is False
+
+
+def test_attach_escape_requires_active_basic_darkness_and_provable_retreat():
+    me = player(
+        hand=[card(DARK_ENERGY, 10), card(999, 11)],
+        active=[pokemon(MUNKIDORI, serial=1)],
+        bench=[ready_grim(2)],
+    )
+    cases = [
+        Option(
+            OptionType.ATTACH,
+            area=AreaType.HAND,
+            index=0,
+            inPlayArea=AreaType.BENCH,
+            inPlayIndex=0,
+        ),
+        Option(
+            OptionType.ATTACH,
+            area=AreaType.HAND,
+            index=1,
+            inPlayArea=AreaType.ACTIVE,
+            inPlayIndex=0,
+        ),
+    ]
+    director = GrimVarianceFloorDirector(config=config(escape=True))
+    for option in cases:
+        obs = dead_support_main(me, [Option(OptionType.END), option])
+        assert director.apply(obs, [0, 1], 1) == ([0, 1], 1, None)
+
+    # A one-Energy escape is not accepted when public card metadata proves the
+    # support Active needs two Energy to retreat.
+    option = Option(
+        OptionType.ATTACH,
+        area=AreaType.HAND,
+        index=0,
+        inPlayArea=AreaType.ACTIVE,
+        inPlayIndex=0,
+    )
+    obs = dead_support_main(me, [Option(OptionType.END), option])
+    with patch(
+        "ptcg_ai.grim_variance_floor.card_table",
+        return_value={MUNKIDORI: NS(retreatCost=2)},
+    ):
+        assert director.apply(obs, [0, 1], 1) == ([0, 1], 1, None)
 
 
 def test_punk_count_option_number_is_selected_semantically():

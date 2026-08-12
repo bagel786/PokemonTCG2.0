@@ -20,6 +20,13 @@ from cg.api import OptionType, SelectContext, to_observation_class
 from cg.game import battle_finish, battle_select, battle_start
 from ptcg_ai.external import ExternalSubmissionAgent
 from ptcg_ai.safety import sanitize_selection
+from training.evaluate import (
+    _finish_game_metrics,
+    _new_game_metrics,
+    _record_hero_action,
+    competition_telemetry,
+    policy_error_count,
+)
 from training.evaluation_schema import sha256_path
 
 
@@ -57,6 +64,7 @@ def run_game(task: tuple) -> dict:
         raise RuntimeError(f"engine rejected deck: {started.errorType}")
     first_player = None
     decisions = 0
+    game_metrics = _new_game_metrics()
     try:
         while True:
             obs = to_observation_class(raw)
@@ -73,6 +81,8 @@ def run_game(task: tuple) -> dict:
                 if observed_order != order:
                     raise RuntimeError(f"requested {order}, observed {observed_order}")
                 result = int(obs.current.result)
+                game_metrics = _finish_game_metrics(game_metrics, obs, hero_seat, first_player)
+                game_metrics["policy_errors"] = policy_error_count(agents[hero_seat])
                 return {
                     "win": int(result == hero_seat),
                     "draw": int(result == 2),
@@ -81,11 +91,16 @@ def run_game(task: tuple) -> dict:
                     "hero_errors": _errors(hero),
                     "opponent_errors": _errors(opponent),
                     "decisions": decisions,
+                    "game_metrics": game_metrics,
+                    "hero_telemetry": competition_telemetry(agents[hero_seat]),
                 }
             if obs.select.context == SelectContext.IS_FIRST:
                 action = _force(obs.select, hero_seat, order)
             else:
-                action = agents[int(obs.current.yourIndex)](raw)
+                acting_seat = int(obs.current.yourIndex)
+                action = agents[acting_seat](raw)
+                if acting_seat == hero_seat:
+                    _record_hero_action(game_metrics, obs, action, hero_seat, first_player)
             raw = battle_select(action)
             decisions += 1
             if decisions >= max_decisions:

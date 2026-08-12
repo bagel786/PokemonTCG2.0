@@ -243,6 +243,9 @@ class GrimVarianceFloorDirector:
         self.escape_root_turn: int | None = None
         self.escape_player: int | None = None
         self.dead_active_serial: int | None = None
+        self.escape_proposal_turn: int | None = None
+        self.escape_proposal_player: int | None = None
+        self.escape_proposal_serial: int | None = None
         self.intervention_counts: Counter[str] = Counter()
         self.telemetry_counts: Counter[str] = Counter()
         self.last_reason: str | None = None
@@ -253,6 +256,12 @@ class GrimVarianceFloorDirector:
         self.escape_root_turn = None
         self.escape_player = None
         self.dead_active_serial = None
+        self._clear_escape_proposal()
+
+    def _clear_escape_proposal(self) -> None:
+        self.escape_proposal_turn = None
+        self.escape_proposal_player = None
+        self.escape_proposal_serial = None
 
     def _record(self, reason: str) -> None:
         self.last_reason = reason
@@ -269,6 +278,10 @@ class GrimVarianceFloorDirector:
             turn != self.escape_root_turn or player != self.escape_player
         ):
             self._clear_escape()
+        if self.escape_proposal_serial is not None and (
+            turn != self.escape_proposal_turn or player != self.escape_proposal_player
+        ):
+            self._clear_escape_proposal()
         return turn >= 0 and player in (0, 1)
 
     def _dead_active(self, obs: Any) -> Any | None:
@@ -494,6 +507,10 @@ class GrimVarianceFloorDirector:
             if _integer(getattr(obs.select.option[index], "type", None)) == int(OptionType.RETREAT)
         ]
         if retreat_options:
+            active = _active
+            self.escape_proposal_turn = _integer(obs.current.turn)
+            self.escape_proposal_player = _integer(obs.current.yourIndex)
+            self.escape_proposal_serial = _integer(getattr(active, "serial", 0), 0)
             self._record("variance_floor:dead_support_retreat_to_ready_grim")
             return _ranked_with(ranked, retreat_options), desired, self.last_reason
         if not ready:
@@ -574,6 +591,24 @@ class GrimVarianceFloorDirector:
                     except (AttributeError, IndexError, TypeError, ValueError):
                         pass
             selected_types = {_integer(getattr(option, "type", None)) for _, option in selected}
+            if self.escape_stage is None and self.escape_proposal_serial is not None:
+                active = self._dead_active(obs)
+                if (
+                    _context_is(obs.select, SelectContext.MAIN)
+                    and selected_types == {int(OptionType.RETREAT)}
+                    and active is not None
+                    and _integer(getattr(active, "serial", 0), 0)
+                    == self.escape_proposal_serial
+                    and self._ready_bench_grims(obs)
+                ):
+                    self.escape_stage = "promote"
+                    self.escape_root_turn = self.escape_proposal_turn
+                    self.escape_player = self.escape_proposal_player
+                    self.dead_active_serial = self.escape_proposal_serial
+                    self._clear_escape_proposal()
+                else:
+                    self._clear_escape()
+                return
             if self.escape_stage == "attached":
                 active = self._dead_active(obs)
                 if (
