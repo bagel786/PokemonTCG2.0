@@ -102,6 +102,27 @@ semantic sequence.
 The exact d842 mirror is the completed 200-game development screen. B1/B2/B3
 were each evaluated against exact frozen B0 with 100 games in each actual order.
 
+Search-disabled development screens then ran 30 games per candidate against
+four existing agents:
+
+| Policy | Alakazam 2.4a no-search | Kangaskhan/Crustle model | Garchomp model | Dragapult model | Aggregate |
+|--------|-------------------------|--------------------------|----------------|-----------------|-----------|
+| B0 | 80.0% pilot / 10 games | 86.7% | 90.0% | 100.0% | 92.2% over 90 games |
+| B1 | 70.0% | 90.0% | 96.7% | 100.0% | 89.2% over 120 games |
+| B2 | 80.0% | 86.7% | 100.0% | 100.0% | 91.7% over 120 games |
+| B3 | 76.7% | 90.0% | 93.3% | 100.0% | 90.0% over 120 games |
+
+The three completed 30-game B0 controls imply no broad point-estimate regression for
+B1, B2, or B3 on those model proxies: B0 92.2%, B1 95.6%, B2 95.6%, B3 94.4%.
+The Alakazam 2.4a B0 30-game control could not finish within the local runtime
+window. A bounded 10-game pilot finished at 80.0% with zero errors, but it is
+not substituted into the 30-game aggregate; the full four-opponent aggregate
+gate is therefore still not established.
+
+Opponent classifications: Alakazam 2.4a was `LOW_CONFIDENCE_PROXY_NO_SEARCH`;
+Kangaskhan/Crustle, Garchomp, and Dragapult were `LOW_CONFIDENCE_PROXY`. These
+are diversity alarms, not authentic ladder estimates.
+
 An authentic Alakazam 2.4a pilot ran locally for B3: 5 games, 2 wins, 40.0%
 with Wilson interval [11.8%, 76.9%], 66.7% actual-first and 0.0% actual-second,
 zero policy errors, and zero illegal actions. This is far too small for a
@@ -110,8 +131,15 @@ promotion claim. The requested 50-game Alakazam batch exceeded the local
 
 ## Final Holdout
 
-Not run. Alakazam 2.7 and a non-Grim/non-Alakazam holdout were not promoted to
-final confirmation because the broad development screen was not available.
+The fixed B3 finalist received bounded search-disabled holdouts:
+
+| Holdout | Games | WR | First | Second | Wilson 95% | Classification |
+|---------|------:|---:|------:|-------:|------------|----------------|
+| Alakazam 2.7 no-search | 20 | 70.0% | 80.0% | 60.0% | [48.1%, 85.5%] | LOW_CONFIDENCE_PROXY_NO_SEARCH |
+| Team Rocket's Mewtwo model | 20 | 85.0% | 80.0% | 90.0% | [64.0%, 94.8%] | LOW_CONFIDENCE_PROXY |
+
+Both holdouts had zero policy errors and zero illegal actions. These are not
+authentic search-enabled holdout results and are too small for promotion.
 
 An Azure fallback was attempted only after the local authentic runner proved too
 slow. The private repository could not be cloned from the VM, and the bounded
@@ -150,7 +178,8 @@ not evidence of expected Kaggle rating movement.
 - Native game arms are unpaired because the engine uses independent randomness.
 - The 200-game mirror screen is a kill screen, not a statistically conclusive strength comparison.
 - The decision audit covers one 5,401-decision d842 shard, not the full replay corpus.
-- Broad authentic evaluation was blocked by local Alakazam runtime and unavailable reliable Azure transfer.
+- Broad authentic search-enabled evaluation was blocked by local Alakazam runtime and unavailable reliable Azure transfer.
+- B0 control coverage is incomplete for Alakazam 2.4a, preventing a complete broad delta gate.
 - The 5-game authentic pilot is not a promotion sample.
 - Intervention-state outcomes are not causal because difficult states trigger interventions.
 - B4 Poffin remains disabled because the required 10-independent-catastrophic-game evidence gate was not met or auditable.
@@ -159,11 +188,12 @@ not evidence of expected Kaggle rating movement.
 
 `INCONCLUSIVE_DO_NOT_PACKAGE`
 
-B2 and B3 survived the gross direct-mirror kill threshold and had zero runtime
-errors. B2 had the lowest measured catastrophic-floor rate in this screen;
-B3 had the highest mirror point estimate. Neither has the required replay
-disagreement audit or broad holdout evidence, so neither is justified for a
-live Kaggle submission.
+B2 and B3 survived the gross direct-mirror kill threshold, passed the replay
+disagreement gate, and had zero runtime errors in the completed broad/holdout
+proxies. B2 had the lowest measured mirror catastrophic-floor rate; B3 had the
+highest mirror point estimate. The broad evidence is still proxy-only, B0
+control coverage is incomplete for Alakazam 2.4a, and samples are far below
+final-confirmation size, so neither is justified for a live Kaggle submission.
 
 SHOULD I SPEND A LIVE KAGGLE SUBMISSION ON THIS?
 
