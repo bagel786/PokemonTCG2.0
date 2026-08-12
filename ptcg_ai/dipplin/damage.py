@@ -380,6 +380,7 @@ def project_do_the_wave(
     *,
     bench_count: int,
     black_belt_used: bool = False,
+    bangle_attached: bool = False,
     stadium_id: Any = None,
     festival_active: bool = True,
 ) -> DamageProjection:
@@ -404,7 +405,7 @@ def project_do_the_wave(
         defender_ex
         and not attacker_rule_box
         and active_stadium != JAMMING_TOWER_CARD_ID
-        and _has_attached_card(attacker, BRAVE_BANGLE_CARD_ID)
+        and (bangle_attached or _has_attached_card(attacker, BRAVE_BANGLE_CARD_ID))
     ):
         bangle_bonus = 30
     black_belt_bonus = 40 if black_belt_used and defender_ex else 0

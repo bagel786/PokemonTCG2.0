@@ -52,6 +52,7 @@ D0_DIPPLIN_MODULES = frozenset(
         "__init__.py",
         "cards.py",
         "damage.py",
+        "objective.py",
         "plan.py",
         "policy.py",
         "resolvers.py",

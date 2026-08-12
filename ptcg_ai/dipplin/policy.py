@@ -38,6 +38,15 @@ from .cards import (
     VOLBEAT,
 )
 from .damage import DamageProjection, project_do_the_wave
+from .objective import (
+    bench_changes_prize_route,
+    boss_improves_completed_turn,
+    compute_turn_route,
+    modifier_crosses_ko_threshold,
+    route_with_boss,
+    route_with_bench_expansion,
+    route_with_modifier,
+)
 from .plan import MacroPlan, Phase, build_macro_plan
 from .resolvers import (
     PromptResolver,
@@ -174,6 +183,7 @@ class FestivalD0Planner:
     def __init__(self, *, go_first: bool = True) -> None:
         self.go_first = bool(go_first)
         self.resolver = PromptResolver(go_first=self.go_first)
+        self.route_v2_enabled = _bool_env("PTCG_DIPPLIN_ROUTE_V2", False)
 
     def propose(self, obs: Any, snapshot: PlanSnapshot | None, memory: PlanMemory) -> PolicyProposal:
         plan = build_macro_plan(obs, memory)
@@ -377,6 +387,94 @@ class FestivalD0Planner:
             or (after.turn_ko and not before.turn_ko)
         )
 
+    def _route_v2(self, obs: Any, plan: MacroPlan) -> SelectionIntent | None:
+        """Complete-turn prize-route priority (C1, behind PTCG_DIPPLIN_ROUTE_V2).
+
+        Unifies Boss, Black Belt, Brave Bangle, and Bench expansion under one
+        ``TurnRoute`` so a single globally better two-strike outcome wins over
+        several individually rational fragmentary rules.  Returns ``None`` when
+        the baseline route is already optimal and the caller should keep the
+        unchanged D0 sequence.
+        """
+
+        baseline = compute_turn_route(obs, plan)
+        if not baseline.attack_available:
+            return None
+
+        # (completed prizes, tie-break rank, intent).  Rank matches the D0
+        # evaluation order: Boss > Black Belt > Brave Bangle > Bench expansion.
+        candidates: list[tuple[int, int, SelectionIntent]] = []
+
+        boss_play = self._play(obs, BOSS)
+        if boss_play:
+            boss_route = route_with_boss(obs, plan)
+            if boss_route is not None and boss_improves_completed_turn(baseline, boss_route):
+                candidates.append(
+                    (
+                        boss_route.completed_turn_guaranteed_prizes,
+                        0,
+                        SelectionIntent(tuple(boss_play), 1, "boss_prize_line", "strictly better complete-turn prizes"),
+                    )
+                )
+
+        belt_play = self._play(obs, BLACK_BELT)
+        if belt_play:
+            belt_route = route_with_modifier(obs, plan, black_belt=True)
+            if (
+                modifier_crosses_ko_threshold(baseline, belt_route)
+                or belt_route.completed_turn_guaranteed_prizes > baseline.completed_turn_guaranteed_prizes
+            ):
+                candidates.append(
+                    (
+                        belt_route.completed_turn_guaranteed_prizes,
+                        -1,
+                        SelectionIntent(tuple(belt_play), 1, "black_belt_threshold", "cross exact KO threshold"),
+                    )
+                )
+
+        bangle = self._attachments(obs, BRAVE_BANGLE, {DIPPLIN})
+        bangle = self._target_order(bangle, obs, (plan.current_attacker_serial or -1,))
+        if bangle:
+            bangle_route = route_with_modifier(obs, plan, bangle=True)
+            if (
+                modifier_crosses_ko_threshold(baseline, bangle_route)
+                or bangle_route.completed_turn_guaranteed_prizes > baseline.completed_turn_guaranteed_prizes
+            ):
+                candidates.append(
+                    (
+                        bangle_route.completed_turn_guaranteed_prizes,
+                        -2,
+                        SelectionIntent(tuple(bangle), 1, "bangle_threshold", "cross exact KO threshold"),
+                    )
+                )
+
+        if plan.bench_count < 5:
+            expanded = route_with_bench_expansion(obs, plan, additional_bodies=1)
+            if bench_changes_prize_route(baseline, expanded):
+                poffin = self._play(obs, POFFIN)
+                if poffin:
+                    candidates.append(
+                        (
+                            expanded.completed_turn_guaranteed_prizes,
+                            -3,
+                            SelectionIntent(tuple(poffin), 1, "poffin_damage", "board width changes the complete-turn prize route"),
+                        )
+                    )
+                else:
+                    basics = self._useful_basic_plays(obs, plan)
+                    if basics and plan.bench_count < 5:
+                        candidates.append(
+                            (
+                                expanded.completed_turn_guaranteed_prizes,
+                                -3,
+                                SelectionIntent(tuple(basics), 1, "bench_for_damage", "one body changes the complete-turn prize route"),
+                            )
+                        )
+
+        if not candidates:
+            return None
+        return max(candidates, key=lambda item: (item[0], item[1]))[2]
+
     @staticmethod
     def _actionable_prerequisites(plan: MacroPlan, hero: Any) -> tuple[str, ...]:
         missing = list(plan.missing_prerequisites)
@@ -511,6 +609,13 @@ class FestivalD0Planner:
             ] if thwackey_count < 2 else []
             if bench_thwackey:
                 return SelectionIntent(tuple(bench_thwackey), 1, "evolve_thwackey_before_attack", "establish tutor before ending the turn")
+            # Route-v2 is a strictly-better overlay: it fires only when it can
+            # prove a superior complete-turn prize outcome.  Otherwise the D0
+            # fragmentary route logic runs unchanged, preserving the floor.
+            if self.route_v2_enabled:
+                route_improvement = self._route_v2(obs, plan)
+                if route_improvement is not None:
+                    return route_improvement
             if self._boss_improves(obs, plan):
                 return SelectionIntent(tuple(self._play(obs, BOSS)), 1, "boss_prize_line", "strictly better completed-turn prizes")
             belt = self._play(obs, BLACK_BELT)
