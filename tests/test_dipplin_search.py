@@ -11,9 +11,17 @@ from cg.api import AreaType, OptionType, SelectContext, SelectType, to_observati
 
 from ptcg_ai.dipplin.cards import (
     APPLIN_DRAGON,
+    APPLIN_GRASS,
+    DIPPLIN,
     FESTIVAL,
+    GRASS_ENERGY,
     HILDA,
     LILLIE,
+    NIGHT_STRETCHER,
+    POFFIN,
+    POKE_PAD,
+    SACRED_ASH,
+    THWACKEY,
 )
 from ptcg_ai.dipplin.search import (
     D1Config,
@@ -25,6 +33,8 @@ from ptcg_ai.dipplin.search import (
     _Budget,
     _WorldRunner,
     _candidate_category,
+    _continuity_proof_admissible,
+    _continuity_root_causal,
     _strict_load_bearing,
     capture_semantic_selection,
     compatible_public_beliefs,
@@ -282,3 +292,144 @@ def test_world_runner_plans_multiple_deterministic_actions_before_turn_end(monke
     assert (2, (1,)) in backend.actions
     assert runner.plan_branch_points == 1
     assert runner.plan_alternatives == 1
+
+
+def _card(card_id: int, *, serial: int = 0):
+    return SimpleNamespace(id=card_id, serial=serial)
+
+
+def _continuity_obs(option: object) -> SimpleNamespace:
+    hero = SimpleNamespace(
+        hand=[_card(GRASS_ENERGY), _card(DIPPLIN), _card(POFFIN), _card(FESTIVAL), _card(LILLIE)],
+        active=[_card(DIPPLIN, serial=7)],
+        bench=[_card(APPLIN_GRASS, serial=8)],
+    )
+    opponent = SimpleNamespace(hand=[], active=[_card(DIPPLIN, serial=99)], bench=[])
+    return SimpleNamespace(
+        current=SimpleNamespace(
+            yourIndex=0,
+            players=[hero, opponent],
+            looking=[],
+            stadium=[],
+        ),
+        select=SimpleNamespace(
+            type=int(SelectType.MAIN),
+            context=int(SelectContext.MAIN),
+            minCount=1,
+            maxCount=1,
+            option=[option],
+            deck=[],
+            contextCard=None,
+            effect=None,
+        ),
+    )
+
+
+def _hand_option(option_type: int, *, in_play_area: int, in_play_index: int = 0, index: int = 0):
+    return SimpleNamespace(
+        type=option_type,
+        index=index,
+        area=int(AreaType.HAND),
+        playerIndex=0,
+        inPlayArea=in_play_area,
+        inPlayIndex=in_play_index,
+        attackId=-1,
+    )
+
+
+def test_continuity_root_causal_energy_to_bench_replacement():
+    option = _hand_option(int(OptionType.ATTACH), in_play_area=int(AreaType.BENCH))
+    candidate = RootCandidate((0,), object(), "replacement")
+    assert _continuity_root_causal(_continuity_obs(option), candidate)
+
+
+def test_continuity_root_causal_rejects_current_attacker_energy():
+    option = _hand_option(int(OptionType.ATTACH), in_play_area=int(AreaType.ACTIVE))
+    candidate = RootCandidate((0,), object(), "replacement")
+    assert not _continuity_root_causal(_continuity_obs(option), candidate)
+
+
+def test_continuity_root_causal_bench_evolution():
+    option = _hand_option(int(OptionType.EVOLVE), in_play_area=int(AreaType.BENCH), index=1)
+    candidate = RootCandidate((0,), object(), "replacement")
+    assert _continuity_root_causal(_continuity_obs(option), candidate)
+
+
+def test_continuity_root_causal_rejects_stadium_and_generic_draw():
+    festival = _hand_option(int(OptionType.PLAY), in_play_area=int(AreaType.STADIUM), index=3)
+    lillie = _hand_option(int(OptionType.PLAY), in_play_area=int(AreaType.BENCH), index=4)
+    assert not _continuity_root_causal(_continuity_obs(festival), RootCandidate((0,), object(), "enable"))
+    assert not _continuity_root_causal(_continuity_obs(lillie), RootCandidate((0,), object(), "replacement"))
+
+
+def test_continuity_root_causal_search_and_recover_cards():
+    # _continuity_obs builds hand = [GRASS_ENERGY, DIPPLIN, POFFIN, FESTIVAL, LILLIE].
+    for index, expected in ((2, True), (3, False), (4, False)):
+        option = _hand_option(int(OptionType.PLAY), in_play_area=int(AreaType.BENCH), index=index)
+        obs = _continuity_obs(option)
+        assert _continuity_root_causal(obs, RootCandidate((0,), object(), "replacement")) is expected
+
+
+def test_continuity_proof_admits_ready_replacement_when_tactical_equal():
+    option = _hand_option(int(OptionType.ATTACH), in_play_area=int(AreaType.BENCH))
+    obs = _continuity_obs(option)
+    candidate = RootCandidate((0,), object(), "replacement")
+    baseline_worlds = []
+    candidate_worlds = []
+    for _world in range(2):
+        baseline = [0.0] * len(METRIC_FIELDS)
+        cand_vec = [0.0] * len(METRIC_FIELDS)
+        cand_vec[METRIC_FIELDS.index("replacement_attacker_ready")] = 1.0
+        cand_vec[METRIC_FIELDS.index("current_attacker_ready")] = 1.0
+        cand_vec[METRIC_FIELDS.index("festival_active")] = 1.0
+        cand_vec[METRIC_FIELDS.index("remaining_core_attacker_resources")] = 3.0
+        baseline_worlds.append(baseline)
+        candidate_worlds.append(cand_vec)
+    assert _continuity_proof_admissible(candidate, obs, candidate_worlds, baseline_worlds)
+
+
+def test_continuity_proof_rejects_when_baseline_already_ready():
+    option = _hand_option(int(OptionType.ATTACH), in_play_area=int(AreaType.BENCH))
+    obs = _continuity_obs(option)
+    candidate = RootCandidate((0,), object(), "replacement")
+    baseline = [0.0] * len(METRIC_FIELDS)
+    baseline[METRIC_FIELDS.index("replacement_attacker_ready")] = 1.0
+    candidate_vec = baseline.copy()
+    candidate_vec[METRIC_FIELDS.index("remaining_core_attacker_resources")] = 3.0
+    assert not _continuity_proof_admissible(candidate, obs, [candidate_vec], [baseline])
+
+
+def test_continuity_proof_rejects_tactical_prize_gain():
+    option = _hand_option(int(OptionType.ATTACH), in_play_area=int(AreaType.BENCH))
+    obs = _continuity_obs(option)
+    candidate = RootCandidate((0,), object(), "replacement")
+    baseline = [0.0] * len(METRIC_FIELDS)
+    candidate_vec = [0.0] * len(METRIC_FIELDS)
+    candidate_vec[METRIC_FIELDS.index("prizes_taken_this_turn")] = 1.0
+    candidate_vec[METRIC_FIELDS.index("replacement_attacker_ready")] = 1.0
+    assert not _continuity_proof_admissible(candidate, obs, [candidate_vec], [baseline])
+
+
+def test_continuity_proof_rejects_world_disagreement():
+    option = _hand_option(int(OptionType.ATTACH), in_play_area=int(AreaType.BENCH))
+    obs = _continuity_obs(option)
+    candidate = RootCandidate((0,), object(), "replacement")
+    baseline_worlds = [[0.0] * len(METRIC_FIELDS), [0.0] * len(METRIC_FIELDS)]
+    candidate_worlds = []
+    for world in range(2):
+        vec = [0.0] * len(METRIC_FIELDS)
+        if world == 0:
+            vec[METRIC_FIELDS.index("replacement_attacker_ready")] = 1.0
+        candidate_worlds.append(vec)
+    assert not _continuity_proof_admissible(candidate, obs, candidate_worlds, baseline_worlds)
+
+
+def test_continuity_proof_rejects_fragile_bench_regression():
+    option = _hand_option(int(OptionType.ATTACH), in_play_area=int(AreaType.BENCH))
+    obs = _continuity_obs(option)
+    candidate = RootCandidate((0,), object(), "replacement")
+    baseline = [0.0] * len(METRIC_FIELDS)
+    candidate_vec = [0.0] * len(METRIC_FIELDS)
+    candidate_vec[METRIC_FIELDS.index("replacement_attacker_ready")] = 1.0
+    candidate_vec[METRIC_FIELDS.index("avoid_exposed_fragile_bench")] = -1.0
+    assert not _continuity_proof_admissible(candidate, obs, [candidate_vec], [baseline])
