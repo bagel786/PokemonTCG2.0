@@ -255,9 +255,9 @@ class FestivalD0Planner:
             priorities.extend((APPLIN_DRAGON, APPLIN_GRASS))
         if engine_count < 2:
             priorities.append(GROOKEY)
-        # Shaymin is a conditional fifth body.  In the Grim/Shadow Bullet line
-        # it has a concrete role; against revealed Dragapult damage counters it
-        # does not and exposed Applin are capped separately below.
+        # Shaymin is the conditional fifth body once the attacker and engine
+        # requirements above are satisfied; its Bench slot adds 20 to each
+        # Festival hit.
         priorities.append(SHAYMIN)
         result: list[int] = []
         for card_id in priorities:
@@ -360,7 +360,11 @@ class FestivalD0Planner:
         before = self._projection(obs, plan)
         after = self._projection(obs, plan, bench_delta=min(2, 5 - plan.bench_count))
         return (
-            plan.bench_count < 3
+            # Four is the audited expert attack floor: it reaches 80 per hit
+            # while retaining one slot when search supplies only a single
+            # useful body.  Three-benched attacks were the remaining broad
+            # damage defect against both single- and multi-Prize decks.
+            plan.bench_count < 4
             or (after.ko and not before.ko)
             or (after.turn_ko and not before.turn_ko)
         )
@@ -391,44 +395,65 @@ class FestivalD0Planner:
             if festival_now:
                 return SelectionIntent(tuple(festival_now), 1, "festival_for_attack", "unlock the second Festival strike")
 
-        # MAIN sequencing is behavior-cloned from 88 public rank-34 pilot
-        # replays.  It sees only this public state and already-legal options;
-        # every effect/search/promotion prompt remains under the explicit,
-        # parent-aware resolver and all output still crosses the safety boundary.
-        from .imitation import rank_main_options
-
-        learned, margin = rank_main_options(obs, plan)
-        if learned:
-            if plan.festival_active:
-                learned = [index for index in learned if option_card_id(obs, index) != FESTIVAL]
-            if do_wave_now:
-                non_end = [
-                    index for index in learned
-                    if _int(getattr(obs.select.option[index], "type", None)) != int(OptionType.END)
-                ]
-                learned = non_end or do_wave_now
-            return SelectionIntent(
-                tuple(learned),
-                1,
-                "expert_main",
-                f"public replay behavior ranker margin={margin:.3f}",
-            )
-
-        turn = _int(getattr(getattr(obs, "current", None), "turn", None), 0)
-
         # Quick Sign is an opening search attack, but it ends the turn.  The
         # rank-34 replay corpus consistently takes every permanent setup action
         # first (Poffin/Pad/Bug Set, Basics, legal Evolutions) and attacks only
         # after the board is developed.  Merely having Quick Sign legal must not
         # suppress those actions.
         quick_sign = self._attack(obs, QUICK_SIGN)
-        if active_id == VOLBEAT and turn == 1 and not quick_sign:
+        if active_id == VOLBEAT and plan.own_turn_ordinal == 1 and not quick_sign:
             energy = self._attachments(obs, GRASS_ENERGY, {VOLBEAT})
             if energy:
                 return SelectionIntent(tuple(energy), 1, "quick_sign_energy", "enable turn-one Quick Sign")
             bug_set = self._play(obs, BUG_SET)
             if bug_set:
                 return SelectionIntent(tuple(bug_set), 1, "quick_sign_bug_set", "look for the missing Grass Energy")
+
+        # When moving second, Quick Sign is the first-turn development action:
+        # it supplies up to two attacker Basics and ends the turn. Continuing
+        # to fill the Bench with Poffin first could make Quick Sign illegal and
+        # produced a dead turn in both represented archetypes. The starting
+        # player retains the longer permanent-setup sequence below.
+        if quick_sign and plan.own_turn_ordinal == 1 and plan.actual_order == "second":
+            return SelectionIntent(tuple(quick_sign), 1, "quick_sign_attack", "preserve two Bench slots for the opening search attack")
+
+        # Broad replay pattern 1: on the first hero turn, thin permanent setup
+        # before attaching, then enable the Active Basic's legal attack.  The
+        # previous tiers frequently ended with Energy still in hand whenever
+        # the Active was an Applin rather than Volbeat.
+        if plan.own_turn_ordinal == 1:
+            basics = self._useful_basic_plays(obs, plan)
+            if basics and len(getattr(hero, "bench", None) or []) < 5:
+                return SelectionIntent(tuple(basics), 1, "opening_basic", "place attacker and engine lines before search")
+            poffin = self._play(obs, POFFIN)
+            if poffin and any(missing in plan.missing_prerequisites for missing in ("replacement_applin", "thwackey")):
+                return SelectionIntent(tuple(poffin), 1, "opening_poffin", "fill the minimum attacker and engine board")
+            poke_pad = self._play(obs, POKE_PAD)
+            if poke_pad and any(missing in plan.missing_prerequisites for missing in ("active_dipplin", "replacement_applin", "replacement_dipplin", "thwackey")):
+                return SelectionIntent(tuple(poke_pad), 1, "opening_poke_pad", "secure the missing evolution line")
+            bug_set = self._play(obs, BUG_SET)
+            if bug_set:
+                return SelectionIntent(tuple(bug_set), 1, "opening_bug_set", "convert the free top-seven search before attachment")
+            opening_energy = [
+                index
+                for index in self._attachments(
+                    obs,
+                    GRASS_ENERGY,
+                    {VOLBEAT, APPLIN_DRAGON, APPLIN_GRASS, GROOKEY, SHAYMIN},
+                )
+                if _serial(option_target(obs, obs.select.option[index])) == _serial(active)
+            ]
+            if opening_energy:
+                return SelectionIntent(tuple(opening_energy), 1, "opening_energy", "enable the Active Basic's opening attack")
+            hand_count = _int(getattr(hero, "handCount", None), len(getattr(hero, "hand", None) or []))
+            hilda = self._play(obs, HILDA)
+            if hilda and plan.has_applin_line and DIPPLIN not in set(plan.known_hand_ids):
+                return SelectionIntent(tuple(hilda), 1, "opening_hilda", "guarantee the first evolution and Energy pair")
+            lillie = self._play(obs, LILLIE)
+            if lillie and hand_count <= 4:
+                return SelectionIntent(tuple(lillie), 1, "opening_lillie", "refresh a depleted opening hand after thinning")
+            if hilda and plan.has_applin_line:
+                return SelectionIntent(tuple(hilda), 1, "opening_hilda", "bank the first evolution and Energy pair")
 
         # Tier 1: escape a support Active when an attack-ready Dipplin waits.
         if active_id not in {DIPPLIN, APPLIN_GRASS, APPLIN_DRAGON} and ready_bench and retreat:
@@ -480,16 +505,13 @@ class FestivalD0Planner:
                 return SelectionIntent(tuple(bench_thwackey), 1, "evolve_thwackey_before_attack", "establish tutor before ending the turn")
             if self._boss_improves(obs, plan):
                 return SelectionIntent(tuple(self._play(obs, BOSS)), 1, "boss_prize_line", "strictly better completed-turn prizes")
-
             belt = self._play(obs, BLACK_BELT)
             if belt and self._modifier_crosses_threshold(obs, plan, BLACK_BELT):
                 return SelectionIntent(tuple(belt), 1, "black_belt_threshold", "cross exact KO threshold")
-
             bangle = self._attachments(obs, BRAVE_BANGLE, {DIPPLIN})
             bangle = self._target_order(bangle, obs, (plan.current_attacker_serial or -1,))
             if bangle and self._modifier_crosses_threshold(obs, plan, BRAVE_BANGLE):
                 return SelectionIntent(tuple(bangle), 1, "bangle_threshold", "cross exact KO threshold")
-
             # Bench development is itself damage for Do the Wave.  Only expand
             # when it establishes the minimum board or changes the prize route.
             if self._damage_expansion_needed(obs, plan):
@@ -523,6 +545,25 @@ class FestivalD0Planner:
             )
             if replacement_energy:
                 return SelectionIntent(tuple(replacement_energy), 1, "energy_replacement", "current attacker already complete")
+
+            replacement_applin_energy = [
+                index
+                for index in self._attachments(obs, GRASS_ENERGY, {APPLIN_DRAGON, APPLIN_GRASS})
+                if _serial(option_target(obs, obs.select.option[index])) != _serial(active)
+                and _energy_count(option_target(obs, obs.select.option[index])) == 0
+            ]
+            replacement_applin_energy = self._target_order(
+                replacement_applin_energy,
+                obs,
+                (plan.replacement_attacker_serial or -1,),
+            )
+            if replacement_applin_energy:
+                return SelectionIntent(
+                    tuple(replacement_applin_energy),
+                    1,
+                    "energy_replacement_applin",
+                    "pre-load the replacement before evolution",
+                )
 
             # Free Pokemon search and the two-card Hilda line are development,
             # not post-attack recovery.  The original D0 deferred them until no
@@ -561,7 +602,11 @@ class FestivalD0Planner:
             # A legal but nullified Do the Wave is not fired merely because it
             # exists.  Continue through recovery lines below.
 
-        # Tier 3: construct the first attacker in target-serial order.
+        # Broad replay pattern 2: evolve all immediately usable attacker and
+        # engine lines before spending the once-per-turn attachment.  This
+        # preserves the choice of which newly evolved Dipplin should receive
+        # Energy and creates the deterministic tutor before an attack ends the
+        # turn.
         active_evolution = [
             index
             for index in self._evolutions(obs, DIPPLIN, {APPLIN_GRASS, APPLIN_DRAGON})
@@ -569,6 +614,48 @@ class FestivalD0Planner:
         ]
         if active_evolution:
             return SelectionIntent(tuple(active_evolution), 1, "evolve_current_attacker", "first missing attack prerequisite")
+
+        early_bench_evolution = self._evolutions(obs, DIPPLIN, {APPLIN_GRASS, APPLIN_DRAGON})
+        early_bench_evolution = self._target_order(
+            early_bench_evolution,
+            obs,
+            (plan.replacement_attacker_serial or -1,),
+        )
+        if early_bench_evolution:
+            return SelectionIntent(tuple(early_bench_evolution), 1, "evolve_promotable_attacker", "establish every available prize-trading line")
+
+        early_thwackey_count = sum(
+            _card_id(card) == THWACKEY
+            for card in list(getattr(hero, "active", None) or []) + list(getattr(hero, "bench", None) or [])
+            if card is not None
+        )
+        early_thwackey = self._evolutions(obs, THWACKEY, {GROOKEY}) if early_thwackey_count < 2 else []
+        if early_thwackey:
+            return SelectionIntent(tuple(early_thwackey), 1, "evolve_thwackey", "establish deterministic engine before attachment")
+
+        # Broad replay pattern 3: known Basics precede deck search, and free
+        # search precedes Energy.  The predicates keep the board to attacker
+        # and engine requirements instead of indiscriminately filling it.
+        early_basics = self._useful_basic_plays(obs, plan)
+        if early_basics and len(getattr(hero, "bench", None) or []) < 5:
+            return SelectionIntent(tuple(early_basics), 1, "play_basic", "complete the minimum attacker and engine board")
+        early_poffin = self._play(obs, POFFIN)
+        if early_poffin and any(missing in plan.missing_prerequisites for missing in ("replacement_applin", "thwackey")):
+            return SelectionIntent(tuple(early_poffin), 1, "poffin_setup", "fill a missing Basic attacker or engine line")
+        early_pad = self._play(obs, POKE_PAD)
+        if early_pad and any(missing in plan.missing_prerequisites for missing in ("active_dipplin", "replacement_applin", "replacement_dipplin", "thwackey")):
+            return SelectionIntent(tuple(early_pad), 1, "poke_pad_setup", "fetch the exact missing non-rule Pokemon")
+        early_bug_set = self._play(obs, BUG_SET)
+        if early_bug_set:
+            return SelectionIntent(tuple(early_bug_set), 1, "bug_set_setup", "use visible Grass resource search before attachment")
+
+        festival_window = self._play(obs, FESTIVAL)
+        if festival_window and not plan.festival_active and any(
+            _card_id(card) == DIPPLIN
+            for card in list(getattr(hero, "active", None) or []) + list(getattr(hero, "bench", None) or [])
+            if card is not None
+        ):
+            return SelectionIntent(tuple(festival_window), 1, "festival_before_energy", "open the durable attack window before attachment")
 
         active_energy = [
             index
@@ -578,6 +665,20 @@ class FestivalD0Planner:
         ]
         if active_energy:
             return SelectionIntent(tuple(active_energy), 1, "energy_current_attacker", "enable current-turn attack")
+
+        # Pre-load an unevolved Active Applin when the evolution is not yet
+        # available. The Energy survives evolution, enables Find a Friend or
+        # Tumbling now, and leaves the following turn's attachment free for the
+        # replacement. The prior Dipplin-only filter caused repeated dead turns
+        # after promotion.
+        active_applin_energy = [
+            index
+            for index in self._attachments(obs, GRASS_ENERGY, {APPLIN_DRAGON, APPLIN_GRASS})
+            if _serial(option_target(obs, obs.select.option[index])) == _serial(active)
+            and _energy_count(active) == 0
+        ]
+        if active_applin_energy:
+            return SelectionIntent(tuple(active_applin_energy), 1, "energy_active_applin", "pre-load the current attacker before evolution")
 
         if active_id == DIPPLIN and _energy_count(active) >= 1 and not plan.festival_active:
             festival = self._play(obs, FESTIVAL)
@@ -607,6 +708,23 @@ class FestivalD0Planner:
         )
         if bench_energy:
             return SelectionIntent(tuple(bench_energy), 1, "energy_promotable_attacker", "one-Energy Dipplin is complete")
+
+        # Energy can be attached to Applin before it evolves. This is the
+        # highest-impact replacement-development pattern in the expert audit:
+        # after evolution the line is immediately attack-ready, instead of
+        # consuming the next turn's attachment and losing a prize-race tempo.
+        bench_applin_energy = [
+            index
+            for index in self._attachments(obs, GRASS_ENERGY, {APPLIN_DRAGON, APPLIN_GRASS})
+            if _energy_count(option_target(obs, obs.select.option[index])) == 0
+        ]
+        bench_applin_energy = self._target_order(
+            bench_applin_energy,
+            obs,
+            (plan.replacement_attacker_serial or -1,),
+        )
+        if bench_applin_energy:
+            return SelectionIntent(tuple(bench_applin_energy), 1, "energy_replacement_applin", "pre-load the replacement before evolution")
 
         if ready_bench and retreat:
             return SelectionIntent(tuple(retreat), 1, "retreat_completed_line", "attach-retreat-attack line completed")
@@ -807,8 +925,6 @@ class DipplinCompetitionAgent:
             telemetry.increment("black_belt_threshold_crossing_uses")
         if resolver == "boss_prize_line" or BOSS in selected_card_ids:
             telemetry.increment("boss_uses")
-        if resolver == "expert_main":
-            telemetry.increment("expert_main_decisions")
         if proposal.plan.productive_attack_legal:
             telemetry.increment("productive_attacks_offered")
         if resolver == "productive_do_the_wave" or took_do_wave:

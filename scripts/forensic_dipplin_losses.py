@@ -145,9 +145,16 @@ def _classify(trace: list[dict[str, Any]]) -> tuple[str, list[str]]:
     return bucket, flags
 
 
-def run_game(opponent_path: Path, *, hero_seat: int, go_first: bool, cap: int) -> dict[str, Any]:
+def run_game(
+    opponent_path: Path,
+    *,
+    hero_seat: int,
+    go_first: bool,
+    cap: int,
+    opponent_env: dict[str, str] | None = None,
+) -> dict[str, Any]:
     hero = DipplinCompetitionAgent(search_enabled=False, go_first=go_first)
-    opponent = ExternalSubmissionAgent(opponent_path, {})
+    opponent = ExternalSubmissionAgent(opponent_path, dict(opponent_env or {}))
     decks = [list(hero.deck), list(opponent.deck)] if hero_seat == 0 else [list(opponent.deck), list(hero.deck)]
     raw, started = battle_start(decks[0], decks[1])
     if raw is None or int(started.errorType) != 0:
@@ -196,8 +203,15 @@ def main() -> None:
     parser.add_argument("--opponent", type=Path, required=True)
     parser.add_argument("--games-per-order", type=int, default=20)
     parser.add_argument("--max-decisions", type=int, default=2000)
+    parser.add_argument("--opponent-env", default="{}", help="JSON object of explicit opponent environment overrides")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    opponent_env = json.loads(args.opponent_env)
+    if not isinstance(opponent_env, dict) or not all(
+        isinstance(key, str) and isinstance(value, str)
+        for key, value in opponent_env.items()
+    ):
+        raise ValueError("--opponent-env must be a JSON object of string pairs")
     rows: list[dict[str, Any]] = []
     # Alternate physical seats inside each forced-order block.
     for go_first in (True, False):
@@ -208,6 +222,7 @@ def main() -> None:
                     hero_seat=index % 2,
                     go_first=go_first,
                     cap=args.max_decisions,
+                    opponent_env=opponent_env,
                 )
             )
     losses = [row for row in rows if row["outcome"] == "loss"]
