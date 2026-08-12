@@ -2,24 +2,37 @@ from __future__ import annotations
 
 import json
 import random
+import time
 from copy import deepcopy
 from pathlib import Path
 from types import SimpleNamespace
 
 from cg.api import AreaType, OptionType, SelectContext, SelectType, to_observation_class
 
-from ptcg_ai.dipplin.cards import APPLIN_DRAGON, FESTIVAL
+from ptcg_ai.dipplin.cards import (
+    APPLIN_DRAGON,
+    FESTIVAL,
+    HILDA,
+    LILLIE,
+)
 from ptcg_ai.dipplin.search import (
+    D1Config,
     LOAD_BEARING_INDICES,
     METRIC_FIELDS,
+    RootCandidate,
     _COMPILED_PUBLIC_DECKS,
+    _AttackTrace,
+    _Budget,
+    _WorldRunner,
     _candidate_category,
     _strict_load_bearing,
     capture_semantic_selection,
     compatible_public_beliefs,
     determinize_public_world,
+    generate_root_candidates,
     resolve_semantic_selection,
 )
+from ptcg_ai.dipplin.snapshot import PlanMemory, SemanticAction
 
 
 FIXTURES = Path(__file__).resolve().parents[1] / "artifacts" / "dipplin_prompt_audit"
@@ -86,6 +99,40 @@ def test_festival_setup_is_not_itself_a_tactical_proof():
     assert not _strict_load_bearing(festival, baseline)
 
 
+def test_root_budget_keeps_hilda_and_lillie_as_distinct_opening_lines():
+    hilda = SimpleNamespace(id=HILDA, serial=10, playerIndex=0)
+    lillie = SimpleNamespace(id=LILLIE, serial=11, playerIndex=0)
+    hero = SimpleNamespace(hand=[hilda, lillie], active=[], bench=[])
+    opponent = SimpleNamespace(hand=[], active=[], bench=[])
+    options = [
+        SimpleNamespace(type=int(OptionType.ATTACK), attackId=115),
+        SimpleNamespace(type=int(OptionType.PLAY), index=0),
+        SimpleNamespace(type=int(OptionType.PLAY), index=1),
+    ]
+    obs = SimpleNamespace(
+        current=SimpleNamespace(yourIndex=0, players=[hero, opponent], looking=[], stadium=[]),
+        select=SimpleNamespace(
+            type=int(SelectType.MAIN),
+            context=int(SelectContext.MAIN),
+            minCount=1,
+            maxCount=1,
+            option=options,
+            deck=[],
+            contextCard=None,
+            effect=None,
+        ),
+    )
+
+    candidates = generate_root_candidates(obs, [0], 4)
+    selected = {
+        options[candidate.original_action[0]].index
+        for candidate in candidates[1:]
+        if int(options[candidate.original_action[0]].type) == int(OptionType.PLAY)
+    }
+
+    assert selected == {0, 1}
+
+
 def test_semantic_root_action_survives_option_reordering():
     raw, obs = _fixture("main_do_the_wave")
     original = next(
@@ -120,3 +167,118 @@ def test_public_determinization_has_exact_hidden_zone_counts():
     assert len(first["opponent_hand"]) == int(opponent.handCount)
     assert len(first["your_prize"]) == len(hero.prize)
     assert len(first["opponent_prize"]) == len(opponent.prize)
+
+
+def test_world_runner_plans_multiple_deterministic_actions_before_turn_end(monkeypatch):
+    card = SimpleNamespace(id=FESTIVAL, serial=7, playerIndex=0)
+    hero = SimpleNamespace(hand=[card], active=[], bench=[], discard=[], prize=[])
+    opponent = SimpleNamespace(hand=[], active=[], bench=[], discard=[], prize=[])
+
+    def select(options):
+        return SimpleNamespace(
+            type=int(SelectType.MAIN),
+            context=int(SelectContext.MAIN),
+            minCount=1,
+            maxCount=1,
+            option=options,
+            deck=[],
+            contextCard=None,
+            effect=None,
+        )
+
+    root_option = SimpleNamespace(type=int(OptionType.PLAY), index=0)
+    attack = SimpleNamespace(type=int(OptionType.ATTACK), attackId=115)
+    end = SimpleNamespace(type=int(OptionType.END))
+
+    def observation(turn, prompt, score=0):
+        return SimpleNamespace(
+            current=SimpleNamespace(
+                turn=turn,
+                yourIndex=0,
+                result=-1,
+                players=[hero, opponent],
+                looking=[],
+                stadium=[],
+                score=score,
+            ),
+            select=prompt,
+            logs=[],
+        )
+
+    root_obs = observation(5, select([root_option]))
+    planning_obs = observation(5, select([attack, end]))
+    good_leaf = observation(6, None, score=1)
+    bad_leaf = observation(6, None, score=0)
+
+    class Backend:
+        def __init__(self):
+            self.actions = []
+
+        def begin(self, _obs, _determinization):
+            return SimpleNamespace(searchId=1, observation=root_obs)
+
+        def step(self, search_id, action):
+            self.actions.append((search_id, tuple(action)))
+            if search_id == 1:
+                return SimpleNamespace(searchId=2, observation=planning_obs)
+            if search_id == 2 and action == [0]:
+                return SimpleNamespace(searchId=3, observation=good_leaf)
+            if search_id == 2 and action == [1]:
+                return SimpleNamespace(searchId=4, observation=bad_leaf)
+            raise AssertionError((search_id, action))
+
+        def release(self, _search_id):
+            return None
+
+        def end(self):
+            return None
+
+    class Planner:
+        def propose(self, _obs, _snapshot, _memory):
+            intent = SimpleNamespace(
+                ranked_indices=(1,),
+                desired_count=1,
+                resolver="fake_d0",
+                reason="end baseline",
+            )
+            return SimpleNamespace(intent=intent)
+
+    monkeypatch.setattr(
+        "ptcg_ai.dipplin.policy.semantic_final_action",
+        lambda *_args, **_kwargs: SemanticAction(kind="TEST"),
+    )
+    monkeypatch.setattr(
+        "ptcg_ai.dipplin.search.PlanSnapshot.from_observation",
+        lambda *_args, **_kwargs: SimpleNamespace(),
+    )
+    monkeypatch.setattr(
+        "ptcg_ai.dipplin.search._advance_trace",
+        lambda trace, *_args, **_kwargs: trace,
+    )
+    monkeypatch.setattr(
+        "ptcg_ai.dipplin.search.completed_turn_metric",
+        lambda _root, leaf, *_args: (float(leaf.current.score),) + (0.0,) * (len(METRIC_FIELDS) - 1),
+    )
+
+    now = time.monotonic()
+    backend = Backend()
+    runner = _WorldRunner(
+        Planner(),
+        backend,
+        _Budget(now, now + 5, now + 5, 32, 32, time.monotonic),
+        D1Config(max_candidates=3, max_plan_candidates=3),
+    )
+    root = RootCandidate(
+        (0,),
+        capture_semantic_selection(root_obs, [0]),
+        "baseline",
+        True,
+    )
+
+    outcomes = runner.run(root_obs, [root], {}, PlanMemory())
+
+    assert outcomes[root.key][0] == 1.0
+    assert (2, (0,)) in backend.actions
+    assert (2, (1,)) in backend.actions
+    assert runner.plan_branch_points == 1
+    assert runner.plan_alternatives == 1

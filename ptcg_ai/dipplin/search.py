@@ -88,6 +88,7 @@ METRIC_FIELDS = (
 # a tie.  This remains opponent-agnostic and is derived solely from the public
 # completed-turn state.
 LOAD_BEARING_INDICES = frozenset(range(5))
+DISRUPTION_OVERRIDE_CARDS = frozenset({BOSS, BLACK_BELT})
 
 _RANDOM_OR_DECK_TOUCH_CARDS = frozenset(
     {
@@ -148,12 +149,14 @@ class D1Config:
     worlds: int = 2
     max_candidates: int = 4
     max_steps_per_path: int = 48
-    max_nodes_per_decision: int = 256
-    max_native_calls_per_decision: int = 272
-    soft_timeout_seconds: float = 0.45
+    max_nodes_per_decision: int = 512
+    max_native_calls_per_decision: int = 544
+    soft_timeout_seconds: float = 0.65
     hard_timeout_seconds: float = 1.50
-    max_searches_per_game: int = 16
+    max_searches_per_game: int = 32
     max_opponent_promotions: int = 5
+    max_planning_branch_points: int = 3
+    max_plan_candidates: int = 3
     seed_salt: str = "festival-d1-public-v1"
 
     def __post_init__(self) -> None:
@@ -166,8 +169,12 @@ class D1Config:
             int(self.max_nodes_per_decision),
             int(self.max_native_calls_per_decision),
             int(self.max_searches_per_game),
+            int(self.max_planning_branch_points),
+            int(self.max_plan_candidates),
         ) <= 0:
             raise ValueError("D1 bounds must be positive")
+        if int(self.max_plan_candidates) > int(self.max_candidates):
+            raise ValueError("D1 plan candidates cannot exceed root candidates")
         if not (
             math.isfinite(self.soft_timeout_seconds)
             and math.isfinite(self.hard_timeout_seconds)
@@ -490,8 +497,24 @@ def _candidate_category(obs: Any, option: Any) -> tuple[str, tuple[int, ...]] | 
         SACRED_ASH,
         BROCK,
         HILDA,
+        LILLIE,
     }:
-        return "replacement", (600, -card_id, 0)
+        # Opening Supporter-vs-Quick-Sign and draw-vs-tutor sequencing are
+        # precisely the high-leverage lines completed-turn search should
+        # adjudicate.  The score is only a bounded candidate ordering; engine
+        # outcomes still decide.  Prefer broad multi-piece Supporters when the
+        # four-slot root budget cannot include every legal search card.
+        priority = {
+            HILDA: 790,
+            LILLIE: 780,
+            BROCK: 770,
+            NIGHT_STRETCHER: 740,
+            POKE_PAD: 720,
+            BUG_SET: 710,
+            POFFIN: 700,
+            SACRED_ASH: 690,
+        }.get(card_id, 600)
+        return "replacement", (priority, -card_id, 0)
     if option_type == int(OptionType.END):
         return "end", (0, 0, 0)
     return None
@@ -502,7 +525,7 @@ def generate_root_candidates(obs: Any, baseline: Sequence[int], limit: int = 4) 
 
     baseline_semantic = capture_semantic_selection(obs, baseline)
     baseline_candidate = RootCandidate(tuple(map(int, baseline)), baseline_semantic, "baseline", True)
-    ranked: dict[str, tuple[tuple[int, ...], RootCandidate]] = {}
+    ranked: dict[str, list[tuple[tuple[int, ...], RootCandidate]]] = {}
     for index, option in enumerate(getattr(obs.select, "option", None) or []):
         classification = _candidate_category(obs, option)
         if classification is None:
@@ -515,12 +538,30 @@ def generate_root_candidates(obs: Any, baseline: Sequence[int], limit: int = 4) 
         if semantic.key == baseline_semantic.key:
             continue
         candidate = RootCandidate(action, semantic, category)
-        current = ranked.get(category)
         tie_key = score + tuple(-ord(ch) for ch in semantic.key[:8])
-        if current is None or tie_key > current[0]:
-            ranked[category] = (tie_key, candidate)
+        ranked.setdefault(category, []).append((tie_key, candidate))
+    for rows in ranked.values():
+        rows.sort(key=lambda item: item[0], reverse=True)
 
-    alternatives = [ranked[name][1] for name in ("enable", "prize", "replacement") if name in ranked]
+    alternatives = [
+        ranked[name][0][1]
+        for name in ("enable", "prize", "replacement")
+        if ranked.get(name)
+    ]
+    # Use otherwise idle root slots for a second semantically distinct option
+    # in the same macro category.  This is crucial for Hilda-vs-Lillie and
+    # attachment/evolution target choices; the previous category compression
+    # silently made those decisions unsearchable.
+    leftovers = sorted(
+        (
+            item
+            for rows in ranked.values()
+            for item in rows[1:]
+        ),
+        key=lambda item: item[0],
+        reverse=True,
+    )
+    alternatives.extend(candidate for _score, candidate in leftovers)
     unique: list[RootCandidate] = [baseline_candidate]
     seen = {baseline_candidate.key}
     for candidate in alternatives:
@@ -1104,6 +1145,42 @@ def _strict_load_bearing(left: Sequence[float], right: Sequence[float]) -> bool:
     return any(float(left[index]) > float(right[index]) for index in LOAD_BEARING_INDICES)
 
 
+def _override_is_causally_admissible(
+    candidate: RootCandidate,
+    obs: Any,
+    left_worlds: Sequence[Sequence[float]],
+    right_worlds: Sequence[Sequence[float]],
+) -> bool:
+    """Require the root action itself to explain the completed-turn gain.
+
+    A prior version credited arbitrary setup roots when D0's later continuation
+    happened to find a KO in one determinization.  Deterministic attack,
+    enablement, and explicit Boss/Belt roots have a direct causal route.  Other
+    setup roots must improve the completed turn in every world, not merely one.
+    """
+
+    option = obs.select.option[int(candidate.original_action[0])]
+    option_type = _integer(getattr(option, "type", None))
+    card_id = _option_card_id(obs, option)
+    direct = (
+        option_type in {
+            int(OptionType.ATTACK),
+            int(OptionType.RETREAT),
+            int(OptionType.EVOLVE),
+            int(OptionType.ATTACH),
+        }
+        or card_id in DISRUPTION_OVERRIDE_CARDS | {FESTIVAL}
+    )
+    tactical = [
+        any(
+            float(left[index]) > float(right[index])
+            for index in range(5)
+        )
+        for left, right in zip(left_worlds, right_worlds)
+    ]
+    return any(tactical) if direct else all(tactical)
+
+
 class _WorldRunner:
     def __init__(
         self,
@@ -1111,15 +1188,22 @@ class _WorldRunner:
         backend: Any,
         budget: _Budget,
         config: D1Config,
+        *,
+        allow_random: bool = False,
+        planning_enabled: bool = True,
     ) -> None:
         self.planner = planner
         self.backend = backend
         self.budget = budget
         self.config = config
+        self.allow_random = bool(allow_random)
+        self.planning_enabled = bool(planning_enabled)
         self.created: list[Any] = []
         self.created_ids: set[int] = set()
         self.release_attempted: set[int] = set()
         self.cleanup_errors: list[str] = []
+        self.plan_branch_points = 0
+        self.plan_alternatives = 0
 
     def _remember(self, state: Any, label: str) -> Any:
         if state is None or getattr(state, "searchId", None) is None:
@@ -1162,7 +1246,7 @@ class _WorldRunner:
         raise D1Error("ambiguous_nonhero_prompt")
 
     def _hero_action(self, obs: Any, memory: PlanMemory) -> tuple[list[int], Any]:
-        if _action_touches_rng_or_hidden_deck(obs, []):
+        if not self.allow_random and _action_touches_rng_or_hidden_deck(obs, []):
             raise D1Error("rng_or_hidden_deck_taint")
         snapshot = PlanSnapshot.from_observation(obs, memory)
         proposal = self.planner.propose(obs, snapshot, memory)
@@ -1171,7 +1255,7 @@ class _WorldRunner:
             list(proposal.intent.ranked_indices),
             proposal.intent.desired_count,
         )
-        if _action_touches_rng_or_hidden_deck(obs, action):
+        if not self.allow_random and _action_touches_rng_or_hidden_deck(obs, action):
             raise D1Error("rng_or_hidden_deck_taint")
         return action, proposal
 
@@ -1184,6 +1268,7 @@ class _WorldRunner:
         memory: PlanMemory,
         trace: _AttackTrace,
         depth: int,
+        planning_branch_points: int,
     ) -> list[tuple[tuple[float, ...], _AttackTrace]]:
         observation = state.observation
         if _completed(observation, root_turn):
@@ -1196,10 +1281,10 @@ class _WorldRunner:
         if actor != root_player:
             leaves: list[tuple[tuple[float, ...], _AttackTrace]] = []
             for action in self._opponent_actions(observation):
-                if _action_touches_rng_or_hidden_deck(observation, action):
+                if not self.allow_random and _action_touches_rng_or_hidden_deck(observation, action):
                     raise D1Error("rng_or_hidden_deck_taint")
                 child = self._step(state, action, "opponent_continuation")
-                if _logs_taint_rng_or_hidden_deck(child.observation, root_turn):
+                if not self.allow_random and _logs_taint_rng_or_hidden_deck(child.observation, root_turn):
                     raise D1Error("rng_or_hidden_deck_taint")
                 leaves.extend(
                     self._rollout(
@@ -1210,37 +1295,110 @@ class _WorldRunner:
                         memory.clone(),
                         replace(trace, log_rows=trace.log_rows + _log_rows(child.observation)),
                         depth + 1,
+                        planning_branch_points,
                     )
                 )
             if not leaves:
                 raise IncompleteLeafError("opponent branch has no completed leaf")
             return leaves
 
-        action, proposal = self._hero_action(observation, memory)
-        child = self._step(state, action, "hero_continuation")
-        if _logs_taint_rng_or_hidden_deck(child.observation, root_turn):
-            raise D1Error("rng_or_hidden_deck_taint")
-        attack_id = _action_attack_id(observation, action)
-        child_trace = _advance_trace(trace, observation, child.observation, root_player, attack_id)
+        baseline_action, proposal = self._hero_action(observation, memory)
+        actions: tuple[RootCandidate, ...] = ()
+        select = observation.select
+        can_plan = (
+            self.planning_enabled
+            and not self.allow_random
+            and planning_branch_points < self.config.max_planning_branch_points
+            and _integer(getattr(select, "type", None)) == int(SelectType.MAIN)
+            and _integer(getattr(select, "context", None)) == int(SelectContext.MAIN)
+            and int(getattr(select, "minCount", 0)) == 1
+            and int(getattr(select, "maxCount", 0)) == 1
+        )
+        if can_plan:
+            actions = generate_root_candidates(
+                observation,
+                baseline_action,
+                self.config.max_plan_candidates,
+            )
+            actions = tuple(
+                candidate
+                for candidate in actions
+                if candidate.is_baseline
+                or not _action_touches_rng_or_hidden_deck(
+                    observation,
+                    candidate.original_action,
+                )
+            )
+        if not actions:
+            actions = (
+                RootCandidate(
+                    tuple(map(int, baseline_action)),
+                    capture_semantic_selection(observation, baseline_action),
+                    "baseline",
+                    True,
+                ),
+            )
+
+        if len(actions) > 1:
+            self.plan_branch_points += 1
+            self.plan_alternatives += len(actions) - 1
+
         from .policy import semantic_final_action
 
-        memory.commit(
-            semantic_final_action(
-                observation,
-                action,
-                proposal.intent.resolver,
-                proposal.intent.reason,
+        planned: list[tuple[tuple[float, ...], list[tuple[tuple[float, ...], _AttackTrace]]]] = []
+        last_uncertifiable: D1Error | None = None
+        for candidate in actions:
+            action = list(candidate.original_action)
+            branch_memory = memory.clone()
+            resolver = proposal.intent.resolver if candidate.is_baseline else "d1_plan"
+            reason = proposal.intent.reason if candidate.is_baseline else candidate.category
+            branch_memory.commit(
+                semantic_final_action(
+                    observation,
+                    action,
+                    resolver,
+                    reason,
+                )
             )
-        )
-        return self._rollout(
-            child,
-            root_obs,
-            root_player,
-            root_turn,
-            memory,
-            child_trace,
-            depth + 1,
-        )
+            try:
+                child = self._step(state, action, f"hero_plan:{candidate.category}")
+                if not self.allow_random and _logs_taint_rng_or_hidden_deck(child.observation, root_turn):
+                    raise D1Error("rng_or_hidden_deck_taint")
+                attack_id = _action_attack_id(observation, action)
+                child_trace = _advance_trace(
+                    trace,
+                    observation,
+                    child.observation,
+                    root_player,
+                    attack_id,
+                )
+                leaves = self._rollout(
+                    child,
+                    root_obs,
+                    root_player,
+                    root_turn,
+                    branch_memory,
+                    child_trace,
+                    depth + 1,
+                    planning_branch_points + int(len(actions) > 1),
+                )
+            except D1Timeout:
+                raise
+            except D1Error as exc:
+                if str(exc) in {"call_budget", "node_budget"}:
+                    raise
+                last_uncertifiable = exc
+                continue
+            if leaves:
+                # The hero chooses a plan by its adversarial public-promotion
+                # floor. Ties retain D0 because it is listed first.
+                planned.append((min(leaf[0] for leaf in leaves), leaves))
+        if not planned:
+            if last_uncertifiable is not None:
+                raise last_uncertifiable
+            raise IncompleteLeafError("hero plan has no completed leaf")
+        best_floor = max(item[0] for item in planned)
+        return next(leaves for floor, leaves in planned if floor == best_floor)
 
     def run(
         self,
@@ -1260,48 +1418,56 @@ class _WorldRunner:
             root_turn = int(obs.current.turn)
             root_observation = root.observation
             for candidate in candidates:
-                remapped = resolve_semantic_selection(root_observation, candidate.semantic)
-                if remapped is None:
-                    raise SemanticRemapError("root semantic remap failed")
-                if _action_touches_rng_or_hidden_deck(root_observation, remapped):
-                    raise D1Error("rng_or_hidden_deck_taint")
-                memory = base_memory.clone()
-                from .policy import semantic_final_action
+                try:
+                    remapped = resolve_semantic_selection(root_observation, candidate.semantic)
+                    if remapped is None:
+                        raise SemanticRemapError("root semantic remap failed")
+                    if not self.allow_random and _action_touches_rng_or_hidden_deck(root_observation, remapped):
+                        raise D1Error("rng_or_hidden_deck_taint")
+                    memory = base_memory.clone()
+                    from .policy import semantic_final_action
 
-                root_semantic = semantic_final_action(
-                    root_observation,
-                    remapped,
-                    "d1_root",
-                    candidate.category,
-                )
-                memory.commit(root_semantic)
-                branch = self._step(root, remapped, f"root:{candidate.category}")
-                if _logs_taint_rng_or_hidden_deck(branch.observation, root_turn):
-                    raise D1Error("rng_or_hidden_deck_taint")
-                attack_id = _action_attack_id(root_observation, remapped)
-                trace = _advance_trace(
-                    _AttackTrace(),
-                    root_observation,
-                    branch.observation,
-                    root_player,
-                    attack_id,
-                )
-                leaves = self._rollout(
-                    branch,
-                    root_observation,
-                    root_player,
-                    root_turn,
-                    memory,
-                    trace,
-                    1,
-                )
-                # Public adversarial defender promotions use the worst complete
-                # leaf for this candidate.  No hypothesized defender hand is
-                # ever passed to D0.
+                    root_semantic = semantic_final_action(
+                        root_observation,
+                        remapped,
+                        "d1_root",
+                        candidate.category,
+                    )
+                    memory.commit(root_semantic)
+                    branch = self._step(root, remapped, f"root:{candidate.category}")
+                    if not self.allow_random and _logs_taint_rng_or_hidden_deck(branch.observation, root_turn):
+                        raise D1Error("rng_or_hidden_deck_taint")
+                    attack_id = _action_attack_id(root_observation, remapped)
+                    trace = _advance_trace(
+                        _AttackTrace(),
+                        root_observation,
+                        branch.observation,
+                        root_player,
+                        attack_id,
+                    )
+                    leaves = self._rollout(
+                        branch,
+                        root_observation,
+                        root_player,
+                        root_turn,
+                        memory,
+                        trace,
+                        1,
+                        0,
+                    )
+                except D1Timeout:
+                    raise
+                except D1Error as exc:
+                    if candidate.is_baseline or str(exc) in {"call_budget", "node_budget"}:
+                        raise
+                    # One uncertifiable alternative must not poison otherwise
+                    # deterministic root siblings. It simply has no evidence
+                    # in this world and cannot qualify globally.
+                    continue
                 vectors = [leaf[0] for leaf in leaves]
                 outcomes[candidate.key] = min(vectors)
-            if set(outcomes) != {candidate.key for candidate in candidates}:
-                raise D1Error("unequal_candidate_coverage")
+            if candidates[0].key not in outcomes:
+                raise D1Error("baseline_missing")
         except Exception as exc:
             primary_error = exc
         finally:
@@ -1392,16 +1558,11 @@ class FestivalD1Search:
             candidates = generate_root_candidates(obs, fallback, self.config.max_candidates)
         except Exception:
             return self._abstain(fallback, "semantic_capture")
-        # Tainted alternatives cannot poison a deterministic comparison.  If
-        # D0 itself touches hidden deck order, preserve it without spending the
-        # bounded search budget.
-        if _action_touches_rng_or_hidden_deck(obs, fallback):
-            return self._abstain(fallback, "baseline_rng_or_hidden_deck")
-        candidates = tuple(
-            candidate
+        # Hidden-deck roots use isolated fresh-root replay certification below.
+        # Deterministic roots retain the cheaper common-root comparison.
+        replay_required = any(
+            _action_touches_rng_or_hidden_deck(obs, candidate.original_action)
             for candidate in candidates
-            if candidate.is_baseline
-            or not _action_touches_rng_or_hidden_deck(obs, candidate.original_action)
         )
         if len(candidates) < 2:
             return fallback
@@ -1446,22 +1607,84 @@ class FestivalD1Search:
                     opponent_deck,
                     random.Random(seed),
                 )
-                runner = _WorldRunner(self.planner, self.backend, budget, self.config)
-                world = runner.run(obs, candidates, determinization, working_memory)
-                if set(world) != set(outcomes):
-                    raise D1Error("unequal_candidate_coverage")
+                if replay_required:
+                    passes: list[dict[str, tuple[float, ...]]] = []
+                    for ordered in (candidates, tuple(reversed(candidates))):
+                        replay: dict[str, tuple[float, ...]] = {}
+                        for candidate in ordered:
+                            runner = _WorldRunner(
+                                self.planner,
+                                self.backend,
+                                budget,
+                                self.config,
+                                allow_random=True,
+                                planning_enabled=False,
+                            )
+                            self._increment("d1_native_roots")
+                            try:
+                                result = runner.run(
+                                    obs,
+                                    (candidate,),
+                                    determinization,
+                                    working_memory,
+                                )
+                            except D1Timeout:
+                                raise
+                            except D1Error as exc:
+                                message = str(exc).lower()
+                                if any(
+                                    token in message
+                                    for token in (
+                                        "call_budget",
+                                        "node_budget",
+                                        "release[",
+                                        "search_end",
+                                    )
+                                ):
+                                    raise
+                                continue
+                            vector = result.get(candidate.key)
+                            if vector is not None:
+                                replay[candidate.key] = vector
+                        passes.append(replay)
+                    world = {}
+                    for candidate in candidates:
+                        key = candidate.key
+                        if key not in passes[0] or key not in passes[1]:
+                            continue
+                        if passes[0][key] != passes[1][key]:
+                            self._increment("d1_rng_replay_disagreements")
+                            continue
+                        world[key] = passes[0][key]
+                        self._increment("d1_rng_replay_agreements")
+                    self._increment("d1_rng_replay_worlds")
+                else:
+                    runner = _WorldRunner(self.planner, self.backend, budget, self.config)
+                    world = runner.run(obs, candidates, determinization, working_memory)
+                    self._increment("d1_plan_branch_points", runner.plan_branch_points)
+                    self._increment("d1_plan_alternatives", runner.plan_alternatives)
+                self._increment("d1_root_candidates_dropped", len(candidates) - len(world))
                 for key, vector in world.items():
                     if len(vector) != len(METRIC_FIELDS) or not all(math.isfinite(x) for x in vector):
                         raise D1Error("nonfinite_metric")
                     outcomes[key].append(tuple(vector))
-            if any(len(values) != self.config.worlds for values in outcomes.values()):
-                raise D1Error("unequal_world_coverage")
+            eligible = tuple(
+                candidate
+                for candidate in candidates
+                if len(outcomes[candidate.key]) == self.config.worlds
+            )
+            if not eligible or not eligible[0].is_baseline:
+                raise D1Error(
+                    "rng_replay_disagreement"
+                    if replay_required
+                    else "baseline_world_coverage"
+                )
             budget.check("comparison")
 
-            baseline_candidate = candidates[0]
+            baseline_candidate = eligible[0]
             baseline_worlds = outcomes[baseline_candidate.key]
             admitted: list[RootCandidate] = []
-            for candidate in candidates[1:]:
+            for candidate in eligible[1:]:
                 candidate_worlds = outcomes[candidate.key]
                 comparisons = [
                     _lex_compare(candidate_metric, baseline_metric)
@@ -1470,6 +1693,11 @@ class FestivalD1Search:
                 if all(value >= 0 for value in comparisons) and any(
                     _strict_load_bearing(candidate_metric, baseline_metric)
                     for candidate_metric, baseline_metric in zip(candidate_worlds, baseline_worlds)
+                ) and _override_is_causally_admissible(
+                    candidate,
+                    obs,
+                    candidate_worlds,
+                    baseline_worlds,
                 ):
                     admitted.append(candidate)
             if not admitted:
@@ -1530,11 +1758,18 @@ class FestivalD1Search:
                 reason = "nonfinite_metric"
             elif "rng_or_hidden_deck" in text:
                 reason = "rng_or_hidden_deck_taint"
+            elif "rng_replay" in text:
+                reason = "rng_replay_disagreement"
             elif "incomplete" in text or "path_depth" in text:
                 reason = "incomplete_leaf"
             else:
                 reason = "engine_error"
                 self._increment("d1_errors")
+                detail = "".join(
+                    character if character.isalnum() else "_"
+                    for character in f"{type(exc).__name__}_{text}".lower()
+                ).strip("_")[:96]
+                self._increment(f"d1_error_detail_{detail or 'unknown'}")
         finally:
             elapsed_ms = max(0.0, (float(self.clock()) - started) * 1000.0)
             if math.isfinite(elapsed_ms):
