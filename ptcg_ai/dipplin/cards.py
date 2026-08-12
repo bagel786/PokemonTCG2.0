@@ -40,6 +40,9 @@ HILDA = 1225
 LILLIE = 1227
 FESTIVAL = 1245
 
+# Opponent supporter that forces us to discard our own hand down to three.
+XEROSIC = 1197
+
 # Attacks used by the exact list.
 FIND_FRIEND = 37
 ROLLING_TACKLE = 38

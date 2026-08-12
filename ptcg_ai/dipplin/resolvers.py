@@ -33,6 +33,7 @@ from .cards import (
     SHAYMIN,
     THWACKEY,
     VOLBEAT,
+    XEROSIC,
 )
 from .plan import MacroPlan, tutor_prerequisite_order
 
@@ -231,6 +232,8 @@ class PromptResolver:
             return SelectionIntent(tuple(range(len(select.option))), int(select.minCount), "attack_prompt", "no known Festival attack")
 
         if select_type == int(SelectType.CARD):
+            if parent == XEROSIC:
+                return self._xerosic_discard(obs, plan)
             if parent == APPLIN_DRAGON and context == int(SelectContext.TO_HAND):
                 return self._find_a_friend(obs, plan)
             if parent == VOLBEAT:
@@ -578,6 +581,24 @@ class PromptResolver:
 
         ranked = sorted(range(len(obs.select.option)), key=score, reverse=True)
         return SelectionIntent(tuple(ranked), 1, "promotion", "attack-ready replacement before support bodies")
+
+    def _xerosic_discard(self, obs: Any, plan: MacroPlan) -> SelectionIntent:
+        """Reproduce the accepted D0 forced-discard behavior exactly.
+
+        Xerosic's Machinations (id 1197) makes us discard our own hand down to
+        three.  Accepted D0 had no named resolver, so the unknown-context
+        boundary sanitized the prompt in engine option order (first N options).
+        A named resolver must reproduce that exact semantic discard while
+        counting the prompt as known rather than fallback.  The smarter
+        load-bearing discard ordering remains an experimental variant only.
+        """
+        return SelectionIntent(
+            tuple(range(len(obs.select.option))),
+            int(obs.select.minCount),
+            "xerosic_discard",
+            "accepted D0 engine-order hand discard",
+            True,
+        )
 
 
 __all__ = [
