@@ -1782,6 +1782,7 @@ class FestivalD1Search:
                         baseline_worlds,
                     )
                 )
+                self._increment("d1_continuity_proof_checked")
                 continuity = (
                     lex_no_regression
                     and _continuity_proof_admissible(
