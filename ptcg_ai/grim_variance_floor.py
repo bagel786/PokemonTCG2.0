@@ -575,10 +575,13 @@ class GrimVarianceFloorDirector:
                         pass
             selected_types = {_integer(getattr(option, "type", None)) for _, option in selected}
             if self.escape_stage == "attached":
+                active = self._dead_active(obs)
                 if (
                     _context_is(obs.select, SelectContext.MAIN)
                     and selected_types == {int(OptionType.RETREAT)}
-                    and self._dead_active(obs) is not None
+                    and active is not None
+                    and _integer(getattr(active, "serial", 0), 0) == self.dead_active_serial
+                    and self._ready_bench_grims(obs)
                 ):
                     self.escape_stage = "promote"
                     return
@@ -597,10 +600,12 @@ class GrimVarianceFloorDirector:
                 if attach is not None and selected == [(attach, obs.select.option[attach])]:
                     active = self._dead_active(obs)
                     if active is not None:
-                        self.escape_stage = "attached"
-                        self.escape_root_turn = _integer(obs.current.turn)
-                        self.escape_player = _integer(obs.current.yourIndex)
-                        self.dead_active_serial = _integer(getattr(active, "serial", 0), 0)
+                        serial = _integer(getattr(active, "serial", 0), 0)
+                        if serial > 0:
+                            self.escape_stage = "attached"
+                            self.escape_root_turn = _integer(obs.current.turn)
+                            self.escape_player = _integer(obs.current.yourIndex)
+                            self.dead_active_serial = serial
         except Exception:
             self._clear_escape()
             raise
