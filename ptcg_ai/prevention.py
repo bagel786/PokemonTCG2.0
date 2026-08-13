@@ -110,6 +110,59 @@ def _entries_protecting(obs, defender_pokemon, defender_player, defender_benched
             yield entry
 
 
+def attack_damage_nullified(
+    obs, attack_id: int, defender, defender_player, defender_benched: bool
+) -> bool:
+    """True when an attack's damage is publicly known to miss ``defender``."""
+    attack = attack_table().get(int(attack_id or 0))
+    if attack is None or not (attack.damage or 0):
+        return False
+    if _BYPASS_TEXT in (attack.text or ""):
+        return False
+
+    state = obs.current
+    me = state.players[state.yourIndex]
+    attacker = (me.active or [None])[0]
+    if attacker is None or defender is None:
+        return False
+    attacker_card = card_table().get(attacker.id)
+    defender_card = card_table().get(defender.id)
+    if attacker_card is None or defender_card is None:
+        return False
+
+    # Tera's rule-box text prevents attack damage while it is on the Bench.
+    if defender_benched and bool(defender_card.tera):
+        return True
+    return any(
+        _entry_protects(entry, defender_card)
+        and _flag_applies(entry, attacker_card, attack, counters=False,
+                          defender_benched=defender_benched)
+        for entry in _entries_protecting(
+            obs, defender, defender_player, defender_benched=defender_benched
+        )
+    )
+
+
+def ability_damage_counter_nullified(
+    obs, defender, defender_player, defender_benched: bool
+) -> bool:
+    """True when public board effects stop ability-placed damage counters."""
+    if defender is None:
+        return False
+    defender_card = card_table().get(defender.id)
+    if defender_card is None:
+        return False
+    # Adrena-Brain is an Ability, so only the counter-prevention flags apply.
+    return any(
+        _entry_protects(entry, defender_card)
+        and entry["flag"] == "NoDamageCounterEnemyAttackAbility"
+        and defender_benched
+        for entry in _entries_protecting(
+            obs, defender, defender_player, defender_benched=defender_benched
+        )
+    )
+
+
 def attack_nullified(obs, option) -> bool:
     """True when this attack option provably does nothing to the opposing active."""
     attack = attack_table().get(int(option.attackId or 0))
@@ -135,8 +188,12 @@ def attack_nullified(obs, option) -> bool:
     if not counters and not (attack.damage or 0):
         return False  # pure status/utility attack; nothing to blank
 
+    if not counters:
+        return attack_damage_nullified(
+            obs, int(option.attackId or 0), defender, opponent, defender_benched=False
+        )
     return any(
         _entry_protects(entry, defender_card)
-        and _flag_applies(entry, attacker_card, attack, counters, defender_benched=False)
+        and _flag_applies(entry, attacker_card, attack, counters=True, defender_benched=False)
         for entry in _entries_protecting(obs, defender, opponent, defender_benched=False)
     )

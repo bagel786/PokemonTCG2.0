@@ -678,7 +678,7 @@ class Wave1Rail:
 
     def __init__(self, mode: str = "off") -> None:
         mode = str(mode or "off").strip().lower()
-        if mode not in {"off", "tempo", "fan", "floor"}:
+        if mode not in {"off", "punk_only", "tempo", "fan", "floor"}:
             raise ValueError(f"unknown Wave-1 rail mode: {mode}")
         self.mode = mode
         self.counts: Counter[str] = Counter()
@@ -686,7 +686,9 @@ class Wave1Rail:
 
     def apply(self, obs, ranked: list[int], desired: int):
         result = None
-        if self.mode == "tempo":
+        if self.mode == "punk_only":
+            result = _apply_punk_up(obs, ranked, desired)
+        elif self.mode == "tempo":
             result = (
                 _apply_setup(obs, ranked, desired)
                 or _apply_punk_up(obs, ranked, desired)
