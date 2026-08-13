@@ -12,6 +12,9 @@ artifacts/dipplin_s1/certification/*
 artifacts/dipplin_s2/*
 !artifacts/dipplin_s2/submission.tar.gz
 !artifacts/dipplin_s2/submission.manifest.json
+!artifacts/dipplin_prompt_audit/
+artifacts/dipplin_prompt_audit/*
+!artifacts/dipplin_prompt_audit/second_opening_quick_sign.json
 !artifacts/general_strength/
 artifacts/general_strength/*
 !artifacts/general_strength/final/
