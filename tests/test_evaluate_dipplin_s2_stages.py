@@ -1554,10 +1554,12 @@ def test_cli_repo_relative_overwrite_guard_preserves_evidence(tmp_path: Path) ->
         candidate_wins=[8],
         games_per_matchup=10,
     )
-    evidence = tmp_path / "hypothesis.json"
-    before = evidence.read_bytes()
-
-    with pytest.raises(SystemExit):
-        main(["--spec", str(spec_path), "--output", str(evidence)])
-
-    assert evidence.read_bytes() == before
+    for evidence in (
+        tmp_path / "hypothesis.json",
+        tmp_path / "baseline-manifest.json",
+        tmp_path / "baseline-0.json",
+    ):
+        before = evidence.read_bytes()
+        with pytest.raises(SystemExit):
+            main(["--spec", str(spec_path), "--output", str(evidence)])
+        assert evidence.read_bytes() == before

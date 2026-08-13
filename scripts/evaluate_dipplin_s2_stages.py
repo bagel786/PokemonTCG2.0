@@ -2860,6 +2860,13 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
             for index, item in enumerate(report["evidence_files"])
         }
+        package_manifest_paths = {
+            _resolve_report_path(
+                report[role]["package_manifest"]["path"],
+                field=f"report.{role}.package_manifest.path",
+            )
+            for role in ("baseline", "candidate")
+        }
         stage_paths = {
             _resolve_report_path(
                 cell["source"]["path"],
@@ -2886,7 +2893,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                             ),
                         )
                     )
-        if output in evidence_paths | stage_paths:
+        if output in evidence_paths | package_manifest_paths | stage_paths:
             raise StageEvaluationError("--output must not overwrite evidence")
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(
