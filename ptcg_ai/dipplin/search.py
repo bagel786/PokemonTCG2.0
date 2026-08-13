@@ -37,6 +37,7 @@ from ptcg_ai.safety import sanitize_selection
 from .cards import (
     APPLIN_DRAGON,
     APPLIN_GRASS,
+    BASIC_POKEMON,
     BLACK_BELT,
     BOSS,
     BRAVE_BANGLE,
@@ -109,6 +110,13 @@ _CONTINUITY_NO_REGRESS_INDICES = frozenset(
 _CONTINUITY_ROOT_CARDS = frozenset(
     {NIGHT_STRETCHER, POFFIN, POKE_PAD, SACRED_ASH, BROCK, HILDA, THWACKEY}
 )
+
+# S2 PRE_ATTACK_SEQUENCE_PROOF is deliberately narrower than D1's general
+# dominance rule.  It may sequence one deterministic, public damage setup root
+# before D0's Do the Wave only when every searched world proves the same
+# tactical turn and a strictly stronger end-of-turn attack state.
+_PRE_ATTACK_EQUAL_INDICES = frozenset(range(5))
+_PRE_ATTACK_SETUP_INDEX = METRIC_FIELDS.index("end_of_turn_do_the_wave_output")
 
 _RANDOM_OR_DECK_TOUCH_CARDS = frozenset(
     {
@@ -471,7 +479,9 @@ def _candidate_category(obs: Any, option: Any) -> tuple[str, tuple[int, ...]] | 
     card_id = _option_card_id(obs, option)
     target = _option_target(obs, option)
     target_id = _integer(getattr(target, "id", None))
-    target_is_active = _integer(getattr(option, "inPlayArea", None)) == int(AreaType.ACTIVE)
+    target_is_active = _integer(getattr(option, "inPlayArea", None)) == int(
+        AreaType.ACTIVE
+    )
     attack_id = _integer(getattr(option, "attackId", None))
 
     if option_type == int(OptionType.ATTACK):
@@ -1259,6 +1269,83 @@ def _continuity_proof_admissible(
     return True
 
 
+def _baseline_is_do_the_wave(obs: Any, candidate: RootCandidate) -> bool:
+    if not candidate.is_baseline or len(candidate.original_action) != 1:
+        return False
+    option = obs.select.option[int(candidate.original_action[0])]
+    return (
+        _integer(getattr(option, "type", None)) == int(OptionType.ATTACK)
+        and _integer(getattr(option, "attackId", None)) == DO_THE_WAVE
+    )
+
+
+def _pre_attack_sequence_root_causal(obs: Any, candidate: RootCandidate) -> bool:
+    """Return whether the root is an allowed deterministic damage setup."""
+
+    if candidate.is_baseline or len(candidate.original_action) != 1:
+        return False
+    if _action_touches_rng_or_hidden_deck(obs, candidate.original_action):
+        return False
+    option = obs.select.option[int(candidate.original_action[0])]
+    option_type = _integer(getattr(option, "type", None))
+    card_id = _option_card_id(obs, option)
+    target = _option_target(obs, option)
+    target_id = _integer(getattr(target, "id", None))
+    target_is_active = _integer(getattr(option, "inPlayArea", None)) == int(AreaType.ACTIVE)
+    if option_type == int(OptionType.ATTACH):
+        return card_id == BRAVE_BANGLE and target_is_active and target_id == DIPPLIN
+    # MAIN Basic PLAY options carry only their visible hand index; the engine
+    # mechanically places the Basic on the Bench and does not populate
+    # ``inPlayArea``.  Resolving ``card_id`` above proves the source is the
+    # actor-visible hand card captured by the semantic root.
+    return option_type == int(OptionType.PLAY) and card_id in BASIC_POKEMON
+
+
+def _pre_attack_sequence_proof_admissible(
+    candidate: RootCandidate,
+    obs: Any,
+    candidate_worlds: Sequence[Sequence[float]],
+    baseline_candidate: RootCandidate,
+    baseline_worlds: Sequence[Sequence[float]],
+) -> bool:
+    """Strict S2 public-world proof for sequencing setup before an attack."""
+
+    if (
+        not _baseline_is_do_the_wave(obs, baseline_candidate)
+        or not _pre_attack_sequence_root_causal(obs, candidate)
+        or not candidate_worlds
+        or len(candidate_worlds) != len(baseline_worlds)
+    ):
+        return False
+    for candidate_metric, baseline_metric in zip(candidate_worlds, baseline_worlds):
+        if (
+            len(candidate_metric) != len(METRIC_FIELDS)
+            or len(baseline_metric) != len(METRIC_FIELDS)
+        ):
+            return False
+        if not all(
+            math.isfinite(float(value))
+            for value in tuple(candidate_metric) + tuple(baseline_metric)
+        ):
+            return False
+        if any(
+            float(candidate_metric[index]) != float(baseline_metric[index])
+            for index in _PRE_ATTACK_EQUAL_INDICES
+        ):
+            return False
+        if any(
+            float(candidate_value) < float(baseline_value)
+            for candidate_value, baseline_value in zip(candidate_metric, baseline_metric)
+        ):
+            return False
+        if not (
+            float(candidate_metric[_PRE_ATTACK_SETUP_INDEX])
+            > float(baseline_metric[_PRE_ATTACK_SETUP_INDEX])
+        ):
+            return False
+    return True
+
+
 class _WorldRunner:
     def __init__(
         self,
@@ -1578,6 +1665,7 @@ class FestivalD1Search:
         belief_path: Path | None = None,
         belief_decks: Sequence[tuple[str, Sequence[int]]] | None = None,
         clock: Any = time.monotonic,
+        s2_enabled: bool = False,
     ) -> None:
         self.planner = planner
         self.telemetry = telemetry
@@ -1588,6 +1676,7 @@ class FestivalD1Search:
         self.belief_path = belief_path
         self.belief_decks = belief_decks
         self.clock = clock
+        self.s2_enabled = bool(s2_enabled)
         self.searches_this_game = 0
 
     def reset(self) -> None:
@@ -1792,9 +1881,23 @@ class FestivalD1Search:
                         baseline_worlds,
                     )
                 )
-                if tactical or continuity:
+                if self.s2_enabled:
+                    self._increment("s2_pre_attack_sequence_proof_checked")
+                pre_attack_sequence = (
+                    self.s2_enabled
+                    and _pre_attack_sequence_proof_admissible(
+                        candidate,
+                        obs,
+                        candidate_worlds,
+                        baseline_candidate,
+                        baseline_worlds,
+                    )
+                )
+                if tactical or continuity or pre_attack_sequence:
                     if continuity:
                         self._increment("d1_continuity_proof_admitted")
+                    if pre_attack_sequence:
+                        self._increment("s2_pre_attack_sequence_proof_admitted")
                     admitted.append(candidate)
             if not admitted:
                 self._increment("d1_searches_completed")
@@ -1825,6 +1928,14 @@ class FestivalD1Search:
             self._increment("d1_searches_completed")
             self._increment("d1_overrides")
             self._increment("d0_d1_disagreements")
+            if self.s2_enabled and _pre_attack_sequence_proof_admissible(
+                winner,
+                obs,
+                outcomes[winner.key],
+                baseline_candidate,
+                baseline_worlds,
+            ):
+                self._increment("s2_pre_attack_sequence_proof_overrides")
             self._increment(f"d1_override_category_{winner.category}")
             baseline_option = obs.select.option[int(fallback[0])]
             winner_option = obs.select.option[int(result[0])]

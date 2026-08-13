@@ -1081,10 +1081,17 @@ class FestivalD0Planner:
 class DipplinCompetitionAgent:
     """Direct competition entrypoint shared by D0 and the optional D1 overlay."""
 
-    def __init__(self, *, search_enabled: bool | None = None, go_first: bool | None = None) -> None:
+    def __init__(
+        self,
+        *,
+        search_enabled: bool | None = None,
+        go_first: bool | None = None,
+        s2_enabled: bool | None = None,
+    ) -> None:
         self.deck = tuple(EXACT_DECK)
         self.go_first = _bool_env("PTCG_DIPPLIN_GO_FIRST", True) if go_first is None else bool(go_first)
         self.search_enabled = _bool_env("PTCG_DIPPLIN_SEARCH", False) if search_enabled is None else bool(search_enabled)
+        self.s2_enabled = _bool_env("PTCG_DIPPLIN_S2", False) if s2_enabled is None else bool(s2_enabled)
         self.planner = FestivalD0Planner(go_first=self.go_first)
         self.memory = PlanMemory()
         self.telemetry = Telemetry()
@@ -1109,6 +1116,8 @@ class DipplinCompetitionAgent:
         values = self.telemetry.snapshot()
         values["policy_errors"] = float(self.errors)
         values["search_enabled"] = float(self.search_enabled)
+        if self.s2_enabled:
+            values["s2_enabled"] = 1.0
         self.route_telemetry = {
             str(key): float(value)
             for key, value in values.items()
@@ -1121,7 +1130,11 @@ class DipplinCompetitionAgent:
         if self._search is None:
             from .search import FestivalD1Search
 
-            self._search = FestivalD1Search(self.planner, self.telemetry)
+            self._search = FestivalD1Search(
+                self.planner,
+                self.telemetry,
+                s2_enabled=self.s2_enabled,
+            )
         return self._search
 
     def _record_decision(

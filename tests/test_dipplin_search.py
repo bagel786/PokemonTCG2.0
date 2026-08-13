@@ -12,9 +12,12 @@ from cg.api import AreaType, OptionType, SelectContext, SelectType, to_observati
 from ptcg_ai.dipplin.cards import (
     APPLIN_DRAGON,
     APPLIN_GRASS,
+    BRAVE_BANGLE,
     DIPPLIN,
+    DO_THE_WAVE,
     FESTIVAL,
     GRASS_ENERGY,
+    GROOKEY,
     HILDA,
     LILLIE,
     NIGHT_STRETCHER,
@@ -25,6 +28,7 @@ from ptcg_ai.dipplin.cards import (
 )
 from ptcg_ai.dipplin.search import (
     D1Config,
+    FestivalD1Search,
     LOAD_BEARING_INDICES,
     METRIC_FIELDS,
     RootCandidate,
@@ -35,6 +39,8 @@ from ptcg_ai.dipplin.search import (
     _candidate_category,
     _continuity_proof_admissible,
     _continuity_root_causal,
+    _pre_attack_sequence_proof_admissible,
+    _pre_attack_sequence_root_causal,
     _strict_load_bearing,
     capture_semantic_selection,
     compatible_public_beliefs,
@@ -42,7 +48,9 @@ from ptcg_ai.dipplin.search import (
     generate_root_candidates,
     resolve_semantic_selection,
 )
+from ptcg_ai.dipplin.policy import DipplinCompetitionAgent
 from ptcg_ai.dipplin.snapshot import PlanMemory, SemanticAction
+from ptcg_ai.dipplin.telemetry import DipplinTelemetry
 
 
 FIXTURES = Path(__file__).resolve().parents[1] / "artifacts" / "dipplin_prompt_audit"
@@ -433,3 +441,237 @@ def test_continuity_proof_rejects_fragile_bench_regression():
     candidate_vec[METRIC_FIELDS.index("replacement_attacker_ready")] = 1.0
     candidate_vec[METRIC_FIELDS.index("avoid_exposed_fragile_bench")] = -1.0
     assert not _continuity_proof_admissible(candidate, obs, [candidate_vec], [baseline])
+
+
+def _pre_attack_obs(card_id: int, option_type: int, *, include_second_setup: bool = False):
+    active = SimpleNamespace(
+        id=DIPPLIN,
+        serial=7,
+        playerIndex=0,
+        energies=[1],
+        energyCards=[],
+        tools=[],
+        preEvolution=[SimpleNamespace(id=APPLIN_GRASS, serial=6, playerIndex=0)],
+    )
+    hand = [SimpleNamespace(id=card_id, serial=10, playerIndex=0)]
+    attack = SimpleNamespace(type=int(OptionType.ATTACK), attackId=DO_THE_WAVE)
+    if option_type == int(OptionType.PLAY):
+        setup = SimpleNamespace(
+            type=option_type,
+            index=0,
+        )
+    else:
+        setup = SimpleNamespace(
+            type=option_type,
+            area=int(AreaType.HAND),
+            playerIndex=0,
+            index=0,
+            inPlayArea=int(AreaType.ACTIVE),
+            inPlayIndex=0,
+            attackId=-1,
+        )
+    options = [attack, setup]
+    if include_second_setup:
+        hand.append(SimpleNamespace(id=GROOKEY, serial=11, playerIndex=0))
+        options.append(
+            SimpleNamespace(
+                type=int(OptionType.PLAY),
+                index=1,
+            )
+        )
+    hero = SimpleNamespace(
+        hand=hand,
+        handCount=len(hand),
+        active=[active],
+        bench=[],
+        discard=[],
+        prize=[],
+        deckCount=40,
+    )
+    opponent = SimpleNamespace(
+        hand=[],
+        handCount=0,
+        active=[],
+        bench=[],
+        discard=[],
+        prize=[],
+        deckCount=40,
+    )
+    return SimpleNamespace(
+        search_begin_input="public-root",
+        current=SimpleNamespace(
+            yourIndex=0,
+            turn=3,
+            players=[hero, opponent],
+            looking=[],
+            stadium=[],
+        ),
+        select=SimpleNamespace(
+            type=int(SelectType.MAIN),
+            context=int(SelectContext.MAIN),
+            minCount=1,
+            maxCount=1,
+            option=options,
+            deck=[],
+            contextCard=None,
+            effect=None,
+        ),
+    )
+
+
+def _pre_attack_vectors():
+    baseline = [0.0] * len(METRIC_FIELDS)
+    baseline[METRIC_FIELDS.index("current_attacker_ready")] = 1.0
+    baseline[METRIC_FIELDS.index("festival_active")] = 1.0
+    baseline[METRIC_FIELDS.index("end_of_turn_do_the_wave_output")] = 100.0
+    candidate = baseline.copy()
+    candidate[METRIC_FIELDS.index("end_of_turn_do_the_wave_output")] = 130.0
+    return baseline, candidate
+
+
+def test_pre_attack_sequence_roots_are_only_public_bangle_or_exact_deck_basic():
+    bangle_obs = _pre_attack_obs(BRAVE_BANGLE, int(OptionType.ATTACH))
+    basic_obs = _pre_attack_obs(GROOKEY, int(OptionType.PLAY))
+    assert _pre_attack_sequence_root_causal(
+        bangle_obs, RootCandidate((1,), object(), "prize")
+    )
+    assert _pre_attack_sequence_root_causal(
+        basic_obs, RootCandidate((1,), object(), "prize")
+    )
+
+    for card_id, option_type in (
+        (GRASS_ENERGY, int(OptionType.ATTACH)),
+        (DIPPLIN, int(OptionType.EVOLVE)),
+        (FESTIVAL, int(OptionType.PLAY)),
+        (POKE_PAD, int(OptionType.PLAY)),
+    ):
+        obs = _pre_attack_obs(card_id, option_type)
+        assert not _pre_attack_sequence_root_causal(
+            obs, RootCandidate((1,), object(), "replacement")
+        )
+
+
+def test_pre_attack_sequence_proof_requires_every_world_componentwise_proof():
+    obs = _pre_attack_obs(BRAVE_BANGLE, int(OptionType.ATTACH))
+    baseline_root = RootCandidate((0,), object(), "baseline", True)
+    candidate_root = RootCandidate((1,), object(), "prize")
+    baseline, candidate = _pre_attack_vectors()
+
+    assert _pre_attack_sequence_proof_admissible(
+        candidate_root,
+        obs,
+        [candidate, candidate],
+        baseline_root,
+        [baseline, baseline],
+    )
+
+    tactical_change = candidate.copy()
+    tactical_change[METRIC_FIELDS.index("prizes_taken_this_turn")] = 1.0
+    assert not _pre_attack_sequence_proof_admissible(
+        candidate_root, obs, [tactical_change], baseline_root, [baseline]
+    )
+    regression = candidate.copy()
+    regression[METRIC_FIELDS.index("festival_active")] = 0.0
+    assert not _pre_attack_sequence_proof_admissible(
+        candidate_root, obs, [regression], baseline_root, [baseline]
+    )
+    assert not _pre_attack_sequence_proof_admissible(
+        candidate_root,
+        obs,
+        [candidate, baseline],
+        baseline_root,
+        [baseline, baseline],
+    )
+    obs.select.option[0].attackId = 114
+    assert not _pre_attack_sequence_proof_admissible(
+        candidate_root, obs, [candidate], baseline_root, [baseline]
+    )
+
+
+class _PreAttackRunner:
+    def __init__(self, *_args, **_kwargs):
+        self.plan_branch_points = 0
+        self.plan_alternatives = 0
+
+    def run(self, _obs, candidates, _world, _memory):
+        baseline, candidate = _pre_attack_vectors()
+        return {
+            root.key: tuple(baseline if root.is_baseline else candidate)
+            for root in candidates
+        }
+
+
+def _run_pre_attack_search(monkeypatch, *, s2_enabled: bool, ambiguous: bool = False):
+    from ptcg_ai.dipplin import search as search_module
+
+    obs = _pre_attack_obs(
+        BRAVE_BANGLE,
+        int(OptionType.ATTACH),
+        include_second_setup=ambiguous,
+    )
+    monkeypatch.setattr(search_module, "_public_state_digest", lambda _obs: "0" * 64)
+    monkeypatch.setattr(
+        search_module,
+        "compatible_public_beliefs",
+        lambda *_args, **_kwargs: (("public", (1,) * 60),),
+    )
+    monkeypatch.setattr(search_module, "determinize_public_world", lambda *_args: {})
+    monkeypatch.setattr(search_module, "_WorldRunner", _PreAttackRunner)
+    telemetry = DipplinTelemetry()
+    search = FestivalD1Search(
+        SimpleNamespace(),
+        telemetry,
+        D1Config(worlds=2),
+        backend=SimpleNamespace(),
+        s2_enabled=s2_enabled,
+    )
+    result = search.choose(
+        {},
+        obs,
+        SimpleNamespace(second_attack_currently_offered=False),
+        PlanMemory(),
+        SimpleNamespace(),
+        [0],
+    )
+    return result, telemetry.flat()
+
+
+def test_s2_default_off_and_enabled_admission(monkeypatch):
+    disabled, disabled_telemetry = _run_pre_attack_search(monkeypatch, s2_enabled=False)
+    enabled, enabled_telemetry = _run_pre_attack_search(monkeypatch, s2_enabled=True)
+
+    assert disabled == [0]
+    assert not any(key.startswith("s2_") for key in disabled_telemetry)
+    assert disabled_telemetry.get("s2_pre_attack_sequence_proof_overrides", 0) == 0
+    assert enabled == [1]
+    assert enabled_telemetry["s2_pre_attack_sequence_proof_checked"] >= 1
+    assert enabled_telemetry["s2_pre_attack_sequence_proof_admitted"] == 1
+    assert enabled_telemetry["s2_pre_attack_sequence_proof_overrides"] == 1
+
+
+def test_s2_ambiguous_public_setup_proofs_fail_closed(monkeypatch):
+    result, telemetry = _run_pre_attack_search(
+        monkeypatch,
+        s2_enabled=True,
+        ambiguous=True,
+    )
+    assert result == [0]
+    assert telemetry["d1_abstention_reason_ambiguous_dominance"] == 1
+    assert telemetry.get("s2_pre_attack_sequence_proof_overrides", 0) == 0
+
+
+def test_agent_translates_s2_environment_and_explicit_override(monkeypatch):
+    monkeypatch.delenv("PTCG_DIPPLIN_S2", raising=False)
+    assert not FestivalD1Search(SimpleNamespace(), DipplinTelemetry()).s2_enabled
+    default = DipplinCompetitionAgent(search_enabled=True)
+    assert not default.s2_enabled
+    assert "s2_enabled" not in default.route_telemetry
+    assert not default._search_controller().s2_enabled
+
+    monkeypatch.setenv("PTCG_DIPPLIN_S2", "1")
+    enabled = DipplinCompetitionAgent(search_enabled=True)
+    assert enabled.s2_enabled
+    assert enabled.route_telemetry["s2_enabled"] == 1.0
+    assert enabled._search_controller().s2_enabled
+    explicit_off = DipplinCompetitionAgent(search_enabled=True, s2_enabled=False)
+    assert not explicit_off._search_controller().s2_enabled

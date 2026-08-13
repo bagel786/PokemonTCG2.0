@@ -1,0 +1,105 @@
+{
+  "schema": "dipplin-s2-hypothesis-v1",
+  "status": "FROZEN_BEFORE_S2_GAMEPLAY_EVALUATION",
+  "candidate": "S2_PRE_ATTACK_SEQUENCE_PROOF",
+  "single_substantive_mechanism": true,
+  "failure": "S1 sometimes attacks with Do the Wave before a deterministic public setup action even when a completed-turn continuation proves that setup preserves the same tactical turn and strictly raises the resulting Do the Wave output.",
+  "frequency": {
+    "broad_premature_attack_cluster": {
+      "decisions": 9,
+      "independent_episodes": 8,
+      "validation_episodes": 50,
+      "note": "This broader cluster includes evolution, attachment, and Rillaboom-pilot actions that the S2 rule deliberately excludes."
+    },
+    "strict_output_improvement_subset": {
+      "decisions": 5,
+      "independent_episodes": 4,
+      "actual_first_episodes": 2,
+      "actual_second_episodes": 2,
+      "actions": {
+        "brave_bangle_to_active_dipplin": 3,
+        "basic_to_bench": 2
+      }
+    },
+    "exact_s1_deck_directly_applicable_subset": {
+      "decisions": 4,
+      "independent_episodes": 3,
+      "note": "Three Brave Bangle rows plus one Grookey row. The other Basic row used card 140 in a pilot variant and is mechanism evidence, not exact-deck applicability evidence."
+    },
+    "brave_bangle_opportunity_audit": {
+      "opportunities": 17,
+      "independent_episodes": 15,
+      "expert_dominates": 3,
+      "equivalent": 10,
+      "uncertifiable": 4,
+      "agent_dominates": 0,
+      "incomparable": 0
+    },
+    "population_frequency_is_not_claimed": true
+  },
+  "mechanism": "An environment-gated public-belief proof may sequence exactly one deterministic Brave Bangle attachment to the Active Dipplin or one exact-deck Basic play before baseline Do the Wave.",
+  "why_current_policy_is_wrong": "D1 requires a strict gain in its first five load-bearing fields, so it rejects setup roots whose completed turn takes the same prizes and attacks but leaves higher certified Do the Wave output. Frozen validation contains repeated certified examples with no component regression.",
+  "proposed_correction": {
+    "environment_flag": "PTCG_DIPPLIN_S2=1",
+    "default": "OFF",
+    "baseline_root_must_be": "ATTACK:DO_THE_WAVE",
+    "allowed_candidate_roots": [
+      "ATTACH:BRAVE_BANGLE:ACTIVE_DIPPLIN",
+      "PLAY:EXACT_DECK_BASIC"
+    ],
+    "all_public_world_requirements": [
+      "complete valid world coverage",
+      "first five tactical metrics exactly equal baseline",
+      "all thirteen comparison metrics componentwise non-regressive",
+      "end_of_turn_do_the_wave_output strictly greater than baseline",
+      "deterministic root with no RNG or hidden-deck touch",
+      "one unique worldwise winner"
+    ],
+    "explicitly_excluded": [
+      "generic setup-before-attack heuristic",
+      "evolution roots",
+      "Energy attachment roots",
+      "Festival roots",
+      "promotion or switch roots",
+      "opponent identity or package information"
+    ]
+  },
+  "why_opponent_agnostic": "The gate uses only the public observation, exact deck card identities, mechanical action semantics, and completed-turn results across compatible public-belief worlds. It receives no evaluator label, opponent package identity, replay identity, or schedule information.",
+  "predicted_affected_game_fraction": {
+    "developmental_range": [
+      0.05,
+      0.15
+    ],
+    "not_a_population_estimate": true,
+    "measurement": "Use s2_pre_attack_sequence_proof_overrides in fresh forced-order games; frozen validation was strategically sampled and cannot estimate live prevalence."
+  },
+  "falsification_test": {
+    "stage_0": "All relevant mechanics, search, sequencing, packaging, and evaluator tests pass with S2 default off.",
+    "stage_1": "Reject immediately for any failure, policy error, illegal action, material pooled actual-second decline, catastrophic major-matchup collapse, or pooled improvement below 3 percentage points versus the current-tree 42.75% S1 actual-second baseline.",
+    "later_stages_if_stage_1_survives": "Require serious forced-second evidence, no material forced-first regression, no clear S2-vs-S1 mirror loss, and lower paired frozen-validation expert regret without a new certified exploratory failure family."
+  },
+  "evidence": {
+    "starting_commit": "a73f2fbf31494ebd97bc2e9357600388fe0805d5",
+    "incumbent_archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
+    "incumbent_extracted_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+    "validation_regret": {
+      "path": "artifacts/general_strength/replay/validation_regret_s1.json",
+      "sha256": "9f1205b2b282b2da37bc284054f51a3ebce7214507da7da4fa75309d5870e87d",
+      "episodes": 50,
+      "sampled_decisions": 1145
+    },
+    "current_tree_second_bucket_analysis": {
+      "path": "artifacts/general_strength/s1_buckets/second_bucket_analysis_400.json",
+      "sha256": "cf52262d2acf02108fe956de0ce2dc5fcdca7b91b218d0172a28b3320be8d8a8",
+      "games": 400
+    },
+    "s1_mirror_first": {
+      "path": "artifacts/general_strength/s1_mirror/s1_vs_s1_first_500.json",
+      "sha256": "c1dd38044323376cf090c95e834718b029af323a48e815a24f74455c2d3fc286"
+    },
+    "s1_mirror_second": {
+      "path": "artifacts/general_strength/s1_mirror/s1_vs_s1_second_500.json",
+      "sha256": "5ef530f3bec98947d09700ed818c572fd0347b6f1a91f8b329ae224540447e6d"
+    }
+  }
+}
