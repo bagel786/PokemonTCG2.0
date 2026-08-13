@@ -1,0 +1,327 @@
+{
+  "dashboard_schema": "dipplin-general-strength-dashboard-v1",
+  "candidate": {
+    "name": "Dipplin S1",
+    "source_sha": "a73f2fbf31494ebd97bc2e9357600388fe0805d5",
+    "tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+    "package": "../../artifacts/dipplin_s1/submission.tar.gz",
+    "package_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
+    "manifest": "../../artifacts/dipplin_s1/submission.manifest.json",
+    "manifest_sha256": "4071c03a020446436b8d33e1951fdaf5229ae4ab760a8283dc7d6f323e02f92c"
+  },
+  "provenance": {
+    "goal_starting_sha": "a73f2fbf31494ebd97bc2e9357600388fe0805d5",
+    "initial_dashboard_preparation_head": "a8d6ff788110a6754de44e39efe4f75abbf31d95",
+    "spec_preparation_head": "3425bf17c5c708676990bea8f14b0d3e03a307cb",
+    "spec_preparation_date": "2026-08-13",
+    "spec_preparation_worktree_dirty": true,
+    "immutable_s1": {
+      "archive": "../../artifacts/dipplin_s1/submission.tar.gz",
+      "archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
+      "archive_bytes": 2033998,
+      "manifest": "../../artifacts/dipplin_s1/submission.manifest.json",
+      "manifest_sha256": "4071c03a020446436b8d33e1951fdaf5229ae4ab760a8283dc7d6f323e02f92c",
+      "packaged_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+      "runtime_source_tree_sha256": "d5aaefab29b5850b298810c21dc628880822381c05bdbad5ecea1716bcef4241",
+      "deck_sha256": "269bc5808a0db862c7afe8f2daaa3d0b3b6e3c68bd651dd515d14f9d85392326",
+      "linux_engine_sha256": "d16244a3157fc55c3314f08dcc7c5179168697d78c105b95c7debd556b764bb7"
+    },
+    "historical_anchor_identity": {
+      "evaluated_tree_sha256": "82ff492058c7c6fd32c26ac0f8c490e679e24d9ae3172dadf4cca45db015af51",
+      "current_immutable_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+      "status": "HISTORICAL_EXACT_RESULTS_NOT_CURRENT_ARCHIVE_EXACT",
+      "note": "Every historical forced-order result records hero_sha256=82ff4920..., which matches the stale historical extracted tree and does not match the current immutable archive tree. These results are admitted only as documented historical S1 evidence."
+    },
+    "historical_anchor_summary": {
+      "actual_first_games": 400,
+      "actual_first_wins": 225,
+      "actual_first_rate": 0.5625,
+      "actual_second_games": 1200,
+      "actual_second_wins": 537,
+      "actual_second_rate": 0.4475,
+      "order_balanced_macro": 0.505,
+      "status": "CONTEXT_ONLY_STALE_EXTRACTED_TREE"
+    },
+    "source_documents": [
+      "../../docs/DIPPLIN_SECOND_ORDER_GENERALITY.md",
+      "../../docs/DIPPLIN_GENERAL_STRENGTH_SPRINT.md"
+    ]
+  },
+  "strong_anchors": [
+    {
+      "opponent": "A2 Grimmsnarl (exact)",
+      "actual_order": "first",
+      "path": "../../artifacts/general_strength/s1_current_anchors/a2_first_100.json",
+      "artifact_sha256": "f6078dd2adc80c98bbdcff90c7c87bf692da1fda852079e85b5c710431154c02",
+      "expected_games": 100,
+      "expected_wins": 50,
+      "evaluated_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+    },
+    {
+      "opponent": "A2 Grimmsnarl (exact)",
+      "actual_order": "second",
+      "path": "../../artifacts/general_strength/s1_buckets/a2_second_trace_100.json",
+      "artifact_sha256": "abd325369edb3e9b07942d1d8bf6523c4f5becf3a3f6f43a539cb195c9abfb5f",
+      "expected_games": 100,
+      "expected_wins": 51,
+      "evaluated_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+    },
+    {
+      "opponent": "d842 Grimmsnarl (exact)",
+      "actual_order": "first",
+      "path": "../../artifacts/general_strength/s1_current_anchors/d842_first_100.json",
+      "artifact_sha256": "2c8a98d9a0aa1b163ef7491d0ae907f19919207fa1031d182a733b0113bd630c",
+      "expected_games": 100,
+      "expected_wins": 60,
+      "evaluated_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+    },
+    {
+      "opponent": "d842 Grimmsnarl (exact)",
+      "actual_order": "second",
+      "path": "../../artifacts/general_strength/s1_buckets/d842_second_trace_100.json",
+      "artifact_sha256": "f876698b95b8defe8b81f35b9684ff5fcb28867dcba39da0d81ea6c58f427baf",
+      "expected_games": 100,
+      "expected_wins": 48,
+      "evaluated_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+    },
+    {
+      "opponent": "Alakazam 2.4a (authentic)",
+      "actual_order": "first",
+      "path": "../../artifacts/general_strength/s1_current_anchors/az2_4a_first_100.json",
+      "artifact_sha256": "63c068d3efb72f0d8a0c30d9f10c3cb7c8ccd675bfc82680daf0e4f6c0ded359",
+      "expected_games": 100,
+      "expected_wins": 59,
+      "evaluated_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+    },
+    {
+      "opponent": "Alakazam 2.4a (authentic)",
+      "actual_order": "second",
+      "path": "../../artifacts/general_strength/s1_buckets/az2_4a_second_trace_100.json",
+      "artifact_sha256": "e22162ccb5c852841d9edaeb9ce7717202ff00abfd379343efe373e8c71f3a19",
+      "expected_games": 100,
+      "expected_wins": 33,
+      "evaluated_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+    },
+    {
+      "opponent": "Alakazam 2.7 (authentic)",
+      "actual_order": "first",
+      "path": "../../artifacts/general_strength/s1_current_anchors/az2_7_first_100.json",
+      "artifact_sha256": "209bd95b06248f860cd9d4dc1b7ddbaeebf1e4c13ef17dcc12a292e9189e04fa",
+      "expected_games": 100,
+      "expected_wins": 48,
+      "evaluated_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+    },
+    {
+      "opponent": "Alakazam 2.7 (authentic)",
+      "actual_order": "second",
+      "path": "../../artifacts/general_strength/s1_buckets/az2_7_second_trace_100.json",
+      "artifact_sha256": "055ab5bc7de48f64a4a0202f9433d8a8ff0e9f8b8fed907036b71457adc7b030",
+      "expected_games": 100,
+      "expected_wins": 39,
+      "evaluated_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+    }
+  ],
+  "same_deck": {
+    "s1_vs_s1_first": {
+      "path": "../../artifacts/general_strength/s1_mirror/s1_vs_s1_first_500.json",
+      "artifact_sha256": "c1dd38044323376cf090c95e834718b029af323a48e815a24f74455c2d3fc286",
+      "expected_games": 500,
+      "expected_wins": 302,
+      "expected_order": "first",
+      "expected_evaluated_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+    },
+    "s1_vs_s1_second": {
+      "path": "../../artifacts/general_strength/s1_mirror/s1_vs_s1_second_500.json",
+      "artifact_sha256": "5ef530f3bec98947d09700ed818c572fd0347b6f1a91f8b329ae224540447e6d",
+      "expected_games": 500,
+      "expected_wins": 197,
+      "expected_order": "second",
+      "expected_evaluated_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+    },
+    "candidate_vs_s1_first": null,
+    "candidate_vs_s1_second": null
+  },
+  "same_deck_provenance": {
+    "s1_vs_s1_first": {
+      "artifact_sha256": "c1dd38044323376cf090c95e834718b029af323a48e815a24f74455c2d3fc286",
+      "games": 500,
+      "wins": 302,
+      "actual_order": "first",
+      "evaluated_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+    },
+    "s1_vs_s1_second": {
+      "artifact_sha256": "5ef530f3bec98947d09700ed818c572fd0347b6f1a91f8b329ae224540447e6d",
+      "games": 500,
+      "wins": 197,
+      "actual_order": "second",
+      "evaluated_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+    },
+    "archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
+    "artifacts_unchanged_during_evaluation": true,
+    "source_worktree_dirty": true
+  },
+  "replay_validation": null,
+  "sealed_replay_holdout": null,
+  "replay_manifests": {
+    "validation": {
+      "path": "../dipplin_replay_eval/frozen/validation_manifest.json",
+      "artifact_sha256": "f147f14c670223b22bf9cba28f6ea166a4bbb5153c0efea941c61f39ff2bb163",
+      "expected_payload_sha256": "d6cc5a7339dcc466546e68c8ea29301c150966be1f287adc00003bd86716c4c1",
+      "expected_split": "VALIDATION",
+      "expected_episode_count": 50,
+      "expected_sealed": false,
+      "expected_actual_order_counts": {
+        "first": 31,
+        "second": 19
+      },
+      "expected_expert_result_counts": {
+        "loss": 25,
+        "win": 25
+      },
+      "expected_selection_contract_verified_count": 50,
+      "require_pristine": true
+    },
+    "final_holdout": {
+      "path": "../dipplin_replay_eval/frozen/final_holdout_manifest.json",
+      "artifact_sha256": "5f7a3faa6d5ba37ca4c0a5725f99ba2db9e362498712a36681b77cbb6657430d",
+      "expected_payload_sha256": "708fe9e318434d1eaee6ab65661c23323ab9f1ceaa4dc5337bfc5ac22b39298d",
+      "expected_split": "FINAL_HOLDOUT",
+      "expected_episode_count": 30,
+      "expected_sealed": true,
+      "expected_actual_order_counts": {
+        "first": 19,
+        "second": 11
+      },
+      "expected_expert_result_counts": {
+        "loss": 15,
+        "win": 15
+      },
+      "expected_selection_contract_verified_count": 30,
+      "require_pristine": true
+    }
+  },
+  "second_bucket_analysis": {
+    "path": "../../artifacts/general_strength/s1_buckets/second_bucket_analysis_400.json",
+    "artifact_sha256": "cf52262d2acf02108fe956de0ce2dc5fcdca7b91b218d0172a28b3320be8d8a8",
+    "expected_schema": "dipplin-second-bucket-analysis-v1",
+    "expected_trace_schema": "dipplin-second-bucket-trace-v1",
+    "expected_eligible_games": 400,
+    "expected_evaluated_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+    "expected_results": {
+      "games": 400,
+      "wins": 171,
+      "losses": 229,
+      "draws": 0
+    },
+    "expected_aggregate_only_sources": 8,
+    "expected_excluded_rows": {
+      "duplicate": 0,
+      "missing_trace": 0,
+      "not_actual_second": 0,
+      "not_completed": 0,
+      "trace_incomplete": 0,
+      "trace_order_mismatch": 0,
+      "trace_outcome_mismatch": 0,
+      "unknown_opening_bucket": 0,
+      "wrong_trace_schema": 0
+    },
+    "expected_quality_counters": {
+      "hero_illegal_actions": 0,
+      "hero_policy_errors": 0,
+      "opponent_illegal_actions": 0,
+      "opponent_policy_errors": 0
+    },
+    "note": "Only the 400 traced current-tree games are admitted per game. The eight historical aggregate-only sources remain context and are never pooled into bucket results or rankings."
+  },
+  "mechanics": {
+    "status": "PASS",
+    "suite": "../../tests/test_dipplin_meta_mechanics.py",
+    "suite_sha256": "a3f15a089520857bfe8ee29af98b10b47c0bbcea4a394bca0d33bacf2936919d",
+    "command": "pytest -q tests/test_evaluate_dipplin_general_strength.py tests/test_dipplin_meta_mechanics.py",
+    "run_date": "2026-08-13",
+    "passed": 15,
+    "failed": 0,
+    "scope": [
+      "prize-value arithmetic",
+      "Weakness math",
+      "one-hit versus two-hit KO",
+      "Boss target selection",
+      "Jamming Tower tool suppression",
+      "non-ex and ability-based immunity",
+      "bench usefulness and no-change handling",
+      "fragile-bench penalty",
+      "replacement continuity",
+      "support-active retreat preference"
+    ],
+    "caveat": "The suite passed against the 2026-08-13 dirty working tree; it is policy-level evidence, not an execution of the immutable submission archive."
+  },
+  "operational_provenance": {
+    "linux_x86_64_complete_game": {
+      "path": "../../artifacts/dipplin_s1/certification/linux_x86_64_complete_game.json",
+      "artifact_sha256": "3a97fa74dd67727dd1c0e5ad03eee0ea39f7393b437426c4c1d6a79615082446",
+      "archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
+      "evaluated_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+      "engine_sha256": "d16244a3157fc55c3314f08dcc7c5179168697d78c105b95c7debd556b764bb7",
+      "games": 2,
+      "actual_first_games": 1,
+      "actual_second_games": 1,
+      "completed_games": 2,
+      "policy_errors": 0,
+      "illegal_actions": 0,
+      "artifact_mutations": 0,
+      "status": "PASS"
+    },
+    "dashboard_scope_note": "The evaluator's operational aggregate is computed only from admitted anchor and same-deck cells. This Linux certification is retained here as auditable provenance but is not folded into that aggregate."
+  },
+  "weak_clones": [
+    {
+      "name": "Mega Lucario",
+      "coverage": "behavior-clone availability only; no current-S1 strength result admitted",
+      "status": "NOT_RUN_FOR_CURRENT_S1",
+      "evidence_tier": "coverage_only",
+      "result_path": null
+    },
+    {
+      "name": "Crustle / Kangaskhan",
+      "coverage": "behavior-clone availability only; no current-S1 strength result admitted",
+      "status": "NOT_RUN_FOR_CURRENT_S1",
+      "evidence_tier": "coverage_only",
+      "result_path": null
+    },
+    {
+      "name": "Teal Mask Ogerpon",
+      "coverage": "behavior-clone availability only; no current-S1 strength result admitted",
+      "status": "NOT_RUN_FOR_CURRENT_S1",
+      "evidence_tier": "coverage_only",
+      "result_path": null
+    },
+    {
+      "name": "Bellibolt",
+      "coverage": "behavior-clone availability only; no current-S1 strength result admitted",
+      "status": "NOT_RUN_FOR_CURRENT_S1",
+      "evidence_tier": "coverage_only",
+      "result_path": null
+    },
+    {
+      "name": "Starmie / Froslass",
+      "coverage": "behavior-clone availability only; no current-S1 strength result admitted",
+      "status": "NOT_RUN_FOR_CURRENT_S1",
+      "evidence_tier": "coverage_only",
+      "result_path": null
+    },
+    {
+      "name": "Dragapult",
+      "coverage": "behavior-clone availability only; no current-S1 strength result admitted",
+      "status": "NOT_RUN_FOR_CURRENT_S1",
+      "evidence_tier": "coverage_only",
+      "result_path": null
+    },
+    {
+      "name": "Mega Lopunny",
+      "coverage": "behavior-clone availability only; no current-S1 strength result admitted",
+      "status": "NOT_RUN_FOR_CURRENT_S1",
+      "evidence_tier": "coverage_only",
+      "result_path": null
+    }
+  ]
+}
