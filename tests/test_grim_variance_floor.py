@@ -244,6 +244,28 @@ def dead_support_main(me, options, *, turn=9):
     )
 
 
+def retreat_payment(me, *, turn=9):
+    return observation(
+        selection(
+            SelectContext.DISCARD_ENERGY,
+            [
+                Option(
+                    OptionType.ENERGY,
+                    area=AreaType.ACTIVE,
+                    index=0,
+                    playerIndex=0,
+                    energyIndex=0,
+                    count=1,
+                )
+            ],
+            select_type=SelectType.ENERGY,
+        ),
+        me,
+        turn=turn,
+        retreated=True,
+    )
+
+
 def test_dead_support_false_positive_guards():
     director = GrimVarianceFloorDirector(config=config(escape=True))
     cases = [
@@ -261,7 +283,7 @@ def test_dead_support_false_positive_guards():
 def test_dead_support_direct_retreat_promotes_ready_grim():
     director = GrimVarianceFloorDirector(config=config(escape=True))
     me = player(
-        active=[pokemon(MUNKIDORI, serial=1)],
+        active=[pokemon(MUNKIDORI, serial=1, energies=[EnergyType.DARKNESS])],
         bench=[pokemon(SNORUNT, serial=3), ready_grim(2)],
     )
     obs = dead_support_main(
@@ -274,11 +296,18 @@ def test_dead_support_direct_retreat_promotes_ready_grim():
     director.commit(obs, [ranked[0]])
     assert director.telemetry()["variance_state"]["escape_stage"] == "promote"
 
+    # Paid retreat inserts an ENERGY/DISCARD_ENERGY prompt before SWITCH.  It
+    # must fall through byte-for-byte and preserve the semantic promotion.
+    payment = retreat_payment(me)
+    assert director.apply(payment, [0], 1) == ([0], 1, None)
+    director.commit(payment, [0])
+    assert director.telemetry()["variance_state"]["escape_stage"] == "promote"
+
     # The ready Grim is now option 0, but d842's semantic ranking puts the
     # other bench support first.  The wrapper must resolve the target anew.
     promote = observation(
         selection(
-            SelectContext.TO_ACTIVE,
+            SelectContext.SWITCH,
             [
                 Option(OptionType.CARD, area=AreaType.BENCH, index=1, playerIndex=0),
                 Option(OptionType.CARD, area=AreaType.BENCH, index=0, playerIndex=0),
@@ -327,9 +356,14 @@ def test_attach_escape_then_semantic_retreat_and_promotion_with_reordered_indice
     assert (ranked[0], reason) == (0, "variance_floor:complete_escape_retreat")
     director.commit(retreat, [0])
 
+    payment = retreat_payment(me)
+    assert director.apply(payment, [0], 1) == ([0], 1, None)
+    director.commit(payment, [0])
+    assert director.telemetry()["variance_state"]["escape_stage"] == "promote"
+
     promote = observation(
         selection(
-            SelectContext.TO_ACTIVE,
+            SelectContext.SWITCH,
             [Option(OptionType.CARD, area=AreaType.BENCH, index=0, playerIndex=0)],
             select_type=SelectType.CARD,
         ),
@@ -367,6 +401,46 @@ def test_escape_state_clears_on_reset_turn_change_target_loss_malformed_and_alte
     director.commit(attach, [0])
     director.apply(None, [0], 1)
     assert director.telemetry()["variance_state"]["escape_pending"] is False
+
+
+def test_promote_state_does_not_survive_a_non_retreat_energy_prompt():
+    director = GrimVarianceFloorDirector(config=config(escape=True))
+    me = player(
+        active=[pokemon(MUNKIDORI, serial=1, energies=[EnergyType.DARKNESS])],
+        bench=[ready_grim(2)],
+    )
+    retreat = dead_support_main(me, [Option(OptionType.RETREAT)])
+    ranked, _, _ = director.apply(retreat, [0], 1)
+    director.commit(retreat, ranked[:1])
+    assert director.telemetry()["variance_state"]["escape_stage"] == "promote"
+
+    # The enum context alone is insufficient: a bridge is valid only after
+    # the engine has marked the retreat as used and exposes ENERGY options.
+    unrelated = retreat_payment(me)
+    unrelated.current.retreated = False
+    director.apply(unrelated, [0], 1)
+    assert director.telemetry()["variance_state"]["escape_pending"] is False
+
+
+def test_promote_state_does_not_cross_turn_or_player_on_payment_shaped_prompt():
+    for mutate in (
+        lambda payment: setattr(payment.current, "turn", 10),
+        lambda payment: setattr(payment.select.option[0], "playerIndex", 1),
+    ):
+        director = GrimVarianceFloorDirector(config=config(escape=True))
+        me = player(
+            active=[pokemon(MUNKIDORI, serial=1, energies=[EnergyType.DARKNESS])],
+            bench=[ready_grim(2)],
+        )
+        retreat = dead_support_main(me, [Option(OptionType.RETREAT)])
+        ranked, _, _ = director.apply(retreat, [0], 1)
+        director.commit(retreat, ranked[:1])
+        assert director.telemetry()["variance_state"]["escape_stage"] == "promote"
+
+        payment = retreat_payment(me)
+        mutate(payment)
+        director.apply(payment, [0], 1)
+        assert director.telemetry()["variance_state"]["escape_pending"] is False
 
 
 def test_escape_fails_closed_for_used_retreat_attack_and_disappearing_grim():

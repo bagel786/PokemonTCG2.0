@@ -5,6 +5,20 @@ FINAL EXPERIMENT SHA: e423b14
 
 # Grim 5k Variance Floor
 
+## Post-evaluation B3 correction
+
+The evaluated B3 runtime cleared its pending ready-Grim promotion on the
+mandatory `ENERGY/DISCARD_ENERGY` prompt inserted between a paid `RETREAT` and
+the engine's `CARD/SWITCH` prompt. This explains the recorded zero
+`escape_promote_ready_grim` interventions despite completed retreats. The state
+machine now preserves the semantic proposal across only that exact public,
+same-turn, same-player retreat-payment bridge and resolves the target afresh at
+`SWITCH`.
+
+This is a correctness fix, not retrospective evidence for B3. All recorded B3
+outcome results below describe the pre-fix runtime and must not be used to ship
+the corrected B3 without a fresh evaluation.
+
 ## Correctness Fixes
 
 Confirmed and fixed the B3 direct-retreat state bug. A direct dead-support
@@ -198,5 +212,5 @@ final-confirmation size, so neither is justified for a live Kaggle submission.
 SHOULD I SPEND A LIVE KAGGLE SUBMISSION ON THIS?
 
 NO. The measured mirror screen is encouraging but incomplete: the <=3%
-decision-disagreement gate and broad general-strength/holdout gates were not
-established.
+decision-disagreement gate passed, but the preferred <=2% target and broad
+general-strength/holdout gates were not established.

@@ -22,10 +22,15 @@ def test_real_reference_is_fully_hash_pinned(tmp_path: Path):
     assert verified["original_source_sha256"] == builder.FROZEN_SOURCE_HASHES
 
 
+def test_cli_requires_an_explicit_variance_candidate():
+    with pytest.raises(SystemExit):
+        builder.parse_args([])
+
+
 def test_stage_wires_exact_rank_count_and_only_search_disabled_narrow_runtime(tmp_path: Path):
     stage = tmp_path / "candidate"
     stage.mkdir()
-    metadata = builder.stage_candidate(builder.DEFAULT_BASE, stage)
+    metadata = builder.stage_candidate(builder.DEFAULT_BASE, stage, variant="B3")
     model = (stage / "ptcg_ai/model.py").read_text(encoding="utf-8")
     agent = (stage / "ptcg_ai/agent.py").read_text(encoding="utf-8")
 
@@ -59,7 +64,7 @@ def test_stage_wires_exact_rank_count_and_only_search_disabled_narrow_runtime(tm
 def test_deck_handshake_falls_through_even_if_runtime_reset_raises(tmp_path: Path):
     stage = tmp_path / "candidate"
     stage.mkdir()
-    builder.stage_candidate(builder.DEFAULT_BASE, stage)
+    builder.stage_candidate(builder.DEFAULT_BASE, stage, variant="B3")
     agent_source = (stage / "ptcg_ai/agent.py").read_text(encoding="utf-8")
     assert (
         "if hasattr(self.policy, \"reset\"):\n"
@@ -98,7 +103,11 @@ def test_safe_extract_refuses_parent_traversal(tmp_path: Path):
 @pytest.mark.skipif(not __import__("sys").platform.startswith("win"), reason="Windows smoke only")
 def test_build_is_byte_deterministic_cache_free_and_raw_source_smoked(tmp_path: Path):
     output = tmp_path / "output"
-    result = builder.build_candidate(base_archive=builder.DEFAULT_BASE, output_dir=output)
+    result = builder.build_candidate(
+        base_archive=builder.DEFAULT_BASE,
+        output_dir=output,
+        variant="B3",
+    )
     archive = output / builder.ARCHIVE_NAME
     extracted = output / builder.EXTRACTED_NAME
     manifest_path = output / builder.MANIFEST_NAME
@@ -151,5 +160,5 @@ def test_build_rejects_wrong_base_archive_before_creating_candidate(tmp_path: Pa
     fake.write_bytes(b"not the pinned archive")
     output = tmp_path / "output"
     with pytest.raises(builder.BuildError, match="pinned base archive mismatch"):
-        builder.build_candidate(base_archive=fake, output_dir=output)
+        builder.build_candidate(base_archive=fake, output_dir=output, variant="B3")
     assert not (output / builder.ARCHIVE_NAME).exists()

@@ -338,7 +338,7 @@ def stage_candidate(
     base_archive: str | Path,
     destination: str | Path,
     *,
-    variant: str = "B3",
+    variant: str,
 ) -> dict[str, Any]:
     base_archive = Path(base_archive)
     destination = Path(destination)
@@ -506,7 +506,7 @@ def build_candidate(
     *,
     base_archive: str | Path = DEFAULT_BASE,
     output_dir: str | Path = DEFAULT_OUTPUT,
-    variant: str = "B3",
+    variant: str,
 ) -> dict[str, Any]:
     base_archive = Path(base_archive).resolve()
     output_dir = Path(output_dir).resolve()
@@ -579,7 +579,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--base-archive", type=Path, default=DEFAULT_BASE)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
-    parser.add_argument("--variant", choices=sorted(VARIANCE_CONFIGS), default="B3")
+    parser.add_argument("--variant", choices=sorted(VARIANCE_CONFIGS), required=True)
     return parser.parse_args(argv)
 
 

@@ -458,6 +458,49 @@ class GrimVarianceFloorDirector:
             return index
         return None
 
+    def _is_retreat_payment_bridge(self, obs: Any) -> bool:
+        """Keep a committed retreat alive across its mandatory Energy payment.
+
+        A paid retreat is a three-prompt transaction in the native engine:
+        MAIN/RETREAT, ENERGY/DISCARD_ENERGY, then CARD/SWITCH.  The payment
+        prompt is not a new tactical decision, so it must neither consume nor
+        cancel the semantic ready-Grim promotion armed by the RETREAT action.
+        """
+
+        if self.escape_stage != "promote":
+            return False
+        # A prompt from another turn or player can look structurally identical
+        # to retreat payment.  Let the normal state guard clear it first, then
+        # re-check the stage because `_state_is_current` clears stale state.
+        if not self._state_is_current(obs) or self.escape_stage != "promote":
+            return False
+        select = getattr(obs, "select", None)
+        state = getattr(obs, "current", None)
+        if (
+            select is None
+            or state is None
+            or not _select_type_is(select, SelectType.ENERGY)
+            or not _context_is(select, SelectContext.DISCARD_ENERGY)
+            or _integer(getattr(state, "retreated", None), -1) != 1
+            or _integer(getattr(select, "minCount", None), -1) != 1
+            or _integer(getattr(select, "maxCount", None), -1) != 1
+        ):
+            return False
+        options = list(getattr(select, "option", None) or [])
+        if not options or any(
+            _integer(getattr(option, "type", None), -1) != int(OptionType.ENERGY)
+            or not _option_active(option)
+            or _integer(getattr(option, "playerIndex", None), -1) != self.escape_player
+            for option in options
+        ):
+            return False
+        active = self._dead_active(obs)
+        return (
+            active is not None
+            and _integer(getattr(active, "serial", 0), 0) == self.dead_active_serial
+            and bool(self._ready_bench_grims(obs))
+        )
+
     def _apply_escape(self, obs: Any, ranked: list[int], desired: int):
         if not self.config.dead_active_escape or desired != 1:
             return None
@@ -483,6 +526,8 @@ class GrimVarianceFloorDirector:
                     return None
 
         if self.escape_stage == "promote":
+            if self._is_retreat_payment_bridge(obs):
+                return None
             if not (
                 _context_is(obs.select, SelectContext.TO_ACTIVE)
                 or _context_is(obs.select, SelectContext.SWITCH)
@@ -623,6 +668,8 @@ class GrimVarianceFloorDirector:
                 self._clear_escape()
                 return
             if self.escape_stage == "promote":
+                if self._is_retreat_payment_bridge(obs):
+                    return
                 choices = _ready_grim_options(obs, [index for index, _ in selected])
                 if choices:
                     self._clear_escape()
