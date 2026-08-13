@@ -1,0 +1,1878 @@
+{
+  "baseline": {
+    "archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
+    "name": "Dipplin S1 current-tree",
+    "package_manifest": {
+      "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/dipplin_s1/submission.manifest.json",
+      "sha256": "4071c03a020446436b8d33e1951fdaf5229ae4ab760a8283dc7d6f323e02f92c",
+      "variant": "s1"
+    },
+    "tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+  },
+  "candidate": {
+    "archive_sha256": "813fab9efd432738856e7d7b784809c7b0c5aef51b3c677d7205f203490d1510",
+    "name": "Dipplin S2 pre-attack sequence proof",
+    "package_manifest": {
+      "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/dipplin_s2/submission.manifest.json",
+      "sha256": "4801239bc3d328909bbd4e5461b84b140dd8931e3b581636ecbc662a97bad1bc",
+      "variant": "s2"
+    },
+    "tree_sha256": "c822bb76fa40a138a6bb07fcfd6e6cc58f8ade0dd65c49425bc703f3170da922"
+  },
+  "evidence_files": [
+    {
+      "id": "frozen_s2_hypothesis",
+      "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/data/dipplin_general_strength/s2_pre_attack_sequence_hypothesis.json",
+      "sha256": "aa2c5a070052ed9b706c20de548b5ad38ca48949156411fb62ff9a5dd39d4f87"
+    }
+  ],
+  "later_stage_decision_contracts": {
+    "frozen_before_result_admission": true,
+    "stage2": {
+      "catastrophic_matchup_drop_delta": -0.1,
+      "expected_actual_order": "second",
+      "expected_matchups": [
+        "A2",
+        "d842",
+        "AZ2.4a",
+        "AZ2.7"
+      ],
+      "minimum_candidate_macro_win_rate": 0.5,
+      "minimum_candidate_minus_s1_pooled_delta": 0.0,
+      "minimum_candidate_pooled_win_rate": 0.5,
+      "paired": false,
+      "requested_games_per_arm_per_matchup": 300,
+      "require_zero_failures_policy_errors_illegal_actions": true,
+      "screen": "serious_forced_second",
+      "statistics": [
+        "wilson_per_arm",
+        "independent_newcombe_wilson_difference"
+      ],
+      "strong_target_candidate_pooled_or_macro_win_rate": 0.55
+    },
+    "stage3": {
+      "catastrophic_matchup_drop_delta": -0.1,
+      "expected_actual_order": "first",
+      "expected_matchups": [
+        "A2",
+        "d842",
+        "AZ2.4a",
+        "AZ2.7"
+      ],
+      "minimum_candidate_minus_s1_macro_delta": -0.04,
+      "minimum_candidate_minus_s1_pooled_delta": -0.04,
+      "paired": false,
+      "requested_games_per_arm_per_matchup": 100,
+      "require_zero_failures_policy_errors_illegal_actions": true,
+      "screen": "forced_first_regression"
+    },
+    "stage4": {
+      "minimum_each_order_s2_win_rate": 0.43,
+      "minimum_pooled_s2_win_rate": 0.47,
+      "orders": [
+        "first",
+        "second"
+      ],
+      "paired": false,
+      "requested_games_per_order": 300,
+      "requested_games_total": 600,
+      "require_no_significant_loss": true,
+      "require_zero_failures_policy_errors_illegal_actions": true,
+      "screen": "same_deck_s2_vs_s1",
+      "significant_loss_definition": "Reject if the relevant independent Newcombe candidate-minus-S1 difference 95% upper bound is below zero or the relevant S2 Wilson 95% upper bound is below the corresponding no-loss threshold.",
+      "statistics": [
+        "wilson_per_arm",
+        "independent_newcombe_wilson_difference"
+      ]
+    },
+    "stage5": {
+      "exploratory_improvements_can_help": false,
+      "maximum_certified_exploratory_expert_dominates": 0,
+      "maximum_certified_exploratory_incomparable": 0,
+      "paired_by_episode_and_decision": true,
+      "primary_only_for_improvement": true,
+      "require_ed_to_non_ed_transitions_exceed_reverse": true,
+      "require_no_new_failure_family": true,
+      "require_s2_expert_dominates_primary_count_below_s1": true,
+      "require_s2_expert_dominates_primary_rate_below_s1": true,
+      "screen": "paired_frozen_validation_regret",
+      "split": "VALIDATION"
+    }
+  },
+  "schema": "dipplin-s2-stage-evaluation-v1",
+  "spec": {
+    "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/data/dipplin_general_strength/s2_stage_evaluation_spec.json",
+    "sha256": "7e95fd1e722b73fcc54814dbf661afc2b483e2d490c95b3d1bace44aa0f088db"
+  },
+  "stages": {
+    "stage1": {
+      "baseline_cells": [
+        {
+          "actual_order": "second",
+          "draws": 0,
+          "evaluation_identity": {
+            "artifact_b_sha256": "854d8d016f545635711cb0722820b2997e19c4a160797c70e6415bcccf0bd1ae",
+            "deck_a_sha256": "269bc5808a0db862c7afe8f2daaa3d0b3b6e3c68bd651dd515d14f9d85392326",
+            "deck_b_sha256": "92b92bac9f9163ecff933b3dc39294d2cc154c8684f3c8497877661419ebc59d",
+            "engine_sha256": "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30",
+            "evaluation_schema_sha256": "bc111f3f2e539b89d2b5ac2ed3a5447e5e2db1f4d7adbcdf7089c8541de7fcf4",
+            "evaluator_sha256": "01e450c3425b86c586b6b51e50a28f58ae482545382e4ffa6715e3f21a27d114",
+            "external_adapter_sha256": "f18294f2e1ee60630fdcc8a63422aa1115365a0b31edeb4ffa6079a270944283",
+            "hero_name": "S1",
+            "max_decisions": 2000,
+            "opponent_name": "A2",
+            "post_evaluation_submission_b_sha256": "854d8d016f545635711cb0722820b2997e19c4a160797c70e6415bcccf0bd1ae",
+            "process_behavior_environment": {
+              "PYTHONDONTWRITEBYTECODE": "1"
+            },
+            "runtime_environment": {
+              "process_ptcg": {},
+              "submission_a_overrides": {},
+              "submission_b_overrides": {}
+            },
+            "s2_enabled": false,
+            "submission_b_sha256": "854d8d016f545635711cb0722820b2997e19c4a160797c70e6415bcccf0bd1ae"
+          },
+          "failed_games": 0,
+          "games": 100,
+          "hero_illegal_actions": 0,
+          "hero_policy_errors": 0,
+          "id": "s1_a2_second_100",
+          "latency_ms": {
+            "count": 4644,
+            "max": 702.2600839845836,
+            "mean": 135.32925652560075,
+            "p50": 6.7501459998311475,
+            "p95": 642.6668581116243,
+            "p99": 658.2778206918738
+          },
+          "losses": 49,
+          "matchup": "A2",
+          "operational_telemetry": {
+            "fatal_count": 0,
+            "fatal_counts": {},
+            "nonfatal_search_fallback_counts": {
+              "d1_abstention_reason_engine_error": 11,
+              "d1_abstention_reason_timeout": 222,
+              "d1_error_detail_d1error_ambiguous_nonhero_prompt": 6,
+              "d1_error_detail_d1error_node_budget": 5,
+              "d1_errors": 11,
+              "d1_timeouts": 222
+            },
+            "policy": "D1 engine-error/node-budget and timeout counters are explicit search abstentions with baseline fallback; unknown error, timeout, cleanup, or failure counters are fatal."
+          },
+          "opponent_illegal_actions": 0,
+          "opponent_name": "A2",
+          "opponent_policy_errors": 0,
+          "s2_proof": {
+            "admitted": 0,
+            "checked": 0,
+            "completed_game_override_rate": 0.0,
+            "completed_games_with_override_count": 0,
+            "d1_intervention_fields_used": false,
+            "games_with_override": [],
+            "games_with_override_count": 0,
+            "overrides": 0,
+            "source": "exact hero_telemetry s2_pre_attack_sequence_proof_* counters"
+          },
+          "scheduled_games": 100,
+          "source": {
+            "archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
+            "artifact_sha256": "abd325369edb3e9b07942d1d8bf6523c4f5becf3a3f6f43a539cb195c9abfb5f",
+            "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/general_strength/s1_buckets/a2_second_trace_100.json",
+            "tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+          },
+          "wilson_95": [
+            0.4134801193402717,
+            0.6057800106955886
+          ],
+          "win_rate": 0.51,
+          "wins": 51
+        },
+        {
+          "actual_order": "second",
+          "draws": 0,
+          "evaluation_identity": {
+            "artifact_b_sha256": "0c15b56adf3b09c654505a152309fdc9f8401579a495da714347d98ae735003c",
+            "deck_a_sha256": "269bc5808a0db862c7afe8f2daaa3d0b3b6e3c68bd651dd515d14f9d85392326",
+            "deck_b_sha256": "92b92bac9f9163ecff933b3dc39294d2cc154c8684f3c8497877661419ebc59d",
+            "engine_sha256": "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30",
+            "evaluation_schema_sha256": "bc111f3f2e539b89d2b5ac2ed3a5447e5e2db1f4d7adbcdf7089c8541de7fcf4",
+            "evaluator_sha256": "01e450c3425b86c586b6b51e50a28f58ae482545382e4ffa6715e3f21a27d114",
+            "external_adapter_sha256": "f18294f2e1ee60630fdcc8a63422aa1115365a0b31edeb4ffa6079a270944283",
+            "hero_name": "S1",
+            "max_decisions": 2000,
+            "opponent_name": "d842",
+            "post_evaluation_submission_b_sha256": "0c15b56adf3b09c654505a152309fdc9f8401579a495da714347d98ae735003c",
+            "process_behavior_environment": {
+              "PYTHONDONTWRITEBYTECODE": "1"
+            },
+            "runtime_environment": {
+              "process_ptcg": {},
+              "submission_a_overrides": {},
+              "submission_b_overrides": {}
+            },
+            "s2_enabled": false,
+            "submission_b_sha256": "0c15b56adf3b09c654505a152309fdc9f8401579a495da714347d98ae735003c"
+          },
+          "failed_games": 0,
+          "games": 100,
+          "hero_illegal_actions": 0,
+          "hero_policy_errors": 0,
+          "id": "s1_d842_second_100",
+          "latency_ms": {
+            "count": 4660,
+            "max": 709.6247910230886,
+            "mean": 136.47042365611432,
+            "p50": 7.362354503129609,
+            "p95": 652.783187199384,
+            "p99": 658.0444367881864
+          },
+          "losses": 52,
+          "matchup": "d842",
+          "operational_telemetry": {
+            "fatal_count": 0,
+            "fatal_counts": {},
+            "nonfatal_search_fallback_counts": {
+              "d1_abstention_reason_engine_error": 25,
+              "d1_abstention_reason_timeout": 243,
+              "d1_error_detail_d1error_ambiguous_nonhero_prompt": 17,
+              "d1_error_detail_d1error_node_budget": 8,
+              "d1_errors": 25,
+              "d1_timeouts": 243
+            },
+            "policy": "D1 engine-error/node-budget and timeout counters are explicit search abstentions with baseline fallback; unknown error, timeout, cleanup, or failure counters are fatal."
+          },
+          "opponent_illegal_actions": 0,
+          "opponent_name": "d842",
+          "opponent_policy_errors": 0,
+          "s2_proof": {
+            "admitted": 0,
+            "checked": 0,
+            "completed_game_override_rate": 0.0,
+            "completed_games_with_override_count": 0,
+            "d1_intervention_fields_used": false,
+            "games_with_override": [],
+            "games_with_override_count": 0,
+            "overrides": 0,
+            "source": "exact hero_telemetry s2_pre_attack_sequence_proof_* counters"
+          },
+          "scheduled_games": 100,
+          "source": {
+            "archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
+            "artifact_sha256": "f876698b95b8defe8b81f35b9684ff5fcb28867dcba39da0d81ea6c58f427baf",
+            "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/general_strength/s1_buckets/d842_second_trace_100.json",
+            "tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+          },
+          "wilson_95": [
+            0.384645517580519,
+            0.5768342223477603
+          ],
+          "win_rate": 0.48,
+          "wins": 48
+        },
+        {
+          "actual_order": "second",
+          "draws": 0,
+          "evaluation_identity": {
+            "artifact_b_sha256": "5d44338891094988ca15f0c26d5187316549facd64a7bfbac04aa0048424e8c7",
+            "deck_a_sha256": "269bc5808a0db862c7afe8f2daaa3d0b3b6e3c68bd651dd515d14f9d85392326",
+            "deck_b_sha256": "f5354da408919c0d9caf9979780126a27394b0a7cc83df2ebd455d4e5ca9abc1",
+            "engine_sha256": "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30",
+            "evaluation_schema_sha256": "bc111f3f2e539b89d2b5ac2ed3a5447e5e2db1f4d7adbcdf7089c8541de7fcf4",
+            "evaluator_sha256": "01e450c3425b86c586b6b51e50a28f58ae482545382e4ffa6715e3f21a27d114",
+            "external_adapter_sha256": "f18294f2e1ee60630fdcc8a63422aa1115365a0b31edeb4ffa6079a270944283",
+            "hero_name": "S1",
+            "max_decisions": 2000,
+            "opponent_name": "AZ2.4a",
+            "post_evaluation_submission_b_sha256": "5d44338891094988ca15f0c26d5187316549facd64a7bfbac04aa0048424e8c7",
+            "process_behavior_environment": {
+              "PYTHONDONTWRITEBYTECODE": "1"
+            },
+            "runtime_environment": {
+              "process_ptcg": {},
+              "submission_a_overrides": {},
+              "submission_b_overrides": {}
+            },
+            "s2_enabled": false,
+            "submission_b_sha256": "5d44338891094988ca15f0c26d5187316549facd64a7bfbac04aa0048424e8c7"
+          },
+          "failed_games": 0,
+          "games": 100,
+          "hero_illegal_actions": 0,
+          "hero_policy_errors": 0,
+          "id": "s1_az2_4a_second_100",
+          "latency_ms": {
+            "count": 5496,
+            "max": 727.2842079983093,
+            "mean": 116.02773187958921,
+            "p50": 4.0624380053486675,
+            "p95": 588.6532287477166,
+            "p99": 657.4261726040277
+          },
+          "losses": 67,
+          "matchup": "AZ2.4a",
+          "operational_telemetry": {
+            "fatal_count": 0,
+            "fatal_counts": {},
+            "nonfatal_search_fallback_counts": {
+              "d1_abstention_reason_engine_error": 6,
+              "d1_abstention_reason_timeout": 206,
+              "d1_error_detail_d1error_node_budget": 6,
+              "d1_errors": 6,
+              "d1_timeouts": 206
+            },
+            "policy": "D1 engine-error/node-budget and timeout counters are explicit search abstentions with baseline fallback; unknown error, timeout, cleanup, or failure counters are fatal."
+          },
+          "opponent_illegal_actions": 0,
+          "opponent_name": "AZ2.4a",
+          "opponent_policy_errors": 0,
+          "s2_proof": {
+            "admitted": 0,
+            "checked": 0,
+            "completed_game_override_rate": 0.0,
+            "completed_games_with_override_count": 0,
+            "d1_intervention_fields_used": false,
+            "games_with_override": [],
+            "games_with_override_count": 0,
+            "overrides": 0,
+            "source": "exact hero_telemetry s2_pre_attack_sequence_proof_* counters"
+          },
+          "scheduled_games": 100,
+          "source": {
+            "archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
+            "artifact_sha256": "e22162ccb5c852841d9edaeb9ce7717202ff00abfd379343efe373e8c71f3a19",
+            "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/general_strength/s1_buckets/az2_4a_second_trace_100.json",
+            "tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+          },
+          "wilson_95": [
+            0.24563122734128034,
+            0.4269465620490947
+          ],
+          "win_rate": 0.33,
+          "wins": 33
+        },
+        {
+          "actual_order": "second",
+          "draws": 0,
+          "evaluation_identity": {
+            "artifact_b_sha256": "f9bb36612bbb2ed4e38c10cb00b2f3b6ac5616414636413af3b108c2138f4a4a",
+            "deck_a_sha256": "269bc5808a0db862c7afe8f2daaa3d0b3b6e3c68bd651dd515d14f9d85392326",
+            "deck_b_sha256": "f5354da408919c0d9caf9979780126a27394b0a7cc83df2ebd455d4e5ca9abc1",
+            "engine_sha256": "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30",
+            "evaluation_schema_sha256": "bc111f3f2e539b89d2b5ac2ed3a5447e5e2db1f4d7adbcdf7089c8541de7fcf4",
+            "evaluator_sha256": "01e450c3425b86c586b6b51e50a28f58ae482545382e4ffa6715e3f21a27d114",
+            "external_adapter_sha256": "f18294f2e1ee60630fdcc8a63422aa1115365a0b31edeb4ffa6079a270944283",
+            "hero_name": "S1",
+            "max_decisions": 2000,
+            "opponent_name": "AZ2.7",
+            "post_evaluation_submission_b_sha256": "f9bb36612bbb2ed4e38c10cb00b2f3b6ac5616414636413af3b108c2138f4a4a",
+            "process_behavior_environment": {
+              "PYTHONDONTWRITEBYTECODE": "1"
+            },
+            "runtime_environment": {
+              "process_ptcg": {},
+              "submission_a_overrides": {},
+              "submission_b_overrides": {}
+            },
+            "s2_enabled": false,
+            "submission_b_sha256": "f9bb36612bbb2ed4e38c10cb00b2f3b6ac5616414636413af3b108c2138f4a4a"
+          },
+          "failed_games": 0,
+          "games": 100,
+          "hero_illegal_actions": 0,
+          "hero_policy_errors": 0,
+          "id": "s1_az2_7_second_100",
+          "latency_ms": {
+            "count": 5761,
+            "max": 899.2070420063101,
+            "mean": 134.59194707033032,
+            "p50": 4.266625008312985,
+            "p95": 654.0645839995705,
+            "p99": 658.6999670020305
+          },
+          "losses": 61,
+          "matchup": "AZ2.7",
+          "operational_telemetry": {
+            "fatal_count": 0,
+            "fatal_counts": {},
+            "nonfatal_search_fallback_counts": {
+              "d1_abstention_reason_engine_error": 2,
+              "d1_abstention_reason_timeout": 386,
+              "d1_error_detail_d1error_node_budget": 2,
+              "d1_errors": 2,
+              "d1_timeouts": 386
+            },
+            "policy": "D1 engine-error/node-budget and timeout counters are explicit search abstentions with baseline fallback; unknown error, timeout, cleanup, or failure counters are fatal."
+          },
+          "opponent_illegal_actions": 0,
+          "opponent_name": "AZ2.7",
+          "opponent_policy_errors": 0,
+          "s2_proof": {
+            "admitted": 0,
+            "checked": 0,
+            "completed_game_override_rate": 0.0,
+            "completed_games_with_override_count": 0,
+            "d1_intervention_fields_used": false,
+            "games_with_override": [],
+            "games_with_override_count": 0,
+            "overrides": 0,
+            "source": "exact hero_telemetry s2_pre_attack_sequence_proof_* counters"
+          },
+          "scheduled_games": 100,
+          "source": {
+            "archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
+            "artifact_sha256": "055ab5bc7de48f64a4a0202f9433d8a8ff0e9f8b8fed907036b71457adc7b030",
+            "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/general_strength/s1_buckets/az2_7_second_trace_100.json",
+            "tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+          },
+          "wilson_95": [
+            0.3001687400639441,
+            0.4879698295415926
+          ],
+          "win_rate": 0.39,
+          "wins": 39
+        }
+      ],
+      "candidate_cells": [
+        {
+          "actual_order": "second",
+          "draws": 0,
+          "evaluation_identity": {
+            "artifact_b_sha256": "854d8d016f545635711cb0722820b2997e19c4a160797c70e6415bcccf0bd1ae",
+            "deck_a_sha256": "269bc5808a0db862c7afe8f2daaa3d0b3b6e3c68bd651dd515d14f9d85392326",
+            "deck_b_sha256": "92b92bac9f9163ecff933b3dc39294d2cc154c8684f3c8497877661419ebc59d",
+            "engine_sha256": "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30",
+            "evaluation_schema_sha256": "bc111f3f2e539b89d2b5ac2ed3a5447e5e2db1f4d7adbcdf7089c8541de7fcf4",
+            "evaluator_sha256": "01e450c3425b86c586b6b51e50a28f58ae482545382e4ffa6715e3f21a27d114",
+            "external_adapter_sha256": "f18294f2e1ee60630fdcc8a63422aa1115365a0b31edeb4ffa6079a270944283",
+            "hero_name": "S2",
+            "max_decisions": 2000,
+            "opponent_name": "A2",
+            "post_evaluation_submission_b_sha256": "854d8d016f545635711cb0722820b2997e19c4a160797c70e6415bcccf0bd1ae",
+            "process_behavior_environment": {
+              "PYTHONDONTWRITEBYTECODE": "1"
+            },
+            "runtime_environment": {
+              "process_ptcg": {},
+              "submission_a_overrides": {},
+              "submission_b_overrides": {}
+            },
+            "s2_enabled": true,
+            "submission_b_sha256": "854d8d016f545635711cb0722820b2997e19c4a160797c70e6415bcccf0bd1ae"
+          },
+          "failed_games": 0,
+          "games": 100,
+          "hero_illegal_actions": 0,
+          "hero_policy_errors": 0,
+          "id": "s2_a2_second_100",
+          "latency_ms": {
+            "count": 4457,
+            "max": 690.0151250010822,
+            "mean": 109.17921548695222,
+            "p50": 4.906665999442339,
+            "p95": 506.72710001235805,
+            "p99": 654.1129734739661
+          },
+          "losses": 49,
+          "matchup": "A2",
+          "operational_telemetry": {
+            "fatal_count": 0,
+            "fatal_counts": {},
+            "nonfatal_search_fallback_counts": {
+              "d1_abstention_reason_engine_error": 21,
+              "d1_abstention_reason_timeout": 95,
+              "d1_error_detail_d1error_ambiguous_nonhero_prompt": 11,
+              "d1_error_detail_d1error_node_budget": 10,
+              "d1_errors": 21,
+              "d1_timeouts": 95
+            },
+            "policy": "D1 engine-error/node-budget and timeout counters are explicit search abstentions with baseline fallback; unknown error, timeout, cleanup, or failure counters are fatal."
+          },
+          "opponent_illegal_actions": 0,
+          "opponent_name": "A2",
+          "opponent_policy_errors": 0,
+          "s2_proof": {
+            "admitted": 18,
+            "checked": 3534,
+            "completed_game_override_rate": 0.11,
+            "completed_games_with_override_count": 11,
+            "d1_intervention_fields_used": false,
+            "games_with_override": [
+              {
+                "cell_id": "s2_a2_second_100",
+                "completed": true,
+                "game_index": 0,
+                "outcome": "win",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_a2_second_100",
+                "completed": true,
+                "game_index": 9,
+                "outcome": "win",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_a2_second_100",
+                "completed": true,
+                "game_index": 14,
+                "outcome": "win",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_a2_second_100",
+                "completed": true,
+                "game_index": 18,
+                "outcome": "loss",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_a2_second_100",
+                "completed": true,
+                "game_index": 21,
+                "outcome": "loss",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_a2_second_100",
+                "completed": true,
+                "game_index": 26,
+                "outcome": "loss",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_a2_second_100",
+                "completed": true,
+                "game_index": 46,
+                "outcome": "loss",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_a2_second_100",
+                "completed": true,
+                "game_index": 49,
+                "outcome": "loss",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_a2_second_100",
+                "completed": true,
+                "game_index": 53,
+                "outcome": "loss",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_a2_second_100",
+                "completed": true,
+                "game_index": 74,
+                "outcome": "loss",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_a2_second_100",
+                "completed": true,
+                "game_index": 97,
+                "outcome": "loss",
+                "override_count": 1
+              }
+            ],
+            "games_with_override_count": 11,
+            "overrides": 11,
+            "source": "exact hero_telemetry s2_pre_attack_sequence_proof_* counters"
+          },
+          "scheduled_games": 100,
+          "source": {
+            "archive_sha256": "813fab9efd432738856e7d7b784809c7b0c5aef51b3c677d7205f203490d1510",
+            "artifact_sha256": "46a0b21a50572ddece82d475805a9aa7f478898251bf8b96e14996fda9530e9b",
+            "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/general_strength/s2_stage1/a2_second_100.json",
+            "tree_sha256": "c822bb76fa40a138a6bb07fcfd6e6cc58f8ade0dd65c49425bc703f3170da922"
+          },
+          "wilson_95": [
+            0.4134801193402717,
+            0.6057800106955886
+          ],
+          "win_rate": 0.51,
+          "wins": 51
+        },
+        {
+          "actual_order": "second",
+          "draws": 0,
+          "evaluation_identity": {
+            "artifact_b_sha256": "0c15b56adf3b09c654505a152309fdc9f8401579a495da714347d98ae735003c",
+            "deck_a_sha256": "269bc5808a0db862c7afe8f2daaa3d0b3b6e3c68bd651dd515d14f9d85392326",
+            "deck_b_sha256": "92b92bac9f9163ecff933b3dc39294d2cc154c8684f3c8497877661419ebc59d",
+            "engine_sha256": "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30",
+            "evaluation_schema_sha256": "bc111f3f2e539b89d2b5ac2ed3a5447e5e2db1f4d7adbcdf7089c8541de7fcf4",
+            "evaluator_sha256": "01e450c3425b86c586b6b51e50a28f58ae482545382e4ffa6715e3f21a27d114",
+            "external_adapter_sha256": "f18294f2e1ee60630fdcc8a63422aa1115365a0b31edeb4ffa6079a270944283",
+            "hero_name": "S2",
+            "max_decisions": 2000,
+            "opponent_name": "d842",
+            "post_evaluation_submission_b_sha256": "0c15b56adf3b09c654505a152309fdc9f8401579a495da714347d98ae735003c",
+            "process_behavior_environment": {
+              "PYTHONDONTWRITEBYTECODE": "1"
+            },
+            "runtime_environment": {
+              "process_ptcg": {},
+              "submission_a_overrides": {},
+              "submission_b_overrides": {}
+            },
+            "s2_enabled": true,
+            "submission_b_sha256": "0c15b56adf3b09c654505a152309fdc9f8401579a495da714347d98ae735003c"
+          },
+          "failed_games": 0,
+          "games": 100,
+          "hero_illegal_actions": 0,
+          "hero_policy_errors": 0,
+          "id": "s2_d842_second_100",
+          "latency_ms": {
+            "count": 4623,
+            "max": 667.5629169913009,
+            "mean": 119.18014402640867,
+            "p50": 5.164250003872439,
+            "p95": 545.3562169132052,
+            "p99": 655.8682162378682
+          },
+          "losses": 46,
+          "matchup": "d842",
+          "operational_telemetry": {
+            "fatal_count": 0,
+            "fatal_counts": {},
+            "nonfatal_search_fallback_counts": {
+              "d1_abstention_reason_engine_error": 19,
+              "d1_abstention_reason_timeout": 128,
+              "d1_error_detail_d1error_ambiguous_nonhero_prompt": 4,
+              "d1_error_detail_d1error_node_budget": 15,
+              "d1_errors": 19,
+              "d1_timeouts": 128
+            },
+            "policy": "D1 engine-error/node-budget and timeout counters are explicit search abstentions with baseline fallback; unknown error, timeout, cleanup, or failure counters are fatal."
+          },
+          "opponent_illegal_actions": 0,
+          "opponent_name": "d842",
+          "opponent_policy_errors": 0,
+          "s2_proof": {
+            "admitted": 15,
+            "checked": 3719,
+            "completed_game_override_rate": 0.1,
+            "completed_games_with_override_count": 10,
+            "d1_intervention_fields_used": false,
+            "games_with_override": [
+              {
+                "cell_id": "s2_d842_second_100",
+                "completed": true,
+                "game_index": 3,
+                "outcome": "win",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_d842_second_100",
+                "completed": true,
+                "game_index": 11,
+                "outcome": "win",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_d842_second_100",
+                "completed": true,
+                "game_index": 23,
+                "outcome": "loss",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_d842_second_100",
+                "completed": true,
+                "game_index": 42,
+                "outcome": "win",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_d842_second_100",
+                "completed": true,
+                "game_index": 44,
+                "outcome": "loss",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_d842_second_100",
+                "completed": true,
+                "game_index": 60,
+                "outcome": "loss",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_d842_second_100",
+                "completed": true,
+                "game_index": 88,
+                "outcome": "loss",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_d842_second_100",
+                "completed": true,
+                "game_index": 90,
+                "outcome": "loss",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_d842_second_100",
+                "completed": true,
+                "game_index": 98,
+                "outcome": "win",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_d842_second_100",
+                "completed": true,
+                "game_index": 99,
+                "outcome": "win",
+                "override_count": 1
+              }
+            ],
+            "games_with_override_count": 10,
+            "overrides": 10,
+            "source": "exact hero_telemetry s2_pre_attack_sequence_proof_* counters"
+          },
+          "scheduled_games": 100,
+          "source": {
+            "archive_sha256": "813fab9efd432738856e7d7b784809c7b0c5aef51b3c677d7205f203490d1510",
+            "artifact_sha256": "a4c7ea48f3f13a2be75b7b2f68880e9dfc18725fbd356e86be3ab5cc24ac531d",
+            "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/general_strength/s2_stage1/d842_second_100.json",
+            "tree_sha256": "c822bb76fa40a138a6bb07fcfd6e6cc58f8ade0dd65c49425bc703f3170da922"
+          },
+          "wilson_95": [
+            0.44264860323368227,
+            0.6343919169097589
+          ],
+          "win_rate": 0.54,
+          "wins": 54
+        },
+        {
+          "actual_order": "second",
+          "draws": 0,
+          "evaluation_identity": {
+            "artifact_b_sha256": "5d44338891094988ca15f0c26d5187316549facd64a7bfbac04aa0048424e8c7",
+            "deck_a_sha256": "269bc5808a0db862c7afe8f2daaa3d0b3b6e3c68bd651dd515d14f9d85392326",
+            "deck_b_sha256": "f5354da408919c0d9caf9979780126a27394b0a7cc83df2ebd455d4e5ca9abc1",
+            "engine_sha256": "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30",
+            "evaluation_schema_sha256": "bc111f3f2e539b89d2b5ac2ed3a5447e5e2db1f4d7adbcdf7089c8541de7fcf4",
+            "evaluator_sha256": "01e450c3425b86c586b6b51e50a28f58ae482545382e4ffa6715e3f21a27d114",
+            "external_adapter_sha256": "f18294f2e1ee60630fdcc8a63422aa1115365a0b31edeb4ffa6079a270944283",
+            "hero_name": "S2",
+            "max_decisions": 2000,
+            "opponent_name": "AZ2.4a",
+            "post_evaluation_submission_b_sha256": "5d44338891094988ca15f0c26d5187316549facd64a7bfbac04aa0048424e8c7",
+            "process_behavior_environment": {
+              "PYTHONDONTWRITEBYTECODE": "1"
+            },
+            "runtime_environment": {
+              "process_ptcg": {},
+              "submission_a_overrides": {},
+              "submission_b_overrides": {}
+            },
+            "s2_enabled": true,
+            "submission_b_sha256": "5d44338891094988ca15f0c26d5187316549facd64a7bfbac04aa0048424e8c7"
+          },
+          "failed_games": 0,
+          "games": 100,
+          "hero_illegal_actions": 0,
+          "hero_policy_errors": 0,
+          "id": "s2_az2_4a_second_100",
+          "latency_ms": {
+            "count": 5792,
+            "max": 785.6800420267973,
+            "mean": 134.27895336288967,
+            "p50": 3.93914598680567,
+            "p95": 652.9731456481386,
+            "p99": 658.0143877613591
+          },
+          "losses": 51,
+          "matchup": "AZ2.4a",
+          "operational_telemetry": {
+            "fatal_count": 0,
+            "fatal_counts": {},
+            "nonfatal_search_fallback_counts": {
+              "d1_abstention_reason_engine_error": 3,
+              "d1_abstention_reason_timeout": 305,
+              "d1_error_detail_d1error_node_budget": 3,
+              "d1_errors": 3,
+              "d1_timeouts": 305
+            },
+            "policy": "D1 engine-error/node-budget and timeout counters are explicit search abstentions with baseline fallback; unknown error, timeout, cleanup, or failure counters are fatal."
+          },
+          "opponent_illegal_actions": 0,
+          "opponent_name": "AZ2.4a",
+          "opponent_policy_errors": 0,
+          "s2_proof": {
+            "admitted": 24,
+            "checked": 4135,
+            "completed_game_override_rate": 0.2,
+            "completed_games_with_override_count": 20,
+            "d1_intervention_fields_used": false,
+            "games_with_override": [
+              {
+                "cell_id": "s2_az2_4a_second_100",
+                "completed": true,
+                "game_index": 11,
+                "outcome": "win",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_az2_4a_second_100",
+                "completed": true,
+                "game_index": 13,
+                "outcome": "loss",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_az2_4a_second_100",
+                "completed": true,
+                "game_index": 15,
+                "outcome": "win",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_az2_4a_second_100",
+                "completed": true,
+                "game_index": 17,
+                "outcome": "win",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_az2_4a_second_100",
+                "completed": true,
+                "game_index": 18,
+                "outcome": "loss",
+                "override_count": 2
+              },
+              {
+                "cell_id": "s2_az2_4a_second_100",
+                "completed": true,
+                "game_index": 19,
+                "outcome": "loss",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_az2_4a_second_100",
+                "completed": true,
+                "game_index": 21,
+                "outcome": "win",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_az2_4a_second_100",
+                "completed": true,
+                "game_index": 29,
+                "outcome": "loss",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_az2_4a_second_100",
+                "completed": true,
+                "game_index": 30,
+                "outcome": "loss",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_az2_4a_second_100",
+                "completed": true,
+                "game_index": 35,
+                "outcome": "win",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_az2_4a_second_100",
+                "completed": true,
+                "game_index": 38,
+                "outcome": "win",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_az2_4a_second_100",
+                "completed": true,
+                "game_index": 43,
+                "outcome": "loss",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_az2_4a_second_100",
+                "completed": true,
+                "game_index": 46,
+                "outcome": "win",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_az2_4a_second_100",
+                "completed": true,
+                "game_index": 48,
+                "outcome": "win",
+                "override_count": 2
+              },
+              {
+                "cell_id": "s2_az2_4a_second_100",
+                "completed": true,
+                "game_index": 57,
+                "outcome": "loss",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_az2_4a_second_100",
+                "completed": true,
+                "game_index": 64,
+                "outcome": "win",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_az2_4a_second_100",
+                "completed": true,
+                "game_index": 67,
+                "outcome": "win",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_az2_4a_second_100",
+                "completed": true,
+                "game_index": 76,
+                "outcome": "loss",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_az2_4a_second_100",
+                "completed": true,
+                "game_index": 88,
+                "outcome": "loss",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_az2_4a_second_100",
+                "completed": true,
+                "game_index": 89,
+                "outcome": "loss",
+                "override_count": 1
+              }
+            ],
+            "games_with_override_count": 20,
+            "overrides": 22,
+            "source": "exact hero_telemetry s2_pre_attack_sequence_proof_* counters"
+          },
+          "scheduled_games": 100,
+          "source": {
+            "archive_sha256": "813fab9efd432738856e7d7b784809c7b0c5aef51b3c677d7205f203490d1510",
+            "artifact_sha256": "22c3b49a5b4f3279c234cf96bdb7674e00a9e306987c433df81105fffb4b4a42",
+            "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/general_strength/s2_stage1/az2_4a_second_100.json",
+            "tree_sha256": "c822bb76fa40a138a6bb07fcfd6e6cc58f8ade0dd65c49425bc703f3170da922"
+          },
+          "wilson_95": [
+            0.3942199893044113,
+            0.5865198806597283
+          ],
+          "win_rate": 0.49,
+          "wins": 49
+        },
+        {
+          "actual_order": "second",
+          "draws": 0,
+          "evaluation_identity": {
+            "artifact_b_sha256": "f9bb36612bbb2ed4e38c10cb00b2f3b6ac5616414636413af3b108c2138f4a4a",
+            "deck_a_sha256": "269bc5808a0db862c7afe8f2daaa3d0b3b6e3c68bd651dd515d14f9d85392326",
+            "deck_b_sha256": "f5354da408919c0d9caf9979780126a27394b0a7cc83df2ebd455d4e5ca9abc1",
+            "engine_sha256": "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30",
+            "evaluation_schema_sha256": "bc111f3f2e539b89d2b5ac2ed3a5447e5e2db1f4d7adbcdf7089c8541de7fcf4",
+            "evaluator_sha256": "01e450c3425b86c586b6b51e50a28f58ae482545382e4ffa6715e3f21a27d114",
+            "external_adapter_sha256": "f18294f2e1ee60630fdcc8a63422aa1115365a0b31edeb4ffa6079a270944283",
+            "hero_name": "S2",
+            "max_decisions": 2000,
+            "opponent_name": "AZ2.7",
+            "post_evaluation_submission_b_sha256": "f9bb36612bbb2ed4e38c10cb00b2f3b6ac5616414636413af3b108c2138f4a4a",
+            "process_behavior_environment": {
+              "PYTHONDONTWRITEBYTECODE": "1"
+            },
+            "runtime_environment": {
+              "process_ptcg": {},
+              "submission_a_overrides": {},
+              "submission_b_overrides": {}
+            },
+            "s2_enabled": true,
+            "submission_b_sha256": "f9bb36612bbb2ed4e38c10cb00b2f3b6ac5616414636413af3b108c2138f4a4a"
+          },
+          "failed_games": 0,
+          "games": 100,
+          "hero_illegal_actions": 0,
+          "hero_policy_errors": 0,
+          "id": "s2_az2_7_second_100",
+          "latency_ms": {
+            "count": 5741,
+            "max": 744.6163330168929,
+            "mean": 140.5977639848833,
+            "p50": 4.3260829988867044,
+            "p95": 653.9904579985887,
+            "p99": 659.4260499929078
+          },
+          "losses": 61,
+          "matchup": "AZ2.7",
+          "operational_telemetry": {
+            "fatal_count": 0,
+            "fatal_counts": {},
+            "nonfatal_search_fallback_counts": {
+              "d1_abstention_reason_timeout": 375,
+              "d1_timeouts": 375
+            },
+            "policy": "D1 engine-error/node-budget and timeout counters are explicit search abstentions with baseline fallback; unknown error, timeout, cleanup, or failure counters are fatal."
+          },
+          "opponent_illegal_actions": 0,
+          "opponent_name": "AZ2.7",
+          "opponent_policy_errors": 0,
+          "s2_proof": {
+            "admitted": 7,
+            "checked": 4011,
+            "completed_game_override_rate": 0.07,
+            "completed_games_with_override_count": 7,
+            "d1_intervention_fields_used": false,
+            "games_with_override": [
+              {
+                "cell_id": "s2_az2_7_second_100",
+                "completed": true,
+                "game_index": 8,
+                "outcome": "loss",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_az2_7_second_100",
+                "completed": true,
+                "game_index": 11,
+                "outcome": "loss",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_az2_7_second_100",
+                "completed": true,
+                "game_index": 28,
+                "outcome": "loss",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_az2_7_second_100",
+                "completed": true,
+                "game_index": 65,
+                "outcome": "loss",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_az2_7_second_100",
+                "completed": true,
+                "game_index": 69,
+                "outcome": "win",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_az2_7_second_100",
+                "completed": true,
+                "game_index": 72,
+                "outcome": "loss",
+                "override_count": 1
+              },
+              {
+                "cell_id": "s2_az2_7_second_100",
+                "completed": true,
+                "game_index": 73,
+                "outcome": "loss",
+                "override_count": 1
+              }
+            ],
+            "games_with_override_count": 7,
+            "overrides": 7,
+            "source": "exact hero_telemetry s2_pre_attack_sequence_proof_* counters"
+          },
+          "scheduled_games": 100,
+          "source": {
+            "archive_sha256": "813fab9efd432738856e7d7b784809c7b0c5aef51b3c677d7205f203490d1510",
+            "artifact_sha256": "fd1e3650e1457d9911e8db178d04c5246465b09b92b0177843263b2ddfe5d9b0",
+            "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/general_strength/s2_stage1/az2_7_second_100.json",
+            "tree_sha256": "c822bb76fa40a138a6bb07fcfd6e6cc58f8ade0dd65c49425bc703f3170da922"
+          },
+          "wilson_95": [
+            0.3001687400639441,
+            0.4879698295415926
+          ],
+          "win_rate": 0.39,
+          "wins": 39
+        }
+      ],
+      "candidate_latency_ms": {
+        "count": 20613,
+        "max": 785.6800420267973,
+        "p50_max_across_cells": 5.164250003872439,
+        "p95_max_across_cells": 653.9904579985887,
+        "p99_max_across_cells": 659.4260499929078,
+        "quantile_note": "Cross-cell quantiles are maxima, not fabricated pooled quantiles.",
+        "weighted_mean": 127.22539320693278
+      },
+      "candidate_s2_proof": {
+        "admitted": 64,
+        "checked": 15399,
+        "completed_game_override_rate": 0.12,
+        "completed_games": 400,
+        "completed_games_with_override_count": 48,
+        "d1_intervention_fields_used": false,
+        "games_with_override": [
+          {
+            "cell_id": "s2_a2_second_100",
+            "completed": true,
+            "game_index": 0,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_100",
+            "completed": true,
+            "game_index": 9,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_100",
+            "completed": true,
+            "game_index": 14,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_100",
+            "completed": true,
+            "game_index": 18,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_100",
+            "completed": true,
+            "game_index": 21,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_100",
+            "completed": true,
+            "game_index": 26,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_100",
+            "completed": true,
+            "game_index": 46,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_100",
+            "completed": true,
+            "game_index": 49,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_100",
+            "completed": true,
+            "game_index": 53,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_100",
+            "completed": true,
+            "game_index": 74,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_100",
+            "completed": true,
+            "game_index": 97,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 11,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 13,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 15,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 17,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 18,
+            "outcome": "loss",
+            "override_count": 2
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 19,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 21,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 29,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 30,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 35,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 38,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 43,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 46,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 48,
+            "outcome": "win",
+            "override_count": 2
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 57,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 64,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 67,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 76,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 88,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 89,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_100",
+            "completed": true,
+            "game_index": 8,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_100",
+            "completed": true,
+            "game_index": 11,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_100",
+            "completed": true,
+            "game_index": 28,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_100",
+            "completed": true,
+            "game_index": 65,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_100",
+            "completed": true,
+            "game_index": 69,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_100",
+            "completed": true,
+            "game_index": 72,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_100",
+            "completed": true,
+            "game_index": 73,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_100",
+            "completed": true,
+            "game_index": 3,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_100",
+            "completed": true,
+            "game_index": 11,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_100",
+            "completed": true,
+            "game_index": 23,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_100",
+            "completed": true,
+            "game_index": 42,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_100",
+            "completed": true,
+            "game_index": 44,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_100",
+            "completed": true,
+            "game_index": 60,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_100",
+            "completed": true,
+            "game_index": 88,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_100",
+            "completed": true,
+            "game_index": 90,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_100",
+            "completed": true,
+            "game_index": 98,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_100",
+            "completed": true,
+            "game_index": 99,
+            "outcome": "win",
+            "override_count": 1
+          }
+        ],
+        "games_with_override_count": 48,
+        "overrides": 50,
+        "source": "exact game_rows hero_telemetry S2 counters"
+      },
+      "decision": {
+        "gates": {
+          "minimum_3pp_pooled_lift": true,
+          "no_catastrophic_matchup_collapse": true,
+          "no_material_pooled_drop": true,
+          "strong_5pp_pooled_lift": true,
+          "zero_failures_and_policy_errors": true,
+          "zero_fatal_operational_telemetry": true,
+          "zero_illegal_actions": true
+        },
+        "observed": {
+          "catastrophic_matchup_cells": [],
+          "failed_games": 0,
+          "fatal_operational_telemetry": 0,
+          "illegal_actions": 0,
+          "policy_errors": 0,
+          "pooled_delta": 0.05499999999999999
+        },
+        "reasons": [
+          "POOLED_LIFT_AT_OR_ABOVE_STRONG_SIGNAL"
+        ],
+        "thresholds": {
+          "catastrophic_matchup_drop_delta": -0.2,
+          "expected_actual_order": "second",
+          "expected_baseline_games": 400,
+          "expected_baseline_wins": 171,
+          "expected_matchups": [
+            "A2",
+            "d842",
+            "AZ2.4a",
+            "AZ2.7"
+          ],
+          "material_pooled_drop_delta": -0.05,
+          "minimum_promising_pooled_delta": 0.03,
+          "requested_games_per_matchup": 100,
+          "strong_signal_pooled_delta": 0.05
+        },
+        "verdict": "STRONG"
+      },
+      "macro": {
+        "baseline_win_rate": 0.4275,
+        "candidate_minus_baseline": 0.05500000000000005,
+        "candidate_win_rate": 0.48250000000000004,
+        "matchup_count": 4,
+        "method": "unweighted_mean_of_matchup_order_cell_win_rates"
+      },
+      "per_matchup": {
+        "A2|second": {
+          "actual_order": "second",
+          "baseline": {
+            "draws": 0,
+            "failed_games": 0,
+            "games": 100,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 49,
+            "operational_telemetry": {
+              "fatal_count": 0,
+              "fatal_counts": {},
+              "nonfatal_search_fallback_counts": {
+                "d1_abstention_reason_engine_error": 11,
+                "d1_abstention_reason_timeout": 222,
+                "d1_error_detail_d1error_ambiguous_nonhero_prompt": 6,
+                "d1_error_detail_d1error_node_budget": 5,
+                "d1_errors": 11,
+                "d1_timeouts": 222
+              }
+            },
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "scheduled_games": 100,
+            "wilson_95": [
+              0.4134801193402717,
+              0.6057800106955886
+            ],
+            "win_rate": 0.51,
+            "wins": 51
+          },
+          "candidate": {
+            "draws": 0,
+            "failed_games": 0,
+            "games": 100,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 49,
+            "operational_telemetry": {
+              "fatal_count": 0,
+              "fatal_counts": {},
+              "nonfatal_search_fallback_counts": {
+                "d1_abstention_reason_engine_error": 21,
+                "d1_abstention_reason_timeout": 95,
+                "d1_error_detail_d1error_ambiguous_nonhero_prompt": 11,
+                "d1_error_detail_d1error_node_budget": 10,
+                "d1_errors": 21,
+                "d1_timeouts": 95
+              }
+            },
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "scheduled_games": 100,
+            "wilson_95": [
+              0.4134801193402717,
+              0.6057800106955886
+            ],
+            "win_rate": 0.51,
+            "wins": 51
+          },
+          "candidate_minus_baseline": {
+            "confidence_95": [
+              -0.13597756363244368,
+              0.13597756363244368
+            ],
+            "estimate": 0.0,
+            "method": "independent_newcombe_wilson_difference",
+            "paired": false
+          },
+          "matchup": "A2"
+        },
+        "AZ2.4a|second": {
+          "actual_order": "second",
+          "baseline": {
+            "draws": 0,
+            "failed_games": 0,
+            "games": 100,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 67,
+            "operational_telemetry": {
+              "fatal_count": 0,
+              "fatal_counts": {},
+              "nonfatal_search_fallback_counts": {
+                "d1_abstention_reason_engine_error": 6,
+                "d1_abstention_reason_timeout": 206,
+                "d1_error_detail_d1error_node_budget": 6,
+                "d1_errors": 6,
+                "d1_timeouts": 206
+              }
+            },
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "scheduled_games": 100,
+            "wilson_95": [
+              0.24563122734128034,
+              0.4269465620490947
+            ],
+            "win_rate": 0.33,
+            "wins": 33
+          },
+          "candidate": {
+            "draws": 0,
+            "failed_games": 0,
+            "games": 100,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 51,
+            "operational_telemetry": {
+              "fatal_count": 0,
+              "fatal_counts": {},
+              "nonfatal_search_fallback_counts": {
+                "d1_abstention_reason_engine_error": 3,
+                "d1_abstention_reason_timeout": 305,
+                "d1_error_detail_d1error_node_budget": 3,
+                "d1_errors": 3,
+                "d1_timeouts": 305
+              }
+            },
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "scheduled_games": 100,
+            "wilson_95": [
+              0.3942199893044113,
+              0.5865198806597283
+            ],
+            "win_rate": 0.49,
+            "wins": 49
+          },
+          "candidate_minus_baseline": {
+            "confidence_95": [
+              0.02371923708026119,
+              0.2881958547009493
+            ],
+            "estimate": 0.15999999999999998,
+            "method": "independent_newcombe_wilson_difference",
+            "paired": false
+          },
+          "matchup": "AZ2.4a"
+        },
+        "AZ2.7|second": {
+          "actual_order": "second",
+          "baseline": {
+            "draws": 0,
+            "failed_games": 0,
+            "games": 100,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 61,
+            "operational_telemetry": {
+              "fatal_count": 0,
+              "fatal_counts": {},
+              "nonfatal_search_fallback_counts": {
+                "d1_abstention_reason_engine_error": 2,
+                "d1_abstention_reason_timeout": 386,
+                "d1_error_detail_d1error_node_budget": 2,
+                "d1_errors": 2,
+                "d1_timeouts": 386
+              }
+            },
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "scheduled_games": 100,
+            "wilson_95": [
+              0.3001687400639441,
+              0.4879698295415926
+            ],
+            "win_rate": 0.39,
+            "wins": 39
+          },
+          "candidate": {
+            "draws": 0,
+            "failed_games": 0,
+            "games": 100,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 61,
+            "operational_telemetry": {
+              "fatal_count": 0,
+              "fatal_counts": {},
+              "nonfatal_search_fallback_counts": {
+                "d1_abstention_reason_timeout": 375,
+                "d1_timeouts": 375
+              }
+            },
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "scheduled_games": 100,
+            "wilson_95": [
+              0.3001687400639441,
+              0.4879698295415926
+            ],
+            "win_rate": 0.39,
+            "wins": 39
+          },
+          "candidate_minus_baseline": {
+            "confidence_95": [
+              -0.13292006154869157,
+              0.13292006154869157
+            ],
+            "estimate": 0.0,
+            "method": "independent_newcombe_wilson_difference",
+            "paired": false
+          },
+          "matchup": "AZ2.7"
+        },
+        "d842|second": {
+          "actual_order": "second",
+          "baseline": {
+            "draws": 0,
+            "failed_games": 0,
+            "games": 100,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 52,
+            "operational_telemetry": {
+              "fatal_count": 0,
+              "fatal_counts": {},
+              "nonfatal_search_fallback_counts": {
+                "d1_abstention_reason_engine_error": 25,
+                "d1_abstention_reason_timeout": 243,
+                "d1_error_detail_d1error_ambiguous_nonhero_prompt": 17,
+                "d1_error_detail_d1error_node_budget": 8,
+                "d1_errors": 25,
+                "d1_timeouts": 243
+              }
+            },
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "scheduled_games": 100,
+            "wilson_95": [
+              0.384645517580519,
+              0.5768342223477603
+            ],
+            "win_rate": 0.48,
+            "wins": 48
+          },
+          "candidate": {
+            "draws": 0,
+            "failed_games": 0,
+            "games": 100,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 46,
+            "operational_telemetry": {
+              "fatal_count": 0,
+              "fatal_counts": {},
+              "nonfatal_search_fallback_counts": {
+                "d1_abstention_reason_engine_error": 19,
+                "d1_abstention_reason_timeout": 128,
+                "d1_error_detail_d1error_ambiguous_nonhero_prompt": 4,
+                "d1_error_detail_d1error_node_budget": 15,
+                "d1_errors": 19,
+                "d1_timeouts": 128
+              }
+            },
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "scheduled_games": 100,
+            "wilson_95": [
+              0.44264860323368227,
+              0.6343919169097589
+            ],
+            "win_rate": 0.54,
+            "wins": 54
+          },
+          "candidate_minus_baseline": {
+            "confidence_95": [
+              -0.07731045506460346,
+              0.19417269206282606
+            ],
+            "estimate": 0.06000000000000005,
+            "method": "independent_newcombe_wilson_difference",
+            "paired": false
+          },
+          "matchup": "d842"
+        }
+      },
+      "pooled": {
+        "baseline": {
+          "draws": 0,
+          "failed_games": 0,
+          "games": 400,
+          "hero_illegal_actions": 0,
+          "hero_policy_errors": 0,
+          "losses": 229,
+          "operational_telemetry": {
+            "fatal_count": 0,
+            "fatal_counts": {},
+            "nonfatal_search_fallback_counts": {
+              "d1_abstention_reason_engine_error": 44,
+              "d1_abstention_reason_timeout": 1057,
+              "d1_error_detail_d1error_ambiguous_nonhero_prompt": 23,
+              "d1_error_detail_d1error_node_budget": 21,
+              "d1_errors": 44,
+              "d1_timeouts": 1057
+            }
+          },
+          "opponent_illegal_actions": 0,
+          "opponent_policy_errors": 0,
+          "scheduled_games": 400,
+          "wilson_95": [
+            0.3799345878043344,
+            0.47644469487413854
+          ],
+          "win_rate": 0.4275,
+          "wins": 171
+        },
+        "candidate": {
+          "draws": 0,
+          "failed_games": 0,
+          "games": 400,
+          "hero_illegal_actions": 0,
+          "hero_policy_errors": 0,
+          "losses": 207,
+          "operational_telemetry": {
+            "fatal_count": 0,
+            "fatal_counts": {},
+            "nonfatal_search_fallback_counts": {
+              "d1_abstention_reason_engine_error": 43,
+              "d1_abstention_reason_timeout": 903,
+              "d1_error_detail_d1error_ambiguous_nonhero_prompt": 15,
+              "d1_error_detail_d1error_node_budget": 28,
+              "d1_errors": 43,
+              "d1_timeouts": 903
+            }
+          },
+          "opponent_illegal_actions": 0,
+          "opponent_policy_errors": 0,
+          "scheduled_games": 400,
+          "wilson_95": [
+            0.43393056304490063,
+            0.5314023672567997
+          ],
+          "win_rate": 0.4825,
+          "wins": 193
+        },
+        "candidate_minus_baseline": {
+          "confidence_95": [
+            -0.013953414436544742,
+            0.1232195716833702
+          ],
+          "estimate": 0.05499999999999999,
+          "method": "independent_newcombe_wilson_difference",
+          "paired": false
+        }
+      },
+      "statistical_contract": {
+        "arms": "independent_unpaired_native_engine_randomness",
+        "difference_interval": "independent_newcombe_wilson_difference_95",
+        "per_arm_interval": "wilson_score_95",
+        "same_schedule_is_paired": false
+      },
+      "status": "EVALUATED"
+    },
+    "stage2": {
+      "status": "PENDING"
+    },
+    "stage3": {
+      "status": "PENDING"
+    },
+    "stage4": {
+      "status": "PENDING"
+    },
+    "stage5": {
+      "status": "PENDING"
+    },
+    "stage6": {
+      "status": "PENDING"
+    }
+  }
+}
