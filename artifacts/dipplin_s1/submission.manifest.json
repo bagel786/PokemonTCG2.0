@@ -1,0 +1,216 @@
+{
+  "deck": {
+    "card_count": 60,
+    "deck_csv_sha256": "269BC5808A0DB862C7AFE8F2DAAA3D0B3B6E3C68BD651DD515D14F9D85392326",
+    "deck_id": "291b0afd6ead",
+    "newline_terminated": true
+  },
+  "deployment": {
+    "cloud_started": false,
+    "games_run_by_packager": false,
+    "uploaded": false
+  },
+  "engine": {
+    "linux_amd64_member": "cg/libcg.so",
+    "linux_amd64_sha256": "D16244A3157FC55C3314F08DCC7C5179168697D78C105B95C7DEBD556B764BB7",
+    "official_template_file_sha256": {
+      "__init__.py": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "api.py": "593F1298E52A635F90F8F505A52113E9AF114F444C293404E37906F18EE06CED",
+      "cg.dll": "EAE88634E26DC31D94150A4D8202FC9D32596B8C688EF67E14CB4088CD4D5771",
+      "game.py": "3BD3D4F4A369A11E6D2F5DA9094CF15EBC410A2221835E6417B7CFF4883F1FC2",
+      "libcg-arm64.so": "1670740B73FAB46586FD25C0A1F96608EA75B1F39381D66A0B8D9486BEA6D4A2",
+      "libcg.dylib": "7A157F045D333F99D1996D49C12BDBDD148072A619AF246385C7295518776E30",
+      "libcg.so": "D16244A3157FC55C3314F08DCC7C5179168697D78C105B95C7DEBD556B764BB7",
+      "sim.py": "1555F57F5D22BF4C09D70E0E667A916E575E68C9DD1DE9EAD34BA5E7E4968655",
+      "utils.py": "60F29665CEE0A88525D6F0383BC45959A6262D16FE35EF380AECE1E0EA13C49B"
+    },
+    "source": "/Users/safiullahbaig/Projects/pokemonTCG2.0/vendor/cg"
+  },
+  "output": {
+    "archive": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/dipplin_s1/submission.tar.gz",
+    "archive_bytes": 2033998,
+    "archive_sha256": "EC74EFE096473C58A2057CABFEE93BF337BC18848C202A6E3D36BCBA802DB171",
+    "extracted_tree_sha256": "940654489EA1F286982226F1F0CBA4DD7340378B997A3F88AB6915C5D67F6C98",
+    "file_manifest": {
+      "cg/__init__.py": {
+        "bytes": 0,
+        "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+      },
+      "cg/api.py": {
+        "bytes": 26933,
+        "sha256": "593F1298E52A635F90F8F505A52113E9AF114F444C293404E37906F18EE06CED"
+      },
+      "cg/cg.dll": {
+        "bytes": 1525248,
+        "sha256": "EAE88634E26DC31D94150A4D8202FC9D32596B8C688EF67E14CB4088CD4D5771"
+      },
+      "cg/game.py": {
+        "bytes": 2225,
+        "sha256": "3BD3D4F4A369A11E6D2F5DA9094CF15EBC410A2221835E6417B7CFF4883F1FC2"
+      },
+      "cg/libcg-arm64.so": {
+        "bytes": 1296464,
+        "sha256": "1670740B73FAB46586FD25C0A1F96608EA75B1F39381D66A0B8D9486BEA6D4A2"
+      },
+      "cg/libcg.dylib": {
+        "bytes": 1245544,
+        "sha256": "7A157F045D333F99D1996D49C12BDBDD148072A619AF246385C7295518776E30"
+      },
+      "cg/libcg.so": {
+        "bytes": 1342400,
+        "sha256": "D16244A3157FC55C3314F08DCC7C5179168697D78C105B95C7DEBD556B764BB7"
+      },
+      "cg/sim.py": {
+        "bytes": 2273,
+        "sha256": "1555F57F5D22BF4C09D70E0E667A916E575E68C9DD1DE9EAD34BA5E7E4968655"
+      },
+      "cg/utils.py": {
+        "bytes": 1970,
+        "sha256": "60F29665CEE0A88525D6F0383BC45959A6262D16FE35EF380AECE1E0EA13C49B"
+      },
+      "deck.csv": {
+        "bytes": 237,
+        "sha256": "269BC5808A0DB862C7AFE8F2DAAA3D0B3B6E3C68BD651DD515D14F9D85392326"
+      },
+      "main.py": {
+        "bytes": 445,
+        "sha256": "384A6E241D86F450FCA32DCCC1DB64370F7D45D50F80B85A738BD401E7A52EB9"
+      },
+      "ptcg_ai/__init__.py": {
+        "bytes": 390,
+        "sha256": "36BE9FEE3CC86FC94D00589ED21772D206A9DE876A50926F80925B9CE5DADAA7"
+      },
+      "ptcg_ai/dipplin/__init__.py": {
+        "bytes": 1425,
+        "sha256": "6CC412A8BB7464FB97480B6F935D4C3CE817104B6C00B2EB6698E8DE1B5EBDA2"
+      },
+      "ptcg_ai/dipplin/cards.py": {
+        "bytes": 3667,
+        "sha256": "22809ABA0124AF78660412ACA675AFAD942168A1BE008E5D0A31C22E996EB92E"
+      },
+      "ptcg_ai/dipplin/damage.py": {
+        "bytes": 15214,
+        "sha256": "9533ABA0D91B1B4564C143863906DC948EE83DA1AD1E998F827BC5F109956801"
+      },
+      "ptcg_ai/dipplin/objective.py": {
+        "bytes": 14155,
+        "sha256": "1E5A2FDECABF9EDC4B749A3F7A1F4E25F0DF8C99C7D4CC8B1F001A2601B0F3E7"
+      },
+      "ptcg_ai/dipplin/plan.py": {
+        "bytes": 12086,
+        "sha256": "32D8ADF3BD9F66D250FD462930D913A6292F3858BE804791299B553471378687"
+      },
+      "ptcg_ai/dipplin/policy.py": {
+        "bytes": 64032,
+        "sha256": "9D970EDF48E17230A4E991D0E60674EE03E5F92886069F4F6B0FB75F9D68A1C6"
+      },
+      "ptcg_ai/dipplin/resolvers.py": {
+        "bytes": 30695,
+        "sha256": "A8E0176827329FA365F87864B943B3FFB3D8317B751212B4F9FA2315409A5544"
+      },
+      "ptcg_ai/dipplin/search.py": {
+        "bytes": 77716,
+        "sha256": "14FDB20B672AA16A6F7D02A1B923F4194D44C26F082DDDDB288E729F64C2C291"
+      },
+      "ptcg_ai/dipplin/snapshot.py": {
+        "bytes": 43327,
+        "sha256": "6C2B361F66E3B5C3FCAFC0523A988E94492254FFC07BE392D65D6C7B0608286C"
+      },
+      "ptcg_ai/dipplin/telemetry.py": {
+        "bytes": 7078,
+        "sha256": "24B53F9ACB9C30D5A7481C77576EB2FA11E0C643201D18B6AADF1AF251831039"
+      },
+      "ptcg_ai/safety.py": {
+        "bytes": 1591,
+        "sha256": "A3AC87CDD07907EB62910BB156E500BAB5604D95EB67E4AAFA6B2C2C4CC91C44"
+      }
+    },
+    "manifest": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/dipplin_s1/submission.manifest.json",
+    "member_count": 23
+  },
+  "runtime": {
+    "direct_entrypoint": true,
+    "entrypoint_forces_evaluated_mode": true,
+    "evaluated_configuration": {
+      "go_first": true,
+      "route_v2": false,
+      "search_worlds": 2
+    },
+    "family": "dedicated_dipplin",
+    "grim_runtime_included": false,
+    "learned_weights_included": false,
+    "runtime_source_members": [
+      "cg/__init__.py",
+      "cg/api.py",
+      "cg/game.py",
+      "cg/sim.py",
+      "cg/utils.py",
+      "main.py",
+      "ptcg_ai/__init__.py",
+      "ptcg_ai/dipplin/__init__.py",
+      "ptcg_ai/dipplin/cards.py",
+      "ptcg_ai/dipplin/damage.py",
+      "ptcg_ai/dipplin/objective.py",
+      "ptcg_ai/dipplin/plan.py",
+      "ptcg_ai/dipplin/policy.py",
+      "ptcg_ai/dipplin/resolvers.py",
+      "ptcg_ai/dipplin/search.py",
+      "ptcg_ai/dipplin/snapshot.py",
+      "ptcg_ai/dipplin/telemetry.py",
+      "ptcg_ai/safety.py"
+    ],
+    "runtime_source_tree_sha256": "D5AAEFAB29B5850B298810C21DC628880822381C05BDBAD5ECEA1716BCEF4241",
+    "search_default": true,
+    "second_opening_v2_default": true
+  },
+  "schema_version": 1,
+  "status": "packaged",
+  "variant": "s1",
+  "verification": {
+    "archive_structure": {
+      "gzip_filename_empty": true,
+      "gzip_mtime_zero": true,
+      "member_count": 23,
+      "normalized_tar_metadata": true,
+      "passed": true,
+      "portable_member_names": true,
+      "regular_files_only": true,
+      "sorted_members": true
+    },
+    "deterministic_double_build": true,
+    "first_archive_sha256": "EC74EFE096473C58A2057CABFEE93BF337BC18848C202A6E3D36BCBA802DB171",
+    "fresh_stage_count": 2,
+    "linux_amd64_complete_game": {
+      "complete_game_attempted": false,
+      "complete_game_verified": false,
+      "eligible_build_host": false,
+      "host_machine": "arm64",
+      "host_system": "Darwin",
+      "reason": "build host is Darwin/arm64, not Linux/amd64",
+      "required_for_release": true,
+      "status": "pending_external_complete_game"
+    },
+    "safe_archive_extraction": true,
+    "second_archive_sha256": "EC74EFE096473C58A2057CABFEE93BF337BC18848C202A6E3D36BCBA802DB171",
+    "sterile_import": {
+      "agent_class": "DipplinCompetitionAgent",
+      "agent_module": "ptcg_ai.dipplin.policy",
+      "bytecode_disabled": true,
+      "cache_free_after_import": true,
+      "command_flags": [
+        "-I",
+        "-B"
+      ],
+      "deck_card_count": 60,
+      "deck_csv_sha256": "269BC5808A0DB862C7AFE8F2DAAA3D0B3B6E3C68BD651DD515D14F9D85392326",
+      "deck_id": "291b0afd6ead",
+      "go_first": true,
+      "isolated_python": true,
+      "passed": true,
+      "route_v2_enabled": false,
+      "search_enabled": true,
+      "search_worlds": 2,
+      "second_opening_v2": true
+    }
+  }
+}

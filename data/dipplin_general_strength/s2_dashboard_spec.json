@@ -1,0 +1,278 @@
+{
+  "dashboard_schema": "dipplin-general-strength-dashboard-v2",
+  "candidate": {
+    "name": "Dipplin S1",
+    "variant": "s1",
+    "source_sha": "a73f2fbf31494ebd97bc2e9357600388fe0805d5",
+    "tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+    "runtime_tree_sha256": "d5aaefab29b5850b298810c21dc628880822381c05bdbad5ecea1716bcef4241",
+    "package": "../../artifacts/dipplin_s1/submission.tar.gz",
+    "package_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
+    "manifest": "../../artifacts/dipplin_s1/submission.manifest.json",
+    "manifest_sha256": "4071c03a020446436b8d33e1951fdaf5229ae4ab760a8283dc7d6f323e02f92c"
+  },
+  "provenance": {
+    "decision": "KEEP_S1",
+    "reason": "The frozen S2 candidate passed Stage1 but failed the serious forced-second Stage2 gate.",
+    "sealed_holdout_action_level_inspected": false,
+    "precommitted_stage6_promotion_veto": "Future PROMOTE_S2 requires zero candidate proposal/policy/action-instability errors, no more than 50% combined uncertifiable/incomparable decisions, and expert-dominates episode rate no greater than agent-dominates episode rate."
+  },
+  "rejected_s2_candidate": {
+    "source_sha": "9d365ccdaae90379e0e9d8ce05a17a5e1a587c74",
+    "package": "../../artifacts/dipplin_s2/submission.tar.gz",
+    "package_sha256": "813fab9efd432738856e7d7b784809c7b0c5aef51b3c677d7205f203490d1510",
+    "manifest": "../../artifacts/dipplin_s2/submission.manifest.json",
+    "manifest_sha256": "4801239bc3d328909bbd4e5461b84b140dd8931e3b581636ecbc662a97bad1bc",
+    "tree_sha256": "c822bb76fa40a138a6bb07fcfd6e6cc58f8ade0dd65c49425bc703f3170da922",
+    "runtime_tree_sha256": "b4290fff9b4fa3374f1bc14b7eefd6e9309dc13f3dcbebb2d9e4ea167650189f"
+  },
+  "strength_source": {
+    "stage_spec": "s2_stage_evaluation_spec.json",
+    "stage_spec_sha256": "47d9326c637387f59bf259b608efb1601ca3d3285b53d2a7096dc369cddc6f3b",
+    "stage_report": "../../artifacts/general_strength/s2_stage2/stage2_evaluation.json",
+    "stage_report_sha256": "82f33fd41aadea811bff43d5365b7af8fc622c30b2267336ade90a7cb4b9f04f",
+    "incumbent_dashboard_spec": "s1_dashboard_spec.json",
+    "incumbent_dashboard_spec_sha256": "bd8142f9b60077d82059c57e9e08a223b0d84701010c9c539537c7b7d58fed1e",
+    "required_stage1_verdicts": [
+      "STRONG"
+    ],
+    "required_stage2_verdict": "KILL"
+  },
+  "replay_manifests": {
+    "validation": {
+      "path": "../dipplin_replay_eval/frozen/validation_manifest.json",
+      "artifact_sha256": "f147f14c670223b22bf9cba28f6ea166a4bbb5153c0efea941c61f39ff2bb163",
+      "expected_payload_sha256": "d6cc5a7339dcc466546e68c8ea29301c150966be1f287adc00003bd86716c4c1",
+      "expected_split": "VALIDATION",
+      "expected_episode_count": 50,
+      "expected_sealed": false,
+      "expected_actual_order_counts": {
+        "first": 31,
+        "second": 19
+      },
+      "expected_expert_result_counts": {
+        "loss": 25,
+        "win": 25
+      },
+      "expected_selection_contract_verified_count": 50,
+      "require_pristine": true
+    },
+    "final_holdout": {
+      "path": "../dipplin_replay_eval/frozen/final_holdout_manifest.json",
+      "artifact_sha256": "5f7a3faa6d5ba37ca4c0a5725f99ba2db9e362498712a36681b77cbb6657430d",
+      "expected_payload_sha256": "708fe9e318434d1eaee6ab65661c23323ab9f1ceaa4dc5337bfc5ac22b39298d",
+      "expected_split": "FINAL_HOLDOUT",
+      "expected_episode_count": 30,
+      "expected_sealed": true,
+      "expected_actual_order_counts": {
+        "first": 19,
+        "second": 11
+      },
+      "expected_expert_result_counts": {
+        "loss": 15,
+        "win": 15
+      },
+      "expected_selection_contract_verified_count": 30,
+      "require_pristine": true
+    }
+  },
+  "replay_validation": {
+    "path": "../../artifacts/general_strength/replay/validation_regret_s1.json",
+    "artifact_sha256": "9f1205b2b282b2da37bc284054f51a3ebce7214507da7da4fa75309d5870e87d",
+    "expected_schema": "dipplin-replay-regret-v1",
+    "expected_split": "VALIDATION",
+    "expected_sealed": false,
+    "expected_episode_count": 50,
+    "expected_manifest_file_sha256": "f147f14c670223b22bf9cba28f6ea166a4bbb5153c0efea941c61f39ff2bb163",
+    "expected_manifest_payload_sha256": "d6cc5a7339dcc466546e68c8ea29301c150966be1f287adc00003bd86716c4c1"
+  },
+  "sealed_replay_holdout": null,
+  "qualification": null,
+  "sealed_holdout_receipt": null,
+  "second_bucket_analysis": {
+    "path": "../../artifacts/general_strength/s1_buckets/second_bucket_analysis_400.json",
+    "artifact_sha256": "cf52262d2acf02108fe956de0ce2dc5fcdca7b91b218d0172a28b3320be8d8a8",
+    "expected_schema": "dipplin-second-bucket-analysis-v1",
+    "expected_trace_schema": "dipplin-second-bucket-trace-v1",
+    "expected_eligible_games": 400,
+    "expected_evaluated_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+    "expected_results": {
+      "games": 400,
+      "wins": 171,
+      "losses": 229,
+      "draws": 0
+    },
+    "expected_aggregate_only_sources": 8,
+    "expected_excluded_rows": {
+      "duplicate": 0,
+      "missing_trace": 0,
+      "not_actual_second": 0,
+      "not_completed": 0,
+      "trace_incomplete": 0,
+      "trace_order_mismatch": 0,
+      "trace_outcome_mismatch": 0,
+      "unknown_opening_bucket": 0,
+      "wrong_trace_schema": 0
+    },
+    "expected_quality_counters": {
+      "hero_illegal_actions": 0,
+      "hero_policy_errors": 0,
+      "opponent_illegal_actions": 0,
+      "opponent_policy_errors": 0
+    },
+    "note": "Only the 400 traced current-tree games are admitted per game. The eight historical aggregate-only sources remain context and are never pooled into bucket results or rankings."
+  },
+  "setup_choice_audit": {
+    "path": "../../artifacts/general_strength/s1_buckets/setup_choice_audit_5000.json",
+    "artifact_sha256": "83aa304aa75d3de59f81083993591d3069020ccb7b57ce5f900a81787e667244",
+    "expected_schema": "dipplin-setup-choice-audit-v1",
+    "expected_games": 5000,
+    "expected_actual_order": "second",
+    "expected_archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
+    "expected_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+    "note": "Aggregate setup-only causal audit; never pooled into strength evidence."
+  },
+  "mechanics": {
+    "status": "PASS",
+    "junit_xml": "../../artifacts/general_strength/mechanics/dipplin_meta_mechanics.junit.xml",
+    "junit_xml_sha256": "23fea3d6466a3bb0ff36a5d181c720d3b26d62a27bbbbcfaf36d3ba49770e0fe",
+    "expected_tests": 15,
+    "command": ".venv/bin/pytest -q tests/test_dipplin_meta_mechanics.py --junitxml=artifacts/general_strength/mechanics/dipplin_meta_mechanics.junit.xml",
+    "run_date": "2026-08-13",
+    "test_files": [
+      {
+        "path": "../../tests/test_dipplin_meta_mechanics.py",
+        "sha256": "a3f15a089520857bfe8ee29af98b10b47c0bbcea4a394bca0d33bacf2936919d"
+      }
+    ],
+    "scope": [
+      "prize-value arithmetic",
+      "Weakness math",
+      "one-hit versus two-hit KO",
+      "Boss target selection",
+      "Jamming Tower tool suppression",
+      "non-ex and ability-based immunity",
+      "bench usefulness and no-change handling",
+      "fragile-bench penalty",
+      "replacement continuity",
+      "support-active retreat preference"
+    ],
+    "caveat": "Tier-C policy-level evidence from the pinned source suite; it is not an execution of the immutable S1 archive."
+  },
+  "weak_clones": [
+    {
+      "name": "Mega Lucario",
+      "availability": "LEGACY_WEIGHTS_OR_DECK_ONLY",
+      "coverage": "availability_only",
+      "runnable_status": "NOT_RUN_UNAVAILABLE_NO_CURRENT_CANDIDATE_EXECUTION",
+      "evaluated_contexts": "NOT_MEASURABLE",
+      "failed_games": "NOT_MEASURABLE",
+      "policy_errors": "NOT_MEASURABLE",
+      "illegal_actions": "NOT_MEASURABLE",
+      "unknown_contexts": "NOT_MEASURABLE",
+      "note": "No exact-current candidate execution artifact is available."
+    },
+    {
+      "name": "Crustle / Kangaskhan",
+      "availability": "LEGACY_WEIGHTS_OR_DECK_ONLY",
+      "coverage": "availability_only",
+      "runnable_status": "NOT_RUN_UNAVAILABLE_NO_CURRENT_CANDIDATE_EXECUTION",
+      "evaluated_contexts": "NOT_MEASURABLE",
+      "failed_games": "NOT_MEASURABLE",
+      "policy_errors": "NOT_MEASURABLE",
+      "illegal_actions": "NOT_MEASURABLE",
+      "unknown_contexts": "NOT_MEASURABLE",
+      "note": "No exact-current candidate execution artifact is available."
+    },
+    {
+      "name": "Teal Mask Ogerpon",
+      "availability": "LEGACY_WEIGHTS_OR_DECK_ONLY",
+      "coverage": "availability_only",
+      "runnable_status": "NOT_RUN_UNAVAILABLE_NO_CURRENT_CANDIDATE_EXECUTION",
+      "evaluated_contexts": "NOT_MEASURABLE",
+      "failed_games": "NOT_MEASURABLE",
+      "policy_errors": "NOT_MEASURABLE",
+      "illegal_actions": "NOT_MEASURABLE",
+      "unknown_contexts": "NOT_MEASURABLE",
+      "note": "No exact-current candidate execution artifact is available."
+    },
+    {
+      "name": "Bellibolt",
+      "availability": "LEGACY_WEIGHTS_OR_DECK_ONLY",
+      "coverage": "availability_only",
+      "runnable_status": "NOT_RUN_UNAVAILABLE_NO_CURRENT_CANDIDATE_EXECUTION",
+      "evaluated_contexts": "NOT_MEASURABLE",
+      "failed_games": "NOT_MEASURABLE",
+      "policy_errors": "NOT_MEASURABLE",
+      "illegal_actions": "NOT_MEASURABLE",
+      "unknown_contexts": "NOT_MEASURABLE",
+      "note": "No exact-current candidate execution artifact is available."
+    },
+    {
+      "name": "Starmie / Froslass",
+      "availability": "LEGACY_WEIGHTS_OR_DECK_ONLY",
+      "coverage": "availability_only",
+      "runnable_status": "NOT_RUN_UNAVAILABLE_NO_CURRENT_CANDIDATE_EXECUTION",
+      "evaluated_contexts": "NOT_MEASURABLE",
+      "failed_games": "NOT_MEASURABLE",
+      "policy_errors": "NOT_MEASURABLE",
+      "illegal_actions": "NOT_MEASURABLE",
+      "unknown_contexts": "NOT_MEASURABLE",
+      "note": "No exact-current candidate execution artifact is available."
+    },
+    {
+      "name": "Dragapult",
+      "availability": "LEGACY_WEIGHTS_OR_DECK_ONLY",
+      "coverage": "availability_only",
+      "runnable_status": "NOT_RUN_UNAVAILABLE_NO_CURRENT_CANDIDATE_EXECUTION",
+      "evaluated_contexts": "NOT_MEASURABLE",
+      "failed_games": "NOT_MEASURABLE",
+      "policy_errors": "NOT_MEASURABLE",
+      "illegal_actions": "NOT_MEASURABLE",
+      "unknown_contexts": "NOT_MEASURABLE",
+      "note": "No exact-current candidate execution artifact is available."
+    },
+    {
+      "name": "Mega Lopunny",
+      "availability": "LEGACY_WEIGHTS_OR_DECK_ONLY",
+      "coverage": "availability_only",
+      "runnable_status": "NOT_RUN_UNAVAILABLE_NO_CURRENT_CANDIDATE_EXECUTION",
+      "evaluated_contexts": "NOT_MEASURABLE",
+      "failed_games": "NOT_MEASURABLE",
+      "policy_errors": "NOT_MEASURABLE",
+      "illegal_actions": "NOT_MEASURABLE",
+      "unknown_contexts": "NOT_MEASURABLE",
+      "note": "No exact-current candidate execution artifact is available."
+    },
+    {
+      "name": "Garchomp",
+      "availability": "LEGACY_WEIGHTS_OR_DECK_ONLY",
+      "coverage": "availability_only",
+      "runnable_status": "NOT_RUN_UNAVAILABLE_NO_CURRENT_CANDIDATE_EXECUTION",
+      "evaluated_contexts": "NOT_MEASURABLE",
+      "failed_games": "NOT_MEASURABLE",
+      "policy_errors": "NOT_MEASURABLE",
+      "illegal_actions": "NOT_MEASURABLE",
+      "unknown_contexts": "NOT_MEASURABLE",
+      "note": "No exact-current candidate execution artifact is available."
+    }
+  ],
+  "operational_provenance": {
+    "linux_x86_64_complete_game": {
+      "path": "../../artifacts/dipplin_s1/certification/linux_x86_64_complete_game.json",
+      "artifact_sha256": "3a97fa74dd67727dd1c0e5ad03eee0ea39f7393b437426c4c1d6a79615082446",
+      "archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
+      "evaluated_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+      "engine_sha256": "d16244a3157fc55c3314f08dcc7c5179168697d78c105b95c7debd556b764bb7",
+      "games": 2,
+      "actual_first_games": 1,
+      "actual_second_games": 1,
+      "completed_games": 2,
+      "policy_errors": 0,
+      "illegal_actions": 0,
+      "artifact_mutations": 0,
+      "status": "PASS"
+    }
+  },
+  "final_verdict": "KEEP_S1"
+}

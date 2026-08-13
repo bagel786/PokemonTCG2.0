@@ -13,6 +13,7 @@ import argparse
 import hashlib
 import json
 import math
+import sys
 import tempfile
 from collections import defaultdict
 from pathlib import Path
@@ -22,6 +23,8 @@ from xml.etree import ElementTree
 
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 SCHEMA = "dipplin-general-strength-dashboard-v1"
 SCHEMA_V2 = "dipplin-general-strength-dashboard-v2"
 REPLAY_V2_SCHEMA = "dipplin-replay-regret-v2"
@@ -30,6 +33,115 @@ SEALED_RECEIPT_SCHEMA = "dipplin-final-holdout-receipt-v2"
 PINNED_S1_DASHBOARD_SPEC_SHA256 = (
     "bd8142f9b60077d82059c57e9e08a223b0d84701010c9c539537c7b7d58fed1e"
 )
+CANONICAL_S1_DASHBOARD_SPEC = (
+    ROOT / "data/dipplin_general_strength/s1_dashboard_spec.json"
+)
+CANONICAL_S2_STAGE_SPEC = (
+    ROOT / "data/dipplin_general_strength/s2_stage_evaluation_spec.json"
+)
+PINNED_S2_STAGE_SPEC_SHA256 = (
+    "47d9326c637387f59bf259b608efb1601ca3d3285b53d2a7096dc369cddc6f3b"
+)
+PINNED_S2_STAGE_SPEC_GIT_BLOB_SHA1 = "056dd0b40218e24a4e36a2f64307c848d7b898b7"
+CANONICAL_S2_STAGE_REPORT = (
+    ROOT / "artifacts/general_strength/s2_stage2/stage2_evaluation.json"
+)
+PINNED_S2_STAGE_REPORT_SHA256 = (
+    "82f33fd41aadea811bff43d5365b7af8fc622c30b2267336ade90a7cb4b9f04f"
+)
+CANONICAL_STAGE_EVALUATOR = ROOT / "scripts/evaluate_dipplin_s2_stages.py"
+PINNED_STAGE_EVALUATOR_SHA256 = (
+    "bdc73fbc2376cd4b587ed7ad7a9585edb5cd7e3626c01b83fc5a153e2aac8416"
+)
+PINNED_STAGE_EVALUATOR_GIT_BLOB_SHA1 = "6df6d213692417e47431180fe424f30926da11bc"
+CANONICAL_MECHANICS_TEST_FILE = ROOT / "tests/test_dipplin_meta_mechanics.py"
+PINNED_MECHANICS_TEST_FILE_SHA256 = (
+    "a3f15a089520857bfe8ee29af98b10b47c0bbcea4a394bca0d33bacf2936919d"
+)
+CANONICAL_MECHANICS_COMMAND = (
+    ".venv/bin/pytest -q tests/test_dipplin_meta_mechanics.py "
+    "--junitxml=artifacts/general_strength/mechanics/"
+    "dipplin_meta_mechanics.junit.xml"
+)
+CANONICAL_MECHANICS_JUNIT = (
+    ROOT / "artifacts/general_strength/mechanics/dipplin_meta_mechanics.junit.xml"
+)
+PINNED_MECHANICS_JUNIT_SHA256 = (
+    "23fea3d6466a3bb0ff36a5d181c720d3b26d62a27bbbbcfaf36d3ba49770e0fe"
+)
+CANONICAL_MECHANICS_SCOPE = (
+    "prize-value arithmetic",
+    "Weakness math",
+    "one-hit versus two-hit KO",
+    "Boss target selection",
+    "Jamming Tower tool suppression",
+    "non-ex and ability-based immunity",
+    "bench usefulness and no-change handling",
+    "fragile-bench penalty",
+    "replacement continuity",
+    "support-active retreat preference",
+)
+CANONICAL_MECHANICS_TEST_NAMES = (
+    "test_single_prize_non_ex_target_ignores_ex_modifiers",
+    "test_two_prize_ex_modifier_arithmetic",
+    "test_three_prize_mega_ex_prize_value",
+    "test_grass_weak_high_hp_target_weakness_math",
+    "test_first_hit_ko_vs_two_hit_ko",
+    "test_boss_prefers_bench_target_that_unlocks_second_strike",
+    "test_jamming_tower_disables_brave_bangle",
+    "test_crustle_ex_immunity_does_not_nullify_dipplin",
+    "test_ability_based_immunity_nullifies_dipplin",
+    "test_neutralization_zone_does_not_apply_ex_restriction_to_non_ex_dipplin",
+    "test_bench_threshold_change_is_useful",
+    "test_bench_threshold_no_change_is_not_useful",
+    "test_fragile_bench_is_penalized_in_metric",
+    "test_replacement_continuity_requires_strict_contract",
+    "test_support_active_prefers_retreat_to_ready_dipplin",
+)
+CANONICAL_S1_LINUX_CERTIFICATION = (
+    ROOT / "artifacts/dipplin_s1/certification/linux_x86_64_complete_game.json"
+)
+PINNED_S1_LINUX_CERTIFICATION_SHA256 = (
+    "3a97fa74dd67727dd1c0e5ad03eee0ea39f7393b437426c4c1d6a79615082446"
+)
+PINNED_S1_LINUX_ENGINE_SHA256 = (
+    "d16244a3157fc55c3314f08dcc7c5179168697d78c105b95c7debd556b764bb7"
+)
+PINNED_GAME_EVALUATOR_SHA256 = (
+    "01e450c3425b86c586b6b51e50a28f58ae482545382e4ffa6715e3f21a27d114"
+)
+CANONICAL_S1_SECOND_BUCKET = (
+    ROOT / "artifacts/general_strength/s1_buckets/second_bucket_analysis_400.json"
+)
+PINNED_S1_SECOND_BUCKET_SHA256 = (
+    "cf52262d2acf02108fe956de0ce2dc5fcdca7b91b218d0172a28b3320be8d8a8"
+)
+CANONICAL_S1_SETUP_AUDIT = (
+    ROOT / "artifacts/general_strength/s1_buckets/setup_choice_audit_5000.json"
+)
+PINNED_S1_SETUP_AUDIT_SHA256 = (
+    "83aa304aa75d3de59f81083993591d3069020ccb7b57ce5f900a81787e667244"
+)
+PINNED_REPLAY_EVALUATOR_SHA256 = (
+    "3f18456b0ae14a967f4443736e72eb95d4c7cb1823c6cd0735f3de94e4f678a7"
+)
+PINNED_REPLAY_EVALUATOR_GIT_BLOB_SHA1 = "d0deed4a71e970f540e17cf489d4df3edae70711"
+CANONICAL_REPLAY_EVALUATOR = ROOT / "scripts/evaluate_dipplin_replay_regret.py"
+CANONICAL_QUALIFICATION_CREATOR = ROOT / "scripts/create_dipplin_s2_qualification.py"
+PINNED_QUALIFICATION_CREATOR_SHA256 = (
+    "f6140a97d61674785d59a0888c14531685588a388c51272c4d258b5822bc2223"
+)
+PINNED_QUALIFICATION_CREATOR_GIT_BLOB_SHA1 = (
+    "996bea6db9611c19f536d59079e584b1874ad7b7"
+)
+CANONICAL_S2_LINUX_CERTIFICATION = (
+    ROOT / "artifacts/dipplin_s2/certification/linux_x86_64_complete_game.json"
+)
+# No S2 Linux certification existed when the v2 contract was frozen. A future
+# promotion must first freeze its canonical artifact digest here; caller-owned
+# self-hashes are never sufficient.
+PINNED_S2_LINUX_CERTIFICATION_SHA256: str | None = None
+STAGE6_MAX_UNCERTIFIABLE_INCOMPARABLE_DECISION_RATE = 0.50
 ORDERS = ("first", "second")
 REPLAY_LABELS = (
     "EQUIVALENT",
@@ -97,6 +209,7 @@ V2_ALLOWED_SPEC_KEYS = {
     "qualification",
     "sealed_holdout_receipt",
     "second_bucket_analysis",
+    "setup_choice_audit",
     "mechanics",
     "weak_clones",
     "operational_provenance",
@@ -117,6 +230,35 @@ WEAK_CLONE_NAMES = {
     "Starmie / Froslass",
     "Dragapult",
     "Mega Lopunny",
+    "Garchomp",
+}
+WEAK_CLONE_UNAVAILABLE_STATUS = (
+    "NOT_RUN_UNAVAILABLE_NO_CURRENT_CANDIDATE_EXECUTION"
+)
+WEAK_CLONE_UNAVAILABLE_AVAILABILITY = "LEGACY_WEIGHTS_OR_DECK_ONLY"
+WEAK_CLONE_UNAVAILABLE_COVERAGE = "availability_only"
+
+CANONICAL_REPLAY_METHOD = {
+    "proposal": (
+        "chronological pinned S2 with s2_enabled=true; recorded expert "
+        "actions committed to shadow memory"
+    ),
+    "proposal_repeat_strategy": (
+        "one chronological pass; every sampled native-search proposal is "
+        "replayed from exact pre-prompt memory/search-count checkpoints"
+    ),
+    "continuation": "independent fresh exact-state roots; frozen D0 through hero turn",
+    "comparison": "componentwise across equal completed-turn coverage",
+    "rng_seed_reset_available": False,
+    "rng_limitation": (
+        "official SearchBegin has no seed-reset API on this host; RNG or "
+        "hidden-deck branches fail closed"
+    ),
+    "statistical_unit": "episode",
+    "rillaboom_metric_scope": (
+        "completed-turn resource fields cover the frozen S2 Dipplin/Thwackey "
+        "core; Rillaboom-only resources are not credited"
+    ),
 }
 
 
@@ -167,6 +309,145 @@ def _verify_file_sha256(path: Path, declared: Any, field: str = "artifact_sha256
                 f"{path}: {field} mismatch: declared {expected}, actual {actual}"
             )
     return actual
+
+
+def _verify_pinned_file_identity(
+    path: Path,
+    *,
+    expected_path: Path,
+    sha256: str,
+    git_blob_sha1: str | None = None,
+    field: str,
+) -> None:
+    if path.resolve() != expected_path.resolve():
+        raise DashboardError(f"{field} path is not canonical")
+    if sha256_file(path) != sha256.lower():
+        raise DashboardError(f"{field} SHA-256 differs from the frozen pin")
+    if git_blob_sha1 is not None and _git_blob_sha1(path) != git_blob_sha1.lower():
+        raise DashboardError(f"{field} Git blob differs from the frozen pin")
+
+
+def _verify_stage_evaluator_identity() -> None:
+    _verify_pinned_file_identity(
+        CANONICAL_STAGE_EVALUATOR,
+        expected_path=CANONICAL_STAGE_EVALUATOR,
+        sha256=PINNED_STAGE_EVALUATOR_SHA256,
+        git_blob_sha1=PINNED_STAGE_EVALUATOR_GIT_BLOB_SHA1,
+        field="stage evaluator",
+    )
+
+
+def _verify_promotion_trust_roots() -> None:
+    _verify_pinned_file_identity(
+        CANONICAL_REPLAY_EVALUATOR,
+        expected_path=CANONICAL_REPLAY_EVALUATOR,
+        sha256=PINNED_REPLAY_EVALUATOR_SHA256,
+        git_blob_sha1=PINNED_REPLAY_EVALUATOR_GIT_BLOB_SHA1,
+        field="replay evaluator",
+    )
+    _verify_pinned_file_identity(
+        CANONICAL_QUALIFICATION_CREATOR,
+        expected_path=CANONICAL_QUALIFICATION_CREATOR,
+        sha256=PINNED_QUALIFICATION_CREATOR_SHA256,
+        git_blob_sha1=PINNED_QUALIFICATION_CREATOR_GIT_BLOB_SHA1,
+        field="qualification creator",
+    )
+
+
+def _portable_report_value(value: Any) -> Any:
+    """Remove checkout-root differences from a stage-report comparison."""
+
+    if isinstance(value, Mapping):
+        return {
+            str(key): _portable_report_value(nested)
+            for key, nested in value.items()
+        }
+    if isinstance(value, list):
+        return [_portable_report_value(nested) for nested in value]
+    if isinstance(value, str) and Path(value).is_absolute():
+        normalized = value.replace("\\", "/")
+        for marker in ("/artifacts/", "/data/", "/scripts/", "/tests/"):
+            if marker in normalized:
+                return marker[1:] + normalized.split(marker, 1)[1]
+    return value
+
+
+def _resolve_stage_report_path(raw: Any) -> Path:
+    if not isinstance(raw, str) or not raw.strip():
+        raise DashboardError("stage report path must be nonempty")
+    path = Path(raw)
+    if path.is_absolute():
+        return path.resolve()
+    if "\\" in raw:
+        raise DashboardError("stage report path must be POSIX")
+    resolved = (ROOT / path).resolve()
+    try:
+        if resolved.relative_to(ROOT.resolve()).as_posix() != raw:
+            raise DashboardError("stage report path is not canonical")
+    except ValueError as error:
+        raise DashboardError("stage report path escapes the repository") from error
+    return resolved
+
+
+def _stage_reports_equal(left: Any, right: Any) -> bool:
+    left = _portable_report_value(left)
+    right = _portable_report_value(right)
+    if isinstance(left, bool) or isinstance(right, bool):
+        return left is right
+    if isinstance(left, (int, float)) and isinstance(right, (int, float)):
+        return math.isclose(
+            float(left), float(right), rel_tol=0.0, abs_tol=1e-12
+        )
+    if isinstance(left, Mapping) and isinstance(right, Mapping):
+        return set(left) == set(right) and all(
+            _stage_reports_equal(left[key], right[key]) for key in left
+        )
+    if isinstance(left, list) and isinstance(right, list):
+        return len(left) == len(right) and all(
+            _stage_reports_equal(a, b) for a, b in zip(left, right)
+        )
+    return left == right
+
+
+def _portable_v2_output(
+    value: Any,
+    *,
+    repo_root: Path = ROOT,
+    fixture_root: Path | None = None,
+) -> Any:
+    """Encode absolute v2 evidence paths without binding a checkout root."""
+
+    if isinstance(value, Mapping):
+        return {
+            str(key): _portable_v2_output(
+                nested, repo_root=repo_root, fixture_root=fixture_root
+            )
+            for key, nested in value.items()
+        }
+    if isinstance(value, list):
+        return [
+            _portable_v2_output(
+                nested, repo_root=repo_root, fixture_root=fixture_root
+            )
+            for nested in value
+        ]
+    if isinstance(value, str) and Path(value).is_absolute():
+        resolved = Path(value).resolve()
+        roots = [repo_root.resolve()]
+        if fixture_root is not None and fixture_root.resolve() not in roots:
+            roots.append(fixture_root.resolve())
+        for root in roots:
+            try:
+                relative = resolved.relative_to(root)
+            except ValueError:
+                continue
+            encoded = relative.as_posix()
+            if encoded and encoded != "." and "\\" not in encoded:
+                return encoded
+        raise DashboardError(
+            f"v2 dashboard output path escapes approved roots: {value}"
+        )
+    return value
 
 
 def _required_integer(value: Any, field: str) -> int:
@@ -823,7 +1104,7 @@ def _stage_cell_to_eval(
     if not matchup:
         raise DashboardError(f"{field}.matchup is required")
     source = _required_mapping(cell.get("source"), f"{field}.source")
-    path = _resolve(base, source.get("path"))
+    path = _resolve_stage_report_path(source.get("path"))
     source_sha256 = _verify_file_sha256(
         path, source.get("artifact_sha256"), f"{field}.source.artifact_sha256"
     )
@@ -1023,6 +1304,7 @@ def _strength_source_dashboard(
     raw: Any,
     candidate: Mapping[str, Any],
 ) -> dict[str, Any]:
+    _verify_stage_evaluator_identity()
     declaration = _required_mapping(raw, "strength_source")
     expected_keys = {
         "stage_spec",
@@ -1036,6 +1318,22 @@ def _strength_source_dashboard(
     _exact_keys(declaration, expected_keys, "strength_source")
     spec_path = _resolve(base, declaration.get("stage_spec"))
     report_path = _resolve(base, declaration.get("stage_report"))
+    try:
+        from scripts.create_dipplin_s2_qualification import (
+            DEFAULT_STAGE_REPORT,
+            DEFAULT_STAGE_SPEC,
+        )
+    except ImportError as error:
+        raise DashboardError(
+            f"cannot import canonical promotion stage paths: {error}"
+        ) from error
+    if (
+        spec_path != DEFAULT_STAGE_SPEC.resolve()
+        or report_path != DEFAULT_STAGE_REPORT.resolve()
+    ):
+        raise DashboardError(
+            "promotion strength_source must use the canonical Stage1-5 spec/report"
+        )
     spec_sha256 = _verify_file_sha256(
         spec_path,
         declaration.get("stage_spec_sha256"),
@@ -1066,13 +1364,16 @@ def _strength_source_dashboard(
         regenerated = evaluate_spec(spec_path)
     except (OSError, StageEvaluationError) as error:
         raise DashboardError(f"cannot recompute staged evaluation: {error}") from error
-    if regenerated != report:
+    if not _stage_reports_equal(regenerated, report):
         raise DashboardError(
             "stored staged evaluation differs from exact evaluator recomputation"
         )
+    # The portable stored report is the canonical serialization after strict,
+    # tolerance-bounded recomputation. Replacing it with ``regenerated`` would
+    # reintroduce cross-Python one-ULP drift into future promotion dashboards.
     report_spec = _required_mapping(report.get("spec"), "stage_report.spec")
     if (
-        Path(str(report_spec.get("path"))).resolve() != spec_path
+        _resolve_stage_report_path(report_spec.get("path")) != spec_path
         or str(report_spec.get("sha256") or "").lower() != spec_sha256
     ):
         raise DashboardError("stage report does not bind the declared stage spec")
@@ -1105,8 +1406,17 @@ def _strength_source_dashboard(
         declaration.get("required_verdicts"),
         "strength_source.required_verdicts",
     )
-    if set(required_verdicts) != {f"stage{index}" for index in range(1, 6)}:
-        raise DashboardError("strength_source must freeze verdicts for Stage1-5")
+    canonical_verdicts = {
+        "stage1": ["PROMISING", "STRONG"],
+        "stage2": ["PASS", "STRONG"],
+        "stage3": ["PASS"],
+        "stage4": ["PASS"],
+        "stage5": ["PASS"],
+    }
+    if dict(required_verdicts) != canonical_verdicts:
+        raise DashboardError(
+            "strength_source verdict declarations differ from the frozen Stage1-5 contract"
+        )
     for name in sorted(required_verdicts):
         stage = _required_mapping(stages.get(name), f"stage_report.stages.{name}")
         if stage.get("status") != "EVALUATED":
@@ -1368,6 +1678,17 @@ def _s1_replay_validation_summary(
     candidate: Mapping[str, Any],
     manifest: Mapping[str, Any],
 ) -> dict[str, Any]:
+    try:
+        from scripts.evaluate_dipplin_replay_regret import (
+            DEFAULT_S1_VALIDATION_OUTPUT,
+            EXPECTED_SPLIT_COUNTS,
+            PINNED_S1_PRIMARY_RECORD_COUNT,
+            PINNED_S1_VALIDATION_OUTPUT_SHA256,
+            RegretError,
+            verify_frozen_s1_provenance,
+        )
+    except ImportError as error:
+        raise DashboardError(f"cannot import frozen S1 replay pins: {error}") from error
     declaration = _required_mapping(raw, "replay_validation")
     required = {
         "path",
@@ -1387,6 +1708,16 @@ def _s1_replay_validation_summary(
     ):
         raise DashboardError("S1 replay validation declaration mismatch")
     path = _resolve(base, declaration.get("path"))
+    if path != DEFAULT_S1_VALIDATION_OUTPUT.resolve():
+        raise DashboardError("S1 replay validation path is not canonical")
+    if _declared_sha256(
+        declaration.get("artifact_sha256"), "replay_validation.artifact_sha256"
+    ) != PINNED_S1_VALIDATION_OUTPUT_SHA256.lower():
+        raise DashboardError("S1 replay validation hash is not the frozen pin")
+    try:
+        frozen_s1 = verify_frozen_s1_provenance(validation_path=path)
+    except (OSError, RegretError) as error:
+        raise DashboardError(f"frozen S1 replay provenance failed: {error}") from error
     document = _load(path)
     expected_episodes = _required_integer(
         declaration.get("expected_episode_count"),
@@ -1396,6 +1727,7 @@ def _s1_replay_validation_summary(
         document.get("schema") != "dipplin-replay-regret-v1"
         or document.get("split") != "VALIDATION"
         or document.get("sealed") is not False
+        or expected_episodes != EXPECTED_SPLIT_COUNTS["VALIDATION"]
         or expected_episodes != manifest.get("episode_count")
         or _declared_sha256(
             declaration.get("expected_manifest_file_sha256"),
@@ -1443,6 +1775,11 @@ def _s1_replay_validation_summary(
             rel_tol=0.0,
             abs_tol=1e-12,
         )
+        or _required_integer(
+            aggregate.get("decision_count"), "S1 replay decision_count"
+        )
+        != PINNED_S1_PRIMARY_RECORD_COUNT
+        or frozen_s1.get("paired_record_count") != PINNED_S1_PRIMARY_RECORD_COUNT
     ):
         raise DashboardError("S1 replay validation does not cover its full manifest")
     result = _replay_summary(base, declaration, "VALIDATION")
@@ -1526,6 +1863,18 @@ def _replay_aggregate_v2(
     )
     if decision_count != sum(counts.values()):
         raise DashboardError(f"{path}: decision_count does not match labels")
+    decision_rates_raw = _required_mapping(
+        value.get("decision_rates"), f"{path} decision_rates"
+    )
+    if set(decision_rates_raw) != set(REPLAY_LABELS):
+        raise DashboardError(f"{path}: decision_rates must contain all five labels")
+    for label in REPLAY_LABELS:
+        rate = _number(decision_rates_raw.get(label))
+        expected = counts[label] / decision_count if decision_count else 0.0
+        if rate is None or not math.isclose(
+            rate, expected, rel_tol=0.0, abs_tol=1e-12
+        ):
+            raise DashboardError(f"{path}: decision rate mismatch for {label}")
     episode_count = _required_integer(
         value.get("episode_count"), f"{path} episode_count"
     )
@@ -1579,6 +1928,15 @@ def _replay_aggregate_v2(
         sum(rates.values()), expected_rate_sum, rel_tol=0.0, abs_tol=1e-12
     ):
         raise DashboardError(f"{path}: replay episode rates do not form a partition")
+    for alias, label in (
+        ("expert_dominates_rate", "EXPERT_DOMINATES"),
+        ("agent_dominates_rate", "AGENT_DOMINATES"),
+    ):
+        alias_value = _number(value.get(alias))
+        if alias_value is None or not math.isclose(
+            alias_value, rates[label], rel_tol=0.0, abs_tol=1e-12
+        ):
+            raise DashboardError(f"{path}: {alias} does not match episode_rates")
     quality = _replay_quality_counts(value, path)
     result = {
         "episode_count": episode_count,
@@ -1650,6 +2008,8 @@ def _verify_replay_baseline_pins(
             PINNED_S1_PRIMARY_RECORD_COUNT,
             PINNED_S1_RUNTIME_TREE_SHA256,
             PINNED_S1_VALIDATION_OUTPUT_SHA256,
+            RegretError,
+            verify_frozen_s1_provenance,
         )
     except ImportError as error:
         raise DashboardError(f"cannot import frozen S1 pins: {error}") from error
@@ -1683,10 +2043,44 @@ def _verify_replay_baseline_pins(
         baseline.get("paired_record_count"), f"{path} paired_record_count"
     ) != PINNED_S1_PRIMARY_RECORD_COUNT:
         raise DashboardError(f"{path}: replay baseline paired-record count mismatch")
-    _declared_sha256(
+    declared_sequence = _declared_sha256(
         baseline.get("paired_record_id_sequence_sha256"),
         f"{path} paired_record_id_sequence_sha256",
     )
+    try:
+        frozen = verify_frozen_s1_provenance()
+    except (OSError, RegretError) as error:
+        raise DashboardError(f"cannot verify frozen S1 record sequence: {error}") from error
+    if declared_sequence != str(
+        frozen.get("paired_record_id_sequence_sha256") or ""
+    ).lower():
+        raise DashboardError(f"{path}: replay baseline record-ID sequence mismatch")
+
+
+def _verify_sealed_nested_contract(
+    document: Mapping[str, Any], path: Path
+) -> None:
+    if document.get("method") != CANONICAL_REPLAY_METHOD:
+        raise DashboardError(f"{path}: sealed replay method contract mismatch")
+    try:
+        from scripts.evaluate_dipplin_replay_regret import (
+            RegretError,
+            verify_s2_candidate,
+        )
+
+        expected_candidate = verify_s2_candidate()
+    except (OSError, RegretError, ImportError) as error:
+        raise DashboardError(
+            f"cannot verify sealed replay candidate identity: {error}"
+        ) from error
+    evaluated_candidate = _required_mapping(
+        document.get("evaluated_candidate"), f"{path} evaluated_candidate"
+    )
+    if dict(evaluated_candidate) != expected_candidate:
+        raise DashboardError(
+            f"{path}: sealed evaluated_candidate schema/identity mismatch"
+        )
+    _verify_replay_baseline_pins(document, path)
 
 
 def _replay_v2_summary(
@@ -1710,6 +2104,23 @@ def _replay_v2_summary(
     }
     _exact_keys(declaration, required, f"{split} replay declaration")
     path = _resolve(base, declaration.get("path"))
+    if split in {"VALIDATION", "FINAL_HOLDOUT"}:
+        try:
+            from scripts.evaluate_dipplin_replay_regret import (
+                DEFAULT_S2_VALIDATION_OUTPUT,
+                DEFAULT_SEALED_OUTPUT,
+            )
+        except ImportError as error:
+            raise DashboardError(
+                f"cannot import canonical sealed-output path: {error}"
+            ) from error
+        expected_path = (
+            DEFAULT_SEALED_OUTPUT
+            if split == "FINAL_HOLDOUT"
+            else DEFAULT_S2_VALIDATION_OUTPUT
+        )
+        if path != expected_path.resolve():
+            raise DashboardError(f"{split} replay path is not canonical")
     source_sha256 = _verify_file_sha256(path, declaration.get("artifact_sha256"))
     document = _load(path)
     expected_sealed = split == "FINAL_HOLDOUT"
@@ -1754,6 +2165,7 @@ def _replay_v2_summary(
             raise DashboardError(
                 f"{path}: sealed aggregate contains forbidden detail key {found}"
             )
+        _verify_sealed_nested_contract(document, path)
         sealed_aggregate = _required_mapping(
             document.get("aggregate"), f"{path} sealed aggregate"
         )
@@ -2198,6 +2610,122 @@ def _second_bucket_analysis(base: Path, raw: Any) -> dict[str, Any]:
     }
 
 
+def _require_canonical_s1_second_bucket(base: Path, raw: Any) -> None:
+    declaration = _required_mapping(raw, "second_bucket_analysis")
+    canonical_spec = _load(CANONICAL_S1_DASHBOARD_SPEC)
+    canonical = _required_mapping(
+        canonical_spec.get("second_bucket_analysis"),
+        "canonical S1 second_bucket_analysis",
+    )
+    if (
+        _resolve(base, declaration.get("path"))
+        != CANONICAL_S1_SECOND_BUCKET.resolve()
+        or _resolve(CANONICAL_S1_DASHBOARD_SPEC.parent, canonical.get("path"))
+        != CANONICAL_S1_SECOND_BUCKET.resolve()
+        or {key: value for key, value in declaration.items() if key != "path"}
+        != {key: value for key, value in canonical.items() if key != "path"}
+        or _declared_sha256(
+            declaration.get("artifact_sha256"),
+            "second_bucket_analysis.artifact_sha256",
+        )
+        != PINNED_S1_SECOND_BUCKET_SHA256
+    ):
+        raise DashboardError(
+            "second_bucket_analysis must be the canonical frozen S1 400-game artifact"
+        )
+
+
+def _setup_choice_audit(base: Path, raw: Any) -> dict[str, Any]:
+    declaration = _required_mapping(raw, "setup_choice_audit")
+    _exact_keys(
+        declaration,
+        {
+            "path",
+            "artifact_sha256",
+            "expected_schema",
+            "expected_games",
+            "expected_actual_order",
+            "expected_archive_sha256",
+            "expected_tree_sha256",
+            "note",
+        },
+        "setup_choice_audit",
+    )
+    path = _resolve(base, declaration.get("path"))
+    if path != CANONICAL_S1_SETUP_AUDIT.resolve():
+        raise DashboardError("setup_choice_audit path is not canonical")
+    source_sha = _verify_file_sha256(
+        path,
+        declaration.get("artifact_sha256"),
+        "setup_choice_audit.artifact_sha256",
+    )
+    if source_sha != PINNED_S1_SETUP_AUDIT_SHA256:
+        raise DashboardError("setup_choice_audit hash differs from the frozen pin")
+    document = _load(path)
+    provenance = _required_mapping(
+        document.get("provenance"), "setup_choice_audit.provenance"
+    )
+    summary = _required_mapping(document.get("summary"), "setup_choice_audit.summary")
+    games = _required_integer(summary.get("games"), "setup_choice_audit.summary.games")
+    if (
+        declaration.get("expected_schema") != "dipplin-setup-choice-audit-v1"
+        or document.get("schema") != declaration.get("expected_schema")
+        or declaration.get("expected_actual_order") != "second"
+        or document.get("actual_order") != declaration.get("expected_actual_order")
+        or _required_integer(
+            declaration.get("expected_games"), "setup_choice_audit.expected_games"
+        )
+        != 5000
+        or games != 5000
+        or _declared_sha256(
+            declaration.get("expected_archive_sha256"),
+            "setup_choice_audit.expected_archive_sha256",
+        )
+        != _declared_sha256(
+            provenance.get("archive_sha256"),
+            "setup_choice_audit.provenance.archive_sha256",
+        )
+        or _declared_sha256(
+            declaration.get("expected_tree_sha256"),
+            "setup_choice_audit.expected_tree_sha256",
+        )
+        != _declared_sha256(
+            provenance.get("submission_tree_sha256"),
+            "setup_choice_audit.provenance.submission_tree_sha256",
+        )
+        or provenance.get("submission_unchanged") is not True
+        or document.get("information_contract")
+        != {
+            "aggregate_basic_candidate_multisets_only": True,
+            "serialized_deck_order": False,
+            "serialized_full_hands": False,
+            "serialized_prize_identities": False,
+        }
+        or document.get("scope")
+        != "aggregate setup-only diagnostic; not gameplay or strength evidence"
+    ):
+        raise DashboardError("setup_choice_audit frozen causal contract mismatch")
+    return {
+        "status": "COMPLETE_CAUSAL_DIAGNOSTIC_ONLY",
+        "source": str(path),
+        "source_sha256": source_sha,
+        "games": games,
+        "actual_order": "second",
+        "grookey_selected": _required_integer(
+            summary.get("grookey_selected"), "setup_choice_audit.grookey_selected"
+        ),
+        "grookey_with_selectable_volbeat": _required_integer(
+            summary.get("grookey_with_selectable_volbeat"),
+            "setup_choice_audit.grookey_with_selectable_volbeat",
+        ),
+        "grookey_with_selectable_volbeat_rate_all_openings": _number(
+            summary.get("grookey_with_selectable_volbeat_rate_all_openings")
+        ),
+        "strength_evidence": False,
+        "note": declaration.get("note"),
+    }
+
+
 def _mechanics_dashboard(
     base: Path, raw: Any, *, strict: bool = False
 ) -> dict[str, Any]:
@@ -2221,6 +2749,12 @@ def _mechanics_dashboard(
         if raw.get("status") != "PASS":
             raise DashboardError("mechanics.status must be PASS")
         xml_path = _resolve(base, raw.get("junit_xml"))
+        _verify_pinned_file_identity(
+            xml_path,
+            expected_path=CANONICAL_MECHANICS_JUNIT,
+            sha256=PINNED_MECHANICS_JUNIT_SHA256,
+            field="mechanics JUnit",
+        )
         xml_sha256 = _verify_file_sha256(
             xml_path, raw.get("junit_xml_sha256"), "mechanics.junit_xml_sha256"
         )
@@ -2241,13 +2775,24 @@ def _mechanics_dashboard(
             raw.get("expected_tests"), "mechanics.expected_tests"
         )
         if (
-            totals["tests"] != expected_tests
+            expected_tests != len(CANONICAL_MECHANICS_TEST_NAMES)
+            or totals["tests"] != expected_tests
             or totals["failures"]
             or totals["errors"]
             or totals["skipped"]
         ):
             raise DashboardError("mechanics JUnit result is incomplete or failing")
+        testcase_names = [
+            str(case.attrib.get("name") or "")
+            for case in root.findall(".//testcase")
+        ]
+        if sorted(testcase_names) != sorted(CANONICAL_MECHANICS_TEST_NAMES):
+            raise DashboardError(
+                "mechanics JUnit does not contain the exact canonical 15 tests"
+            )
         test_files_raw = _required_sequence(raw.get("test_files"), "mechanics.test_files")
+        if len(test_files_raw) != 1:
+            raise DashboardError("mechanics must bind exactly one canonical test file")
         verified_files: list[dict[str, str]] = []
         for index, declaration_raw in enumerate(test_files_raw):
             declaration = _required_mapping(
@@ -2259,6 +2804,13 @@ def _mechanics_dashboard(
                 f"mechanics.test_files[{index}]",
             )
             path = _resolve(base, declaration.get("path"))
+            _verify_pinned_file_identity(
+                path,
+                expected_path=CANONICAL_MECHANICS_TEST_FILE,
+                sha256=PINNED_MECHANICS_TEST_FILE_SHA256,
+                git_blob_sha1="a5691f997d951ee239a7ef275af0f0fd461ea271",
+                field="mechanics test file",
+            )
             verified_files.append(
                 {
                     "path": str(path),
@@ -2269,6 +2821,12 @@ def _mechanics_dashboard(
                     ),
                 }
             )
+        if raw.get("command") != CANONICAL_MECHANICS_COMMAND:
+            raise DashboardError("mechanics.command differs from the canonical command")
+        if raw.get("scope") != list(CANONICAL_MECHANICS_SCOPE):
+            raise DashboardError("mechanics.scope differs from the frozen scope")
+        if not isinstance(raw.get("caveat"), str) or not raw["caveat"].strip():
+            raise DashboardError("mechanics.caveat must be nonempty")
         return {
             "status": "PASS",
             "junit_xml": str(xml_path),
@@ -2542,6 +3100,7 @@ def _weak_clones_dashboard(raw: Any, *, strict: bool) -> list[dict[str, Any]]:
         "illegal_actions",
         "unknown_contexts",
         "note",
+        "execution_artifact",
     }
     result: list[dict[str, Any]] = []
     for index, raw_row in enumerate(rows):
@@ -2581,17 +3140,38 @@ def _weak_clones_dashboard(raw: Any, *, strict: bool) -> list[dict[str, Any]]:
                 "win_rate_is_strength_metric": False,
             }
         )
-        if strict and runnable in {"NOT_RUN_NONRUNNABLE", "WEIGHTS_ONLY"}:
+        if strict and runnable == WEAK_CLONE_UNAVAILABLE_STATUS:
+            required_unavailable = allowed - {"execution_artifact"}
+            _exact_keys(row, required_unavailable, f"weak_clones[{index}]")
+            if (
+                row.get("availability") != WEAK_CLONE_UNAVAILABLE_AVAILABILITY
+                or row.get("coverage") != WEAK_CLONE_UNAVAILABLE_COVERAGE
+                or row.get("evaluated_contexts") != "NOT_MEASURABLE"
+                or not isinstance(row.get("note"), str)
+                or not row["note"].strip()
+            ):
+                raise DashboardError(
+                    f"weak_clones[{index}] has an unsupported unavailable declaration"
+                )
             for key in (
                 "failed_games",
                 "policy_errors",
                 "illegal_actions",
                 "unknown_contexts",
             ):
-                if row.get(key) not in (None, "NOT_MEASURABLE"):
+                if row.get(key) != "NOT_MEASURABLE":
                     raise DashboardError(
                         f"weak_clones[{index}].{key} must be NOT_MEASURABLE"
                     )
+        elif strict and runnable == "RUN":
+            raise DashboardError(
+                f"weak_clones[{index}] RUN is not admitted without a separately "
+                "frozen candidate/matchup/evaluator execution contract"
+            )
+        elif strict:
+            raise DashboardError(
+                f"weak_clones[{index}].runnable_status is not an admitted status"
+            )
         result.append(output)
     return result
 
@@ -2602,6 +3182,7 @@ def _qualification_dashboard(
     *,
     validation: Mapping[str, Any],
 ) -> dict[str, Any]:
+    _verify_promotion_trust_roots()
     declaration = _required_mapping(raw, "qualification")
     _exact_keys(
         declaration,
@@ -2671,6 +3252,15 @@ def _qualification_dashboard(
         != expected_validation
     ):
         raise DashboardError("qualification verifier result does not match declaration")
+    staged = _required_mapping(
+        payload.get("staged_evaluation"), "qualification.staged_evaluation"
+    )
+    staged_report = _required_mapping(
+        staged.get("report"), "qualification.staged_evaluation.report"
+    )
+    staged_spec = _required_mapping(
+        staged.get("spec"), "qualification.staged_evaluation.spec"
+    )
     return {
         "status": "QUALIFIED",
         "source": str(path),
@@ -2678,6 +3268,10 @@ def _qualification_dashboard(
         "payload_sha256": claimed_payload,
         "candidate_validation_sha256": expected_validation,
         "rule_version": verified.get("rule_version"),
+        "staged_evaluation": {
+            "report": dict(staged_report),
+            "spec": dict(staged_spec),
+        },
     }
 
 
@@ -2697,8 +3291,42 @@ def _receipt_dashboard(
         "sealed_holdout_receipt",
     )
     path = _resolve(base, declaration.get("path"))
+    try:
+        from scripts.evaluate_dipplin_replay_regret import (
+            DEFAULT_SEALED_RECEIPT,
+        )
+    except ImportError as error:
+        raise DashboardError(f"cannot import canonical sealed receipt path: {error}") from error
+    if path != DEFAULT_SEALED_RECEIPT.resolve():
+        raise DashboardError("sealed holdout receipt path is not canonical")
     file_sha256 = _verify_file_sha256(path, declaration.get("artifact_sha256"))
     receipt = _load(path)
+    _exact_keys(
+        receipt,
+        {
+            "schema",
+            "status",
+            "manifest_file_sha256",
+            "manifest_payload_sha256",
+            "candidate",
+            "baseline_s1_archive_sha256",
+            "baseline_s1_validation_sha256",
+            "candidate_archive_sha256",
+            "candidate_manifest_sha256",
+            "candidate_extracted_tree_sha256",
+            "candidate_runtime_tree_sha256",
+            "qualification_file_sha256",
+            "qualification_payload_sha256",
+            "candidate_validation_sha256",
+            "evaluator_path",
+            "evaluator_sha256",
+            "evaluator_git_blob_sha1",
+            "parameters",
+            "aggregate_output",
+            "aggregate_output_sha256",
+        },
+        "sealed holdout receipt",
+    )
     if receipt.get("schema") != SEALED_RECEIPT_SCHEMA or receipt.get("status") != "COMPLETE":
         raise DashboardError("sealed holdout receipt is not COMPLETE")
     try:
@@ -2752,6 +3380,18 @@ def _receipt_dashboard(
     )
     _exact_keys(evaluator, {"path", "sha256", "git_blob_sha1"}, "receipt evaluator")
     evaluator_path = _resolve(ROOT, evaluator.get("path"))
+    try:
+        from scripts import evaluate_dipplin_replay_regret as regret_evaluator
+    except ImportError as error:
+        raise DashboardError(f"cannot import canonical replay evaluator: {error}") from error
+    canonical_evaluator = Path(regret_evaluator.__file__).resolve()
+    _verify_pinned_file_identity(
+        evaluator_path,
+        expected_path=canonical_evaluator,
+        sha256=PINNED_REPLAY_EVALUATOR_SHA256,
+        git_blob_sha1=PINNED_REPLAY_EVALUATOR_GIT_BLOB_SHA1,
+        field="sealed replay evaluator",
+    )
     evaluator_sha256 = _verify_file_sha256(
         evaluator_path, evaluator.get("sha256"), "receipt evaluator.sha256"
     )
@@ -2827,6 +3467,12 @@ def _operational_provenance(base: Path, raw: Any) -> dict[str, Any]:
         engine_sha256 = (
             _declared_sha256(engine_raw, f"{path} engine_sha256")
             if engine_raw is not None
+            else None
+        )
+        evaluator_raw = provenance.get("evaluator_sha256")
+        evaluator_sha256 = (
+            _declared_sha256(evaluator_raw, f"{path} evaluator_sha256")
+            if evaluator_raw is not None
             else None
         )
         for key, actual in (
@@ -2924,6 +3570,7 @@ def _operational_provenance(base: Path, raw: Any) -> dict[str, Any]:
             "machine": provenance.get("machine"),
             "engine_binary": provenance.get("engine_binary"),
             "engine_sha256": engine_sha256,
+            "evaluator_sha256": evaluator_sha256,
             "archive_sha256": archive_sha256,
             "evaluated_tree_sha256": tree_sha256,
             "games": games,
@@ -2940,15 +3587,116 @@ def _operational_provenance(base: Path, raw: Any) -> dict[str, Any]:
 
 def _v2_operational_provenance(base: Path, raw: Any) -> dict[str, Any]:
     declarations = _required_mapping(raw, "operational_provenance")
+    if not declarations:
+        raise DashboardError("operational_provenance cannot be empty in v2")
     for label, raw_declaration in declarations.items():
         declaration = _required_mapping(
             raw_declaration, f"operational_provenance.{label}"
         )
-        if "path" not in declaration:
+        if "path" not in declaration or "artifact_sha256" not in declaration:
             raise DashboardError(
                 f"operational_provenance.{label} must be a hashed artifact declaration"
             )
+        _declared_sha256(
+            declaration.get("artifact_sha256"),
+            f"operational_provenance.{label}.artifact_sha256",
+        )
     return _operational_provenance(base, declarations)
+
+
+def _verify_keep_s1_linux_provenance(
+    base: Path,
+    declarations_raw: Any,
+    rows: Mapping[str, Any],
+    *,
+    candidate: Mapping[str, Any],
+) -> None:
+    declarations = _required_mapping(declarations_raw, "operational_provenance")
+    label = "linux_x86_64_complete_game"
+    if set(declarations) != {label}:
+        raise DashboardError("KEEP_S1 requires exactly the canonical S1 Linux certificate")
+    declaration = _required_mapping(declarations.get(label), f"operational_provenance.{label}")
+    canonical_spec = _load(CANONICAL_S1_DASHBOARD_SPEC)
+    canonical_declaration = _required_mapping(
+        _required_mapping(
+            canonical_spec.get("operational_provenance"),
+            "canonical operational_provenance",
+        ).get(label),
+        "canonical S1 Linux declaration",
+    )
+    if (
+        _resolve(base, declaration.get("path"))
+        != CANONICAL_S1_LINUX_CERTIFICATION.resolve()
+        or _resolve(CANONICAL_S1_DASHBOARD_SPEC.parent, canonical_declaration.get("path"))
+        != CANONICAL_S1_LINUX_CERTIFICATION.resolve()
+        or {key: value for key, value in declaration.items() if key != "path"}
+        != {key: value for key, value in canonical_declaration.items() if key != "path"}
+        or _declared_sha256(
+            declaration.get("artifact_sha256"),
+            f"operational_provenance.{label}.artifact_sha256",
+        )
+        != PINNED_S1_LINUX_CERTIFICATION_SHA256
+    ):
+        raise DashboardError("KEEP_S1 Linux declaration differs from the canonical pin")
+    row = _required_mapping(rows.get(label), f"operational_provenance.{label} result")
+    if (
+        row.get("status") != "PASS"
+        or not str(row.get("platform") or "").startswith("Linux")
+        or row.get("machine") != "x86_64"
+        or row.get("source_sha256") != PINNED_S1_LINUX_CERTIFICATION_SHA256
+        or row.get("archive_sha256") != candidate.get("package_sha256")
+        or row.get("evaluated_tree_sha256") != candidate.get("verified_tree_sha256")
+        or row.get("engine_sha256") != PINNED_S1_LINUX_ENGINE_SHA256
+        or row.get("games") != 2
+        or row.get("actual_order_games") != {"first": 1, "second": 1}
+        or row.get("completed_games") != 2
+        or row.get("policy_errors") != 0
+        or row.get("illegal_actions") != 0
+        or row.get("artifacts_unchanged") is not True
+    ):
+        raise DashboardError("canonical S1 Linux/x86_64 certification is invalid")
+
+
+def _verify_s2_linux_provenance(
+    base: Path,
+    declarations_raw: Any,
+    rows: Mapping[str, Any],
+    *,
+    candidate: Mapping[str, Any],
+) -> None:
+    label = "s2_linux_x86_64"
+    declarations = _required_mapping(declarations_raw, "operational_provenance")
+    if set(declarations) != {label}:
+        raise DashboardError(
+            "PROMOTE_S2 requires exactly the canonical S2 Linux certification"
+        )
+    if PINNED_S2_LINUX_CERTIFICATION_SHA256 is None:
+        raise DashboardError(
+            "S2 Linux certification has no pre-frozen artifact SHA; PROMOTE_S2 "
+            "remains inadmissible"
+        )
+    declaration = _required_mapping(
+        declarations.get(label), f"operational_provenance.{label}"
+    )
+    if (
+        _resolve(base, declaration.get("path"))
+        != CANONICAL_S2_LINUX_CERTIFICATION.resolve()
+        or _declared_sha256(
+            declaration.get("artifact_sha256"),
+            f"operational_provenance.{label}.artifact_sha256",
+        )
+        != PINNED_S2_LINUX_CERTIFICATION_SHA256
+    ):
+        raise DashboardError("S2 Linux certification path/hash is not canonical")
+    row = _required_mapping(rows.get(label), f"operational_provenance.{label} result")
+    if (
+        row.get("source_sha256") != PINNED_S2_LINUX_CERTIFICATION_SHA256
+        or row.get("engine_sha256") != PINNED_S1_LINUX_ENGINE_SHA256
+        or row.get("evaluator_sha256") != PINNED_GAME_EVALUATOR_SHA256
+        or row.get("archive_sha256") != candidate.get("package_sha256")
+        or row.get("evaluated_tree_sha256") != candidate.get("verified_tree_sha256")
+    ):
+        raise DashboardError("S2 Linux certification provenance is invalid")
 
 
 def _operational(cells: Iterable[Mapping[str, Any]]) -> dict[str, Any]:
@@ -3024,6 +3772,80 @@ def _operational(cells: Iterable[Mapping[str, Any]]) -> dict[str, Any]:
     }
 
 
+def _stage6_promotion_gate(holdout: Mapping[str, Any]) -> dict[str, Any]:
+    quality = _required_mapping(
+        holdout.get("quality_counts"), "sealed holdout quality_counts"
+    )
+    decisions = _required_integer(
+        holdout.get("decision_count"), "sealed holdout decision_count"
+    )
+    if decisions <= 0:
+        raise DashboardError("sealed holdout has no decisions")
+    proposal_errors = _required_integer(
+        quality.get("proposal_error_rows"), "sealed holdout proposal_error_rows"
+    )
+    policy_errors = _required_integer(
+        quality.get("candidate_policy_error_rows"),
+        "sealed holdout candidate_policy_error_rows",
+    )
+    unstable = _required_integer(
+        quality.get("candidate_action_unstable_rows"),
+        "sealed holdout candidate_action_unstable_rows",
+    )
+    burden = (
+        _required_integer(
+            quality.get("uncertifiable_rows"), "sealed holdout uncertifiable_rows"
+        )
+        + _required_integer(
+            quality.get("incomparable_rows"), "sealed holdout incomparable_rows"
+        )
+    ) / decisions
+    rates = _required_mapping(holdout.get("rates"), "sealed holdout episode rates")
+    expert_dominates_rate = _number(rates.get("EXPERT_DOMINATES"))
+    agent_dominates_rate = _number(rates.get("AGENT_DOMINATES"))
+    if expert_dominates_rate is None or agent_dominates_rate is None:
+        raise DashboardError("sealed holdout dominance rates are missing")
+    gates = {
+        "zero_candidate_proposal_errors": proposal_errors == 0,
+        "zero_candidate_policy_errors": policy_errors == 0,
+        "zero_candidate_action_instability": unstable == 0,
+        "adequate_certifiability": (
+            burden <= STAGE6_MAX_UNCERTIFIABLE_INCOMPARABLE_DECISION_RATE
+        ),
+        # Frozen before the one-shot result: promotion cannot call a candidate
+        # evidence-positive when expert-dominating episodes outweigh the
+        # reverse direction. This is a minimal efficacy/non-regression veto,
+        # not a claim of exact expert imitation.
+        "expert_dominates_not_above_agent_dominates": (
+            expert_dominates_rate <= agent_dominates_rate
+        ),
+    }
+    result = {
+        "status": "PASS" if all(gates.values()) else "FAIL",
+        "gates": gates,
+        "observed": {
+            "uncertifiable_incomparable_decision_rate": burden,
+            "proposal_error_rows": proposal_errors,
+            "candidate_policy_error_rows": policy_errors,
+            "candidate_action_unstable_rows": unstable,
+            "expert_dominates_episode_rate": expert_dominates_rate,
+            "agent_dominates_episode_rate": agent_dominates_rate,
+        },
+        "thresholds": {
+            "maximum_uncertifiable_incomparable_decision_rate": (
+                STAGE6_MAX_UNCERTIFIABLE_INCOMPARABLE_DECISION_RATE
+            ),
+            "maximum_candidate_proposal_errors": 0,
+            "maximum_candidate_policy_errors": 0,
+            "maximum_candidate_action_unstable_rows": 0,
+            "maximum_expert_minus_agent_dominates_episode_rate": 0.0,
+        },
+    }
+    if result["status"] != "PASS":
+        raise DashboardError("sealed holdout fails the frozen Stage6 promotion gate")
+    return result
+
+
 def _build_dashboard_v2(
     spec_path: Path, spec: Mapping[str, Any]
 ) -> dict[str, Any]:
@@ -3044,11 +3866,7 @@ def _build_dashboard_v2(
     # A rejected S2 is represented by a KEEP_S1 dashboard whose candidate is
     # the immutable S1 archive. It deliberately does not fabricate promotion
     # qualification, sealed holdout, or S2 Linux certification.
-    rejected_s2 = variant == "s1" and final_verdict in {
-        "KEEP_S1",
-        "S1_NEAR_ARCHITECTURE_CEILING",
-        "REJECT_DIPPLIN",
-    }
+    rejected_s2 = variant == "s1" and final_verdict == "KEEP_S1"
     if rejected_s2:
         if not isinstance(strength_raw, Mapping):
             raise DashboardError("KEEP_S1 v2 dashboard requires strength_source")
@@ -3062,8 +3880,6 @@ def _build_dashboard_v2(
             "incumbent_dashboard_spec_sha256",
             "required_stage1_verdicts",
             "required_stage2_verdict",
-            "incumbent_strong_anchors",
-            "incumbent_same_deck",
         }
         _exact_keys(rejection, required, "strength_source")
         stage_spec = _resolve(base, rejection.get("stage_spec"))
@@ -3078,6 +3894,20 @@ def _build_dashboard_v2(
             rejection.get("stage_report_sha256"),
             "strength_source.stage_report_sha256",
         )
+        _verify_stage_evaluator_identity()
+        _verify_pinned_file_identity(
+            stage_spec,
+            expected_path=CANONICAL_S2_STAGE_SPEC,
+            sha256=PINNED_S2_STAGE_SPEC_SHA256,
+            git_blob_sha1=PINNED_S2_STAGE_SPEC_GIT_BLOB_SHA1,
+            field="KEEP_S1 stage spec",
+        )
+        _verify_pinned_file_identity(
+            stage_report,
+            expected_path=CANONICAL_S2_STAGE_REPORT,
+            sha256=PINNED_S2_STAGE_REPORT_SHA256,
+            field="KEEP_S1 stage report",
+        )
         incumbent_dashboard_spec = _resolve(
             base, rejection.get("incumbent_dashboard_spec")
         )
@@ -3086,9 +3916,7 @@ def _build_dashboard_v2(
             rejection.get("incumbent_dashboard_spec_sha256"),
             "strength_source.incumbent_dashboard_spec_sha256",
         )
-        canonical_incumbent_spec = (
-            ROOT / "data/dipplin_general_strength/s1_dashboard_spec.json"
-        ).resolve()
+        canonical_incumbent_spec = CANONICAL_S1_DASHBOARD_SPEC.resolve()
         if incumbent_dashboard_spec != canonical_incumbent_spec:
             raise DashboardError("KEEP_S1 requires the canonical S1 dashboard spec")
         if incumbent_dashboard_spec_sha != PINNED_S1_DASHBOARD_SPEC_SHA256:
@@ -3113,12 +3941,6 @@ def _build_dashboard_v2(
             != _resolve(base, candidate_raw.get("package"))
             or _resolve(incumbent_dashboard_spec.parent, canonical_candidate.get("manifest"))
             != _resolve(base, candidate_raw.get("manifest"))
-            or canonical_incumbent.get("strong_anchors")
-            != rejection.get("incumbent_strong_anchors")
-            or canonical_incumbent.get("same_deck")
-            != rejection.get("incumbent_same_deck")
-            or canonical_incumbent.get("second_bucket_analysis")
-            != spec.get("second_bucket_analysis")
         ):
             raise DashboardError(
                 "KEEP_S1 candidate/anchor/mirror declarations differ from canonical S1"
@@ -3131,6 +3953,60 @@ def _build_dashboard_v2(
             stage_provenance.get("source_head"),
             "stage_spec.provenance.source_head",
         )
+        stage1_contract = _required_mapping(
+            stage_spec_document.get("stage1_decision"),
+            "stage_spec.stage1_decision",
+        )
+        exact_stage1_contract = {
+            "expected_actual_order": "second",
+            "expected_matchups": ["A2", "d842", "AZ2.4a", "AZ2.7"],
+            "requested_games_per_matchup": 100,
+            "expected_baseline_games": 400,
+            "expected_baseline_wins": 171,
+            "minimum_promising_pooled_delta": 0.03,
+            "strong_signal_pooled_delta": 0.05,
+            "material_pooled_drop_delta": -0.05,
+            "catastrophic_matchup_drop_delta": -0.20,
+        }
+        if dict(stage1_contract) != exact_stage1_contract:
+            raise DashboardError("KEEP_S1 stage spec changes the frozen Stage1 contract")
+        baseline_cells = _required_sequence(
+            _required_mapping(
+                stage_spec_document.get("baseline"), "stage_spec.baseline"
+            ).get("cells"),
+            "stage_spec.baseline.cells",
+        )
+        stage1_candidate_cells = _required_sequence(
+            _required_mapping(
+                _required_mapping(
+                    stage_spec_document.get("stages"), "stage_spec.stages"
+                ).get("stage1"),
+                "stage_spec.stages.stage1",
+            ).get("candidate_cells"),
+            "stage_spec.stages.stage1.candidate_cells",
+        )
+        expected_matchups = {"A2", "d842", "AZ2.4a", "AZ2.7"}
+        for arm, cells in (
+            ("baseline", baseline_cells),
+            ("candidate", stage1_candidate_cells),
+        ):
+            if (
+                len(cells) != 4
+                or {str(_required_mapping(cell, arm).get("matchup")) for cell in cells}
+                != expected_matchups
+                or any(
+                    _required_mapping(cell, arm).get("actual_order") != "second"
+                    or _required_integer(
+                        _required_mapping(cell, arm).get("requested_games"),
+                        f"stage1 {arm} requested_games",
+                    )
+                    != 100
+                    for cell in cells
+                )
+            ):
+                raise DashboardError(
+                    f"KEEP_S1 Stage1 {arm} is not the exact four-by-100 screen"
+                )
         report = _load(stage_report)
         try:
             from scripts.evaluate_dipplin_s2_stages import (
@@ -3141,13 +4017,18 @@ def _build_dashboard_v2(
             regenerated = evaluate_spec(stage_spec)
         except (OSError, StageEvaluationError) as error:
             raise DashboardError(f"cannot recompute rejected S2 report: {error}") from error
-        if regenerated != report:
+        if not _stage_reports_equal(regenerated, report):
             raise DashboardError("rejected S2 stage report fails exact recomputation")
+        # The pinned, portable report is the canonical serialization. Keep its
+        # values after tolerance-bounded recomputation: otherwise harmless
+        # libm/float accumulation differences between Python releases can move
+        # a latency mean by one ULP and make the dashboard bytes checkout-
+        # dependent even though all verified evidence is identical.
         if report.get("schema") != "dipplin-s2-stage-evaluation-v1":
             raise DashboardError("rejected S2 stage report schema mismatch")
         report_spec = _required_mapping(report.get("spec"), "stage_report.spec")
         if (
-            Path(str(report_spec.get("path"))).resolve() != stage_spec
+            _resolve_stage_report_path(report_spec.get("path")) != stage_spec
             or str(report_spec.get("sha256") or "").lower() != spec_sha
         ):
             raise DashboardError("rejected S2 report does not bind its stage spec")
@@ -3208,6 +4089,9 @@ def _build_dashboard_v2(
             stage2_decision.get("gates"), "stage2.decision.gates"
         )
         if (
+            allowed_stage1 != ["STRONG"]
+            or rejection.get("required_stage2_verdict") != "KILL"
+            or
             stage1.get("status") != "EVALUATED"
             or stage1_decision.get("verdict") not in allowed_stage1
             or not stage1_gates
@@ -3221,19 +4105,22 @@ def _build_dashboard_v2(
         ):
             raise DashboardError("KEEP_S1 rejection-stage contract mismatch")
         for name in ("stage3", "stage4", "stage5", "stage6"):
-            status = str(_required_mapping(stages.get(name), name).get("status") or "")
-            if not (
-                status.startswith("INADMISSIBLE_PRECEDING_STAGE_KILL")
-                or status == "PENDING"
+            blocked_stage = _required_mapping(stages.get(name), name)
+            if (
+                blocked_stage.get("status")
+                != "INADMISSIBLE_PRECEDING_STAGE_KILL"
+                or blocked_stage.get("blocked_by") != "stage2"
+                or blocked_stage.get("decision")
+                != {"verdict": "NOT_EVALUATED", "gates": {}}
             ):
                 raise DashboardError(f"{name} should not be evaluated after Stage2 KILL")
         anchors, anchor_cells = _anchor_dashboard(
             incumbent_dashboard_spec.parent,
-            rejection.get("incumbent_strong_anchors"),
+            canonical_incumbent.get("strong_anchors"),
         )
         same_deck, mirror_cells = _same_deck(
             incumbent_dashboard_spec.parent,
-            rejection.get("incumbent_same_deck"),
+            canonical_incumbent.get("same_deck"),
         )
         canonical_anchor_rows = _required_sequence(
             canonical_incumbent.get("strong_anchors"),
@@ -3313,6 +4200,7 @@ def _build_dashboard_v2(
             "PROMOTE_S2_NEEDS_LIVE_TEST",
         }:
             raise DashboardError("v2 candidate/verdict combination is inconsistent")
+        _verify_promotion_trust_roots()
         strength = _strength_source_dashboard(base, strength_raw, candidate)
 
     manifests = _v2_replay_manifest_provenance(
@@ -3346,6 +4234,7 @@ def _build_dashboard_v2(
             raise DashboardError("rejected S2 dashboard cannot claim qualification/receipt")
         qualification = {"status": "NOT_APPLICABLE_AFTER_S2_REJECTION"}
         receipt = {"status": "NOT_RUN_NOT_APPLICABLE_AFTER_S2_REJECTION"}
+        stage6_gate = {"status": "NOT_APPLICABLE_AFTER_S2_REJECTION"}
     else:
         replay_validation = _replay_v2_summary(
             base,
@@ -3357,6 +4246,40 @@ def _build_dashboard_v2(
         qualification = _qualification_dashboard(
             base, spec.get("qualification"), validation=replay_validation
         )
+        qualified_stages = _required_mapping(
+            qualification.get("staged_evaluation"),
+            "qualification.staged_evaluation",
+        )
+        qualified_report = _required_mapping(
+            qualified_stages.get("report"),
+            "qualification.staged_evaluation.report",
+        )
+        qualified_spec = _required_mapping(
+            qualified_stages.get("spec"),
+            "qualification.staged_evaluation.spec",
+        )
+        strength_source = _required_mapping(
+            strength.get("source"), "strength_source result"
+        )
+        if (
+            _resolve(ROOT, qualified_report.get("path"))
+            != Path(str(strength_source.get("stage_report"))).resolve()
+            or _declared_sha256(
+                qualified_report.get("sha256"),
+                "qualification staged report sha256",
+            )
+            != strength_source.get("stage_report_sha256")
+            or _resolve(ROOT, qualified_spec.get("path"))
+            != Path(str(strength_source.get("stage_spec"))).resolve()
+            or _declared_sha256(
+                qualified_spec.get("sha256"),
+                "qualification staged spec sha256",
+            )
+            != strength_source.get("stage_spec_sha256")
+        ):
+            raise DashboardError(
+                "dashboard strength source is not the qualification's canonical staged evaluation"
+            )
         if spec.get("sealed_replay_holdout") in (None, ""):
             if final_verdict != "PROMOTE_S2_NEEDS_LIVE_TEST":
                 raise DashboardError("PROMOTE_S2 requires the sealed holdout")
@@ -3369,7 +4292,12 @@ def _build_dashboard_v2(
             if spec.get("sealed_holdout_receipt") not in (None, ""):
                 raise DashboardError("sealed receipt exists without a holdout result")
             receipt = {"status": "NOT_RUN"}
+            stage6_gate = {"status": "NOT_RUN"}
         else:
+            if final_verdict != "PROMOTE_S2":
+                raise DashboardError(
+                    "PROMOTE_S2_NEEDS_LIVE_TEST cannot admit a completed holdout"
+                )
             sealed_holdout = _replay_v2_summary(
                 base,
                 spec.get("sealed_replay_holdout"),
@@ -3385,11 +4313,11 @@ def _build_dashboard_v2(
                 qualification=qualification,
                 candidate=candidate,
             )
+            stage6_gate = _stage6_promotion_gate(sealed_holdout)
 
-    bucket_analysis = _second_bucket_analysis(
-        incumbent_dashboard_spec.parent if rejected_s2 else base,
-        spec.get("second_bucket_analysis"),
-    )
+    _require_canonical_s1_second_bucket(base, spec.get("second_bucket_analysis"))
+    bucket_analysis = _second_bucket_analysis(base, spec.get("second_bucket_analysis"))
+    setup_audit = _setup_choice_audit(base, spec.get("setup_choice_audit"))
     if rejected_s2:
         if (
             not bucket_analysis.get("available")
@@ -3415,6 +4343,12 @@ def _build_dashboard_v2(
                 raise DashboardError("PROMOTE_S2 requires S2 Linux/x86_64 certification")
             operational_provenance["s2_linux_x86_64"] = {"status": "NOT_RUN"}
         else:
+            _verify_s2_linux_provenance(
+                base,
+                spec.get("operational_provenance"),
+                operational_provenance,
+                candidate=candidate,
+            )
             for linux in linux_rows:
                 if (
                     linux.get("status") != "PASS"
@@ -3438,6 +4372,12 @@ def _build_dashboard_v2(
     ):
         raise DashboardError("rejected S2 dashboard cannot claim S2 Linux certification")
     elif rejected_s2:
+        _verify_keep_s1_linux_provenance(
+            base,
+            spec.get("operational_provenance"),
+            operational_provenance,
+            candidate=candidate,
+        )
         operational_provenance["s2_linux_x86_64"] = {
             "status": "NOT_APPLICABLE_AFTER_S2_REJECTION"
         }
@@ -3452,7 +4392,7 @@ def _build_dashboard_v2(
             "weak_clones must cover each known weak clone exactly once"
         )
     operational = _operational(strength["operational_cells"])
-    return {
+    dashboard = {
         "schema": SCHEMA_V2,
         "spec_path": str(spec_path),
         "spec_sha256": sha256_file(spec_path),
@@ -3469,7 +4409,9 @@ def _build_dashboard_v2(
         "replay_manifests": manifests,
         "qualification": qualification,
         "sealed_holdout_receipt": receipt,
+        "stage6_promotion_gate": stage6_gate,
         "second_bucket_analysis": bucket_analysis,
+        "setup_choice_audit": setup_audit,
         "mechanics": mechanics,
         "weak_clones": weak_clones,
         "operational_provenance": operational_provenance,
@@ -3484,6 +4426,7 @@ def _build_dashboard_v2(
             "robust_anchor": strength["anchors"]["robust_anchor"],
         },
     }
+    return _portable_v2_output(dashboard, fixture_root=spec_path.parent)
 
 
 def build_dashboard(spec_path: Path) -> dict[str, Any]:
@@ -3556,9 +4499,9 @@ def render_markdown(dashboard: Mapping[str, Any]) -> str:
     lines = [
         "# Dipplin general-strength dashboard",
         "",
-        f"Candidate: {candidate.get('name')}  ",
-        f"Source: `{candidate.get('source_sha')}`  ",
-        f"Package SHA-256: `{candidate.get('package_sha256')}`  ",
+        f"Candidate: {candidate.get('name')}",
+        f"Source: `{candidate.get('source_sha')}`",
+        f"Package SHA-256: `{candidate.get('package_sha256')}`",
         f"Verified tree SHA-256: `{candidate.get('verified_tree_sha256')}`",
         *(
             [f"Runtime tree SHA-256: `{candidate.get('verified_runtime_tree_sha256')}`"]
@@ -3648,6 +4591,14 @@ def render_markdown(dashboard: Mapping[str, Any]) -> str:
                 "not merged as per-game evidence.",
             ]
         )
+    setup_audit = dashboard.get("setup_choice_audit")
+    if isinstance(setup_audit, Mapping):
+        lines.append(
+            f"Setup-choice causal audit: {setup_audit.get('games')} aggregate "
+            f"actual-second openings; Grookey had selectable Volbeat in "
+            f"{_percent(setup_audit.get('grookey_with_selectable_volbeat_rate_all_openings'))}; "
+            "diagnostic only, excluded from strength."
+        )
     operational = dashboard["operational"]
     latency = operational["latency_ms"]
     lines.extend(
@@ -3676,6 +4627,12 @@ def render_markdown(dashboard: Mapping[str, Any]) -> str:
             [
                 f"Qualification: {dashboard.get('qualification', {}).get('status')}; "
                 f"sealed receipt: {dashboard.get('sealed_holdout_receipt', {}).get('status')}.",
+                f"Precommitted Stage6 promotion gate: "
+                f"{dashboard.get('stage6_promotion_gate', {}).get('status')}. "
+                "A future promotion requires zero candidate proposal/policy/action-instability "
+                "errors, <=50% combined uncertifiable/incomparable decisions, and "
+                "expert-dominates episode rate no greater than agent-dominates. "
+                "This is a conservative pre-look eligibility veto, not a strength estimate.",
                 "Weak clones: "
                 + ", ".join(
                     f"{row.get('name')} ({row.get('runnable_status', row.get('availability', 'unknown'))})"

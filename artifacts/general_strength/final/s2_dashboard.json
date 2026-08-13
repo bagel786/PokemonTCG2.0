@@ -1,0 +1,3605 @@
+{
+  "candidate": {
+    "manifest": "artifacts/dipplin_s1/submission.manifest.json",
+    "manifest_sha256": "4071c03a020446436b8d33e1951fdaf5229ae4ab760a8283dc7d6f323e02f92c",
+    "name": "Dipplin S1",
+    "package": "artifacts/dipplin_s1/submission.tar.gz",
+    "package_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
+    "runtime_tree_sha256": "d5aaefab29b5850b298810c21dc628880822381c05bdbad5ecea1716bcef4241",
+    "source_sha": "a73f2fbf31494ebd97bc2e9357600388fe0805d5",
+    "tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+    "variant": "s1",
+    "verified_runtime_tree_sha256": "d5aaefab29b5850b298810c21dc628880822381c05bdbad5ecea1716bcef4241",
+    "verified_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+  },
+  "candidate_vs_s1": {
+    "rejected_candidate": {
+      "manifest": "artifacts/dipplin_s2/submission.manifest.json",
+      "manifest_sha256": "4801239bc3d328909bbd4e5461b84b140dd8931e3b581636ecbc662a97bad1bc",
+      "package": "artifacts/dipplin_s2/submission.tar.gz",
+      "package_sha256": "813fab9efd432738856e7d7b784809c7b0c5aef51b3c677d7205f203490d1510",
+      "runtime_tree_sha256": "b4290fff9b4fa3374f1bc14b7eefd6e9309dc13f3dcbebb2d9e4ea167650189f",
+      "source_sha": "9d365ccdaae90379e0e9d8ce05a17a5e1a587c74",
+      "status": "REJECTED_STAGE2_KILL",
+      "tree_sha256": "c822bb76fa40a138a6bb07fcfd6e6cc58f8ade0dd65c49425bc703f3170da922"
+    },
+    "stage1": {
+      "candidate_latency_ms": {
+        "count": 20613,
+        "max": 785.6800420267973,
+        "p50_max_across_cells": 5.164250003872439,
+        "p95_max_across_cells": 653.9904579985887,
+        "p99_max_across_cells": 659.4260499929078,
+        "quantile_note": "Cross-cell quantiles are maxima, not fabricated pooled quantiles.",
+        "weighted_mean": 127.22539320693278
+      },
+      "candidate_s2_proof": {
+        "admitted": 64,
+        "checked": 15399,
+        "completed_game_override_rate": 0.12,
+        "completed_games": 400,
+        "completed_games_with_override_count": 48,
+        "d1_intervention_fields_used": false,
+        "games_with_override": [
+          {
+            "cell_id": "s2_a2_second_100",
+            "completed": true,
+            "game_index": 0,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_100",
+            "completed": true,
+            "game_index": 9,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_100",
+            "completed": true,
+            "game_index": 14,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_100",
+            "completed": true,
+            "game_index": 18,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_100",
+            "completed": true,
+            "game_index": 21,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_100",
+            "completed": true,
+            "game_index": 26,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_100",
+            "completed": true,
+            "game_index": 46,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_100",
+            "completed": true,
+            "game_index": 49,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_100",
+            "completed": true,
+            "game_index": 53,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_100",
+            "completed": true,
+            "game_index": 74,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_100",
+            "completed": true,
+            "game_index": 97,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 11,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 13,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 15,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 17,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 18,
+            "outcome": "loss",
+            "override_count": 2
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 19,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 21,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 29,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 30,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 35,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 38,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 43,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 46,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 48,
+            "outcome": "win",
+            "override_count": 2
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 57,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 64,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 67,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 76,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 88,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_100",
+            "completed": true,
+            "game_index": 89,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_100",
+            "completed": true,
+            "game_index": 8,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_100",
+            "completed": true,
+            "game_index": 11,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_100",
+            "completed": true,
+            "game_index": 28,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_100",
+            "completed": true,
+            "game_index": 65,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_100",
+            "completed": true,
+            "game_index": 69,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_100",
+            "completed": true,
+            "game_index": 72,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_100",
+            "completed": true,
+            "game_index": 73,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_100",
+            "completed": true,
+            "game_index": 3,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_100",
+            "completed": true,
+            "game_index": 11,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_100",
+            "completed": true,
+            "game_index": 23,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_100",
+            "completed": true,
+            "game_index": 42,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_100",
+            "completed": true,
+            "game_index": 44,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_100",
+            "completed": true,
+            "game_index": 60,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_100",
+            "completed": true,
+            "game_index": 88,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_100",
+            "completed": true,
+            "game_index": 90,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_100",
+            "completed": true,
+            "game_index": 98,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_100",
+            "completed": true,
+            "game_index": 99,
+            "outcome": "win",
+            "override_count": 1
+          }
+        ],
+        "games_with_override_count": 48,
+        "overrides": 50,
+        "source": "exact game_rows hero_telemetry S2 counters"
+      },
+      "decision": {
+        "gates": {
+          "minimum_3pp_pooled_lift": true,
+          "no_catastrophic_matchup_collapse": true,
+          "no_material_pooled_drop": true,
+          "zero_failures_and_policy_errors": true,
+          "zero_fatal_operational_telemetry": true,
+          "zero_illegal_actions": true
+        },
+        "observed": {
+          "catastrophic_matchup_cells": [],
+          "failed_games": 0,
+          "fatal_operational_telemetry": 0,
+          "illegal_actions": 0,
+          "policy_errors": 0,
+          "pooled_delta": 0.05499999999999999
+        },
+        "reasons": [
+          "POOLED_LIFT_AT_OR_ABOVE_STRONG_SIGNAL"
+        ],
+        "targets": {
+          "strong_5pp_pooled_lift": true
+        },
+        "thresholds": {
+          "catastrophic_matchup_drop_delta": -0.2,
+          "expected_actual_order": "second",
+          "expected_baseline_games": 400,
+          "expected_baseline_wins": 171,
+          "expected_matchups": [
+            "A2",
+            "d842",
+            "AZ2.4a",
+            "AZ2.7"
+          ],
+          "material_pooled_drop_delta": -0.05,
+          "minimum_promising_pooled_delta": 0.03,
+          "requested_games_per_matchup": 100,
+          "strong_signal_pooled_delta": 0.05
+        },
+        "verdict": "STRONG"
+      },
+      "macro": {
+        "baseline_win_rate": 0.4275,
+        "candidate_minus_baseline": 0.05500000000000005,
+        "candidate_win_rate": 0.48250000000000004,
+        "matchup_count": 4,
+        "method": "unweighted_mean_of_matchup_order_cell_win_rates"
+      },
+      "per_matchup": {
+        "A2|second": {
+          "actual_order": "second",
+          "baseline": {
+            "draws": 0,
+            "failed_games": 0,
+            "games": 100,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 49,
+            "operational_telemetry": {
+              "fatal_count": 0,
+              "fatal_counts": {},
+              "nonfatal_search_fallback_counts": {
+                "d1_abstention_reason_engine_error": 11,
+                "d1_abstention_reason_timeout": 222,
+                "d1_error_detail_d1error_ambiguous_nonhero_prompt": 6,
+                "d1_error_detail_d1error_node_budget": 5,
+                "d1_errors": 11,
+                "d1_timeouts": 222
+              }
+            },
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "scheduled_games": 100,
+            "wilson_95": [
+              0.4134801193402717,
+              0.6057800106955886
+            ],
+            "win_rate": 0.51,
+            "wins": 51
+          },
+          "candidate": {
+            "draws": 0,
+            "failed_games": 0,
+            "games": 100,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 49,
+            "operational_telemetry": {
+              "fatal_count": 0,
+              "fatal_counts": {},
+              "nonfatal_search_fallback_counts": {
+                "d1_abstention_reason_engine_error": 21,
+                "d1_abstention_reason_timeout": 95,
+                "d1_error_detail_d1error_ambiguous_nonhero_prompt": 11,
+                "d1_error_detail_d1error_node_budget": 10,
+                "d1_errors": 21,
+                "d1_timeouts": 95
+              }
+            },
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "scheduled_games": 100,
+            "wilson_95": [
+              0.4134801193402717,
+              0.6057800106955886
+            ],
+            "win_rate": 0.51,
+            "wins": 51
+          },
+          "candidate_minus_baseline": {
+            "confidence_95": [
+              -0.13597756363244368,
+              0.13597756363244368
+            ],
+            "estimate": 0.0,
+            "method": "independent_newcombe_wilson_difference",
+            "paired": false
+          },
+          "matchup": "A2"
+        },
+        "AZ2.4a|second": {
+          "actual_order": "second",
+          "baseline": {
+            "draws": 0,
+            "failed_games": 0,
+            "games": 100,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 67,
+            "operational_telemetry": {
+              "fatal_count": 0,
+              "fatal_counts": {},
+              "nonfatal_search_fallback_counts": {
+                "d1_abstention_reason_engine_error": 6,
+                "d1_abstention_reason_timeout": 206,
+                "d1_error_detail_d1error_node_budget": 6,
+                "d1_errors": 6,
+                "d1_timeouts": 206
+              }
+            },
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "scheduled_games": 100,
+            "wilson_95": [
+              0.24563122734128034,
+              0.4269465620490947
+            ],
+            "win_rate": 0.33,
+            "wins": 33
+          },
+          "candidate": {
+            "draws": 0,
+            "failed_games": 0,
+            "games": 100,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 51,
+            "operational_telemetry": {
+              "fatal_count": 0,
+              "fatal_counts": {},
+              "nonfatal_search_fallback_counts": {
+                "d1_abstention_reason_engine_error": 3,
+                "d1_abstention_reason_timeout": 305,
+                "d1_error_detail_d1error_node_budget": 3,
+                "d1_errors": 3,
+                "d1_timeouts": 305
+              }
+            },
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "scheduled_games": 100,
+            "wilson_95": [
+              0.3942199893044113,
+              0.5865198806597283
+            ],
+            "win_rate": 0.49,
+            "wins": 49
+          },
+          "candidate_minus_baseline": {
+            "confidence_95": [
+              0.02371923708026119,
+              0.2881958547009493
+            ],
+            "estimate": 0.15999999999999998,
+            "method": "independent_newcombe_wilson_difference",
+            "paired": false
+          },
+          "matchup": "AZ2.4a"
+        },
+        "AZ2.7|second": {
+          "actual_order": "second",
+          "baseline": {
+            "draws": 0,
+            "failed_games": 0,
+            "games": 100,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 61,
+            "operational_telemetry": {
+              "fatal_count": 0,
+              "fatal_counts": {},
+              "nonfatal_search_fallback_counts": {
+                "d1_abstention_reason_engine_error": 2,
+                "d1_abstention_reason_timeout": 386,
+                "d1_error_detail_d1error_node_budget": 2,
+                "d1_errors": 2,
+                "d1_timeouts": 386
+              }
+            },
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "scheduled_games": 100,
+            "wilson_95": [
+              0.3001687400639441,
+              0.4879698295415926
+            ],
+            "win_rate": 0.39,
+            "wins": 39
+          },
+          "candidate": {
+            "draws": 0,
+            "failed_games": 0,
+            "games": 100,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 61,
+            "operational_telemetry": {
+              "fatal_count": 0,
+              "fatal_counts": {},
+              "nonfatal_search_fallback_counts": {
+                "d1_abstention_reason_timeout": 375,
+                "d1_timeouts": 375
+              }
+            },
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "scheduled_games": 100,
+            "wilson_95": [
+              0.3001687400639441,
+              0.4879698295415926
+            ],
+            "win_rate": 0.39,
+            "wins": 39
+          },
+          "candidate_minus_baseline": {
+            "confidence_95": [
+              -0.13292006154869157,
+              0.13292006154869157
+            ],
+            "estimate": 0.0,
+            "method": "independent_newcombe_wilson_difference",
+            "paired": false
+          },
+          "matchup": "AZ2.7"
+        },
+        "d842|second": {
+          "actual_order": "second",
+          "baseline": {
+            "draws": 0,
+            "failed_games": 0,
+            "games": 100,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 52,
+            "operational_telemetry": {
+              "fatal_count": 0,
+              "fatal_counts": {},
+              "nonfatal_search_fallback_counts": {
+                "d1_abstention_reason_engine_error": 25,
+                "d1_abstention_reason_timeout": 243,
+                "d1_error_detail_d1error_ambiguous_nonhero_prompt": 17,
+                "d1_error_detail_d1error_node_budget": 8,
+                "d1_errors": 25,
+                "d1_timeouts": 243
+              }
+            },
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "scheduled_games": 100,
+            "wilson_95": [
+              0.384645517580519,
+              0.5768342223477603
+            ],
+            "win_rate": 0.48,
+            "wins": 48
+          },
+          "candidate": {
+            "draws": 0,
+            "failed_games": 0,
+            "games": 100,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 46,
+            "operational_telemetry": {
+              "fatal_count": 0,
+              "fatal_counts": {},
+              "nonfatal_search_fallback_counts": {
+                "d1_abstention_reason_engine_error": 19,
+                "d1_abstention_reason_timeout": 128,
+                "d1_error_detail_d1error_ambiguous_nonhero_prompt": 4,
+                "d1_error_detail_d1error_node_budget": 15,
+                "d1_errors": 19,
+                "d1_timeouts": 128
+              }
+            },
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "scheduled_games": 100,
+            "wilson_95": [
+              0.44264860323368227,
+              0.6343919169097589
+            ],
+            "win_rate": 0.54,
+            "wins": 54
+          },
+          "candidate_minus_baseline": {
+            "confidence_95": [
+              -0.07731045506460346,
+              0.19417269206282606
+            ],
+            "estimate": 0.06000000000000005,
+            "method": "independent_newcombe_wilson_difference",
+            "paired": false
+          },
+          "matchup": "d842"
+        }
+      },
+      "pooled": {
+        "baseline": {
+          "draws": 0,
+          "failed_games": 0,
+          "games": 400,
+          "hero_illegal_actions": 0,
+          "hero_policy_errors": 0,
+          "losses": 229,
+          "operational_telemetry": {
+            "fatal_count": 0,
+            "fatal_counts": {},
+            "nonfatal_search_fallback_counts": {
+              "d1_abstention_reason_engine_error": 44,
+              "d1_abstention_reason_timeout": 1057,
+              "d1_error_detail_d1error_ambiguous_nonhero_prompt": 23,
+              "d1_error_detail_d1error_node_budget": 21,
+              "d1_errors": 44,
+              "d1_timeouts": 1057
+            }
+          },
+          "opponent_illegal_actions": 0,
+          "opponent_policy_errors": 0,
+          "scheduled_games": 400,
+          "wilson_95": [
+            0.3799345878043344,
+            0.47644469487413854
+          ],
+          "win_rate": 0.4275,
+          "wins": 171
+        },
+        "candidate": {
+          "draws": 0,
+          "failed_games": 0,
+          "games": 400,
+          "hero_illegal_actions": 0,
+          "hero_policy_errors": 0,
+          "losses": 207,
+          "operational_telemetry": {
+            "fatal_count": 0,
+            "fatal_counts": {},
+            "nonfatal_search_fallback_counts": {
+              "d1_abstention_reason_engine_error": 43,
+              "d1_abstention_reason_timeout": 903,
+              "d1_error_detail_d1error_ambiguous_nonhero_prompt": 15,
+              "d1_error_detail_d1error_node_budget": 28,
+              "d1_errors": 43,
+              "d1_timeouts": 903
+            }
+          },
+          "opponent_illegal_actions": 0,
+          "opponent_policy_errors": 0,
+          "scheduled_games": 400,
+          "wilson_95": [
+            0.43393056304490063,
+            0.5314023672567997
+          ],
+          "win_rate": 0.4825,
+          "wins": 193
+        },
+        "candidate_minus_baseline": {
+          "confidence_95": [
+            -0.013953414436544742,
+            0.1232195716833702
+          ],
+          "estimate": 0.05499999999999999,
+          "method": "independent_newcombe_wilson_difference",
+          "paired": false
+        }
+      },
+      "statistical_contract": {
+        "arms": "independent_unpaired_native_engine_randomness",
+        "difference_interval": "independent_newcombe_wilson_difference_95",
+        "per_arm_interval": "wilson_score_95",
+        "same_schedule_is_paired": false
+      },
+      "status": "EVALUATED"
+    },
+    "stage2": {
+      "candidate_latency_ms": {
+        "count": 62229,
+        "max": 860.5760419741273,
+        "p50_max_across_cells": 7.20566650852561,
+        "p95_max_across_cells": 654.8267079895595,
+        "p99_max_across_cells": 660.6291186012094,
+        "quantile_note": "Cross-cell quantiles are maxima, not fabricated pooled quantiles.",
+        "weighted_mean": 140.8665572983614
+      },
+      "candidate_s2_proof": {
+        "admitted": 257,
+        "checked": 44604,
+        "completed_game_override_rate": 0.15083333333333335,
+        "completed_games": 1200,
+        "completed_games_with_override_count": 181,
+        "d1_intervention_fields_used": false,
+        "games_with_override": [
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 9,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 15,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 23,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 29,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 31,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 42,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 66,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 71,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 74,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 77,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 85,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 91,
+            "outcome": "win",
+            "override_count": 2
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 92,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 99,
+            "outcome": "loss",
+            "override_count": 2
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 101,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 109,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 110,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 112,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 113,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 120,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 134,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 136,
+            "outcome": "win",
+            "override_count": 2
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 142,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 144,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 153,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 166,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 167,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 180,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 196,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 197,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 212,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 221,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 229,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 231,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 245,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 249,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 260,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 264,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 266,
+            "outcome": "loss",
+            "override_count": 2
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 270,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 271,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 276,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 286,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_a2_second_300",
+            "completed": true,
+            "game_index": 299,
+            "outcome": "loss",
+            "override_count": 2
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 8,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 11,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 22,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 23,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 24,
+            "outcome": "win",
+            "override_count": 2
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 26,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 27,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 41,
+            "outcome": "win",
+            "override_count": 2
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 43,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 57,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 61,
+            "outcome": "loss",
+            "override_count": 3
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 63,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 64,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 81,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 90,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 91,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 106,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 107,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 109,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 112,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 120,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 124,
+            "outcome": "win",
+            "override_count": 2
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 127,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 140,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 142,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 144,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 151,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 156,
+            "outcome": "loss",
+            "override_count": 2
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 160,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 177,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 179,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 182,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 186,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 191,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 196,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 197,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 203,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 220,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 232,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 234,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 239,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 252,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 267,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 270,
+            "outcome": "loss",
+            "override_count": 2
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 272,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 275,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 276,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 277,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_4a_second_300",
+            "completed": true,
+            "game_index": 296,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 2,
+            "outcome": "win",
+            "override_count": 2
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 11,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 22,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 39,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 45,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 52,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 60,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 64,
+            "outcome": "win",
+            "override_count": 2
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 67,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 71,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 75,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 76,
+            "outcome": "loss",
+            "override_count": 2
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 80,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 82,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 87,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 88,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 96,
+            "outcome": "loss",
+            "override_count": 2
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 98,
+            "outcome": "win",
+            "override_count": 2
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 108,
+            "outcome": "win",
+            "override_count": 2
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 112,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 119,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 121,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 128,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 130,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 131,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 140,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 146,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 147,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 154,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 157,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 160,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 164,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 174,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 185,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 189,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 193,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 207,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 211,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 214,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 218,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 236,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 238,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 242,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 245,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 250,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 255,
+            "outcome": "loss",
+            "override_count": 2
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 260,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 262,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 271,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 274,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 285,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 287,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_az2_7_second_300",
+            "completed": true,
+            "game_index": 294,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 1,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 18,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 24,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 33,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 35,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 39,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 40,
+            "outcome": "loss",
+            "override_count": 2
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 74,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 75,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 80,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 87,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 90,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 93,
+            "outcome": "win",
+            "override_count": 2
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 120,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 155,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 157,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 175,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 185,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 186,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 187,
+            "outcome": "win",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 189,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 194,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 195,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 203,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 207,
+            "outcome": "loss",
+            "override_count": 2
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 210,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 217,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 251,
+            "outcome": "loss",
+            "override_count": 2
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 265,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 273,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 274,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 288,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 290,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 294,
+            "outcome": "loss",
+            "override_count": 1
+          },
+          {
+            "cell_id": "s2_d842_second_300",
+            "completed": true,
+            "game_index": 298,
+            "outcome": "loss",
+            "override_count": 1
+          }
+        ],
+        "games_with_override_count": 181,
+        "overrides": 204,
+        "source": "exact game_rows hero_telemetry S2 counters"
+      },
+      "decision": {
+        "gates": {
+          "candidate_macro_rate_at_least_50pct": false,
+          "candidate_pooled_delta_nonnegative": false,
+          "candidate_pooled_rate_at_least_50pct": false,
+          "no_catastrophic_matchup_drop": true,
+          "zero_quality_errors": true
+        },
+        "observed": {
+          "candidate_macro_win_rate": 0.4425,
+          "candidate_minus_s1_pooled_delta": -0.004166666666666652,
+          "candidate_pooled_win_rate": 0.4425,
+          "catastrophic_matchup_cells": [],
+          "failed_games": 0,
+          "fatal_operational_telemetry": 0,
+          "illegal_actions": 0,
+          "policy_errors": 0
+        },
+        "passed": false,
+        "targets": {
+          "strong_55pct_target_met": false
+        },
+        "thresholds": {
+          "catastrophic_matchup_drop_delta": -0.1,
+          "expected_actual_order": "second",
+          "expected_matchups": [
+            "A2",
+            "d842",
+            "AZ2.4a",
+            "AZ2.7"
+          ],
+          "minimum_candidate_macro_win_rate": 0.5,
+          "minimum_candidate_minus_s1_pooled_delta": 0.0,
+          "minimum_candidate_pooled_win_rate": 0.5,
+          "paired": false,
+          "requested_games_per_arm_per_matchup": 300,
+          "require_zero_failures_policy_errors_illegal_actions": true,
+          "screen": "serious_forced_second",
+          "statistics": [
+            "wilson_per_arm",
+            "independent_newcombe_wilson_difference"
+          ],
+          "strong_target_candidate_pooled_or_macro_win_rate": 0.55
+        },
+        "verdict": "KILL"
+      },
+      "macro": {
+        "baseline_win_rate": 0.44666666666666666,
+        "candidate_minus_baseline": -0.004166666666666652,
+        "candidate_win_rate": 0.4425,
+        "matchup_count": 4,
+        "method": "unweighted_mean_of_matchup_order_cell_win_rates"
+      },
+      "per_matchup": {
+        "A2|second": {
+          "actual_order": "second",
+          "baseline": {
+            "draws": 0,
+            "failed_games": 0,
+            "games": 300,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 151,
+            "operational_telemetry": {
+              "fatal_count": 0,
+              "fatal_counts": {},
+              "nonfatal_search_fallback_counts": {
+                "d1_abstention_reason_engine_error": 39,
+                "d1_abstention_reason_timeout": 673,
+                "d1_error_detail_d1error_ambiguous_nonhero_prompt": 39,
+                "d1_errors": 39,
+                "d1_timeouts": 673
+              }
+            },
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "scheduled_games": 300,
+            "wilson_95": [
+              0.4404895596001963,
+              0.5529280602079671
+            ],
+            "win_rate": 0.49666666666666665,
+            "wins": 149
+          },
+          "candidate": {
+            "draws": 1,
+            "failed_games": 0,
+            "games": 300,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 156,
+            "operational_telemetry": {
+              "fatal_count": 0,
+              "fatal_counts": {},
+              "nonfatal_search_fallback_counts": {
+                "d1_abstention_reason_engine_error": 49,
+                "d1_abstention_reason_timeout": 752,
+                "d1_error_detail_d1error_ambiguous_nonhero_prompt": 37,
+                "d1_error_detail_d1error_node_budget": 12,
+                "d1_errors": 49,
+                "d1_timeouts": 752
+              }
+            },
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "scheduled_games": 300,
+            "wilson_95": [
+              0.42080166187431245,
+              0.533121676782833
+            ],
+            "win_rate": 0.4766666666666667,
+            "wins": 143
+          },
+          "candidate_minus_baseline": {
+            "confidence_95": [
+              -0.09928583204872636,
+              0.05964317626497648
+            ],
+            "estimate": -0.019999999999999962,
+            "method": "independent_newcombe_wilson_difference",
+            "paired": false
+          },
+          "matchup": "A2"
+        },
+        "AZ2.4a|second": {
+          "actual_order": "second",
+          "baseline": {
+            "draws": 0,
+            "failed_games": 0,
+            "games": 300,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 194,
+            "operational_telemetry": {
+              "fatal_count": 0,
+              "fatal_counts": {},
+              "nonfatal_search_fallback_counts": {
+                "d1_abstention_reason_engine_error": 10,
+                "d1_abstention_reason_timeout": 901,
+                "d1_error_detail_d1error_node_budget": 10,
+                "d1_errors": 10,
+                "d1_timeouts": 901
+              }
+            },
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "scheduled_games": 300,
+            "wilson_95": [
+              0.30140830066923496,
+              0.40896697088996514
+            ],
+            "win_rate": 0.35333333333333333,
+            "wins": 106
+          },
+          "candidate": {
+            "draws": 0,
+            "failed_games": 0,
+            "games": 300,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 178,
+            "operational_telemetry": {
+              "fatal_count": 0,
+              "fatal_counts": {},
+              "nonfatal_search_fallback_counts": {
+                "d1_abstention_reason_engine_error": 19,
+                "d1_abstention_reason_timeout": 1181,
+                "d1_error_detail_d1error_node_budget": 19,
+                "d1_errors": 19,
+                "d1_timeouts": 1181
+              }
+            },
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "scheduled_games": 300,
+            "wilson_95": [
+              0.3526017598634212,
+              0.46309159476516065
+            ],
+            "win_rate": 0.4066666666666667,
+            "wins": 122
+          },
+          "candidate_minus_baseline": {
+            "confidence_95": [
+              -0.024243182284644074,
+              0.13001437093773655
+            ],
+            "estimate": 0.053333333333333344,
+            "method": "independent_newcombe_wilson_difference",
+            "paired": false
+          },
+          "matchup": "AZ2.4a"
+        },
+        "AZ2.7|second": {
+          "actual_order": "second",
+          "baseline": {
+            "draws": 0,
+            "failed_games": 0,
+            "games": 300,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 179,
+            "operational_telemetry": {
+              "fatal_count": 0,
+              "fatal_counts": {},
+              "nonfatal_search_fallback_counts": {
+                "d1_abstention_reason_timeout": 1282,
+                "d1_timeouts": 1282
+              }
+            },
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "scheduled_games": 300,
+            "wilson_95": [
+              0.3493821700801514,
+              0.459728804356594
+            ],
+            "win_rate": 0.4033333333333333,
+            "wins": 121
+          },
+          "candidate": {
+            "draws": 0,
+            "failed_games": 0,
+            "games": 300,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 174,
+            "operational_telemetry": {
+              "fatal_count": 0,
+              "fatal_counts": {},
+              "nonfatal_search_fallback_counts": {
+                "d1_abstention_reason_engine_error": 1,
+                "d1_abstention_reason_timeout": 1308,
+                "d1_error_detail_d1error_node_budget": 1,
+                "d1_errors": 1,
+                "d1_timeouts": 1308
+              }
+            },
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "scheduled_games": 300,
+            "wilson_95": [
+              0.3655060253806384,
+              0.4765168500152888
+            ],
+            "win_rate": 0.42,
+            "wins": 126
+          },
+          "candidate_minus_baseline": {
+            "confidence_95": [
+              -0.06175553951086356,
+              0.0948004132299932
+            ],
+            "estimate": 0.016666666666666663,
+            "method": "independent_newcombe_wilson_difference",
+            "paired": false
+          },
+          "matchup": "AZ2.7"
+        },
+        "d842|second": {
+          "actual_order": "second",
+          "baseline": {
+            "draws": 0,
+            "failed_games": 0,
+            "games": 300,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 140,
+            "operational_telemetry": {
+              "fatal_count": 0,
+              "fatal_counts": {},
+              "nonfatal_search_fallback_counts": {
+                "d1_abstention_reason_engine_error": 54,
+                "d1_abstention_reason_timeout": 755,
+                "d1_error_detail_d1error_ambiguous_nonhero_prompt": 30,
+                "d1_error_detail_d1error_node_budget": 24,
+                "d1_errors": 54,
+                "d1_timeouts": 755
+              }
+            },
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "scheduled_games": 300,
+            "wilson_95": [
+              0.47681490758540607,
+              0.5890088943329576
+            ],
+            "win_rate": 0.5333333333333333,
+            "wins": 160
+          },
+          "candidate": {
+            "draws": 0,
+            "failed_games": 0,
+            "games": 300,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 160,
+            "operational_telemetry": {
+              "fatal_count": 0,
+              "fatal_counts": {},
+              "nonfatal_search_fallback_counts": {
+                "d1_abstention_reason_engine_error": 33,
+                "d1_abstention_reason_timeout": 786,
+                "d1_error_detail_d1error_ambiguous_nonhero_prompt": 28,
+                "d1_error_detail_d1error_node_budget": 5,
+                "d1_errors": 33,
+                "d1_timeouts": 786
+              }
+            },
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "scheduled_games": 300,
+            "wilson_95": [
+              0.4109911056670424,
+              0.5231850924145939
+            ],
+            "win_rate": 0.4666666666666667,
+            "wins": 140
+          },
+          "candidate_minus_baseline": {
+            "confidence_95": [
+              -0.14540380012506582,
+              0.013262457550028778
+            ],
+            "estimate": -0.06666666666666665,
+            "method": "independent_newcombe_wilson_difference",
+            "paired": false
+          },
+          "matchup": "d842"
+        }
+      },
+      "pooled": {
+        "baseline": {
+          "draws": 0,
+          "failed_games": 0,
+          "games": 1200,
+          "hero_illegal_actions": 0,
+          "hero_policy_errors": 0,
+          "losses": 664,
+          "operational_telemetry": {
+            "fatal_count": 0,
+            "fatal_counts": {},
+            "nonfatal_search_fallback_counts": {
+              "d1_abstention_reason_engine_error": 103,
+              "d1_abstention_reason_timeout": 3611,
+              "d1_error_detail_d1error_ambiguous_nonhero_prompt": 69,
+              "d1_error_detail_d1error_node_budget": 34,
+              "d1_errors": 103,
+              "d1_timeouts": 3611
+            }
+          },
+          "opponent_illegal_actions": 0,
+          "opponent_policy_errors": 0,
+          "scheduled_games": 1200,
+          "wilson_95": [
+            0.41875300586803826,
+            0.47492070086292
+          ],
+          "win_rate": 0.44666666666666666,
+          "wins": 536
+        },
+        "candidate": {
+          "draws": 1,
+          "failed_games": 0,
+          "games": 1200,
+          "hero_illegal_actions": 0,
+          "hero_policy_errors": 0,
+          "losses": 668,
+          "operational_telemetry": {
+            "fatal_count": 0,
+            "fatal_counts": {},
+            "nonfatal_search_fallback_counts": {
+              "d1_abstention_reason_engine_error": 102,
+              "d1_abstention_reason_timeout": 4027,
+              "d1_error_detail_d1error_ambiguous_nonhero_prompt": 65,
+              "d1_error_detail_d1error_node_budget": 37,
+              "d1_errors": 102,
+              "d1_timeouts": 4027
+            }
+          },
+          "opponent_illegal_actions": 0,
+          "opponent_policy_errors": 0,
+          "scheduled_games": 1200,
+          "wilson_95": [
+            0.4146257996156872,
+            0.47074116545362726
+          ],
+          "win_rate": 0.4425,
+          "wins": 531
+        },
+        "candidate_minus_baseline": {
+          "confidence_95": [
+            -0.04385623072861973,
+            0.03554146707643482
+          ],
+          "estimate": -0.004166666666666652,
+          "method": "independent_newcombe_wilson_difference",
+          "paired": false
+        }
+      },
+      "statistical_contract": {
+        "arms": "independent_unpaired_native_engine_randomness",
+        "difference_interval": "independent_newcombe_wilson_difference_95",
+        "per_arm_interval": "wilson_score_95",
+        "same_schedule_is_paired": false
+      },
+      "status": "EVALUATED"
+    }
+  },
+  "final_verdict": "KEEP_S1",
+  "mechanics": {
+    "caveat": "Tier-C policy-level evidence from the pinned source suite; it is not an execution of the immutable S1 archive.",
+    "command": ".venv/bin/pytest -q tests/test_dipplin_meta_mechanics.py --junitxml=artifacts/general_strength/mechanics/dipplin_meta_mechanics.junit.xml",
+    "errors": 0,
+    "failed": 0,
+    "junit_xml": "artifacts/general_strength/mechanics/dipplin_meta_mechanics.junit.xml",
+    "junit_xml_sha256": "23fea3d6466a3bb0ff36a5d181c720d3b26d62a27bbbbcfaf36d3ba49770e0fe",
+    "passed": 15,
+    "run_date": "2026-08-13",
+    "scope": [
+      "prize-value arithmetic",
+      "Weakness math",
+      "one-hit versus two-hit KO",
+      "Boss target selection",
+      "Jamming Tower tool suppression",
+      "non-ex and ability-based immunity",
+      "bench usefulness and no-change handling",
+      "fragile-bench penalty",
+      "replacement continuity",
+      "support-active retreat preference"
+    ],
+    "skipped": 0,
+    "status": "PASS",
+    "test_files": [
+      {
+        "path": "tests/test_dipplin_meta_mechanics.py",
+        "sha256": "a3f15a089520857bfe8ee29af98b10b47c0bbcea4a394bca0d33bacf2936919d"
+      }
+    ],
+    "tests": 15
+  },
+  "operational": {
+    "failed_games": 0,
+    "fatal_operational_telemetry": {
+      "count": 0,
+      "counts": {}
+    },
+    "hero_illegal_actions": 0,
+    "hero_policy_errors": 0,
+    "illegal_actions": 0,
+    "latency_ms": {
+      "count": 76154,
+      "max": 899.2070420063101,
+      "mean": 131.11496295067866,
+      "p95_max_across_inputs": 655.4782485502074,
+      "p99_max_across_inputs": 674.718723888509,
+      "quantile_note": "max of input p95/p99 summaries; not a pooled quantile"
+    },
+    "nonfatal_search_fallback_counts": {},
+    "opponent_illegal_actions": 0,
+    "opponent_policy_errors": 0,
+    "policy_errors": 0,
+    "unknown_contexts": 0.0
+  },
+  "operational_provenance": {
+    "linux_x86_64_complete_game": {
+      "actual_order_games": {
+        "first": 1,
+        "second": 1
+      },
+      "archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
+      "artifacts_unchanged": true,
+      "completed_games": 2,
+      "engine_binary": "libcg.so",
+      "engine_sha256": "d16244a3157fc55c3314f08dcc7c5179168697d78c105b95c7debd556b764bb7",
+      "evaluated_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+      "evaluator_sha256": "1524a6007168a6ddd2f155a3436683953e6f31e53e854c47767d2e0ab7ec1958",
+      "failed_games": 0,
+      "games": 2,
+      "illegal_actions": 0,
+      "machine": "x86_64",
+      "platform": "Linux-6.8.0-117-generic-x86_64-with-glibc2.41",
+      "policy_errors": 0,
+      "s2_enabled_games": null,
+      "schema": "dipplin-authentic-evaluation-v1",
+      "source": "artifacts/dipplin_s1/certification/linux_x86_64_complete_game.json",
+      "source_sha256": "3a97fa74dd67727dd1c0e5ad03eee0ea39f7393b437426c4c1d6a79615082446",
+      "status": "PASS"
+    },
+    "s2_linux_x86_64": {
+      "status": "NOT_APPLICABLE_AFTER_S2_REJECTION"
+    }
+  },
+  "provenance": {
+    "decision": "KEEP_S1",
+    "precommitted_stage6_promotion_veto": "Future PROMOTE_S2 requires zero candidate proposal/policy/action-instability errors, no more than 50% combined uncertifiable/incomparable decisions, and expert-dominates episode rate no greater than agent-dominates episode rate.",
+    "reason": "The frozen S2 candidate passed Stage1 but failed the serious forced-second Stage2 gate.",
+    "sealed_holdout_action_level_inspected": false
+  },
+  "qualification": {
+    "status": "NOT_APPLICABLE_AFTER_S2_REJECTION"
+  },
+  "replay_manifests": {
+    "final_holdout": {
+      "actual_order_counts": {
+        "first": 19,
+        "second": 11
+      },
+      "episode_count": 30,
+      "expert_result_counts": {
+        "loss": 15,
+        "win": 15
+      },
+      "inspection_contract_at_freeze": {
+        "action_level_inspected": false,
+        "metadata_only": true,
+        "replay_regret_executed": false
+      },
+      "manifest_payload_sha256": "708fe9e318434d1eaee6ab65661c23323ab9f1ceaa4dc5337bfc5ac22b39298d",
+      "opponent_archetype_episode_counts": {
+        "alakazam_dudunsparce": 2,
+        "dipplin_thwackey": 1,
+        "dragapult_ex": 2,
+        "grimmsnarl_marnie": 9,
+        "kangaskhan_crustle": 2,
+        "mega_kangaskhan_toolbox": 1,
+        "mega_lopunny_ex": 4,
+        "mega_lucario_ex": 1,
+        "mega_lucario_ex_variant_2": 1,
+        "ogerpon": 3,
+        "other": 4
+      },
+      "sealed": true,
+      "selection_contract_verified_count": 30,
+      "selection_used_outcome": false,
+      "source": "data/dipplin_replay_eval/frozen/final_holdout_manifest.json",
+      "source_sha256": "5f7a3faa6d5ba37ca4c0a5725f99ba2db9e362498712a36681b77cbb6657430d",
+      "split": "FINAL_HOLDOUT",
+      "status": "FROZEN_INPUT"
+    },
+    "validation": {
+      "actual_order_counts": {
+        "first": 31,
+        "second": 19
+      },
+      "episode_count": 50,
+      "expert_result_counts": {
+        "loss": 25,
+        "win": 25
+      },
+      "inspection_contract_at_freeze": {
+        "action_level_inspected": false,
+        "metadata_only": true,
+        "replay_regret_executed": false
+      },
+      "manifest_payload_sha256": "d6cc5a7339dcc466546e68c8ea29301c150966be1f287adc00003bd86716c4c1",
+      "opponent_archetype_episode_counts": {
+        "alakazam_dudunsparce": 7,
+        "cynthias_garchomp_ex": 3,
+        "dipplin_thwackey": 1,
+        "dragapult_ex": 5,
+        "grimmsnarl_marnie": 13,
+        "kangaskhan_crustle": 6,
+        "mega_kangaskhan_toolbox": 2,
+        "mega_lopunny_ex": 5,
+        "mega_lucario_ex_variant_2": 2,
+        "ogerpon": 2,
+        "other": 3,
+        "team_rockets_mewtwo_ex": 1
+      },
+      "sealed": false,
+      "selection_contract_verified_count": 50,
+      "selection_used_outcome": false,
+      "source": "data/dipplin_replay_eval/frozen/validation_manifest.json",
+      "source_sha256": "f147f14c670223b22bf9cba28f6ea166a4bbb5153c0efea941c61f39ff2bb163",
+      "split": "VALIDATION",
+      "status": "FROZEN_INPUT"
+    }
+  },
+  "replay_validation": {
+    "available": true,
+    "bootstrap_95": {
+      "AGENT_DOMINATES": [
+        0.003333333333333333,
+        0.014166666666666662
+      ],
+      "EQUIVALENT": [
+        0.5374958333333333,
+        0.6005000000000001
+      ],
+      "EXPERT_DOMINATES": [
+        0.006666666666666666,
+        0.0225
+      ],
+      "INCOMPARABLE": [
+        0.006666666666666666,
+        0.02166666666666666
+      ],
+      "UNCERTIFIABLE": [
+        0.3636666666666667,
+        0.4274166666666666
+      ]
+    },
+    "classifications": {
+      "AGENT_DOMINATES": 10,
+      "EQUIVALENT": 658,
+      "EXPERT_DOMINATES": 17,
+      "INCOMPARABLE": 16,
+      "UNCERTIFIABLE": 444
+    },
+    "coverage_source": "frozen_metadata_only_manifest",
+    "decisions": 1145,
+    "episodes": 50,
+    "opponent_archetype_coverage": {
+      "alakazam_dudunsparce": 7,
+      "cynthias_garchomp_ex": 3,
+      "dipplin_thwackey": 1,
+      "dragapult_ex": 5,
+      "grimmsnarl_marnie": 13,
+      "kangaskhan_crustle": 6,
+      "mega_kangaskhan_toolbox": 2,
+      "mega_lopunny_ex": 5,
+      "mega_lucario_ex_variant_2": 2,
+      "ogerpon": 2,
+      "other": 3,
+      "team_rockets_mewtwo_ex": 1
+    },
+    "rate_basis": "episode_mean",
+    "rates": {
+      "AGENT_DOMINATES": 0.008333333333333333,
+      "EQUIVALENT": 0.5692500000000001,
+      "EXPERT_DOMINATES": 0.014166666666666666,
+      "INCOMPARABLE": 0.013333333333333332,
+      "UNCERTIFIABLE": 0.39491666666666675
+    },
+    "sealed_aggregate_only": false,
+    "source": "artifacts/general_strength/replay/validation_regret_s1.json",
+    "source_sha256": "9f1205b2b282b2da37bc284054f51a3ebce7214507da7da4fa75309d5870e87d",
+    "split": "VALIDATION",
+    "status": "COMPLETE"
+  },
+  "same_deck": {
+    "candidate_vs_s1_first": null,
+    "candidate_vs_s1_second": null,
+    "s1_vs_s1_first": {
+      "actual_order": "first",
+      "artifacts_unchanged": true,
+      "draws": 0,
+      "evaluated_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+      "failed_games": 0,
+      "games": 500,
+      "hero_illegal_actions": 0,
+      "hero_policy_errors": 0,
+      "latency_ms": {
+        "count": 18685.0,
+        "max": 782.3859589989297,
+        "mean": 128.8718765774363,
+        "p95": 652.7579667919781,
+        "p99": 657.7154300000984
+      },
+      "losses": 198,
+      "opponent_illegal_actions": 0,
+      "opponent_policy_errors": 0,
+      "source": "artifacts/general_strength/s1_mirror/s1_vs_s1_first_500.json",
+      "source_sha256": "c1dd38044323376cf090c95e834718b029af323a48e815a24f74455c2d3fc286",
+      "unknown_contexts": 0.0,
+      "wilson_95": [
+        0.5604958406867544,
+        0.6459182964972427
+      ],
+      "win_rate": 0.604,
+      "wins": 302
+    },
+    "s1_vs_s1_second": {
+      "actual_order": "second",
+      "artifacts_unchanged": true,
+      "draws": 0,
+      "evaluated_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+      "failed_games": 0,
+      "games": 500,
+      "hero_illegal_actions": 0,
+      "hero_policy_errors": 0,
+      "latency_ms": {
+        "count": 16830.0,
+        "max": 722.940000006929,
+        "mean": 125.620363874919,
+        "p95": 622.6005437390995,
+        "p99": 657.1374202490551
+      },
+      "losses": 303,
+      "opponent_illegal_actions": 0,
+      "opponent_policy_errors": 0,
+      "source": "artifacts/general_strength/s1_mirror/s1_vs_s1_second_500.json",
+      "source_sha256": "5ef530f3bec98947d09700ed818c572fd0347b6f1a91f8b329ae224540447e6d",
+      "unknown_contexts": 0.0,
+      "wilson_95": [
+        0.3521341694850665,
+        0.4374821906927827
+      ],
+      "win_rate": 0.394,
+      "wins": 197
+    }
+  },
+  "same_deck_provenance": {
+    "status": "IMMUTABLE_S1_CONTROLS"
+  },
+  "schema": "dipplin-general-strength-dashboard-v2",
+  "score_contract": {
+    "anchor_actual_first": 0.5425,
+    "anchor_actual_second": 0.4275,
+    "anchor_macro": 0.485,
+    "anchor_sample_weighted": 0.485,
+    "robust_anchor": 0.4275,
+    "single_magic_score": false
+  },
+  "sealed_holdout_receipt": {
+    "status": "NOT_RUN_NOT_APPLICABLE_AFTER_S2_REJECTION"
+  },
+  "sealed_replay_holdout": {
+    "available": false,
+    "episodes": 0,
+    "split": "FINAL_HOLDOUT",
+    "status": "NOT_RUN_NOT_APPLICABLE_AFTER_S2_REJECTION"
+  },
+  "second_bucket_analysis": {
+    "aggregate_context": {
+      "merged_as_per_game": false,
+      "note": "Aggregate-only sources are context only. They are never used for bucket-by-outcome, board, timing, or opportunity calculations.",
+      "source_count": 8
+    },
+    "aggregate_only_sources": 8,
+    "available": true,
+    "bucket_results": {
+      "applin_42_active": {
+        "draws": 0,
+        "games": 119,
+        "losses": 69,
+        "wilson_95": [
+          0.3353441373563325,
+          0.5099849544470025
+        ],
+        "win_rate": 0.42016806722689076,
+        "wins": 50
+      },
+      "applin_92_active": {
+        "draws": 0,
+        "games": 30,
+        "losses": 23,
+        "wilson_95": [
+          0.11792388144489496,
+          0.40928326158122164
+        ],
+        "win_rate": 0.23333333333333334,
+        "wins": 7
+      },
+      "grookey_active": {
+        "draws": 0,
+        "games": 100,
+        "losses": 59,
+        "wilson_95": [
+          0.3186731302113651,
+          0.5079856994658921
+        ],
+        "win_rate": 0.41,
+        "wins": 41
+      },
+      "other_unusual": {
+        "draws": 0,
+        "games": 0,
+        "losses": 0,
+        "wilson_95": [
+          0.0,
+          1.0
+        ],
+        "win_rate": null,
+        "wins": 0
+      },
+      "shaymin_active": {
+        "draws": 0,
+        "games": 11,
+        "losses": 8,
+        "wilson_95": [
+          0.09746059290024889,
+          0.5656453011761291
+        ],
+        "win_rate": 0.2727272727272727,
+        "wins": 3
+      },
+      "volbeat_active_quick_sign_legal": {
+        "draws": 0,
+        "games": 133,
+        "losses": 64,
+        "wilson_95": [
+          0.43455287512403684,
+          0.6019857590230282
+        ],
+        "win_rate": 0.518796992481203,
+        "wins": 69
+      },
+      "volbeat_active_quick_sign_unavailable": {
+        "draws": 0,
+        "games": 7,
+        "losses": 6,
+        "wilson_95": [
+          0.02567962434474355,
+          0.5131278292743189
+        ],
+        "win_rate": 0.14285714285714285,
+        "wins": 1
+      }
+    },
+    "eligible_traced_games": 400,
+    "excluded_rows": {
+      "duplicate": 0,
+      "missing_trace": 0,
+      "not_actual_second": 0,
+      "not_completed": 0,
+      "trace_incomplete": 0,
+      "trace_order_mismatch": 0,
+      "trace_outcome_mismatch": 0,
+      "unknown_opening_bucket": 0,
+      "wrong_trace_schema": 0
+    },
+    "hero_hashes": [
+      "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+    ],
+    "mixed_hero_hashes_allowed": false,
+    "opportunity_ranking": {
+      "buckets": [
+        {
+          "avoidable_deficit": 0.13783834586466165,
+          "bucket": "grookey_active",
+          "bucket_frequency": 0.25,
+          "games": 100,
+          "mechanism_rates": {
+            "any_dead_turn": {
+              "known_games": 100,
+              "rate": 0.69
+            },
+            "any_trapped_active_turn": {
+              "known_games": 100,
+              "rate": 0.61
+            },
+            "delayed_first_attack": {
+              "known_games": 100,
+              "rate": 0.45
+            },
+            "delayed_first_double_attack": {
+              "known_games": 100,
+              "rate": 0.26
+            }
+          },
+          "opportunity": 0.03445958646616541,
+          "rank": 1
+        },
+        {
+          "avoidable_deficit": 0.11610275689223055,
+          "bucket": "applin_92_active",
+          "bucket_frequency": 0.075,
+          "games": 30,
+          "mechanism_rates": {
+            "any_dead_turn": {
+              "known_games": 30,
+              "rate": 0.7333333333333333
+            },
+            "any_trapped_active_turn": {
+              "known_games": 30,
+              "rate": 0.5
+            },
+            "delayed_first_attack": {
+              "known_games": 30,
+              "rate": 0.3333333333333333
+            },
+            "delayed_first_double_attack": {
+              "known_games": 30,
+              "rate": 0.3
+            }
+          },
+          "opportunity": 0.008707706766917291,
+          "rank": 2
+        },
+        {
+          "avoidable_deficit": 0.3139097744360902,
+          "bucket": "volbeat_active_quick_sign_unavailable",
+          "bucket_frequency": 0.0175,
+          "games": 7,
+          "mechanism_rates": {
+            "any_dead_turn": {
+              "known_games": 7,
+              "rate": 0.8571428571428571
+            },
+            "any_trapped_active_turn": {
+              "known_games": 7,
+              "rate": 0.8571428571428571
+            },
+            "delayed_first_attack": {
+              "known_games": 7,
+              "rate": 0.42857142857142855
+            },
+            "delayed_first_double_attack": {
+              "known_games": 7,
+              "rate": 0.5714285714285714
+            }
+          },
+          "opportunity": 0.005493421052631579,
+          "rank": 3
+        },
+        {
+          "avoidable_deficit": 0.01658558160106148,
+          "bucket": "applin_42_active",
+          "bucket_frequency": 0.2975,
+          "games": 119,
+          "mechanism_rates": {
+            "any_dead_turn": {
+              "known_games": 119,
+              "rate": 0.5798319327731093
+            },
+            "any_trapped_active_turn": {
+              "known_games": 119,
+              "rate": 0.5126050420168067
+            },
+            "delayed_first_attack": {
+              "known_games": 119,
+              "rate": 0.15966386554621848
+            },
+            "delayed_first_double_attack": {
+              "known_games": 119,
+              "rate": 0.20168067226890757
+            }
+          },
+          "opportunity": 0.00493421052631579,
+          "rank": 4
+        },
+        {
+          "avoidable_deficit": 0.06715652768284347,
+          "bucket": "shaymin_active",
+          "bucket_frequency": 0.0275,
+          "games": 11,
+          "mechanism_rates": {
+            "any_dead_turn": {
+              "known_games": 11,
+              "rate": 0.6363636363636364
+            },
+            "any_trapped_active_turn": {
+              "known_games": 11,
+              "rate": 0.6363636363636364
+            },
+            "delayed_first_attack": {
+              "known_games": 11,
+              "rate": 0.2727272727272727
+            },
+            "delayed_first_double_attack": {
+              "known_games": 11,
+              "rate": 0.18181818181818182
+            }
+          },
+          "opportunity": 0.0018468045112781954,
+          "rank": 5
+        },
+        {
+          "avoidable_deficit": 0.0,
+          "bucket": "volbeat_active_quick_sign_legal",
+          "bucket_frequency": 0.3325,
+          "games": 133,
+          "mechanism_rates": {
+            "any_dead_turn": {
+              "known_games": 133,
+              "rate": 0.5939849624060151
+            },
+            "any_trapped_active_turn": {
+              "known_games": 133,
+              "rate": 0.556390977443609
+            },
+            "delayed_first_attack": {
+              "known_games": 133,
+              "rate": 0.17293233082706766
+            },
+            "delayed_first_double_attack": {
+              "known_games": 133,
+              "rate": 0.13533834586466165
+            }
+          },
+          "opportunity": 0.0,
+          "rank": 6
+        }
+      ],
+      "method": {
+        "component_definitions": {
+          "any_dead_turn": "P(dead_turns > 0)",
+          "any_trapped_active_turn": "P(trapped_active_turns > 0)",
+          "delayed_first_attack": "P(first productive attack after own turn 2, or never)",
+          "delayed_first_double_attack": "P(first Festival double attack after own turn 3, or never)"
+        },
+        "fallback_when_reference_missing": "ideal zero mechanism-failure rate",
+        "formula": "opportunity = bucket_frequency * mean(nonnegative bucket-minus-reference mechanism-rate gaps with coverage)",
+        "interpretation": "observational mechanism-triage heuristic, not a causal strength estimate",
+        "name": "outcome-independent-visible-tempo-gap-v1",
+        "reference_available": true,
+        "reference_bucket": "volbeat_active_quick_sign_legal",
+        "uses_outcomes_or_win_rate": false
+      },
+      "reference_mechanism_rates": {
+        "any_dead_turn": {
+          "known_games": 133,
+          "rate": 0.5939849624060151
+        },
+        "any_trapped_active_turn": {
+          "known_games": 133,
+          "rate": 0.556390977443609
+        },
+        "delayed_first_attack": {
+          "known_games": 133,
+          "rate": 0.17293233082706766
+        },
+        "delayed_first_double_attack": {
+          "known_games": 133,
+          "rate": 0.13533834586466165
+        }
+      }
+    },
+    "quality_counters": {
+      "hero_illegal_actions": 0,
+      "hero_policy_errors": 0,
+      "opponent_illegal_actions": 0,
+      "opponent_policy_errors": 0
+    },
+    "results": {
+      "draws": 0,
+      "games": 400,
+      "losses": 229,
+      "wilson_95": [
+        0.3799345878043344,
+        0.47644469487413854
+      ],
+      "win_rate": 0.4275,
+      "wins": 171
+    },
+    "row_sources": [
+      {
+        "hero_hash": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+        "rows": 100,
+        "source": "artifacts/general_strength/s1_buckets/a2_second_trace_100.json"
+      },
+      {
+        "hero_hash": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+        "rows": 100,
+        "source": "artifacts/general_strength/s1_buckets/d842_second_trace_100.json"
+      },
+      {
+        "hero_hash": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+        "rows": 100,
+        "source": "artifacts/general_strength/s1_buckets/az2_4a_second_trace_100.json"
+      },
+      {
+        "hero_hash": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+        "rows": 100,
+        "source": "artifacts/general_strength/s1_buckets/az2_7_second_trace_100.json"
+      }
+    ],
+    "rows_seen": 400,
+    "schema": "dipplin-second-bucket-analysis-v1",
+    "source": "artifacts/general_strength/s1_buckets/second_bucket_analysis_400.json",
+    "source_sha256": "cf52262d2acf02108fe956de0ce2dc5fcdca7b91b218d0172a28b3320be8d8a8",
+    "status": "COMPLETE",
+    "trace_schema": "dipplin-second-bucket-trace-v1"
+  },
+  "setup_choice_audit": {
+    "actual_order": "second",
+    "games": 5000,
+    "grookey_selected": 1271,
+    "grookey_with_selectable_volbeat": 119,
+    "grookey_with_selectable_volbeat_rate_all_openings": 0.0238,
+    "note": "Aggregate setup-only causal audit; never pooled into strength evidence.",
+    "source": "artifacts/general_strength/s1_buckets/setup_choice_audit_5000.json",
+    "source_sha256": "83aa304aa75d3de59f81083993591d3069020ccb7b57ce5f900a81787e667244",
+    "status": "COMPLETE_CAUSAL_DIAGNOSTIC_ONLY",
+    "strength_evidence": false
+  },
+  "spec_path": "data/dipplin_general_strength/s2_dashboard_spec.json",
+  "spec_sha256": "2d11d5f1caf8df433b4b3ddf19a2e35795dee6e0f2608d92ea0430c367ef31f1",
+  "stage6_promotion_gate": {
+    "status": "NOT_APPLICABLE_AFTER_S2_REJECTION"
+  },
+  "stage_verdicts": {
+    "stage1": "STRONG",
+    "stage2": "KILL"
+  },
+  "strength_source": {
+    "exact_recomputation_match": true,
+    "incumbent_dashboard_spec": "data/dipplin_general_strength/s1_dashboard_spec.json",
+    "incumbent_dashboard_spec_sha256": "bd8142f9b60077d82059c57e9e08a223b0d84701010c9c539537c7b7d58fed1e",
+    "stage_report": "artifacts/general_strength/s2_stage2/stage2_evaluation.json",
+    "stage_report_sha256": "82f33fd41aadea811bff43d5365b7af8fc622c30b2267336ade90a7cb4b9f04f",
+    "stage_spec": "data/dipplin_general_strength/s2_stage_evaluation_spec.json",
+    "stage_spec_sha256": "47d9326c637387f59bf259b608efb1601ca3d3285b53d2a7096dc369cddc6f3b"
+  },
+  "strong_anchors": {
+    "anchor_actual_first": 0.5425,
+    "anchor_actual_second": 0.4275,
+    "anchor_macro": 0.485,
+    "anchor_sample_weighted": 0.485,
+    "macro_definition": "unweighted mean of opponent order-balanced win rates; each opponent x actual-order cell has equal weight",
+    "opponents": {
+      "A2 Grimmsnarl (exact)": {
+        "actual_order": {
+          "first": {
+            "draws": 1,
+            "evaluated_tree_sha256": [
+              "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+            ],
+            "failed_games": 0,
+            "games": 100,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 49,
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "sources": [
+              "artifacts/general_strength/s1_current_anchors/a2_first_100.json"
+            ],
+            "unknown_contexts": 0.0,
+            "wilson_95": [
+              0.4038315303659956,
+              0.5961684696340044
+            ],
+            "win_rate": 0.5,
+            "wins": 50
+          },
+          "second": {
+            "draws": 0,
+            "evaluated_tree_sha256": [
+              "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+            ],
+            "failed_games": 0,
+            "games": 100,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 49,
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "sources": [
+              "artifacts/general_strength/s1_buckets/a2_second_trace_100.json"
+            ],
+            "unknown_contexts": 0.0,
+            "wilson_95": [
+              0.4134801193402717,
+              0.6057800106955886
+            ],
+            "win_rate": 0.51,
+            "wins": 51
+          }
+        },
+        "overall": {
+          "draws": 1,
+          "evaluated_tree_sha256": [
+            "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+          ],
+          "failed_games": 0,
+          "games": 200,
+          "hero_illegal_actions": 0,
+          "hero_policy_errors": 0,
+          "losses": 98,
+          "opponent_illegal_actions": 0,
+          "opponent_policy_errors": 0,
+          "order_balanced_win_rate": 0.505,
+          "sample_weighted_win_rate": 0.505,
+          "sources": [
+            "artifacts/general_strength/s1_current_anchors/a2_first_100.json",
+            "artifacts/general_strength/s1_buckets/a2_second_trace_100.json"
+          ],
+          "unknown_contexts": 0.0,
+          "wilson_95": [
+            0.43627000033527485,
+            0.5735415464009526
+          ],
+          "win_rate": 0.505,
+          "wins": 101
+        }
+      },
+      "Alakazam 2.4a (authentic)": {
+        "actual_order": {
+          "first": {
+            "draws": 0,
+            "evaluated_tree_sha256": [
+              "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+            ],
+            "failed_games": 0,
+            "games": 100,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 41,
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "sources": [
+              "artifacts/general_strength/s1_current_anchors/az2_4a_first_100.json"
+            ],
+            "unknown_contexts": 0.0,
+            "wilson_95": [
+              0.4920143005341078,
+              0.6813268697886348
+            ],
+            "win_rate": 0.59,
+            "wins": 59
+          },
+          "second": {
+            "draws": 0,
+            "evaluated_tree_sha256": [
+              "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+            ],
+            "failed_games": 0,
+            "games": 100,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 67,
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "sources": [
+              "artifacts/general_strength/s1_buckets/az2_4a_second_trace_100.json"
+            ],
+            "unknown_contexts": 0.0,
+            "wilson_95": [
+              0.24563122734128034,
+              0.4269465620490947
+            ],
+            "win_rate": 0.33,
+            "wins": 33
+          }
+        },
+        "overall": {
+          "draws": 0,
+          "evaluated_tree_sha256": [
+            "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+          ],
+          "failed_games": 0,
+          "games": 200,
+          "hero_illegal_actions": 0,
+          "hero_policy_errors": 0,
+          "losses": 108,
+          "opponent_illegal_actions": 0,
+          "opponent_policy_errors": 0,
+          "order_balanced_win_rate": 0.45999999999999996,
+          "sample_weighted_win_rate": 0.46,
+          "sources": [
+            "artifacts/general_strength/s1_current_anchors/az2_4a_first_100.json",
+            "artifacts/general_strength/s1_buckets/az2_4a_second_trace_100.json"
+          ],
+          "unknown_contexts": 0.0,
+          "wilson_95": [
+            0.39233051799971463,
+            0.5291771081104667
+          ],
+          "win_rate": 0.46,
+          "wins": 92
+        }
+      },
+      "Alakazam 2.7 (authentic)": {
+        "actual_order": {
+          "first": {
+            "draws": 0,
+            "evaluated_tree_sha256": [
+              "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+            ],
+            "failed_games": 0,
+            "games": 100,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 52,
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "sources": [
+              "artifacts/general_strength/s1_current_anchors/az2_7_first_100.json"
+            ],
+            "unknown_contexts": 0.0,
+            "wilson_95": [
+              0.384645517580519,
+              0.5768342223477603
+            ],
+            "win_rate": 0.48,
+            "wins": 48
+          },
+          "second": {
+            "draws": 0,
+            "evaluated_tree_sha256": [
+              "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+            ],
+            "failed_games": 0,
+            "games": 100,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 61,
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "sources": [
+              "artifacts/general_strength/s1_buckets/az2_7_second_trace_100.json"
+            ],
+            "unknown_contexts": 0.0,
+            "wilson_95": [
+              0.3001687400639441,
+              0.4879698295415926
+            ],
+            "win_rate": 0.39,
+            "wins": 39
+          }
+        },
+        "overall": {
+          "draws": 0,
+          "evaluated_tree_sha256": [
+            "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+          ],
+          "failed_games": 0,
+          "games": 200,
+          "hero_illegal_actions": 0,
+          "hero_policy_errors": 0,
+          "losses": 113,
+          "opponent_illegal_actions": 0,
+          "opponent_policy_errors": 0,
+          "order_balanced_win_rate": 0.435,
+          "sample_weighted_win_rate": 0.435,
+          "sources": [
+            "artifacts/general_strength/s1_current_anchors/az2_7_first_100.json",
+            "artifacts/general_strength/s1_buckets/az2_7_second_trace_100.json"
+          ],
+          "unknown_contexts": 0.0,
+          "wilson_95": [
+            0.36815725502699076,
+            0.504292637402054
+          ],
+          "win_rate": 0.435,
+          "wins": 87
+        }
+      },
+      "d842 Grimmsnarl (exact)": {
+        "actual_order": {
+          "first": {
+            "draws": 0,
+            "evaluated_tree_sha256": [
+              "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+            ],
+            "failed_games": 0,
+            "games": 100,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 40,
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "sources": [
+              "artifacts/general_strength/s1_current_anchors/d842_first_100.json"
+            ],
+            "unknown_contexts": 0.0,
+            "wilson_95": [
+              0.5020025867910618,
+              0.6905987135675411
+            ],
+            "win_rate": 0.6,
+            "wins": 60
+          },
+          "second": {
+            "draws": 0,
+            "evaluated_tree_sha256": [
+              "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+            ],
+            "failed_games": 0,
+            "games": 100,
+            "hero_illegal_actions": 0,
+            "hero_policy_errors": 0,
+            "losses": 52,
+            "opponent_illegal_actions": 0,
+            "opponent_policy_errors": 0,
+            "sources": [
+              "artifacts/general_strength/s1_buckets/d842_second_trace_100.json"
+            ],
+            "unknown_contexts": 0.0,
+            "wilson_95": [
+              0.384645517580519,
+              0.5768342223477603
+            ],
+            "win_rate": 0.48,
+            "wins": 48
+          }
+        },
+        "overall": {
+          "draws": 0,
+          "evaluated_tree_sha256": [
+            "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+          ],
+          "failed_games": 0,
+          "games": 200,
+          "hero_illegal_actions": 0,
+          "hero_policy_errors": 0,
+          "losses": 92,
+          "opponent_illegal_actions": 0,
+          "opponent_policy_errors": 0,
+          "order_balanced_win_rate": 0.54,
+          "sample_weighted_win_rate": 0.54,
+          "sources": [
+            "artifacts/general_strength/s1_current_anchors/d842_first_100.json",
+            "artifacts/general_strength/s1_buckets/d842_second_trace_100.json"
+          ],
+          "unknown_contexts": 0.0,
+          "wilson_95": [
+            0.4708228918895333,
+            0.6076694820002854
+          ],
+          "win_rate": 0.54,
+          "wins": 108
+        }
+      }
+    },
+    "robust_anchor": 0.4275,
+    "robust_anchor_definition": "min(anchor_actual_first, anchor_actual_second)",
+    "sample_weighted_definition": "pooled wins/games across admitted shards; retained only as a sampling diagnostic"
+  },
+  "weak_clones": [
+    {
+      "availability": "LEGACY_WEIGHTS_OR_DECK_ONLY",
+      "coverage": "availability_only",
+      "evaluated_contexts": "NOT_MEASURABLE",
+      "failed_games": "NOT_MEASURABLE",
+      "illegal_actions": "NOT_MEASURABLE",
+      "name": "Mega Lucario",
+      "note": "No exact-current candidate execution artifact is available.",
+      "policy_errors": "NOT_MEASURABLE",
+      "runnable_status": "NOT_RUN_UNAVAILABLE_NO_CURRENT_CANDIDATE_EXECUTION",
+      "strength_status": "CEILINGED \u2014 EXCLUDED FROM STRENGTH",
+      "unknown_contexts": "NOT_MEASURABLE",
+      "win_rate_is_strength_metric": false
+    },
+    {
+      "availability": "LEGACY_WEIGHTS_OR_DECK_ONLY",
+      "coverage": "availability_only",
+      "evaluated_contexts": "NOT_MEASURABLE",
+      "failed_games": "NOT_MEASURABLE",
+      "illegal_actions": "NOT_MEASURABLE",
+      "name": "Crustle / Kangaskhan",
+      "note": "No exact-current candidate execution artifact is available.",
+      "policy_errors": "NOT_MEASURABLE",
+      "runnable_status": "NOT_RUN_UNAVAILABLE_NO_CURRENT_CANDIDATE_EXECUTION",
+      "strength_status": "CEILINGED \u2014 EXCLUDED FROM STRENGTH",
+      "unknown_contexts": "NOT_MEASURABLE",
+      "win_rate_is_strength_metric": false
+    },
+    {
+      "availability": "LEGACY_WEIGHTS_OR_DECK_ONLY",
+      "coverage": "availability_only",
+      "evaluated_contexts": "NOT_MEASURABLE",
+      "failed_games": "NOT_MEASURABLE",
+      "illegal_actions": "NOT_MEASURABLE",
+      "name": "Teal Mask Ogerpon",
+      "note": "No exact-current candidate execution artifact is available.",
+      "policy_errors": "NOT_MEASURABLE",
+      "runnable_status": "NOT_RUN_UNAVAILABLE_NO_CURRENT_CANDIDATE_EXECUTION",
+      "strength_status": "CEILINGED \u2014 EXCLUDED FROM STRENGTH",
+      "unknown_contexts": "NOT_MEASURABLE",
+      "win_rate_is_strength_metric": false
+    },
+    {
+      "availability": "LEGACY_WEIGHTS_OR_DECK_ONLY",
+      "coverage": "availability_only",
+      "evaluated_contexts": "NOT_MEASURABLE",
+      "failed_games": "NOT_MEASURABLE",
+      "illegal_actions": "NOT_MEASURABLE",
+      "name": "Bellibolt",
+      "note": "No exact-current candidate execution artifact is available.",
+      "policy_errors": "NOT_MEASURABLE",
+      "runnable_status": "NOT_RUN_UNAVAILABLE_NO_CURRENT_CANDIDATE_EXECUTION",
+      "strength_status": "CEILINGED \u2014 EXCLUDED FROM STRENGTH",
+      "unknown_contexts": "NOT_MEASURABLE",
+      "win_rate_is_strength_metric": false
+    },
+    {
+      "availability": "LEGACY_WEIGHTS_OR_DECK_ONLY",
+      "coverage": "availability_only",
+      "evaluated_contexts": "NOT_MEASURABLE",
+      "failed_games": "NOT_MEASURABLE",
+      "illegal_actions": "NOT_MEASURABLE",
+      "name": "Starmie / Froslass",
+      "note": "No exact-current candidate execution artifact is available.",
+      "policy_errors": "NOT_MEASURABLE",
+      "runnable_status": "NOT_RUN_UNAVAILABLE_NO_CURRENT_CANDIDATE_EXECUTION",
+      "strength_status": "CEILINGED \u2014 EXCLUDED FROM STRENGTH",
+      "unknown_contexts": "NOT_MEASURABLE",
+      "win_rate_is_strength_metric": false
+    },
+    {
+      "availability": "LEGACY_WEIGHTS_OR_DECK_ONLY",
+      "coverage": "availability_only",
+      "evaluated_contexts": "NOT_MEASURABLE",
+      "failed_games": "NOT_MEASURABLE",
+      "illegal_actions": "NOT_MEASURABLE",
+      "name": "Dragapult",
+      "note": "No exact-current candidate execution artifact is available.",
+      "policy_errors": "NOT_MEASURABLE",
+      "runnable_status": "NOT_RUN_UNAVAILABLE_NO_CURRENT_CANDIDATE_EXECUTION",
+      "strength_status": "CEILINGED \u2014 EXCLUDED FROM STRENGTH",
+      "unknown_contexts": "NOT_MEASURABLE",
+      "win_rate_is_strength_metric": false
+    },
+    {
+      "availability": "LEGACY_WEIGHTS_OR_DECK_ONLY",
+      "coverage": "availability_only",
+      "evaluated_contexts": "NOT_MEASURABLE",
+      "failed_games": "NOT_MEASURABLE",
+      "illegal_actions": "NOT_MEASURABLE",
+      "name": "Mega Lopunny",
+      "note": "No exact-current candidate execution artifact is available.",
+      "policy_errors": "NOT_MEASURABLE",
+      "runnable_status": "NOT_RUN_UNAVAILABLE_NO_CURRENT_CANDIDATE_EXECUTION",
+      "strength_status": "CEILINGED \u2014 EXCLUDED FROM STRENGTH",
+      "unknown_contexts": "NOT_MEASURABLE",
+      "win_rate_is_strength_metric": false
+    },
+    {
+      "availability": "LEGACY_WEIGHTS_OR_DECK_ONLY",
+      "coverage": "availability_only",
+      "evaluated_contexts": "NOT_MEASURABLE",
+      "failed_games": "NOT_MEASURABLE",
+      "illegal_actions": "NOT_MEASURABLE",
+      "name": "Garchomp",
+      "note": "No exact-current candidate execution artifact is available.",
+      "policy_errors": "NOT_MEASURABLE",
+      "runnable_status": "NOT_RUN_UNAVAILABLE_NO_CURRENT_CANDIDATE_EXECUTION",
+      "strength_status": "CEILINGED \u2014 EXCLUDED FROM STRENGTH",
+      "unknown_contexts": "NOT_MEASURABLE",
+      "win_rate_is_strength_metric": false
+    }
+  ]
+}

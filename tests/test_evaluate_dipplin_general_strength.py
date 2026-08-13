@@ -9,18 +9,35 @@ from pathlib import Path
 import pytest
 
 from scripts.evaluate_dipplin_general_strength import (
+    CANONICAL_MECHANICS_COMMAND,
+    CANONICAL_MECHANICS_JUNIT,
+    CANONICAL_MECHANICS_SCOPE,
+    CANONICAL_MECHANICS_TEST_FILE,
+    CANONICAL_MECHANICS_TEST_NAMES,
+    PINNED_MECHANICS_JUNIT_SHA256,
+    PINNED_MECHANICS_TEST_FILE_SHA256,
+    PINNED_S1_SETUP_AUDIT_SHA256,
+    WEAK_CLONE_UNAVAILABLE_AVAILABILITY,
+    WEAK_CLONE_UNAVAILABLE_COVERAGE,
+    WEAK_CLONE_UNAVAILABLE_STATUS,
     DashboardError,
     _mechanics_dashboard,
+    _portable_v2_output,
     _receipt_dashboard,
     _replay_aggregate_v2,
     _replay_quality_counts,
     _replay_v2_summary,
+    _stage6_promotion_gate,
+    _stage_reports_equal,
     _strength_source_dashboard,
+    _verify_sealed_nested_contract,
     _v2_operational_provenance,
     _v2_replay_manifest_provenance,
+    _verify_s2_linux_provenance,
     _weak_clones_dashboard,
     build_dashboard,
     render_markdown,
+    _setup_choice_audit,
 )
 
 
@@ -30,6 +47,61 @@ def _write(path: Path, value):
 
 def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _unavailable_clone(name: str) -> dict[str, object]:
+    return {
+        "name": name,
+        "availability": WEAK_CLONE_UNAVAILABLE_AVAILABILITY,
+        "coverage": WEAK_CLONE_UNAVAILABLE_COVERAGE,
+        "runnable_status": WEAK_CLONE_UNAVAILABLE_STATUS,
+        "evaluated_contexts": "NOT_MEASURABLE",
+        "failed_games": "NOT_MEASURABLE",
+        "policy_errors": "NOT_MEASURABLE",
+        "illegal_actions": "NOT_MEASURABLE",
+        "unknown_contexts": "NOT_MEASURABLE",
+        "note": "No exact-current candidate execution artifact is available.",
+    }
+
+
+def _canonical_mechanics() -> dict[str, object]:
+    return {
+        "status": "PASS",
+        "junit_xml": str(CANONICAL_MECHANICS_JUNIT),
+        "junit_xml_sha256": PINNED_MECHANICS_JUNIT_SHA256,
+        "expected_tests": len(CANONICAL_MECHANICS_TEST_NAMES),
+        "command": CANONICAL_MECHANICS_COMMAND,
+        "run_date": "2026-08-13",
+        "test_files": [
+            {
+                "path": str(CANONICAL_MECHANICS_TEST_FILE),
+                "sha256": PINNED_MECHANICS_TEST_FILE_SHA256,
+            }
+        ],
+        "scope": list(CANONICAL_MECHANICS_SCOPE),
+        "caveat": "Policy-level mechanics evidence; not an archive execution.",
+    }
+
+
+def _canonical_setup_audit() -> dict[str, object]:
+    root = Path(__file__).resolve().parents[1]
+    return {
+        "path": str(
+            root
+            / "artifacts/general_strength/s1_buckets/setup_choice_audit_5000.json"
+        ),
+        "artifact_sha256": PINNED_S1_SETUP_AUDIT_SHA256,
+        "expected_schema": "dipplin-setup-choice-audit-v1",
+        "expected_games": 5000,
+        "expected_actual_order": "second",
+        "expected_archive_sha256": (
+            "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171"
+        ),
+        "expected_tree_sha256": (
+            "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
+        ),
+        "note": "Aggregate setup-only causal audit; never strength evidence.",
+    }
 
 
 def _tar_gz(path: Path, files: dict[str, bytes]) -> None:
@@ -573,60 +645,45 @@ def test_strict_weak_clones_reject_strength_outcomes_and_unmeasured_zeros():
         _weak_clones_dashboard(
             [{"name": "Lucario", "win_rate": 0.99}], strict=True
         )
+    malformed = _unavailable_clone("Lucario")
+    malformed["policy_errors"] = 0
     with pytest.raises(DashboardError, match="NOT_MEASURABLE"):
         _weak_clones_dashboard(
-            [
-                {
-                    "name": "Lucario",
-                    "runnable_status": "NOT_RUN_NONRUNNABLE",
-                    "policy_errors": 0,
-                }
-            ],
+            [malformed],
             strict=True,
         )
-    row = _weak_clones_dashboard(
-        [
-            {
-                "name": "Lucario",
-                "availability": "weights only",
-                "runnable_status": "NOT_RUN_NONRUNNABLE",
-                "policy_errors": "NOT_MEASURABLE",
-            }
-        ],
-        strict=True,
-    )[0]
+    row = _weak_clones_dashboard([_unavailable_clone("Lucario")], strict=True)[0]
     assert row["win_rate_is_strength_metric"] is False
 
+    runnable_without_evidence = _unavailable_clone("Lucario")
+    runnable_without_evidence["runnable_status"] = "RUN"
+    runnable_without_evidence["availability"] = "RUNNABLE_CURRENT_CANDIDATE"
+    runnable_without_evidence["coverage"] = "execution_artifact"
+    with pytest.raises(DashboardError, match="RUN is not admitted"):
+        _weak_clones_dashboard([runnable_without_evidence], strict=True)
 
-def test_strict_mechanics_parses_hashed_junit_and_rejects_failures(tmp_path):
-    test_file = tmp_path / "test_one.py"
-    test_file.write_text("def test_one(): pass\n", encoding="utf-8")
-    junit = tmp_path / "junit.xml"
+
+def test_strict_mechanics_requires_exact_pinned_suite_and_rejects_one_test(tmp_path):
+    declaration = _canonical_mechanics()
+    result = _mechanics_dashboard(Path.cwd(), declaration, strict=True)
+    assert result["passed"] == 15
+
+    junit = tmp_path / "forged.xml"
     junit.write_text(
-        '<testsuites><testsuite tests="2" failures="0" errors="0" skipped="0"/></testsuites>',
+        '<testsuites><testsuite tests="1" failures="0" errors="0" skipped="0">'
+        '<testcase name="test_one"/></testsuite></testsuites>',
         encoding="utf-8",
     )
-    declaration = {
-        "status": "PASS",
-        "junit_xml": junit.name,
-        "junit_xml_sha256": _sha256(junit),
-        "expected_tests": 2,
-        "command": "pytest",
-        "run_date": "2026-08-13",
-        "test_files": [{"path": test_file.name, "sha256": _sha256(test_file)}],
-        "scope": ["mechanics"],
-        "caveat": "working source",
-    }
-    result = _mechanics_dashboard(tmp_path, declaration, strict=True)
-    assert result["passed"] == 2
-
-    junit.write_text(
-        '<testsuites><testsuite tests="2" failures="1" errors="0" skipped="0"/></testsuites>',
-        encoding="utf-8",
+    forged = dict(declaration)
+    forged.update(
+        {
+            "junit_xml": str(junit),
+            "junit_xml_sha256": _sha256(junit),
+            "expected_tests": 1,
+        }
     )
-    declaration["junit_xml_sha256"] = _sha256(junit)
-    with pytest.raises(DashboardError, match="incomplete or failing"):
-        _mechanics_dashboard(tmp_path, declaration, strict=True)
+    with pytest.raises(DashboardError, match="not canonical"):
+        _mechanics_dashboard(tmp_path, forged, strict=True)
 
 
 def test_linux_certification_enforces_platform_machine_and_s2_mode(tmp_path):
@@ -730,6 +787,9 @@ def _v2_aggregate(*, episodes=2):
         "evaluated_episode_count": episodes,
         "episode_coverage": 1.0,
         "classification_counts": counts,
+        "decision_rates": {
+            label: count / 2 for label, count in counts.items()
+        },
         "episode_rates": {
             "EQUIVALENT": 0.5,
             "AGENT_DOMINATES": 0.5,
@@ -740,6 +800,8 @@ def _v2_aggregate(*, episodes=2):
         "episode_bootstrap_95": {
             label: [0.0, 1.0] for label in counts
         },
+        "expert_dominates_rate": 0.0,
+        "agent_dominates_rate": 0.5,
         "quality_counts": {
             "proposal_error_rows": 0,
             "candidate_policy_error_rows": 0,
@@ -770,7 +832,7 @@ def test_replay_v2_aggregate_requires_full_coverage_and_safe_quality_counts(tmp_
         )
 
 
-def test_receipt_binds_output_qualification_candidate_and_parameters(tmp_path):
+def test_receipt_rejects_caller_selected_alternate_path(tmp_path):
     from scripts import evaluate_dipplin_replay_regret as regret
 
     holdout = tmp_path / "holdout.json"
@@ -825,32 +887,7 @@ def test_receipt_binds_output_qualification_candidate_and_parameters(tmp_path):
             "git_blob_sha1": evaluator_blob,
         },
     }
-    verified = _receipt_dashboard(
-        tmp_path,
-        declaration,
-        holdout={"source": str(holdout), "source_sha256": _sha256(holdout)},
-        holdout_manifest={
-            "source_sha256": manifest_file_sha,
-            "manifest_payload_sha256": manifest_payload_sha,
-        },
-        qualification={
-            "file_sha256": qualification_sha,
-            "payload_sha256": payload_sha,
-            "candidate_validation_sha256": validation_sha,
-        },
-        candidate={
-            "package_sha256": package_sha,
-            "manifest_sha256": candidate_manifest_sha,
-            "verified_tree_sha256": tree,
-            "verified_runtime_tree_sha256": runtime_tree,
-        },
-    )
-    assert verified["status"] == "COMPLETE"
-
-    value["status"] = "ACTION_INSPECTION_CLAIMED"
-    _write(receipt, value)
-    declaration["artifact_sha256"] = _sha256(receipt)
-    with pytest.raises(DashboardError, match="not COMPLETE"):
+    with pytest.raises(DashboardError, match="path is not canonical"):
         _receipt_dashboard(
             tmp_path,
             declaration,
@@ -894,6 +931,8 @@ def _evaluated_candidate():
 def _replay_baseline():
     from scripts import evaluate_dipplin_replay_regret as regret
 
+    frozen = regret.verify_frozen_s1_provenance()
+
     return {
         "variant": "s1",
         "archive_sha256": regret.PINNED_S1_ARCHIVE_SHA256,
@@ -902,7 +941,9 @@ def _replay_baseline():
         "runtime_source_tree_sha256": regret.PINNED_S1_RUNTIME_TREE_SHA256,
         "validation_result_sha256": regret.PINNED_S1_VALIDATION_OUTPUT_SHA256,
         "paired_record_count": regret.PINNED_S1_PRIMARY_RECORD_COUNT,
-        "paired_record_id_sequence_sha256": "1" * 64,
+        "paired_record_id_sequence_sha256": frozen[
+            "paired_record_id_sequence_sha256"
+        ],
     }
 
 
@@ -921,62 +962,47 @@ def _replay_declaration(path: Path, *, split: str, sealed: bool, manifest):
     }
 
 
-def test_sealed_replay_v2_rejects_any_detail_key(tmp_path):
+def test_sealed_replay_rejects_alternate_path_and_nested_detail(tmp_path):
+    from scripts.evaluate_dipplin_general_strength import CANONICAL_REPLAY_METHOD
+    from scripts import evaluate_dipplin_replay_regret as regret
+
+    alternate = tmp_path / "holdout.json"
+    alternate.write_text("{}\n", encoding="utf-8")
     manifest = {
         "source_sha256": "e" * 64,
         "manifest_payload_sha256": "f" * 64,
         "episode_count": 2,
         "opponent_archetype_episode_counts": {"deck_a": 1, "deck_b": 1},
     }
-    path = tmp_path / "holdout.json"
-    document = {
-        "schema": "dipplin-replay-regret-v2",
-        "split": "FINAL_HOLDOUT",
-        "sealed": True,
-        "method": {},
-        "candidate_variant": "s2",
-        "baseline_incumbent_s1": _replay_baseline(),
-        "manifest_payload_sha256": manifest["manifest_payload_sha256"],
-        "evaluated_candidate": _evaluated_candidate(),
-        "aggregate": {
-            **_v2_aggregate(),
-            "decision_rates": {
-                label: value / 2
-                for label, value in _v2_aggregate()["classification_counts"].items()
-            },
-            "expert_dominates_rate": 0.0,
-            "agent_dominates_rate": 0.5,
-        },
-    }
-    _write(path, document)
-    result = _replay_v2_summary(
-        tmp_path,
-        _replay_declaration(
-            path, split="FINAL_HOLDOUT", sealed=True, manifest=manifest
-        ),
-        split="FINAL_HOLDOUT",
-        candidate=_replay_candidate(),
-        manifest=manifest,
-    )
-    assert result["sealed_aggregate_only"] is True
-    assert result["opponent_archetype_coverage"] == {"deck_a": 1, "deck_b": 1}
-
-    document["decision_rows"] = [{"episode_id": "private"}]
-    _write(path, document)
-    declaration = _replay_declaration(
-        path, split="FINAL_HOLDOUT", sealed=True, manifest=manifest
-    )
-    with pytest.raises(DashboardError, match="keys mismatch|forbidden detail key"):
+    with pytest.raises(DashboardError, match="path is not canonical"):
         _replay_v2_summary(
             tmp_path,
-            declaration,
+            _replay_declaration(
+                alternate, split="FINAL_HOLDOUT", sealed=True, manifest=manifest
+            ),
             split="FINAL_HOLDOUT",
             candidate=_replay_candidate(),
             manifest=manifest,
         )
 
+    document = {
+        "method": {**CANONICAL_REPLAY_METHOD, "private_sentinel": [1, 2, 3]},
+        "baseline_incumbent_s1": _replay_baseline(),
+        "evaluated_candidate": regret.verify_s2_candidate(),
+    }
+    with pytest.raises(DashboardError, match="method contract mismatch"):
+        _verify_sealed_nested_contract(document, alternate)
 
-def test_validation_replay_v2_keeps_primary_and_exploratory_disjoint(tmp_path):
+    document["method"] = CANONICAL_REPLAY_METHOD
+    document["evaluated_candidate"] = {
+        **regret.verify_s2_candidate(),
+        "private_sentinel": [1, 2, 3],
+    }
+    with pytest.raises(DashboardError, match="schema/identity mismatch"):
+        _verify_sealed_nested_contract(document, alternate)
+
+
+def test_validation_replay_v2_rejects_noncanonical_path(tmp_path):
     manifest = {
         "source_sha256": "e" * 64,
         "manifest_payload_sha256": "f" * 64,
@@ -1047,20 +1073,7 @@ def test_validation_replay_v2_keeps_primary_and_exploratory_disjoint(tmp_path):
     declaration = _replay_declaration(
         path, split="VALIDATION", sealed=False, manifest=manifest
     )
-    result = _replay_v2_summary(
-        tmp_path,
-        declaration,
-        split="VALIDATION",
-        candidate=_replay_candidate(),
-        manifest=manifest,
-    )
-    assert result["headline_set"] == "paired_primary"
-    assert result["s2_exploratory_safety_veto"]["decision_count"] == 2
-
-    exploratory["decision_rows"][0]["record_id"] = "a"
-    _write(path, document)
-    declaration["artifact_sha256"] = _sha256(path)
-    with pytest.raises(DashboardError, match="overlap"):
+    with pytest.raises(DashboardError, match="VALIDATION replay path is not canonical"):
         _replay_v2_summary(
             tmp_path,
             declaration,
@@ -1185,26 +1198,7 @@ def test_strength_source_uses_stage3_first_stage2_second_and_recomputes(
             "stage5": ["PASS"],
         },
     }
-    result = _strength_source_dashboard(
-        tmp_path,
-        declaration,
-        {
-            "verified_tree_sha256": s2_tree,
-            "package_sha256": package_sha,
-            "manifest_sha256": manifest_sha,
-            "source_sha": "6" * 40,
-        },
-    )
-    assert result["anchors"]["anchor_actual_first"] == 0.8
-    assert result["anchors"]["anchor_actual_second"] == 0.6
-    assert result["same_deck"]["s1_vs_s1_first"]["win_rate"] == 0.6
-    assert result["same_deck"]["candidate_vs_s1_second"]["win_rate"] == 0.5
-
-    stored = dict(report)
-    stored["schema"] = "tampered"
-    _write(report_path, stored)
-    declaration["stage_report_sha256"] = _sha256(report_path)
-    with pytest.raises(DashboardError, match="schema mismatch"):
+    with pytest.raises(DashboardError, match="canonical Stage1-5 spec/report"):
         _strength_source_dashboard(
             tmp_path,
             declaration,
@@ -1218,10 +1212,9 @@ def test_strength_source_uses_stage3_first_stage2_second_and_recomputes(
 
 
 def test_v2_stage2_kill_keeps_exact_s1_and_marks_later_proof_not_applicable(
-    tmp_path, monkeypatch
+    tmp_path,
 ):
     from scripts import evaluate_dipplin_replay_regret as regret
-    from scripts import evaluate_dipplin_s2_stages as stage_evaluator
 
     root = Path(__file__).resolve().parents[1]
     incumbent_spec_path = root / "data/dipplin_general_strength/s1_dashboard_spec.json"
@@ -1235,45 +1228,10 @@ def test_v2_stage2_kill_keeps_exact_s1_and_marks_later_proof_not_applicable(
             "manifest": str(root / "artifacts/dipplin_s1/submission.manifest.json"),
         }
     )
-    source_head = "6" * 40
-    stage_spec = tmp_path / "stage-spec.json"
-    _write(stage_spec, {"provenance": {"source_head": source_head}})
-    stages = {
-        "stage1": {
-            "status": "EVALUATED",
-            "decision": {"verdict": "STRONG", "gates": {"quality": True}},
-        },
-        "stage2": {
-            "status": "EVALUATED",
-            "decision": {"verdict": "KILL", "gates": {"minimum": False}},
-        },
-        **{
-            name: {
-                "status": "INADMISSIBLE_PRECEDING_STAGE_KILL",
-                "blocked_by": "stage2",
-                "decision": {"verdict": "NOT_EVALUATED", "gates": {}},
-            }
-            for name in ("stage3", "stage4", "stage5", "stage6")
-        },
-    }
-    report = {
-        "schema": "dipplin-s2-stage-evaluation-v1",
-        "spec": {"path": str(stage_spec.resolve()), "sha256": _sha256(stage_spec)},
-        "baseline": {
-            "tree_sha256": regret.PINNED_S1_EXTRACTED_TREE_SHA256,
-            "archive_sha256": regret.PINNED_S1_ARCHIVE_SHA256,
-            "package_manifest": {"sha256": regret.PINNED_S1_MANIFEST_SHA256},
-        },
-        "candidate": {
-            "tree_sha256": regret.PINNED_S2_EXTRACTED_TREE_SHA256,
-            "archive_sha256": regret.PINNED_S2_ARCHIVE_SHA256,
-            "package_manifest": {"sha256": regret.PINNED_S2_MANIFEST_SHA256},
-        },
-        "stages": stages,
-    }
-    stage_report = tmp_path / "stage-report.json"
-    _write(stage_report, report)
-    monkeypatch.setattr(stage_evaluator, "evaluate_spec", lambda _path: report)
+    stage_spec = root / "data/dipplin_general_strength/s2_stage_evaluation_spec.json"
+    stage_spec_document = json.loads(stage_spec.read_text(encoding="utf-8"))
+    source_head = stage_spec_document["provenance"]["source_head"]
+    stage_report = root / "artifacts/general_strength/s2_stage2/stage2_evaluation.json"
 
     replay_manifests = json.loads(json.dumps(incumbent_spec["replay_manifests"]))
     replay_manifests["validation"]["path"] = str(
@@ -1283,23 +1241,8 @@ def test_v2_stage2_kill_keeps_exact_s1_and_marks_later_proof_not_applicable(
         regret.PINNED_MANIFESTS["FINAL_HOLDOUT"]["path"]
     )
     validation = root / "artifacts/general_strength/replay/validation_regret_s1.json"
-    junit = tmp_path / "mechanics.xml"
-    junit.write_text(
-        '<testsuites><testsuite tests="1" failures="0" errors="0" skipped="0"/></testsuites>',
-        encoding="utf-8",
-    )
-    mechanics_test = tmp_path / "test_mechanics.py"
-    mechanics_test.write_text("def test_mechanics(): pass\n", encoding="utf-8")
     weak_clones = [
-        {
-            "name": name,
-            "coverage": "coverage-only",
-            "runnable_status": "NOT_RUN_NONRUNNABLE",
-            "failed_games": "NOT_MEASURABLE",
-            "policy_errors": "NOT_MEASURABLE",
-            "illegal_actions": "NOT_MEASURABLE",
-            "unknown_contexts": "NOT_MEASURABLE",
-        }
+        _unavailable_clone(name)
         for name in (
             "Mega Lucario",
             "Crustle / Kangaskhan",
@@ -1308,8 +1251,19 @@ def test_v2_stage2_kill_keeps_exact_s1_and_marks_later_proof_not_applicable(
             "Starmie / Froslass",
             "Dragapult",
             "Mega Lopunny",
+            "Garchomp",
         )
     ]
+    second_bucket = dict(incumbent_spec["second_bucket_analysis"])
+    second_bucket["path"] = str(
+        root / "artifacts/general_strength/s1_buckets/second_bucket_analysis_400.json"
+    )
+    linux = dict(
+        incumbent_spec["operational_provenance"]["linux_x86_64_complete_game"]
+    )
+    linux["path"] = str(
+        root / "artifacts/dipplin_s1/certification/linux_x86_64_complete_game.json"
+    )
     spec = tmp_path / "dashboard-v2.json"
     _write(
         spec,
@@ -1334,8 +1288,6 @@ def test_v2_stage2_kill_keeps_exact_s1_and_marks_later_proof_not_applicable(
                 "incumbent_dashboard_spec_sha256": _sha256(incumbent_spec_path),
                 "required_stage1_verdicts": ["STRONG"],
                 "required_stage2_verdict": "KILL",
-                "incumbent_strong_anchors": incumbent_spec["strong_anchors"],
-                "incumbent_same_deck": incumbent_spec["same_deck"],
             },
             "replay_manifests": replay_manifests,
             "replay_validation": {
@@ -1352,22 +1304,11 @@ def test_v2_stage2_kill_keeps_exact_s1_and_marks_later_proof_not_applicable(
                     "VALIDATION"
                 ]["payload_sha256"],
             },
-            "second_bucket_analysis": incumbent_spec["second_bucket_analysis"],
-            "mechanics": {
-                "status": "PASS",
-                "junit_xml": str(junit),
-                "junit_xml_sha256": _sha256(junit),
-                "expected_tests": 1,
-                "command": "pytest test_mechanics.py",
-                "run_date": "2026-08-13",
-                "test_files": [
-                    {"path": str(mechanics_test), "sha256": _sha256(mechanics_test)}
-                ],
-                "scope": ["synthetic mechanics fixture"],
-                "caveat": "synthetic",
-            },
+            "second_bucket_analysis": second_bucket,
+            "setup_choice_audit": _canonical_setup_audit(),
+            "mechanics": _canonical_mechanics(),
             "weak_clones": weak_clones,
-            "operational_provenance": {},
+            "operational_provenance": {"linux_x86_64_complete_game": linux},
             "final_verdict": "KEEP_S1",
         },
     )
@@ -1380,3 +1321,235 @@ def test_v2_stage2_kill_keeps_exact_s1_and_marks_later_proof_not_applicable(
         "status"
     ].startswith("NOT_APPLICABLE")
     assert dashboard["strong_anchors"]["anchor_actual_first"] == 0.5425
+
+
+def test_v2_kill_rejects_forged_s1_replay_path_and_non_keep_verdict(tmp_path):
+    from scripts import evaluate_dipplin_replay_regret as regret
+    from scripts.evaluate_dipplin_general_strength import (
+        _s1_replay_validation_summary,
+    )
+
+    forged = tmp_path / "forged-s1.json"
+    _write(
+        forged,
+        {
+            "schema": "dipplin-replay-regret-v1",
+            "split": "VALIDATION",
+            "sealed": False,
+            "aggregate": {"classification_counts": {"EQUIVALENT": 1}},
+        },
+    )
+    declaration = {
+        "path": forged.name,
+        "artifact_sha256": _sha256(forged),
+        "expected_schema": "dipplin-replay-regret-v1",
+        "expected_split": "VALIDATION",
+        "expected_sealed": False,
+        "expected_episode_count": 50,
+        "expected_manifest_file_sha256": regret.PINNED_MANIFESTS["VALIDATION"][
+            "file_sha256"
+        ],
+        "expected_manifest_payload_sha256": regret.PINNED_MANIFESTS[
+            "VALIDATION"
+        ]["payload_sha256"],
+    }
+    with pytest.raises(DashboardError, match="path is not canonical"):
+        _s1_replay_validation_summary(
+            tmp_path,
+            declaration,
+            candidate={
+                "package_sha256": regret.PINNED_S1_ARCHIVE_SHA256.lower(),
+                "manifest_sha256": regret.PINNED_S1_MANIFEST_SHA256.lower(),
+            },
+            manifest={
+                "episode_count": 50,
+                "source_sha256": regret.PINNED_MANIFESTS["VALIDATION"][
+                    "file_sha256"
+                ].lower(),
+                "manifest_payload_sha256": regret.PINNED_MANIFESTS[
+                    "VALIDATION"
+                ]["payload_sha256"].lower(),
+            },
+        )
+
+    root = Path(__file__).resolve().parents[1]
+    incumbent_spec_path = root / "data/dipplin_general_strength/s1_dashboard_spec.json"
+    incumbent = json.loads(incumbent_spec_path.read_text(encoding="utf-8"))
+    candidate = dict(incumbent["candidate"])
+    candidate.update(
+        {
+            "variant": "s1",
+            "runtime_tree_sha256": regret.PINNED_S1_RUNTIME_TREE_SHA256.lower(),
+            "package": str(root / "artifacts/dipplin_s1/submission.tar.gz"),
+            "manifest": str(root / "artifacts/dipplin_s1/submission.manifest.json"),
+        }
+    )
+    spec = tmp_path / "wrong-verdict.json"
+    _write(
+        spec,
+        {
+            "dashboard_schema": "dipplin-general-strength-dashboard-v2",
+            "candidate": candidate,
+            "final_verdict": "S1_NEAR_ARCHITECTURE_CEILING",
+        },
+    )
+    with pytest.raises(DashboardError, match="combination is inconsistent"):
+        build_dashboard(spec)
+
+
+def test_v2_operational_provenance_requires_artifact_sha256(tmp_path):
+    artifact = tmp_path / "linux.json"
+    _write(artifact, {"schema": "test"})
+    with pytest.raises(DashboardError, match="hashed artifact declaration"):
+        _v2_operational_provenance(tmp_path, {"linux": {"path": artifact.name}})
+
+
+def test_setup_choice_audit_requires_canonical_5k_artifact(tmp_path):
+    result = _setup_choice_audit(Path.cwd(), _canonical_setup_audit())
+    assert result["games"] == 5000
+    assert result["strength_evidence"] is False
+
+    forged = tmp_path / "setup.json"
+    forged.write_text("{}\n", encoding="utf-8")
+    declaration = _canonical_setup_audit()
+    declaration.update(
+        {"path": str(forged), "artifact_sha256": _sha256(forged)}
+    )
+    with pytest.raises(DashboardError, match="path is not canonical"):
+        _setup_choice_audit(tmp_path, declaration)
+
+
+def test_setup_choice_audit_rejects_self_hashed_tamper(tmp_path, monkeypatch):
+    from scripts import evaluate_dipplin_general_strength as dashboard_module
+
+    forged = tmp_path / "setup_choice_audit_5000.json"
+    forged.write_bytes(
+        dashboard_module.CANONICAL_S1_SETUP_AUDIT.read_bytes().replace(
+            b'"games": 5000', b'"games": 4999', 1
+        )
+    )
+    monkeypatch.setattr(dashboard_module, "CANONICAL_S1_SETUP_AUDIT", forged)
+    declaration = _canonical_setup_audit()
+    declaration.update(
+        {"path": str(forged), "artifact_sha256": _sha256(forged)}
+    )
+    with pytest.raises(DashboardError, match="hash differs from the frozen pin"):
+        _setup_choice_audit(tmp_path, declaration)
+
+
+def test_stage6_promotion_gate_rejects_expert_dominating_holdout():
+    holdout = {
+        "decision_count": 100,
+        "quality_counts": {
+            "proposal_error_rows": 0,
+            "candidate_policy_error_rows": 0,
+            "candidate_action_unstable_rows": 0,
+            "uncertifiable_rows": 0,
+            "incomparable_rows": 0,
+        },
+        "rates": {"EXPERT_DOMINATES": 1.0, "AGENT_DOMINATES": 0.0},
+    }
+    with pytest.raises(DashboardError, match="Stage6 promotion gate"):
+        _stage6_promotion_gate(holdout)
+
+
+def test_stage_report_recomputation_allows_only_tiny_float_drift():
+    pinned = {
+        "candidate_latency_ms": {"weighted_mean": 127.22539320693278},
+        "decision": {"verdict": "KILL"},
+    }
+    alternate_python = {
+        "candidate_latency_ms": {"weighted_mean": 127.22539320693276},
+        "decision": {"verdict": "KILL"},
+    }
+    assert _stage_reports_equal(pinned, alternate_python)
+
+    tampered = json.loads(json.dumps(alternate_python))
+    tampered["candidate_latency_ms"]["weighted_mean"] += 1e-6
+    assert not _stage_reports_equal(pinned, tampered)
+
+
+def test_s2_linux_certification_stays_inadmissible_until_pin_is_frozen():
+    with pytest.raises(DashboardError, match="no pre-frozen artifact SHA"):
+        _verify_s2_linux_provenance(
+            Path.cwd(),
+            {"s2_linux_x86_64": {}},
+            {},
+            candidate={"package_sha256": "a" * 64, "verified_tree_sha256": "b" * 64},
+        )
+
+
+def test_s2_linux_certification_rejects_extra_operational_labels(monkeypatch):
+    from scripts import evaluate_dipplin_general_strength as dashboard_module
+
+    monkeypatch.setattr(
+        dashboard_module, "PINNED_S2_LINUX_CERTIFICATION_SHA256", "c" * 64
+    )
+    with pytest.raises(DashboardError, match="exactly the canonical"):
+        _verify_s2_linux_provenance(
+            Path.cwd(),
+            {"s2_linux_x86_64": {}, "synthetic_linux": {}},
+            {},
+            candidate={"package_sha256": "a" * 64, "verified_tree_sha256": "b" * 64},
+        )
+
+
+def test_real_keep_s1_v2_spec_builds_canonical_rejection_dashboard():
+    root = Path(__file__).resolve().parents[1]
+    dashboard = build_dashboard(
+        root / "data/dipplin_general_strength/s2_dashboard_spec.json"
+    )
+    assert dashboard["schema"] == "dipplin-general-strength-dashboard-v2"
+    assert dashboard["candidate"]["variant"] == "s1"
+    assert dashboard["final_verdict"] == "KEEP_S1"
+    assert dashboard["stage_verdicts"] == {"stage1": "STRONG", "stage2": "KILL"}
+    assert dashboard["mechanics"]["passed"] == 15
+    assert dashboard["operational_provenance"]["linux_x86_64_complete_game"][
+        "status"
+    ] == "PASS"
+    assert dashboard["sealed_replay_holdout"]["status"].startswith("NOT_RUN")
+    assert {row["name"] for row in dashboard["weak_clones"]} == {
+        "Mega Lucario",
+        "Crustle / Kangaskhan",
+        "Teal Mask Ogerpon",
+        "Bellibolt",
+        "Starmie / Froslass",
+        "Dragapult",
+        "Mega Lopunny",
+        "Garchomp",
+    }
+    assert not any(
+        Path(value).is_absolute()
+        for value in _all_string_values(dashboard)
+    )
+
+
+def _all_string_values(value):
+    if isinstance(value, dict):
+        for nested in value.values():
+            yield from _all_string_values(nested)
+    elif isinstance(value, list):
+        for nested in value:
+            yield from _all_string_values(nested)
+    elif isinstance(value, str):
+        yield value
+
+
+def test_v2_output_paths_are_cross_checkout_stable_and_reject_escapes(tmp_path):
+    left = tmp_path / "left"
+    right = tmp_path / "right"
+    left.mkdir()
+    right.mkdir()
+    left_value = {"source": str(left / "artifacts/evidence.json")}
+    right_value = {"source": str(right / "artifacts/evidence.json")}
+    assert _portable_v2_output(left_value, repo_root=left) == _portable_v2_output(
+        right_value, repo_root=right
+    ) == {"source": "artifacts/evidence.json"}
+
+    outside = tmp_path / "outside.json"
+    with pytest.raises(DashboardError, match="escapes approved roots"):
+        _portable_v2_output(
+            {"source": str(outside)},
+            repo_root=left,
+            fixture_root=right,
+        )

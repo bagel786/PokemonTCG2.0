@@ -1,0 +1,201 @@
+{
+  "actual_order": "second",
+  "information_contract": {
+    "aggregate_basic_candidate_multisets_only": true,
+    "serialized_deck_order": false,
+    "serialized_full_hands": false,
+    "serialized_prize_identities": false
+  },
+  "interpretation_contract": {
+    "known_quick_sign_energy_path": "Grass Energy or Bug Catching Set visible in the hero hand",
+    "maximum_direct_policy_scope": "grookey_with_selectable_volbeat_rate_all_openings",
+    "selectable_volbeat_is_causal_win_evidence": false
+  },
+  "physical_seat_split": {
+    "seat_0": 2500,
+    "seat_1": 2500
+  },
+  "provenance": {
+    "archive_path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/dipplin_s1/submission.tar.gz",
+    "archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
+    "engine_path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/vendor/cg/libcg.dylib",
+    "engine_sha256": "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30",
+    "evaluator_path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/scripts/audit_dipplin_setup_choice.py",
+    "evaluator_sha256": "658c59a19415d3f591b01ac9cb39f2a60046155e4257f215e530175c7c6ccb75",
+    "opponent_deck_path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/dipplin_opponents/a2_exact/deck.csv",
+    "opponent_deck_sha256": "92b92bac9f9163ecff933b3dc39294d2cc154c8684f3c8497877661419ebc59d",
+    "submission_path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/general_strength/s1_mirror/s1_copy_a",
+    "submission_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+    "submission_unchanged": true
+  },
+  "rng_contract": {
+    "engine": "independent_std_random_device",
+    "paired_deals": false,
+    "seeded": false
+  },
+  "schema": "dipplin-setup-choice-audit-v1",
+  "scope": "aggregate setup-only diagnostic; not gameplay or strength evidence",
+  "summary": {
+    "candidate_basic_multiset_counts": {
+      "343": 204,
+      "42": 547,
+      "42,343": 85,
+      "42,42": 91,
+      "42,42,343": 13,
+      "42,42,42": 4,
+      "42,42,42,88": 2,
+      "42,42,42,88,89": 1,
+      "42,42,88": 21,
+      "42,42,88,343": 4,
+      "42,42,88,88": 3,
+      "42,42,88,88,92": 1,
+      "42,42,88,89": 9,
+      "42,42,88,89,89,89": 1,
+      "42,42,88,89,89,92,343": 1,
+      "42,42,88,89,92": 1,
+      "42,42,88,89,92,343": 1,
+      "42,42,88,92": 3,
+      "42,42,88,92,343": 2,
+      "42,42,89": 31,
+      "42,42,89,343": 2,
+      "42,42,89,89": 5,
+      "42,42,89,92": 2,
+      "42,42,92": 9,
+      "42,42,92,343": 1,
+      "42,88": 261,
+      "42,88,343": 28,
+      "42,88,88": 32,
+      "42,88,88,343": 7,
+      "42,88,88,89": 12,
+      "42,88,88,89,343": 2,
+      "42,88,88,89,92": 2,
+      "42,88,88,92": 2,
+      "42,88,89": 119,
+      "42,88,89,343": 17,
+      "42,88,89,89": 12,
+      "42,88,89,89,343": 2,
+      "42,88,89,89,92": 1,
+      "42,88,89,92": 8,
+      "42,88,89,92,343": 3,
+      "42,88,92": 28,
+      "42,88,92,343": 5,
+      "42,89": 303,
+      "42,89,343": 24,
+      "42,89,89": 53,
+      "42,89,89,343": 4,
+      "42,89,89,89": 3,
+      "42,89,89,92": 9,
+      "42,89,92": 38,
+      "42,89,92,343": 1,
+      "42,92": 79,
+      "42,92,343": 9,
+      "88": 585,
+      "88,343": 75,
+      "88,88": 81,
+      "88,88,343": 9,
+      "88,88,88": 3,
+      "88,88,88,343": 1,
+      "88,88,88,89": 1,
+      "88,88,89": 45,
+      "88,88,89,343": 4,
+      "88,88,89,89": 6,
+      "88,88,89,89,89": 1,
+      "88,88,89,92": 5,
+      "88,88,92": 10,
+      "88,89": 302,
+      "88,89,343": 39,
+      "88,89,89": 60,
+      "88,89,89,343": 3,
+      "88,89,89,92": 9,
+      "88,89,89,92,343": 1,
+      "88,89,92": 50,
+      "88,89,92,343": 1,
+      "88,92": 90,
+      "88,92,343": 13,
+      "89": 803,
+      "89,343": 128,
+      "89,89": 177,
+      "89,89,343": 25,
+      "89,89,89": 14,
+      "89,89,89,343": 1,
+      "89,89,89,89": 4,
+      "89,89,92": 23,
+      "89,89,92,343": 3,
+      "89,92": 114,
+      "89,92,343": 8,
+      "92": 179,
+      "92,343": 19
+    },
+    "games": 5000,
+    "grookey_selected": 1271,
+    "grookey_selection_categories": {
+      "no_volbeat:known_energy_path": 944,
+      "no_volbeat:no_known_energy_path": 208,
+      "with_volbeat:no_known_energy_path": 119
+    },
+    "grookey_with_selectable_volbeat": 119,
+    "grookey_with_selectable_volbeat_rate_all_openings": 0.0238,
+    "grookey_with_selectable_volbeat_rate_within_grookey": 0.0936270653029111,
+    "selected_active_counts": {
+      "343": 204,
+      "42": 1482,
+      "88": 1645,
+      "89": 1271,
+      "92": 398
+    },
+    "selected_choice_scope": {
+      "343": {
+        "alternative_basic_presence": {},
+        "only_distinct_candidate": 204,
+        "selected": 204,
+        "with_any_alternative": 0,
+        "with_known_quick_sign_energy_path": 167
+      },
+      "42": {
+        "alternative_basic_presence": {
+          "343": 168,
+          "88": 169,
+          "89": 544,
+          "92": 166
+        },
+        "only_distinct_candidate": 642,
+        "selected": 1482,
+        "with_any_alternative": 840,
+        "with_known_quick_sign_energy_path": 1049
+      },
+      "88": {
+        "alternative_basic_presence": {
+          "343": 174,
+          "42": 422,
+          "89": 505,
+          "92": 167
+        },
+        "only_distinct_candidate": 669,
+        "selected": 1645,
+        "with_any_alternative": 976,
+        "with_known_quick_sign_energy_path": 1523
+      },
+      "89": {
+        "alternative_basic_presence": {
+          "343": 164,
+          "88": 119
+        },
+        "only_distinct_candidate": 998,
+        "selected": 1271,
+        "with_any_alternative": 273,
+        "with_known_quick_sign_energy_path": 944
+      },
+      "92": {
+        "alternative_basic_presence": {
+          "343": 35,
+          "88": 52,
+          "89": 174
+        },
+        "only_distinct_candidate": 179,
+        "selected": 398,
+        "with_any_alternative": 219,
+        "with_known_quick_sign_energy_path": 273
+      }
+    }
+  }
+}
