@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Completed-turn expert-regret evaluation for the frozen Dipplin S1 policy.
+"""Completed-turn expert-regret evaluation for the frozen Dipplin S2 candidate.
 
-The evaluator replays each hero prompt chronologically.  S1 is allowed to make
+The evaluator replays each hero prompt chronologically.  S2 is allowed to make
 its normal D0+D1 proposal, but persistent ``PlanMemory`` is advanced with the
 recorded expert action.  A disagreement is compared from two independent
 ``SearchBegin`` roots through the end of the hero turn under the same frozen D0
@@ -23,6 +23,7 @@ import math
 import os
 import random
 import sys
+import tarfile
 import tempfile
 import time
 from collections import Counter, defaultdict
@@ -85,22 +86,48 @@ from ptcg_ai.safety import emergency_selection, sanitize_selection  # noqa: E402
 from scripts.freeze_dipplin_replay_holdout import verify_manifest_digest  # noqa: E402
 
 
-SCHEMA = "dipplin-replay-regret-v1"
+SCHEMA = "dipplin-replay-regret-v2"
+QUALIFICATION_SCHEMA = "dipplin-s2-holdout-qualification-v1"
 DEFAULT_INCUMBENT_MANIFEST = ROOT / "artifacts" / "dipplin_s1" / "submission.manifest.json"
+DEFAULT_CANDIDATE_MANIFEST = ROOT / "artifacts" / "dipplin_s2" / "submission.manifest.json"
+DEFAULT_S1_VALIDATION_OUTPUT = (
+    ROOT / "artifacts" / "general_strength" / "replay" / "validation_regret_s1.json"
+)
+DEFAULT_S2_VALIDATION_OUTPUT = (
+    ROOT / "artifacts" / "general_strength" / "replay" / "validation_regret_s2.json"
+)
+QUALIFIED_S2_VALIDATION_PATH = str(DEFAULT_S2_VALIDATION_OUTPUT.relative_to(ROOT))
+DEFAULT_S2_QUALIFICATION = (
+    ROOT / "data" / "dipplin_replay_eval" / "frozen" / "s2_qualification.json"
+)
 DEFAULT_PP_REPLAYS = ROOT / "artifacts" / "dipplin_forensics" / "pp_kawada_replays"
 DEFAULT_FINAL_HOLDOUT_MANIFEST = (
     ROOT / "data" / "dipplin_replay_eval" / "frozen" / "final_holdout_manifest.json"
 )
 DEFAULT_SEALED_OUTPUT = (
-    ROOT / "artifacts" / "general_strength" / "replay" / "final_holdout_regret.json"
+    ROOT / "artifacts" / "general_strength" / "replay" / "final_holdout_regret_s2.json"
 )
 DEFAULT_SEALED_RECEIPT = (
     ROOT / "data" / "dipplin_replay_eval" / "frozen" / "final_holdout_regret_receipt.json"
+)
+RESERVED_FROZEN_OUTPUT_PATHS = (
+    DEFAULT_S1_VALIDATION_OUTPUT,
+    DEFAULT_S2_VALIDATION_OUTPUT,
+    DEFAULT_S2_QUALIFICATION,
+    DEFAULT_SEALED_OUTPUT,
+    DEFAULT_SEALED_RECEIPT,
 )
 PINNED_S1_ARCHIVE_SHA256 = "EC74EFE096473C58A2057CABFEE93BF337BC18848C202A6E3D36BCBA802DB171"
 PINNED_S1_MANIFEST_SHA256 = "4071C03A020446436B8D33E1951FDAF5229AE4AB760A8283DC7D6F323E02F92C"
 PINNED_S1_EXTRACTED_TREE_SHA256 = "940654489EA1F286982226F1F0CBA4DD7340378B997A3F88AB6915C5D67F6C98"
 PINNED_S1_RUNTIME_TREE_SHA256 = "D5AAEFAB29B5850B298810C21DC628880822381C05BDBAD5ECEA1716BCEF4241"
+PINNED_S1_VALIDATION_OUTPUT_SHA256 = "9F1205B2B282B2DA37BC284054F51A3EBCE7214507DA7DA4FA75309D5870E87D"
+PINNED_S1_PRIMARY_RECORD_COUNT = 1145
+PINNED_S2_ARCHIVE_SHA256 = "813FAB9EFD432738856E7D7B784809C7B0C5AEF51B3C677D7205F203490D1510"
+PINNED_S2_MANIFEST_SHA256 = "4801239BC3D328909BBD4E5461B84B140DD8931E3B581636ECBC662A97BAD1BC"
+PINNED_S2_EXTRACTED_TREE_SHA256 = "C822BB76FA40A138A6BB07FCFD6E6CC58F8ADE0DD65C49425BC703F3170DA922"
+PINNED_S2_RUNTIME_TREE_SHA256 = "B4290FFF9B4FA3374F1BC14B7EEFD6E9309DC13F3DCBEBB2D9E4EA167650189F"
+S2_EXPLORATORY_HARD_CEILING = 256
 FROZEN_DATASET = "dipplin_fresh_expert_replay_eval_v1"
 EXPECTED_SPLIT_COUNTS = {"VALIDATION": 50, "FINAL_HOLDOUT": 30}
 PINNED_MANIFESTS = {
@@ -255,20 +282,38 @@ def load_manifest(path: str | Path, *, require_pinned: bool = True) -> dict[str,
     return result
 
 
-def verify_incumbent(manifest_path: str | Path = DEFAULT_INCUMBENT_MANIFEST) -> dict[str, Any]:
-    """Prove that imported S1 sources and archive match the frozen incumbent."""
+def _read_json_object(path: Path, description: str) -> dict[str, Any]:
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise RegretError(f"cannot load {description}: {exc}") from exc
+    if not isinstance(payload, dict):
+        raise RegretError(f"{description} is not a JSON object")
+    return payload
+
+
+def verify_frozen_s1_provenance(
+    manifest_path: str | Path = DEFAULT_INCUMBENT_MANIFEST,
+    validation_path: str | Path = DEFAULT_S1_VALIDATION_OUTPUT,
+) -> dict[str, Any]:
+    """Verify S1's frozen package/result without comparing S2 working sources.
+
+    S1 is the paired baseline, not the imported candidate.  Requiring the live
+    source tree to equal S1 would either reject the legitimate S2 checkout or
+    tempt an unsafe source swap between validation and holdout.
+    """
 
     path = Path(manifest_path).resolve()
+    result_path = Path(validation_path).resolve()
     if path != DEFAULT_INCUMBENT_MANIFEST.resolve():
-        raise RegretError("incumbent manifest path is not the pinned S1 manifest")
+        raise RegretError("baseline manifest path is not the pinned S1 manifest")
+    if result_path != DEFAULT_S1_VALIDATION_OUTPUT.resolve():
+        raise RegretError("baseline validation path is not the pinned S1 result")
     if not path.is_file() or _sha256(path) != PINNED_S1_MANIFEST_SHA256:
         raise RegretError("frozen S1 manifest hash mismatch")
-    try:
-        manifest = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as exc:
-        raise RegretError(f"cannot load incumbent manifest: {exc}") from exc
+    manifest = _read_json_object(path, "S1 manifest")
     if manifest.get("variant") != "s1" or manifest.get("status") != "packaged":
-        raise RegretError("incumbent manifest is not packaged S1")
+        raise RegretError("baseline manifest is not packaged S1")
     output = manifest.get("output") or {}
     archive = ROOT / "artifacts" / "dipplin_s1" / "submission.tar.gz"
     if (
@@ -280,38 +325,190 @@ def verify_incumbent(manifest_path: str | Path = DEFAULT_INCUMBENT_MANIFEST) -> 
         or str((manifest.get("runtime") or {}).get("runtime_source_tree_sha256") or "").upper()
         != PINNED_S1_RUNTIME_TREE_SHA256
     ):
-        raise RegretError("frozen S1 archive hash mismatch")
-    files = output.get("file_manifest") or {}
-    checked: dict[str, str] = {}
-    for relative in (
-        "ptcg_ai/dipplin/cards.py",
-        "ptcg_ai/dipplin/damage.py",
-        "ptcg_ai/dipplin/objective.py",
-        "ptcg_ai/dipplin/plan.py",
-        "ptcg_ai/dipplin/policy.py",
-        "ptcg_ai/dipplin/resolvers.py",
-        "ptcg_ai/dipplin/search.py",
-        "ptcg_ai/dipplin/snapshot.py",
-        "ptcg_ai/dipplin/telemetry.py",
-        "ptcg_ai/safety.py",
+        raise RegretError("frozen S1 package provenance mismatch")
+    if not result_path.is_file() or _sha256(result_path) != PINNED_S1_VALIDATION_OUTPUT_SHA256:
+        raise RegretError("frozen S1 validation result hash mismatch")
+    result = _read_json_object(result_path, "S1 validation result")
+    rows = result.get("decision_rows")
+    aggregate = result.get("aggregate") or {}
+    if (
+        result.get("schema") != "dipplin-replay-regret-v1"
+        or result.get("split") != "VALIDATION"
+        or result.get("sealed") is not False
+        or str(result.get("manifest_payload_sha256") or "").upper()
+        != PINNED_MANIFESTS["VALIDATION"]["payload_sha256"]
+        or not isinstance(rows, list)
+        or len(rows) != PINNED_S1_PRIMARY_RECORD_COUNT
+        or _integer(aggregate.get("decision_count")) != PINNED_S1_PRIMARY_RECORD_COUNT
+        or _integer(aggregate.get("episode_count")) != EXPECTED_SPLIT_COUNTS["VALIDATION"]
     ):
-        local = ROOT / relative
-        expected = str((files.get(relative) or {}).get("sha256") or "").upper()
-        actual = _sha256(local)
-        if not expected or actual != expected:
-            raise RegretError(f"working source differs from frozen S1: {relative}")
-        checked[relative] = actual
+        raise RegretError("frozen S1 validation selection contract mismatch")
+    record_ids = [row.get("record_id") if isinstance(row, Mapping) else None for row in rows]
+    if any(not isinstance(value, str) or not value for value in record_ids):
+        raise RegretError("frozen S1 validation has an invalid record ID")
+    if len(set(record_ids)) != len(record_ids):
+        raise RegretError("frozen S1 validation record IDs are not unique")
     return {
-        "archive_sha256": _sha256(archive),
-        "manifest_sha256": _sha256(path),
-        "source_sha256": checked,
-        "configuration": {
-            "search": True,
-            "second_opening_v2": True,
-            "go_first": True,
-            "route_v2": False,
-            "worlds": 2,
-        },
+        "variant": "s1",
+        "archive_sha256": PINNED_S1_ARCHIVE_SHA256,
+        "manifest_sha256": PINNED_S1_MANIFEST_SHA256,
+        "extracted_tree_sha256": PINNED_S1_EXTRACTED_TREE_SHA256,
+        "runtime_source_tree_sha256": PINNED_S1_RUNTIME_TREE_SHA256,
+        "validation_result_sha256": PINNED_S1_VALIDATION_OUTPUT_SHA256,
+        "paired_record_count": len(record_ids),
+        "paired_record_id_sequence_sha256": _object_sha256(record_ids),
+        "_paired_record_ids": record_ids,
+    }
+
+
+# Backwards-compatible public name for tests and diagnostic callers.  Its
+# semantics are intentionally provenance-only in v2.
+verify_incumbent = verify_frozen_s1_provenance
+
+
+def verify_s2_candidate(
+    manifest_path: str | Path = DEFAULT_CANDIDATE_MANIFEST,
+) -> dict[str, Any]:
+    """Verify the exact S2 archive plus every staged local source/entry flag."""
+
+    path = Path(manifest_path).resolve()
+    archive = ROOT / "artifacts" / "dipplin_s2" / "submission.tar.gz"
+    if path != DEFAULT_CANDIDATE_MANIFEST.resolve():
+        raise RegretError("candidate manifest path is not the pinned S2 manifest")
+    if not path.is_file() or _sha256(path) != PINNED_S2_MANIFEST_SHA256:
+        raise RegretError("frozen S2 manifest hash mismatch")
+    if not archive.is_file() or _sha256(archive) != PINNED_S2_ARCHIVE_SHA256:
+        raise RegretError("frozen S2 archive hash mismatch")
+    manifest = _read_json_object(path, "S2 manifest")
+    runtime = manifest.get("runtime") or {}
+    output = manifest.get("output") or {}
+    verification = manifest.get("verification") or {}
+    evaluated = runtime.get("evaluated_configuration") or {}
+    required_evaluated = {
+        "go_first": True,
+        "route_v2": False,
+        "s2": True,
+        "search": True,
+        "search_worlds": 2,
+        "second_opening_v2": True,
+    }
+    if (
+        manifest.get("variant") != "s2"
+        or manifest.get("status") != "packaged"
+        or str(output.get("archive_sha256") or "").upper() != PINNED_S2_ARCHIVE_SHA256
+        or str(output.get("extracted_tree_sha256") or "").upper()
+        != PINNED_S2_EXTRACTED_TREE_SHA256
+        or str(runtime.get("runtime_source_tree_sha256") or "").upper()
+        != PINNED_S2_RUNTIME_TREE_SHA256
+        or evaluated != required_evaluated
+        or runtime.get("direct_entrypoint") is not True
+        or runtime.get("entrypoint_forces_evaluated_mode") is not True
+        or runtime.get("s2_default") is not True
+        or runtime.get("search_default") is not True
+        or runtime.get("second_opening_v2_default") is not True
+    ):
+        raise RegretError("frozen S2 runtime contract mismatch")
+    archive_flags = verification.get("archive_structure") or {}
+    sterile = verification.get("sterile_import") or {}
+    if (
+        verification.get("safe_archive_extraction") is not True
+        or verification.get("deterministic_double_build") is not True
+        or verification.get("byte_identical_double_build") is not True
+        or verification.get("fresh_stage_manifests_identical") is not True
+        or _integer(verification.get("fresh_stage_count")) != 2
+        or any(archive_flags.get(key) is not True for key in (
+            "passed",
+            "gzip_filename_empty",
+            "gzip_mtime_zero",
+            "normalized_tar_metadata",
+            "portable_member_names",
+            "regular_files_only",
+            "sorted_members",
+        ))
+        or sterile.get("passed") is not True
+        or sterile.get("isolated_python") is not True
+        or sterile.get("bytecode_disabled") is not True
+        or sterile.get("opposite_inherited_controls_overridden") is not True
+        or sterile.get("s2_enabled") is not True
+        or sterile.get("search_controller_s2_enabled") is not True
+        or sterile.get("search_enabled") is not True
+        or sterile.get("second_opening_v2") is not True
+        or sterile.get("go_first") is not True
+        or sterile.get("route_v2_enabled") is not False
+        or _integer(sterile.get("search_worlds")) != 2
+        or sterile.get("command_flags") != ["-I", "-B"]
+    ):
+        raise RegretError("frozen S2 packaging/entrypoint flags mismatch")
+
+    files = output.get("file_manifest") or {}
+    verified_files = verification.get("verified_file_manifest") or {}
+    source_files = (manifest.get("source") or {}).get("source_file_manifest") or {}
+    if not isinstance(files, dict) or not files or files != verified_files:
+        raise RegretError("S2 staged and verified file manifests differ")
+    if set(source_files) != set(files):
+        raise RegretError("S2 source and archive member sets differ")
+    checked_local: dict[str, str] = {}
+    for member, source_entry in sorted(source_files.items()):
+        archived_entry = files.get(member) or {}
+        if (
+            str(source_entry.get("sha256") or "").upper()
+            != str(archived_entry.get("sha256") or "").upper()
+            or _integer(source_entry.get("bytes")) != _integer(archived_entry.get("bytes"))
+        ):
+            raise RegretError(f"S2 source/archive manifest mismatch: {member}")
+        origin = str(source_entry.get("origin") or "")
+        if origin.startswith("generated:"):
+            continue
+        local = (ROOT / origin).resolve()
+        try:
+            local.relative_to(ROOT.resolve())
+        except ValueError as exc:
+            raise RegretError(f"S2 source origin escapes repository: {member}") from exc
+        if (
+            not local.is_file()
+            or _sha256(local) != str(source_entry.get("sha256") or "").upper()
+            or local.stat().st_size != _integer(source_entry.get("bytes"))
+        ):
+            raise RegretError(f"working source differs from frozen S2: {origin}")
+        checked_local[origin] = _sha256(local)
+
+    with tarfile.open(archive, mode="r:gz") as handle:
+        members = handle.getmembers()
+        names = [member.name for member in members]
+        if names != sorted(files) or len(members) != _integer(archive_flags.get("member_count")):
+            raise RegretError("S2 archive member order/count mismatch")
+        for member in members:
+            if not member.isfile() or member.name not in files:
+                raise RegretError("S2 archive contains an invalid member")
+            stream = handle.extractfile(member)
+            data = stream.read() if stream is not None else b""
+            expected = files[member.name]
+            if (
+                len(data) != _integer(expected.get("bytes"))
+                or hashlib.sha256(data).hexdigest().upper()
+                != str(expected.get("sha256") or "").upper()
+            ):
+                raise RegretError(f"S2 archive member hash mismatch: {member.name}")
+            if member.name == "main.py":
+                text = data.decode("utf-8")
+                required_markers = (
+                    'os.environ["PTCG_DIPPLIN_SEARCH"] = "1"',
+                    'os.environ["PTCG_DIPPLIN_SECOND_OPENING_V2"] = "1"',
+                    'os.environ["PTCG_DIPPLIN_S2"] = "1"',
+                    'os.environ["PTCG_DIPPLIN_GO_FIRST"] = "1"',
+                    'os.environ["PTCG_DIPPLIN_ROUTE_V2"] = "0"',
+                    'os.environ["PTCG_DIPPLIN_WORLDS"] = "2"',
+                )
+                if any(marker not in text for marker in required_markers):
+                    raise RegretError("S2 entrypoint does not force all evaluated flags")
+    return {
+        "variant": "s2",
+        "archive_sha256": PINNED_S2_ARCHIVE_SHA256,
+        "manifest_sha256": PINNED_S2_MANIFEST_SHA256,
+        "extracted_tree_sha256": PINNED_S2_EXTRACTED_TREE_SHA256,
+        "runtime_source_tree_sha256": PINNED_S2_RUNTIME_TREE_SHA256,
+        "source_sha256": checked_local,
+        "configuration": required_evaluated,
     }
 
 
@@ -836,11 +1033,12 @@ def build_output(
     rows: Sequence[Mapping[str, Any]],
     *,
     sealed: bool,
-    bootstrap_samples: int = 2000,
+    bootstrap_samples: int = FROZEN_SEALED_PARAMETERS["bootstrap_samples"],
     seed: int = 20260813,
     incumbent: Mapping[str, Any] | None = None,
+    candidate: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """Build validation detail output or sealed aggregate-only output."""
+    """Build diagnostic detail output or sealed candidate aggregate output."""
 
     manifest_sealed = bool(manifest.get("sealed"))
     if manifest_sealed and not sealed:
@@ -880,7 +1078,10 @@ def build_output(
         "split": manifest.get("split", "REPLAY_INPUT"),
         "manifest_payload_sha256": manifest.get("manifest_payload_sha256"),
         "method": {
-            "proposal": "chronological frozen S1; recorded expert actions committed to shadow memory",
+            "proposal": (
+                "chronological pinned S2 with s2_enabled=true; recorded expert "
+                "actions committed to shadow memory"
+            ),
             "proposal_repeat_strategy": (
                 "one chronological pass; every sampled native-search proposal is "
                 "replayed from exact pre-prompt memory/search-count checkpoints"
@@ -891,15 +1092,133 @@ def build_output(
             "rng_limitation": RNG_LIMITATION,
             "statistical_unit": "episode",
             "rillaboom_metric_scope": (
-                "completed-turn resource fields cover the frozen S1 Dipplin/Thwackey "
+                "completed-turn resource fields cover the frozen S2 Dipplin/Thwackey "
                 "core; Rillaboom-only resources are not credited"
             ),
         },
-        "incumbent": dict(incumbent or {}),
+        "candidate_variant": "s2",
+        "baseline_incumbent_s1": dict(incumbent or {}),
+        "evaluated_candidate": dict(candidate or {}),
         "aggregate": aggregate,
     }
     if not sealed:
         payload["decision_rows"] = public_rows
+    return payload
+
+
+def build_s2_validation_output(
+    manifest: Mapping[str, Any],
+    evaluation: Mapping[str, Any],
+    *,
+    bootstrap_samples: int,
+    seed: int,
+    baseline: Mapping[str, Any],
+    candidate: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Build two labeled validation sets without ever computing a combined rate."""
+
+    if (
+        int(bootstrap_samples) != FROZEN_SEALED_PARAMETERS["bootstrap_samples"]
+        or int(seed) != FROZEN_SEALED_PARAMETERS["sample_seed"]
+        or _integer(manifest.get("episode_count")) != EXPECTED_SPLIT_COUNTS["VALIDATION"]
+    ):
+        raise RegretError("S2 validation output parameters/episode count are not frozen")
+    primary_rows = list(evaluation.get("paired_primary") or [])
+    exploratory_rows = list(evaluation.get("s2_exploratory") or [])
+    universe_counts = dict(evaluation.get("universe_counts") or {})
+    if len(primary_rows) != PINNED_S1_PRIMARY_RECORD_COUNT:
+        raise RegretError("paired-primary output count differs from frozen S1")
+    primary_ids = [str(row.get("record_id") or "") for row in primary_rows]
+    frozen_ids = list(baseline.get("_paired_record_ids") or [])
+    if primary_ids != frozen_ids:
+        raise RegretError("paired-primary output record order differs from frozen S1")
+    exploratory_ids = [str(row.get("record_id") or "") for row in exploratory_rows]
+    if len(set(exploratory_ids)) != len(exploratory_ids) or set(primary_ids) & set(exploratory_ids):
+        raise RegretError("validation output sets are duplicated or overlapping")
+    if len(exploratory_rows) > S2_EXPLORATORY_HARD_CEILING:
+        raise RegretError("S2 exploratory output exceeds its hard ceiling")
+
+    public_baseline = {key: value for key, value in baseline.items() if not str(key).startswith("_")}
+    primary_payload = build_output(
+        manifest,
+        primary_rows,
+        sealed=False,
+        bootstrap_samples=bootstrap_samples,
+        seed=seed,
+        incumbent=public_baseline,
+        candidate=candidate,
+    )
+    exploratory_payload = build_output(
+        manifest,
+        exploratory_rows,
+        sealed=False,
+        bootstrap_samples=bootstrap_samples,
+        seed=int.from_bytes(hashlib.sha256(f"{seed}:s2_exploratory".encode()).digest()[:8], "big"),
+        incumbent=public_baseline,
+        candidate=candidate,
+    )
+    primary_aggregate = primary_payload.pop("aggregate")
+    primary_public_rows = primary_payload.pop("decision_rows")
+    exploratory_aggregate = exploratory_payload["aggregate"]
+    exploratory_public_rows = exploratory_payload["decision_rows"]
+    if (
+        _integer(primary_aggregate.get("episode_count"))
+        != EXPECTED_SPLIT_COUNTS["VALIDATION"]
+        or float(primary_aggregate.get("episode_coverage", 0.0)) != 1.0
+    ):
+        raise RegretError("paired-primary output does not cover all validation episodes")
+    exploratory_episode_count = _integer(exploratory_aggregate.get("episode_count"), 0)
+    for key in ("manifest_episode_count", "evaluated_episode_count", "episode_coverage"):
+        exploratory_aggregate.pop(key, None)
+    exploratory_aggregate["episodes_with_selected_prompts"] = exploratory_episode_count
+    payload = primary_payload
+    payload.update({
+        "headline_set": "paired_primary",
+        "aggregate_alias": "evaluation_sets.paired_primary.aggregate",
+        # Dashboard compatibility: this is an explicit alias of primary only.
+        "aggregate": primary_aggregate,
+        "run_contract": {
+            "candidate": "s2",
+            "validation_manifest_file_sha256": PINNED_MANIFESTS["VALIDATION"]["file_sha256"],
+            "validation_manifest_payload_sha256": PINNED_MANIFESTS["VALIDATION"]["payload_sha256"],
+            "baseline_s1_validation_result_sha256": PINNED_S1_VALIDATION_OUTPUT_SHA256,
+            "parameters": dict(FROZEN_SEALED_PARAMETERS),
+            "full_manifest_episode_count": EXPECTED_SPLIT_COUNTS["VALIDATION"],
+            "evaluator": _evaluator_provenance(),
+        },
+        "universe_counts": universe_counts,
+        "evaluation_sets": {
+            "paired_primary": {
+                "role": "qualification_primary",
+                "selection": {
+                    "mode": "exact_frozen_s1_record_ids",
+                    "source_result_sha256": PINNED_S1_VALIDATION_OUTPUT_SHA256,
+                    "record_count": PINNED_S1_PRIMARY_RECORD_COUNT,
+                    "record_id_sequence_sha256": baseline.get(
+                        "paired_record_id_sequence_sha256"
+                    ),
+                    "order_preserved": True,
+                },
+                "aggregate": primary_aggregate,
+                "decision_rows": primary_public_rows,
+            },
+            "s2_exploratory": {
+                "role": "exploratory_safety_veto_only",
+                "safety_veto_only": True,
+                "eligible_for_efficacy_rate": False,
+                "selection": {
+                    "mode": "exhaustive_disjoint_out_of_primary_s2_override_disagreements",
+                    "requires_trustworthy_s2_override_delta": True,
+                    "requires_candidate_expert_disagreement": True,
+                    "hard_ceiling": S2_EXPLORATORY_HARD_CEILING,
+                    "disjoint_from": "paired_primary",
+                },
+                "aggregate": exploratory_aggregate,
+                "decision_rows": exploratory_public_rows,
+            },
+        },
+        "combined_rate_permitted": False,
+    })
     return payload
 
 
@@ -912,10 +1231,14 @@ class ShadowProposal:
     error: str | None = None
 
 
-class ChronologicalS1:
-    """Frozen S1 proposal stream whose state follows recorded expert history."""
+class ChronologicalCandidate:
+    """Frozen S2 proposal stream whose state follows recorded expert history."""
 
-    def __init__(self) -> None:
+    def __init__(self, *, candidate: str = "s2", s2_enabled: bool = True) -> None:
+        if candidate != "s2" or s2_enabled is not True:
+            raise RegretError("replay-regret v2 requires the explicit S2 candidate")
+        self.candidate = candidate
+        self.s2_enabled = s2_enabled
         self.planner = FestivalD0Planner(go_first=True)
         # Set the archive-forced configuration explicitly; do not inherit a
         # caller's environment.
@@ -928,6 +1251,7 @@ class ChronologicalS1:
             self.planner,
             self.telemetry,
             D1Config(worlds=2),
+            s2_enabled=self.s2_enabled,
         )
 
     def propose(self, raw: Mapping[str, Any], obs: Any) -> ShadowProposal:
@@ -946,7 +1270,7 @@ class ChronologicalS1:
             return ShadowProposal(list(action), working, snapshot, proposal)
         except Exception as exc:
             # Keep chronological memory reconstructable, but never present an
-            # emergency proposal as certifiable S1 evidence.
+            # emergency proposal as certifiable S2 evidence.
             try:
                 snapshot = PlanSnapshot.from_observation(obs, working)
                 proposal = self.planner.propose(obs, snapshot, working)
@@ -980,6 +1304,11 @@ class ChronologicalS1:
                 snapshot.parent_serial,
             ),
         )
+
+
+# Kept as an import compatibility alias; all evaluator construction sites use
+# the candidate-explicit name above.
+ChronologicalS1 = ChronologicalCandidate
 
 
 def _selected_card_ids(obs: Any, *actions: Sequence[int]) -> set[int]:
@@ -1117,7 +1446,7 @@ def reconstruct_episode_candidates(
     *,
     proposal_repeats: int = 2,
 ) -> list[dict[str, Any]]:
-    """Reconstruct chronological S1 proposals while following expert memory."""
+    """Reconstruct chronological S2 proposals while following expert memory."""
 
     steps = replay.get("steps") or []
     hero = episode_meta.get("hero") or {}
@@ -1132,7 +1461,7 @@ def reconstruct_episode_candidates(
     # Only one policy may own the chronological trajectory.  Additional
     # repeatability checks are replayed lazily from the saved pre-prompt state
     # after strategic sampling, rather than paying for full D1 at every prompt.
-    shadow_policy = ChronologicalS1()
+    shadow_policy = ChronologicalCandidate(candidate="s2", s2_enabled=True)
     rows: list[dict[str, Any]] = []
     for step_index in range(len(steps) - 1):
         current = steps[step_index]
@@ -1154,11 +1483,32 @@ def reconstruct_episode_candidates(
         expert = _valid_action(obs, following_row.get("action"))
         pre_prompt_memory = shadow_policy.memory.clone()
         pre_searches = int(shadow_policy.search.searches_this_game)
+        pre_s2_overrides = _integer(
+            shadow_policy.telemetry.snapshot().get(
+                "s2_pre_attack_sequence_proof_overrides", 0
+            ),
+            0,
+        )
         proposed = shadow_policy.propose(raw, obs)
         agent = list(proposed.action)
         _valid_action(obs, agent)
         proposal_error = proposed.error
         post_searches = int(shadow_policy.search.searches_this_game)
+        post_s2_overrides = _integer(
+            shadow_policy.telemetry.snapshot().get(
+                "s2_pre_attack_sequence_proof_overrides", 0
+            ),
+            0,
+        )
+        s2_override_delta = post_s2_overrides - pre_s2_overrides
+        if s2_override_delta not in (0, 1):
+            raise RegretError(
+                f"episode {episode_id} step {step_index} has an invalid S2 override delta"
+            )
+        if proposed.error and s2_override_delta:
+            raise RegretError(
+                f"episode {episode_id} step {step_index} has an untrustworthy S2 override"
+            )
         first_player = _integer(getattr(obs.current, "firstPlayer", None))
         turn = _integer(getattr(obs.current, "turn", None), 0)
         ordinal = own_turn_ordinal(turn, seat, first_player)
@@ -1184,18 +1534,26 @@ def reconstruct_episode_candidates(
                 "expert_semantic": repr(semantic_action_key(obs, expert)),
                 "agent_semantic": repr(semantic_action_key(obs, agent)),
                 "semantic_equivalent": equivalent,
-                "s1_resolver": getattr(getattr(proposed.proposal, "intent", None), "resolver", "error"),
-                "s1_searches_this_game": post_searches,
-                "s1_search_started": post_searches > pre_searches,
-                "s1_proposal_repeat_target": int(proposal_repeats),
-                "s1_proposal_repeats": 1,
-                "s1_proposal_repeat_mode": "chronological_primary",
+                "candidate_variant": "s2",
+                "candidate_s2_enabled": True,
+                "candidate_resolver": getattr(
+                    getattr(proposed.proposal, "intent", None), "resolver", "error"
+                ),
+                "candidate_searches_this_game": post_searches,
+                "candidate_search_started": post_searches > pre_searches,
+                "candidate_proposal_repeat_target": int(proposal_repeats),
+                "candidate_proposal_repeats": 1,
+                "candidate_proposal_repeat_mode": "chronological_primary",
+                "s2_pre_attack_sequence_proof_overrides_delta": s2_override_delta,
+                "s2_override_telemetry_trustworthy": proposed.error is None,
                 "proposal_error": proposal_error,
                 "_obs": obs,
                 "_memory": proposed.working_memory.clone(),
                 "_pre_prompt_memory": pre_prompt_memory,
                 "_pre_searches_this_game": pre_searches,
                 "_post_searches_this_game": post_searches,
+                "_pre_s2_overrides": pre_s2_overrides,
+                "_post_s2_overrides": post_s2_overrides,
                 "_raw_observation": dict(raw),
             }
             rows.append(row)
@@ -1210,7 +1568,7 @@ def certify_sampled_proposal(
 ) -> dict[str, Any]:
     """Repeat every sampled native-search proposal from one exact checkpoint.
 
-    S1's only policy state is ``PlanMemory`` plus D1's per-game search counter.
+    S2's only selection state is ``PlanMemory`` plus D1's per-game search counter.
     Restoring those two values recreates the exact pre-prompt controller state;
     telemetry is write-only and cannot affect selection.  A prompt where D1 did
     not increment its search counter never entered native search and is already
@@ -1221,13 +1579,22 @@ def certify_sampled_proposal(
     if int(proposal_repeats) < 2:
         raise RegretError("proposal_repeats must be at least 2")
     result = dict(row)
-    result["s1_proposal_repeat_target"] = int(proposal_repeats)
-    result["s1_proposal_repeats"] = 1
+    result["candidate_proposal_repeat_target"] = int(proposal_repeats)
+    result["candidate_proposal_repeats"] = 1
     if result.get("proposal_error"):
-        result["s1_proposal_repeat_mode"] = "primary_policy_error"
+        result["candidate_proposal_repeat_mode"] = "primary_policy_error"
         return result
-    if not bool(result.get("s1_search_started")):
-        result["s1_proposal_repeat_mode"] = "deterministic_no_native_search"
+    expected_s2_delta = _integer(
+        result.get("s2_pre_attack_sequence_proof_overrides_delta"), 0
+    )
+    if expected_s2_delta not in (0, 1):
+        result["proposal_error"] = "candidate_repeat_s2_telemetry_invalid"
+        result["candidate_proposal_repeat_mode"] = "checkpoint_error"
+        return result
+    if not bool(result.get("candidate_search_started")):
+        result["candidate_proposal_repeat_mode"] = "deterministic_no_native_search"
+        if expected_s2_delta:
+            result["proposal_error"] = "candidate_repeat_s2_telemetry_invalid"
         return result
 
     obs = result.get("_obs")
@@ -1242,8 +1609,8 @@ def certify_sampled_proposal(
         or pre_searches < 0
         or post_searches <= pre_searches
     ):
-        result["proposal_error"] = "s1_repeat_checkpoint_missing"
-        result["s1_proposal_repeat_mode"] = "checkpoint_error"
+        result["proposal_error"] = "candidate_repeat_checkpoint_missing"
+        result["candidate_proposal_repeat_mode"] = "checkpoint_error"
         return result
 
     expected = semantic_action_key(obs, list(result.get("agent_action") or []))
@@ -1251,27 +1618,36 @@ def certify_sampled_proposal(
     error: str | None = None
     unstable = False
     for _ in range(int(proposal_repeats) - 1):
-        repeat_policy = ChronologicalS1()
+        repeat_policy = ChronologicalCandidate(candidate="s2", s2_enabled=True)
         repeat_policy.memory = pre_memory.clone()
         repeat_policy.search.searches_this_game = pre_searches
         repeat = repeat_policy.propose(raw, obs)
         executed += 1
         if int(repeat_policy.search.searches_this_game) != post_searches:
-            error = "s1_repeat_search_progression_error"
+            error = "candidate_repeat_search_progression_error"
             continue
         if repeat.error:
-            error = "s1_repeat_policy_error"
+            error = "candidate_repeat_policy_error"
+            continue
+        repeated_s2_delta = _integer(
+            repeat_policy.telemetry.snapshot().get(
+                "s2_pre_attack_sequence_proof_overrides", 0
+            ),
+            0,
+        )
+        if repeated_s2_delta != expected_s2_delta:
+            error = "candidate_repeat_s2_telemetry_mismatch"
             continue
         try:
             _valid_action(obs, repeat.action)
             if semantic_action_key(obs, repeat.action) != expected:
                 unstable = True
         except Exception:
-            error = "s1_repeat_policy_error"
-    result["s1_proposal_repeats"] = executed
-    result["s1_proposal_repeat_mode"] = "lazy_checkpoint_replay"
+            error = "candidate_repeat_policy_error"
+    result["candidate_proposal_repeats"] = executed
+    result["candidate_proposal_repeat_mode"] = "lazy_checkpoint_replay"
     if unstable:
-        result["proposal_error"] = "s1_action_unstable"
+        result["proposal_error"] = "candidate_action_unstable"
     elif error is not None:
         result["proposal_error"] = error
     return result
@@ -1332,7 +1708,7 @@ def evaluate_candidate(
     agent = list(result.get("agent_action") or [])
     if result.get("proposal_error"):
         proposal_error = str(result.get("proposal_error"))
-        reason = "s1_action_unstable" if "unstable" in proposal_error else "policy_error"
+        reason = "candidate_action_unstable" if "unstable" in proposal_error else "policy_error"
         result.update({"classification": "UNCERTIFIABLE", "uncertifiable_reason": reason})
         return result
     if bool(result.get("semantic_equivalent")):
@@ -1405,10 +1781,20 @@ def evaluate_candidate(
     return result
 
 
-def _load_json_replay(path: Path) -> dict[str, Any]:
+def _load_json_replay(
+    path: Path,
+    *,
+    expected_sha256: str | None = None,
+) -> dict[str, Any]:
     try:
-        payload = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as exc:
+        encoded = path.read_bytes()
+        if (
+            expected_sha256 is not None
+            and hashlib.sha256(encoded).hexdigest().upper() != str(expected_sha256).upper()
+        ):
+            raise RegretError(f"replay changed after manifest verification: {path.name}")
+        payload = json.loads(encoded)
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
         raise RegretError(f"invalid replay {path}: {exc}") from exc
     if not isinstance(payload, dict):
         raise RegretError(f"replay is not an object: {path}")
@@ -1470,15 +1856,12 @@ def _raw_input_manifest(paths: Sequence[Path], hero_seat: int | None) -> dict[st
     }
 
 
-def evaluate_manifest(
+def _collect_manifest_candidates(
     manifest: Mapping[str, Any],
     *,
-    cap_per_episode: int,
-    sample_seed: int,
-    repeat_passes: int,
     proposal_repeats: int = 2,
     max_episodes: int | None = None,
-) -> list[dict[str, Any]]:
+) -> tuple[list[dict[str, Any]], dict[int, dict[str, Any]], list[Mapping[str, Any]]]:
     episode_rows = list(manifest.get("episodes") or [])
     if max_episodes is not None:
         episode_rows = episode_rows[: int(max_episodes)]
@@ -1486,7 +1869,10 @@ def evaluate_manifest(
     replay_cache: dict[int, dict[str, Any]] = {}
     for meta in episode_rows:
         path = Path(str(meta.get("_resolved_replay_path") or meta.get("replay_cache_path"))).resolve()
-        replay = _load_json_replay(path)
+        replay = _load_json_replay(
+            path,
+            expected_sha256=str(meta.get("replay_sha256") or ""),
+        )
         episode_id = _integer(meta.get("episode_id"))
         replay_id = _integer((replay.get("info") or {}).get("EpisodeId", replay.get("id")))
         if replay_id != episode_id:
@@ -1499,6 +1885,28 @@ def evaluate_manifest(
                 proposal_repeats=proposal_repeats,
             )
         )
+    record_ids = [str(row.get("record_id") or "") for row in candidates]
+    if any(not value for value in record_ids) or len(set(record_ids)) != len(record_ids):
+        raise RegretError("candidate prompt record IDs are absent or duplicated")
+    return candidates, replay_cache, episode_rows
+
+
+def evaluate_manifest(
+    manifest: Mapping[str, Any],
+    *,
+    cap_per_episode: int,
+    sample_seed: int,
+    repeat_passes: int,
+    proposal_repeats: int = 2,
+    max_episodes: int | None = None,
+) -> list[dict[str, Any]]:
+    """Evaluate the candidate-selected aggregate used by diagnostics/holdout."""
+
+    candidates, replay_cache, episode_rows = _collect_manifest_candidates(
+        manifest,
+        proposal_repeats=proposal_repeats,
+        max_episodes=max_episodes,
+    )
     sampled = strategic_sample(candidates, cap_per_episode=cap_per_episode, seed=sample_seed)
     expected_episode_ids = {_integer(row.get("episode_id")) for row in episode_rows}
     sampled_episode_ids = {_integer(row.get("episode_id")) for row in sampled}
@@ -1517,6 +1925,103 @@ def evaluate_manifest(
     ]
 
 
+def evaluate_s2_validation_dual_sets(
+    manifest: Mapping[str, Any],
+    primary_record_ids: Sequence[str],
+    *,
+    repeat_passes: int,
+    proposal_repeats: int,
+    exploratory_hard_ceiling: int = S2_EXPLORATORY_HARD_CEILING,
+) -> dict[str, Any]:
+    """Evaluate frozen paired IDs plus disjoint exhaustive S2 interventions."""
+
+    if manifest.get("split") != "VALIDATION" or manifest.get("sealed") is not False:
+        raise RegretError("dual-set evaluation requires the frozen validation split")
+    if len(primary_record_ids) != PINNED_S1_PRIMARY_RECORD_COUNT:
+        raise RegretError("paired-primary record count differs from frozen S1")
+    if len(set(primary_record_ids)) != len(primary_record_ids):
+        raise RegretError("paired-primary record IDs are duplicated")
+    candidates, replay_cache, episode_rows = _collect_manifest_candidates(
+        manifest,
+        proposal_repeats=proposal_repeats,
+    )
+    by_id = {str(row.get("record_id")): row for row in candidates}
+    missing = [record_id for record_id in primary_record_ids if record_id not in by_id]
+    if missing:
+        raise RegretError(
+            f"S2 reconstruction is missing frozen paired-primary records (count={len(missing)})"
+        )
+    primary_ids = set(primary_record_ids)
+    primary = [by_id[record_id] for record_id in primary_record_ids]
+    out_of_primary = [row for row in candidates if str(row.get("record_id")) not in primary_ids]
+
+    def is_trustworthy_s2_override(row: Mapping[str, Any]) -> bool:
+        return (
+            row.get("candidate_variant") == "s2"
+            and row.get("candidate_s2_enabled") is True
+            and row.get("s2_override_telemetry_trustworthy") is True
+            and not row.get("proposal_error")
+            and _integer(row.get("s2_pre_attack_sequence_proof_overrides_delta"), -1) == 1
+        )
+
+    all_s2_overrides = [row for row in candidates if is_trustworthy_s2_override(row)]
+    primary_s2_overrides = [row for row in primary if is_trustworthy_s2_override(row)]
+    outside_s2_overrides = [row for row in out_of_primary if is_trustworthy_s2_override(row)]
+    exploratory = [
+        row for row in outside_s2_overrides if not bool(row.get("semantic_equivalent"))
+    ]
+    if int(exploratory_hard_ceiling) <= 0:
+        raise RegretError("S2 exploratory hard ceiling must be positive")
+    if len(exploratory) > int(exploratory_hard_ceiling):
+        raise RegretError(
+            "S2 exploratory disagreement ceiling exceeded "
+            f"({len(exploratory)} > {int(exploratory_hard_ceiling)})"
+        )
+    if primary_ids.intersection(str(row.get("record_id")) for row in exploratory):
+        raise RegretError("paired-primary and S2 exploratory sets overlap")
+
+    expected_episode_ids = {_integer(row.get("episode_id")) for row in episode_rows}
+    primary_episode_ids = {_integer(row.get("episode_id")) for row in primary}
+    if primary_episode_ids != expected_episode_ids:
+        raise RegretError("paired-primary does not cover every validation episode")
+
+    def certify_and_evaluate(rows: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
+        certified = [
+            certify_sampled_proposal(row, proposal_repeats=proposal_repeats)
+            for row in rows
+        ]
+        return [
+            evaluate_candidate(
+                row,
+                replay_cache[_integer(row.get("episode_id"))],
+                repeat_passes=repeat_passes,
+            )
+            for row in certified
+        ]
+
+    evaluated_primary = certify_and_evaluate(primary)
+    evaluated_exploratory = certify_and_evaluate(exploratory)
+    return {
+        "paired_primary": evaluated_primary,
+        "s2_exploratory": evaluated_exploratory,
+        "universe_counts": {
+            "manifest_episode_count": len(expected_episode_ids),
+            "useful_prompt_count": len(candidates),
+            "paired_primary_record_count": len(primary),
+            "out_of_primary_useful_prompt_count": len(out_of_primary),
+            "s2_override_prompt_count": len(all_s2_overrides),
+            "paired_primary_s2_override_prompt_count": len(primary_s2_overrides),
+            "out_of_primary_s2_override_prompt_count": len(outside_s2_overrides),
+            "out_of_primary_s2_override_expert_equivalent_count": sum(
+                bool(row.get("semantic_equivalent")) for row in outside_s2_overrides
+            ),
+            "out_of_primary_s2_override_disagreement_count": len(exploratory),
+            "s2_exploratory_record_count": len(evaluated_exploratory),
+            "s2_exploratory_hard_ceiling": int(exploratory_hard_ceiling),
+        },
+    }
+
+
 def _sealed_parameter_values(args: argparse.Namespace) -> dict[str, int]:
     return {
         "cap_per_episode": int(args.cap_per_episode),
@@ -1527,7 +2032,172 @@ def _sealed_parameter_values(args: argparse.Namespace) -> dict[str, int]:
     }
 
 
-def validate_sealed_run_contract(args: argparse.Namespace, manifest: Mapping[str, Any]) -> None:
+def validate_validation_run_contract(args: argparse.Namespace, manifest: Mapping[str, Any]) -> None:
+    """Require the canonical full S2 validation run and its frozen parameters."""
+
+    if manifest.get("split") != "VALIDATION" or manifest.get("sealed") is not False:
+        raise RegretError("official S2 validation requires the frozen VALIDATION manifest")
+    if Path(args.manifest).resolve() != Path(PINNED_MANIFESTS["VALIDATION"]["path"]).resolve():
+        raise RegretError("official S2 validation requires the canonical validation manifest")
+    if Path(args.output).resolve() != DEFAULT_S2_VALIDATION_OUTPUT.resolve():
+        raise RegretError("official S2 validation requires its canonical output path")
+    if Path(args.incumbent_manifest).resolve() != DEFAULT_INCUMBENT_MANIFEST.resolve():
+        raise RegretError("official S2 validation requires the pinned S1 baseline")
+    if Path(args.candidate_manifest).resolve() != DEFAULT_CANDIDATE_MANIFEST.resolve():
+        raise RegretError("official S2 validation requires the pinned S2 candidate")
+    if args.candidate != "s2" or bool(args.sealed):
+        raise RegretError("official validation requires --candidate s2 without --sealed")
+    if args.max_episodes is not None:
+        raise RegretError("official validation cannot select a partial episode set")
+    if _sealed_parameter_values(args) != FROZEN_SEALED_PARAMETERS:
+        raise RegretError("official validation parameters differ from the frozen contract")
+    if _integer(manifest.get("episode_count")) != EXPECTED_SPLIT_COUNTS["VALIDATION"]:
+        raise RegretError("official validation must include all 50 episodes")
+
+
+def validate_diagnostic_run_contract(args: argparse.Namespace) -> None:
+    """Keep raw diagnostics from overwriting any frozen workflow artifact."""
+
+    if bool(args.sealed):
+        raise RegretError("raw diagnostic replay input cannot use sealed mode")
+    output = Path(args.output).resolve()
+    if output in {Path(path).resolve() for path in RESERVED_FROZEN_OUTPUT_PATHS}:
+        raise RegretError("raw diagnostic output path is reserved by the frozen workflow")
+
+
+def _qualification_payload_sha256(payload: Mapping[str, Any]) -> str:
+    unsigned = dict(payload)
+    unsigned.pop("qualification_payload_sha256", None)
+    return _object_sha256(unsigned)
+
+
+def verify_s2_qualification(
+    qualification_path: str | Path = DEFAULT_S2_QUALIFICATION,
+) -> dict[str, Any]:
+    """Verify the later-frozen qualification before any holdout replay access."""
+
+    path = Path(qualification_path).resolve()
+    if path != DEFAULT_S2_QUALIFICATION.resolve():
+        raise RegretError("sealed run requires the canonical S2 qualification path")
+    if not path.is_file():
+        raise RegretError("S2 qualification is absent; final holdout remains disabled")
+    qualification_file_sha256 = _sha256(path)
+    payload = _read_json_object(path, "S2 qualification")
+    claimed_payload = str(payload.get("qualification_payload_sha256") or "").upper()
+    if len(claimed_payload) != 64 or claimed_payload != _qualification_payload_sha256(payload):
+        raise RegretError("S2 qualification payload digest mismatch")
+    candidate_validation = payload.get("candidate_validation") or {}
+    package = payload.get("candidate_package") or {}
+    evaluator = payload.get("evaluator") or {}
+    expected_evaluator = _evaluator_provenance()
+    validation_path = (ROOT / QUALIFIED_S2_VALIDATION_PATH).resolve()
+    if (
+        payload.get("schema") != QUALIFICATION_SCHEMA
+        or payload.get("status") != "QUALIFIED"
+        or payload.get("candidate") != "s2"
+        or payload.get("qualification_rule")
+        != "paired_primary_with_exploratory_safety_veto_v1"
+        or payload.get("baseline_s1_validation_sha256")
+        != PINNED_S1_VALIDATION_OUTPUT_SHA256
+        or candidate_validation.get("path") != QUALIFIED_S2_VALIDATION_PATH
+        or str(package.get("archive_sha256") or "").upper() != PINNED_S2_ARCHIVE_SHA256
+        or str(package.get("manifest_sha256") or "").upper() != PINNED_S2_MANIFEST_SHA256
+        or str(package.get("extracted_tree_sha256") or "").upper()
+        != PINNED_S2_EXTRACTED_TREE_SHA256
+        or str(package.get("runtime_source_tree_sha256") or "").upper()
+        != PINNED_S2_RUNTIME_TREE_SHA256
+        or evaluator != expected_evaluator
+    ):
+        raise RegretError("S2 qualification contract mismatch")
+    expected_validation_sha = str(candidate_validation.get("sha256") or "").upper()
+    if (
+        len(expected_validation_sha) != 64
+        or not validation_path.is_file()
+        or _sha256(validation_path) != expected_validation_sha
+    ):
+        raise RegretError("qualified S2 validation artifact hash mismatch")
+    validation = _read_json_object(validation_path, "qualified S2 validation result")
+    sets = validation.get("evaluation_sets") or {}
+    primary = sets.get("paired_primary") or {}
+    exploratory = sets.get("s2_exploratory") or {}
+    primary_rows = primary.get("decision_rows") or []
+    exploratory_rows = exploratory.get("decision_rows") or []
+    frozen_s1 = verify_frozen_s1_provenance()
+    primary_ids = [
+        row.get("record_id") if isinstance(row, Mapping) else None for row in primary_rows
+    ]
+    exploratory_ids = [
+        row.get("record_id") if isinstance(row, Mapping) else None
+        for row in exploratory_rows
+    ]
+    universe_counts = validation.get("universe_counts") or {}
+    validation_candidate = validation.get("evaluated_candidate") or {}
+    validation_baseline = validation.get("baseline_incumbent_s1") or {}
+    validation_contract = validation.get("run_contract") or {}
+    if (
+        validation.get("schema") != SCHEMA
+        or validation.get("split") != "VALIDATION"
+        or validation.get("sealed") is not False
+        or validation.get("candidate_variant") != "s2"
+        or validation.get("aggregate_alias") != "evaluation_sets.paired_primary.aggregate"
+        or validation.get("aggregate") != primary.get("aggregate")
+        or "decision_rows" in validation
+        or "combined_rate" in validation
+        or primary_ids != frozen_s1["_paired_record_ids"]
+        or len(set(exploratory_ids)) != len(exploratory_ids)
+        or set(primary_ids).intersection(exploratory_ids)
+        or any(
+            not isinstance(row, Mapping)
+            or row.get("candidate_variant") != "s2"
+            or row.get("candidate_s2_enabled") is not True
+            or row.get("s2_override_telemetry_trustworthy") is not True
+            or _integer(row.get("s2_pre_attack_sequence_proof_overrides_delta"), -1) != 1
+            or bool(row.get("semantic_equivalent"))
+            or bool(row.get("proposal_error"))
+            for row in exploratory_rows
+        )
+        or _integer(universe_counts.get("s2_exploratory_record_count"), -1)
+        != len(exploratory_rows)
+        or _integer(
+            universe_counts.get("out_of_primary_s2_override_disagreement_count"), -1
+        )
+        != len(exploratory_rows)
+        or validation_contract.get("evaluator") != expected_evaluator
+        or validation_contract.get("parameters") != FROZEN_SEALED_PARAMETERS
+        or validation_contract.get("validation_manifest_file_sha256")
+        != PINNED_MANIFESTS["VALIDATION"]["file_sha256"]
+        or validation_contract.get("validation_manifest_payload_sha256")
+        != PINNED_MANIFESTS["VALIDATION"]["payload_sha256"]
+        or validation_baseline.get("validation_result_sha256")
+        != PINNED_S1_VALIDATION_OUTPUT_SHA256
+        or validation_candidate.get("archive_sha256") != PINNED_S2_ARCHIVE_SHA256
+        or validation_candidate.get("manifest_sha256") != PINNED_S2_MANIFEST_SHA256
+        or validation_candidate.get("extracted_tree_sha256")
+        != PINNED_S2_EXTRACTED_TREE_SHA256
+        or validation_candidate.get("runtime_source_tree_sha256")
+        != PINNED_S2_RUNTIME_TREE_SHA256
+        or _integer((primary.get("aggregate") or {}).get("decision_count"))
+        != PINNED_S1_PRIMARY_RECORD_COUNT
+        or exploratory.get("safety_veto_only") is not True
+        or exploratory.get("eligible_for_efficacy_rate") is not False
+        or len(exploratory_rows) > S2_EXPLORATORY_HARD_CEILING
+        or validation.get("combined_rate_permitted") is not False
+    ):
+        raise RegretError("qualified S2 validation artifact violates the dual-set contract")
+    return {
+        "schema": QUALIFICATION_SCHEMA,
+        "file_sha256": qualification_file_sha256,
+        "payload_sha256": claimed_payload,
+        "candidate_validation_sha256": expected_validation_sha,
+        "status": "QUALIFIED",
+    }
+
+
+def validate_sealed_run_contract(
+    args: argparse.Namespace,
+    manifest: Mapping[str, Any],
+    qualification: Mapping[str, Any] | None = None,
+) -> None:
     """Require the one canonical final-holdout input, output, and parameters."""
 
     if manifest.get("split") != "FINAL_HOLDOUT" or manifest.get("sealed") is not True:
@@ -1538,6 +2208,14 @@ def validate_sealed_run_contract(args: argparse.Namespace, manifest: Mapping[str
         raise RegretError("sealed run requires the canonical aggregate output path")
     if Path(args.incumbent_manifest).resolve() != DEFAULT_INCUMBENT_MANIFEST.resolve():
         raise RegretError("sealed run requires the pinned incumbent manifest")
+    if Path(args.candidate_manifest).resolve() != DEFAULT_CANDIDATE_MANIFEST.resolve():
+        raise RegretError("sealed run requires the pinned S2 candidate manifest")
+    if Path(args.qualification).resolve() != DEFAULT_S2_QUALIFICATION.resolve():
+        raise RegretError("sealed run requires the canonical S2 qualification")
+    if args.candidate != "s2":
+        raise RegretError("sealed run requires --candidate s2")
+    if not qualification or qualification.get("status") != "QUALIFIED":
+        raise RegretError("sealed run requires verified S2 qualification")
     if args.max_episodes is not None:
         raise RegretError("sealed evaluation cannot select a partial episode set")
     if _sealed_parameter_values(args) != FROZEN_SEALED_PARAMETERS:
@@ -1552,7 +2230,7 @@ def _exclusive_json_write(path: Path, payload: Mapping[str, Any]) -> None:
     try:
         descriptor = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
     except FileExistsError as exc:
-        raise RegretError("sealed run has already been claimed") from exc
+        raise RegretError(f"canonical output/receipt already exists: {path.name}") from exc
     with os.fdopen(descriptor, "wb") as handle:
         handle.write(encoded)
         handle.flush()
@@ -1564,20 +2242,39 @@ def _git_blob_sha1(path: Path) -> str:
     return hashlib.sha1(b"blob " + str(len(data)).encode("ascii") + b"\0" + data).hexdigest().upper()
 
 
+def _evaluator_provenance() -> dict[str, str]:
+    evaluator = Path(__file__).resolve()
+    return {
+        "path": str(evaluator.relative_to(ROOT)),
+        "sha256": _sha256(evaluator),
+        "git_blob_sha1": _git_blob_sha1(evaluator),
+    }
+
+
 def claim_sealed_run(
     receipt_path: Path,
     manifest: Mapping[str, Any],
     args: argparse.Namespace,
+    qualification: Mapping[str, Any],
 ) -> dict[str, Any]:
     """Consume the one holdout inspection before any replay action is parsed."""
 
     evaluator = Path(__file__).resolve()
     receipt = {
-        "schema": "dipplin-final-holdout-receipt-v1",
+        "schema": "dipplin-final-holdout-receipt-v2",
         "status": "ACTION_INSPECTION_CLAIMED",
         "manifest_file_sha256": _sha256(Path(args.manifest).resolve()),
         "manifest_payload_sha256": manifest.get("manifest_payload_sha256"),
-        "incumbent_archive_sha256": PINNED_S1_ARCHIVE_SHA256,
+        "candidate": "s2",
+        "baseline_s1_archive_sha256": PINNED_S1_ARCHIVE_SHA256,
+        "baseline_s1_validation_sha256": PINNED_S1_VALIDATION_OUTPUT_SHA256,
+        "candidate_archive_sha256": PINNED_S2_ARCHIVE_SHA256,
+        "candidate_manifest_sha256": PINNED_S2_MANIFEST_SHA256,
+        "candidate_extracted_tree_sha256": PINNED_S2_EXTRACTED_TREE_SHA256,
+        "candidate_runtime_tree_sha256": PINNED_S2_RUNTIME_TREE_SHA256,
+        "qualification_file_sha256": qualification.get("file_sha256"),
+        "qualification_payload_sha256": qualification.get("payload_sha256"),
+        "candidate_validation_sha256": qualification.get("candidate_validation_sha256"),
         "evaluator_path": str(evaluator.relative_to(ROOT)),
         "evaluator_sha256": _sha256(evaluator),
         "evaluator_git_blob_sha1": _git_blob_sha1(evaluator),
@@ -1629,6 +2326,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--replays", type=Path, help="diagnostic directory of episode-*-replay.json")
     parser.add_argument("--hero-seat", type=int, choices=(0, 1), help="hero seat for raw replay input")
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--candidate", choices=("s2",), required=True)
     parser.add_argument(
         "--cap-per-episode", type=int, default=FROZEN_SEALED_PARAMETERS["cap_per_episode"]
     )
@@ -1642,6 +2340,13 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument("--max-episodes", type=int)
     parser.add_argument("--incumbent-manifest", type=Path, default=DEFAULT_INCUMBENT_MANIFEST)
+    parser.add_argument("--candidate-manifest", type=Path, default=DEFAULT_CANDIDATE_MANIFEST)
+    parser.add_argument(
+        "--qualification",
+        type=Path,
+        default=DEFAULT_S2_QUALIFICATION,
+        help="tracked write-once frozen S2 qualification (required before FINAL_HOLDOUT)",
+    )
     parser.add_argument(
         "--sealed",
         action="store_true",
@@ -1668,40 +2373,97 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 def main(argv: Sequence[str] | None = None) -> int:
     args = parse_args(argv)
     sealed_receipt: dict[str, Any] | None = None
+    qualification: dict[str, Any] | None = None
     try:
-        incumbent = verify_incumbent(args.incumbent_manifest)
+        baseline = verify_frozen_s1_provenance(args.incumbent_manifest)
+        candidate = verify_s2_candidate(args.candidate_manifest)
+        evaluator_provenance = _evaluator_provenance()
         if args.manifest:
+            resolved_manifest = Path(args.manifest).resolve()
+            # Qualification is checked before load_manifest hashes any holdout
+            # replay bytes.  The holdout is disabled while its exact pin is None.
+            if resolved_manifest == DEFAULT_FINAL_HOLDOUT_MANIFEST.resolve():
+                qualification = verify_s2_qualification(args.qualification)
+                if args.output.exists() or DEFAULT_SEALED_RECEIPT.exists():
+                    raise RegretError("canonical sealed output/receipt already exists")
+            elif (
+                resolved_manifest == Path(PINNED_MANIFESTS["VALIDATION"]["path"]).resolve()
+                and args.output.exists()
+            ):
+                raise RegretError("canonical S2 validation output already exists")
             manifest = load_manifest(args.manifest)
             if manifest.get("sealed") and not args.sealed:
                 raise RegretError("FINAL_HOLDOUT requires --sealed aggregate-only mode")
             if manifest.get("sealed"):
-                validate_sealed_run_contract(args, manifest)
+                validate_sealed_run_contract(args, manifest, qualification)
                 if args.output.exists():
                     raise RegretError("sealed aggregate output already exists")
+                if verify_s2_qualification(args.qualification) != qualification:
+                    raise RegretError("S2 qualification changed before holdout claim")
                 # The permanent O_EXCL claim is the last operation before any
                 # action-level holdout replay parsing.
-                sealed_receipt = claim_sealed_run(DEFAULT_SEALED_RECEIPT, manifest, args)
+                sealed_receipt = claim_sealed_run(
+                    DEFAULT_SEALED_RECEIPT,
+                    manifest,
+                    args,
+                    qualification or {},
+                )
+            else:
+                validate_validation_run_contract(args, manifest)
+                if args.output.exists():
+                    raise RegretError("canonical S2 validation output already exists")
         else:
+            validate_diagnostic_run_contract(args)
             paths = list(args.replay)
             if args.replays:
                 paths.extend(sorted(args.replays.glob("episode-*-replay.json")))
             manifest = _raw_input_manifest(paths, args.hero_seat)
-        rows = evaluate_manifest(
-            manifest,
-            cap_per_episode=args.cap_per_episode,
-            sample_seed=args.sample_seed,
-            repeat_passes=args.repeat_passes,
-            proposal_repeats=args.proposal_repeats,
-            max_episodes=args.max_episodes,
-        )
-        output = build_output(
-            manifest,
-            rows,
-            sealed=bool(args.sealed),
-            bootstrap_samples=args.bootstrap_samples,
-            seed=args.sample_seed,
-            incumbent=incumbent,
-        )
+        public_baseline = {
+            key: value for key, value in baseline.items() if not str(key).startswith("_")
+        }
+        if manifest.get("split") == "VALIDATION":
+            evaluation = evaluate_s2_validation_dual_sets(
+                manifest,
+                baseline["_paired_record_ids"],
+                repeat_passes=args.repeat_passes,
+                proposal_repeats=args.proposal_repeats,
+            )
+            output = build_s2_validation_output(
+                manifest,
+                evaluation,
+                bootstrap_samples=args.bootstrap_samples,
+                seed=args.sample_seed,
+                baseline=baseline,
+                candidate=candidate,
+            )
+        else:
+            rows = evaluate_manifest(
+                manifest,
+                cap_per_episode=args.cap_per_episode,
+                sample_seed=args.sample_seed,
+                repeat_passes=args.repeat_passes,
+                proposal_repeats=args.proposal_repeats,
+                max_episodes=args.max_episodes,
+            )
+            output = build_output(
+                manifest,
+                rows,
+                sealed=bool(args.sealed),
+                bootstrap_samples=args.bootstrap_samples,
+                seed=args.sample_seed,
+                incumbent=public_baseline,
+                candidate=candidate,
+            )
+        if (
+            _evaluator_provenance() != evaluator_provenance
+            or verify_s2_candidate(args.candidate_manifest) != candidate
+            or verify_frozen_s1_provenance(args.incumbent_manifest) != baseline
+            or (
+                manifest.get("sealed")
+                and verify_s2_qualification(args.qualification) != qualification
+            )
+        ):
+            raise RegretError("frozen evaluator/package provenance changed during evaluation")
         if manifest.get("sealed"):
             _exclusive_json_write(args.output, output)
             complete_sealed_run(
@@ -1709,6 +2471,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 sealed_receipt or {},
                 args.output,
             )
+        elif manifest.get("split") == "VALIDATION":
+            _exclusive_json_write(args.output, output)
         else:
             args.output.parent.mkdir(parents=True, exist_ok=True)
             args.output.write_text(
@@ -1726,7 +2490,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         }, indent=2, sort_keys=True))
         return 0
     except Exception as exc:
-        if "args" in locals() and bool(getattr(args, "sealed", False)):
+        sealed_attempt = "args" in locals() and (
+            bool(getattr(args, "sealed", False))
+            or (
+                getattr(args, "manifest", None) is not None
+                and Path(args.manifest).resolve() == DEFAULT_FINAL_HOLDOUT_MANIFEST.resolve()
+            )
+        )
+        if sealed_attempt:
             print(
                 "sealed replay-regret evaluation failed closed; no individual detail emitted",
                 file=sys.stderr,
