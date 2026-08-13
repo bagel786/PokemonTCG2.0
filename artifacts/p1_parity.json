@@ -1,0 +1,26 @@
+{
+  "off_vs_control": {
+    "label": "p0-off vs R0 control",
+    "decisions": 4659,
+    "options_total": 24065,
+    "feature_diffs": [],
+    "feature_diff_count": 0,
+    "play_source_changes": 0,
+    "decision_diff_count": 0,
+    "main_decision_diffs": 0,
+    "non_main_decision_diffs": 0,
+    "non_main_examples": []
+  },
+  "on_vs_control": {
+    "label": "p0-on vs R0 control",
+    "decisions": 4659,
+    "options_total": 24065,
+    "feature_diffs": [],
+    "feature_diff_count": 0,
+    "play_source_changes": 0,
+    "decision_diff_count": 327,
+    "main_decision_diffs": 327,
+    "non_main_decision_diffs": 0,
+    "non_main_examples": []
+  }
+}

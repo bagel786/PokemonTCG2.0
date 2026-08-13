@@ -1,0 +1,31 @@
+{
+  "games": 80,
+  "wins": 70,
+  "losses": 10,
+  "opportunities": 45,
+  "games_with_opportunity": 29,
+  "loss_games_with_opportunity": 5,
+  "theoretical_max_uplift_pp": 6.25,
+  "stamp_in_search": 27,
+  "stamp_playable_after_retrieval": 27,
+  "r0_played_petrel_at_opportunity": 2,
+  "opponent_hand_size_distribution": {
+    "16": 4,
+    "19": 5,
+    "7": 3,
+    "13": 6,
+    "18": 4,
+    "17": 7,
+    "22": 1,
+    "11": 3,
+    "15": 1,
+    "12": 1,
+    "21": 1,
+    "8": 3,
+    "9": 2,
+    "6": 1,
+    "20": 3
+  },
+  "errors": [],
+  "elapsed_seconds": 28
+}

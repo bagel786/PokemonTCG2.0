@@ -1,0 +1,51 @@
+{
+  "preferences": 54,
+  "train_prefs": 41,
+  "val_prefs": 13,
+  "val_seeds": [
+    202608160104,
+    202608160134,
+    202608160143,
+    202608160192,
+    202608160227,
+    202608160253,
+    202608160280,
+    202608160299,
+    202608160349,
+    202608160392
+  ],
+  "dim": 49,
+  "hyperparameter_grid": {
+    "lam0.1_scale1.0": {
+      "val_acc": 0.6153846153846154,
+      "train_acc": 0.7560975609756098,
+      "rehearsal_mean_abs": 0.6829869839233178
+    },
+    "lam0.1_scale2.0": {
+      "val_acc": 0.7692307692307693,
+      "train_acc": 0.7804878048780488,
+      "rehearsal_mean_abs": 1.093610749699318
+    },
+    "lam0.5_scale1.0": {
+      "val_acc": 0.8461538461538461,
+      "train_acc": 0.7804878048780488,
+      "rehearsal_mean_abs": 0.4476547556076794
+    },
+    "lam0.5_scale2.0": {
+      "val_acc": 0.8461538461538461,
+      "train_acc": 0.7073170731707317,
+      "rehearsal_mean_abs": 0.5926527600053848
+    }
+  },
+  "chosen": {
+    "lam": 0.5,
+    "scale": 1.0,
+    "val_acc": 0.8461538461538461
+  },
+  "preference_by_opponent": {
+    "d842": 17,
+    "master_v1": 21,
+    "replay_refresh": 16
+  },
+  "states_total": 596
+}
