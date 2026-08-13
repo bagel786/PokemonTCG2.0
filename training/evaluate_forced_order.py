@@ -39,8 +39,27 @@ def _errors(agent: ExternalSubmissionAgent) -> int:
     return result
 
 
+def _route_telemetry(agent: ExternalSubmissionAgent) -> dict:
+    """Read the packaged agent's flat numeric mechanism telemetry."""
+    inner = getattr(agent.module, "_AGENT", None)
+    candidate = getattr(inner, "route_telemetry", None)
+    if candidate is None:
+        candidate = getattr(inner, "telemetry", None)
+    if candidate is None:
+        return {}
+    if hasattr(candidate, "flat"):
+        candidate = candidate.flat()
+    elif hasattr(candidate, "snapshot"):
+        candidate = candidate.snapshot()
+    result = {}
+    for key, value in (candidate or {}).items():
+        if isinstance(value, (int, float)) and not isinstance(value, bool):
+            result[str(key)] = float(value)
+    return result
+
+
 def run_game(task: tuple) -> dict:
-    index, hero_path, opponent_path, order, seed, max_decisions = task
+    index, hero_path, opponent_path, order, seed, max_decisions, hero_env, opponent_env = task
     random.seed(seed + index)
     hero_path = Path(hero_path)
     opponent_path = Path(opponent_path)
@@ -48,8 +67,8 @@ def run_game(task: tuple) -> dict:
     opponent_deck = [int(value) for value in (opponent_path / "deck.csv").read_text().splitlines() if value.strip()]
     hero_seat = index % 2
     decks = [hero_deck, opponent_deck] if hero_seat == 0 else [opponent_deck, hero_deck]
-    hero = ExternalSubmissionAgent(hero_path, {})
-    opponent = ExternalSubmissionAgent(opponent_path, {})
+    hero = ExternalSubmissionAgent(hero_path, hero_env)
+    opponent = ExternalSubmissionAgent(opponent_path, opponent_env)
     agents = {hero_seat: hero, 1 - hero_seat: opponent}
     raw, started = battle_start(decks[0], decks[1])
     if started.errorType:
@@ -81,6 +100,7 @@ def run_game(task: tuple) -> dict:
                     "hero_errors": _errors(hero),
                     "opponent_errors": _errors(opponent),
                     "decisions": decisions,
+                    "hero_telemetry": _route_telemetry(hero),
                 }
             if obs.select.context == SelectContext.IS_FIRST:
                 action = _force(obs.select, hero_seat, order)
@@ -113,14 +133,21 @@ def main() -> int:
     parser.add_argument("--workers", type=int, default=max(1, (mp.cpu_count() or 2) - 1))
     parser.add_argument("--seed", type=int, required=True)
     parser.add_argument("--max-decisions", type=int, default=2_000)
+    parser.add_argument("--hero-env", default="{}", help="JSON env overrides for the hero submission")
+    parser.add_argument("--opponent-env", default="{}", help="JSON env overrides for the opponent submission")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    hero_env = json.loads(args.hero_env)
+    opponent_env = json.loads(args.opponent_env)
+    if not isinstance(hero_env, dict) or not isinstance(opponent_env, dict):
+        parser.error("--hero-env and --opponent-env must be JSON objects")
     started = time.time()
     hero = args.hero.resolve(); opponent = args.opponent.resolve()
-    tasks = [(index, str(hero), str(opponent), args.actual_order, args.seed, args.max_decisions)
+    tasks = [(index, str(hero), str(opponent), args.actual_order, args.seed, args.max_decisions, hero_env, opponent_env)
              for index in range(args.games)]
     totals = {"wins": 0, "draws": 0, "hero_policy_errors": 0, "opponent_policy_errors": 0, "decisions": 0}
     seats = {"0": {"games": 0, "wins": 0}, "1": {"games": 0, "wins": 0}}
+    telemetry: dict[str, float] = {}
     context = mp.get_context("spawn")
     with context.Pool(args.workers) as pool:
         for completed, row in enumerate(pool.imap_unordered(run_game, tasks, chunksize=2), 1):
@@ -128,6 +155,8 @@ def main() -> int:
             totals["hero_policy_errors"] += row["hero_errors"]
             totals["opponent_policy_errors"] += row["opponent_errors"]
             totals["decisions"] += row["decisions"]
+            for key, value in row.get("hero_telemetry", {}).items():
+                telemetry[key] = telemetry.get(key, 0.0) + value
             seat = str(row["physical_seat"])
             seats[seat]["games"] += 1; seats[seat]["wins"] += row["win"]
             if completed % 100 == 0:
@@ -142,6 +171,7 @@ def main() -> int:
         "decisions": totals["decisions"], "seed": args.seed,
         "hero": str(hero), "opponent": str(opponent),
         "hero_sha256": sha256_path(hero), "opponent_sha256": sha256_path(opponent),
+        "hero_telemetry": dict(sorted(telemetry.items())),
         "actual_order_accounting_complete": sum(value["games"] for value in seats.values()) == args.games,
         "elapsed_seconds": time.time() - started,
     }

@@ -198,8 +198,17 @@ def _prize_value(card: Any) -> int:
 class PromptResolver:
     """Resolve every non-main prompt from its exact parent contract."""
 
-    def __init__(self, *, go_first: bool = True) -> None:
+    def __init__(self, *, go_first: bool = True, second_opening_v2: bool = False) -> None:
         self.go_first = bool(go_first)
+        self.second_opening_v2 = bool(second_opening_v2)
+
+    def _in_second_opening(self, plan: MacroPlan) -> bool:
+        """Detect the S1 second-opening context from public plan state only."""
+        if not self.second_opening_v2:
+            return False
+        if plan.actual_order != "second" or plan.own_turn_ordinal != 1:
+            return False
+        return plan.active is not None and plan.active.card_id == VOLBEAT
 
     def resolve(self, obs: Any, plan: MacroPlan, memory: Any = None) -> SelectionIntent:
         select = obs.select
@@ -399,7 +408,33 @@ class PromptResolver:
         # live rank-34 pilot overwhelmingly chose Dragon Applin pairs here and
         # obtained Grookey through the four Poffin/Pad lines; the former
         # attacker+engine rule left only one attacker in 78% of attack windows.
-        if name == "quick_sign":
+        if name == "quick_sign" and self._in_second_opening(plan):
+            # S1 second opening: fill the remaining opening requirements rather
+            # than blindly forcing two Applin.  Missing Applin lines first, the
+            # first engine line second, then an optional second engine/useful
+            # body.  Quick Sign supplies the Applin lines that Poffin reserved.
+            while applin_count + sum(option_card_id(obs, i) in {APPLIN_GRASS, APPLIN_DRAGON} for i in useful) < 2:
+                before = len(useful)
+                take_one((APPLIN_DRAGON, APPLIN_GRASS))
+                if len(useful) == before:
+                    break
+            if engine_count + sum(option_card_id(obs, i) == GROOKEY for i in useful) < 1 and len(useful) < 2:
+                take_one((GROOKEY,))
+            if engine_count + sum(option_card_id(obs, i) == GROOKEY for i in useful) < 2 and len(useful) < 2:
+                take_one((GROOKEY,))
+            if len(useful) < 2:
+                take_one((SHAYMIN,))
+        elif name == "poffin" and self._in_second_opening(plan):
+            # S1 second opening: Quick Sign supplies the Applin lines, so
+            # Poffin prioritizes the engine instead of redundantly filling the
+            # attacker slots Quick Sign is about to occupy.
+            if engine_count == 0:
+                take_one((GROOKEY,))
+            if engine_count + sum(option_card_id(obs, i) == GROOKEY for i in useful) < 2 and len(useful) < 2:
+                take_one((GROOKEY,))
+            if len(useful) < 2:
+                take_one((SHAYMIN,))
+        elif name == "quick_sign":
             while applin_count + sum(option_card_id(obs, i) in {APPLIN_GRASS, APPLIN_DRAGON} for i in useful) < 2:
                 before = len(useful)
                 take_one((APPLIN_DRAGON, APPLIN_GRASS))
@@ -407,13 +442,14 @@ class PromptResolver:
                     break
         elif applin_count == 0:
             take_one((APPLIN_DRAGON, APPLIN_GRASS))
-        if engine_count == 0 and len(useful) < 2:
+        if engine_count == 0 and len(useful) < 2 and not self._in_second_opening(plan):
             take_one((GROOKEY,))
-        if applin_count + sum(option_card_id(obs, i) in {APPLIN_GRASS, APPLIN_DRAGON} for i in useful) < 2:
+        if applin_count + sum(option_card_id(obs, i) in {APPLIN_GRASS, APPLIN_DRAGON} for i in useful) < 2 and not self._in_second_opening(plan):
             take_one((APPLIN_DRAGON, APPLIN_GRASS))
-        if engine_count + sum(option_card_id(obs, i) == GROOKEY for i in useful) < 2:
+        if engine_count + sum(option_card_id(obs, i) == GROOKEY for i in useful) < 2 and not self._in_second_opening(plan):
             take_one((GROOKEY,))
-        take_one((SHAYMIN,))
+        if not self._in_second_opening(plan):
+            take_one((SHAYMIN,))
         remaining = _rank_by_ids(obs, (APPLIN_DRAGON, APPLIN_GRASS, GROOKEY, SHAYMIN))
         useful.extend(index for index in remaining if index not in useful and option_card_id(obs, index) in {APPLIN_GRASS, APPLIN_DRAGON, GROOKEY, SHAYMIN})
         desired = min(int(obs.select.maxCount), 2, len(useful))
@@ -446,6 +482,11 @@ class PromptResolver:
         counts = _board_counts(obs)
         has_applin = any(counts.get(card_id, 0) for card_id in (APPLIN_GRASS, APPLIN_DRAGON))
         has_grookey = counts.get(GROOKEY, 0) > 0
+        # S1 second opening: Quick Sign is guaranteed to place an Applin later
+        # this turn, so Hilda may bank a Dipplin for that future Applin even
+        # though no Applin is currently in play.
+        if self._in_second_opening(plan):
+            has_applin = True
         priorities: tuple[int, ...]
         if has_applin:
             priorities = (DIPPLIN, THWACKEY)

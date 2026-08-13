@@ -182,7 +182,8 @@ class FestivalD0Planner:
 
     def __init__(self, *, go_first: bool = True) -> None:
         self.go_first = bool(go_first)
-        self.resolver = PromptResolver(go_first=self.go_first)
+        self.second_opening_v2 = _bool_env("PTCG_DIPPLIN_SECOND_OPENING_V2", False)
+        self.resolver = PromptResolver(go_first=self.go_first, second_opening_v2=self.second_opening_v2)
         self.route_v2_enabled = _bool_env("PTCG_DIPPLIN_ROUTE_V2", False)
 
     def propose(self, obs: Any, snapshot: PlanSnapshot | None, memory: PlanMemory) -> PolicyProposal:
@@ -483,6 +484,157 @@ class FestivalD0Planner:
             missing = [item for item in missing if item != "replacement_applin"]
         return tuple(missing)
 
+    def _second_opening_basic_play(
+        self,
+        obs: Any,
+        card_id: int,
+        *,
+        applin_lines: int,
+        engine_lines: int,
+        free_slots: int,
+        engine_cap: int = 2,
+        applin_cap: int = 2,
+    ) -> list[int]:
+        """Return a slot-safe Basic play, or [] if none is legal/useful.
+
+        A Basic is safe only when it satisfies a missing opening line and leaves
+        enough free Bench slots for the Quick Sign slots that remain required.
+        """
+        indices = self._play(obs, card_id)
+        if not indices:
+            return []
+        if card_id in {APPLIN_DRAGON, APPLIN_GRASS}:
+            if applin_lines >= applin_cap:
+                return []
+            new_applin = applin_lines + 1
+            new_engine = engine_lines
+        elif card_id == GROOKEY:
+            if engine_lines >= engine_cap:
+                return []
+            new_applin = applin_lines
+            new_engine = engine_lines + 1
+        else:
+            return []
+        useful_after = min(2, max(0, 2 - new_applin) + max(0, 1 - new_engine))
+        if free_slots - 1 < useful_after:
+            return []
+        return indices
+
+    def _second_opening_v2(self, obs: Any, plan: MacroPlan, memory: PlanMemory) -> SelectionIntent | None:
+        """S1 SECOND_OPENING_V2 deterministic second-player first-turn route.
+
+        Reserve only the Bench slots Quick Sign still needs, perform the useful
+        setup that does not consume those slots, spend the second-player
+        Supporter opportunity, then Quick Sign into the best next-turn board.
+        """
+        hero, _ = _players(obs)
+        active = _active(hero)
+        if _card_id(active) != VOLBEAT:
+            return None
+        bench = [card for card in (getattr(hero, "bench", None) or []) if card is not None]
+        bench_max = int(getattr(hero, "benchMax", 5) or 5)
+        free_slots = max(0, bench_max - len(bench))
+        in_play = [card for card in [active] + bench if card is not None]
+        applin_lines = sum(_card_id(card) in {APPLIN_GRASS, APPLIN_DRAGON, DIPPLIN} for card in in_play)
+        engine_lines = sum(_card_id(card) in {GROOKEY, THWACKEY} for card in in_play)
+        missing_applin = max(0, 2 - applin_lines)
+        missing_engine = max(0, 1 - engine_lines)
+        useful_slots = min(2, missing_applin + missing_engine)
+        hand_ids = set(plan.known_hand_ids)
+
+        # A. Hilda banks the evolution and Energy for the Applin Quick Sign is
+        # guaranteed to place later this turn.
+        hilda = self._play(obs, HILDA)
+        if hilda and (DIPPLIN not in hand_ids or GRASS_ENERGY not in hand_ids):
+            return SelectionIntent(
+                tuple(hilda), 1, "second_opening_v2_hilda",
+                "bank the evolution and Energy for the Quick Sign Applin",
+            )
+
+        # B. Lillie rebuilds a depleted hand; safe permanent Basics come first.
+        lillie = self._play(obs, LILLIE)
+        hand_count = _int(getattr(hero, "handCount", None), len(getattr(hero, "hand", None) or []))
+        if lillie and hand_count <= 4:
+            for card_id in (GROOKEY, APPLIN_GRASS, APPLIN_DRAGON):
+                safe = self._second_opening_basic_play(
+                    obs, card_id,
+                    applin_lines=applin_lines, engine_lines=engine_lines, free_slots=free_slots,
+                )
+                if safe:
+                    return SelectionIntent(
+                        tuple(safe), 1, "second_opening_v2_manual_basic",
+                        "safe permanent Basics before the draw rebuild",
+                    )
+            return SelectionIntent(
+                tuple(lillie), 1, "second_opening_v2_lillie",
+                "rebuild a depleted opening hand",
+            )
+
+        # C. Non-Supporter search for the missing engine / evolution line.
+        bug_set = self._play(obs, BUG_SET)
+        poke_pad = self._play(obs, POKE_PAD)
+        if missing_engine and GROOKEY not in hand_ids:
+            if bug_set:
+                return SelectionIntent(
+                    tuple(bug_set), 1, "second_opening_v2_bug_set",
+                    "search the missing engine Basic",
+                )
+            if poke_pad:
+                return SelectionIntent(
+                    tuple(poke_pad), 1, "second_opening_v2_pad",
+                    "fetch the missing engine Basic",
+                )
+        if missing_applin and DIPPLIN not in hand_ids and poke_pad:
+            return SelectionIntent(
+                tuple(poke_pad), 1, "second_opening_v2_pad",
+                "fetch the missing evolution line",
+            )
+
+        # D. Establish the missing engine first, then attacker lines, while
+        # preserving the Quick Sign slots.  Manual Basics are preferred over
+        # Poffin when the needed card is already in hand.
+        poffin = self._play(obs, POFFIN)
+        if missing_engine:
+            grookey = self._second_opening_basic_play(
+                obs, GROOKEY,
+                applin_lines=applin_lines, engine_lines=engine_lines, free_slots=free_slots,
+            )
+            if grookey:
+                return SelectionIntent(
+                    tuple(grookey), 1, "second_opening_v2_manual_basic",
+                    "place the engine Basic while preserving the Quick Sign slots",
+                )
+            if poffin and free_slots >= useful_slots + 1:
+                return SelectionIntent(
+                    tuple(poffin), 1, "second_opening_v2_poffin",
+                    "establish the engine line before Quick Sign",
+                )
+        if missing_applin and engine_lines >= 1:
+            for card_id in (APPLIN_GRASS, APPLIN_DRAGON):
+                applin = self._second_opening_basic_play(
+                    obs, card_id,
+                    applin_lines=applin_lines, engine_lines=engine_lines, free_slots=free_slots,
+                )
+                if applin:
+                    return SelectionIntent(
+                        tuple(applin), 1, "second_opening_v2_manual_basic",
+                        "place the attacker Basic while preserving the Quick Sign slots",
+                    )
+            if poffin and free_slots >= useful_slots + 1:
+                return SelectionIntent(
+                    tuple(poffin), 1, "second_opening_v2_poffin",
+                    "supply the attacker line now that the engine exists",
+                )
+
+        # E. Quick Sign fills the remaining opening requirements.
+        quick_sign = self._attack(obs, QUICK_SIGN)
+        if quick_sign:
+            return SelectionIntent(
+                tuple(quick_sign), 1, "second_opening_v2_quick_sign",
+                "develop the remaining lines with the opening search attack",
+            )
+        return None
+
     def _main(self, obs: Any, plan: MacroPlan, memory: PlanMemory) -> SelectionIntent:
         hero, opponent = _players(obs)
         active = _active(hero)
@@ -521,6 +673,10 @@ class FestivalD0Planner:
         # produced a dead turn in both represented archetypes. The starting
         # player retains the longer permanent-setup sequence below.
         if quick_sign and plan.own_turn_ordinal == 1 and plan.actual_order == "second":
+            if self.second_opening_v2:
+                opening = self._second_opening_v2(obs, plan, memory)
+                if opening is not None:
+                    return opening
             return SelectionIntent(tuple(quick_sign), 1, "quick_sign_attack", "preserve two Bench slots for the opening search attack")
 
         # Broad replay pattern 1: on the first hero turn, thin permanent setup
@@ -936,6 +1092,7 @@ class DipplinCompetitionAgent:
         self.route_telemetry: dict[str, float] = {}
         self._search = None
         self._first_productive_turn_recorded = False
+        self._second_opening_recorded = False
         self._refresh_telemetry()
 
     def reset(self) -> None:
@@ -943,6 +1100,7 @@ class DipplinCompetitionAgent:
         self.telemetry.reset()
         self.errors = 0
         self._first_productive_turn_recorded = False
+        self._second_opening_recorded = False
         if self._search is not None and hasattr(self._search, "reset"):
             self._search.reset()
         self._refresh_telemetry()
@@ -980,6 +1138,13 @@ class DipplinCompetitionAgent:
         took_do_wave = DO_THE_WAVE in selected_attack_ids
         telemetry.increment("decisions")
         telemetry.record_phase(proposal.plan.phase)
+        if resolver.startswith("second_opening_v2"):
+            if not self._second_opening_recorded:
+                self._second_opening_recorded = True
+                telemetry.increment("second_opening_v2_opportunities")
+            telemetry.increment(resolver)
+            if resolver == "second_opening_v2_quick_sign":
+                self._record_opening_composition(obs, proposal.plan)
         if not proposal.intent.known_context:
             telemetry.increment("unknown_contexts")
             telemetry.increment("legal_fallbacks")
@@ -1065,6 +1230,31 @@ class DipplinCompetitionAgent:
                 telemetry.increment("second_attacks_taken")
             else:
                 telemetry.increment("second_attacks_missed")
+
+    def _record_opening_composition(self, obs: Any, plan: MacroPlan) -> None:
+        """Record pre-Quick-Sign opening board composition (S1 telemetry)."""
+        hero, _ = _players(obs)
+        active = _active(hero)
+        bench = [card for card in (getattr(hero, "bench", None) or []) if card is not None]
+        in_play = [card for card in [active] + bench if card is not None]
+        telemetry = self.telemetry
+        telemetry.increment(
+            "opening_applin_lines",
+            sum(_card_id(card) in {APPLIN_GRASS, APPLIN_DRAGON, DIPPLIN} for card in in_play),
+        )
+        telemetry.increment(
+            "opening_engine_lines",
+            sum(_card_id(card) in {GROOKEY, THWACKEY} for card in in_play),
+        )
+        telemetry.increment("opening_bench_count", len(bench))
+        telemetry.increment(
+            "opening_hand_count",
+            _int(getattr(hero, "handCount", None), len(getattr(hero, "hand", None) or [])),
+        )
+        hand_ids = set(plan.known_hand_ids)
+        telemetry.increment("opening_has_dipplin_in_hand", int(DIPPLIN in hand_ids))
+        telemetry.increment("opening_has_energy_in_hand", int(GRASS_ENERGY in hand_ids))
+        telemetry.increment("opening_has_festival_in_hand", int(FESTIVAL in hand_ids))
 
     def __call__(self, raw: dict[str, Any]) -> list[int]:
         if not raw or raw.get("select") is None:
