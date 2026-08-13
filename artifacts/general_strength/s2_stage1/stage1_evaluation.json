@@ -3,7 +3,7 @@
     "archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
     "name": "Dipplin S1 current-tree",
     "package_manifest": {
-      "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/dipplin_s1/submission.manifest.json",
+      "path": "artifacts/dipplin_s1/submission.manifest.json",
       "sha256": "4071c03a020446436b8d33e1951fdaf5229ae4ab760a8283dc7d6f323e02f92c",
       "variant": "s1"
     },
@@ -13,7 +13,7 @@
     "archive_sha256": "813fab9efd432738856e7d7b784809c7b0c5aef51b3c677d7205f203490d1510",
     "name": "Dipplin S2 pre-attack sequence proof",
     "package_manifest": {
-      "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/dipplin_s2/submission.manifest.json",
+      "path": "artifacts/dipplin_s2/submission.manifest.json",
       "sha256": "4801239bc3d328909bbd4e5461b84b140dd8931e3b581636ecbc662a97bad1bc",
       "variant": "s2"
     },
@@ -22,7 +22,7 @@
   "evidence_files": [
     {
       "id": "frozen_s2_hypothesis",
-      "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/data/dipplin_general_strength/s2_pre_attack_sequence_hypothesis.json",
+      "path": "data/dipplin_general_strength/s2_pre_attack_sequence_hypothesis.json",
       "sha256": "aa2c5a070052ed9b706c20de548b5ad38ca48949156411fb62ff9a5dd39d4f87"
     }
   ],
@@ -67,19 +67,25 @@
       "screen": "forced_first_regression"
     },
     "stage4": {
-      "minimum_each_order_s2_win_rate": 0.43,
+      "candidate_games_per_order": 300,
+      "candidate_games_total": 600,
+      "control_games_per_order": 500,
+      "control_wins_by_order": {
+        "first": 302,
+        "second": 197
+      },
+      "minimum_candidate_minus_control_each_order_delta": -0.04,
+      "minimum_candidate_minus_control_pooled_delta": -0.03,
       "minimum_pooled_s2_win_rate": 0.47,
       "orders": [
         "first",
         "second"
       ],
       "paired": false,
-      "requested_games_per_order": 300,
-      "requested_games_total": 600,
       "require_no_significant_loss": true,
       "require_zero_failures_policy_errors_illegal_actions": true,
       "screen": "same_deck_s2_vs_s1",
-      "significant_loss_definition": "Reject if the relevant independent Newcombe candidate-minus-S1 difference 95% upper bound is below zero or the relevant S2 Wilson 95% upper bound is below the corresponding no-loss threshold.",
+      "significant_loss_definition": "Reject if a relevant independent Newcombe candidate-minus-control difference 95% upper bound is below zero.",
       "statistics": [
         "wilson_per_arm",
         "independent_newcombe_wilson_difference"
@@ -91,18 +97,20 @@
       "maximum_certified_exploratory_incomparable": 0,
       "paired_by_episode_and_decision": true,
       "primary_only_for_improvement": true,
-      "require_ed_to_non_ed_transitions_exceed_reverse": true,
+      "require_favorable_ed_exits_exceed_reverse_ed_entries": true,
       "require_no_new_failure_family": true,
+      "require_no_primary_incomparable_uncertifiable_burden_increase": true,
       "require_s2_expert_dominates_primary_count_below_s1": true,
       "require_s2_expert_dominates_primary_rate_below_s1": true,
+      "require_zero_candidate_policy_errors": true,
       "screen": "paired_frozen_validation_regret",
       "split": "VALIDATION"
     }
   },
   "schema": "dipplin-s2-stage-evaluation-v1",
   "spec": {
-    "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/data/dipplin_general_strength/s2_stage_evaluation_spec.json",
-    "sha256": "7e95fd1e722b73fcc54814dbf661afc2b483e2d490c95b3d1bace44aa0f088db"
+    "path": "data/dipplin_general_strength/s2_stage_evaluation_spec.json",
+    "sha256": "bf4ec9a7a99067c0dae8b9f10c00f8ce25fb93c01b5462c06120009cf4f1ed61"
   },
   "stages": {
     "stage1": {
@@ -159,7 +167,7 @@
               "d1_errors": 11,
               "d1_timeouts": 222
             },
-            "policy": "D1 engine-error/node-budget and timeout counters are explicit search abstentions with baseline fallback; unknown error, timeout, cleanup, or failure counters are fatal."
+            "policy": "D1 engine-error/node-budget and timeout counters are explicit search abstentions with baseline fallback; unknown error, timeout, cleanup, failure, or unknown-context counters are fatal."
           },
           "opponent_illegal_actions": 0,
           "opponent_name": "A2",
@@ -179,7 +187,7 @@
           "source": {
             "archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
             "artifact_sha256": "abd325369edb3e9b07942d1d8bf6523c4f5becf3a3f6f43a539cb195c9abfb5f",
-            "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/general_strength/s1_buckets/a2_second_trace_100.json",
+            "path": "artifacts/general_strength/s1_buckets/a2_second_trace_100.json",
             "tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
           },
           "wilson_95": [
@@ -241,7 +249,7 @@
               "d1_errors": 25,
               "d1_timeouts": 243
             },
-            "policy": "D1 engine-error/node-budget and timeout counters are explicit search abstentions with baseline fallback; unknown error, timeout, cleanup, or failure counters are fatal."
+            "policy": "D1 engine-error/node-budget and timeout counters are explicit search abstentions with baseline fallback; unknown error, timeout, cleanup, failure, or unknown-context counters are fatal."
           },
           "opponent_illegal_actions": 0,
           "opponent_name": "d842",
@@ -261,7 +269,7 @@
           "source": {
             "archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
             "artifact_sha256": "f876698b95b8defe8b81f35b9684ff5fcb28867dcba39da0d81ea6c58f427baf",
-            "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/general_strength/s1_buckets/d842_second_trace_100.json",
+            "path": "artifacts/general_strength/s1_buckets/d842_second_trace_100.json",
             "tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
           },
           "wilson_95": [
@@ -322,7 +330,7 @@
               "d1_errors": 6,
               "d1_timeouts": 206
             },
-            "policy": "D1 engine-error/node-budget and timeout counters are explicit search abstentions with baseline fallback; unknown error, timeout, cleanup, or failure counters are fatal."
+            "policy": "D1 engine-error/node-budget and timeout counters are explicit search abstentions with baseline fallback; unknown error, timeout, cleanup, failure, or unknown-context counters are fatal."
           },
           "opponent_illegal_actions": 0,
           "opponent_name": "AZ2.4a",
@@ -342,7 +350,7 @@
           "source": {
             "archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
             "artifact_sha256": "e22162ccb5c852841d9edaeb9ce7717202ff00abfd379343efe373e8c71f3a19",
-            "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/general_strength/s1_buckets/az2_4a_second_trace_100.json",
+            "path": "artifacts/general_strength/s1_buckets/az2_4a_second_trace_100.json",
             "tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
           },
           "wilson_95": [
@@ -403,7 +411,7 @@
               "d1_errors": 2,
               "d1_timeouts": 386
             },
-            "policy": "D1 engine-error/node-budget and timeout counters are explicit search abstentions with baseline fallback; unknown error, timeout, cleanup, or failure counters are fatal."
+            "policy": "D1 engine-error/node-budget and timeout counters are explicit search abstentions with baseline fallback; unknown error, timeout, cleanup, failure, or unknown-context counters are fatal."
           },
           "opponent_illegal_actions": 0,
           "opponent_name": "AZ2.7",
@@ -423,7 +431,7 @@
           "source": {
             "archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
             "artifact_sha256": "055ab5bc7de48f64a4a0202f9433d8a8ff0e9f8b8fed907036b71457adc7b030",
-            "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/general_strength/s1_buckets/az2_7_second_trace_100.json",
+            "path": "artifacts/general_strength/s1_buckets/az2_7_second_trace_100.json",
             "tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98"
           },
           "wilson_95": [
@@ -487,7 +495,7 @@
               "d1_errors": 21,
               "d1_timeouts": 95
             },
-            "policy": "D1 engine-error/node-budget and timeout counters are explicit search abstentions with baseline fallback; unknown error, timeout, cleanup, or failure counters are fatal."
+            "policy": "D1 engine-error/node-budget and timeout counters are explicit search abstentions with baseline fallback; unknown error, timeout, cleanup, failure, or unknown-context counters are fatal."
           },
           "opponent_illegal_actions": 0,
           "opponent_name": "A2",
@@ -585,7 +593,7 @@
           "source": {
             "archive_sha256": "813fab9efd432738856e7d7b784809c7b0c5aef51b3c677d7205f203490d1510",
             "artifact_sha256": "46a0b21a50572ddece82d475805a9aa7f478898251bf8b96e14996fda9530e9b",
-            "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/general_strength/s2_stage1/a2_second_100.json",
+            "path": "artifacts/general_strength/s2_stage1/a2_second_100.json",
             "tree_sha256": "c822bb76fa40a138a6bb07fcfd6e6cc58f8ade0dd65c49425bc703f3170da922"
           },
           "wilson_95": [
@@ -647,7 +655,7 @@
               "d1_errors": 19,
               "d1_timeouts": 128
             },
-            "policy": "D1 engine-error/node-budget and timeout counters are explicit search abstentions with baseline fallback; unknown error, timeout, cleanup, or failure counters are fatal."
+            "policy": "D1 engine-error/node-budget and timeout counters are explicit search abstentions with baseline fallback; unknown error, timeout, cleanup, failure, or unknown-context counters are fatal."
           },
           "opponent_illegal_actions": 0,
           "opponent_name": "d842",
@@ -738,7 +746,7 @@
           "source": {
             "archive_sha256": "813fab9efd432738856e7d7b784809c7b0c5aef51b3c677d7205f203490d1510",
             "artifact_sha256": "a4c7ea48f3f13a2be75b7b2f68880e9dfc18725fbd356e86be3ab5cc24ac531d",
-            "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/general_strength/s2_stage1/d842_second_100.json",
+            "path": "artifacts/general_strength/s2_stage1/d842_second_100.json",
             "tree_sha256": "c822bb76fa40a138a6bb07fcfd6e6cc58f8ade0dd65c49425bc703f3170da922"
           },
           "wilson_95": [
@@ -799,7 +807,7 @@
               "d1_errors": 3,
               "d1_timeouts": 305
             },
-            "policy": "D1 engine-error/node-budget and timeout counters are explicit search abstentions with baseline fallback; unknown error, timeout, cleanup, or failure counters are fatal."
+            "policy": "D1 engine-error/node-budget and timeout counters are explicit search abstentions with baseline fallback; unknown error, timeout, cleanup, failure, or unknown-context counters are fatal."
           },
           "opponent_illegal_actions": 0,
           "opponent_name": "AZ2.4a",
@@ -960,7 +968,7 @@
           "source": {
             "archive_sha256": "813fab9efd432738856e7d7b784809c7b0c5aef51b3c677d7205f203490d1510",
             "artifact_sha256": "22c3b49a5b4f3279c234cf96bdb7674e00a9e306987c433df81105fffb4b4a42",
-            "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/general_strength/s2_stage1/az2_4a_second_100.json",
+            "path": "artifacts/general_strength/s2_stage1/az2_4a_second_100.json",
             "tree_sha256": "c822bb76fa40a138a6bb07fcfd6e6cc58f8ade0dd65c49425bc703f3170da922"
           },
           "wilson_95": [
@@ -1018,7 +1026,7 @@
               "d1_abstention_reason_timeout": 375,
               "d1_timeouts": 375
             },
-            "policy": "D1 engine-error/node-budget and timeout counters are explicit search abstentions with baseline fallback; unknown error, timeout, cleanup, or failure counters are fatal."
+            "policy": "D1 engine-error/node-budget and timeout counters are explicit search abstentions with baseline fallback; unknown error, timeout, cleanup, failure, or unknown-context counters are fatal."
           },
           "opponent_illegal_actions": 0,
           "opponent_name": "AZ2.7",
@@ -1088,7 +1096,7 @@
           "source": {
             "archive_sha256": "813fab9efd432738856e7d7b784809c7b0c5aef51b3c677d7205f203490d1510",
             "artifact_sha256": "fd1e3650e1457d9911e8db178d04c5246465b09b92b0177843263b2ddfe5d9b0",
-            "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/general_strength/s2_stage1/az2_7_second_100.json",
+            "path": "artifacts/general_strength/s2_stage1/az2_7_second_100.json",
             "tree_sha256": "c822bb76fa40a138a6bb07fcfd6e6cc58f8ade0dd65c49425bc703f3170da922"
           },
           "wilson_95": [
@@ -1462,7 +1470,6 @@
           "minimum_3pp_pooled_lift": true,
           "no_catastrophic_matchup_collapse": true,
           "no_material_pooled_drop": true,
-          "strong_5pp_pooled_lift": true,
           "zero_failures_and_policy_errors": true,
           "zero_fatal_operational_telemetry": true,
           "zero_illegal_actions": true
@@ -1478,6 +1485,9 @@
         "reasons": [
           "POOLED_LIFT_AT_OR_ABOVE_STRONG_SIGNAL"
         ],
+        "targets": {
+          "strong_5pp_pooled_lift": true
+        },
         "thresholds": {
           "catastrophic_matchup_drop_delta": -0.2,
           "expected_actual_order": "second",
@@ -1863,16 +1873,36 @@
       "status": "PENDING"
     },
     "stage3": {
-      "status": "PENDING"
+      "blocked_by": "stage2",
+      "decision": {
+        "gates": {},
+        "verdict": "NOT_EVALUATED"
+      },
+      "status": "INADMISSIBLE_PRECEDING_STAGE_PENDING"
     },
     "stage4": {
-      "status": "PENDING"
+      "blocked_by": "stage2",
+      "decision": {
+        "gates": {},
+        "verdict": "NOT_EVALUATED"
+      },
+      "status": "INADMISSIBLE_PRECEDING_STAGE_PENDING"
     },
     "stage5": {
-      "status": "PENDING"
+      "blocked_by": "stage2",
+      "decision": {
+        "gates": {},
+        "verdict": "NOT_EVALUATED"
+      },
+      "status": "INADMISSIBLE_PRECEDING_STAGE_PENDING"
     },
     "stage6": {
-      "status": "PENDING"
+      "blocked_by": "stage2",
+      "decision": {
+        "gates": {},
+        "verdict": "NOT_EVALUATED"
+      },
+      "status": "INADMISSIBLE_PRECEDING_STAGE_PENDING"
     }
   }
 }

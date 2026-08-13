@@ -39,6 +39,13 @@ OPPONENT_TREE = "a" * 64
 OPPONENT_DECK = "b" * 64
 
 
+@pytest.fixture(autouse=True)
+def _synthetic_repository_root(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(stage_module, "REPO_ROOT", tmp_path.resolve())
+
+
 def _write_json(path: Path, value: object) -> None:
     path.write_text(
         json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8"
@@ -1475,3 +1482,82 @@ def test_cli_writes_kill_report_and_returns_nonzero(tmp_path: Path) -> None:
     assert json.loads(output.read_text(encoding="utf-8"))["stages"]["stage1"][
         "decision"
     ]["verdict"] == "KILL"
+
+
+def test_report_paths_are_portable_and_exact_across_checkout_roots(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    roots = [tmp_path / "checkout-a", tmp_path / "checkout-b"]
+    specs = [
+        _build_spec(
+            root,
+            baseline_wins=[4],
+            candidate_wins=[8],
+            games_per_matchup=10,
+        )
+        for root in roots
+    ]
+    reports = []
+    for root, spec_path in zip(roots, specs):
+        monkeypatch.setattr(stage_module, "REPO_ROOT", root.resolve())
+        reports.append(evaluate_spec(spec_path))
+
+    assert reports[0] == reports[1]
+    report = reports[0]
+    paths = [
+        report["spec"]["path"],
+        report["evidence_files"][0]["path"],
+        report["baseline"]["package_manifest"]["path"],
+        report["candidate"]["package_manifest"]["path"],
+        report["stages"]["stage1"]["baseline_cells"][0]["source"]["path"],
+        report["stages"]["stage1"]["candidate_cells"][0]["source"]["path"],
+    ]
+    assert paths == [
+        "spec.json",
+        "hypothesis.json",
+        "baseline-manifest.json",
+        "candidate-manifest.json",
+        "baseline-0.json",
+        "candidate-0.json",
+    ]
+    assert all(not Path(value).is_absolute() and "\\" not in value for value in paths)
+
+
+def test_stage_evidence_cannot_escape_repository(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    root = tmp_path / "checkout"
+    spec_path = _build_spec(
+        root,
+        baseline_wins=[4],
+        candidate_wins=[8],
+        games_per_matchup=10,
+    )
+    outside = tmp_path / "outside.json"
+    _write_json(outside, {"schema": "outside"})
+    _rewrite_spec(
+        spec_path,
+        lambda spec: spec["evidence_files"][0].update(
+            {"path": str(outside), "sha256": _sha256(outside)}
+        ),
+    )
+    monkeypatch.setattr(stage_module, "REPO_ROOT", root.resolve())
+
+    with pytest.raises(StageEvaluationError, match="escapes the repository"):
+        evaluate_spec(spec_path)
+
+
+def test_cli_repo_relative_overwrite_guard_preserves_evidence(tmp_path: Path) -> None:
+    spec_path = _build_spec(
+        tmp_path,
+        baseline_wins=[4],
+        candidate_wins=[8],
+        games_per_matchup=10,
+    )
+    evidence = tmp_path / "hypothesis.json"
+    before = evidence.read_bytes()
+
+    with pytest.raises(SystemExit):
+        main(["--spec", str(spec_path), "--output", str(evidence)])
+
+    assert evidence.read_bytes() == before

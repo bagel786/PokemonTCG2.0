@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any, Iterable, Mapping, Sequence
 
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
 SPEC_SCHEMA = "dipplin-s2-stage-evaluation-spec-v1"
 REPORT_SCHEMA = "dipplin-s2-stage-evaluation-v1"
 RESULT_SCHEMA = "dipplin-authentic-evaluation-v1"
@@ -310,7 +311,36 @@ def _read_json(path: Path, *, field: str) -> Mapping[str, Any]:
 
 def _resolve(spec_path: Path, raw: object, *, field: str) -> Path:
     path = Path(_string(raw, field=field))
-    return path if path.is_absolute() else (spec_path.parent / path).resolve()
+    resolved = path.resolve() if path.is_absolute() else (spec_path.parent / path).resolve()
+    _repo_relative_path(resolved, field=field)
+    return resolved
+
+
+def _repo_relative_path(path: Path, *, field: str) -> str:
+    """Encode one verified repository file as a portable canonical POSIX path."""
+
+    resolved = path.resolve()
+    try:
+        relative = resolved.relative_to(REPO_ROOT.resolve())
+    except ValueError as error:
+        raise StageEvaluationError(f"{field} escapes the repository") from error
+    encoded = relative.as_posix()
+    if not encoded or encoded == ".":
+        raise StageEvaluationError(f"{field} must name a repository file")
+    return encoded
+
+
+def _resolve_report_path(raw: object, *, field: str) -> Path:
+    """Decode a canonical report path against the repository, never the CWD."""
+
+    encoded = _string(raw, field=field)
+    path = Path(encoded)
+    if path.is_absolute() or "\\" in encoded:
+        raise StageEvaluationError(f"{field} is not a repo-relative POSIX path")
+    resolved = (REPO_ROOT / path).resolve()
+    if _repo_relative_path(resolved, field=field) != encoded:
+        raise StageEvaluationError(f"{field} is not a canonical repository path")
+    return resolved
 
 
 def _validate_evidence_files(
@@ -336,7 +366,15 @@ def _validate_evidence_files(
         actual = sha256_file(path)
         if actual != expected:
             raise StageEvaluationError(f"evidence file {identifier} hash mismatch")
-        result.append({"id": identifier, "path": str(path), "sha256": actual})
+        result.append(
+            {
+                "id": identifier,
+                "path": _repo_relative_path(
+                    path, field=f"evidence_files[{offset}].path"
+                ),
+                "sha256": actual,
+            }
+        )
     return result
 
 
@@ -403,7 +441,11 @@ def _validate_package_manifest(
             raise StageEvaluationError(
                 f"{field}.package_manifest {dotted_path} mismatch"
             )
-    return {"path": str(path), "sha256": actual_hash, "variant": expected_variant}
+    return {
+        "path": _repo_relative_path(path, field=f"{field}.package_manifest.path"),
+        "sha256": actual_hash,
+        "variant": expected_variant,
+    }
 
 
 def wilson(wins: int, games: int, z: float = 1.959963984540054) -> list[float]:
@@ -959,7 +1001,9 @@ def _artifact_summary(
         "opponent_name": opponent_name,
         "actual_order": order,
         "source": {
-            "path": str(artifact_path),
+            "path": _repo_relative_path(
+                artifact_path, field=f"{role}.{cell_id}.path"
+            ),
             "artifact_sha256": actual_artifact_hash,
             "tree_sha256": expected_tree,
             "archive_sha256": expected_archive,
@@ -2512,11 +2556,21 @@ def _stage5_evaluation(
     return {
         "status": "EVALUATED",
         "baseline": {
-            "source": {"path": str(baseline_path), "artifact_sha256": baseline_hash},
+            "source": {
+                "path": _repo_relative_path(
+                    baseline_path, field="stage5.baseline_result.path"
+                ),
+                "artifact_sha256": baseline_hash,
+            },
             **baseline_summary,
         },
         "candidate": {
-            "source": {"path": str(candidate_path), "artifact_sha256": candidate_hash},
+            "source": {
+                "path": _repo_relative_path(
+                    candidate_path, field="stage5.candidate_result.path"
+                ),
+                "artifact_sha256": candidate_hash,
+            },
             **primary_summary,
         },
         "paired_record_ids": {
@@ -2587,6 +2641,7 @@ def _stage5_evaluation(
 
 def evaluate_spec(spec_path: Path) -> dict[str, Any]:
     spec_path = spec_path.resolve()
+    report_spec_path = _repo_relative_path(spec_path, field="spec.path")
     spec_hash = sha256_file(spec_path)
     spec = _read_json(spec_path, field="spec")
     if spec.get("schema") != SPEC_SCHEMA:
@@ -2761,7 +2816,7 @@ def evaluate_spec(spec_path: Path) -> dict[str, Any]:
 
     return {
         "schema": REPORT_SCHEMA,
-        "spec": {"path": str(spec_path), "sha256": spec_hash},
+        "spec": {"path": report_spec_path, "sha256": spec_hash},
         "evidence_files": evidence_files,
         "later_stage_decision_contracts": {
             "frozen_before_result_admission": True,
@@ -2800,16 +2855,22 @@ def main(argv: Sequence[str] | None = None) -> int:
             raise StageEvaluationError("--output must not overwrite the spec")
         report = evaluate_spec(args.spec)
         evidence_paths = {
-            Path(item["path"]).resolve() for item in report["evidence_files"]
+            _resolve_report_path(
+                item["path"], field=f"report.evidence_files[{index}].path"
+            )
+            for index, item in enumerate(report["evidence_files"])
         }
         stage_paths = {
-            Path(cell["source"]["path"]).resolve()
-            for stage in report["stages"].values()
+            _resolve_report_path(
+                cell["source"]["path"],
+                field=f"report.stages.{stage_name}.{arm_key}[{index}].source.path",
+            )
+            for stage_name, stage in report["stages"].items()
             if isinstance(stage, Mapping)
             for arm_key in ("baseline_cells", "candidate_cells")
-            for cell in stage.get(arm_key, [])
+            for index, cell in enumerate(stage.get(arm_key, []))
         }
-        for stage in report["stages"].values():
+        for stage_name, stage in report["stages"].items():
             if not isinstance(stage, Mapping):
                 continue
             for source_key in ("baseline", "candidate"):
@@ -2817,7 +2878,14 @@ def main(argv: Sequence[str] | None = None) -> int:
                 if isinstance(source_value, Mapping) and isinstance(
                     source_value.get("source"), Mapping
                 ):
-                    stage_paths.add(Path(source_value["source"]["path"]).resolve())
+                    stage_paths.add(
+                        _resolve_report_path(
+                            source_value["source"]["path"],
+                            field=(
+                                f"report.stages.{stage_name}.{source_key}.source.path"
+                            ),
+                        )
+                    )
         if output in evidence_paths | stage_paths:
             raise StageEvaluationError("--output must not overwrite evidence")
         output.parent.mkdir(parents=True, exist_ok=True)
