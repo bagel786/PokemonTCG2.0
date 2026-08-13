@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build deterministic, minimal FESTIVAL-D0/FESTIVAL-D1 submissions.
+"""Build deterministic, minimal FESTIVAL-D0/FESTIVAL-D1/FESTIVAL-S1 submissions.
 
 This command is packaging-only: it does not run matches, upload an archive, or
 start external resources.  Every package is assembled twice from audited
@@ -25,24 +25,26 @@ from typing import Any, Iterable, Mapping
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OFFICIAL_CG_ROOT = ROOT / "freshstart" / "submission_template" / "cg"
+OFFICIAL_CG_ROOT = ROOT / "vendor" / "cg"
 DEFAULT_OUTPUT_DIRS = {
     "d0": ROOT / "artifacts" / "dipplin_d0",
     "d1": ROOT / "artifacts" / "dipplin_d1",
+    "s1": ROOT / "artifacts" / "dipplin_s1",
 }
 DEFAULT_NAME = "submission"
 
-# These are the exact files in the current official competition template.  In
-# particular, do not silently fall back to vendor/cg: that directory contains
-# an older set of native binaries in this repository.
+# These pins were refreshed from Kaggle's current sample submission on
+# 2026-08-12. ``scripts/sync_engine.py`` owns ``vendor/cg``; packaging from the
+# separate freshstart template is forbidden because its native binaries no
+# longer match the competition download.
 OFFICIAL_CG_SHA256 = {
     "__init__.py": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
     "api.py": "593F1298E52A635F90F8F505A52113E9AF114F444C293404E37906F18EE06CED",
-    "cg.dll": "9EA2B0A751029689BFF3DDCCB5F29A98EDD46961DAD264490ED121EF704FB500",
+    "cg.dll": "EAE88634E26DC31D94150A4D8202FC9D32596B8C688EF67E14CB4088CD4D5771",
     "game.py": "3BD3D4F4A369A11E6D2F5DA9094CF15EBC410A2221835E6417B7CFF4883F1FC2",
-    "libcg-arm64.so": "030B4728CE9FB9E90B75830B7CF7236F71859732A05EC4A377078EEE0421BBE5",
-    "libcg.dylib": "77BB978A8129B094452679E0DAF0DA69593AFDA7331685F4642C0D4A94D39D82",
-    "libcg.so": "FFD89BF923525A3E6FEB5E6201E96A866C0F456895499ED5C4A566303CAAE67C",
+    "libcg-arm64.so": "1670740B73FAB46586FD25C0A1F96608EA75B1F39381D66A0B8D9486BEA6D4A2",
+    "libcg.dylib": "7A157F045D333F99D1996D49C12BDBDD148072A619AF246385C7295518776E30",
+    "libcg.so": "D16244A3157FC55C3314F08DCC7C5179168697D78C105B95C7DEBD556B764BB7",
     "sim.py": "1555F57F5D22BF4C09D70E0E667A916E575E68C9DD1DE9EAD34BA5E7E4968655",
     "utils.py": "60F29665CEE0A88525D6F0383BC45959A6262D16FE35EF380AECE1E0EA13C49B",
 }
@@ -256,14 +258,21 @@ def _validated_source(path: Path, *, expected_sha256: str | None = None) -> Path
 
 
 def _entrypoint_bytes(variant: str) -> bytes:
-    if variant == "d0":
-        control = 'os.environ["PTCG_DIPPLIN_SEARCH"] = "0"'
-    elif variant == "d1":
-        # D1 defaults on but remains explicitly disableable.  With the value
-        # set to zero it instantiates the exact same D0 planner/runtime.
-        control = 'os.environ.setdefault("PTCG_DIPPLIN_SEARCH", "1")'
-    else:  # pragma: no cover - guarded by the public builder
+    if variant not in DEFAULT_OUTPUT_DIRS:
         raise PackageError(f"unsupported Dipplin variant: {variant!r}")
+    # Pin every evaluated policy switch. Competition execution must not depend
+    # on inherited process configuration or on evaluator-only --hero-env data.
+    controls = {
+        "PTCG_DIPPLIN_SEARCH": "0" if variant == "d0" else "1",
+        "PTCG_DIPPLIN_SECOND_OPENING_V2": "1" if variant == "s1" else "0",
+        "PTCG_DIPPLIN_GO_FIRST": "1",
+        "PTCG_DIPPLIN_ROUTE_V2": "0",
+        "PTCG_DIPPLIN_WORLDS": "2",
+    }
+    control = "\n".join(
+        f"os.environ[{json.dumps(name)}] = {json.dumps(value)}"
+        for name, value in controls.items()
+    )
     return (
         '"""Direct Festival Lead competition entry point."""\n\n'
         "import os\n\n"
@@ -433,17 +442,24 @@ print(json.dumps({{
     "agent_module": type(runtime).__module__,
     "deck_card_count": len(deck),
     "search_enabled": bool(runtime.search_enabled),
+    "second_opening_v2": bool(runtime.planner.second_opening_v2),
+    "go_first": bool(runtime.go_first),
+    "route_v2_enabled": bool(runtime.planner.route_v2_enabled),
+    "search_worlds": int(runtime._search_controller().config.worlds) if runtime.search_enabled else 2,
 }}))
 '''
         environment = dict(os.environ)
         environment.pop("PYTHONPATH", None)
         environment.pop("PYTHONHOME", None)
-        if variant == "d0":
-            # Prove that the D0 archive cannot accidentally be enabled by a
-            # deployment environment inherited from a previous D1 run.
-            environment["PTCG_DIPPLIN_SEARCH"] = "1"
-        else:
-            environment.pop("PTCG_DIPPLIN_SEARCH", None)
+        # Start from the exact opposite of the evaluated configuration. The
+        # archive entrypoint must override every value before construction.
+        environment.update({
+            "PTCG_DIPPLIN_SEARCH": "1" if variant == "d0" else "0",
+            "PTCG_DIPPLIN_SECOND_OPENING_V2": "0" if variant == "s1" else "1",
+            "PTCG_DIPPLIN_GO_FIRST": "0",
+            "PTCG_DIPPLIN_ROUTE_V2": "1",
+            "PTCG_DIPPLIN_WORLDS": "4",
+        })
         result = subprocess.run(
             [sys.executable, "-I", "-B", "-c", code],
             cwd=stage,
@@ -459,9 +475,18 @@ print(json.dumps({{
             payload = json.loads(result.stdout.strip().splitlines()[-1])
         except (IndexError, json.JSONDecodeError) as exc:
             raise PackageError(f"malformed sterile smoke output: {result.stdout!r}") from exc
-        expected_search = variant == "d1"
+        expected_search = variant in {"d1", "s1"}
         if payload.get("search_enabled") is not expected_search:
             raise PackageError(f"{variant} entrypoint selected the wrong search mode")
+        expected_second_opening = variant == "s1"
+        if payload.get("second_opening_v2") is not expected_second_opening:
+            raise PackageError(f"{variant} entrypoint selected the wrong second-opening mode")
+        if payload.get("go_first") is not True:
+            raise PackageError(f"{variant} entrypoint selected the wrong order preference")
+        if payload.get("route_v2_enabled") is not False:
+            raise PackageError(f"{variant} entrypoint accidentally enabled rejected route-v2")
+        if payload.get("search_worlds") != 2:
+            raise PackageError(f"{variant} entrypoint selected the wrong D1 world count")
         if (stage / "deck.csv").read_bytes() != deck:
             raise PackageError("sterile extraction changed deck.csv")
         if sha256_file(stage / "deck.csv") != deck_sha256:
@@ -584,8 +609,14 @@ def build_package(
             "runtime": {
                 "family": "dedicated_dipplin",
                 "direct_entrypoint": True,
-                "search_default": normalized_variant == "d1",
-                "d1_disable_environment": "PTCG_DIPPLIN_SEARCH=0" if normalized_variant == "d1" else None,
+                "search_default": normalized_variant in {"d1", "s1"},
+                "second_opening_v2_default": normalized_variant == "s1",
+                "entrypoint_forces_evaluated_mode": True,
+                "evaluated_configuration": {
+                    "go_first": True,
+                    "route_v2": False,
+                    "search_worlds": 2,
+                },
                 "learned_weights_included": False,
                 "grim_runtime_included": False,
                 "runtime_source_tree_sha256": first["runtime_source_tree_sha256"],
@@ -637,7 +668,7 @@ def build_package(
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--variant", choices=sorted(DEFAULT_OUTPUT_DIRS), default="d0")
+    parser.add_argument("--variant", choices=sorted(DEFAULT_OUTPUT_DIRS), required=True)
     parser.add_argument("--name", default=DEFAULT_NAME, help="portable archive basename")
     parser.add_argument(
         "--output-dir",

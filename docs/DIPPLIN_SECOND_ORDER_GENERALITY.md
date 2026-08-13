@@ -2,14 +2,19 @@
 
 Status: **COMPLETE — PROMOTE_SECOND_OPENING_V2 (BASIC IMPROVEMENT)**
 
-Branch: `opencode-second-order-general`. Base HEAD: `a1b4acbfce51ffdb944bde9bcb03186bfedce443`.
+Branch: `opencode-second-order-general`. D0/D1 base:
+`a1b4acbfce51ffdb944bde9bcb03186bfedce443`; S1 source HEAD:
+`a73f2fbf31494ebd97bc2e9357600388fe0805d5`.
 
 ## 0. Immutable control
 
 - Incumbent archive: `artifacts/dipplin_d1/submission.tar.gz`
 - Incumbent SHA-256 (recomputed locally): `E5B932DB2DFFC2A860F8B5B883785885F73FD820665119687BB0C29969583BA6` (matches prior sprint)
 - Incumbent extracted tree: `artifacts/dipplin_d1_incumbent` (`076AE8DE12D2D6C4A170B47B2D2F9CF538C1D318A05BB2E81F13DA9BE2CD2026`)
-- Candidate package (D1 + S1 code, S1 off by default): `artifacts/dipplin_s1/submission.tar.gz`, SHA-256 `250C99EBA1F12D4DD28991A544F3B81BE2BC809CE49B3B07350A77498FACB47F`
+- Candidate package: `artifacts/dipplin_s1/submission.tar.gz`. The S1 entrypoint
+  forces both D1 search and `SECOND_OPENING_V2` on, matching the evaluated
+  runtime without relying on evaluator-only environment variables. Rebuild the
+  package after source changes and take its identity from the generated manifest.
 
 ## 1. Forced-order baseline (current D1 incumbent)
 
@@ -53,7 +58,8 @@ Interpretation:
 
 ## 3. S1 SECOND_OPENING_V2
 
-Implemented behind `PTCG_DIPPLIN_SECOND_OPENING_V2=1` (default OFF). Applies only
+Implemented behind `PTCG_DIPPLIN_SECOND_OPENING_V2=1` (off in library/D1 control,
+forced on by the S1 competition entrypoint). Applies only
 when `actual_order == "second"` and `own_turn_ordinal == 1` and Active is Volbeat
 and Quick Sign is legal. It reserves only the Bench slots Quick Sign still needs,
 banks the evolution/Energy with Hilda, establishes the engine line (Poffin /
@@ -105,7 +111,20 @@ strictness, and support-active retreat preference.
 - Zero illegal actions, zero policy errors across every S1 and incumbent cell.
 - S1 latency unchanged from D1 (S1 is a deterministic planner branch; D1 search
   bounds unchanged at soft 0.65s / hard 1.5s).
-- Candidate package SHA: `250C99EBA1F12D4DD28991A544F3B81BE2BC809CE49B3B07350A77498FACB47F`.
+- The S1 packager performs a hostile-environment sterile import and proves that
+  search, `second_opening_v2`, go-first preference, rejected route-v2 state,
+  and the evaluated two-world search configuration are all pinned correctly in
+  the archive.
+- The packager now sources `cg/` from the hash-pinned `vendor/cg` sync. On
+  2026-08-12 those hashes were independently re-downloaded from Kaggle's current
+  sample; the previous S1 archive incorrectly carried the divergent
+  `freshstart/submission_template/cg` native binaries.
+- Release candidate SHA-256: `EC74EFE096473C58A2057CABFEE93BF337BC18848C202A6E3D36BCBA802DB171`;
+  packaged Linux engine SHA-256: `D16244A3157FC55C3314F08DCC7C5179168697D78C105B95C7DEBD556B764BB7`.
+  A separate Linux/x86_64 complete-game certification exercised one actual-first
+  and one actual-second game from the packaged archive: 2/2 completed, with zero
+  policy errors, illegal actions, or artifact mutations. Results are in
+  `artifacts/dipplin_s1/certification/linux_x86_64_complete_game.json`.
 
 ## 7. Verdict
 

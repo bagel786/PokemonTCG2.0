@@ -12,6 +12,11 @@ from ptcg_ai.dipplin.cards import DECK_CSV_SHA256, DECK_ID, EXACT_DECK, deck_csv
 from scripts import package_dipplin as packager
 
 
+def test_cli_requires_an_explicit_policy_variant():
+    with pytest.raises(SystemExit):
+        packager.parse_args([])
+
+
 def test_build_d0_is_direct_exact_minimal_and_deterministic(tmp_path: Path):
     output = tmp_path / "output"
     result = packager.build_package(variant="d0", output_dir=output)
@@ -165,11 +170,39 @@ def test_deterministic_tar_rejects_source_symlinks_and_caches(tmp_path: Path):
         packager.deterministic_tar(link_stage, tmp_path / "link.tar.gz")
 
 
-def test_d1_entrypoint_defaults_on_but_can_be_disabled():
+def test_d1_entrypoint_forces_evaluated_search_without_s1():
     source = packager._entrypoint_bytes("d1").decode("utf-8")
-    assert 'os.environ.setdefault("PTCG_DIPPLIN_SEARCH", "1")' in source
+    assert 'os.environ["PTCG_DIPPLIN_SEARCH"] = "1"' in source
+    assert 'os.environ["PTCG_DIPPLIN_SECOND_OPENING_V2"] = "0"' in source
     assert "from ptcg_ai.dipplin.policy import DipplinCompetitionAgent" in source
     assert "from ptcg_ai import CompetitionAgent" not in source
+
+
+def test_s1_entrypoint_forces_the_evaluated_search_and_second_opening_mode(tmp_path: Path):
+    source = packager._entrypoint_bytes("s1").decode("utf-8")
+    assert 'os.environ["PTCG_DIPPLIN_SEARCH"] = "1"' in source
+    assert 'os.environ["PTCG_DIPPLIN_SECOND_OPENING_V2"] = "1"' in source
+
+    result = packager.build_package(variant="s1", output_dir=tmp_path / "s1")
+    smoke = result["verification"]["sterile_import"]
+    assert result["variant"] == "s1"
+    assert result["runtime"]["search_default"] is True
+    assert result["runtime"]["second_opening_v2_default"] is True
+    assert result["runtime"]["entrypoint_forces_evaluated_mode"] is True
+    assert smoke["search_enabled"] is True
+    assert smoke["second_opening_v2"] is True
+    assert smoke["go_first"] is True
+    assert smoke["route_v2_enabled"] is False
+    assert smoke["search_worlds"] == 2
+
+
+def test_packager_uses_synced_competition_engine_not_divergent_freshstart_copy():
+    assert packager.OFFICIAL_CG_ROOT == packager.ROOT / "vendor" / "cg"
+    assert packager.OFFICIAL_CG_SHA256["libcg.so"] == (
+        "D16244A3157FC55C3314F08DCC7C5179168697D78C105B95C7DEBD556B764BB7"
+    )
+    divergent = packager.ROOT / "freshstart" / "submission_template" / "cg" / "libcg.so"
+    assert packager.sha256_file(divergent) != packager.OFFICIAL_CG_SHA256["libcg.so"]
 
 
 @pytest.mark.parametrize("name", ["../submission", "CON", "bad:name", "."])
