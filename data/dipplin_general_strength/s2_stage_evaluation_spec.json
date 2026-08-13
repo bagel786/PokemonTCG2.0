@@ -53,6 +53,12 @@
       "opponent_name": "AZ2.7",
       "tree_sha256": "f9bb36612bbb2ed4e38c10cb00b2f3b6ac5616414636413af3b108c2138f4a4a",
       "deck_sha256": "f5354da408919c0d9caf9979780126a27394b0a7cc83df2ebd455d4e5ca9abc1"
+    },
+    "S1": {
+      "opponent_name": "S1",
+      "tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+      "archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
+      "deck_sha256": "269bc5808a0db862c7afe8f2daaa3d0b3b6e3c68bd651dd515d14f9d85392326"
     }
   },
   "baseline": {
@@ -215,13 +221,19 @@
         "first",
         "second"
       ],
-      "requested_games_per_order": 300,
-      "requested_games_total": 600,
+      "candidate_games_per_order": 300,
+      "candidate_games_total": 600,
+      "control_games_per_order": 500,
+      "control_wins_by_order": {
+        "first": 302,
+        "second": 197
+      },
       "require_zero_failures_policy_errors_illegal_actions": true,
       "minimum_pooled_s2_win_rate": 0.47,
-      "minimum_each_order_s2_win_rate": 0.43,
+      "minimum_candidate_minus_control_pooled_delta": -0.03,
+      "minimum_candidate_minus_control_each_order_delta": -0.04,
       "require_no_significant_loss": true,
-      "significant_loss_definition": "Reject if the relevant independent Newcombe candidate-minus-S1 difference 95% upper bound is below zero or the relevant S2 Wilson 95% upper bound is below the corresponding no-loss threshold.",
+      "significant_loss_definition": "Reject if a relevant independent Newcombe candidate-minus-control difference 95% upper bound is below zero.",
       "statistics": [
         "wilson_per_arm",
         "independent_newcombe_wilson_difference"
@@ -236,11 +248,96 @@
       "exploratory_improvements_can_help": false,
       "require_s2_expert_dominates_primary_count_below_s1": true,
       "require_s2_expert_dominates_primary_rate_below_s1": true,
-      "require_ed_to_non_ed_transitions_exceed_reverse": true,
+      "require_favorable_ed_exits_exceed_reverse_ed_entries": true,
       "maximum_certified_exploratory_expert_dominates": 0,
       "maximum_certified_exploratory_incomparable": 0,
-      "require_no_new_failure_family": true
+      "require_no_new_failure_family": true,
+      "require_zero_candidate_policy_errors": true,
+      "require_no_primary_incomparable_uncertifiable_burden_increase": true
     }
+  },
+  "stage4_control_evaluation_contract": {
+    "deck_a_sha256": "269bc5808a0db862c7afe8f2daaa3d0b3b6e3c68bd651dd515d14f9d85392326",
+    "engine_sha256": "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30",
+    "evaluator_sha256": "d7d4a3d21f7a2a8f066165caa96696719db33186234ce7ca3e9ea314f6878755",
+    "external_adapter_sha256": "f18294f2e1ee60630fdcc8a63422aa1115365a0b31edeb4ffa6079a270944283",
+    "evaluation_schema_sha256": "bc111f3f2e539b89d2b5ac2ed3a5447e5e2db1f4d7adbcdf7089c8541de7fcf4"
+  },
+  "stage4_controls": [
+    {
+      "id": "s1_vs_s1_first_500",
+      "matchup": "S1",
+      "opponent_name": "S1",
+      "actual_order": "first",
+      "path": "../../artifacts/general_strength/s1_mirror/s1_vs_s1_first_500.json",
+      "artifact_sha256": "c1dd38044323376cf090c95e834718b029af323a48e815a24f74455c2d3fc286",
+      "requested_games": 500,
+      "expected_wins": 302,
+      "tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+      "archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171"
+    },
+    {
+      "id": "s1_vs_s1_second_500",
+      "matchup": "S1",
+      "opponent_name": "S1",
+      "actual_order": "second",
+      "path": "../../artifacts/general_strength/s1_mirror/s1_vs_s1_second_500.json",
+      "artifact_sha256": "5ef530f3bec98947d09700ed818c572fd0347b6f1a91f8b329ae224540447e6d",
+      "requested_games": 500,
+      "expected_wins": 197,
+      "tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+      "archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171"
+    }
+  ],
+  "stage5_baseline": {
+    "path": "../../artifacts/general_strength/replay/validation_regret_s1.json",
+    "artifact_sha256": "9f1205b2b282b2da37bc284054f51a3ebce7214507da7da4fa75309d5870e87d",
+    "schema": "dipplin-replay-regret-v1",
+    "split": "VALIDATION",
+    "sealed": false,
+    "decision_count": 1145,
+    "episode_count": 50,
+    "record_id_sequence_sha256": "c41f7a918033fac52212193c759264b81d1b2f379346c33c0ab7a5ae36c6863b",
+    "classification_counts": {
+      "EQUIVALENT": 658,
+      "AGENT_DOMINATES": 10,
+      "EXPERT_DOMINATES": 17,
+      "INCOMPARABLE": 16,
+      "UNCERTIFIABLE": 444
+    },
+    "expert_dominates_episode_rate": 0.014166666666666666
+  },
+  "stage5_run_contract": {
+    "baseline_package": {
+      "archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
+      "manifest_sha256": "4071c03a020446436b8d33e1951fdaf5229ae4ab760a8283dc7d6f323e02f92c",
+      "extracted_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+      "runtime_source_tree_sha256": "d5aaefab29b5850b298810c21dc628880822381c05bdbad5ecea1716bcef4241"
+    },
+    "candidate_package": {
+      "archive_sha256": "813fab9efd432738856e7d7b784809c7b0c5aef51b3c677d7205f203490d1510",
+      "manifest_sha256": "4801239bc3d328909bbd4e5461b84b140dd8931e3b581636ecbc662a97bad1bc",
+      "extracted_tree_sha256": "c822bb76fa40a138a6bb07fcfd6e6cc58f8ade0dd65c49425bc703f3170da922",
+      "runtime_source_tree_sha256": "b4290fff9b4fa3374f1bc14b7eefd6e9309dc13f3dcbebb2d9e4ea167650189f"
+    },
+    "replay_run": {
+      "validation_manifest_file_sha256": "f147f14c670223b22bf9cba28f6ea166a4bbb5153c0efea941c61f39ff2bb163",
+      "validation_manifest_payload_sha256": "d6cc5a7339dcc466546e68c8ea29301c150966be1f287adc00003bd86716c4c1",
+      "baseline_s1_validation_result_sha256": "9f1205b2b282b2da37bc284054f51a3ebce7214507da7da4fa75309d5870e87d",
+      "parameters": {
+        "cap_per_episode": 24,
+        "sample_seed": 20260813,
+        "bootstrap_samples": 10000,
+        "repeat_passes": 2,
+        "proposal_repeats": 3
+      },
+      "evaluator": {
+        "path": "scripts/evaluate_dipplin_replay_regret.py",
+        "sha256": "65FC798C8A37037F61A8CE7E5D00C0E7B80535A99114BA5605976FDAB01F6840",
+        "git_blob_sha1": "55A9BA453BE40A19BAADD061103E742313791D30"
+      }
+    },
+    "exploratory_hard_ceiling": 256
   },
   "stages": {
     "stage1": {

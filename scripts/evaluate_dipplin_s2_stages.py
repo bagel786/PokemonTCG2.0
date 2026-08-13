@@ -18,6 +18,16 @@ from typing import Any, Iterable, Mapping, Sequence
 SPEC_SCHEMA = "dipplin-s2-stage-evaluation-spec-v1"
 REPORT_SCHEMA = "dipplin-s2-stage-evaluation-v1"
 RESULT_SCHEMA = "dipplin-authentic-evaluation-v1"
+REPLAY_BASELINE_SCHEMA = "dipplin-replay-regret-v1"
+REPLAY_CANDIDATE_SCHEMA = "dipplin-replay-regret-v2"
+REPLAY_CLASSIFICATIONS = (
+    "EQUIVALENT",
+    "AGENT_DOMINATES",
+    "EXPERT_DOMINATES",
+    "INCOMPARABLE",
+    "UNCERTIFIABLE",
+)
+SEQUENTIAL_STAGES = ("stage1", "stage2", "stage3", "stage4", "stage5", "stage6")
 STAGE1_MINIMUM_PROMISING_DELTA = 0.03
 STAGE1_STRONG_SIGNAL_DELTA = 0.05
 FLOAT_COMPARISON_TOLERANCE = 1e-12
@@ -72,16 +82,18 @@ LATER_STAGE_DECISION_CONTRACT = {
     "stage4": {
         "screen": "same_deck_s2_vs_s1",
         "orders": ["first", "second"],
-        "requested_games_per_order": 300,
-        "requested_games_total": 600,
+        "candidate_games_per_order": 300,
+        "candidate_games_total": 600,
+        "control_games_per_order": 500,
+        "control_wins_by_order": {"first": 302, "second": 197},
         "require_zero_failures_policy_errors_illegal_actions": True,
         "minimum_pooled_s2_win_rate": 0.47,
-        "minimum_each_order_s2_win_rate": 0.43,
+        "minimum_candidate_minus_control_pooled_delta": -0.03,
+        "minimum_candidate_minus_control_each_order_delta": -0.04,
         "require_no_significant_loss": True,
         "significant_loss_definition": (
-            "Reject if the relevant independent Newcombe candidate-minus-S1 "
-            "difference 95% upper bound is below zero or the relevant S2 Wilson "
-            "95% upper bound is below the corresponding no-loss threshold."
+            "Reject if a relevant independent Newcombe candidate-minus-control "
+            "difference 95% upper bound is below zero."
         ),
         "statistics": [
             "wilson_per_arm",
@@ -97,11 +109,96 @@ LATER_STAGE_DECISION_CONTRACT = {
         "exploratory_improvements_can_help": False,
         "require_s2_expert_dominates_primary_count_below_s1": True,
         "require_s2_expert_dominates_primary_rate_below_s1": True,
-        "require_ed_to_non_ed_transitions_exceed_reverse": True,
+        "require_favorable_ed_exits_exceed_reverse_ed_entries": True,
         "maximum_certified_exploratory_expert_dominates": 0,
         "maximum_certified_exploratory_incomparable": 0,
         "require_no_new_failure_family": True,
+        "require_zero_candidate_policy_errors": True,
+        "require_no_primary_incomparable_uncertifiable_burden_increase": True,
     },
+}
+STAGE4_CONTROL_CONTRACT = [
+    {
+        "id": "s1_vs_s1_first_500",
+        "matchup": "S1",
+        "opponent_name": "S1",
+        "actual_order": "first",
+        "path": "../../artifacts/general_strength/s1_mirror/s1_vs_s1_first_500.json",
+        "artifact_sha256": "c1dd38044323376cf090c95e834718b029af323a48e815a24f74455c2d3fc286",
+        "requested_games": 500,
+        "expected_wins": 302,
+        "tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+        "archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
+    },
+    {
+        "id": "s1_vs_s1_second_500",
+        "matchup": "S1",
+        "opponent_name": "S1",
+        "actual_order": "second",
+        "path": "../../artifacts/general_strength/s1_mirror/s1_vs_s1_second_500.json",
+        "artifact_sha256": "5ef530f3bec98947d09700ed818c572fd0347b6f1a91f8b329ae224540447e6d",
+        "requested_games": 500,
+        "expected_wins": 197,
+        "tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+        "archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
+    },
+]
+STAGE4_CONTROL_EVALUATION_CONTRACT = {
+    "deck_a_sha256": "269bc5808a0db862c7afe8f2daaa3d0b3b6e3c68bd651dd515d14f9d85392326",
+    "engine_sha256": "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30",
+    "evaluator_sha256": "d7d4a3d21f7a2a8f066165caa96696719db33186234ce7ca3e9ea314f6878755",
+    "external_adapter_sha256": "f18294f2e1ee60630fdcc8a63422aa1115365a0b31edeb4ffa6079a270944283",
+    "evaluation_schema_sha256": "bc111f3f2e539b89d2b5ac2ed3a5447e5e2db1f4d7adbcdf7089c8541de7fcf4",
+}
+STAGE5_BASELINE_CONTRACT = {
+    "path": "../../artifacts/general_strength/replay/validation_regret_s1.json",
+    "artifact_sha256": "9f1205b2b282b2da37bc284054f51a3ebce7214507da7da4fa75309d5870e87d",
+    "schema": REPLAY_BASELINE_SCHEMA,
+    "split": "VALIDATION",
+    "sealed": False,
+    "decision_count": 1145,
+    "episode_count": 50,
+    "record_id_sequence_sha256": "c41f7a918033fac52212193c759264b81d1b2f379346c33c0ab7a5ae36c6863b",
+    "classification_counts": {
+        "EQUIVALENT": 658,
+        "AGENT_DOMINATES": 10,
+        "EXPERT_DOMINATES": 17,
+        "INCOMPARABLE": 16,
+        "UNCERTIFIABLE": 444,
+    },
+    "expert_dominates_episode_rate": 0.014166666666666666,
+}
+STAGE5_RUN_CONTRACT = {
+    "baseline_package": {
+        "archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
+        "manifest_sha256": "4071c03a020446436b8d33e1951fdaf5229ae4ab760a8283dc7d6f323e02f92c",
+        "extracted_tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+        "runtime_source_tree_sha256": "d5aaefab29b5850b298810c21dc628880822381c05bdbad5ecea1716bcef4241",
+    },
+    "candidate_package": {
+        "archive_sha256": "813fab9efd432738856e7d7b784809c7b0c5aef51b3c677d7205f203490d1510",
+        "manifest_sha256": "4801239bc3d328909bbd4e5461b84b140dd8931e3b581636ecbc662a97bad1bc",
+        "extracted_tree_sha256": "c822bb76fa40a138a6bb07fcfd6e6cc58f8ade0dd65c49425bc703f3170da922",
+        "runtime_source_tree_sha256": "b4290fff9b4fa3374f1bc14b7eefd6e9309dc13f3dcbebb2d9e4ea167650189f",
+    },
+    "replay_run": {
+        "validation_manifest_file_sha256": "f147f14c670223b22bf9cba28f6ea166a4bbb5153c0efea941c61f39ff2bb163",
+        "validation_manifest_payload_sha256": "d6cc5a7339dcc466546e68c8ea29301c150966be1f287adc00003bd86716c4c1",
+        "baseline_s1_validation_result_sha256": "9f1205b2b282b2da37bc284054f51a3ebce7214507da7da4fa75309d5870e87d",
+        "parameters": {
+            "cap_per_episode": 24,
+            "sample_seed": 20260813,
+            "bootstrap_samples": 10000,
+            "repeat_passes": 2,
+            "proposal_repeats": 3,
+        },
+        "evaluator": {
+            "path": "scripts/evaluate_dipplin_replay_regret.py",
+            "sha256": "65FC798C8A37037F61A8CE7E5D00C0E7B80535A99114BA5605976FDAB01F6840",
+            "git_blob_sha1": "55A9BA453BE40A19BAADD061103E742313791D30",
+        },
+    },
+    "exploratory_hard_ceiling": 256,
 }
 
 
@@ -124,6 +221,14 @@ def _sequence(value: object, *, field: str) -> Sequence[Any]:
 def _string(value: object, *, field: str) -> str:
     if not isinstance(value, str) or not value:
         raise StageEvaluationError(f"{field} must be a non-empty string")
+    return value
+
+
+def _scalar_identifier(value: object, *, field: str) -> int | str:
+    if isinstance(value, bool) or not isinstance(value, (int, str)):
+        raise StageEvaluationError(f"{field} must be an integer or non-empty string")
+    if isinstance(value, str) and not value:
+        raise StageEvaluationError(f"{field} must be an integer or non-empty string")
     return value
 
 
@@ -176,6 +281,17 @@ def sha256_file(path: Path) -> str:
     except OSError as error:
         raise StageEvaluationError(f"cannot read {path}: {error}") from error
     return digest.hexdigest()
+
+
+def _object_sha256(value: object) -> str:
+    encoded = json.dumps(
+        value,
+        ensure_ascii=True,
+        sort_keys=True,
+        separators=(",", ":"),
+        default=str,
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
 
 
 def _read_json(path: Path, *, field: str) -> Mapping[str, Any]:
@@ -693,6 +809,20 @@ def _artifact_summary(
         if actual != expected_opponent_tree:
             raise StageEvaluationError(f"{role}.{cell_id}.{key} opponent mismatch")
         provenance_hashes[key] = actual
+    expected_opponent_archive = opponent_contract.get("archive_sha256")
+    if expected_opponent_archive is not None:
+        actual_opponent_archive = _hash(
+            provenance.get("archive_b_sha256"),
+            field=f"{role}.{cell_id}.archive_b_sha256",
+        )
+        if actual_opponent_archive != _hash(
+            expected_opponent_archive,
+            field=f"opponents.{matchup}.archive_sha256",
+        ):
+            raise StageEvaluationError(
+                f"{role}.{cell_id}.archive_b_sha256 opponent mismatch"
+            )
+        provenance_hashes["archive_b_sha256"] = actual_opponent_archive
     expected_opponent_deck = _hash(
         opponent_contract.get("deck_sha256"),
         field=f"opponents.{matchup}.deck_sha256",
@@ -998,7 +1128,18 @@ def _stage_comparison(
     opponent_contracts: Mapping[str, Any],
     top_baselines: object,
 ) -> dict[str, Any]:
-    baseline_values = stage.get("baseline_cells", top_baselines)
+    expected_keys = (
+        {"candidate_cells"}
+        if stage_name == "stage1"
+        else {"baseline_cells", "candidate_cells"}
+    )
+    if set(stage) != expected_keys:
+        raise StageEvaluationError(
+            f"stages.{stage_name} keys must be exactly {sorted(expected_keys)}"
+        )
+    baseline_values = top_baselines if stage_name == "stage1" else stage.get(
+        "baseline_cells"
+    )
     baseline_declarations = _sequence(
         baseline_values, field=f"stages.{stage_name}.baseline_cells"
     )
@@ -1326,9 +1467,1032 @@ def _stage1_decision(
             "minimum_3pp_pooled_lift": (
                 delta + FLOAT_COMPARISON_TOLERANCE >= minimum
             ),
+        },
+        "targets": {
             "strong_5pp_pooled_lift": (
                 delta + FLOAT_COMPARISON_TOLERANCE >= strong
             ),
+        },
+    }
+
+
+def _candidate_quality(comparison: Mapping[str, Any], *, field: str) -> dict[str, int]:
+    candidate = _mapping(
+        _mapping(comparison.get("pooled"), field=f"{field}.pooled").get("candidate"),
+        field=f"{field}.pooled.candidate",
+    )
+    return {
+        "failed_games": int(candidate["failed_games"]),
+        "policy_errors": int(candidate["hero_policy_errors"])
+        + int(candidate["opponent_policy_errors"]),
+        "illegal_actions": int(candidate["hero_illegal_actions"])
+        + int(candidate["opponent_illegal_actions"]),
+        "fatal_operational_telemetry": int(
+            candidate["operational_telemetry"]["fatal_count"]
+        ),
+    }
+
+
+def _stage2_decision(comparison: Mapping[str, Any]) -> dict[str, Any]:
+    contract = LATER_STAGE_DECISION_CONTRACT["stage2"]
+    per_matchup = _mapping(comparison.get("per_matchup"), field="stage2.per_matchup")
+    expected_matchups = list(contract["expected_matchups"])
+    if sorted(row["matchup"] for row in per_matchup.values()) != sorted(
+        expected_matchups
+    ):
+        raise StageEvaluationError("Stage2 matchup set mismatch")
+    requested = int(contract["requested_games_per_arm_per_matchup"])
+    for key, row in per_matchup.items():
+        if row["actual_order"] != contract["expected_actual_order"]:
+            raise StageEvaluationError(f"Stage2 {key} is not actual-second")
+        if any(
+            int(row[arm]["scheduled_games"]) != requested
+            for arm in ("baseline", "candidate")
+        ):
+            raise StageEvaluationError(f"Stage2 {key} requested-games mismatch")
+    pooled = _mapping(comparison.get("pooled"), field="stage2.pooled")
+    candidate_rate = float(pooled["candidate"]["win_rate"])
+    macro_rate = float(comparison["macro"]["candidate_win_rate"])
+    pooled_delta = float(pooled["candidate_minus_baseline"]["estimate"])
+    collapses = [
+        key
+        for key, row in per_matchup.items()
+        if float(row["candidate_minus_baseline"]["estimate"])
+        <= float(contract["catastrophic_matchup_drop_delta"])
+        + FLOAT_COMPARISON_TOLERANCE
+    ]
+    quality = _candidate_quality(comparison, field="stage2")
+    checks = {
+        "zero_quality_errors": all(value == 0 for value in quality.values()),
+        "candidate_pooled_rate_at_least_50pct": candidate_rate
+        + FLOAT_COMPARISON_TOLERANCE
+        >= float(contract["minimum_candidate_pooled_win_rate"]),
+        "candidate_macro_rate_at_least_50pct": macro_rate
+        + FLOAT_COMPARISON_TOLERANCE
+        >= float(contract["minimum_candidate_macro_win_rate"]),
+        "candidate_pooled_delta_nonnegative": pooled_delta
+        + FLOAT_COMPARISON_TOLERANCE
+        >= float(contract["minimum_candidate_minus_s1_pooled_delta"]),
+        "no_catastrophic_matchup_drop": not collapses,
+    }
+    passed = all(checks.values())
+    strong = (
+        passed
+        and max(candidate_rate, macro_rate) + FLOAT_COMPARISON_TOLERANCE
+        >= float(contract["strong_target_candidate_pooled_or_macro_win_rate"])
+    )
+    return {
+        "verdict": "STRONG" if strong else "PASS" if passed else "KILL",
+        "passed": passed,
+        "gates": checks,
+        "observed": {
+            **quality,
+            "candidate_pooled_win_rate": candidate_rate,
+            "candidate_macro_win_rate": macro_rate,
+            "candidate_minus_s1_pooled_delta": pooled_delta,
+            "catastrophic_matchup_cells": collapses,
+        },
+        "thresholds": dict(contract),
+        "targets": {"strong_55pct_target_met": strong},
+    }
+
+
+def _stage3_decision(comparison: Mapping[str, Any]) -> dict[str, Any]:
+    contract = LATER_STAGE_DECISION_CONTRACT["stage3"]
+    per_matchup = _mapping(comparison.get("per_matchup"), field="stage3.per_matchup")
+    if sorted(row["matchup"] for row in per_matchup.values()) != sorted(
+        contract["expected_matchups"]
+    ):
+        raise StageEvaluationError("Stage3 matchup set mismatch")
+    requested = int(contract["requested_games_per_arm_per_matchup"])
+    for key, row in per_matchup.items():
+        if row["actual_order"] != contract["expected_actual_order"]:
+            raise StageEvaluationError(f"Stage3 {key} is not actual-first")
+        if any(
+            int(row[arm]["scheduled_games"]) != requested
+            for arm in ("baseline", "candidate")
+        ):
+            raise StageEvaluationError(f"Stage3 {key} requested-games mismatch")
+    pooled_delta = float(comparison["pooled"]["candidate_minus_baseline"]["estimate"])
+    macro_delta = float(comparison["macro"]["candidate_minus_baseline"])
+    collapses = [
+        key
+        for key, row in per_matchup.items()
+        if float(row["candidate_minus_baseline"]["estimate"])
+        <= float(contract["catastrophic_matchup_drop_delta"])
+        + FLOAT_COMPARISON_TOLERANCE
+    ]
+    quality = _candidate_quality(comparison, field="stage3")
+    checks = {
+        "zero_quality_errors": all(value == 0 for value in quality.values()),
+        "pooled_delta_above_regression_floor": pooled_delta
+        + FLOAT_COMPARISON_TOLERANCE
+        >= float(contract["minimum_candidate_minus_s1_pooled_delta"]),
+        "macro_delta_above_regression_floor": macro_delta
+        + FLOAT_COMPARISON_TOLERANCE
+        >= float(contract["minimum_candidate_minus_s1_macro_delta"]),
+        "no_catastrophic_matchup_drop": not collapses,
+    }
+    passed = all(checks.values())
+    return {
+        "verdict": "PASS" if passed else "KILL",
+        "passed": passed,
+        "gates": checks,
+        "observed": {
+            **quality,
+            "candidate_minus_s1_pooled_delta": pooled_delta,
+            "candidate_minus_s1_macro_delta": macro_delta,
+            "catastrophic_matchup_cells": collapses,
+        },
+        "thresholds": dict(contract),
+    }
+
+
+def _stage4_evaluation(
+    stage: Mapping[str, Any],
+    *,
+    spec: Mapping[str, Any],
+    spec_path: Path,
+    baseline_identity: Mapping[str, Any],
+    candidate_identity: Mapping[str, Any],
+    evaluation_contract: Mapping[str, Any],
+    opponent_contracts: Mapping[str, Any],
+) -> dict[str, Any]:
+    control_contract = _mapping(
+        spec.get("stage4_control_evaluation_contract"),
+        field="stage4_control_evaluation_contract",
+    )
+    control_declarations = _sequence(
+        spec.get("stage4_controls"), field="stage4_controls"
+    )
+    candidate_declarations = _sequence(
+        stage.get("candidate_cells"), field="stages.stage4.candidate_cells"
+    )
+    if len(control_declarations) != 2 or len(candidate_declarations) != 2:
+        raise StageEvaluationError(
+            "Stage4 requires exactly two immutable controls and two candidate cells"
+        )
+    for index, declaration_value in enumerate(control_declarations):
+        declaration = _mapping(
+            declaration_value, field=f"stage4_controls[{index}]"
+        )
+        if (
+            _hash(
+                declaration.get("tree_sha256"),
+                field=f"stage4_controls[{index}].tree_sha256",
+            )
+            != _hash(
+                baseline_identity.get("tree_sha256"), field="baseline.tree_sha256"
+            )
+            or _hash(
+                declaration.get("archive_sha256"),
+                field=f"stage4_controls[{index}].archive_sha256",
+            )
+            != _hash(
+                baseline_identity.get("archive_sha256"),
+                field="baseline.archive_sha256",
+            )
+        ):
+            raise StageEvaluationError("Stage4 control package identity mismatch")
+    controls = [
+        _artifact_summary(
+            declaration,
+            spec_path=spec_path,
+            identity=baseline_identity,
+            evaluation_contract=control_contract,
+            opponent_contracts=opponent_contracts,
+            role="stages.stage4.baseline",
+        )
+        for declaration in control_declarations
+    ]
+    candidates = [
+        _artifact_summary(
+            declaration,
+            spec_path=spec_path,
+            identity=candidate_identity,
+            evaluation_contract=evaluation_contract,
+            opponent_contracts=opponent_contracts,
+            role="stages.stage4.candidate",
+        )
+        for declaration in candidate_declarations
+    ]
+
+    def by_order(
+        cells: Sequence[Mapping[str, Any]], *, field: str
+    ) -> dict[str, Mapping[str, Any]]:
+        result: dict[str, Mapping[str, Any]] = {}
+        for cell in cells:
+            order = str(cell["actual_order"])
+            if order not in {"first", "second"} or order in result:
+                raise StageEvaluationError(f"{field} must contain one cell per order")
+            result[order] = cell
+        if set(result) != {"first", "second"}:
+            raise StageEvaluationError(f"{field} order set mismatch")
+        return result
+
+    controls_by_order = by_order(controls, field="Stage4 controls")
+    candidates_by_order = by_order(candidates, field="Stage4 candidates")
+    comparable_keys = {
+        "deck_a_sha256",
+        "engine_sha256",
+        "external_adapter_sha256",
+        "evaluation_schema_sha256",
+        "submission_b_sha256",
+        "post_evaluation_submission_b_sha256",
+        "artifact_b_sha256",
+        "archive_b_sha256",
+        "deck_b_sha256",
+        "runtime_environment",
+        "process_behavior_environment",
+        "max_decisions",
+    }
+    for order in ("first", "second"):
+        control_identity = controls_by_order[order]["evaluation_identity"]
+        candidate_identity_value = candidates_by_order[order]["evaluation_identity"]
+        if any(
+            control_identity.get(key) != candidate_identity_value.get(key)
+            for key in comparable_keys
+        ):
+            raise StageEvaluationError(
+                f"Stage4 {order} candidate/control gameplay identity mismatch"
+            )
+
+    control_pool = _aggregate(controls)
+    candidate_pool = _aggregate(candidates)
+    control_quality = int(control_pool["failed_games"]) + sum(
+        int(control_pool[key]) for key in QUALITY_KEYS
+    ) + int(control_pool["operational_telemetry"]["fatal_count"])
+    if control_quality:
+        raise StageEvaluationError("Stage4 immutable control contains a quality error")
+    per_order: dict[str, Any] = {}
+    for order in ("first", "second"):
+        control = _aggregate([controls_by_order[order]])
+        candidate = _aggregate([candidates_by_order[order]])
+        per_order[order] = {
+            "control": control,
+            "candidate": candidate,
+            "candidate_minus_control": independent_difference(candidate, control),
+        }
+    return {
+        "status": "EVALUATED",
+        "baseline_cells": controls,
+        "candidate_cells": candidates,
+        "per_order": per_order,
+        "pooled": {
+            "baseline": control_pool,
+            "candidate": candidate_pool,
+            "candidate_minus_baseline": independent_difference(
+                candidate_pool, control_pool
+            ),
+        },
+        "candidate_s2_proof": _aggregate_proof(candidates),
+        "candidate_latency_ms": _aggregate_latency(candidates),
+        "statistical_contract": {
+            "arms": "independent_unpaired_historical_initiative_controls",
+            "controls": "immutable_exact_current_tree_s1_vs_s1_by_order",
+            "per_arm_interval": "wilson_score_95",
+            "difference_interval": "independent_newcombe_wilson_difference_95",
+            "same_schedule_is_paired": False,
+            "control_evaluator_may_differ_but_is_hash_pinned": True,
+        },
+    }
+
+
+def _stage4_decision(evaluation: Mapping[str, Any]) -> dict[str, Any]:
+    contract = LATER_STAGE_DECISION_CONTRACT["stage4"]
+    per_order = _mapping(evaluation.get("per_order"), field="stage4.per_order")
+    if set(per_order) != set(contract["orders"]):
+        raise StageEvaluationError("Stage4 order set mismatch")
+    order_deltas: dict[str, float] = {}
+    clear_losses: list[str] = []
+    for order in contract["orders"]:
+        row = _mapping(per_order[order], field=f"stage4.per_order.{order}")
+        control = _mapping(row.get("control"), field=f"stage4.{order}.control")
+        candidate = _mapping(row.get("candidate"), field=f"stage4.{order}.candidate")
+        difference = _mapping(
+            row.get("candidate_minus_control"), field=f"stage4.{order}.difference"
+        )
+        if (
+            int(control["scheduled_games"]) != int(contract["control_games_per_order"])
+            or int(control["games"]) != int(contract["control_games_per_order"])
+            or int(control["wins"]) != int(contract["control_wins_by_order"][order])
+        ):
+            raise StageEvaluationError(f"Stage4 {order} immutable control mismatch")
+        if (
+            int(candidate["scheduled_games"]) != int(contract["candidate_games_per_order"])
+            or int(candidate["games"]) != int(contract["candidate_games_per_order"])
+        ):
+            raise StageEvaluationError(f"Stage4 {order} candidate-games mismatch")
+        order_deltas[order] = float(difference["estimate"])
+        confidence = _sequence(
+            difference.get("confidence_95"), field=f"stage4.{order}.confidence_95"
+        )
+        if len(confidence) != 2 or float(confidence[1]) < 0.0:
+            clear_losses.append(order)
+
+    pooled = _mapping(evaluation.get("pooled"), field="stage4.pooled")
+    control_pool = _mapping(pooled.get("baseline"), field="stage4.pooled.control")
+    candidate_pool = _mapping(pooled.get("candidate"), field="stage4.pooled.candidate")
+    difference_pool = _mapping(
+        pooled.get("candidate_minus_baseline"), field="stage4.pooled.difference"
+    )
+    if (
+        int(control_pool["games"])
+        != int(contract["control_games_per_order"]) * 2
+        or int(control_pool["wins"])
+        != sum(int(value) for value in contract["control_wins_by_order"].values())
+        or int(candidate_pool["scheduled_games"]) != int(contract["candidate_games_total"])
+        or int(candidate_pool["games"]) != int(contract["candidate_games_total"])
+    ):
+        raise StageEvaluationError("Stage4 pooled game/control contract mismatch")
+    pooled_delta = float(difference_pool["estimate"])
+    pooled_confidence = _sequence(
+        difference_pool.get("confidence_95"), field="stage4.pooled.confidence_95"
+    )
+    if len(pooled_confidence) != 2 or float(pooled_confidence[1]) < 0.0:
+        clear_losses.append("balanced_pooled")
+    candidate_rate = float(candidate_pool["win_rate"])
+    quality = _candidate_quality(evaluation, field="stage4")
+    gates = {
+        "zero_quality_errors": all(value == 0 for value in quality.values()),
+        "candidate_pooled_rate_at_least_47pct": candidate_rate
+        + FLOAT_COMPARISON_TOLERANCE
+        >= float(contract["minimum_pooled_s2_win_rate"]),
+        "balanced_pooled_delta_above_floor": pooled_delta
+        + FLOAT_COMPARISON_TOLERANCE
+        >= float(contract["minimum_candidate_minus_control_pooled_delta"]),
+        "each_order_delta_above_floor": all(
+            delta + FLOAT_COMPARISON_TOLERANCE
+            >= float(contract["minimum_candidate_minus_control_each_order_delta"])
+            for delta in order_deltas.values()
+        ),
+        "no_statistically_clear_loss": not clear_losses,
+    }
+    passed = all(gates.values())
+    return {
+        "verdict": "PASS" if passed else "KILL",
+        "passed": passed,
+        "gates": gates,
+        "observed": {
+            **quality,
+            "candidate_pooled_win_rate": candidate_rate,
+            "candidate_minus_control_pooled_delta": pooled_delta,
+            "candidate_minus_control_by_order": order_deltas,
+            "statistically_clear_loss_cells": clear_losses,
+        },
+        "thresholds": dict(contract),
+    }
+
+
+def _replay_aggregate_summary(
+    aggregate_value: object,
+    rows: Sequence[Mapping[str, Any]],
+    *,
+    field: str,
+) -> dict[str, Any]:
+    aggregate = _mapping(aggregate_value, field=field)
+    counts = {label: 0 for label in REPLAY_CLASSIFICATIONS}
+    by_episode: dict[str, list[str]] = {}
+    for offset, row in enumerate(rows):
+        label = _string(
+            row.get("classification"), field=f"{field}.rows[{offset}].classification"
+        )
+        if label not in counts:
+            raise StageEvaluationError(f"{field} has unknown classification {label}")
+        episode_id = _scalar_identifier(
+            row.get("episode_id"), field=f"{field}.rows[{offset}].episode_id"
+        )
+        counts[label] += 1
+        by_episode.setdefault(str(episode_id), []).append(label)
+    decision_count = len(rows)
+    episode_rates = {
+        label: (
+            sum(labels.count(label) / len(labels) for labels in by_episode.values())
+            / len(by_episode)
+            if by_episode
+            else 0.0
+        )
+        for label in REPLAY_CLASSIFICATIONS
+    }
+    claimed_counts = _mapping(
+        aggregate.get("classification_counts"), field=f"{field}.classification_counts"
+    )
+    claimed_decision_rates = _mapping(
+        aggregate.get("decision_rates"), field=f"{field}.decision_rates"
+    )
+    claimed_episode_rates = _mapping(
+        aggregate.get("episode_rates"), field=f"{field}.episode_rates"
+    )
+    if _integer(aggregate.get("decision_count"), field=f"{field}.decision_count") != decision_count:
+        raise StageEvaluationError(f"{field}.decision_count does not reaggregate")
+    if _integer(aggregate.get("episode_count"), field=f"{field}.episode_count") != len(by_episode):
+        raise StageEvaluationError(f"{field}.episode_count does not reaggregate")
+    for label in REPLAY_CLASSIFICATIONS:
+        if _counter(claimed_counts.get(label), field=f"{field}.counts.{label}") != counts[label]:
+            raise StageEvaluationError(f"{field}.{label} count does not reaggregate")
+        expected_decision_rate = counts[label] / decision_count if decision_count else 0.0
+        if not _same_number(
+            _number(
+                claimed_decision_rates.get(label),
+                field=f"{field}.decision_rates.{label}",
+            ),
+            expected_decision_rate,
+        ):
+            raise StageEvaluationError(f"{field}.{label} decision rate mismatch")
+        if not _same_number(
+            _number(
+                claimed_episode_rates.get(label),
+                field=f"{field}.episode_rates.{label}",
+            ),
+            episode_rates[label],
+        ):
+            raise StageEvaluationError(f"{field}.{label} episode rate mismatch")
+    for alias, label in (
+        ("expert_dominates_rate", "EXPERT_DOMINATES"),
+        ("agent_dominates_rate", "AGENT_DOMINATES"),
+    ):
+        if not _same_number(
+            _number(aggregate.get(alias), field=f"{field}.{alias}"),
+            episode_rates[label],
+        ):
+            raise StageEvaluationError(f"{field}.{alias} mismatch")
+    intervals = _mapping(
+        aggregate.get("episode_bootstrap_95"),
+        field=f"{field}.episode_bootstrap_95",
+    )
+    for label in REPLAY_CLASSIFICATIONS:
+        interval = _sequence(
+            intervals.get(label), field=f"{field}.episode_bootstrap_95.{label}"
+        )
+        if len(interval) != 2:
+            raise StageEvaluationError(f"{field}.{label} bootstrap interval malformed")
+        lower = _number(interval[0], field=f"{field}.{label}.lower", minimum=0.0)
+        upper = _number(interval[1], field=f"{field}.{label}.upper", minimum=0.0)
+        if lower > upper or upper > 1.0:
+            raise StageEvaluationError(f"{field}.{label} bootstrap interval invalid")
+    return {
+        "episode_count": len(by_episode),
+        "decision_count": decision_count,
+        "classification_counts": counts,
+        "episode_rates": episode_rates,
+    }
+
+
+def _replay_failure_family(
+    row: Mapping[str, Any],
+) -> tuple[str, str, str] | None:
+    label = str(row.get("classification") or "")
+    if label not in {"EXPERT_DOMINATES", "INCOMPARABLE", "UNCERTIFIABLE"}:
+        return None
+    reason = ""
+    if label == "UNCERTIFIABLE":
+        raw = str(
+            row.get("uncertifiable_reason") or row.get("proposal_error") or "unknown"
+        )
+        lowered = raw.lower()
+        if "action_unstable" in lowered:
+            reason = "action_unstable"
+        elif "policy_error" in lowered or row.get("proposal_error"):
+            reason = "policy_error"
+        else:
+            reason = raw
+    return (label, str(row.get("decision_family") or "unknown"), reason)
+
+
+def _stage5_evaluation(
+    stage: Mapping[str, Any],
+    *,
+    spec: Mapping[str, Any],
+    spec_path: Path,
+) -> dict[str, Any]:
+    baseline_declaration = _mapping(
+        spec.get("stage5_baseline"), field="stage5_baseline"
+    )
+    candidate_declaration = _mapping(
+        stage.get("candidate_result"), field="stages.stage5.candidate_result"
+    )
+    run_contract = _mapping(
+        spec.get("stage5_run_contract"), field="stage5_run_contract"
+    )
+
+    baseline_path = _resolve(
+        spec_path,
+        baseline_declaration.get("path"),
+        field="stage5_baseline.path",
+    )
+    baseline_hash = sha256_file(baseline_path)
+    if baseline_hash != _hash(
+        baseline_declaration.get("artifact_sha256"),
+        field="stage5_baseline.artifact_sha256",
+    ):
+        raise StageEvaluationError("Stage5 frozen S1 baseline hash mismatch")
+    baseline = _read_json(baseline_path, field="Stage5 S1 baseline")
+    baseline_rows_value = _sequence(
+        baseline.get("decision_rows"), field="Stage5 S1 decision_rows"
+    )
+    baseline_rows = [
+        _mapping(row, field=f"Stage5 S1 decision_rows[{index}]")
+        for index, row in enumerate(baseline_rows_value)
+    ]
+    if (
+        baseline.get("schema") != REPLAY_BASELINE_SCHEMA
+        or baseline.get("split") != "VALIDATION"
+        or baseline.get("sealed") is not False
+    ):
+        raise StageEvaluationError("Stage5 frozen S1 baseline schema/split mismatch")
+    baseline_summary = _replay_aggregate_summary(
+        baseline.get("aggregate"), baseline_rows, field="Stage5 S1 aggregate"
+    )
+    expected_count = _integer(
+        baseline_declaration.get("decision_count"),
+        field="stage5_baseline.decision_count",
+        minimum=1,
+    )
+    expected_episodes = _integer(
+        baseline_declaration.get("episode_count"),
+        field="stage5_baseline.episode_count",
+        minimum=1,
+    )
+    expected_counts = _mapping(
+        baseline_declaration.get("classification_counts"),
+        field="stage5_baseline.classification_counts",
+    )
+    if set(expected_counts) != set(REPLAY_CLASSIFICATIONS):
+        raise StageEvaluationError("Stage5 baseline classification key set mismatch")
+    if (
+        baseline_summary["decision_count"] != expected_count
+        or baseline_summary["episode_count"] != expected_episodes
+        or baseline_summary["classification_counts"]
+        != {
+            label: _counter(
+                expected_counts.get(label),
+                field=f"stage5_baseline.classification_counts.{label}",
+            )
+            for label in REPLAY_CLASSIFICATIONS
+        }
+        or not _same_number(
+            baseline_summary["episode_rates"]["EXPERT_DOMINATES"],
+            _number(
+                baseline_declaration.get("expert_dominates_episode_rate"),
+                field="stage5_baseline.expert_dominates_episode_rate",
+            ),
+        )
+    ):
+        raise StageEvaluationError("Stage5 frozen S1 baseline metrics mismatch")
+    baseline_ids = [
+        _string(row.get("record_id"), field=f"Stage5 S1 rows[{index}].record_id")
+        for index, row in enumerate(baseline_rows)
+    ]
+    if len(set(baseline_ids)) != len(baseline_ids):
+        raise StageEvaluationError("Stage5 S1 record IDs are not unique")
+    if _object_sha256(baseline_ids) != _hash(
+        baseline_declaration.get("record_id_sequence_sha256"),
+        field="stage5_baseline.record_id_sequence_sha256",
+    ):
+        raise StageEvaluationError("Stage5 S1 record-ID sequence hash mismatch")
+
+    candidate_path = _resolve(
+        spec_path,
+        candidate_declaration.get("path"),
+        field="stages.stage5.candidate_result.path",
+    )
+    candidate_hash = sha256_file(candidate_path)
+    if candidate_hash != _hash(
+        candidate_declaration.get("artifact_sha256"),
+        field="stages.stage5.candidate_result.artifact_sha256",
+    ):
+        raise StageEvaluationError("Stage5 S2 candidate result hash mismatch")
+    candidate = _read_json(candidate_path, field="Stage5 S2 candidate")
+    sets = _mapping(candidate.get("evaluation_sets"), field="Stage5 evaluation_sets")
+    primary = _mapping(sets.get("paired_primary"), field="Stage5 paired_primary")
+    exploratory = _mapping(
+        sets.get("s2_exploratory"), field="Stage5 s2_exploratory"
+    )
+    primary_rows = [
+        _mapping(row, field=f"Stage5 primary rows[{index}]")
+        for index, row in enumerate(
+            _sequence(primary.get("decision_rows"), field="Stage5 primary rows")
+        )
+    ]
+    exploratory_rows = [
+        _mapping(row, field=f"Stage5 exploratory rows[{index}]")
+        for index, row in enumerate(
+            _sequence(
+                exploratory.get("decision_rows"), field="Stage5 exploratory rows"
+            )
+        )
+    ]
+    if (
+        candidate.get("schema") != REPLAY_CANDIDATE_SCHEMA
+        or candidate.get("split") != "VALIDATION"
+        or candidate.get("sealed") is not False
+        or candidate.get("candidate_variant") != "s2"
+        or candidate.get("headline_set") != "paired_primary"
+        or candidate.get("aggregate_alias")
+        != "evaluation_sets.paired_primary.aggregate"
+        or candidate.get("aggregate") != primary.get("aggregate")
+        or "decision_rows" in candidate
+        or "combined_rate" in candidate
+        or candidate.get("combined_rate_permitted") is not False
+    ):
+        raise StageEvaluationError("Stage5 S2 dual-set schema contract mismatch")
+    primary_selection = _mapping(
+        primary.get("selection"), field="Stage5 primary selection"
+    )
+    primary_ids = [
+        _string(row.get("record_id"), field=f"Stage5 primary[{index}].record_id")
+        for index, row in enumerate(primary_rows)
+    ]
+    if (
+        primary.get("role") != "qualification_primary"
+        or primary_selection.get("mode") != "exact_frozen_s1_record_ids"
+        or _hash(
+            primary_selection.get("source_result_sha256"),
+            field="Stage5 primary selection source_result_sha256",
+        )
+        != baseline_hash
+        or _integer(
+            primary_selection.get("record_count"),
+            field="Stage5 primary selection record_count",
+        )
+        != expected_count
+        or _hash(
+            primary_selection.get("record_id_sequence_sha256"),
+            field="Stage5 primary selection record_id_sequence_sha256",
+        )
+        != _object_sha256(baseline_ids)
+        or primary_selection.get("order_preserved") is not True
+        or primary_ids != baseline_ids
+    ):
+        raise StageEvaluationError("Stage5 paired-primary ordered-ID contract mismatch")
+    if len(set(primary_ids)) != len(primary_ids):
+        raise StageEvaluationError("Stage5 paired-primary IDs are not unique")
+    immutable_row_fields = (
+        "episode_id",
+        "replay_sha256",
+        "seat",
+        "step",
+        "expert_action",
+        "expert_semantic",
+        "actual_order",
+        "turn",
+        "own_turn_ordinal",
+        "hero_deck_family",
+        "opponent_archetype",
+    )
+    for offset, (before, after) in enumerate(zip(baseline_rows, primary_rows)):
+        for key in immutable_row_fields:
+            if before.get(key) != after.get(key):
+                raise StageEvaluationError(
+                    f"Stage5 paired row {offset} immutable field {key} mismatch"
+                )
+
+    candidate_provenance = _mapping(
+        candidate.get("evaluated_candidate"), field="Stage5 evaluated_candidate"
+    )
+    baseline_provenance = _mapping(
+        candidate.get("baseline_incumbent_s1"),
+        field="Stage5 baseline_incumbent_s1",
+    )
+    candidate_package = _mapping(
+        run_contract.get("candidate_package"), field="stage5_run_contract.candidate_package"
+    )
+    baseline_package = _mapping(
+        run_contract.get("baseline_package"), field="stage5_run_contract.baseline_package"
+    )
+    for key in (
+        "archive_sha256",
+        "manifest_sha256",
+        "extracted_tree_sha256",
+        "runtime_source_tree_sha256",
+    ):
+        if str(candidate_provenance.get(key) or "").lower() != _hash(
+            candidate_package.get(key), field=f"stage5 candidate_package.{key}"
+        ):
+            raise StageEvaluationError(f"Stage5 candidate package {key} mismatch")
+        if str(baseline_provenance.get(key) or "").lower() != _hash(
+            baseline_package.get(key), field=f"stage5 baseline_package.{key}"
+        ):
+            raise StageEvaluationError(f"Stage5 baseline package {key} mismatch")
+    if str(baseline_provenance.get("validation_result_sha256") or "").lower() != baseline_hash:
+        raise StageEvaluationError("Stage5 baseline provenance result hash mismatch")
+    run = _mapping(candidate.get("run_contract"), field="Stage5 run_contract")
+    expected_run = _mapping(
+        run_contract.get("replay_run"), field="stage5_run_contract.replay_run"
+    )
+    for key in (
+        "validation_manifest_file_sha256",
+        "validation_manifest_payload_sha256",
+        "baseline_s1_validation_result_sha256",
+    ):
+        if str(run.get(key) or "").lower() != _hash(
+            expected_run.get(key), field=f"stage5_run_contract.replay_run.{key}"
+        ):
+            raise StageEvaluationError(f"Stage5 run {key} mismatch")
+    if (
+        run.get("candidate") != "s2"
+        or run.get("parameters") != expected_run.get("parameters")
+        or run.get("full_manifest_episode_count") != expected_episodes
+        or run.get("evaluator") != expected_run.get("evaluator")
+        or str(candidate.get("manifest_payload_sha256") or "").lower()
+        != _hash(
+            expected_run.get("validation_manifest_payload_sha256"),
+            field="stage5_run_contract.replay_run.validation_manifest_payload_sha256",
+        )
+    ):
+        raise StageEvaluationError("Stage5 replay run provenance mismatch")
+
+    exploratory_selection = _mapping(
+        exploratory.get("selection"), field="Stage5 exploratory selection"
+    )
+    exploratory_ids = [
+        _string(row.get("record_id"), field=f"Stage5 exploratory[{index}].record_id")
+        for index, row in enumerate(exploratory_rows)
+    ]
+    hard_ceiling = _integer(
+        run_contract.get("exploratory_hard_ceiling"),
+        field="stage5_run_contract.exploratory_hard_ceiling",
+    )
+    universe = _mapping(candidate.get("universe_counts"), field="Stage5 universe_counts")
+    if (
+        exploratory.get("role") != "exploratory_safety_veto_only"
+        or exploratory.get("safety_veto_only") is not True
+        or exploratory.get("eligible_for_efficacy_rate") is not False
+        or exploratory_selection.get("mode")
+        != "exhaustive_disjoint_out_of_primary_s2_override_disagreements"
+        or exploratory_selection.get("requires_trustworthy_s2_override_delta")
+        is not True
+        or exploratory_selection.get("requires_candidate_expert_disagreement")
+        is not True
+        or exploratory_selection.get("hard_ceiling") != hard_ceiling
+        or exploratory_selection.get("disjoint_from") != "paired_primary"
+        or len(exploratory_rows) > hard_ceiling
+        or len(set(exploratory_ids)) != len(exploratory_ids)
+        or set(primary_ids).intersection(exploratory_ids)
+        or _integer(
+            universe.get("s2_exploratory_record_count"),
+            field="Stage5 universe s2_exploratory_record_count",
+        )
+        != len(exploratory_rows)
+        or _integer(
+            universe.get("out_of_primary_s2_override_disagreement_count"),
+            field="Stage5 universe out_of_primary disagreement count",
+        )
+        != len(exploratory_rows)
+    ):
+        raise StageEvaluationError("Stage5 exploratory safety-set contract mismatch")
+    universe_values = {
+        key: _integer(universe.get(key), field=f"Stage5 universe {key}")
+        for key in (
+            "manifest_episode_count",
+            "useful_prompt_count",
+            "paired_primary_record_count",
+            "out_of_primary_useful_prompt_count",
+            "s2_override_prompt_count",
+            "paired_primary_s2_override_prompt_count",
+            "out_of_primary_s2_override_prompt_count",
+            "out_of_primary_s2_override_expert_equivalent_count",
+            "out_of_primary_s2_override_disagreement_count",
+            "s2_exploratory_record_count",
+            "s2_exploratory_hard_ceiling",
+        )
+    }
+    primary_override_prompt_count = sum(
+        _integer(
+            row.get("s2_pre_attack_sequence_proof_overrides_delta"),
+            field=f"Stage5 primary row {offset} override delta",
+        )
+        == 1
+        for offset, row in enumerate(primary_rows)
+    )
+    if (
+        universe_values["manifest_episode_count"] != expected_episodes
+        or universe_values["paired_primary_record_count"] != expected_count
+        or universe_values["useful_prompt_count"]
+        != universe_values["paired_primary_record_count"]
+        + universe_values["out_of_primary_useful_prompt_count"]
+        or universe_values["s2_override_prompt_count"]
+        != universe_values["paired_primary_s2_override_prompt_count"]
+        + universe_values["out_of_primary_s2_override_prompt_count"]
+        or universe_values["out_of_primary_s2_override_prompt_count"]
+        != universe_values["out_of_primary_s2_override_expert_equivalent_count"]
+        + universe_values["out_of_primary_s2_override_disagreement_count"]
+        or universe_values["out_of_primary_s2_override_disagreement_count"]
+        != len(exploratory_rows)
+        or universe_values["s2_exploratory_record_count"] != len(exploratory_rows)
+        or universe_values["s2_exploratory_hard_ceiling"] != hard_ceiling
+        or universe_values["paired_primary_s2_override_prompt_count"]
+        != primary_override_prompt_count
+        or universe_values["out_of_primary_s2_override_prompt_count"]
+        > universe_values["out_of_primary_useful_prompt_count"]
+    ):
+        raise StageEvaluationError("Stage5 universe-count arithmetic mismatch")
+    for offset, row in enumerate([*primary_rows, *exploratory_rows]):
+        if (
+            row.get("candidate_variant") != "s2"
+            or row.get("candidate_s2_enabled") is not True
+        ):
+            raise StageEvaluationError(
+                f"Stage5 candidate row {offset} lacks S2 mode proof"
+            )
+        trustworthy = row.get("s2_override_telemetry_trustworthy")
+        if not isinstance(trustworthy, bool):
+            raise StageEvaluationError(
+                f"Stage5 candidate row {offset} has invalid S2 telemetry trust"
+            )
+        if not trustworthy and row.get("proposal_error") is None:
+            raise StageEvaluationError(
+                f"Stage5 candidate row {offset} has unexplained untrusted telemetry"
+            )
+        if row.get("proposal_error") is not None and trustworthy:
+            raise StageEvaluationError(
+                f"Stage5 candidate row {offset} trusts errored telemetry"
+            )
+        override_delta = _integer(
+            row.get("s2_pre_attack_sequence_proof_overrides_delta"),
+            field=f"Stage5 candidate row {offset} override delta",
+        )
+        if override_delta not in (0, 1):
+            raise StageEvaluationError(
+                f"Stage5 candidate row {offset} has invalid override delta"
+            )
+    for offset, row in enumerate(exploratory_rows):
+        if (
+            _integer(
+                row.get("s2_pre_attack_sequence_proof_overrides_delta"),
+                field=f"Stage5 exploratory row {offset} override delta",
+            )
+            != 1
+            or _boolean(
+                row.get("semantic_equivalent"),
+                field=f"Stage5 exploratory row {offset} semantic_equivalent",
+            )
+            or row.get("proposal_error") is not None
+        ):
+            raise StageEvaluationError(
+                f"Stage5 exploratory row {offset} is not a certified S2 disagreement"
+            )
+
+    primary_summary = _replay_aggregate_summary(
+        primary.get("aggregate"), primary_rows, field="Stage5 S2 primary aggregate"
+    )
+    exploratory_summary = _replay_aggregate_summary(
+        exploratory.get("aggregate"),
+        exploratory_rows,
+        field="Stage5 S2 exploratory aggregate",
+    )
+    if (
+        primary_summary["decision_count"] != expected_count
+        or primary_summary["episode_count"] != expected_episodes
+    ):
+        raise StageEvaluationError("Stage5 S2 primary coverage mismatch")
+    transition_matrix = {
+        before: {after: 0 for after in REPLAY_CLASSIFICATIONS}
+        for before in REPLAY_CLASSIFICATIONS
+    }
+    for before, after in zip(baseline_rows, primary_rows):
+        transition_matrix[str(before["classification"])][
+            str(after["classification"])
+        ] += 1
+    transitions = {
+        "ed_to_non_ed": sum(
+            transition_matrix["EXPERT_DOMINATES"][label]
+            for label in ("EQUIVALENT", "AGENT_DOMINATES")
+        ),
+        "non_ed_to_ed": sum(
+            transition_matrix[label]["EXPERT_DOMINATES"]
+            for label in REPLAY_CLASSIFICATIONS
+            if label != "EXPERT_DOMINATES"
+        ),
+    }
+    baseline_families = {
+        family
+        for row in baseline_rows
+        if (family := _replay_failure_family(row)) is not None
+    }
+    candidate_families = {
+        family
+        for row in [*primary_rows, *exploratory_rows]
+        if (family := _replay_failure_family(row)) is not None
+    }
+    new_families = sorted(candidate_families - baseline_families)
+    contract = LATER_STAGE_DECISION_CONTRACT["stage5"]
+    baseline_ed_count = baseline_summary["classification_counts"]["EXPERT_DOMINATES"]
+    candidate_ed_count = primary_summary["classification_counts"]["EXPERT_DOMINATES"]
+    baseline_ed_rate = baseline_summary["episode_rates"]["EXPERT_DOMINATES"]
+    candidate_ed_rate = primary_summary["episode_rates"]["EXPERT_DOMINATES"]
+    all_ed_exits = sum(
+        transition_matrix["EXPERT_DOMINATES"][label]
+        for label in REPLAY_CLASSIFICATIONS
+        if label != "EXPERT_DOMINATES"
+    )
+    if baseline_ed_count - candidate_ed_count != (
+        all_ed_exits - transitions["non_ed_to_ed"]
+    ):
+        raise StageEvaluationError("Stage5 paired ED transition invariant failed")
+    baseline_failure_burden = sum(
+        baseline_summary["classification_counts"][label]
+        for label in ("INCOMPARABLE", "UNCERTIFIABLE")
+    )
+    candidate_failure_burden = sum(
+        primary_summary["classification_counts"][label]
+        for label in ("INCOMPARABLE", "UNCERTIFIABLE")
+    )
+    exploratory_ed = exploratory_summary["classification_counts"]["EXPERT_DOMINATES"]
+    exploratory_incomparable = exploratory_summary["classification_counts"]["INCOMPARABLE"]
+    candidate_policy_error_rows = sum(
+        int(row.get("proposal_error") is not None) for row in primary_rows
+    )
+    gates = {
+        "primary_expert_dominates_count_decreased": candidate_ed_count
+        < baseline_ed_count,
+        "primary_expert_dominates_episode_rate_decreased": candidate_ed_rate
+        < baseline_ed_rate,
+        "favorable_ed_exits_exceed_reverse_ed_entries": transitions["ed_to_non_ed"]
+        > transitions["non_ed_to_ed"],
+        "zero_certified_exploratory_expert_dominates": exploratory_ed
+        <= int(contract["maximum_certified_exploratory_expert_dominates"]),
+        "zero_certified_exploratory_incomparable": exploratory_incomparable
+        <= int(contract["maximum_certified_exploratory_incomparable"]),
+        "no_new_failure_family": not new_families,
+        "zero_candidate_policy_errors": candidate_policy_error_rows == 0,
+        "primary_incomparable_uncertifiable_burden_not_increased": (
+            candidate_failure_burden <= baseline_failure_burden
+        ),
+    }
+    passed = all(gates.values())
+    return {
+        "status": "EVALUATED",
+        "baseline": {
+            "source": {"path": str(baseline_path), "artifact_sha256": baseline_hash},
+            **baseline_summary,
+        },
+        "candidate": {
+            "source": {"path": str(candidate_path), "artifact_sha256": candidate_hash},
+            **primary_summary,
+        },
+        "paired_record_ids": {
+            "count": len(primary_ids),
+            "sequence_sha256": _object_sha256(primary_ids),
+            "exact_order_match": True,
+        },
+        "paired_transitions": {
+            **transitions,
+            "matrix": transition_matrix,
+            "ed_count_identity_verified": True,
+            "ed_to_non_ed_definition": "EXPERT_DOMINATES to EQUIVALENT or AGENT_DOMINATES only",
+        },
+        "exploratory_safety_veto": {
+            **exploratory_summary,
+            "efficacy_credit_permitted": False,
+        },
+        "failure_families": {
+            "baseline": [
+                {"classification": item[0], "decision_family": item[1], "reason": item[2]}
+                for item in sorted(baseline_families)
+            ],
+            "candidate": [
+                {"classification": item[0], "decision_family": item[1], "reason": item[2]}
+                for item in sorted(candidate_families)
+            ],
+            "new": [
+                {"classification": item[0], "decision_family": item[1], "reason": item[2]}
+                for item in new_families
+            ],
+        },
+        "statistical_contract": {
+            "unit": "episode",
+            "comparison": "paired_exact_record_id_transitions",
+            "primary_set_only_for_efficacy": True,
+            "exploratory_set_is_safety_veto_only": True,
+            "combined_rate_permitted": False,
+        },
+        "decision": {
+            "verdict": "PASS" if passed else "KILL",
+            "passed": passed,
+            "gates": gates,
+            "observed": {
+                "baseline_expert_dominates_count": baseline_ed_count,
+                "candidate_expert_dominates_count": candidate_ed_count,
+                "baseline_expert_dominates_episode_rate": baseline_ed_rate,
+                "candidate_expert_dominates_episode_rate": candidate_ed_rate,
+                "ed_to_non_ed": transitions["ed_to_non_ed"],
+                "non_ed_to_ed": transitions["non_ed_to_ed"],
+                "exploratory_expert_dominates": exploratory_ed,
+                "exploratory_incomparable": exploratory_incomparable,
+                "new_failure_families": [
+                    {
+                        "classification": item[0],
+                        "decision_family": item[1],
+                        "reason": item[2],
+                    }
+                    for item in new_families
+                ],
+                "candidate_policy_error_rows": candidate_policy_error_rows,
+                "baseline_primary_incomparable_uncertifiable_count": baseline_failure_burden,
+                "candidate_primary_incomparable_uncertifiable_count": candidate_failure_burden,
+            },
+            "thresholds": dict(contract),
         },
     }
 
@@ -1378,6 +2542,17 @@ def evaluate_spec(spec_path: Path) -> dict[str, Any]:
     }
     if declared_later != LATER_STAGE_DECISION_CONTRACT:
         raise StageEvaluationError("later-stage decision contract mismatch")
+    if spec.get("stage4_controls") != STAGE4_CONTROL_CONTRACT:
+        raise StageEvaluationError("immutable Stage4 control contract mismatch")
+    if (
+        spec.get("stage4_control_evaluation_contract")
+        != STAGE4_CONTROL_EVALUATION_CONTRACT
+    ):
+        raise StageEvaluationError("Stage4 control evaluation contract mismatch")
+    if spec.get("stage5_baseline") != STAGE5_BASELINE_CONTRACT:
+        raise StageEvaluationError("immutable Stage5 baseline contract mismatch")
+    if spec.get("stage5_run_contract") != STAGE5_RUN_CONTRACT:
+        raise StageEvaluationError("Stage5 replay run contract mismatch")
     opponent_contracts = _mapping(spec.get("opponents"), field="opponents")
     baseline_name = _string(baseline_identity.get("name"), field="baseline.name")
     candidate_name = _string(candidate_identity.get("name"), field="candidate.name")
@@ -1422,39 +2597,79 @@ def evaluate_spec(spec_path: Path) -> dict[str, Any]:
     )
     stage1["decision"] = _stage1_decision(stage1, spec.get("stage1_decision"))
     output_stages: dict[str, Any] = {"stage1": stage1}
-    stage1_survived = stage1["decision"]["verdict"] != "KILL"
-    for stage_name, stage_value in stages.items():
-        name = _string(stage_name, field="stage name")
-        if name == "stage1":
+    unknown_stages = set(stages) - set(SEQUENTIAL_STAGES)
+    if unknown_stages:
+        raise StageEvaluationError(
+            "unknown stage declarations: " + ", ".join(sorted(unknown_stages))
+        )
+    blocking_kind = (
+        "KILL" if stage1["decision"]["verdict"] == "KILL" else None
+    )
+    blocking_stage = "stage1" if blocking_kind else None
+    for name in SEQUENTIAL_STAGES[1:]:
+        stage_value = stages.get(name)
+        if blocking_kind is not None:
+            output_stages[name] = {
+                "status": f"INADMISSIBLE_PRECEDING_STAGE_{blocking_kind}",
+                "blocked_by": blocking_stage,
+                "decision": {"verdict": "NOT_EVALUATED", "gates": {}},
+            }
             continue
         if stage_value is None:
             output_stages[name] = {"status": "PENDING"}
+            blocking_kind = "PENDING"
+            blocking_stage = name
             continue
-        if not stage1_survived:
-            output_stages[name] = {
-                "status": "INADMISSIBLE_STAGE1_KILL",
-                "decision": {"verdict": "NOT_EVALUATED"},
-            }
-            continue
+        if name == "stage6":
+            raise StageEvaluationError(
+                "Stage6 sealed holdout is outside this evaluator and must remain pending"
+            )
         stage = _mapping(stage_value, field=f"stages.{name}")
-        comparison = _stage_comparison(
-            name,
-            stage,
-            spec_path=spec_path,
-            baseline_identity=baseline_identity,
-            candidate_identity=candidate_identity,
-            evaluation_contract=evaluation_contract,
-            opponent_contracts=opponent_contracts,
-            top_baselines=top_baselines,
-        )
-        comparison["decision"] = {
-            "verdict": "NOT_IMPLEMENTED_FOR_LATER_STAGE",
-            "note": (
-                "Evidence is integrity-checked and summarized; only Stage1 "
-                "has a decision rule."
-            ),
-        }
-        output_stages[name] = comparison
+        expected_stage_keys = {
+            "stage2": {"baseline_cells", "candidate_cells"},
+            "stage3": {"baseline_cells", "candidate_cells"},
+            "stage4": {"candidate_cells"},
+            "stage5": {"candidate_result"},
+        }[name]
+        if set(stage) != expected_stage_keys:
+            raise StageEvaluationError(
+                f"stages.{name} keys must be exactly {sorted(expected_stage_keys)}"
+            )
+        if name in {"stage2", "stage3"}:
+            evaluated = _stage_comparison(
+                name,
+                stage,
+                spec_path=spec_path,
+                baseline_identity=baseline_identity,
+                candidate_identity=candidate_identity,
+                evaluation_contract=evaluation_contract,
+                opponent_contracts=opponent_contracts,
+                top_baselines=None,
+            )
+            evaluated["decision"] = (
+                _stage2_decision(evaluated)
+                if name == "stage2"
+                else _stage3_decision(evaluated)
+            )
+        elif name == "stage4":
+            evaluated = _stage4_evaluation(
+                stage,
+                spec=spec,
+                spec_path=spec_path,
+                baseline_identity=baseline_identity,
+                candidate_identity=candidate_identity,
+                evaluation_contract=evaluation_contract,
+                opponent_contracts=opponent_contracts,
+            )
+            evaluated["decision"] = _stage4_decision(evaluated)
+        else:
+            evaluated = _stage5_evaluation(
+                stage, spec=spec, spec_path=spec_path
+            )
+        output_stages[name] = evaluated
+        if evaluated["decision"]["verdict"] == "KILL":
+            blocking_kind = "KILL"
+            blocking_stage = name
 
     return {
         "schema": REPORT_SCHEMA,
@@ -1506,6 +2721,15 @@ def main(argv: Sequence[str] | None = None) -> int:
             for arm_key in ("baseline_cells", "candidate_cells")
             for cell in stage.get(arm_key, [])
         }
+        for stage in report["stages"].values():
+            if not isinstance(stage, Mapping):
+                continue
+            for source_key in ("baseline", "candidate"):
+                source_value = stage.get(source_key)
+                if isinstance(source_value, Mapping) and isinstance(
+                    source_value.get("source"), Mapping
+                ):
+                    stage_paths.add(Path(source_value["source"]["path"]).resolve())
         if output in evidence_paths | stage_paths:
             raise StageEvaluationError("--output must not overwrite evidence")
         output.parent.mkdir(parents=True, exist_ok=True)
@@ -1514,8 +2738,12 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
     except (OSError, StageEvaluationError) as error:
         parser.error(str(error))
-    verdict = report["stages"]["stage1"]["decision"]["verdict"]
-    return 2 if verdict == "KILL" else 0
+    verdicts = [
+        stage.get("decision", {}).get("verdict")
+        for stage in report["stages"].values()
+        if isinstance(stage, Mapping)
+    ]
+    return 2 if "KILL" in verdicts else 0
 
 
 if __name__ == "__main__":
