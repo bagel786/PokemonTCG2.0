@@ -1,0 +1,296 @@
+{
+  "schema": "dipplin-s2-stage-evaluation-spec-v1",
+  "status": "STAGE1_FROZEN_COMPLETE_LATER_STAGES_PENDING",
+  "evidence_files": [
+    {
+      "id": "frozen_s2_hypothesis",
+      "path": "s2_pre_attack_sequence_hypothesis.json",
+      "sha256": "aa2c5a070052ed9b706c20de548b5ad38ca48949156411fb62ff9a5dd39d4f87"
+    }
+  ],
+  "provenance": {
+    "source_head": "9d365ccdaae90379e0e9d8ce05a17a5e1a587c74",
+    "hypothesis": "s2_pre_attack_sequence_hypothesis.json",
+    "hypothesis_sha256": "aa2c5a070052ed9b706c20de548b5ad38ca48949156411fb62ff9a5dd39d4f87",
+    "candidate_package_manifest": "../../artifacts/dipplin_s2/submission.manifest.json",
+    "candidate_package_manifest_sha256": "4801239bc3d328909bbd4e5461b84b140dd8931e3b581636ecbc662a97bad1bc",
+    "native_engine_arms_are_unpaired": true,
+    "threshold_basis": "The prompt freezes +3pp as promising and +5pp as strong. For the otherwise qualitative safety clauses, the tracked contract binds material pooled decline at -5pp using the repository's audited material-drop convention, and catastrophic single-matchup collapse at -20pp. Neither threshold affects this Stage1 result because no pool or matchup declined."
+  },
+  "evaluation_contract": {
+    "deck_a_sha256": "269bc5808a0db862c7afe8f2daaa3d0b3b6e3c68bd651dd515d14f9d85392326",
+    "engine_sha256": "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30",
+    "evaluator_sha256": "01e450c3425b86c586b6b51e50a28f58ae482545382e4ffa6715e3f21a27d114",
+    "external_adapter_sha256": "f18294f2e1ee60630fdcc8a63422aa1115365a0b31edeb4ffa6079a270944283",
+    "evaluation_schema_sha256": "bc111f3f2e539b89d2b5ac2ed3a5447e5e2db1f4d7adbcdf7089c8541de7fcf4",
+    "nonfatal_search_fallback_keys": [
+      "d1_errors",
+      "d1_timeouts",
+      "d1_abstention_reason_engine_error",
+      "d1_abstention_reason_timeout"
+    ],
+    "nonfatal_search_fallback_prefixes": [
+      "d1_error_detail_"
+    ]
+  },
+  "opponents": {
+    "A2": {
+      "opponent_name": "A2",
+      "tree_sha256": "854d8d016f545635711cb0722820b2997e19c4a160797c70e6415bcccf0bd1ae",
+      "deck_sha256": "92b92bac9f9163ecff933b3dc39294d2cc154c8684f3c8497877661419ebc59d"
+    },
+    "d842": {
+      "opponent_name": "d842",
+      "tree_sha256": "0c15b56adf3b09c654505a152309fdc9f8401579a495da714347d98ae735003c",
+      "deck_sha256": "92b92bac9f9163ecff933b3dc39294d2cc154c8684f3c8497877661419ebc59d"
+    },
+    "AZ2.4a": {
+      "opponent_name": "AZ2.4a",
+      "tree_sha256": "5d44338891094988ca15f0c26d5187316549facd64a7bfbac04aa0048424e8c7",
+      "deck_sha256": "f5354da408919c0d9caf9979780126a27394b0a7cc83df2ebd455d4e5ca9abc1"
+    },
+    "AZ2.7": {
+      "opponent_name": "AZ2.7",
+      "tree_sha256": "f9bb36612bbb2ed4e38c10cb00b2f3b6ac5616414636413af3b108c2138f4a4a",
+      "deck_sha256": "f5354da408919c0d9caf9979780126a27394b0a7cc83df2ebd455d4e5ca9abc1"
+    }
+  },
+  "baseline": {
+    "name": "Dipplin S1 current-tree",
+    "variant": "s1",
+    "result_hero_name": "S1",
+    "expected_s2_enabled": false,
+    "tree_sha256": "940654489ea1f286982226f1f0cba4dd7340378b997a3f88ab6915c5d67f6c98",
+    "archive_sha256": "ec74efe096473c58a2057cabfee93bf337bc18848c202a6e3d36bcba802db171",
+    "package_manifest": {
+      "path": "../../artifacts/dipplin_s1/submission.manifest.json",
+      "sha256": "4071c03a020446436b8d33e1951fdaf5229ae4ab760a8283dc7d6f323e02f92c"
+    },
+    "expected_runtime_configuration": {
+      "go_first": true,
+      "route_v2": false,
+      "search_worlds": 2
+    },
+    "expected_manifest_values": {
+      "runtime.entrypoint_forces_evaluated_mode": true,
+      "runtime.search_default": true,
+      "runtime.second_opening_v2_default": true,
+      "verification.sterile_import.passed": true,
+      "verification.sterile_import.search_enabled": true,
+      "verification.sterile_import.second_opening_v2": true
+    },
+    "cells": [
+      {
+        "id": "s1_a2_second_100",
+        "matchup": "A2",
+        "opponent_name": "A2",
+        "actual_order": "second",
+        "path": "../../artifacts/general_strength/s1_buckets/a2_second_trace_100.json",
+        "artifact_sha256": "abd325369edb3e9b07942d1d8bf6523c4f5becf3a3f6f43a539cb195c9abfb5f",
+        "requested_games": 100,
+        "expected_wins": 51
+      },
+      {
+        "id": "s1_d842_second_100",
+        "matchup": "d842",
+        "opponent_name": "d842",
+        "actual_order": "second",
+        "path": "../../artifacts/general_strength/s1_buckets/d842_second_trace_100.json",
+        "artifact_sha256": "f876698b95b8defe8b81f35b9684ff5fcb28867dcba39da0d81ea6c58f427baf",
+        "requested_games": 100,
+        "expected_wins": 48
+      },
+      {
+        "id": "s1_az2_4a_second_100",
+        "matchup": "AZ2.4a",
+        "opponent_name": "AZ2.4a",
+        "actual_order": "second",
+        "path": "../../artifacts/general_strength/s1_buckets/az2_4a_second_trace_100.json",
+        "artifact_sha256": "e22162ccb5c852841d9edaeb9ce7717202ff00abfd379343efe373e8c71f3a19",
+        "requested_games": 100,
+        "expected_wins": 33
+      },
+      {
+        "id": "s1_az2_7_second_100",
+        "matchup": "AZ2.7",
+        "opponent_name": "AZ2.7",
+        "actual_order": "second",
+        "path": "../../artifacts/general_strength/s1_buckets/az2_7_second_trace_100.json",
+        "artifact_sha256": "055ab5bc7de48f64a4a0202f9433d8a8ff0e9f8b8fed907036b71457adc7b030",
+        "requested_games": 100,
+        "expected_wins": 39
+      }
+    ]
+  },
+  "candidate": {
+    "name": "Dipplin S2 pre-attack sequence proof",
+    "variant": "s2",
+    "result_hero_name": "S2",
+    "expected_s2_enabled": true,
+    "tree_sha256": "c822bb76fa40a138a6bb07fcfd6e6cc58f8ade0dd65c49425bc703f3170da922",
+    "archive_sha256": "813fab9efd432738856e7d7b784809c7b0c5aef51b3c677d7205f203490d1510",
+    "package_manifest": {
+      "path": "../../artifacts/dipplin_s2/submission.manifest.json",
+      "sha256": "4801239bc3d328909bbd4e5461b84b140dd8931e3b581636ecbc662a97bad1bc"
+    },
+    "expected_runtime_configuration": {
+      "go_first": true,
+      "route_v2": false,
+      "s2": true,
+      "search": true,
+      "search_worlds": 2,
+      "second_opening_v2": true
+    },
+    "expected_manifest_values": {
+      "runtime.entrypoint_forces_evaluated_mode": true,
+      "runtime.s2_default": true,
+      "runtime.search_default": true,
+      "runtime.second_opening_v2_default": true,
+      "verification.sterile_import.passed": true,
+      "verification.sterile_import.s2_enabled": true,
+      "verification.sterile_import.search_controller_s2_enabled": true,
+      "verification.sterile_import.search_enabled": true,
+      "verification.sterile_import.second_opening_v2": true
+    }
+  },
+  "stage1_decision": {
+    "expected_actual_order": "second",
+    "expected_matchups": [
+      "A2",
+      "d842",
+      "AZ2.4a",
+      "AZ2.7"
+    ],
+    "requested_games_per_matchup": 100,
+    "expected_baseline_games": 400,
+    "expected_baseline_wins": 171,
+    "minimum_promising_pooled_delta": 0.03,
+    "strong_signal_pooled_delta": 0.05,
+    "material_pooled_drop_delta": -0.05,
+    "catastrophic_matchup_drop_delta": -0.2
+  },
+  "later_stage_decision_contracts": {
+    "frozen_before_result_admission": true,
+    "stage2": {
+      "screen": "serious_forced_second",
+      "expected_actual_order": "second",
+      "expected_matchups": [
+        "A2",
+        "d842",
+        "AZ2.4a",
+        "AZ2.7"
+      ],
+      "requested_games_per_arm_per_matchup": 300,
+      "require_zero_failures_policy_errors_illegal_actions": true,
+      "minimum_candidate_pooled_win_rate": 0.5,
+      "minimum_candidate_macro_win_rate": 0.5,
+      "minimum_candidate_minus_s1_pooled_delta": 0.0,
+      "catastrophic_matchup_drop_delta": -0.1,
+      "strong_target_candidate_pooled_or_macro_win_rate": 0.55,
+      "statistics": [
+        "wilson_per_arm",
+        "independent_newcombe_wilson_difference"
+      ],
+      "paired": false
+    },
+    "stage3": {
+      "screen": "forced_first_regression",
+      "expected_actual_order": "first",
+      "expected_matchups": [
+        "A2",
+        "d842",
+        "AZ2.4a",
+        "AZ2.7"
+      ],
+      "requested_games_per_arm_per_matchup": 100,
+      "require_zero_failures_policy_errors_illegal_actions": true,
+      "minimum_candidate_minus_s1_pooled_delta": -0.04,
+      "minimum_candidate_minus_s1_macro_delta": -0.04,
+      "catastrophic_matchup_drop_delta": -0.1,
+      "paired": false
+    },
+    "stage4": {
+      "screen": "same_deck_s2_vs_s1",
+      "orders": [
+        "first",
+        "second"
+      ],
+      "requested_games_per_order": 300,
+      "requested_games_total": 600,
+      "require_zero_failures_policy_errors_illegal_actions": true,
+      "minimum_pooled_s2_win_rate": 0.47,
+      "minimum_each_order_s2_win_rate": 0.43,
+      "require_no_significant_loss": true,
+      "significant_loss_definition": "Reject if the relevant independent Newcombe candidate-minus-S1 difference 95% upper bound is below zero or the relevant S2 Wilson 95% upper bound is below the corresponding no-loss threshold.",
+      "statistics": [
+        "wilson_per_arm",
+        "independent_newcombe_wilson_difference"
+      ],
+      "paired": false
+    },
+    "stage5": {
+      "screen": "paired_frozen_validation_regret",
+      "split": "VALIDATION",
+      "paired_by_episode_and_decision": true,
+      "primary_only_for_improvement": true,
+      "exploratory_improvements_can_help": false,
+      "require_s2_expert_dominates_primary_count_below_s1": true,
+      "require_s2_expert_dominates_primary_rate_below_s1": true,
+      "require_ed_to_non_ed_transitions_exceed_reverse": true,
+      "maximum_certified_exploratory_expert_dominates": 0,
+      "maximum_certified_exploratory_incomparable": 0,
+      "require_no_new_failure_family": true
+    }
+  },
+  "stages": {
+    "stage1": {
+      "candidate_cells": [
+        {
+          "id": "s2_a2_second_100",
+          "matchup": "A2",
+          "opponent_name": "A2",
+          "actual_order": "second",
+          "path": "../../artifacts/general_strength/s2_stage1/a2_second_100.json",
+          "artifact_sha256": "46a0b21a50572ddece82d475805a9aa7f478898251bf8b96e14996fda9530e9b",
+          "requested_games": 100,
+          "expected_wins": 51
+        },
+        {
+          "id": "s2_d842_second_100",
+          "matchup": "d842",
+          "opponent_name": "d842",
+          "actual_order": "second",
+          "path": "../../artifacts/general_strength/s2_stage1/d842_second_100.json",
+          "artifact_sha256": "a4c7ea48f3f13a2be75b7b2f68880e9dfc18725fbd356e86be3ab5cc24ac531d",
+          "requested_games": 100,
+          "expected_wins": 54
+        },
+        {
+          "id": "s2_az2_4a_second_100",
+          "matchup": "AZ2.4a",
+          "opponent_name": "AZ2.4a",
+          "actual_order": "second",
+          "path": "../../artifacts/general_strength/s2_stage1/az2_4a_second_100.json",
+          "artifact_sha256": "22c3b49a5b4f3279c234cf96bdb7674e00a9e306987c433df81105fffb4b4a42",
+          "requested_games": 100,
+          "expected_wins": 49
+        },
+        {
+          "id": "s2_az2_7_second_100",
+          "matchup": "AZ2.7",
+          "opponent_name": "AZ2.7",
+          "actual_order": "second",
+          "path": "../../artifacts/general_strength/s2_stage1/az2_7_second_100.json",
+          "artifact_sha256": "fd1e3650e1457d9911e8db178d04c5246465b09b92b0177843263b2ddfe5d9b0",
+          "requested_games": 100,
+          "expected_wins": 39
+        }
+      ]
+    },
+    "stage2": null,
+    "stage3": null,
+    "stage4": null,
+    "stage5": null,
+    "stage6": null
+  }
+}
