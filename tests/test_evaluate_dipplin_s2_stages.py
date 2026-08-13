@@ -560,6 +560,26 @@ def _replay_aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
         )
         for label in labels
     }
+    proposal_errors = sum(row.get("proposal_error") is not None for row in rows)
+    action_unstable = sum(
+        row.get("proposal_error") is not None
+        and (
+            "unstable" in str(row.get("proposal_error")).lower()
+            or str(row.get("uncertifiable_reason") or "").lower()
+            in {"candidate_action_unstable", "action_unstable"}
+        )
+        for row in rows
+    )
+    decision_archetypes: dict[str, int] = {}
+    episode_archetypes: dict[str, str] = {}
+    for row in rows:
+        archetype = str(row.get("opponent_archetype") or "unknown")
+        episode_id = str(row["episode_id"])
+        episode_archetypes[episode_id] = archetype
+        decision_archetypes[archetype] = decision_archetypes.get(archetype, 0) + 1
+    episode_counts: dict[str, int] = {}
+    for archetype in episode_archetypes.values():
+        episode_counts[archetype] = episode_counts.get(archetype, 0) + 1
     return {
         "episode_count": len(episodes),
         "decision_count": len(rows),
@@ -573,6 +593,17 @@ def _replay_aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
         },
         "expert_dominates_rate": episode_rates["EXPERT_DOMINATES"],
         "agent_dominates_rate": episode_rates["AGENT_DOMINATES"],
+        "quality_counts": {
+            "proposal_error_rows": proposal_errors,
+            "candidate_policy_error_rows": proposal_errors - action_unstable,
+            "candidate_action_unstable_rows": action_unstable,
+            "uncertifiable_rows": counts["UNCERTIFIABLE"],
+            "incomparable_rows": counts["INCOMPARABLE"],
+        },
+        "opponent_archetype_decision_counts": dict(sorted(decision_archetypes.items())),
+        "opponent_archetype_episode_counts": dict(sorted(episode_counts.items())),
+        "opponent_archetypes": dict(sorted(episode_counts.items())),
+        "opponent_archetypes_basis": "unique_episode_id",
     }
 
 
@@ -667,6 +698,7 @@ def _stage5_fixture(
             "record_id": "x0",
             "episode_id": 4,
             "classification": "AGENT_DOMINATES",
+            "opponent_archetype": "other",
             "decision_family": "setup",
             "candidate_variant": "s2",
             "candidate_s2_enabled": True,
@@ -978,7 +1010,13 @@ def test_stage5_safety_kills(
 def test_stage5_exact_pair_identity_aggregate_and_universe_fail_closed(
     tmp_path: Path,
 ) -> None:
-    for name in ("identity", "aggregate", "universe", "primary_override_count"):
+    for name in (
+        "identity",
+        "aggregate",
+        "quality_counts",
+        "universe",
+        "primary_override_count",
+    ):
         case = tmp_path / name
         spec_path, spec, stage = _stage5_fixture(case)
         candidate_path = case / "s2.json"
@@ -991,6 +1029,13 @@ def test_stage5_exact_pair_identity_aggregate_and_universe_fail_closed(
             payload["evaluation_sets"]["paired_primary"]["aggregate"][
                 "classification_counts"
             ]["EQUIVALENT"] += 1
+            payload["aggregate"] = payload["evaluation_sets"]["paired_primary"][
+                "aggregate"
+            ]
+        elif name == "quality_counts":
+            payload["evaluation_sets"]["paired_primary"]["aggregate"][
+                "quality_counts"
+            ]["candidate_policy_error_rows"] += 1
             payload["aggregate"] = payload["evaluation_sets"]["paired_primary"][
                 "aggregate"
             ]
@@ -1239,6 +1284,22 @@ def test_known_search_abstentions_are_accounted_but_unknown_errors_kill(
     decision = evaluate_spec(unknown_spec)["stages"]["stage1"]["decision"]
     assert decision["verdict"] == "KILL"
     assert "FATAL_OPERATIONAL_TELEMETRY_GT_ZERO" in decision["reasons"]
+
+    unknown_context_spec = _build_spec(
+        tmp_path / "unknown_context",
+        baseline_wins=[4],
+        candidate_wins=[8],
+        games_per_matchup=10,
+        candidate_operational={0: {"unknown_contexts": 1}},
+    )
+    unknown_context_stage = evaluate_spec(unknown_context_spec)["stages"]["stage1"]
+    assert unknown_context_stage["decision"]["verdict"] == "KILL"
+    assert "FATAL_OPERATIONAL_TELEMETRY_GT_ZERO" in unknown_context_stage[
+        "decision"
+    ]["reasons"]
+    assert unknown_context_stage["pooled"]["candidate"]["operational_telemetry"][
+        "fatal_counts"
+    ] == {"unknown_contexts": 1}
 
 
 def test_s2_mode_and_cross_arm_opponent_identity_fail_closed(tmp_path: Path) -> None:

@@ -333,8 +333,8 @@
       },
       "evaluator": {
         "path": "scripts/evaluate_dipplin_replay_regret.py",
-        "sha256": "65FC798C8A37037F61A8CE7E5D00C0E7B80535A99114BA5605976FDAB01F6840",
-        "git_blob_sha1": "55A9BA453BE40A19BAADD061103E742313791D30"
+        "sha256": "3F18456B0AE14A967F4443736E72EB95D4C7CB1823C6CD0735F3DE94E4F678A7",
+        "git_blob_sha1": "D0DEED4A71E970F540E17CF489D4DF3EDAE70711"
       }
     },
     "exploratory_hard_ceiling": 256

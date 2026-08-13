@@ -42,7 +42,13 @@ QUALITY_KEYS = (
     "hero_illegal_actions",
     "opponent_illegal_actions",
 )
-OPERATIONAL_TELEMETRY_MARKERS = ("error", "timeout", "cleanup", "failure")
+OPERATIONAL_TELEMETRY_MARKERS = (
+    "error",
+    "timeout",
+    "cleanup",
+    "failure",
+    "unknown_context",
+)
 NONFATAL_SEARCH_FALLBACK_KEYS = {
     "d1_errors",
     "d1_timeouts",
@@ -194,8 +200,8 @@ STAGE5_RUN_CONTRACT = {
         },
         "evaluator": {
             "path": "scripts/evaluate_dipplin_replay_regret.py",
-            "sha256": "65FC798C8A37037F61A8CE7E5D00C0E7B80535A99114BA5605976FDAB01F6840",
-            "git_blob_sha1": "55A9BA453BE40A19BAADD061103E742313791D30",
+            "sha256": "3F18456B0AE14A967F4443736E72EB95D4C7CB1823C6CD0735F3DE94E4F678A7",
+            "git_blob_sha1": "D0DEED4A71E970F540E17CF489D4DF3EDAE70711",
         },
     },
     "exploratory_hard_ceiling": 256,
@@ -984,7 +990,7 @@ def _artifact_summary(
             "policy": (
                 "D1 engine-error/node-budget and timeout counters are explicit "
                 "search abstentions with baseline fallback; unknown error, timeout, "
-                "cleanup, or failure counters are fatal."
+                "cleanup, failure, or unknown-context counters are fatal."
             ),
         },
         "s2_proof": {
@@ -1849,6 +1855,7 @@ def _replay_aggregate_summary(
     rows: Sequence[Mapping[str, Any]],
     *,
     field: str,
+    require_quality_counts: bool = False,
 ) -> dict[str, Any]:
     aggregate = _mapping(aggregate_value, field=field)
     counts = {label: 0 for label in REPLAY_CLASSIFICATIONS}
@@ -1916,6 +1923,76 @@ def _replay_aggregate_summary(
             episode_rates[label],
         ):
             raise StageEvaluationError(f"{field}.{alias} mismatch")
+    quality_counts: dict[str, int] | None = None
+    archetype_decision_counts: dict[str, int] | None = None
+    archetype_episode_counts: dict[str, int] | None = None
+    if require_quality_counts:
+        proposal_errors = sum(int(row.get("proposal_error") is not None) for row in rows)
+        action_unstable = sum(
+            int(
+                row.get("proposal_error") is not None
+                and (
+                    "unstable" in str(row.get("proposal_error")).lower()
+                    or str(row.get("uncertifiable_reason") or "").lower()
+                    in {"candidate_action_unstable", "action_unstable"}
+                )
+            )
+            for row in rows
+        )
+        quality_counts = {
+            "proposal_error_rows": proposal_errors,
+            "candidate_policy_error_rows": proposal_errors - action_unstable,
+            "candidate_action_unstable_rows": action_unstable,
+            "uncertifiable_rows": counts["UNCERTIFIABLE"],
+            "incomparable_rows": counts["INCOMPARABLE"],
+        }
+        claimed_quality = _mapping(
+            aggregate.get("quality_counts"), field=f"{field}.quality_counts"
+        )
+        if set(claimed_quality) != set(quality_counts) or any(
+            _integer(claimed_quality.get(key), field=f"{field}.quality_counts.{key}")
+            != expected
+            for key, expected in quality_counts.items()
+        ):
+            raise StageEvaluationError(f"{field}.quality_counts does not reaggregate")
+        decision_archetypes: dict[str, int] = {}
+        episode_archetypes: dict[str, str] = {}
+        for offset, row in enumerate(rows):
+            episode_id = str(
+                _scalar_identifier(
+                    row.get("episode_id"),
+                    field=f"{field}.rows[{offset}].episode_id",
+                )
+            )
+            archetype = str(row.get("opponent_archetype") or "unknown")
+            if (
+                episode_id in episode_archetypes
+                and episode_archetypes[episode_id] != archetype
+            ):
+                raise StageEvaluationError(
+                    f"{field} episode has inconsistent opponent archetypes"
+                )
+            episode_archetypes[episode_id] = archetype
+            decision_archetypes[archetype] = decision_archetypes.get(archetype, 0) + 1
+        episode_counts: dict[str, int] = {}
+        for archetype in episode_archetypes.values():
+            episode_counts[archetype] = episode_counts.get(archetype, 0) + 1
+        archetype_decision_counts = dict(sorted(decision_archetypes.items()))
+        archetype_episode_counts = dict(sorted(episode_counts.items()))
+        for key, expected in (
+            ("opponent_archetype_decision_counts", archetype_decision_counts),
+            ("opponent_archetype_episode_counts", archetype_episode_counts),
+            ("opponent_archetypes", archetype_episode_counts),
+        ):
+            claimed = _mapping(aggregate.get(key), field=f"{field}.{key}")
+            if set(claimed) != set(expected) or any(
+                _integer(claimed.get(name), field=f"{field}.{key}.{name}")
+                != count
+                for name, count in expected.items()
+            ):
+                raise StageEvaluationError(f"{field}.{key} does not reaggregate")
+        if aggregate.get("opponent_archetypes_basis") != "unique_episode_id":
+            raise StageEvaluationError(f"{field}.opponent_archetypes_basis mismatch")
     intervals = _mapping(
         aggregate.get("episode_bootstrap_95"),
         field=f"{field}.episode_bootstrap_95",
@@ -1930,12 +2007,19 @@ def _replay_aggregate_summary(
         upper = _number(interval[1], field=f"{field}.{label}.upper", minimum=0.0)
         if lower > upper or upper > 1.0:
             raise StageEvaluationError(f"{field}.{label} bootstrap interval invalid")
-    return {
+    result = {
         "episode_count": len(by_episode),
         "decision_count": decision_count,
         "classification_counts": counts,
         "episode_rates": episode_rates,
     }
+    if quality_counts is not None:
+        result["quality_counts"] = quality_counts
+        result["opponent_archetype_decision_counts"] = archetype_decision_counts
+        result["opponent_archetype_episode_counts"] = archetype_episode_counts
+        result["opponent_archetypes"] = archetype_episode_counts
+        result["opponent_archetypes_basis"] = "unique_episode_id"
+    return result
 
 
 def _replay_failure_family(
@@ -2334,12 +2418,16 @@ def _stage5_evaluation(
             )
 
     primary_summary = _replay_aggregate_summary(
-        primary.get("aggregate"), primary_rows, field="Stage5 S2 primary aggregate"
+        primary.get("aggregate"),
+        primary_rows,
+        field="Stage5 S2 primary aggregate",
+        require_quality_counts=True,
     )
     exploratory_summary = _replay_aggregate_summary(
         exploratory.get("aggregate"),
         exploratory_rows,
         field="Stage5 S2 exploratory aggregate",
+        require_quality_counts=True,
     )
     if (
         primary_summary["decision_count"] != expected_count

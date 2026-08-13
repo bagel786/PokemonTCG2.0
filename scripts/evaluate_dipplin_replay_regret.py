@@ -87,7 +87,6 @@ from scripts.freeze_dipplin_replay_holdout import verify_manifest_digest  # noqa
 
 
 SCHEMA = "dipplin-replay-regret-v2"
-QUALIFICATION_SCHEMA = "dipplin-s2-holdout-qualification-v1"
 DEFAULT_INCUMBENT_MANIFEST = ROOT / "artifacts" / "dipplin_s1" / "submission.manifest.json"
 DEFAULT_CANDIDATE_MANIFEST = ROOT / "artifacts" / "dipplin_s2" / "submission.manifest.json"
 DEFAULT_S1_VALIDATION_OUTPUT = (
@@ -96,7 +95,6 @@ DEFAULT_S1_VALIDATION_OUTPUT = (
 DEFAULT_S2_VALIDATION_OUTPUT = (
     ROOT / "artifacts" / "general_strength" / "replay" / "validation_regret_s2.json"
 )
-QUALIFIED_S2_VALIDATION_PATH = str(DEFAULT_S2_VALIDATION_OUTPUT.relative_to(ROOT))
 DEFAULT_S2_QUALIFICATION = (
     ROOT / "data" / "dipplin_replay_eval" / "frozen" / "s2_qualification.json"
 )
@@ -980,6 +978,19 @@ def aggregate_results(
         for label in CLASSIFICATIONS
     }
     decisions = len(normalized)
+    proposal_error_rows = 0
+    action_unstable_rows = 0
+    for row in normalized:
+        proposal_error = row.get("proposal_error")
+        if proposal_error is None:
+            continue
+        proposal_error_rows += 1
+        reason = str(row.get("uncertifiable_reason") or "").lower()
+        if "unstable" in str(proposal_error).lower() or reason in {
+            "candidate_action_unstable",
+            "action_unstable",
+        }:
+            action_unstable_rows += 1
     return {
         "episode_count": len(episode_ids),
         "decision_count": decisions,
@@ -991,6 +1002,17 @@ def aggregate_results(
         "episode_bootstrap_95": intervals,
         "expert_dominates_rate": episode_rates["EXPERT_DOMINATES"],
         "agent_dominates_rate": episode_rates["AGENT_DOMINATES"],
+        # Global integer counts remain safe in sealed output and let the final
+        # dashboard distinguish candidate failures from ordinary evaluator
+        # uncertainty without exposing an episode, prompt, or error string.
+        "quality_counts": {
+            "proposal_error_rows": proposal_error_rows,
+            "candidate_policy_error_rows": proposal_error_rows
+            - action_unstable_rows,
+            "candidate_action_unstable_rows": action_unstable_rows,
+            "uncertifiable_rows": int(counts["UNCERTIFIABLE"]),
+            "incomparable_rows": int(counts["INCOMPARABLE"]),
+        },
     }
 
 
@@ -1054,9 +1076,32 @@ def build_output(
     # The final holdout is one aggregate number set, not a drill-down dataset.
     # Even nominally aggregated rare categories can identify a single episode.
     if not sealed:
-        aggregate["opponent_archetypes"] = dict(sorted(Counter(
-            str(row.get("opponent_archetype") or "unknown") for row in public_rows
-        ).items()))
+        decision_archetypes: Counter[str] = Counter()
+        episode_archetypes: dict[str, str] = {}
+        for row in public_rows:
+            archetype = str(row.get("opponent_archetype") or "unknown")
+            episode_id = str(row.get("episode_id") or "")
+            if not episode_id:
+                raise RegretError("aggregate row lacks episode_id")
+            if (
+                episode_id in episode_archetypes
+                and episode_archetypes[episode_id] != archetype
+            ):
+                raise RegretError("episode has inconsistent opponent archetypes")
+            episode_archetypes[episode_id] = archetype
+            decision_archetypes[archetype] += 1
+        episode_archetype_counts = Counter(episode_archetypes.values())
+        aggregate["opponent_archetype_decision_counts"] = dict(
+            sorted(decision_archetypes.items())
+        )
+        aggregate["opponent_archetype_episode_counts"] = dict(
+            sorted(episode_archetype_counts.items())
+        )
+        # Compatibility alias now uses the statistically meaningful unit.
+        aggregate["opponent_archetypes"] = dict(
+            aggregate["opponent_archetype_episode_counts"]
+        )
+        aggregate["opponent_archetypes_basis"] = "unique_episode_id"
         aggregate["by_actual_order"] = _grouped_aggregates(
             public_rows, "actual_order", bootstrap_samples=bootstrap_samples, seed=seed
         )
@@ -2065,132 +2110,20 @@ def validate_diagnostic_run_contract(args: argparse.Namespace) -> None:
         raise RegretError("raw diagnostic output path is reserved by the frozen workflow")
 
 
-def _qualification_payload_sha256(payload: Mapping[str, Any]) -> str:
-    unsigned = dict(payload)
-    unsigned.pop("qualification_payload_sha256", None)
-    return _object_sha256(unsigned)
-
-
 def verify_s2_qualification(
     qualification_path: str | Path = DEFAULT_S2_QUALIFICATION,
 ) -> dict[str, Any]:
-    """Verify the later-frozen qualification before any holdout replay access."""
+    """Recompute all stage/validation gates before any holdout replay access."""
 
-    path = Path(qualification_path).resolve()
-    if path != DEFAULT_S2_QUALIFICATION.resolve():
-        raise RegretError("sealed run requires the canonical S2 qualification path")
-    if not path.is_file():
-        raise RegretError("S2 qualification is absent; final holdout remains disabled")
-    qualification_file_sha256 = _sha256(path)
-    payload = _read_json_object(path, "S2 qualification")
-    claimed_payload = str(payload.get("qualification_payload_sha256") or "").upper()
-    if len(claimed_payload) != 64 or claimed_payload != _qualification_payload_sha256(payload):
-        raise RegretError("S2 qualification payload digest mismatch")
-    candidate_validation = payload.get("candidate_validation") or {}
-    package = payload.get("candidate_package") or {}
-    evaluator = payload.get("evaluator") or {}
-    expected_evaluator = _evaluator_provenance()
-    validation_path = (ROOT / QUALIFIED_S2_VALIDATION_PATH).resolve()
-    if (
-        payload.get("schema") != QUALIFICATION_SCHEMA
-        or payload.get("status") != "QUALIFIED"
-        or payload.get("candidate") != "s2"
-        or payload.get("qualification_rule")
-        != "paired_primary_with_exploratory_safety_veto_v1"
-        or payload.get("baseline_s1_validation_sha256")
-        != PINNED_S1_VALIDATION_OUTPUT_SHA256
-        or candidate_validation.get("path") != QUALIFIED_S2_VALIDATION_PATH
-        or str(package.get("archive_sha256") or "").upper() != PINNED_S2_ARCHIVE_SHA256
-        or str(package.get("manifest_sha256") or "").upper() != PINNED_S2_MANIFEST_SHA256
-        or str(package.get("extracted_tree_sha256") or "").upper()
-        != PINNED_S2_EXTRACTED_TREE_SHA256
-        or str(package.get("runtime_source_tree_sha256") or "").upper()
-        != PINNED_S2_RUNTIME_TREE_SHA256
-        or evaluator != expected_evaluator
-    ):
-        raise RegretError("S2 qualification contract mismatch")
-    expected_validation_sha = str(candidate_validation.get("sha256") or "").upper()
-    if (
-        len(expected_validation_sha) != 64
-        or not validation_path.is_file()
-        or _sha256(validation_path) != expected_validation_sha
-    ):
-        raise RegretError("qualified S2 validation artifact hash mismatch")
-    validation = _read_json_object(validation_path, "qualified S2 validation result")
-    sets = validation.get("evaluation_sets") or {}
-    primary = sets.get("paired_primary") or {}
-    exploratory = sets.get("s2_exploratory") or {}
-    primary_rows = primary.get("decision_rows") or []
-    exploratory_rows = exploratory.get("decision_rows") or []
-    frozen_s1 = verify_frozen_s1_provenance()
-    primary_ids = [
-        row.get("record_id") if isinstance(row, Mapping) else None for row in primary_rows
-    ]
-    exploratory_ids = [
-        row.get("record_id") if isinstance(row, Mapping) else None
-        for row in exploratory_rows
-    ]
-    universe_counts = validation.get("universe_counts") or {}
-    validation_candidate = validation.get("evaluated_candidate") or {}
-    validation_baseline = validation.get("baseline_incumbent_s1") or {}
-    validation_contract = validation.get("run_contract") or {}
-    if (
-        validation.get("schema") != SCHEMA
-        or validation.get("split") != "VALIDATION"
-        or validation.get("sealed") is not False
-        or validation.get("candidate_variant") != "s2"
-        or validation.get("aggregate_alias") != "evaluation_sets.paired_primary.aggregate"
-        or validation.get("aggregate") != primary.get("aggregate")
-        or "decision_rows" in validation
-        or "combined_rate" in validation
-        or primary_ids != frozen_s1["_paired_record_ids"]
-        or len(set(exploratory_ids)) != len(exploratory_ids)
-        or set(primary_ids).intersection(exploratory_ids)
-        or any(
-            not isinstance(row, Mapping)
-            or row.get("candidate_variant") != "s2"
-            or row.get("candidate_s2_enabled") is not True
-            or row.get("s2_override_telemetry_trustworthy") is not True
-            or _integer(row.get("s2_pre_attack_sequence_proof_overrides_delta"), -1) != 1
-            or bool(row.get("semantic_equivalent"))
-            or bool(row.get("proposal_error"))
-            for row in exploratory_rows
+    try:
+        from scripts.create_dipplin_s2_qualification import (
+            QualificationError,
+            verify_canonical_qualification,
         )
-        or _integer(universe_counts.get("s2_exploratory_record_count"), -1)
-        != len(exploratory_rows)
-        or _integer(
-            universe_counts.get("out_of_primary_s2_override_disagreement_count"), -1
-        )
-        != len(exploratory_rows)
-        or validation_contract.get("evaluator") != expected_evaluator
-        or validation_contract.get("parameters") != FROZEN_SEALED_PARAMETERS
-        or validation_contract.get("validation_manifest_file_sha256")
-        != PINNED_MANIFESTS["VALIDATION"]["file_sha256"]
-        or validation_contract.get("validation_manifest_payload_sha256")
-        != PINNED_MANIFESTS["VALIDATION"]["payload_sha256"]
-        or validation_baseline.get("validation_result_sha256")
-        != PINNED_S1_VALIDATION_OUTPUT_SHA256
-        or validation_candidate.get("archive_sha256") != PINNED_S2_ARCHIVE_SHA256
-        or validation_candidate.get("manifest_sha256") != PINNED_S2_MANIFEST_SHA256
-        or validation_candidate.get("extracted_tree_sha256")
-        != PINNED_S2_EXTRACTED_TREE_SHA256
-        or validation_candidate.get("runtime_source_tree_sha256")
-        != PINNED_S2_RUNTIME_TREE_SHA256
-        or _integer((primary.get("aggregate") or {}).get("decision_count"))
-        != PINNED_S1_PRIMARY_RECORD_COUNT
-        or exploratory.get("safety_veto_only") is not True
-        or exploratory.get("eligible_for_efficacy_rate") is not False
-        or len(exploratory_rows) > S2_EXPLORATORY_HARD_CEILING
-        or validation.get("combined_rate_permitted") is not False
-    ):
-        raise RegretError("qualified S2 validation artifact violates the dual-set contract")
-    return {
-        "schema": QUALIFICATION_SCHEMA,
-        "file_sha256": qualification_file_sha256,
-        "payload_sha256": claimed_payload,
-        "candidate_validation_sha256": expected_validation_sha,
-        "status": "QUALIFIED",
-    }
+
+        return verify_canonical_qualification(qualification_path)
+    except QualificationError as exc:
+        raise RegretError(str(exc)) from exc
 
 
 def validate_sealed_run_contract(

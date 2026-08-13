@@ -798,6 +798,16 @@ def test_sealed_output_is_aggregate_only_and_suppresses_episode_and_decision_det
     open_output = regret.build_output(validation_manifest, rows, sealed=False)
     assert "episode-many" in json.dumps(open_output)
     assert "many-secret-0" in json.dumps(open_output)
+    assert open_output["aggregate"]["opponent_archetype_decision_counts"] == {
+        "unknown": 101
+    }
+    assert open_output["aggregate"]["opponent_archetype_episode_counts"] == {
+        "unknown": 2
+    }
+    assert open_output["aggregate"]["opponent_archetypes"] == {"unknown": 2}
+    assert open_output["aggregate"]["opponent_archetypes_basis"] == (
+        "unique_episode_id"
+    )
 
     sealed_output = regret.build_output(holdout_manifest, rows, sealed=True)
     encoded = json.dumps(sealed_output, sort_keys=True)
@@ -811,6 +821,9 @@ def test_sealed_output_is_aggregate_only_and_suppresses_episode_and_decision_det
     assert "by_actual_order" not in sealed_output["aggregate"]
     assert "by_opponent_archetype" not in sealed_output["aggregate"]
     assert "by_decision_family" not in sealed_output["aggregate"]
+    assert "opponent_archetype_decision_counts" not in sealed_output["aggregate"]
+    assert "opponent_archetype_episode_counts" not in sealed_output["aggregate"]
+    assert "opponent_archetypes" not in sealed_output["aggregate"]
     assert not _contains_key(
         sealed_output,
         {
@@ -824,6 +837,103 @@ def test_sealed_output_is_aggregate_only_and_suppresses_episode_and_decision_det
             "episode_labels",
         },
     )
+
+
+def test_sealed_output_reports_only_coarse_global_quality_counts(tmp_path: Path):
+    _, holdout_manifest = frozen_manifest(tmp_path / "holdout", sealed=True)
+    rows = [
+        {
+            "episode_id": "private-episode-a",
+            "step": 1,
+            "classification": "UNCERTIFIABLE",
+            "proposal_error": "candidate_action_unstable",
+            "uncertifiable_reason": "candidate_action_unstable",
+        },
+        {
+            "episode_id": "private-episode-b",
+            "step": 1,
+            "classification": "UNCERTIFIABLE",
+            "proposal_error": "candidate_repeat_checkpoint_missing",
+            "uncertifiable_reason": "policy_error",
+        },
+        {
+            "episode_id": "private-episode-c",
+            "step": 1,
+            "classification": "UNCERTIFIABLE",
+            "proposal_error": None,
+            "uncertifiable_reason": "rng_or_hidden_deck_unseeded",
+        },
+        {
+            "episode_id": "private-episode-d",
+            "step": 1,
+            "classification": "INCOMPARABLE",
+            "proposal_error": None,
+            "uncertifiable_reason": None,
+        },
+    ]
+
+    output = regret.build_output(holdout_manifest, rows, sealed=True)
+    quality = output["aggregate"]["quality_counts"]
+
+    assert quality == {
+        "proposal_error_rows": 2,
+        "candidate_policy_error_rows": 1,
+        "candidate_action_unstable_rows": 1,
+        "uncertifiable_rows": 3,
+        "incomparable_rows": 1,
+    }
+    assert quality["proposal_error_rows"] == (
+        quality["candidate_policy_error_rows"]
+        + quality["candidate_action_unstable_rows"]
+    )
+    assert quality["uncertifiable_rows"] == output["aggregate"][
+        "classification_counts"
+    ]["UNCERTIFIABLE"]
+    assert quality["incomparable_rows"] == output["aggregate"][
+        "classification_counts"
+    ]["INCOMPARABLE"]
+    encoded = json.dumps(output, sort_keys=True)
+    assert "private-episode" not in encoded
+    assert '"candidate_action_unstable"' not in encoded
+    assert '"candidate_repeat_checkpoint_missing"' not in encoded
+    assert '"rng_or_hidden_deck_unseeded"' not in encoded
+
+
+def test_unsealed_archetype_coverage_uses_unique_episodes(tmp_path: Path):
+    _, validation_manifest = frozen_manifest(tmp_path / "validation", sealed=False)
+    rows = [
+        {
+            "episode_id": "a",
+            "step": step,
+            "classification": "EQUIVALENT",
+            "opponent_archetype": "deck_a",
+        }
+        for step in range(10)
+    ] + [
+        {
+            "episode_id": "b",
+            "step": 1,
+            "classification": "EQUIVALENT",
+            "opponent_archetype": "deck_b",
+        }
+    ]
+
+    aggregate = regret.build_output(validation_manifest, rows, sealed=False)[
+        "aggregate"
+    ]
+
+    assert aggregate["opponent_archetype_decision_counts"] == {
+        "deck_a": 10,
+        "deck_b": 1,
+    }
+    assert aggregate["opponent_archetype_episode_counts"] == {
+        "deck_a": 1,
+        "deck_b": 1,
+    }
+
+    inconsistent = [dict(rows[0]), {**rows[0], "step": 99, "opponent_archetype": "deck_b"}]
+    with pytest.raises(regret.RegretError, match="inconsistent opponent archetypes"):
+        regret.build_output(validation_manifest, inconsistent, sealed=False)
 
 
 def test_sealed_contract_is_canonical_and_receipt_is_one_shot(tmp_path: Path):
@@ -1130,90 +1240,22 @@ def test_qualification_verifier_is_disabled_until_canonical_file_exists():
         regret.verify_s2_qualification()
 
 
-def test_qualification_verifier_binds_validation_package_and_evaluator(tmp_path: Path, monkeypatch):
-    validation_path = tmp_path / "validation_regret_s2.json"
-    frozen_s1 = regret.verify_frozen_s1_provenance()
-    validation = {
-        "schema": regret.SCHEMA,
-        "split": "VALIDATION",
-        "sealed": False,
-        "candidate_variant": "s2",
-        "baseline_incumbent_s1": {
-            "validation_result_sha256": regret.PINNED_S1_VALIDATION_OUTPUT_SHA256,
-        },
-        "evaluated_candidate": {
-            "archive_sha256": regret.PINNED_S2_ARCHIVE_SHA256,
-            "manifest_sha256": regret.PINNED_S2_MANIFEST_SHA256,
-            "extracted_tree_sha256": regret.PINNED_S2_EXTRACTED_TREE_SHA256,
-            "runtime_source_tree_sha256": regret.PINNED_S2_RUNTIME_TREE_SHA256,
-        },
-        "run_contract": {
-            "evaluator": regret._evaluator_provenance(),
-            "parameters": regret.FROZEN_SEALED_PARAMETERS,
-            "validation_manifest_file_sha256": regret.PINNED_MANIFESTS["VALIDATION"][
-                "file_sha256"
-            ],
-            "validation_manifest_payload_sha256": regret.PINNED_MANIFESTS["VALIDATION"][
-                "payload_sha256"
-            ],
-        },
-        "aggregate_alias": "evaluation_sets.paired_primary.aggregate",
-        "aggregate": {"decision_count": regret.PINNED_S1_PRIMARY_RECORD_COUNT},
-        "evaluation_sets": {
-            "paired_primary": {
-                "aggregate": {"decision_count": regret.PINNED_S1_PRIMARY_RECORD_COUNT},
-                "decision_rows": [
-                    {"record_id": record_id}
-                    for record_id in frozen_s1["_paired_record_ids"]
-                ],
-            },
-            "s2_exploratory": {
-                "safety_veto_only": True,
-                "eligible_for_efficacy_rate": False,
-                "decision_rows": [],
-            },
-        },
-        "universe_counts": {
-            "s2_exploratory_record_count": 0,
-            "out_of_primary_s2_override_disagreement_count": 0,
-        },
-        "combined_rate_permitted": False,
-    }
-    validation_path.write_text(json.dumps(validation, sort_keys=True), encoding="utf-8")
-    evaluator = Path(regret.__file__).resolve()
-    qualification_path = tmp_path / "s2_qualification.json"
-    qualification = {
-        "schema": regret.QUALIFICATION_SCHEMA,
+def test_qualification_verifier_delegates_full_rule_recomputation(tmp_path: Path, monkeypatch):
+    from scripts import create_dipplin_s2_qualification as qualification
+
+    path = tmp_path / "qualification.json"
+    expected = {
         "status": "QUALIFIED",
-        "candidate": "s2",
-        "qualification_rule": "paired_primary_with_exploratory_safety_veto_v1",
-        "baseline_s1_validation_sha256": regret.PINNED_S1_VALIDATION_OUTPUT_SHA256,
-        "candidate_validation": {
-            "path": str(validation_path.resolve()),
-            "sha256": regret._sha256(validation_path),
-        },
-        "candidate_package": {
-            "archive_sha256": regret.PINNED_S2_ARCHIVE_SHA256,
-            "manifest_sha256": regret.PINNED_S2_MANIFEST_SHA256,
-            "extracted_tree_sha256": regret.PINNED_S2_EXTRACTED_TREE_SHA256,
-            "runtime_source_tree_sha256": regret.PINNED_S2_RUNTIME_TREE_SHA256,
-        },
-        "evaluator": {
-            "path": str(evaluator.relative_to(regret.ROOT)),
-            "sha256": regret._sha256(evaluator),
-            "git_blob_sha1": regret._git_blob_sha1(evaluator),
-        },
+        "file_sha256": "A" * 64,
+        "payload_sha256": "B" * 64,
+        "candidate_validation_sha256": "C" * 64,
     }
-    qualification["qualification_payload_sha256"] = regret._qualification_payload_sha256(
-        qualification
+    calls = []
+    monkeypatch.setattr(
+        qualification,
+        "verify_canonical_qualification",
+        lambda supplied: calls.append(Path(supplied)) or expected,
     )
-    qualification_path.write_text(json.dumps(qualification, sort_keys=True), encoding="utf-8")
-    monkeypatch.setattr(regret, "DEFAULT_S2_QUALIFICATION", qualification_path)
-    monkeypatch.setattr(regret, "DEFAULT_S2_VALIDATION_OUTPUT", validation_path)
-    monkeypatch.setattr(regret, "QUALIFIED_S2_VALIDATION_PATH", str(validation_path.resolve()))
 
-    verified = regret.verify_s2_qualification(qualification_path)
-
-    assert verified["status"] == "QUALIFIED"
-    assert verified["file_sha256"] == regret._sha256(qualification_path)
-    assert verified["candidate_validation_sha256"] == regret._sha256(validation_path)
+    assert regret.verify_s2_qualification(path) == expected
+    assert calls == [path]
