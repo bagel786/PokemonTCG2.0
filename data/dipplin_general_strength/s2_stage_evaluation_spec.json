@@ -384,7 +384,92 @@
         }
       ]
     },
-    "stage2": null,
+    "stage2": {
+      "baseline_cells": [
+        {
+          "id": "s1_a2_second_300",
+          "matchup": "A2",
+          "opponent_name": "A2",
+          "actual_order": "second",
+          "path": "../../artifacts/general_strength/s1_stage2/a2_second_300.json",
+          "artifact_sha256": "22d3b198f209b003f536dc2a011f2a1b63a03eb8d57fdbdd8a8bfcc7d39e8501",
+          "requested_games": 300,
+          "expected_wins": 149
+        },
+        {
+          "id": "s1_d842_second_300",
+          "matchup": "d842",
+          "opponent_name": "d842",
+          "actual_order": "second",
+          "path": "../../artifacts/general_strength/s1_stage2/d842_second_300.json",
+          "artifact_sha256": "e7e6fbe4b5a84cb57518587853f258c78667cf87908a93fe95a13390b39c5e74",
+          "requested_games": 300,
+          "expected_wins": 160
+        },
+        {
+          "id": "s1_az2_4a_second_300",
+          "matchup": "AZ2.4a",
+          "opponent_name": "AZ2.4a",
+          "actual_order": "second",
+          "path": "../../artifacts/general_strength/s1_stage2/az2_4a_second_300.json",
+          "artifact_sha256": "bbc6c957b08399a93b63a8a499b4750a213ed85527599df01bf1a24e945bd2aa",
+          "requested_games": 300,
+          "expected_wins": 106
+        },
+        {
+          "id": "s1_az2_7_second_300",
+          "matchup": "AZ2.7",
+          "opponent_name": "AZ2.7",
+          "actual_order": "second",
+          "path": "../../artifacts/general_strength/s1_stage2/az2_7_second_300.json",
+          "artifact_sha256": "36b178ba39a554d404339ad697a904aaea611273d889c16c8c8112a45ae2964e",
+          "requested_games": 300,
+          "expected_wins": 121
+        }
+      ],
+      "candidate_cells": [
+        {
+          "id": "s2_a2_second_300",
+          "matchup": "A2",
+          "opponent_name": "A2",
+          "actual_order": "second",
+          "path": "../../artifacts/general_strength/s2_stage2/a2_second_300.json",
+          "artifact_sha256": "5b14e38e54baff579f5fb6330d38a07f37d3d12d9ddf401a87d6cc984fafc470",
+          "requested_games": 300,
+          "expected_wins": 143
+        },
+        {
+          "id": "s2_d842_second_300",
+          "matchup": "d842",
+          "opponent_name": "d842",
+          "actual_order": "second",
+          "path": "../../artifacts/general_strength/s2_stage2/d842_second_300.json",
+          "artifact_sha256": "48fbc9a4373fbaf1851fcbf7f3bf68bbe5ac183aee32b0b582d1d2273a649e1c",
+          "requested_games": 300,
+          "expected_wins": 140
+        },
+        {
+          "id": "s2_az2_4a_second_300",
+          "matchup": "AZ2.4a",
+          "opponent_name": "AZ2.4a",
+          "actual_order": "second",
+          "path": "../../artifacts/general_strength/s2_stage2/az2_4a_second_300.json",
+          "artifact_sha256": "ecfb7af5fb9e264aa509d3a0666c142e3b4cd55dcf0a44f7bd3e78680b47fafc",
+          "requested_games": 300,
+          "expected_wins": 122
+        },
+        {
+          "id": "s2_az2_7_second_300",
+          "matchup": "AZ2.7",
+          "opponent_name": "AZ2.7",
+          "actual_order": "second",
+          "path": "../../artifacts/general_strength/s2_stage2/az2_7_second_300.json",
+          "artifact_sha256": "9c36d91a2736680630750cb6d7c19ba0bcb12e6fb133e7936af62aef54a3264d",
+          "requested_games": 300,
+          "expected_wins": 126
+        }
+      ]
+    },
     "stage3": null,
     "stage4": null,
     "stage5": null,
