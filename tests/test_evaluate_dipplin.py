@@ -1,9 +1,14 @@
 from __future__ import annotations
 
 import math
+from types import SimpleNamespace
+
+from cg.api import OptionType
 
 from scripts.evaluate_dipplin import (
+    _trace_call,
     build_parser,
+    force_actual_order,
     intervention_analysis,
     latency_summary,
     merge_numeric_rows,
@@ -11,6 +16,42 @@ from scripts.evaluate_dipplin import (
     seat_order_cells,
     wilson,
 )
+
+
+def test_force_actual_order_crosses_physical_seat_without_ambiguity():
+    select = SimpleNamespace(
+        option=[
+            SimpleNamespace(type=OptionType.YES),
+            SimpleNamespace(type=OptionType.NO),
+        ],
+        minCount=1,
+        maxCount=1,
+    )
+    assert force_actual_order(select, 0, "first") == [0]
+    assert force_actual_order(select, 1, "first") == [1]
+    assert force_actual_order(select, 0, "second") == [1]
+    assert force_actual_order(select, 1, "second") == [0]
+
+
+def test_optional_trace_failure_cannot_mutate_or_replace_action():
+    class BrokenTrace:
+        def record_action(self, _obs, action, _seat):
+            assert isinstance(action, tuple)
+            raise RuntimeError("collector failed")
+
+    errors = []
+    engine_action = [1]
+    immutable_copy = tuple(engine_action)
+    _trace_call(BrokenTrace(), errors, "record_action", object(), immutable_copy, 0)
+    assert engine_action == [1]
+    assert errors == ["record_action:RuntimeError:collector failed"]
+
+
+def test_second_bucket_trace_flag_is_opt_in():
+    parser = build_parser()
+    base = ["--submission-a", "a", "--submission-b", "b", "--output", "o"]
+    assert parser.parse_args(base).second_bucket_trace is False
+    assert parser.parse_args([*base, "--second-bucket-trace"]).second_bucket_trace is True
 
 
 def _row(*, seat: int, order: str, win: int, telemetry=None):

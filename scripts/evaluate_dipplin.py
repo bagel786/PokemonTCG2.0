@@ -33,9 +33,14 @@ if (ROOT / "vendor").is_dir():
     sys.path.insert(0, str(ROOT / "vendor"))
 
 from cg import sim as cg_sim  # noqa: E402
-from cg.api import to_observation_class  # noqa: E402
+from cg.api import OptionType, SelectContext, to_observation_class  # noqa: E402
 from cg.game import battle_finish, battle_select, battle_start  # noqa: E402
 from ptcg_ai.external import ExternalSubmissionAgent  # noqa: E402
+from ptcg_ai.safety import sanitize_selection  # noqa: E402
+from scripts.dipplin_second_trace import (  # noqa: E402
+    SCHEMA as SECOND_BUCKET_TRACE_SCHEMA,
+    SecondBucketTrace,
+)
 from training.evaluation_schema import (  # noqa: E402
     build_provenance,
     sha256_file,
@@ -80,6 +85,28 @@ RELEVANT_ENV_KEYS = (
 
 class EvaluationFailure(RuntimeError):
     """A game-level failure that should be retained in the output rows."""
+
+
+def _trace_call(
+    trace: SecondBucketTrace | None,
+    errors: list[str],
+    method: str,
+    *args: Any,
+    **kwargs: Any,
+) -> Any:
+    """Run optional read-only instrumentation without affecting gameplay.
+
+    The first collector exception disables subsequent observation/action hooks.
+    Finalization is still attempted so the row retains explicit partial
+    coverage.  This helper never mutates or replaces an engine action.
+    """
+    if trace is None or (errors and method != "finalize"):
+        return None
+    try:
+        return getattr(trace, method)(*args, **kwargs)
+    except Exception as error:  # instrumentation is never gameplay-critical
+        errors.append(f"{method}:{type(error).__name__}:{error}"[:2000])
+        return None
 
 
 def _is_number(value: object) -> bool:
@@ -158,6 +185,29 @@ def capture_initial_first_player(current: object, captured: int | None = None) -
             )
         return captured
     return observed
+
+
+def force_actual_order(select: object, hero_seat: int, order: str) -> list[int]:
+    """Choose the unique IS_FIRST option that gives the hero ``order``.
+
+    Physical seat zero owns the engine's go-first prompt.  Crossing the hero
+    between physical seats while applying this mapping keeps order forcing and
+    seat balancing independent.
+    """
+    if order not in {"first", "second"}:
+        raise EvaluationFailure(f"invalid forced actual order: {order!r}")
+    seat_zero_first = (order == "first") == (int(hero_seat) == 0)
+    desired = OptionType.YES if seat_zero_first else OptionType.NO
+    choices = [
+        index
+        for index, option in enumerate(getattr(select, "option", ()) or ())
+        if getattr(option, "type", None) == desired
+    ]
+    if len(choices) != 1:
+        raise EvaluationFailure(
+            "forced-order evaluation found an invalid IS_FIRST choice set"
+        )
+    return sanitize_selection(select, choices, 1)
 
 
 def percentile(values: Sequence[float], probability: float) -> float:
@@ -305,6 +355,12 @@ def run_game(task: Mapping[str, Any]) -> dict[str, Any]:
     hero_latencies: list[float] = []
     opponent_latencies: list[float] = []
     failure: dict[str, str | None] | None = None
+    second_bucket_trace = (
+        SecondBucketTrace(hero_seat=hero_seat)
+        if bool(task.get("second_bucket_trace"))
+        else None
+    )
+    second_bucket_trace_errors: list[str] = []
     game_started = time.perf_counter()
 
     try:
@@ -330,6 +386,12 @@ def run_game(task: Mapping[str, Any]) -> dict[str, Any]:
 
         while True:
             obs = to_observation_class(raw)
+            _trace_call(
+                second_bucket_trace,
+                second_bucket_trace_errors,
+                "observe",
+                obs,
+            )
             current = obs.current
             initial_first_player = capture_initial_first_player(
                 current, initial_first_player
@@ -348,19 +410,28 @@ def run_game(task: Mapping[str, Any]) -> dict[str, Any]:
                 raise EvaluationFailure("live observation has no valid acting player")
 
             acting_seat = int(current.yourIndex)
-            active_actor = "hero" if acting_seat == hero_seat else "opponent"
-            call_started = time.perf_counter()
-            action = agents[acting_seat](raw)
-            latency_ms = (time.perf_counter() - call_started) * 1000.0
-            if active_actor == "hero":
-                hero_latencies.append(latency_ms)
-                hero_decisions += 1
+            forced_order = task.get("actual_order")
+            if (
+                forced_order
+                and getattr(obs.select, "context", None) == SelectContext.IS_FIRST
+            ):
+                action = force_actual_order(obs.select, hero_seat, str(forced_order))
+                active_actor = None
             else:
-                opponent_latencies.append(latency_ms)
-                opponent_decisions += 1
+                active_actor = "hero" if acting_seat == hero_seat else "opponent"
+                call_started = time.perf_counter()
+                action = agents[acting_seat](raw)
+                latency_ms = (time.perf_counter() - call_started) * 1000.0
+                if active_actor == "hero":
+                    hero_latencies.append(latency_ms)
+                    hero_decisions += 1
+                else:
+                    opponent_latencies.append(latency_ms)
+                    opponent_decisions += 1
             decisions += 1
             try:
-                raw = battle_select(action)
+                selected_action = tuple(map(int, action))
+                next_raw = battle_select(action)
             except (IndexError, ValueError) as error:
                 if active_actor == "hero":
                     hero_illegal_actions += 1
@@ -369,6 +440,18 @@ def run_game(task: Mapping[str, Any]) -> dict[str, Any]:
                 raise EvaluationFailure(
                     f"engine rejected {active_actor} action {action!r}"
                 ) from error
+            # Gameplay is committed before the read-only collector sees the
+            # selected public action.  A collector failure therefore cannot
+            # alter legality, timing, or the engine transition.
+            _trace_call(
+                second_bucket_trace,
+                second_bucket_trace_errors,
+                "record_action",
+                obs,
+                selected_action,
+                acting_seat,
+            )
+            raw = next_raw
             active_actor = None
     except Exception as error:  # retain an auditable row instead of losing the shard
         failure = _failure(error, active_actor)
@@ -410,7 +493,7 @@ def run_game(task: Mapping[str, Any]) -> dict[str, Any]:
     draw = int(completed and result_seat not in (0, 1))
     win = int(completed and result_seat == hero_seat)
     outcome = "win" if win else "draw" if draw else "loss" if completed else "failed"
-    return {
+    row = {
         "game_index": game_index,
         "python_seed": schedule_seed,
         "numpy_seed": numpy_seed,
@@ -445,6 +528,25 @@ def run_game(task: Mapping[str, Any]) -> dict[str, Any]:
         "_hero_latency_samples_ms": hero_latencies,
         "_opponent_latency_samples_ms": opponent_latencies,
     }
+    if second_bucket_trace is not None:
+        trace_payload = _trace_call(
+            second_bucket_trace,
+            second_bucket_trace_errors,
+            "finalize",
+            completed=completed,
+            result_seat=result_seat if completed else None,
+        )
+        if not isinstance(trace_payload, dict):
+            trace_payload = {
+                "schema": SECOND_BUCKET_TRACE_SCHEMA,
+                "completed": False,
+            }
+        trace_payload["collection_complete"] = bool(
+            completed and not second_bucket_trace_errors
+        )
+        trace_payload["trace_errors"] = list(second_bucket_trace_errors)
+        row["second_bucket_trace"] = trace_payload
+    return row
 
 
 def _cell(rows: Iterable[Mapping[str, Any]]) -> dict[str, Any]:
@@ -614,6 +716,7 @@ def exact_provenance(
     evaluator_path = Path(__file__).resolve()
     adapter_path = ROOT / "ptcg_ai" / "external.py"
     schema_path = ROOT / "training" / "evaluation_schema.py"
+    second_trace_path = ROOT / "scripts" / "dipplin_second_trace.py"
     base.update(
         {
             "captured_utc": datetime.now(timezone.utc).isoformat(),
@@ -651,6 +754,15 @@ def exact_provenance(
                 "hero_receives_opponent_package_identity": False,
                 "agent_call_payload": "engine_observation_only",
                 "labels_added_in_parent_after_game": True,
+            },
+            "forced_actual_order": args.actual_order,
+            "second_bucket_trace": {
+                "enabled": bool(args.second_bucket_trace),
+                "schema": SECOND_BUCKET_TRACE_SCHEMA,
+                "collector_path": str(second_trace_path.resolve()),
+                "collector_sha256": sha256_file(second_trace_path),
+                "agent_latency_includes_collection": False,
+                "public_information_only": True,
             },
         }
     )
@@ -730,6 +842,16 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--games", type=int, default=400)
     parser.add_argument(
+        "--actual-order",
+        choices=("first", "second"),
+        help="force the hero's actual play order while retaining crossed physical seats",
+    )
+    parser.add_argument(
+        "--second-bucket-trace",
+        action="store_true",
+        help="retain read-only public-board causal diagnostics per game",
+    )
+    parser.add_argument(
         "--workers",
         type=int,
         default=max(1, (mp.cpu_count() or 2) - 1),
@@ -808,6 +930,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             "submission_env_a": env_a,
             "submission_env_b": env_b,
             "max_decisions": int(args.max_decisions),
+            "actual_order": args.actual_order,
+            "second_bucket_trace": bool(args.second_bucket_trace),
             # Human labels are intentionally not included in worker tasks.
         }
         for game_index in range(args.games)
@@ -860,6 +984,25 @@ def main(argv: Sequence[str] | None = None) -> int:
     rows.sort(key=lambda row: int(row["game_index"]))
     cells = seat_order_cells(rows)
     overall = cells["overall"]
+    second_bucket_trace_errors = sum(
+        len((row.get("second_bucket_trace") or {}).get("trace_errors") or ())
+        for row in rows
+    )
+    second_bucket_traces_complete = sum(
+        bool((row.get("second_bucket_trace") or {}).get("collection_complete"))
+        for row in rows
+    )
+    forced_order_accounting_complete = bool(
+        args.actual_order is None
+        or (
+            cells["actual_order"][args.actual_order]["games"] == overall["games"]
+            and all(
+                row.get("actual_order") == args.actual_order
+                for row in rows
+                if row.get("completed")
+            )
+        )
+    )
     post_submission_a_sha256 = sha256_path(submission_a)
     post_submission_b_sha256 = sha256_path(submission_b)
     artifacts_unchanged = bool(
@@ -888,6 +1031,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         "hero_illegal_actions": int(overall["hero_illegal_actions"]),
         "opponent_illegal_actions": int(overall["opponent_illegal_actions"]),
         "failed_games": int(overall["failed_games"]),
+        "forced_actual_order": args.actual_order,
+        "forced_order_accounting_complete": forced_order_accounting_complete,
+        "second_bucket_trace": {
+            "enabled": bool(args.second_bucket_trace),
+            "schema": SECOND_BUCKET_TRACE_SCHEMA,
+            "complete_rows": second_bucket_traces_complete,
+            "trace_errors": second_bucket_trace_errors,
+        },
         "decisions": int(overall["decisions"]),
         "elapsed_seconds": elapsed_seconds,
         "games_per_second": overall["games"] / elapsed_seconds if elapsed_seconds else 0.0,
@@ -943,6 +1094,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         "hero_illegal_actions": overall["hero_illegal_actions"],
         "opponent_illegal_actions": overall["opponent_illegal_actions"],
         "failed_games": overall["failed_games"],
+        "forced_actual_order": args.actual_order,
+        "forced_order_accounting_complete": forced_order_accounting_complete,
+        "second_bucket_trace": result["second_bucket_trace"],
         "hero_latency_ms": result["latency_ms"]["hero"],
     }
     print(json.dumps(concise, indent=2, sort_keys=True))
@@ -954,6 +1108,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             or overall["hero_illegal_actions"]
             or overall["opponent_illegal_actions"]
             or not artifacts_unchanged
+            or not forced_order_accounting_complete
+            or (args.second_bucket_trace and second_bucket_trace_errors)
         )
     )
 
