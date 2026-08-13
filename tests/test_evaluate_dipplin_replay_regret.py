@@ -128,16 +128,29 @@ def full_frame(*, turn: int = 3, turn_action_count: int = 5) -> dict:
 
 def frozen_manifest(tmp_path: Path, *, sealed: bool = False) -> tuple[Path, dict]:
     tmp_path.mkdir(parents=True, exist_ok=True)
-    replay_path = tmp_path / "episode-7001-replay.json"
-    replay_path.write_text(json.dumps({"id": 7001, "steps": []}), encoding="utf-8")
-    replay_sha256 = hashlib.sha256(replay_path.read_bytes()).hexdigest()
     split = "FINAL_HOLDOUT" if sealed else "VALIDATION"
+    count = regret.EXPECTED_SPLIT_COUNTS[split]
+    episodes = []
+    for offset in range(count):
+        episode_id = 7001 + offset
+        replay_path = tmp_path / f"episode-{episode_id}-replay.json"
+        replay_path.write_text(json.dumps({"id": episode_id, "steps": []}), encoding="utf-8")
+        episodes.append({
+            "episode_id": episode_id,
+            "replay_cache_path": str(replay_path),
+            "replay_sha256": hashlib.sha256(replay_path.read_bytes()).hexdigest(),
+            "first_player_seat": 0,
+            "expert_result": "win",
+            "selection_contract_verified": True,
+            "hero": {"seat": 0, "actual_order": "first"},
+            "opponent": {"archetype": "Garchomp"},
+        })
     payload = {
         "schema_version": 1,
-        "dataset": "dipplin_replay_eval",
+        "dataset": regret.FROZEN_DATASET,
         "split": split,
         "sealed": sealed,
-        "episode_count": 1,
+        "episode_count": count,
         "inspection_policy": {
             "metadata_only": True,
             "action_level_inspected": False,
@@ -146,18 +159,7 @@ def frozen_manifest(tmp_path: Path, *, sealed: bool = False) -> tuple[Path, dict
         },
         "selection_provenance": {"selection_used_outcome": False},
         "provenance": {},
-        "episodes": [
-            {
-                "episode_id": 7001,
-                "replay_cache_path": str(replay_path),
-                "replay_sha256": replay_sha256,
-                "first_player_seat": 0,
-                "expert_result": "win",
-                "selection_contract_verified": True,
-                "hero": {"seat": 0, "actual_order": "first"},
-                "opponent": {"archetype": "Garchomp"},
-            }
-        ],
+        "episodes": episodes,
     }
     signed = add_manifest_digest(payload)
     manifest_path = tmp_path / f"{split.casefold()}_manifest.json"
@@ -167,7 +169,7 @@ def frozen_manifest(tmp_path: Path, *, sealed: bool = False) -> tuple[Path, dict
 
 def test_load_manifest_verifies_digest_replay_hash_and_sealed_contract(tmp_path: Path):
     path, signed = frozen_manifest(tmp_path)
-    loaded = regret.load_manifest(path)
+    loaded = regret.load_manifest(path, require_pinned=False)
     assert loaded["split"] == "VALIDATION"
     assert loaded["episodes"][0]["episode_id"] == 7001
 
@@ -175,14 +177,14 @@ def test_load_manifest_verifies_digest_replay_hash_and_sealed_contract(tmp_path:
     tampered["episodes"][0]["expert_result"] = "loss"
     path.write_text(json.dumps(tampered), encoding="utf-8")
     with pytest.raises(regret.RegretError, match="digest"):
-        regret.load_manifest(path)
+        regret.load_manifest(path, require_pinned=False)
 
     path, signed = frozen_manifest(tmp_path / "wrong-hash")
     unsigned = {key: value for key, value in signed.items() if key != "manifest_payload_sha256"}
     unsigned["episodes"][0]["replay_sha256"] = "0" * 64
     path.write_text(json.dumps(add_manifest_digest(unsigned)), encoding="utf-8")
     with pytest.raises(regret.RegretError, match="replay.*sha|hash"):
-        regret.load_manifest(path)
+        regret.load_manifest(path, require_pinned=False)
 
 
 def test_load_manifest_rejects_a_final_holdout_that_is_not_sealed(tmp_path: Path):
@@ -191,7 +193,42 @@ def test_load_manifest_rejects_a_final_holdout_that_is_not_sealed(tmp_path: Path
     unsigned["sealed"] = False
     path.write_text(json.dumps(add_manifest_digest(unsigned)), encoding="utf-8")
     with pytest.raises(regret.RegretError, match="sealed|FINAL_HOLDOUT"):
-        regret.load_manifest(path)
+        regret.load_manifest(path, require_pinned=False)
+
+
+@pytest.mark.parametrize("split", ["VALIDATION", "FINAL_HOLDOUT"])
+def test_real_frozen_manifest_matches_exact_pin_without_opening_replays(monkeypatch, split):
+    pinned = regret.PINNED_MANIFESTS[split]
+    manifest_path = Path(pinned["path"])
+    payload = json.loads(manifest_path.read_text(encoding="utf-8"))
+    replay_hashes = {
+        Path(row["replay_cache_path"]).name: row["replay_sha256"].upper()
+        for row in payload["episodes"]
+    }
+    original_sha256 = regret._sha256
+
+    monkeypatch.setattr(
+        regret,
+        "_resolve_replay_path",
+        lambda raw, _manifest_path: Path(str(raw)),
+    )
+    def metadata_only_hash(path):
+        replay_hash = replay_hashes.get(Path(path).name)
+        return replay_hash if replay_hash is not None else original_sha256(Path(path))
+
+    monkeypatch.setattr(regret, "_sha256", metadata_only_hash)
+
+    loaded = regret.load_manifest(manifest_path)
+
+    assert loaded["dataset"] == regret.FROZEN_DATASET
+    assert loaded["episode_count"] == regret.EXPECTED_SPLIT_COUNTS[split]
+
+
+def test_verify_incumbent_matches_exact_archive_manifest_and_tree_pins():
+    incumbent = regret.verify_incumbent()
+
+    assert incumbent["archive_sha256"] == regret.PINNED_S1_ARCHIVE_SHA256
+    assert incumbent["manifest_sha256"] == regret.PINNED_S1_MANIFEST_SHA256
 
 
 def test_strategic_sample_is_seeded_priority_preserving_and_capped_per_episode():
@@ -261,7 +298,7 @@ def test_actual_second_setup_disagreement_has_nontrivial_sampling_priority():
 
     priority = regret._strategic_priority(obs, shadow, "setup", 0, "second")
 
-    assert priority >= 55
+    assert priority >= 85
 
 
 def test_strategic_sample_reserves_actual_second_setup_under_a_small_cap():
@@ -379,6 +416,12 @@ def test_visualizer_alignment_uses_t_minus_one_and_rejects_mismatches():
     with pytest.raises(regret.RegretError, match="visual|step|align"):
         regret.aligned_visualizer_frame(replay, 0, obs)
 
+    wrong_select = copy.deepcopy(aligned)
+    wrong_select["select"]["context"] = "SetupBenchPokemon"
+    replay["steps"][0][0]["visualize"][1] = wrong_select
+    with pytest.raises(regret.RegretError, match="select context"):
+        regret.aligned_visualizer_frame(replay, 2, obs)
+
 
 def test_validate_exact_hidden_preserves_order_and_checks_public_zone_counts():
     obs = observation([card(42, 100)], opponent_active=None)
@@ -426,6 +469,158 @@ def test_chronological_s1_forces_frozen_search_and_opening_configuration():
     assert policy.planner.resolver.second_opening_v2 is True
     assert policy.planner.route_v2_enabled is False
     assert policy.search.config.worlds == 2
+
+
+def test_lazy_proposal_repeat_skips_only_no_search_rows(monkeypatch):
+    def forbidden():
+        raise AssertionError("no repeat policy should be constructed")
+
+    monkeypatch.setattr(regret, "ChronologicalS1", forbidden)
+    deterministic = regret.certify_sampled_proposal(
+        {
+            "semantic_equivalent": False,
+            "proposal_error": None,
+            "s1_search_started": False,
+        },
+        proposal_repeats=3,
+    )
+
+    assert deterministic["s1_proposal_repeats"] == 1
+    assert deterministic["s1_proposal_repeat_mode"] == "deterministic_no_native_search"
+
+
+def test_lazy_proposal_repeat_restores_exact_pre_prompt_checkpoint(monkeypatch):
+    obs = observation(
+        [card(42, 1001), card(92, 1002)],
+        options=[play_option(0), play_option(1)],
+    )
+    pre_memory = regret.PlanMemory(global_turn=7)
+    calls = []
+
+    class FakeRepeatPolicy:
+        def __init__(self):
+            self.memory = regret.PlanMemory()
+            self.search = SimpleNamespace(searches_this_game=0)
+
+        def propose(self, raw, repeated_obs):
+            calls.append(
+                (
+                    raw["marker"],
+                    repeated_obs is obs,
+                    self.memory.global_turn,
+                    self.search.searches_this_game,
+                )
+            )
+            self.search.searches_this_game += 1
+            return regret.ShadowProposal(
+                [1],
+                self.memory.clone(),
+                SimpleNamespace(),
+                None,
+            )
+
+    monkeypatch.setattr(regret, "ChronologicalS1", FakeRepeatPolicy)
+    result = regret.certify_sampled_proposal(
+        {
+            "semantic_equivalent": True,
+            "proposal_error": None,
+            "s1_search_started": True,
+            "agent_action": [1],
+            "_obs": obs,
+            "_raw_observation": {"marker": "root"},
+            "_pre_prompt_memory": pre_memory,
+            "_pre_searches_this_game": 4,
+            "_post_searches_this_game": 5,
+        },
+        proposal_repeats=3,
+    )
+
+    assert calls == [
+        ("root", True, 7, 4),
+        ("root", True, 7, 4),
+    ]
+    assert result["proposal_error"] is None
+    assert result["s1_proposal_repeats"] == 3
+    assert result["s1_proposal_repeat_mode"] == "lazy_checkpoint_replay"
+
+
+def test_lazy_proposal_repeat_fails_closed_on_unstable_action(monkeypatch):
+    obs = observation(
+        [card(42, 1001), card(92, 1002)],
+        options=[play_option(0), play_option(1)],
+    )
+
+    class UnstablePolicy:
+        def __init__(self):
+            self.memory = regret.PlanMemory()
+            self.search = SimpleNamespace(searches_this_game=0)
+
+        def propose(self, _raw, _obs):
+            self.search.searches_this_game += 1
+            return regret.ShadowProposal(
+                [0],
+                self.memory.clone(),
+                SimpleNamespace(),
+                None,
+            )
+
+    monkeypatch.setattr(regret, "ChronologicalS1", UnstablePolicy)
+    result = regret.certify_sampled_proposal(
+        {
+            "semantic_equivalent": False,
+            "proposal_error": None,
+            "s1_search_started": True,
+            "agent_action": [1],
+            "_obs": obs,
+            "_raw_observation": {},
+            "_pre_prompt_memory": regret.PlanMemory(),
+            "_pre_searches_this_game": 2,
+            "_post_searches_this_game": 3,
+        },
+        proposal_repeats=2,
+    )
+
+    assert result["proposal_error"] == "s1_action_unstable"
+
+
+def test_lazy_proposal_repeat_fails_closed_on_search_progression_change(monkeypatch):
+    obs = observation(
+        [card(42, 1001), card(92, 1002)],
+        options=[play_option(0), play_option(1)],
+    )
+
+    class WrongProgressionPolicy:
+        def __init__(self):
+            self.memory = regret.PlanMemory()
+            self.search = SimpleNamespace(searches_this_game=0)
+
+        def propose(self, _raw, _obs):
+            # A repeated controller which does not enter the same D1 gate is not
+            # an identical reconstruction, even if its action happens to match.
+            return regret.ShadowProposal(
+                [1],
+                self.memory.clone(),
+                SimpleNamespace(),
+                None,
+            )
+
+    monkeypatch.setattr(regret, "ChronologicalS1", WrongProgressionPolicy)
+    result = regret.certify_sampled_proposal(
+        {
+            "semantic_equivalent": False,
+            "proposal_error": None,
+            "s1_search_started": True,
+            "agent_action": [1],
+            "_obs": obs,
+            "_raw_observation": {},
+            "_pre_prompt_memory": regret.PlanMemory(),
+            "_pre_searches_this_game": 2,
+            "_post_searches_this_game": 3,
+        },
+        proposal_repeats=2,
+    )
+
+    assert result["proposal_error"] == "s1_repeat_search_progression_error"
 
 
 def test_deterministic_disagreement_uses_fresh_alternating_arm_calls(monkeypatch):
@@ -544,6 +739,9 @@ def test_sealed_output_is_aggregate_only_and_suppresses_episode_and_decision_det
     assert "private_marker" not in encoded
     assert "many-secret" not in encoded
     assert "one-secret" not in encoded
+    assert "by_actual_order" not in sealed_output["aggregate"]
+    assert "by_opponent_archetype" not in sealed_output["aggregate"]
+    assert "by_decision_family" not in sealed_output["aggregate"]
     assert not _contains_key(
         sealed_output,
         {
@@ -557,3 +755,85 @@ def test_sealed_output_is_aggregate_only_and_suppresses_episode_and_decision_det
             "episode_labels",
         },
     )
+
+
+def test_sealed_contract_is_canonical_and_receipt_is_one_shot(tmp_path: Path):
+    args = SimpleNamespace(
+        manifest=regret.DEFAULT_FINAL_HOLDOUT_MANIFEST,
+        output=regret.DEFAULT_SEALED_OUTPUT,
+        incumbent_manifest=regret.DEFAULT_INCUMBENT_MANIFEST,
+        max_episodes=None,
+        **regret.FROZEN_SEALED_PARAMETERS,
+    )
+    manifest = {
+        "split": "FINAL_HOLDOUT",
+        "sealed": True,
+        "manifest_payload_sha256": regret.PINNED_MANIFESTS["FINAL_HOLDOUT"]["payload_sha256"],
+    }
+    regret.validate_sealed_run_contract(args, manifest)
+
+    changed = copy.copy(args)
+    changed.bootstrap_samples -= 1
+    with pytest.raises(regret.RegretError, match="parameters"):
+        regret.validate_sealed_run_contract(changed, manifest)
+
+    output_path = tmp_path / "aggregate.json"
+    receipt_args = copy.copy(args)
+    receipt_args.output = output_path
+    receipt_path = tmp_path / "sealed-receipt.json"
+    receipt = regret.claim_sealed_run(receipt_path, manifest, receipt_args)
+    assert receipt["status"] == "ACTION_INSPECTION_CLAIMED"
+    assert receipt["evaluator_sha256"]
+    assert receipt["evaluator_git_blob_sha1"]
+    with pytest.raises(regret.RegretError, match="already|claimed"):
+        regret.claim_sealed_run(receipt_path, manifest, receipt_args)
+
+    output_path.write_text('{"sealed":true}\n', encoding="utf-8")
+    regret.complete_sealed_run(receipt_path, receipt, output_path)
+    completed = json.loads(receipt_path.read_text(encoding="utf-8"))
+    assert completed["status"] == "COMPLETE"
+    assert completed["aggregate_output_sha256"] == regret._sha256(output_path)
+
+
+def test_active_hero_actor_must_match_manifest_seat(monkeypatch):
+    fake_obs = observation([card(42, 100)], your_index=1)
+    fake_obs.current.firstPlayer = 0
+    monkeypatch.setattr(regret, "to_observation_class", lambda _raw: fake_obs)
+    replay = {
+        "steps": [
+            [
+                {
+                    "status": "ACTIVE",
+                    "observation": {"current": {}, "select": {}},
+                }
+            ],
+            [{"action": [0]}],
+        ]
+    }
+    meta = {
+        "episode_id": 7,
+        "hero": {"seat": 0, "actual_order": "first"},
+        "opponent": {"archetype": "other"},
+    }
+
+    with pytest.raises(regret.RegretError, match="actor.*seat"):
+        regret.reconstruct_episode_candidates(replay, meta, proposal_repeats=2)
+
+
+def test_evaluate_manifest_requires_every_episode_to_contribute(monkeypatch):
+    monkeypatch.setattr(regret, "_load_json_replay", lambda _path: {"id": 9})
+    monkeypatch.setattr(regret, "reconstruct_episode_candidates", lambda *_args, **_kwargs: [])
+    manifest = {
+        "episodes": [
+            {"episode_id": 9, "replay_cache_path": "unused.json"},
+        ]
+    }
+
+    with pytest.raises(regret.RegretError, match="no sampled useful decision"):
+        regret.evaluate_manifest(
+            manifest,
+            cap_per_episode=2,
+            sample_seed=1,
+            repeat_passes=2,
+            proposal_repeats=2,
+        )

@@ -20,8 +20,10 @@ import copy
 import hashlib
 import json
 import math
+import os
 import random
 import sys
+import tempfile
 import time
 from collections import Counter, defaultdict
 from dataclasses import dataclass
@@ -86,6 +88,40 @@ from scripts.freeze_dipplin_replay_holdout import verify_manifest_digest  # noqa
 SCHEMA = "dipplin-replay-regret-v1"
 DEFAULT_INCUMBENT_MANIFEST = ROOT / "artifacts" / "dipplin_s1" / "submission.manifest.json"
 DEFAULT_PP_REPLAYS = ROOT / "artifacts" / "dipplin_forensics" / "pp_kawada_replays"
+DEFAULT_FINAL_HOLDOUT_MANIFEST = (
+    ROOT / "data" / "dipplin_replay_eval" / "frozen" / "final_holdout_manifest.json"
+)
+DEFAULT_SEALED_OUTPUT = (
+    ROOT / "artifacts" / "general_strength" / "replay" / "final_holdout_regret.json"
+)
+DEFAULT_SEALED_RECEIPT = (
+    ROOT / "data" / "dipplin_replay_eval" / "frozen" / "final_holdout_regret_receipt.json"
+)
+PINNED_S1_ARCHIVE_SHA256 = "EC74EFE096473C58A2057CABFEE93BF337BC18848C202A6E3D36BCBA802DB171"
+PINNED_S1_MANIFEST_SHA256 = "4071C03A020446436B8D33E1951FDAF5229AE4AB760A8283DC7D6F323E02F92C"
+PINNED_S1_EXTRACTED_TREE_SHA256 = "940654489EA1F286982226F1F0CBA4DD7340378B997A3F88AB6915C5D67F6C98"
+PINNED_S1_RUNTIME_TREE_SHA256 = "D5AAEFAB29B5850B298810C21DC628880822381C05BDBAD5ECEA1716BCEF4241"
+FROZEN_DATASET = "dipplin_fresh_expert_replay_eval_v1"
+EXPECTED_SPLIT_COUNTS = {"VALIDATION": 50, "FINAL_HOLDOUT": 30}
+PINNED_MANIFESTS = {
+    "VALIDATION": {
+        "path": ROOT / "data" / "dipplin_replay_eval" / "frozen" / "validation_manifest.json",
+        "file_sha256": "F147F14C670223B22BF9CBA28F6EA166A4BBB5153C0EFEA941C61F39FF2BB163",
+        "payload_sha256": "D6CC5A7339DCC466546E68C8EA29301C150966BE1F287ADC00003BD86716C4C1",
+    },
+    "FINAL_HOLDOUT": {
+        "path": DEFAULT_FINAL_HOLDOUT_MANIFEST,
+        "file_sha256": "5F7A3FAA6D5BA37CA4C0A5725F99BA2DB9E362498712A36681B77CBB6657430D",
+        "payload_sha256": "708FE9E318434D1EAEE6AB65661C23323AB9F1CEAA4DC5337BFC5AC22B39298D",
+    },
+}
+FROZEN_SEALED_PARAMETERS = {
+    "cap_per_episode": 24,
+    "sample_seed": 20260813,
+    "bootstrap_samples": 10000,
+    "repeat_passes": 2,
+    "proposal_repeats": 3,
+}
 CLASSIFICATIONS = (
     "EQUIVALENT",
     "AGENT_DOMINATES",
@@ -143,7 +179,7 @@ def _resolve_replay_path(raw: object, manifest_path: Path) -> Path:
     raise RegretError(f"manifest replay path does not exist: {raw}")
 
 
-def load_manifest(path: str | Path) -> dict[str, Any]:
+def load_manifest(path: str | Path, *, require_pinned: bool = True) -> dict[str, Any]:
     """Load a frozen replay manifest and verify its digest and replay hashes.
 
     Relative replay paths are resolved against the repository first (the freeze
@@ -160,17 +196,38 @@ def load_manifest(path: str | Path) -> dict[str, Any]:
     if _integer(payload.get("schema_version")) != 1:
         raise RegretError("manifest schema_version must be 1")
     split = str(payload.get("split") or "")
+    if payload.get("dataset") != FROZEN_DATASET or split not in EXPECTED_SPLIT_COUNTS:
+        raise RegretError("manifest is not a frozen Dipplin replay-eval split")
+    if require_pinned:
+        pinned = PINNED_MANIFESTS[split]
+        if (
+            manifest_path != Path(pinned["path"]).resolve()
+            or _sha256(manifest_path) != pinned["file_sha256"]
+            or str(payload.get("manifest_payload_sha256") or "").upper()
+            != pinned["payload_sha256"]
+        ):
+            raise RegretError(f"manifest {split} does not match its frozen file/payload pin")
     sealed = bool(payload.get("sealed"))
     if split == "FINAL_HOLDOUT" and not sealed:
         raise RegretError("FINAL_HOLDOUT manifest must be sealed")
     if sealed and split != "FINAL_HOLDOUT":
         raise RegretError("only FINAL_HOLDOUT may be sealed")
     inspection = payload.get("inspection_policy") or {}
-    if sealed and inspection.get("individual_failure_inspection_permitted") is not False:
-        raise RegretError("sealed manifest permits individual failure inspection")
+    if (
+        inspection.get("metadata_only") is not True
+        or inspection.get("action_level_inspected") is not False
+        or inspection.get("replay_regret_executed") is not False
+        or inspection.get("individual_failure_inspection_permitted") is not (not sealed)
+    ):
+        raise RegretError("manifest inspection policy violates the frozen split contract")
+    selection = payload.get("selection_provenance") or {}
+    if selection.get("selection_used_outcome") is not False:
+        raise RegretError("manifest is not reward-blind")
     episodes = payload.get("episodes")
     if not isinstance(episodes, list) or len(episodes) != _integer(payload.get("episode_count")):
         raise RegretError("manifest episode_count does not match episodes")
+    if len(episodes) != EXPECTED_SPLIT_COUNTS[split]:
+        raise RegretError(f"manifest {split} must contain exactly {EXPECTED_SPLIT_COUNTS[split]} episodes")
 
     result = copy.deepcopy(payload)
     result["_manifest_path"] = str(manifest_path)
@@ -202,6 +259,10 @@ def verify_incumbent(manifest_path: str | Path = DEFAULT_INCUMBENT_MANIFEST) -> 
     """Prove that imported S1 sources and archive match the frozen incumbent."""
 
     path = Path(manifest_path).resolve()
+    if path != DEFAULT_INCUMBENT_MANIFEST.resolve():
+        raise RegretError("incumbent manifest path is not the pinned S1 manifest")
+    if not path.is_file() or _sha256(path) != PINNED_S1_MANIFEST_SHA256:
+        raise RegretError("frozen S1 manifest hash mismatch")
     try:
         manifest = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
@@ -210,7 +271,15 @@ def verify_incumbent(manifest_path: str | Path = DEFAULT_INCUMBENT_MANIFEST) -> 
         raise RegretError("incumbent manifest is not packaged S1")
     output = manifest.get("output") or {}
     archive = ROOT / "artifacts" / "dipplin_s1" / "submission.tar.gz"
-    if not archive.is_file() or _sha256(archive) != str(output.get("archive_sha256") or "").upper():
+    if (
+        not archive.is_file()
+        or _sha256(archive) != PINNED_S1_ARCHIVE_SHA256
+        or str(output.get("archive_sha256") or "").upper() != PINNED_S1_ARCHIVE_SHA256
+        or str(output.get("extracted_tree_sha256") or "").upper()
+        != PINNED_S1_EXTRACTED_TREE_SHA256
+        or str((manifest.get("runtime") or {}).get("runtime_source_tree_sha256") or "").upper()
+        != PINNED_S1_RUNTIME_TREE_SHA256
+    ):
         raise RegretError("frozen S1 archive hash mismatch")
     files = output.get("file_manifest") or {}
     checked: dict[str, str] = {}
@@ -422,16 +491,24 @@ def aligned_visualizer_frame(replay: Mapping[str, Any], step_index: int, obs: An
             raise RegretError(f"visualizer alignment {label} mismatch: {actual} != {expected}")
     frame_select = frame.get("select")
     if isinstance(frame_select, dict):
-        def enum_token(value: Any) -> str:
-            name = getattr(value, "name", value)
-            return "".join(character.lower() for character in str(name) if character.isalnum())
+        def enum_value(value: Any, enum_class: Any) -> int:
+            if isinstance(value, str):
+                token = "".join(character.lower() for character in value if character.isalnum())
+                matches = [
+                    member
+                    for member in enum_class
+                    if "".join(character.lower() for character in member.name if character.isalnum())
+                    == token
+                ]
+                if len(matches) != 1:
+                    raise RegretError("visualizer alignment contains an unknown enum label")
+                return int(matches[0])
+            return _integer(value)
 
-        for field in ("type", "context"):
-            if (
-                frame_select.get(field) is not None
-                and enum_token(frame_select[field])
-                != enum_token(getattr(obs.select, field, None))
-            ):
+        for field, enum_class in (("type", SelectType), ("context", SelectContext)):
+            if frame_select.get(field) is not None and enum_value(
+                frame_select[field], enum_class
+            ) != _integer(getattr(obs.select, field, None)):
                 raise RegretError(f"visualizer alignment select {field} mismatch")
         for field in ("minCount", "maxCount"):
             if frame_select.get(field) is not None and _integer(frame_select[field]) != _integer(getattr(obs.select, field, None)):
@@ -770,24 +847,33 @@ def build_output(
         raise RegretError("sealed FINAL_HOLDOUT requires --sealed aggregate-only mode")
     public_rows = [_public_row(row) for row in rows]
     aggregate = aggregate_results(public_rows, bootstrap_samples=bootstrap_samples, seed=seed)
-    aggregate["opponent_archetypes"] = dict(sorted(Counter(
-        str(row.get("opponent_archetype") or "unknown") for row in public_rows
-    ).items()))
-    aggregate["by_actual_order"] = _grouped_aggregates(
-        public_rows, "actual_order", bootstrap_samples=bootstrap_samples, seed=seed
+    aggregate["manifest_episode_count"] = _integer(manifest.get("episode_count"), 0)
+    aggregate["evaluated_episode_count"] = aggregate["episode_count"]
+    aggregate["episode_coverage"] = (
+        aggregate["evaluated_episode_count"] / aggregate["manifest_episode_count"]
+        if aggregate["manifest_episode_count"] else 0.0
     )
-    aggregate["by_opponent_archetype"] = _grouped_aggregates(
-        public_rows, "opponent_archetype", bootstrap_samples=bootstrap_samples, seed=seed
-    )
-    aggregate["by_decision_family"] = _grouped_aggregates(
-        public_rows, "decision_family", bootstrap_samples=bootstrap_samples, seed=seed
-    )
-    aggregate["by_hero_deck_family"] = _grouped_aggregates(
-        public_rows, "hero_deck_family", bootstrap_samples=bootstrap_samples, seed=seed
-    )
-    aggregate["by_game_phase"] = _grouped_aggregates(
-        public_rows, "game_phase", bootstrap_samples=bootstrap_samples, seed=seed
-    )
+    # The final holdout is one aggregate number set, not a drill-down dataset.
+    # Even nominally aggregated rare categories can identify a single episode.
+    if not sealed:
+        aggregate["opponent_archetypes"] = dict(sorted(Counter(
+            str(row.get("opponent_archetype") or "unknown") for row in public_rows
+        ).items()))
+        aggregate["by_actual_order"] = _grouped_aggregates(
+            public_rows, "actual_order", bootstrap_samples=bootstrap_samples, seed=seed
+        )
+        aggregate["by_opponent_archetype"] = _grouped_aggregates(
+            public_rows, "opponent_archetype", bootstrap_samples=bootstrap_samples, seed=seed
+        )
+        aggregate["by_decision_family"] = _grouped_aggregates(
+            public_rows, "decision_family", bootstrap_samples=bootstrap_samples, seed=seed
+        )
+        aggregate["by_hero_deck_family"] = _grouped_aggregates(
+            public_rows, "hero_deck_family", bootstrap_samples=bootstrap_samples, seed=seed
+        )
+        aggregate["by_game_phase"] = _grouped_aggregates(
+            public_rows, "game_phase", bootstrap_samples=bootstrap_samples, seed=seed
+        )
     payload: dict[str, Any] = {
         "schema": SCHEMA,
         "sealed": bool(sealed),
@@ -795,6 +881,10 @@ def build_output(
         "manifest_payload_sha256": manifest.get("manifest_payload_sha256"),
         "method": {
             "proposal": "chronological frozen S1; recorded expert actions committed to shadow memory",
+            "proposal_repeat_strategy": (
+                "one chronological pass; every sampled native-search proposal is "
+                "replayed from exact pre-prompt memory/search-count checkpoints"
+            ),
             "continuation": "independent fresh exact-state roots; frozen D0 through hero turn",
             "comparison": "componentwise across equal completed-turn coverage",
             "rng_seed_reset_available": False,
@@ -981,7 +1071,7 @@ def _strategic_priority(
         # setup itself is earlier than a completed hero-turn boundary.
         "setup": 55,
     }.get(family, 0)
-    if actual_order == "second" and own_turn == 1:
+    if actual_order == "second" and (own_turn == 1 or family == "setup"):
         priority += 30
     plan = getattr(shadow.proposal, "plan", None)
     if plan is not None:
@@ -1039,7 +1129,10 @@ def reconstruct_episode_candidates(
     archetype = str((episode_meta.get("opponent") or {}).get("archetype") or "unknown")
     if int(proposal_repeats) < 2:
         raise RegretError("proposal_repeats must be at least 2")
-    shadow_policies = [ChronologicalS1() for _ in range(int(proposal_repeats))]
+    # Only one policy may own the chronological trajectory.  Additional
+    # repeatability checks are replayed lazily from the saved pre-prompt state
+    # after strategic sampling, rather than paying for full D1 at every prompt.
+    shadow_policy = ChronologicalS1()
     rows: list[dict[str, Any]] = []
     for step_index in range(len(steps) - 1):
         current = steps[step_index]
@@ -1054,20 +1147,18 @@ def reconstruct_episode_candidates(
         if not isinstance(raw, Mapping) or raw.get("current") is None or raw.get("select") is None:
             continue
         obs = to_observation_class(dict(raw))
+        if _integer(getattr(obs.current, "yourIndex", None)) != seat:
+            raise RegretError(
+                f"episode {episode_id} step {step_index} ACTIVE hero actor does not match seat"
+            )
         expert = _valid_action(obs, following_row.get("action"))
-        proposals = [policy.propose(raw, obs) for policy in shadow_policies]
-        proposed = proposals[0]
+        pre_prompt_memory = shadow_policy.memory.clone()
+        pre_searches = int(shadow_policy.search.searches_this_game)
+        proposed = shadow_policy.propose(raw, obs)
         agent = list(proposed.action)
         _valid_action(obs, agent)
-        proposal_keys: list[tuple[Any, ...]] = []
-        for repeat in proposals:
-            _valid_action(obs, repeat.action)
-            proposal_keys.append(semantic_action_key(obs, repeat.action))
         proposal_error = proposed.error
-        if any(repeat.error for repeat in proposals):
-            proposal_error = proposal_error or "s1_repeat_policy_error"
-        if len(set(proposal_keys)) != 1:
-            proposal_error = "s1_action_unstable"
+        post_searches = int(shadow_policy.search.searches_this_game)
         first_player = _integer(getattr(obs.current, "firstPlayer", None))
         turn = _integer(getattr(obs.current, "turn", None), 0)
         ordinal = own_turn_ordinal(turn, seat, first_player)
@@ -1094,16 +1185,96 @@ def reconstruct_episode_candidates(
                 "agent_semantic": repr(semantic_action_key(obs, agent)),
                 "semantic_equivalent": equivalent,
                 "s1_resolver": getattr(getattr(proposed.proposal, "intent", None), "resolver", "error"),
-                "s1_searches_this_game": int(shadow_policies[0].search.searches_this_game),
-                "s1_proposal_repeats": int(proposal_repeats),
+                "s1_searches_this_game": post_searches,
+                "s1_search_started": post_searches > pre_searches,
+                "s1_proposal_repeat_target": int(proposal_repeats),
+                "s1_proposal_repeats": 1,
+                "s1_proposal_repeat_mode": "chronological_primary",
                 "proposal_error": proposal_error,
                 "_obs": obs,
                 "_memory": proposed.working_memory.clone(),
+                "_pre_prompt_memory": pre_prompt_memory,
+                "_pre_searches_this_game": pre_searches,
+                "_post_searches_this_game": post_searches,
+                "_raw_observation": dict(raw),
             }
             rows.append(row)
-        for policy, repeat in zip(shadow_policies, proposals):
-            policy.commit_expert(obs, expert, repeat)
+        shadow_policy.commit_expert(obs, expert, proposed)
     return rows
+
+
+def certify_sampled_proposal(
+    row: Mapping[str, Any],
+    *,
+    proposal_repeats: int,
+) -> dict[str, Any]:
+    """Repeat every sampled native-search proposal from one exact checkpoint.
+
+    S1's only policy state is ``PlanMemory`` plus D1's per-game search counter.
+    Restoring those two values recreates the exact pre-prompt controller state;
+    telemetry is write-only and cannot affect selection.  A prompt where D1 did
+    not increment its search counter never entered native search and is already
+    deterministic D0.  Native-search proposals are repeated even when the first
+    proposal matched the expert, so D1 instability cannot hide as equivalence.
+    """
+
+    if int(proposal_repeats) < 2:
+        raise RegretError("proposal_repeats must be at least 2")
+    result = dict(row)
+    result["s1_proposal_repeat_target"] = int(proposal_repeats)
+    result["s1_proposal_repeats"] = 1
+    if result.get("proposal_error"):
+        result["s1_proposal_repeat_mode"] = "primary_policy_error"
+        return result
+    if not bool(result.get("s1_search_started")):
+        result["s1_proposal_repeat_mode"] = "deterministic_no_native_search"
+        return result
+
+    obs = result.get("_obs")
+    raw = result.get("_raw_observation")
+    pre_memory = result.get("_pre_prompt_memory")
+    pre_searches = _integer(result.get("_pre_searches_this_game"), -1)
+    post_searches = _integer(result.get("_post_searches_this_game"), -1)
+    if (
+        obs is None
+        or not isinstance(raw, Mapping)
+        or pre_memory is None
+        or pre_searches < 0
+        or post_searches <= pre_searches
+    ):
+        result["proposal_error"] = "s1_repeat_checkpoint_missing"
+        result["s1_proposal_repeat_mode"] = "checkpoint_error"
+        return result
+
+    expected = semantic_action_key(obs, list(result.get("agent_action") or []))
+    executed = 1
+    error: str | None = None
+    unstable = False
+    for _ in range(int(proposal_repeats) - 1):
+        repeat_policy = ChronologicalS1()
+        repeat_policy.memory = pre_memory.clone()
+        repeat_policy.search.searches_this_game = pre_searches
+        repeat = repeat_policy.propose(raw, obs)
+        executed += 1
+        if int(repeat_policy.search.searches_this_game) != post_searches:
+            error = "s1_repeat_search_progression_error"
+            continue
+        if repeat.error:
+            error = "s1_repeat_policy_error"
+            continue
+        try:
+            _valid_action(obs, repeat.action)
+            if semantic_action_key(obs, repeat.action) != expected:
+                unstable = True
+        except Exception:
+            error = "s1_repeat_policy_error"
+    result["s1_proposal_repeats"] = executed
+    result["s1_proposal_repeat_mode"] = "lazy_checkpoint_replay"
+    if unstable:
+        result["proposal_error"] = "s1_action_unstable"
+    elif error is not None:
+        result["proposal_error"] = error
+    return result
 
 
 def _branch_metric(
@@ -1329,10 +1500,126 @@ def evaluate_manifest(
             )
         )
     sampled = strategic_sample(candidates, cap_per_episode=cap_per_episode, seed=sample_seed)
-    return [
-        evaluate_candidate(row, replay_cache[_integer(row.get("episode_id"))], repeat_passes=repeat_passes)
+    expected_episode_ids = {_integer(row.get("episode_id")) for row in episode_rows}
+    sampled_episode_ids = {_integer(row.get("episode_id")) for row in sampled}
+    missing = sorted(expected_episode_ids - sampled_episode_ids)
+    if missing:
+        raise RegretError(
+            f"manifest episodes have no sampled useful decision (count={len(missing)})"
+        )
+    certified = [
+        certify_sampled_proposal(row, proposal_repeats=proposal_repeats)
         for row in sampled
     ]
+    return [
+        evaluate_candidate(row, replay_cache[_integer(row.get("episode_id"))], repeat_passes=repeat_passes)
+        for row in certified
+    ]
+
+
+def _sealed_parameter_values(args: argparse.Namespace) -> dict[str, int]:
+    return {
+        "cap_per_episode": int(args.cap_per_episode),
+        "sample_seed": int(args.sample_seed),
+        "bootstrap_samples": int(args.bootstrap_samples),
+        "repeat_passes": int(args.repeat_passes),
+        "proposal_repeats": int(args.proposal_repeats),
+    }
+
+
+def validate_sealed_run_contract(args: argparse.Namespace, manifest: Mapping[str, Any]) -> None:
+    """Require the one canonical final-holdout input, output, and parameters."""
+
+    if manifest.get("split") != "FINAL_HOLDOUT" or manifest.get("sealed") is not True:
+        raise RegretError("sealed run requires the frozen FINAL_HOLDOUT manifest")
+    if Path(args.manifest).resolve() != DEFAULT_FINAL_HOLDOUT_MANIFEST.resolve():
+        raise RegretError("sealed run requires the canonical final-holdout manifest path")
+    if Path(args.output).resolve() != DEFAULT_SEALED_OUTPUT.resolve():
+        raise RegretError("sealed run requires the canonical aggregate output path")
+    if Path(args.incumbent_manifest).resolve() != DEFAULT_INCUMBENT_MANIFEST.resolve():
+        raise RegretError("sealed run requires the pinned incumbent manifest")
+    if args.max_episodes is not None:
+        raise RegretError("sealed evaluation cannot select a partial episode set")
+    if _sealed_parameter_values(args) != FROZEN_SEALED_PARAMETERS:
+        raise RegretError("sealed evaluation parameters differ from the frozen contract")
+
+
+def _exclusive_json_write(path: Path, payload: Mapping[str, Any]) -> None:
+    """Create one JSON file without overwriting or racing another evaluator."""
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    encoded = json.dumps(payload, indent=2, sort_keys=True).encode("utf-8") + b"\n"
+    try:
+        descriptor = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    except FileExistsError as exc:
+        raise RegretError("sealed run has already been claimed") from exc
+    with os.fdopen(descriptor, "wb") as handle:
+        handle.write(encoded)
+        handle.flush()
+        os.fsync(handle.fileno())
+
+
+def _git_blob_sha1(path: Path) -> str:
+    data = path.read_bytes()
+    return hashlib.sha1(b"blob " + str(len(data)).encode("ascii") + b"\0" + data).hexdigest().upper()
+
+
+def claim_sealed_run(
+    receipt_path: Path,
+    manifest: Mapping[str, Any],
+    args: argparse.Namespace,
+) -> dict[str, Any]:
+    """Consume the one holdout inspection before any replay action is parsed."""
+
+    evaluator = Path(__file__).resolve()
+    receipt = {
+        "schema": "dipplin-final-holdout-receipt-v1",
+        "status": "ACTION_INSPECTION_CLAIMED",
+        "manifest_file_sha256": _sha256(Path(args.manifest).resolve()),
+        "manifest_payload_sha256": manifest.get("manifest_payload_sha256"),
+        "incumbent_archive_sha256": PINNED_S1_ARCHIVE_SHA256,
+        "evaluator_path": str(evaluator.relative_to(ROOT)),
+        "evaluator_sha256": _sha256(evaluator),
+        "evaluator_git_blob_sha1": _git_blob_sha1(evaluator),
+        "parameters": _sealed_parameter_values(args),
+        "aggregate_output": str(Path(args.output).resolve()),
+    }
+    _exclusive_json_write(receipt_path, receipt)
+    return receipt
+
+
+def complete_sealed_run(
+    receipt_path: Path,
+    receipt: Mapping[str, Any],
+    output_path: Path,
+) -> None:
+    """Atomically mark the already-consumed run complete without private detail."""
+
+    current = json.loads(receipt_path.read_text(encoding="utf-8"))
+    if current != dict(receipt) or current.get("status") != "ACTION_INSPECTION_CLAIMED":
+        raise RegretError("sealed receipt changed after the run was claimed")
+    if Path(str(current.get("aggregate_output"))).resolve() != output_path.resolve():
+        raise RegretError("sealed aggregate output path differs from its receipt")
+    completed = dict(receipt)
+    completed.update({
+        "status": "COMPLETE",
+        "aggregate_output_sha256": _sha256(output_path),
+    })
+    encoded = json.dumps(completed, indent=2, sort_keys=True).encode("utf-8") + b"\n"
+    with tempfile.NamedTemporaryFile(
+        dir=receipt_path.parent,
+        prefix=f".{receipt_path.name}.",
+        delete=False,
+    ) as handle:
+        temporary = Path(handle.name)
+        handle.write(encoded)
+        handle.flush()
+        os.fsync(handle.fileno())
+    try:
+        os.replace(temporary, receipt_path)
+    finally:
+        if temporary.exists():
+            temporary.unlink()
 
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
@@ -1342,11 +1629,17 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--replays", type=Path, help="diagnostic directory of episode-*-replay.json")
     parser.add_argument("--hero-seat", type=int, choices=(0, 1), help="hero seat for raw replay input")
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--cap-per-episode", type=int, default=24)
-    parser.add_argument("--sample-seed", type=int, default=20260813)
-    parser.add_argument("--bootstrap-samples", type=int, default=2000)
-    parser.add_argument("--repeat-passes", type=int, default=2)
-    parser.add_argument("--proposal-repeats", type=int, default=3)
+    parser.add_argument(
+        "--cap-per-episode", type=int, default=FROZEN_SEALED_PARAMETERS["cap_per_episode"]
+    )
+    parser.add_argument("--sample-seed", type=int, default=FROZEN_SEALED_PARAMETERS["sample_seed"])
+    parser.add_argument(
+        "--bootstrap-samples", type=int, default=FROZEN_SEALED_PARAMETERS["bootstrap_samples"]
+    )
+    parser.add_argument("--repeat-passes", type=int, default=FROZEN_SEALED_PARAMETERS["repeat_passes"])
+    parser.add_argument(
+        "--proposal-repeats", type=int, default=FROZEN_SEALED_PARAMETERS["proposal_repeats"]
+    )
     parser.add_argument("--max-episodes", type=int)
     parser.add_argument("--incumbent-manifest", type=Path, default=DEFAULT_INCUMBENT_MANIFEST)
     parser.add_argument(
@@ -1374,16 +1667,20 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = parse_args(argv)
+    sealed_receipt: dict[str, Any] | None = None
     try:
         incumbent = verify_incumbent(args.incumbent_manifest)
         if args.manifest:
             manifest = load_manifest(args.manifest)
             if manifest.get("sealed") and not args.sealed:
                 raise RegretError("FINAL_HOLDOUT requires --sealed aggregate-only mode")
-            if manifest.get("sealed") and args.max_episodes is not None:
-                raise RegretError("sealed evaluation cannot select a partial episode set")
-            if manifest.get("sealed") and args.output.exists():
-                raise RegretError("refusing to overwrite an existing sealed evaluation output")
+            if manifest.get("sealed"):
+                validate_sealed_run_contract(args, manifest)
+                if args.output.exists():
+                    raise RegretError("sealed aggregate output already exists")
+                # The permanent O_EXCL claim is the last operation before any
+                # action-level holdout replay parsing.
+                sealed_receipt = claim_sealed_run(DEFAULT_SEALED_RECEIPT, manifest, args)
         else:
             paths = list(args.replay)
             if args.replays:
@@ -1405,8 +1702,19 @@ def main(argv: Sequence[str] | None = None) -> int:
             seed=args.sample_seed,
             incumbent=incumbent,
         )
-        args.output.parent.mkdir(parents=True, exist_ok=True)
-        args.output.write_text(json.dumps(output, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        if manifest.get("sealed"):
+            _exclusive_json_write(args.output, output)
+            complete_sealed_run(
+                DEFAULT_SEALED_RECEIPT,
+                sealed_receipt or {},
+                args.output,
+            )
+        else:
+            args.output.parent.mkdir(parents=True, exist_ok=True)
+            args.output.write_text(
+                json.dumps(output, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
         aggregate = output["aggregate"]
         print(json.dumps({
             "output": str(args.output),
