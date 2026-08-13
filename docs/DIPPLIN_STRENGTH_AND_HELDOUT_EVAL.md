@@ -256,7 +256,8 @@ the test-file SHA-256 is
 `a3f15a089520857bfe8ee29af98b10b47c0bbcea4a394bca0d33bacf2936919d`.
 The focused S2 search and packaging suites separately passed 28/28. These are
 part of a broader final dashboard/replay/stage/qualification/search/package/
-meta-mechanics regression set that passed 303/303. These are working-tree tests
+meta-mechanics regression set that passed 300/300 from a clean archive of the
+final branch. These are source-level tests
 plus sterile package-build checks, not a claim that every test executed from
 the release archive on every target platform.
 
