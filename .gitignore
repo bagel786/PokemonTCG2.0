@@ -1,6 +1,9 @@
 .venv/
 .codex_tmp/
 artifacts/*
+!artifacts/dipplin_expert_fresh/
+artifacts/dipplin_expert_fresh/*
+!artifacts/dipplin_expert_fresh/manifest.json
 !artifacts/dipplin_s1/
 artifacts/dipplin_s1/*
 !artifacts/dipplin_s1/submission.tar.gz
