@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "dataset": "dipplin_fresh_expert_replay_eval_v1",
+  "freeze_contract_created_at": "2026-08-13",
+  "expected_counts": {
+    "VALIDATION": 50,
+    "FINAL_HOLDOUT": 30
+  },
+  "selection_provenance": {
+    "source": "Bounded local Kaggle metadata/cache audit plus current EpisodeService metadata on 2026-08-12/13",
+    "selection_method": "Fixed candidate submissions, pilot-diverse deterministic episode allocation, with priority for opponents not known as Grimmsnarl or Alakazam; one invalid survey-linked source was replaced reward-blind by unique-opponent SHA order before any action-level evaluation",
+    "selection_used_outcome": false,
+    "expected_expert_reward_is_integrity_only": true,
+    "excluded_submission_ids": [
+      55408594,
+      55336470
+    ],
+    "excluded_reason": "PP kawada 55408594 influenced D0/S1 development and is contaminated DEV data; Magist 55336470 failed the metadata-only deck handshake and was Grimmsnarl rather than Dipplin.",
+    "dev_smoke_episode_ids": [
+      90415058,
+      90367171,
+      89463202
+    ],
+    "limitations_before_freeze": [
+      "Seed rows are provisional until API identity, source timestamp, and replay deck handshakes all verify.",
+      "Opponent archetypes in the frozen manifests must be derived from the full replay deck, not team-level survey labels.",
+      "No replay in FINAL_HOLDOUT may be inspected beyond deck/order/outcome metadata before the policy is frozen."
+    ]
+  },
+  "sources": {
+    "bluesleetw_55404784": {
+      "submission_id": 55404784,
+      "team_id": 16382115,
+      "pilot": "BluesLeeTW",
+      "deck_family": "Thwackey / Dipplin",
+      "survey_rank": 104,
+      "survey_rating": 991.4
+    },
+    "nishimatsu_55430091": {
+      "submission_id": 55430091,
+      "team_id": 16374469,
+      "pilot": "西松大祐",
+      "deck_family": "Thwackey / Dipplin",
+      "survey_rank": 173,
+      "survey_rating": 966.5
+    },
+    "iliamna_55185538": {
+      "submission_id": 55185538,
+      "team_id": 16391123,
+      "pilot": "Iliamna",
+      "deck_family": "Thwackey / Dipplin",
+      "survey_rank": 242,
+      "survey_rating": 937.5
+    },
+    "magist_55289327": {
+      "submission_id": 55289327,
+      "team_id": 16378507,
+      "pilot": "Magist",
+      "deck_family": "Thwackey / Dipplin",
+      "survey_current_submission_id": 55336470
+    },
+    "bluesleetw_55288239": {
+      "submission_id": 55288239,
+      "team_id": 16382115,
+      "pilot": "BluesLeeTW",
+      "deck_family": "Thwackey / Dipplin",
+      "survey_current_submission_id": 55404784
+    },
+    "iliamna_55175199": {
+      "submission_id": 55175199,
+      "team_id": 16391123,
+      "pilot": "Iliamna",
+      "deck_family": "Thwackey / Dipplin",
+      "survey_current_submission_id": 55185538
+    },
+    "pachirisu_55429378": {
+      "submission_id": 55429378,
+      "team_id": 16601361,
+      "pilot": "パチリス",
+      "deck_family": "Rillaboom / Dipplin",
+      "survey_rank": 60,
+      "survey_rating": 1029.5
+    }
+  },
+  "splits": {
+    "VALIDATION": [
+      {"episode_id": 90557740, "source_id": "magist_55289327", "expected_expert_reward": 1, "expected_opponent_submission_id": 55308209, "expected_opponent_team_id": 16425415},
+      {"episode_id": 90356628, "source_id": "magist_55289327", "expected_expert_reward": 1, "expected_opponent_submission_id": 55287436, "expected_opponent_team_id": 16381537},
+      {"episode_id": 90375334, "source_id": "magist_55289327", "expected_expert_reward": 1, "expected_opponent_submission_id": 55282075, "expected_opponent_team_id": 16490418},
+      {"episode_id": 90477157, "source_id": "magist_55289327", "expected_expert_reward": 1, "expected_opponent_submission_id": 55301726, "expected_opponent_team_id": 16553454},
+      {"episode_id": 90376815, "source_id": "magist_55289327", "expected_expert_reward": 1, "expected_opponent_submission_id": 55200073, "expected_opponent_team_id": 16609882},
+      {"episode_id": 90461218, "source_id": "magist_55289327", "expected_expert_reward": -1, "expected_opponent_submission_id": 55299808, "expected_opponent_team_id": 16610275},
+
+      {"episode_id": 91657612, "source_id": "bluesleetw_55404784", "expected_expert_reward": 1, "expected_opponent_submission_id": 55396374, "expected_opponent_team_id": 16372993},
+      {"episode_id": 91740201, "source_id": "bluesleetw_55404784", "expected_expert_reward": 1, "expected_opponent_submission_id": 55414188, "expected_opponent_team_id": 16383960},
+      {"episode_id": 91835939, "source_id": "bluesleetw_55404784", "expected_expert_reward": -1, "expected_opponent_submission_id": 55419254, "expected_opponent_team_id": 16421599},
+      {"episode_id": 91903167, "source_id": "bluesleetw_55404784", "expected_expert_reward": -1, "expected_opponent_submission_id": 55412805, "expected_opponent_team_id": 16422241},
+      {"episode_id": 92132479, "source_id": "bluesleetw_55404784", "expected_expert_reward": -1, "expected_opponent_submission_id": 55442597, "expected_opponent_team_id": 16371280},
+      {"episode_id": 92186168, "source_id": "bluesleetw_55404784", "expected_expert_reward": -1, "expected_opponent_submission_id": 55444389, "expected_opponent_team_id": 16535369},
+
+      {"episode_id": 91962705, "source_id": "nishimatsu_55430091", "expected_expert_reward": 1, "expected_opponent_submission_id": 55418751, "expected_opponent_team_id": 16385537},
+      {"episode_id": 91963644, "source_id": "nishimatsu_55430091", "expected_expert_reward": -1, "expected_opponent_submission_id": 55422319, "expected_opponent_team_id": 16383960},
+      {"episode_id": 91979674, "source_id": "nishimatsu_55430091", "expected_expert_reward": 1, "expected_opponent_submission_id": 55410531, "expected_opponent_team_id": 16374843},
+      {"episode_id": 92051784, "source_id": "nishimatsu_55430091", "expected_expert_reward": -1, "expected_opponent_submission_id": 55437409, "expected_opponent_team_id": 16381624},
+      {"episode_id": 92165381, "source_id": "nishimatsu_55430091", "expected_expert_reward": 1, "expected_opponent_submission_id": 55445464, "expected_opponent_team_id": 16422150},
+
+      {"episode_id": 89555003, "source_id": "iliamna_55185538", "expected_expert_reward": -1, "expected_opponent_submission_id": 55167739, "expected_opponent_team_id": 16514272},
+      {"episode_id": 89582448, "source_id": "iliamna_55185538", "expected_expert_reward": 1, "expected_opponent_submission_id": 55177269, "expected_opponent_team_id": 16422241},
+      {"episode_id": 89591078, "source_id": "iliamna_55185538", "expected_expert_reward": -1, "expected_opponent_submission_id": 55176220, "expected_opponent_team_id": 16379865},
+      {"episode_id": 89592725, "source_id": "iliamna_55185538", "expected_expert_reward": -1, "expected_opponent_submission_id": 55109984, "expected_opponent_team_id": 16531269},
+      {"episode_id": 89609836, "source_id": "iliamna_55185538", "expected_expert_reward": -1, "expected_opponent_submission_id": 55157066, "expected_opponent_team_id": 16371280},
+      {"episode_id": 89609846, "source_id": "iliamna_55185538", "expected_expert_reward": -1, "expected_opponent_submission_id": 55188658, "expected_opponent_team_id": 16375647},
+
+      {"episode_id": 90374599, "source_id": "magist_55289327", "expected_expert_reward": 1, "expected_opponent_submission_id": 55290110, "expected_opponent_team_id": 16432117},
+      {"episode_id": 90444414, "source_id": "magist_55289327", "expected_expert_reward": -1, "expected_opponent_submission_id": 55298014, "expected_opponent_team_id": 16385817},
+      {"episode_id": 90516264, "source_id": "magist_55289327", "expected_expert_reward": 1, "expected_opponent_submission_id": 55304054, "expected_opponent_team_id": 16531269},
+      {"episode_id": 90561875, "source_id": "magist_55289327", "expected_expert_reward": 1, "expected_opponent_submission_id": 55307558, "expected_opponent_team_id": 16489999},
+      {"episode_id": 90590633, "source_id": "magist_55289327", "expected_expert_reward": 1, "expected_opponent_submission_id": 55312041, "expected_opponent_team_id": 16372696},
+      {"episode_id": 90591450, "source_id": "magist_55289327", "expected_expert_reward": 1, "expected_opponent_submission_id": 55312011, "expected_opponent_team_id": 16374884},
+
+      {"episode_id": 90346246, "source_id": "bluesleetw_55288239", "expected_expert_reward": 1, "expected_opponent_submission_id": 55267497, "expected_opponent_team_id": 16531269},
+      {"episode_id": 90369388, "source_id": "bluesleetw_55288239", "expected_expert_reward": -1, "expected_opponent_submission_id": 55251809, "expected_opponent_team_id": 16594494},
+      {"episode_id": 90378450, "source_id": "bluesleetw_55288239", "expected_expert_reward": 1, "expected_opponent_submission_id": 55283348, "expected_opponent_team_id": 16375404},
+      {"episode_id": 90392394, "source_id": "bluesleetw_55288239", "expected_expert_reward": -1, "expected_opponent_submission_id": 55292400, "expected_opponent_team_id": 16378476},
+      {"episode_id": 90392469, "source_id": "bluesleetw_55288239", "expected_expert_reward": -1, "expected_opponent_submission_id": 55290927, "expected_opponent_team_id": 16505594},
+      {"episode_id": 90414204, "source_id": "bluesleetw_55288239", "expected_expert_reward": -1, "expected_opponent_submission_id": 55293982, "expected_opponent_team_id": 16440585},
+
+      {"episode_id": 89459410, "source_id": "iliamna_55175199", "expected_expert_reward": 1, "expected_opponent_submission_id": 55052595, "expected_opponent_team_id": 16514497},
+      {"episode_id": 89464267, "source_id": "iliamna_55175199", "expected_expert_reward": 1, "expected_opponent_submission_id": 55168673, "expected_opponent_team_id": 16514272},
+      {"episode_id": 89466438, "source_id": "iliamna_55175199", "expected_expert_reward": -1, "expected_opponent_submission_id": 55162369, "expected_opponent_team_id": 16431331},
+      {"episode_id": 89538443, "source_id": "iliamna_55175199", "expected_expert_reward": -1, "expected_opponent_submission_id": 55168898, "expected_opponent_team_id": 16383960},
+      {"episode_id": 89548250, "source_id": "iliamna_55175199", "expected_expert_reward": 1, "expected_opponent_submission_id": 55187554, "expected_opponent_team_id": 16556346},
+      {"episode_id": 89554373, "source_id": "iliamna_55175199", "expected_expert_reward": 1, "expected_opponent_submission_id": 55187554, "expected_opponent_team_id": 16556346},
+
+      {"episode_id": 91948588, "source_id": "pachirisu_55429378", "expected_expert_reward": -1, "expected_opponent_submission_id": 55427852, "expected_opponent_team_id": 16371723},
+      {"episode_id": 91952376, "source_id": "pachirisu_55429378", "expected_expert_reward": 1, "expected_opponent_submission_id": 55322389, "expected_opponent_team_id": 16379865},
+      {"episode_id": 91970292, "source_id": "pachirisu_55429378", "expected_expert_reward": 1, "expected_opponent_submission_id": 55308983, "expected_opponent_team_id": 16418623},
+      {"episode_id": 91972171, "source_id": "pachirisu_55429378", "expected_expert_reward": -1, "expected_opponent_submission_id": 55430865, "expected_opponent_team_id": 16371280},
+      {"episode_id": 91974796, "source_id": "pachirisu_55429378", "expected_expert_reward": -1, "expected_opponent_submission_id": 55431662, "expected_opponent_team_id": 16375647},
+      {"episode_id": 92076513, "source_id": "pachirisu_55429378", "expected_expert_reward": -1, "expected_opponent_submission_id": 55434459, "expected_opponent_team_id": 16536318},
+      {"episode_id": 92095226, "source_id": "pachirisu_55429378", "expected_expert_reward": 1, "expected_opponent_submission_id": 55437946, "expected_opponent_team_id": 16553454},
+      {"episode_id": 92379542, "source_id": "pachirisu_55429378", "expected_expert_reward": -1, "expected_opponent_submission_id": 55462611, "expected_opponent_team_id": 16385817},
+      {"episode_id": 92380504, "source_id": "pachirisu_55429378", "expected_expert_reward": -1, "expected_opponent_submission_id": 55462641, "expected_opponent_team_id": 16446941}
+    ],
+    "FINAL_HOLDOUT": [
+      {"episode_id": 90571432, "source_id": "magist_55289327", "expected_expert_reward": 1, "expected_opponent_submission_id": 55307558, "expected_opponent_team_id": 16489999},
+      {"episode_id": 90424918, "source_id": "magist_55289327", "expected_expert_reward": -1, "expected_opponent_submission_id": 55291053, "expected_opponent_team_id": 16373297},
+      {"episode_id": 90350653, "source_id": "magist_55289327", "expected_expert_reward": 1, "expected_opponent_submission_id": 54379398, "expected_opponent_team_id": 16392551},
+      {"episode_id": 90358838, "source_id": "magist_55289327", "expected_expert_reward": -1, "expected_opponent_submission_id": 55274842, "expected_opponent_team_id": 16428218},
+      {"episode_id": 90367107, "source_id": "magist_55289327", "expected_expert_reward": -1, "expected_opponent_submission_id": 54597288, "expected_opponent_team_id": 16376257},
+      {"episode_id": 90376076, "source_id": "magist_55289327", "expected_expert_reward": 1, "expected_opponent_submission_id": 55289362, "expected_opponent_team_id": 16652464},
+      {"episode_id": 90380566, "source_id": "magist_55289327", "expected_expert_reward": -1, "expected_opponent_submission_id": 55259664, "expected_opponent_team_id": 16384218},
+
+      {"episode_id": 91793058, "source_id": "bluesleetw_55404784", "expected_expert_reward": -1, "expected_opponent_submission_id": 55411393, "expected_opponent_team_id": 16421599},
+      {"episode_id": 91830348, "source_id": "bluesleetw_55404784", "expected_expert_reward": -1, "expected_opponent_submission_id": 55418078, "expected_opponent_team_id": 16422381},
+      {"episode_id": 91858217, "source_id": "bluesleetw_55404784", "expected_expert_reward": 1, "expected_opponent_submission_id": 55421067, "expected_opponent_team_id": 16441839},
+      {"episode_id": 91998451, "source_id": "bluesleetw_55404784", "expected_expert_reward": -1, "expected_opponent_submission_id": 55431711, "expected_opponent_team_id": 16371427},
+      {"episode_id": 92002976, "source_id": "bluesleetw_55404784", "expected_expert_reward": 1, "expected_opponent_submission_id": 55434124, "expected_opponent_team_id": 16445258},
+      {"episode_id": 92040475, "source_id": "bluesleetw_55404784", "expected_expert_reward": 1, "expected_opponent_submission_id": 55437101, "expected_opponent_team_id": 16406640},
+
+      {"episode_id": 91977783, "source_id": "nishimatsu_55430091", "expected_expert_reward": 1, "expected_opponent_submission_id": 55393485, "expected_opponent_team_id": 16591662},
+      {"episode_id": 92084868, "source_id": "nishimatsu_55430091", "expected_expert_reward": 1, "expected_opponent_submission_id": 55423348, "expected_opponent_team_id": 16371703},
+      {"episode_id": 92098883, "source_id": "nishimatsu_55430091", "expected_expert_reward": -1, "expected_opponent_submission_id": 55283348, "expected_opponent_team_id": 16375404},
+      {"episode_id": 92131553, "source_id": "nishimatsu_55430091", "expected_expert_reward": -1, "expected_opponent_submission_id": 55442486, "expected_opponent_team_id": 16375320},
+
+      {"episode_id": 89522679, "source_id": "iliamna_55185538", "expected_expert_reward": -1, "expected_opponent_submission_id": 55183481, "expected_opponent_team_id": 16406640},
+      {"episode_id": 89540549, "source_id": "iliamna_55185538", "expected_expert_reward": 1, "expected_opponent_submission_id": 55175951, "expected_opponent_team_id": 16375635},
+      {"episode_id": 89585609, "source_id": "iliamna_55185538", "expected_expert_reward": 1, "expected_opponent_submission_id": 55162220, "expected_opponent_team_id": 16385250},
+      {"episode_id": 89591614, "source_id": "iliamna_55185538", "expected_expert_reward": -1, "expected_opponent_submission_id": 55121805, "expected_opponent_team_id": 16371280},
+      {"episode_id": 89599866, "source_id": "iliamna_55185538", "expected_expert_reward": -1, "expected_opponent_submission_id": 55188658, "expected_opponent_team_id": 16375647},
+      {"episode_id": 89607061, "source_id": "iliamna_55185538", "expected_expert_reward": 1, "expected_opponent_submission_id": 55175954, "expected_opponent_team_id": 16375635},
+
+      {"episode_id": 91967437, "source_id": "pachirisu_55429378", "expected_expert_reward": 1, "expected_opponent_submission_id": 55299922, "expected_opponent_team_id": 16501184},
+      {"episode_id": 91974062, "source_id": "pachirisu_55429378", "expected_expert_reward": -1, "expected_opponent_submission_id": 55367704, "expected_opponent_team_id": 16385817},
+      {"episode_id": 92095864, "source_id": "pachirisu_55429378", "expected_expert_reward": 1, "expected_opponent_submission_id": 55441073, "expected_opponent_team_id": 16452272},
+      {"episode_id": 92136403, "source_id": "pachirisu_55429378", "expected_expert_reward": 1, "expected_opponent_submission_id": 55442597, "expected_opponent_team_id": 16371280},
+      {"episode_id": 92138360, "source_id": "pachirisu_55429378", "expected_expert_reward": 1, "expected_opponent_submission_id": 55441845, "expected_opponent_team_id": 16663985},
+      {"episode_id": 92283452, "source_id": "pachirisu_55429378", "expected_expert_reward": -1, "expected_opponent_submission_id": 55452422, "expected_opponent_team_id": 16371829},
+      {"episode_id": 92289775, "source_id": "pachirisu_55429378", "expected_expert_reward": -1, "expected_opponent_submission_id": 55455825, "expected_opponent_team_id": 16375635}
+    ]
+  }
+}

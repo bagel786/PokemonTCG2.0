@@ -1,0 +1,2704 @@
+{
+  "dataset": "dipplin_fresh_expert_replay_eval_v1",
+  "episode_count": 50,
+  "episodes": [
+    {
+      "episode_id": 89459410,
+      "expert_result": "win",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "second",
+        "agent_id": 198779301,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "d6c573dd89bd1319494e25d56e66536c0b68c3db2cf4694f4a63f7423ee2f0bd",
+        "initial_rating": 1046.1278958628986,
+        "pilot": "Iliamna",
+        "reward": 1,
+        "seat": 1,
+        "submission_id": 55175199,
+        "team_id": 16391123,
+        "updated_rating": 1051.4076257909885
+      },
+      "opponent": {
+        "agent_id": 198779299,
+        "archetype": "kangaskhan_crustle",
+        "deck_sha256": "67cf83ea7e092595551b8cd9668be37903de3beb362b384f21c07b66d0549ff9",
+        "exact_catalog_match": false,
+        "initial_rating": 985.9918207975347,
+        "multiset_jaccard": 0.5789473684210527,
+        "pilot": "beeyan",
+        "reward": -1,
+        "seat": 0,
+        "submission_id": 55052595,
+        "team_id": 16514497,
+        "updated_rating": 982.4573184570943
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-89459410-replay.json",
+      "replay_sha256": "083a9e10740489df56b67ebca620bfd71147a1f1db52e500d55e8aaddb5e3fea",
+      "selection_contract_verified": true,
+      "selection_source_id": "iliamna_55175199",
+      "source_metadata_sha256": "9b1c3fd8f99931ff26067d883203c3d213714647ee031cd66828d3dc9a1b9840",
+      "source_timestamp": "2026-08-02T05:15:07.217874100Z",
+      "terminal_replay_rewards": [
+        -1,
+        1
+      ],
+      "terminal_winner_seat": 1
+    },
+    {
+      "episode_id": 89464267,
+      "expert_result": "win",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 198789015,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "d6c573dd89bd1319494e25d56e66536c0b68c3db2cf4694f4a63f7423ee2f0bd",
+        "initial_rating": 1069.6338023723793,
+        "pilot": "Iliamna",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55175199,
+        "team_id": 16391123,
+        "updated_rating": 1075.2582926382015
+      },
+      "opponent": {
+        "agent_id": 198789022,
+        "archetype": "grimmsnarl_marnie",
+        "deck_sha256": "c20a8a46f5c635773754f03103652f5c534b13dc622448ed2255a97234c103af",
+        "exact_catalog_match": true,
+        "initial_rating": 1076.8746381846952,
+        "multiset_jaccard": 1.0,
+        "pilot": "Dominic Peel",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55168673,
+        "team_id": 16514272,
+        "updated_rating": 1072.2769567183407
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-89464267-replay.json",
+      "replay_sha256": "64f98308ce116b4adaa6a69d06c8f6109a058377e5e4b2a1d69eb8514835847d",
+      "selection_contract_verified": true,
+      "selection_source_id": "iliamna_55175199",
+      "source_metadata_sha256": "073a3530e5b33e03be41d24ee544abb6e30ef50d95fefbdcf2b5f3d6bc0abc28",
+      "source_timestamp": "2026-08-02T05:51:05.760846200Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    },
+    {
+      "episode_id": 89466438,
+      "expert_result": "loss",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 198793359,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "d6c573dd89bd1319494e25d56e66536c0b68c3db2cf4694f4a63f7423ee2f0bd",
+        "initial_rating": 1081.3277265360473,
+        "pilot": "Iliamna",
+        "reward": -1,
+        "seat": 0,
+        "submission_id": 55175199,
+        "team_id": 16391123,
+        "updated_rating": 1075.6199015826264
+      },
+      "opponent": {
+        "agent_id": 198793360,
+        "archetype": "mega_lopunny_ex",
+        "deck_sha256": "053b4950d40b4a85f4c63511b1f89f90f82b691754d1aaa57b0a4df9f9806e75",
+        "exact_catalog_match": true,
+        "initial_rating": 1057.8261156746562,
+        "multiset_jaccard": 1.0,
+        "pilot": "insuperabilehart",
+        "reward": 1,
+        "seat": 1,
+        "submission_id": 55162369,
+        "team_id": 16431331,
+        "updated_rating": 1062.6994781794062
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-89466438-replay.json",
+      "replay_sha256": "95818e7220d12ae26f0f163756a6e9a8464c3e3e1918d8b4f0d7ca3dccce70d8",
+      "selection_contract_verified": true,
+      "selection_source_id": "iliamna_55175199",
+      "source_metadata_sha256": "674f5f4ee8785e2a15b4ac9801cba5f97a96422bc26972a52842e154772e98c3",
+      "source_timestamp": "2026-08-02T06:07:05.858826600Z",
+      "terminal_replay_rewards": [
+        -1,
+        1
+      ],
+      "terminal_winner_seat": 1
+    },
+    {
+      "episode_id": 89538443,
+      "expert_result": "loss",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "second",
+        "agent_id": 198937406,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "d6c573dd89bd1319494e25d56e66536c0b68c3db2cf4694f4a63f7423ee2f0bd",
+        "initial_rating": 1060.665567116408,
+        "pilot": "Iliamna",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55175199,
+        "team_id": 16391123,
+        "updated_rating": 1056.343609493747
+      },
+      "opponent": {
+        "agent_id": 198937405,
+        "archetype": "mega_lopunny_ex",
+        "deck_sha256": "01501d644249c08144b169d9af115042260d89f0990e04b81c5aeadfcb7d7b84",
+        "exact_catalog_match": false,
+        "initial_rating": 1071.06040650144,
+        "multiset_jaccard": 0.9672131147540983,
+        "pilot": "宝糕手",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55168898,
+        "team_id": 16383960,
+        "updated_rating": 1075.382364124101
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-89538443-replay.json",
+      "replay_sha256": "71d9cffebfb6e4b40324bacdf5df4310c48cce583777dca291d1014ef159f6e9",
+      "selection_contract_verified": true,
+      "selection_source_id": "iliamna_55175199",
+      "source_metadata_sha256": "2efbdda03905ab01a38bebf9d9da48d60ae61e3fdb493e13d3896547d377fc7a",
+      "source_timestamp": "2026-08-02T14:55:12.868338600Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    },
+    {
+      "episode_id": 89548250,
+      "expert_result": "win",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 198957025,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "d6c573dd89bd1319494e25d56e66536c0b68c3db2cf4694f4a63f7423ee2f0bd",
+        "initial_rating": 1060.94027607808,
+        "pilot": "Iliamna",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55175199,
+        "team_id": 16391123,
+        "updated_rating": 1066.6605878234766
+      },
+      "opponent": {
+        "agent_id": 198957026,
+        "archetype": "grimmsnarl_marnie",
+        "deck_sha256": "c20a8a46f5c635773754f03103652f5c534b13dc622448ed2255a97234c103af",
+        "exact_catalog_match": true,
+        "initial_rating": 1135.9042890697808,
+        "multiset_jaccard": 1.0,
+        "pilot": "sadwat",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55187554,
+        "team_id": 16556346,
+        "updated_rating": 1125.6292613314124
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-89548250-replay.json",
+      "replay_sha256": "7f449ddcca91f20d8c9ac6aa594cb384605dc5b7133fa85a8e303c885e0fc68f",
+      "selection_contract_verified": true,
+      "selection_source_id": "iliamna_55175199",
+      "source_metadata_sha256": "8afa18c6738c36c84c5d611c0c52d4bee6bf514e082546931304f3f80db50202",
+      "source_timestamp": "2026-08-02T16:07:08.047505200Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    },
+    {
+      "episode_id": 89554373,
+      "expert_result": "win",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 198969269,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "d6c573dd89bd1319494e25d56e66536c0b68c3db2cf4694f4a63f7423ee2f0bd",
+        "initial_rating": 1066.6605878234766,
+        "pilot": "Iliamna",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55175199,
+        "team_id": 16391123,
+        "updated_rating": 1071.6805874297625
+      },
+      "opponent": {
+        "agent_id": 198969270,
+        "archetype": "grimmsnarl_marnie",
+        "deck_sha256": "c20a8a46f5c635773754f03103652f5c534b13dc622448ed2255a97234c103af",
+        "exact_catalog_match": true,
+        "initial_rating": 1099.3892803044268,
+        "multiset_jaccard": 1.0,
+        "pilot": "sadwat",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55187554,
+        "team_id": 16556346,
+        "updated_rating": 1092.748377083341
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-89554373-replay.json",
+      "replay_sha256": "b7f1fcfcdc71a98d6eec1de5ab12ad3fadca356f16a11760973aada3b69cd370",
+      "selection_contract_verified": true,
+      "selection_source_id": "iliamna_55175199",
+      "source_metadata_sha256": "254a13ce98faa9c9160be3902b7f7abc0adbaf6f15777fb717f76af76798e1e3",
+      "source_timestamp": "2026-08-02T16:51:09.171131400Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    },
+    {
+      "episode_id": 89555003,
+      "expert_result": "loss",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "second",
+        "agent_id": 198970532,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "d6c573dd89bd1319494e25d56e66536c0b68c3db2cf4694f4a63f7423ee2f0bd",
+        "initial_rating": 1101.515196630479,
+        "pilot": "Iliamna",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55185538,
+        "team_id": 16391123,
+        "updated_rating": 1095.7263762801153
+      },
+      "opponent": {
+        "agent_id": 198970529,
+        "archetype": "grimmsnarl_marnie",
+        "deck_sha256": "c20a8a46f5c635773754f03103652f5c534b13dc622448ed2255a97234c103af",
+        "exact_catalog_match": true,
+        "initial_rating": 1077.6544002702171,
+        "multiset_jaccard": 1.0,
+        "pilot": "Dominic Peel",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55167739,
+        "team_id": 16514272,
+        "updated_rating": 1082.5328108599574
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-89555003-replay.json",
+      "replay_sha256": "bb0bcedecd344af7e1a0c490008f7fc87e8231ffbdadb142712c631fddee19ac",
+      "selection_contract_verified": true,
+      "selection_source_id": "iliamna_55185538",
+      "source_metadata_sha256": "734b77055384bd6f4244b58036c8da1ba5618d0cfe83fd93aa9f9327e130d142",
+      "source_timestamp": "2026-08-02T16:55:12.762178400Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    },
+    {
+      "episode_id": 89582448,
+      "expert_result": "win",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 199025438,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "d6c573dd89bd1319494e25d56e66536c0b68c3db2cf4694f4a63f7423ee2f0bd",
+        "initial_rating": 1112.6950607859012,
+        "pilot": "Iliamna",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55185538,
+        "team_id": 16391123,
+        "updated_rating": 1117.5012672699008
+      },
+      "opponent": {
+        "agent_id": 199025440,
+        "archetype": "grimmsnarl_marnie",
+        "deck_sha256": "c20a8a46f5c635773754f03103652f5c534b13dc622448ed2255a97234c103af",
+        "exact_catalog_match": true,
+        "initial_rating": 1131.5556338240813,
+        "multiset_jaccard": 1.0,
+        "pilot": "Raihan Ramadistra",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55177269,
+        "team_id": 16422241,
+        "updated_rating": 1126.7494273400816
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-89582448-replay.json",
+      "replay_sha256": "ac2a23a34c47bca8231d212f1584ec4140626424878cb7799e79af90c049b0fd",
+      "selection_contract_verified": true,
+      "selection_source_id": "iliamna_55185538",
+      "source_metadata_sha256": "f2cddf7ef362007025695ac9942352ead230d1052a4c6a29c2b544c761238e53",
+      "source_timestamp": "2026-08-02T20:15:11.312342200Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    },
+    {
+      "episode_id": 89591078,
+      "expert_result": "loss",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "second",
+        "agent_id": 199042700,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "d6c573dd89bd1319494e25d56e66536c0b68c3db2cf4694f4a63f7423ee2f0bd",
+        "initial_rating": 1126.042978436228,
+        "pilot": "Iliamna",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55185538,
+        "team_id": 16391123,
+        "updated_rating": 1119.913567520597
+      },
+      "opponent": {
+        "agent_id": 199042699,
+        "archetype": "alakazam_dudunsparce",
+        "deck_sha256": "0bf5955cee6d44a49ff0d50e733aa04af460c7bbca17e8f2ff438d7eaa2540bc",
+        "exact_catalog_match": false,
+        "initial_rating": 1032.7810942225776,
+        "multiset_jaccard": 0.7910447761194029,
+        "pilot": "Abhyuday",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55176220,
+        "team_id": 16379865,
+        "updated_rating": 1038.9105051382085
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-89591078-replay.json",
+      "replay_sha256": "f55dd0e0e2a74fe66b2ab1c1cc43287bdce9713af5426e177868743fe3807581",
+      "selection_contract_verified": true,
+      "selection_source_id": "iliamna_55185538",
+      "source_metadata_sha256": "790efb841355972c7ccbfd4209528d4f47b779f32eaa720280424687f20df557",
+      "source_timestamp": "2026-08-02T21:19:09.147771700Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    },
+    {
+      "episode_id": 89592725,
+      "expert_result": "loss",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "second",
+        "agent_id": 199045994,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "d6c573dd89bd1319494e25d56e66536c0b68c3db2cf4694f4a63f7423ee2f0bd",
+        "initial_rating": 1119.913567520597,
+        "pilot": "Iliamna",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55185538,
+        "team_id": 16391123,
+        "updated_rating": 1115.11370036134
+      },
+      "opponent": {
+        "agent_id": 199045993,
+        "archetype": "grimmsnarl_marnie",
+        "deck_sha256": "c20a8a46f5c635773754f03103652f5c534b13dc622448ed2255a97234c103af",
+        "exact_catalog_match": true,
+        "initial_rating": 1101.427728589557,
+        "multiset_jaccard": 1.0,
+        "pilot": "Dries @ Tufa Labs",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55109984,
+        "team_id": 16531269,
+        "updated_rating": 1106.227595748814
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-89592725-replay.json",
+      "replay_sha256": "3a964128254c21e18c0de38dc92a9606085267f0b55ea350d9a333e1d9c734c6",
+      "selection_contract_verified": true,
+      "selection_source_id": "iliamna_55185538",
+      "source_metadata_sha256": "23725762964e02009bf24af471c062fa9e67f1281b3980374b144dadfb9fe023",
+      "source_timestamp": "2026-08-02T21:31:09.444250700Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    },
+    {
+      "episode_id": 89609836,
+      "expert_result": "loss",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 199080223,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "d6c573dd89bd1319494e25d56e66536c0b68c3db2cf4694f4a63f7423ee2f0bd",
+        "initial_rating": 1087.8730723542726,
+        "pilot": "Iliamna",
+        "reward": -1,
+        "seat": 0,
+        "submission_id": 55185538,
+        "team_id": 16391123,
+        "updated_rating": 1083.9618399318438
+      },
+      "opponent": {
+        "agent_id": 199080224,
+        "archetype": "mega_lopunny_ex",
+        "deck_sha256": "546b39d1d1340529eb93a53907f2d46e15f58297902f0c1a68f2563673df8fc6",
+        "exact_catalog_match": false,
+        "initial_rating": 1124.222009535772,
+        "multiset_jaccard": 0.6438356164383562,
+        "pilot": "Iolzpo + emonga",
+        "reward": 1,
+        "seat": 1,
+        "submission_id": 55157066,
+        "team_id": 16371280,
+        "updated_rating": 1128.1332419582009
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-89609836-replay.json",
+      "replay_sha256": "3c20f43611165452209a5228786a66d5fbc6e9efa4b45dcce53a04ef05a73252",
+      "selection_contract_verified": true,
+      "selection_source_id": "iliamna_55185538",
+      "source_metadata_sha256": "27cc3a0683fb821b73da3856fa77c08801de9a8f8bdd256c7e1fa172c4d7f8d5",
+      "source_timestamp": "2026-08-02T23:35:12.834737300Z",
+      "terminal_replay_rewards": [
+        -1,
+        1
+      ],
+      "terminal_winner_seat": 1
+    },
+    {
+      "episode_id": 89609846,
+      "expert_result": "loss",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "second",
+        "agent_id": 199080244,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "d6c573dd89bd1319494e25d56e66536c0b68c3db2cf4694f4a63f7423ee2f0bd",
+        "initial_rating": 1105.0333623725653,
+        "pilot": "Iliamna",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55185538,
+        "team_id": 16391123,
+        "updated_rating": 1100.2906356823232
+      },
+      "opponent": {
+        "agent_id": 199080243,
+        "archetype": "mega_kangaskhan_toolbox",
+        "deck_sha256": "f50fa3a23cdf21be7cf7d3f558b8ff0b82e8d4e7ba8f61b7b4cacc1a0080c16a",
+        "exact_catalog_match": true,
+        "initial_rating": 1089.9345565320425,
+        "multiset_jaccard": 1.0,
+        "pilot": "James Cox & Henry Chao",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55188658,
+        "team_id": 16375647,
+        "updated_rating": 1094.6772832222846
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-89609846-replay.json",
+      "replay_sha256": "887c6028a31f5acde90cac4c64fe723f0be5bc159f440c4725027e43abf9da18",
+      "selection_contract_verified": true,
+      "selection_source_id": "iliamna_55185538",
+      "source_metadata_sha256": "ae8abbc105fcd95a284f94bc3e3a533aae3b1611f1c192148e97aceec454009d",
+      "source_timestamp": "2026-08-02T23:35:12.850379900Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    },
+    {
+      "episode_id": 90346246,
+      "expert_result": "win",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "second",
+        "agent_id": 200559086,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "ccf805e7b3088120c2787270014dc24cafd39b948e2e6d94a6c5b8859138bc71",
+        "initial_rating": 927.0917116668373,
+        "pilot": "BluesLeeTW",
+        "reward": 1,
+        "seat": 1,
+        "submission_id": 55288239,
+        "team_id": 16382115,
+        "updated_rating": 965.3297739186911
+      },
+      "opponent": {
+        "agent_id": 200559085,
+        "archetype": "alakazam_dudunsparce",
+        "deck_sha256": "3f4515092dc59df397f365a9b79c7cf0c1cb73b9aa38bc47c1b18e9df4c2fdaf",
+        "exact_catalog_match": true,
+        "initial_rating": 883.0171960605106,
+        "multiset_jaccard": 1.0,
+        "pilot": "Dries @ Tufa Labs",
+        "reward": -1,
+        "seat": 0,
+        "submission_id": 55267497,
+        "team_id": 16531269,
+        "updated_rating": 879.5738787074216
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-90346246-replay.json",
+      "replay_sha256": "357282127d6987aedf8aebbf6a49b8fbcf927d5c4b94ce7c34c9f6d8330a0d66",
+      "selection_contract_verified": true,
+      "selection_source_id": "bluesleetw_55288239",
+      "source_metadata_sha256": "a24ac8d47fafc6e673b4008ce8d45988496fbcfe1b66aa132a21144ff01b4bc2",
+      "source_timestamp": "2026-08-06T04:45:31.569305100Z",
+      "terminal_replay_rewards": [
+        -1,
+        1
+      ],
+      "terminal_winner_seat": 1
+    },
+    {
+      "episode_id": 90356628,
+      "expert_result": "win",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 200579853,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "61c89cc57288dfcdba5b082e79373d4d3925e29b297e1fee816c57db9ac58604",
+        "initial_rating": 866.0356331641631,
+        "pilot": "Magist",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55289327,
+        "team_id": 16378507,
+        "updated_rating": 896.1503547926479
+      },
+      "opponent": {
+        "agent_id": 200579854,
+        "archetype": "alakazam_dudunsparce",
+        "deck_sha256": "3f4515092dc59df397f365a9b79c7cf0c1cb73b9aa38bc47c1b18e9df4c2fdaf",
+        "exact_catalog_match": true,
+        "initial_rating": 838.6074389603091,
+        "multiset_jaccard": 1.0,
+        "pilot": "Takumu Hata",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55287436,
+        "team_id": 16381537,
+        "updated_rating": 830.6306943342366
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-90356628-replay.json",
+      "replay_sha256": "509a76efeb871e3c799566951cd4171de01759994e751057e73505ecddbc3fdb",
+      "selection_contract_verified": true,
+      "selection_source_id": "magist_55289327",
+      "source_metadata_sha256": "4e8eacb0b9a90c15d22885280516ab55f4c5bdeaaaa38841454083a126d9e68d",
+      "source_timestamp": "2026-08-06T05:41:31.373563100Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    },
+    {
+      "episode_id": 90369388,
+      "expert_result": "loss",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 200605300,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "ccf805e7b3088120c2787270014dc24cafd39b948e2e6d94a6c5b8859138bc71",
+        "initial_rating": 912.19086291704,
+        "pilot": "BluesLeeTW",
+        "reward": -1,
+        "seat": 0,
+        "submission_id": 55288239,
+        "team_id": 16382115,
+        "updated_rating": 904.2163939846739
+      },
+      "opponent": {
+        "agent_id": 200605346,
+        "archetype": "kangaskhan_crustle",
+        "deck_sha256": "03822cc73f7886a42fbfe086d205d4a37f24fc65c443ce1574363bbf200542bd",
+        "exact_catalog_match": false,
+        "initial_rating": 909.3883175859988,
+        "multiset_jaccard": 0.5584415584415584,
+        "pilot": "MOP Capital",
+        "reward": 1,
+        "seat": 1,
+        "submission_id": 55251809,
+        "team_id": 16594494,
+        "updated_rating": 913.8808369678004
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-90369388-replay.json",
+      "replay_sha256": "98e2ec9942165ec0c8d300b7c6d3b2b0b397b2e6802cd53e961963d7fb4c0d21",
+      "selection_contract_verified": true,
+      "selection_source_id": "bluesleetw_55288239",
+      "source_metadata_sha256": "7cfbb62f0155365355645fd9c9b00903faa002dbceb00ad09f5185e0745b6fef",
+      "source_timestamp": "2026-08-06T06:49:32.892891300Z",
+      "terminal_replay_rewards": [
+        -1,
+        1
+      ],
+      "terminal_winner_seat": 1
+    },
+    {
+      "episode_id": 90374599,
+      "expert_result": "win",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "second",
+        "agent_id": 200615804,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "61c89cc57288dfcdba5b082e79373d4d3925e29b297e1fee816c57db9ac58604",
+        "initial_rating": 887.3766404477223,
+        "pilot": "Magist",
+        "reward": 1,
+        "seat": 1,
+        "submission_id": 55289327,
+        "team_id": 16378507,
+        "updated_rating": 895.5282906861371
+      },
+      "opponent": {
+        "agent_id": 200615803,
+        "archetype": "other",
+        "deck_sha256": "fdeb93b5eb27a704aa15051c8d709e7eccee5b279a7f1ba54d5cc3a34028899e",
+        "exact_catalog_match": false,
+        "initial_rating": 887.5093051667992,
+        "multiset_jaccard": null,
+        "pilot": "volume_pomeranian",
+        "reward": -1,
+        "seat": 0,
+        "submission_id": 55290110,
+        "team_id": 16432117,
+        "updated_rating": 874.9642881798587
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-90374599-replay.json",
+      "replay_sha256": "1083d5196d9e17852f0940d968912394476abd7fb22b18113b7897e3a917d12b",
+      "selection_contract_verified": true,
+      "selection_source_id": "magist_55289327",
+      "source_metadata_sha256": "364af35011cb1820ddbf2691ec20a337065e3d5737249a0af854aacc9c562c2d",
+      "source_timestamp": "2026-08-06T07:17:31.718934900Z",
+      "terminal_replay_rewards": [
+        -1,
+        1
+      ],
+      "terminal_winner_seat": 1
+    },
+    {
+      "episode_id": 90375334,
+      "expert_result": "win",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "second",
+        "agent_id": 200617274,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "61c89cc57288dfcdba5b082e79373d4d3925e29b297e1fee816c57db9ac58604",
+        "initial_rating": 895.5282906861371,
+        "pilot": "Magist",
+        "reward": 1,
+        "seat": 1,
+        "submission_id": 55289327,
+        "team_id": 16378507,
+        "updated_rating": 903.6065534929758
+      },
+      "opponent": {
+        "agent_id": 200617273,
+        "archetype": "alakazam_dudunsparce",
+        "deck_sha256": "3f4515092dc59df397f365a9b79c7cf0c1cb73b9aa38bc47c1b18e9df4c2fdaf",
+        "exact_catalog_match": true,
+        "initial_rating": 895.4299996170259,
+        "multiset_jaccard": 1.0,
+        "pilot": "tokk",
+        "reward": -1,
+        "seat": 0,
+        "submission_id": 55282075,
+        "team_id": 16490418,
+        "updated_rating": 889.9657474899943
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-90375334-replay.json",
+      "replay_sha256": "f8bfb9b18e0ef48137cafb9f59b0f335580fc447286160c1635df6bd08cbb142",
+      "selection_contract_verified": true,
+      "selection_source_id": "magist_55289327",
+      "source_metadata_sha256": "e49915bf5e5914fd0e16773823d74e27bf11bcd3707b71fa8c3d2de38c456a32",
+      "source_timestamp": "2026-08-06T07:21:31.808633500Z",
+      "terminal_replay_rewards": [
+        -1,
+        1
+      ],
+      "terminal_winner_seat": 1
+    },
+    {
+      "episode_id": 90376815,
+      "expert_result": "win",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "second",
+        "agent_id": 200620251,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "61c89cc57288dfcdba5b082e79373d4d3925e29b297e1fee816c57db9ac58604",
+        "initial_rating": 900.5290613047114,
+        "pilot": "Magist",
+        "reward": 1,
+        "seat": 1,
+        "submission_id": 55289327,
+        "team_id": 16378507,
+        "updated_rating": 907.4629154147548
+      },
+      "opponent": {
+        "agent_id": 200620237,
+        "archetype": "dragapult_ex",
+        "deck_sha256": "07bedfffbfad6ecb31733acc54c8110bb1934d8b1dc98bd9c4d37f6ba5c5e725",
+        "exact_catalog_match": true,
+        "initial_rating": 881.7234794355826,
+        "multiset_jaccard": 1.0,
+        "pilot": "Attacker",
+        "reward": -1,
+        "seat": 0,
+        "submission_id": 55200073,
+        "team_id": 16609882,
+        "updated_rating": 877.5697980074781
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-90376815-replay.json",
+      "replay_sha256": "7e79f084270d0e4fe6d3337a5fffd2b25bda49a208bdefcc3314be5e3224c895",
+      "selection_contract_verified": true,
+      "selection_source_id": "magist_55289327",
+      "source_metadata_sha256": "5f41c5f067a3eafa8f9adf16f3e30dba0d3df31fb5b050e6bf85d3192e35c756",
+      "source_timestamp": "2026-08-06T07:29:32.475234900Z",
+      "terminal_replay_rewards": [
+        -1,
+        1
+      ],
+      "terminal_winner_seat": 1
+    },
+    {
+      "episode_id": 90378450,
+      "expert_result": "win",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 200623505,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "ccf805e7b3088120c2787270014dc24cafd39b948e2e6d94a6c5b8859138bc71",
+        "initial_rating": 941.6526079281853,
+        "pilot": "BluesLeeTW",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55288239,
+        "team_id": 16382115,
+        "updated_rating": 947.134904478606
+      },
+      "opponent": {
+        "agent_id": 200623506,
+        "archetype": "ogerpon",
+        "deck_sha256": "e40278fd83d971c280b0fb9cd14d5e45cfe63a45c647741eb937440b4b19be34",
+        "exact_catalog_match": true,
+        "initial_rating": 921.309915474399,
+        "multiset_jaccard": 1.0,
+        "pilot": "tktkyamyam",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55283348,
+        "team_id": 16375404,
+        "updated_rating": 916.0192745830674
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-90378450-replay.json",
+      "replay_sha256": "abb475f4b86518f25a34b87972420019436ecc68bce91b57e022c8d2b27e0dfa",
+      "selection_contract_verified": true,
+      "selection_source_id": "bluesleetw_55288239",
+      "source_metadata_sha256": "a1b3de96d78811b7225adf7ee90f106b6e116a85492d1b072628b7535f41ba38",
+      "source_timestamp": "2026-08-06T07:37:31.911901500Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    },
+    {
+      "episode_id": 90392394,
+      "expert_result": "loss",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "second",
+        "agent_id": 200651403,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "ccf805e7b3088120c2787270014dc24cafd39b948e2e6d94a6c5b8859138bc71",
+        "initial_rating": 950.0742599392157,
+        "pilot": "BluesLeeTW",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55288239,
+        "team_id": 16382115,
+        "updated_rating": 944.9378995018752
+      },
+      "opponent": {
+        "agent_id": 200651399,
+        "archetype": "kangaskhan_crustle",
+        "deck_sha256": "3b8168a28f4eb991252e28da4a89b9b4296534b678dc7420b48bca5169cf9a2c",
+        "exact_catalog_match": false,
+        "initial_rating": 961.3496661824656,
+        "multiset_jaccard": 0.9047619047619048,
+        "pilot": "aaa",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55292400,
+        "team_id": 16378476,
+        "updated_rating": 975.1742735591951
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-90392394-replay.json",
+      "replay_sha256": "bf11a693f87e318933de07576d5a444b5b50d015d534bc7060a0590d59587eb7",
+      "selection_contract_verified": true,
+      "selection_source_id": "bluesleetw_55288239",
+      "source_metadata_sha256": "58f296bdb2c147a38eb7c007b5e7b8e5caf04296954bb5190602d3471fbbcec6",
+      "source_timestamp": "2026-08-06T08:53:36.737871600Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    },
+    {
+      "episode_id": 90392469,
+      "expert_result": "loss",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 200651553,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "ccf805e7b3088120c2787270014dc24cafd39b948e2e6d94a6c5b8859138bc71",
+        "initial_rating": 955.8666290143583,
+        "pilot": "BluesLeeTW",
+        "reward": -1,
+        "seat": 0,
+        "submission_id": 55288239,
+        "team_id": 16382115,
+        "updated_rating": 950.0742599392157
+      },
+      "opponent": {
+        "agent_id": 200651554,
+        "archetype": "grimmsnarl_marnie",
+        "deck_sha256": "c20a8a46f5c635773754f03103652f5c534b13dc622448ed2255a97234c103af",
+        "exact_catalog_match": true,
+        "initial_rating": 943.8289734649901,
+        "multiset_jaccard": 1.0,
+        "pilot": "Pokemon Fan",
+        "reward": 1,
+        "seat": 1,
+        "submission_id": 55290927,
+        "team_id": 16505594,
+        "updated_rating": 952.8808223545288
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-90392469-replay.json",
+      "replay_sha256": "4075fe5dc94ff3d270e00ab1c8816ae768e99cb1967f4bdf53b5e38bdce990ca",
+      "selection_contract_verified": true,
+      "selection_source_id": "bluesleetw_55288239",
+      "source_metadata_sha256": "ce14ab217d06e79d5fa08c4dc0e3e72af8070a108e0bc95466ff6fa6a07c2f72",
+      "source_timestamp": "2026-08-06T08:53:36.923066500Z",
+      "terminal_replay_rewards": [
+        -1,
+        1
+      ],
+      "terminal_winner_seat": 1
+    },
+    {
+      "episode_id": 90414204,
+      "expert_result": "loss",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 200695019,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "ccf805e7b3088120c2787270014dc24cafd39b948e2e6d94a6c5b8859138bc71",
+        "initial_rating": 950.6924535351026,
+        "pilot": "BluesLeeTW",
+        "reward": -1,
+        "seat": 0,
+        "submission_id": 55288239,
+        "team_id": 16382115,
+        "updated_rating": 945.3963591909754
+      },
+      "opponent": {
+        "agent_id": 200695020,
+        "archetype": "grimmsnarl_marnie",
+        "deck_sha256": "c20a8a46f5c635773754f03103652f5c534b13dc622448ed2255a97234c103af",
+        "exact_catalog_match": true,
+        "initial_rating": 927.5541681932178,
+        "multiset_jaccard": 1.0,
+        "pilot": "Brahim",
+        "reward": 1,
+        "seat": 1,
+        "submission_id": 55293982,
+        "team_id": 16440585,
+        "updated_rating": 936.5671231868132
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-90414204-replay.json",
+      "replay_sha256": "11b018fe5e28a9df22b87e5227ce6b36cbf8c2b1ac0ab53de5e47b525717d21c",
+      "selection_contract_verified": true,
+      "selection_source_id": "bluesleetw_55288239",
+      "source_metadata_sha256": "445f2be2aa38864bc0eb76827901308d50362a99a0d16e053478bccc11abce98",
+      "source_timestamp": "2026-08-06T10:49:42.505911900Z",
+      "terminal_replay_rewards": [
+        -1,
+        1
+      ],
+      "terminal_winner_seat": 1
+    },
+    {
+      "episode_id": 90444414,
+      "expert_result": "loss",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 200755457,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "61c89cc57288dfcdba5b082e79373d4d3925e29b297e1fee816c57db9ac58604",
+        "initial_rating": 917.0202319313381,
+        "pilot": "Magist",
+        "reward": -1,
+        "seat": 0,
+        "submission_id": 55289327,
+        "team_id": 16378507,
+        "updated_rating": 910.5537224097234
+      },
+      "opponent": {
+        "agent_id": 200755458,
+        "archetype": "kangaskhan_crustle",
+        "deck_sha256": "ca60839cba73b0054f0854952ec3a5e98cb8178db1f71e264aafceb44ffd7adb",
+        "exact_catalog_match": true,
+        "initial_rating": 850.31638764324,
+        "multiset_jaccard": 1.0,
+        "pilot": "M Sato",
+        "reward": 1,
+        "seat": 1,
+        "submission_id": 55298014,
+        "team_id": 16385817,
+        "updated_rating": 870.2218501808434
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-90444414-replay.json",
+      "replay_sha256": "a4c414cc0fb4b82d16d0a8b4948b58fd58ce19d68c98b431a4de4c651e60edb0",
+      "selection_contract_verified": true,
+      "selection_source_id": "magist_55289327",
+      "source_metadata_sha256": "a851e6a155e3e829777f443432c4c33c263fcd4a37ec8be18087f6fb5fe01c4b",
+      "source_timestamp": "2026-08-06T13:29:42.795514700Z",
+      "terminal_replay_rewards": [
+        -1,
+        1
+      ],
+      "terminal_winner_seat": 1
+    },
+    {
+      "episode_id": 90461218,
+      "expert_result": "loss",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 200789064,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "61c89cc57288dfcdba5b082e79373d4d3925e29b297e1fee816c57db9ac58604",
+        "initial_rating": 916.5709104580559,
+        "pilot": "Magist",
+        "reward": -1,
+        "seat": 0,
+        "submission_id": 55289327,
+        "team_id": 16378507,
+        "updated_rating": 910.8367115165019
+      },
+      "opponent": {
+        "agent_id": 200789084,
+        "archetype": "alakazam_dudunsparce",
+        "deck_sha256": "05a3832a57b6f47488e5c852959522ac55e39c1635937b24cab0601587e75118",
+        "exact_catalog_match": false,
+        "initial_rating": 874.0115009439942,
+        "multiset_jaccard": 0.7647058823529411,
+        "pilot": "PhN01",
+        "reward": 1,
+        "seat": 1,
+        "submission_id": 55299808,
+        "team_id": 16610275,
+        "updated_rating": 894.3189317506834
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-90461218-replay.json",
+      "replay_sha256": "072de723923d0df7be8f2dd0e540bee1ffad35da5548fe0263109b65fa2fc081",
+      "selection_contract_verified": true,
+      "selection_source_id": "magist_55289327",
+      "source_metadata_sha256": "6db36c80fade2b1a7b1e0223bb94f2048521d63dce99d216795210b1fa73f421",
+      "source_timestamp": "2026-08-06T14:58:12.277918100Z",
+      "terminal_replay_rewards": [
+        -1,
+        1
+      ],
+      "terminal_winner_seat": 1
+    },
+    {
+      "episode_id": 90477157,
+      "expert_result": "win",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "second",
+        "agent_id": 200820950,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "61c89cc57288dfcdba5b082e79373d4d3925e29b297e1fee816c57db9ac58604",
+        "initial_rating": 910.8367115165019,
+        "pilot": "Magist",
+        "reward": 1,
+        "seat": 1,
+        "submission_id": 55289327,
+        "team_id": 16378507,
+        "updated_rating": 916.5195545757008
+      },
+      "opponent": {
+        "agent_id": 200820949,
+        "archetype": "grimmsnarl_marnie",
+        "deck_sha256": "c20a8a46f5c635773754f03103652f5c534b13dc622448ed2255a97234c103af",
+        "exact_catalog_match": true,
+        "initial_rating": 955.9818515616662,
+        "multiset_jaccard": 1.0,
+        "pilot": "masspeaks",
+        "reward": -1,
+        "seat": 0,
+        "submission_id": 55301726,
+        "team_id": 16553454,
+        "updated_rating": 935.8784094858926
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-90477157-replay.json",
+      "replay_sha256": "9acc1842ed62777de90ec8fbed757cd7a6302e73277be6011527777000984ce9",
+      "selection_contract_verified": true,
+      "selection_source_id": "magist_55289327",
+      "source_metadata_sha256": "8d73fe7f952cac88db01fee83dee6261bb4d3d82edfe2e449ef5c0441a56c4f9",
+      "source_timestamp": "2026-08-06T16:38:17.562144Z",
+      "terminal_replay_rewards": [
+        -1,
+        1
+      ],
+      "terminal_winner_seat": 1
+    },
+    {
+      "episode_id": 90516264,
+      "expert_result": "win",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "second",
+        "agent_id": 200899176,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "61c89cc57288dfcdba5b082e79373d4d3925e29b297e1fee816c57db9ac58604",
+        "initial_rating": 912.3512450394348,
+        "pilot": "Magist",
+        "reward": 1,
+        "seat": 1,
+        "submission_id": 55289327,
+        "team_id": 16378507,
+        "updated_rating": 917.8380047148466
+      },
+      "opponent": {
+        "agent_id": 200899175,
+        "archetype": "grimmsnarl_marnie",
+        "deck_sha256": "c20a8a46f5c635773754f03103652f5c534b13dc622448ed2255a97234c103af",
+        "exact_catalog_match": true,
+        "initial_rating": 957.6040400154684,
+        "multiset_jaccard": 1.0,
+        "pilot": "Dries @ Tufa Labs",
+        "reward": -1,
+        "seat": 0,
+        "submission_id": 55304054,
+        "team_id": 16531269,
+        "updated_rating": 948.9032153263294
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-90516264-replay.json",
+      "replay_sha256": "e61d3190259ebd75abdd72d4f217d84451357b9193256842bc2aec46400832f8",
+      "selection_contract_verified": true,
+      "selection_source_id": "magist_55289327",
+      "source_metadata_sha256": "d2b3eead4659b90398fe09d07b32a21d13e99d04ff9a2fef5e0eb8d91eec6bc3",
+      "source_timestamp": "2026-08-06T20:09:22.112998Z",
+      "terminal_replay_rewards": [
+        -1,
+        1
+      ],
+      "terminal_winner_seat": 1
+    },
+    {
+      "episode_id": 90557740,
+      "expert_result": "win",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "second",
+        "agent_id": 200982142,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "61c89cc57288dfcdba5b082e79373d4d3925e29b297e1fee816c57db9ac58604",
+        "initial_rating": 908.2517174832351,
+        "pilot": "Magist",
+        "reward": 1,
+        "seat": 1,
+        "submission_id": 55289327,
+        "team_id": 16378507,
+        "updated_rating": 913.2718717688439
+      },
+      "opponent": {
+        "agent_id": 200982141,
+        "archetype": "cynthias_garchomp_ex",
+        "deck_sha256": "23a19d608736b49b456d1716f6fe884666b4e0ff8a877529303eba75261b8bc8",
+        "exact_catalog_match": false,
+        "initial_rating": 957.1905089598495,
+        "multiset_jaccard": 0.9672131147540983,
+        "pilot": "flaty",
+        "reward": -1,
+        "seat": 0,
+        "submission_id": 55308209,
+        "team_id": 16425415,
+        "updated_rating": 931.229045319183
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-90557740-replay.json",
+      "replay_sha256": "a4bbba3a299076a70a8e46c611a3c8e95ead5359385f23d3429b82cdb78b8347",
+      "selection_contract_verified": true,
+      "selection_source_id": "magist_55289327",
+      "source_metadata_sha256": "cab1683065a5828a37bc68d99ac9965a97c165d078d056a292be42c721516918",
+      "source_timestamp": "2026-08-06T23:46:01.159765300Z",
+      "terminal_replay_rewards": [
+        -1,
+        1
+      ],
+      "terminal_winner_seat": 1
+    },
+    {
+      "episode_id": 90561875,
+      "expert_result": "win",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 200990413,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "61c89cc57288dfcdba5b082e79373d4d3925e29b297e1fee816c57db9ac58604",
+        "initial_rating": 917.4711596533182,
+        "pilot": "Magist",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55289327,
+        "team_id": 16378507,
+        "updated_rating": 922.2922487353679
+      },
+      "opponent": {
+        "agent_id": 200990414,
+        "archetype": "dipplin_thwackey",
+        "deck_sha256": "d6c573dd89bd1319494e25d56e66536c0b68c3db2cf4694f4a63f7423ee2f0bd",
+        "exact_catalog_match": true,
+        "initial_rating": 941.9729161475221,
+        "multiset_jaccard": 1.0,
+        "pilot": "Gijs Smit",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55307558,
+        "team_id": 16489999,
+        "updated_rating": 931.3280954211117
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-90561875-replay.json",
+      "replay_sha256": "de778c297a1f307aa717ba0bfb8f60a5b509a4497420a8acc22562829b99f003",
+      "selection_contract_verified": true,
+      "selection_source_id": "magist_55289327",
+      "source_metadata_sha256": "7ad22b066ca7bb20ee79405728b1a86c2a6f8754a39c66f705cfba9d61fc46a7",
+      "source_timestamp": "2026-08-07T00:06:02.600951100Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    },
+    {
+      "episode_id": 90590633,
+      "expert_result": "win",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "second",
+        "agent_id": 201047942,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "61c89cc57288dfcdba5b082e79373d4d3925e29b297e1fee816c57db9ac58604",
+        "initial_rating": 932.0953192345404,
+        "pilot": "Magist",
+        "reward": 1,
+        "seat": 1,
+        "submission_id": 55289327,
+        "team_id": 16378507,
+        "updated_rating": 936.3402181134663
+      },
+      "opponent": {
+        "agent_id": 201047941,
+        "archetype": "grimmsnarl_marnie",
+        "deck_sha256": "c20a8a46f5c635773754f03103652f5c534b13dc622448ed2255a97234c103af",
+        "exact_catalog_match": true,
+        "initial_rating": 980.4651867320468,
+        "multiset_jaccard": 1.0,
+        "pilot": "senkin13",
+        "reward": -1,
+        "seat": 0,
+        "submission_id": 55312041,
+        "team_id": 16372696,
+        "updated_rating": 897.2131903514786
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-90590633-replay.json",
+      "replay_sha256": "ac54e69666df89b2ad57f48a93a1c44d84faef36911183c691de0786cbba14c7",
+      "selection_contract_verified": true,
+      "selection_source_id": "magist_55289327",
+      "source_metadata_sha256": "27b20ba892fe8c5316ef578452adad9f014482a8b5d54802814efcb4bc92ee03",
+      "source_timestamp": "2026-08-07T02:35:43.983593600Z",
+      "terminal_replay_rewards": [
+        -1,
+        1
+      ],
+      "terminal_winner_seat": 1
+    },
+    {
+      "episode_id": 90591450,
+      "expert_result": "win",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 201049573,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "61c89cc57288dfcdba5b082e79373d4d3925e29b297e1fee816c57db9ac58604",
+        "initial_rating": 936.3402181134663,
+        "pilot": "Magist",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55289327,
+        "team_id": 16378507,
+        "updated_rating": 939.9933744550247
+      },
+      "opponent": {
+        "agent_id": 201049574,
+        "archetype": "grimmsnarl_marnie",
+        "deck_sha256": "c20a8a46f5c635773754f03103652f5c534b13dc622448ed2255a97234c103af",
+        "exact_catalog_match": true,
+        "initial_rating": 923.0418815150025,
+        "multiset_jaccard": 1.0,
+        "pilot": "Funky",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55312011,
+        "team_id": 16374884,
+        "updated_rating": 864.1401220508963
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-90591450-replay.json",
+      "replay_sha256": "7e2ed070cda355b2f38768ad562c863789ac759998e8622ede354b814d0a8c6c",
+      "selection_contract_verified": true,
+      "selection_source_id": "magist_55289327",
+      "source_metadata_sha256": "c2c37b16e75e04c19fbe8f62be7c433ff912dae6a30aa5cbb781ca1a34596319",
+      "source_timestamp": "2026-08-07T02:39:44.337587100Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    },
+    {
+      "episode_id": 91657612,
+      "expert_result": "win",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 203182220,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "b86b5b31208135f9bf188990981ee008edd65b0dbc335e7961d8dbf7b8ccfcb5",
+        "initial_rating": 929.4722154837356,
+        "pilot": "BluesLeeTW",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55404784,
+        "team_id": 16382115,
+        "updated_rating": 940.0318357408642
+      },
+      "opponent": {
+        "agent_id": 203182222,
+        "archetype": "team_rockets_mewtwo_ex",
+        "deck_sha256": "47e3d1a3d474ae078c48236b4f2c5b65decee3e14bdf1f27cfbdfc365cec67bc",
+        "exact_catalog_match": false,
+        "initial_rating": 940.1097039677933,
+        "multiset_jaccard": 0.7391304347826086,
+        "pilot": "【ＡＩと共に、ＡＩと戦う】tubotu",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55396374,
+        "team_id": 16372993,
+        "updated_rating": 933.9247613327844
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-91657612-replay.json",
+      "replay_sha256": "87f317c68f980da55393105ee3f6c40e4c6a699b226e81b1aae6060af284d7d8",
+      "selection_contract_verified": true,
+      "selection_source_id": "bluesleetw_55404784",
+      "source_metadata_sha256": "a951280b21d74e15a5c1940dafe75a130e14d75e51509787509c78d7f07541af",
+      "source_timestamp": "2026-08-10T13:12:08.182638600Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    },
+    {
+      "episode_id": 91740201,
+      "expert_result": "win",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 203347419,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "b86b5b31208135f9bf188990981ee008edd65b0dbc335e7961d8dbf7b8ccfcb5",
+        "initial_rating": 944.7118693369935,
+        "pilot": "BluesLeeTW",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55404784,
+        "team_id": 16382115,
+        "updated_rating": 950.3702372513139
+      },
+      "opponent": {
+        "agent_id": 203347420,
+        "archetype": "dragapult_ex",
+        "deck_sha256": "07bedfffbfad6ecb31733acc54c8110bb1934d8b1dc98bd9c4d37f6ba5c5e725",
+        "exact_catalog_match": true,
+        "initial_rating": 941.0209389932579,
+        "multiset_jaccard": 1.0,
+        "pilot": "宝糕手",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55414188,
+        "team_id": 16383960,
+        "updated_rating": 897.1488392891035
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-91740201-replay.json",
+      "replay_sha256": "da6aedd7045c4251a76120ff9504c8c38935e770829acc7ca1f1ca7131aad85e",
+      "selection_contract_verified": true,
+      "selection_source_id": "bluesleetw_55404784",
+      "source_metadata_sha256": "a3d6e01ce0ceaa039a657b046d179714a927c358cde0cc2fa11bf21c5ce09a93",
+      "source_timestamp": "2026-08-10T19:24:08.126053800Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    },
+    {
+      "episode_id": 91835939,
+      "expert_result": "loss",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 203538923,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "b86b5b31208135f9bf188990981ee008edd65b0dbc335e7961d8dbf7b8ccfcb5",
+        "initial_rating": 963.191915183195,
+        "pilot": "BluesLeeTW",
+        "reward": -1,
+        "seat": 0,
+        "submission_id": 55404784,
+        "team_id": 16382115,
+        "updated_rating": 958.022414633571
+      },
+      "opponent": {
+        "agent_id": 203538924,
+        "archetype": "dragapult_ex",
+        "deck_sha256": "07bedfffbfad6ecb31733acc54c8110bb1934d8b1dc98bd9c4d37f6ba5c5e725",
+        "exact_catalog_match": true,
+        "initial_rating": 958.6055754958008,
+        "multiset_jaccard": 1.0,
+        "pilot": "Marshall Maximizer",
+        "reward": 1,
+        "seat": 1,
+        "submission_id": 55419254,
+        "team_id": 16421599,
+        "updated_rating": 968.9476311361383
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-91835939-replay.json",
+      "replay_sha256": "c040956513297ac9da74691883117e924869d5506a6de1e626f53d94bf8ac524",
+      "selection_contract_verified": true,
+      "selection_source_id": "bluesleetw_55404784",
+      "source_metadata_sha256": "21cbf26e646021dcd0ff8399248c83772ebc80070a066cb559c04d71879f32db",
+      "source_timestamp": "2026-08-11T02:25:51.246342900Z",
+      "terminal_replay_rewards": [
+        -1,
+        1
+      ],
+      "terminal_winner_seat": 1
+    },
+    {
+      "episode_id": 91903167,
+      "expert_result": "loss",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "second",
+        "agent_id": 203673394,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "b86b5b31208135f9bf188990981ee008edd65b0dbc335e7961d8dbf7b8ccfcb5",
+        "initial_rating": 968.6746995203911,
+        "pilot": "BluesLeeTW",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55404784,
+        "team_id": 16382115,
+        "updated_rating": 965.2354602885666
+      },
+      "opponent": {
+        "agent_id": 203673393,
+        "archetype": "grimmsnarl_marnie",
+        "deck_sha256": "c20a8a46f5c635773754f03103652f5c534b13dc622448ed2255a97234c103af",
+        "exact_catalog_match": true,
+        "initial_rating": 1050.0043683063957,
+        "multiset_jaccard": 1.0,
+        "pilot": "Raihan Ramadistra",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55412805,
+        "team_id": 16422241,
+        "updated_rating": 1053.2474379688883
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-91903167-replay.json",
+      "replay_sha256": "5496a5c264c05fa5e460e7ce2854b3afe95c00be0d670bf13444de774a4df68d",
+      "selection_contract_verified": true,
+      "selection_source_id": "bluesleetw_55404784",
+      "source_metadata_sha256": "1b2507fb8e371dc78543b9701e9465d0471a59ab1e0884ae4614ad61b0c12e17",
+      "source_timestamp": "2026-08-11T07:13:51.117253Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    },
+    {
+      "episode_id": 91948588,
+      "expert_result": "loss",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 203764245,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 1,
+          "thwackey": 4
+        },
+        "deck_family": "rillaboom_dipplin",
+        "deck_sha256": "a23b89031a0c3a384c860e8be483be3a7264d25ee5737fc5d511627ed5bd0f9d",
+        "initial_rating": 910.9549597968919,
+        "pilot": "パチリス",
+        "reward": -1,
+        "seat": 0,
+        "submission_id": 55429378,
+        "team_id": 16601361,
+        "updated_rating": 885.9287517027354
+      },
+      "opponent": {
+        "agent_id": 203764249,
+        "archetype": "dragapult_ex",
+        "deck_sha256": "1ad4871bb14dbee0800c50f667a3b3e55d73332b5a495a527db23e79fbee529b",
+        "exact_catalog_match": false,
+        "initial_rating": 1031.3659886077824,
+        "multiset_jaccard": 0.7910447761194029,
+        "pilot": "RtoABC",
+        "reward": 1,
+        "seat": 1,
+        "submission_id": 55427852,
+        "team_id": 16371723,
+        "updated_rating": 1037.624671764054
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-91948588-replay.json",
+      "replay_sha256": "e08ccbf8c1f6be6594e016b53f2f9965853b632bae8e0046e5cbbc4ddf237851",
+      "selection_contract_verified": true,
+      "selection_source_id": "pachirisu_55429378",
+      "source_metadata_sha256": "a4c0877713af276ee7baa439e64c114d70475f8e384a04dd0e6609f192047fae",
+      "source_timestamp": "2026-08-11T10:29:50.621276400Z",
+      "terminal_replay_rewards": [
+        -1,
+        1
+      ],
+      "terminal_winner_seat": 1
+    },
+    {
+      "episode_id": 91952376,
+      "expert_result": "win",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 203771829,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 1,
+          "thwackey": 4
+        },
+        "deck_family": "rillaboom_dipplin",
+        "deck_sha256": "a23b89031a0c3a384c860e8be483be3a7264d25ee5737fc5d511627ed5bd0f9d",
+        "initial_rating": 924.0392685503938,
+        "pilot": "パチリス",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55429378,
+        "team_id": 16601361,
+        "updated_rating": 958.0770787792869
+      },
+      "opponent": {
+        "agent_id": 203771830,
+        "archetype": "other",
+        "deck_sha256": "5b1e19a2e0256f12e1ac27701e847d0ec569cec89c15edac8316cdc2a826a32b",
+        "exact_catalog_match": false,
+        "initial_rating": 957.4671083954232,
+        "multiset_jaccard": null,
+        "pilot": "Abhyuday",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55322389,
+        "team_id": 16379865,
+        "updated_rating": 952.8188291319678
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-91952376-replay.json",
+      "replay_sha256": "cf0a5f04eff1b05db508eb45013e5f15e35df22f31e50b9338a39d4bcfe098b1",
+      "selection_contract_verified": true,
+      "selection_source_id": "pachirisu_55429378",
+      "source_metadata_sha256": "faba4696f11799c95dbb9a14e1b593180b87923914bf0aa414ebe62bbca35f05",
+      "source_timestamp": "2026-08-11T10:45:52.135395900Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    },
+    {
+      "episode_id": 91962705,
+      "expert_result": "win",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 203792487,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "d6c573dd89bd1319494e25d56e66536c0b68c3db2cf4694f4a63f7423ee2f0bd",
+        "initial_rating": 810.7941468288226,
+        "pilot": "西松大祐",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55430091,
+        "team_id": 16374469,
+        "updated_rating": 838.7462961823246
+      },
+      "opponent": {
+        "agent_id": 203792488,
+        "archetype": "kangaskhan_crustle",
+        "deck_sha256": "df3fbbfdb4687a056a521e59ccae8f3fd1ea6e658d8eb88e26b7af5f02c4f738",
+        "exact_catalog_match": false,
+        "initial_rating": 902.0020450827119,
+        "multiset_jaccard": 0.875,
+        "pilot": "keithtyser",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55418751,
+        "team_id": 16385537,
+        "updated_rating": 894.4168635243897
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-91962705-replay.json",
+      "replay_sha256": "6d60b1102d88fee9eea61a5d5ab7193a1f5b3aff4f77f3276e71f75bbd849900",
+      "selection_contract_verified": true,
+      "selection_source_id": "nishimatsu_55430091",
+      "source_metadata_sha256": "986e9672cc0ab013cb5701eadec57c3d8db1f98308e3276a3d158fd5e17e4f2f",
+      "source_timestamp": "2026-08-11T11:29:50.870294400Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    },
+    {
+      "episode_id": 91963644,
+      "expert_result": "loss",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 203794358,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "d6c573dd89bd1319494e25d56e66536c0b68c3db2cf4694f4a63f7423ee2f0bd",
+        "initial_rating": 838.7462961823246,
+        "pilot": "西松大祐",
+        "reward": -1,
+        "seat": 0,
+        "submission_id": 55430091,
+        "team_id": 16374469,
+        "updated_rating": 820.058847644011
+      },
+      "opponent": {
+        "agent_id": 203794370,
+        "archetype": "mega_lucario_ex_variant_2",
+        "deck_sha256": "77a53ffc32f89b22562f6b4ac0b8cbde9e8210923cd0ef512551b8a8eb9003f8",
+        "exact_catalog_match": false,
+        "initial_rating": 847.1721480121183,
+        "multiset_jaccard": 0.7142857142857143,
+        "pilot": "宝糕手",
+        "reward": 1,
+        "seat": 1,
+        "submission_id": 55422319,
+        "team_id": 16383960,
+        "updated_rating": 853.4223157769021
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-91963644-replay.json",
+      "replay_sha256": "69df63389ca5699c689296ce7019af83482df08055ed04a40b66e63a2474430a",
+      "selection_contract_verified": true,
+      "selection_source_id": "nishimatsu_55430091",
+      "source_metadata_sha256": "c4844dcf4b75e35573e4ada90922c5dfc4125b9a2e1248b8f2bbd38ccbf3a984",
+      "source_timestamp": "2026-08-11T11:33:51.663908300Z",
+      "terminal_replay_rewards": [
+        -1,
+        1
+      ],
+      "terminal_winner_seat": 1
+    },
+    {
+      "episode_id": 91970292,
+      "expert_result": "win",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 203807669,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 1,
+          "thwackey": 4
+        },
+        "deck_family": "rillaboom_dipplin",
+        "deck_sha256": "a23b89031a0c3a384c860e8be483be3a7264d25ee5737fc5d511627ed5bd0f9d",
+        "initial_rating": 1053.5557838397656,
+        "pilot": "パチリス",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55429378,
+        "team_id": 16601361,
+        "updated_rating": 1060.3964363318205
+      },
+      "opponent": {
+        "agent_id": 203807670,
+        "archetype": "cynthias_garchomp_ex",
+        "deck_sha256": "c04e65de725b8bb51b25f5dc87ae1c56a01316177c501ee2cfc62b3c60ac5712",
+        "exact_catalog_match": true,
+        "initial_rating": 942.8826028551081,
+        "multiset_jaccard": 1.0,
+        "pilot": "Yudai Ueno",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55308983,
+        "team_id": 16418623,
+        "updated_rating": 940.0647564230989
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-91970292-replay.json",
+      "replay_sha256": "521a72117352d899bcbde28ccf11f145687262bed41f86a2fffcaa3f8c2cbdbf",
+      "selection_contract_verified": true,
+      "selection_source_id": "pachirisu_55429378",
+      "source_metadata_sha256": "926d48b03aa4dea7c9fd1eceddc25065ebbec722745bc656491c24ac5cb964f8",
+      "source_timestamp": "2026-08-11T12:01:50.735529700Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    },
+    {
+      "episode_id": 91972171,
+      "expert_result": "loss",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "second",
+        "agent_id": 203811424,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 1,
+          "thwackey": 4
+        },
+        "deck_family": "rillaboom_dipplin",
+        "deck_sha256": "a23b89031a0c3a384c860e8be483be3a7264d25ee5737fc5d511627ed5bd0f9d",
+        "initial_rating": 1055.430851270956,
+        "pilot": "パチリス",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55429378,
+        "team_id": 16601361,
+        "updated_rating": 1046.645817777527
+      },
+      "opponent": {
+        "agent_id": 203811423,
+        "archetype": "other",
+        "deck_sha256": "a0c76728e82f1ba5bb3beaa9d24c1afdb630de1dcb8cc78a525078e5dfa754a7",
+        "exact_catalog_match": false,
+        "initial_rating": 1072.7000915468209,
+        "multiset_jaccard": null,
+        "pilot": "loIzpo + emonga",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55430865,
+        "team_id": 16371280,
+        "updated_rating": 1088.3230834633778
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-91972171-replay.json",
+      "replay_sha256": "69abd4e5e3a1edcde03786a745f5304300cb58a0e8a664259de57164711dbcb3",
+      "selection_contract_verified": true,
+      "selection_source_id": "pachirisu_55429378",
+      "source_metadata_sha256": "6a52351eb3dd1019f7211d5d7625e46122545c35663a25abafe250f38c614fec",
+      "source_timestamp": "2026-08-11T12:09:51.062601700Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    },
+    {
+      "episode_id": 91974796,
+      "expert_result": "loss",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 203816672,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 1,
+          "thwackey": 4
+        },
+        "deck_family": "rillaboom_dipplin",
+        "deck_sha256": "a23b89031a0c3a384c860e8be483be3a7264d25ee5737fc5d511627ed5bd0f9d",
+        "initial_rating": 1036.2735762424372,
+        "pilot": "パチリス",
+        "reward": -1,
+        "seat": 0,
+        "submission_id": 55429378,
+        "team_id": 16601361,
+        "updated_rating": 1027.7675124033228
+      },
+      "opponent": {
+        "agent_id": 203816688,
+        "archetype": "mega_kangaskhan_toolbox",
+        "deck_sha256": "310ede704da1adc09e09efc2b3e4f96cd2201abdbcb3f51ada245472cac2742a",
+        "exact_catalog_match": false,
+        "initial_rating": 1029.3314873506529,
+        "multiset_jaccard": 0.9672131147540983,
+        "pilot": "James Cox & Henry Chao",
+        "reward": 1,
+        "seat": 1,
+        "submission_id": 55431662,
+        "team_id": 16375647,
+        "updated_rating": 1064.1771062423625
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-91974796-replay.json",
+      "replay_sha256": "b93ec8837366a3867f82e711ba6407c9e87b2138aafe1b1ad5aa3e6a0a005534",
+      "selection_contract_verified": true,
+      "selection_source_id": "pachirisu_55429378",
+      "source_metadata_sha256": "fdd77486bbab5aab1304deb99ce11071f887441c980e35aa0ef63b72a62cf2c3",
+      "source_timestamp": "2026-08-11T12:21:50.921102300Z",
+      "terminal_replay_rewards": [
+        -1,
+        1
+      ],
+      "terminal_winner_seat": 1
+    },
+    {
+      "episode_id": 91979674,
+      "expert_result": "win",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 203826429,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "d6c573dd89bd1319494e25d56e66536c0b68c3db2cf4694f4a63f7423ee2f0bd",
+        "initial_rating": 958.4277192677162,
+        "pilot": "西松大祐",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55430091,
+        "team_id": 16374469,
+        "updated_rating": 967.923973526893
+      },
+      "opponent": {
+        "agent_id": 203826431,
+        "archetype": "kangaskhan_crustle",
+        "deck_sha256": "ca60839cba73b0054f0854952ec3a5e98cb8178db1f71e264aafceb44ffd7adb",
+        "exact_catalog_match": true,
+        "initial_rating": 968.5843241426329,
+        "multiset_jaccard": 1.0,
+        "pilot": "あなまか",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55410531,
+        "team_id": 16374843,
+        "updated_rating": 963.9895913244541
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-91979674-replay.json",
+      "replay_sha256": "f16904f9f64ea772ba4980f8f0c1ea0977085fdb211510dc98c0774235bdd320",
+      "selection_contract_verified": true,
+      "selection_source_id": "nishimatsu_55430091",
+      "source_metadata_sha256": "9019ade525dee42110289f5f1847a0d546899dc25548cfd1da05c17c144956a5",
+      "source_timestamp": "2026-08-11T12:41:51.143287200Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    },
+    {
+      "episode_id": 92051784,
+      "expert_result": "loss",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "second",
+        "agent_id": 203970670,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "d6c573dd89bd1319494e25d56e66536c0b68c3db2cf4694f4a63f7423ee2f0bd",
+        "initial_rating": 972.2549537556583,
+        "pilot": "西松大祐",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55430091,
+        "team_id": 16374469,
+        "updated_rating": 965.7974254866804
+      },
+      "opponent": {
+        "agent_id": 203970669,
+        "archetype": "dragapult_ex",
+        "deck_sha256": "25393c128f3bb0b662a02e7c0aa7564f6ce87e8865cd09ee551082305272587d",
+        "exact_catalog_match": false,
+        "initial_rating": 982.73821754071,
+        "multiset_jaccard": 0.6666666666666666,
+        "pilot": "LumenLiquidity",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55437409,
+        "team_id": 16381624,
+        "updated_rating": 997.4816784813976
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-92051784-replay.json",
+      "replay_sha256": "c02b37cc962990bc69ec5e6a44680a198c33688e624d7924ee367349ca9a826e",
+      "selection_contract_verified": true,
+      "selection_source_id": "nishimatsu_55430091",
+      "source_metadata_sha256": "fbb773b583904caa7b432b8a6d53c8b1af4187d8821b0c4aa50d8a549f0b8e75",
+      "source_timestamp": "2026-08-11T17:49:50.634159Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    },
+    {
+      "episode_id": 92076513,
+      "expert_result": "loss",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 204020128,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 1,
+          "thwackey": 4
+        },
+        "deck_family": "rillaboom_dipplin",
+        "deck_sha256": "a23b89031a0c3a384c860e8be483be3a7264d25ee5737fc5d511627ed5bd0f9d",
+        "initial_rating": 1029.5059249547655,
+        "pilot": "パチリス",
+        "reward": -1,
+        "seat": 0,
+        "submission_id": 55429378,
+        "team_id": 16601361,
+        "updated_rating": 1021.7282336020213
+      },
+      "opponent": {
+        "agent_id": 204020132,
+        "archetype": "mega_lucario_ex_variant_2",
+        "deck_sha256": "77a53ffc32f89b22562f6b4ac0b8cbde9e8210923cd0ef512551b8a8eb9003f8",
+        "exact_catalog_match": false,
+        "initial_rating": 960.2625095067284,
+        "multiset_jaccard": 0.7142857142857143,
+        "pilot": "李秉叡（ntumlnoob）",
+        "reward": 1,
+        "seat": 1,
+        "submission_id": 55434459,
+        "team_id": 16536318,
+        "updated_rating": 968.6674064438728
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-92076513-replay.json",
+      "replay_sha256": "ad000a505175c57604f0286dc788ea2efdf5190cb0322cc0ae66d3fef5c021aa",
+      "selection_contract_verified": true,
+      "selection_source_id": "pachirisu_55429378",
+      "source_metadata_sha256": "b3c9fdef2d160914d0a7c2d39d2611787a89f302a784f381ca01b644ea14f248",
+      "source_timestamp": "2026-08-11T19:33:50.725413400Z",
+      "terminal_replay_rewards": [
+        -1,
+        1
+      ],
+      "terminal_winner_seat": 1
+    },
+    {
+      "episode_id": 92095226,
+      "expert_result": "win",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 204057565,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 1,
+          "thwackey": 4
+        },
+        "deck_family": "rillaboom_dipplin",
+        "deck_sha256": "a23b89031a0c3a384c860e8be483be3a7264d25ee5737fc5d511627ed5bd0f9d",
+        "initial_rating": 1027.348840842164,
+        "pilot": "パチリス",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55429378,
+        "team_id": 16601361,
+        "updated_rating": 1032.6493366482316
+      },
+      "opponent": {
+        "agent_id": 204057566,
+        "archetype": "alakazam_dudunsparce",
+        "deck_sha256": "3f4515092dc59df397f365a9b79c7cf0c1cb73b9aa38bc47c1b18e9df4c2fdaf",
+        "exact_catalog_match": true,
+        "initial_rating": 998.9203018954399,
+        "multiset_jaccard": 1.0,
+        "pilot": "masspeaks",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55437946,
+        "team_id": 16553454,
+        "updated_rating": 993.601088708993
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-92095226-replay.json",
+      "replay_sha256": "cce4c6bec4fd7b3ff6decccf26adf028b13c06a4ac76b70da9b740b2293b8dc1",
+      "selection_contract_verified": true,
+      "selection_source_id": "pachirisu_55429378",
+      "source_metadata_sha256": "f785ef5ef395bad8b3a9e092450891a4698bb14d3e8f4a6b966ffe3f6c5859c0",
+      "source_timestamp": "2026-08-11T20:53:50.850504900Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    },
+    {
+      "episode_id": 92132479,
+      "expert_result": "loss",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 204132083,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "b86b5b31208135f9bf188990981ee008edd65b0dbc335e7961d8dbf7b8ccfcb5",
+        "initial_rating": 981.9896270866017,
+        "pilot": "BluesLeeTW",
+        "reward": -1,
+        "seat": 0,
+        "submission_id": 55404784,
+        "team_id": 16382115,
+        "updated_rating": 978.0143028781849
+      },
+      "opponent": {
+        "agent_id": 204132084,
+        "archetype": "mega_lopunny_ex",
+        "deck_sha256": "dd63244cb42c5002bb2c7e415e8224e3dc8440ee02743f0db22d9d44594a72cc",
+        "exact_catalog_match": false,
+        "initial_rating": 1008.6843718168845,
+        "multiset_jaccard": 0.6438356164383562,
+        "pilot": "loIzpo + emonga",
+        "reward": 1,
+        "seat": 1,
+        "submission_id": 55442597,
+        "team_id": 16371280,
+        "updated_rating": 1020.2262904742172
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-92132479-replay.json",
+      "replay_sha256": "073e00445183277995ea84528bcabf63e00ce6c24a79186ad6ac5e2c3427ba95",
+      "selection_contract_verified": true,
+      "selection_source_id": "bluesleetw_55404784",
+      "source_metadata_sha256": "4357ccb58c777a243fab279226752ae66157906d5aeb9eb10dcfa11d1cbc0c8b",
+      "source_timestamp": "2026-08-11T23:39:10.850697800Z",
+      "terminal_replay_rewards": [
+        -1,
+        1
+      ],
+      "terminal_winner_seat": 1
+    },
+    {
+      "episode_id": 92165381,
+      "expert_result": "win",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 204197895,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "d6c573dd89bd1319494e25d56e66536c0b68c3db2cf4694f4a63f7423ee2f0bd",
+        "initial_rating": 984.3299520660586,
+        "pilot": "西松大祐",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55430091,
+        "team_id": 16374469,
+        "updated_rating": 989.7051555884972
+      },
+      "opponent": {
+        "agent_id": 204197896,
+        "archetype": "cynthias_garchomp_ex",
+        "deck_sha256": "c04e65de725b8bb51b25f5dc87ae1c56a01316177c501ee2cfc62b3c60ac5712",
+        "exact_catalog_match": true,
+        "initial_rating": 1009.6199466944447,
+        "multiset_jaccard": 1.0,
+        "pilot": "junjun",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55445464,
+        "team_id": 16422150,
+        "updated_rating": 984.7991042459614
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-92165381-replay.json",
+      "replay_sha256": "8b9b9393de91cdca219962bea0cc851d143719f0e8274fe7866b6bca3c198de9",
+      "selection_contract_verified": true,
+      "selection_source_id": "nishimatsu_55430091",
+      "source_metadata_sha256": "7af8672d75a01dc2a7eff0f1a6ff3d9bde1d4c00d9309584ccd803970528e98b",
+      "source_timestamp": "2026-08-12T01:59:10.682871400Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    },
+    {
+      "episode_id": 92186168,
+      "expert_result": "loss",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 204239472,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 0,
+          "thwackey": 4
+        },
+        "deck_family": "thwackey_dipplin",
+        "deck_sha256": "b86b5b31208135f9bf188990981ee008edd65b0dbc335e7961d8dbf7b8ccfcb5",
+        "initial_rating": 979.3801228001843,
+        "pilot": "BluesLeeTW",
+        "reward": -1,
+        "seat": 0,
+        "submission_id": 55404784,
+        "team_id": 16382115,
+        "updated_rating": 974.9913250657612
+      },
+      "opponent": {
+        "agent_id": 204239483,
+        "archetype": "ogerpon",
+        "deck_sha256": "5e60b8c7eafc87e69cb063ae0ed7f7351fbf415b4c021567790b977bece49fbf",
+        "exact_catalog_match": false,
+        "initial_rating": 983.8172642310942,
+        "multiset_jaccard": 0.7910447761194029,
+        "pilot": "WUHAOZHE618",
+        "reward": 1,
+        "seat": 1,
+        "submission_id": 55444389,
+        "team_id": 16535369,
+        "updated_rating": 990.5763767138407
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-92186168-replay.json",
+      "replay_sha256": "d4b4857aac6104796bc957e863cc974ffe980ad0a73dc134b5ee973cda65cee5",
+      "selection_contract_verified": true,
+      "selection_source_id": "bluesleetw_55404784",
+      "source_metadata_sha256": "162e24ee8f724c0955c2f704c3bb6b0607fc5b763c4f5589316e5781397ab2f7",
+      "source_timestamp": "2026-08-12T03:27:36.651261Z",
+      "terminal_replay_rewards": [
+        -1,
+        1
+      ],
+      "terminal_winner_seat": 1
+    },
+    {
+      "episode_id": 92379542,
+      "expert_result": "loss",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "first",
+        "agent_id": 204626279,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 1,
+          "thwackey": 4
+        },
+        "deck_family": "rillaboom_dipplin",
+        "deck_sha256": "a23b89031a0c3a384c860e8be483be3a7264d25ee5737fc5d511627ed5bd0f9d",
+        "initial_rating": 1004.3384765846075,
+        "pilot": "パチリス",
+        "reward": -1,
+        "seat": 0,
+        "submission_id": 55429378,
+        "team_id": 16601361,
+        "updated_rating": 1000.5673394904742
+      },
+      "opponent": {
+        "agent_id": 204626280,
+        "archetype": "alakazam_dudunsparce",
+        "deck_sha256": "3f4515092dc59df397f365a9b79c7cf0c1cb73b9aa38bc47c1b18e9df4c2fdaf",
+        "exact_catalog_match": true,
+        "initial_rating": 1043.2159143105532,
+        "multiset_jaccard": 1.0,
+        "pilot": "M Sato",
+        "reward": 1,
+        "seat": 1,
+        "submission_id": 55462611,
+        "team_id": 16385817,
+        "updated_rating": 1056.38938067908
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-92379542-replay.json",
+      "replay_sha256": "a0811eb7c6a233b7cb27326bf8d79528f0b45ef2234735841bc711f65346863f",
+      "selection_contract_verified": true,
+      "selection_source_id": "pachirisu_55429378",
+      "source_metadata_sha256": "b8c84f4ef469de7865fbb3d2d8ed3bc78d73369e6331d9a7fca427092ab17674",
+      "source_timestamp": "2026-08-12T17:18:03.552470800Z",
+      "terminal_replay_rewards": [
+        -1,
+        1
+      ],
+      "terminal_winner_seat": 1
+    },
+    {
+      "episode_id": 92380504,
+      "expert_result": "loss",
+      "first_player_seat": 0,
+      "hero": {
+        "actual_order": "second",
+        "agent_id": 204628200,
+        "deck_core_counts": {
+          "applin": 4,
+          "festival_grounds": 4,
+          "festival_lead_dipplin": 4,
+          "grookey": 4,
+          "rillaboom": 1,
+          "thwackey": 4
+        },
+        "deck_family": "rillaboom_dipplin",
+        "deck_sha256": "a23b89031a0c3a384c860e8be483be3a7264d25ee5737fc5d511627ed5bd0f9d",
+        "initial_rating": 1000.5673394904742,
+        "pilot": "パチリス",
+        "reward": -1,
+        "seat": 1,
+        "submission_id": 55429378,
+        "team_id": 16601361,
+        "updated_rating": 995.6049767145505
+      },
+      "opponent": {
+        "agent_id": 204628199,
+        "archetype": "mega_lopunny_ex",
+        "deck_sha256": "01501d644249c08144b169d9af115042260d89f0990e04b81c5aeadfcb7d7b84",
+        "exact_catalog_match": false,
+        "initial_rating": 962.6075992864623,
+        "multiset_jaccard": 0.9672131147540983,
+        "pilot": "pikachu",
+        "reward": 1,
+        "seat": 0,
+        "submission_id": 55462641,
+        "team_id": 16446941,
+        "updated_rating": 979.5157870482418
+      },
+      "replay_cache_path": "data/dipplin_replay_eval/cache/replays/episode-92380504-replay.json",
+      "replay_sha256": "5238121ff152d064d7ff351aa792c6a4776405ad4854d03210356334d8c59bbc",
+      "selection_contract_verified": true,
+      "selection_source_id": "pachirisu_55429378",
+      "source_metadata_sha256": "2dffa88dc3f58af6f86af604787121cb78dc46c927f65855bd1e678e9c232fdb",
+      "source_timestamp": "2026-08-12T17:22:04.060832200Z",
+      "terminal_replay_rewards": [
+        1,
+        -1
+      ],
+      "terminal_winner_seat": 0
+    }
+  ],
+  "freeze_contract_created_at": "2026-08-13",
+  "inspection_policy": {
+    "action_level_inspected": false,
+    "individual_failure_inspection_permitted": true,
+    "metadata_only": true,
+    "permitted_fields": [
+      "deck_handshake",
+      "public_first_player",
+      "terminal_result",
+      "episode_service_metadata"
+    ],
+    "replay_regret_executed": false
+  },
+  "manifest_payload_sha256": "d6cc5a7339dcc466546e68c8ea29301c150966be1f287adc00003bd86716c4c1",
+  "provenance": {
+    "deck_catalog": {
+      "card_data_path": "freshstart/data/EN_Card_Data.csv",
+      "card_data_sha256": "a0ea63cf7adcb65d35436ce0eb390de6e2e35654a7c67c065a45f4abaa00f373",
+      "classification": "exact match, else multiset Jaccard >= 0.55, else other",
+      "freshstart_deck_files": [
+        {
+          "path": "freshstart/decklists/alakazam_dudunsparce.deck.csv",
+          "sha256": "0598646548d081832ec311c15fdc369b32c6f5e63175b0cfd1904d21fd082451"
+        },
+        {
+          "path": "freshstart/decklists/cynthias_garchomp_ex.deck.csv",
+          "sha256": "0d5cb0303a955a0432ed73eec60a3dfcfd01c88ab7d7758597605bd8297bfb2f"
+        },
+        {
+          "path": "freshstart/decklists/dipplin_thwackey.deck.csv",
+          "sha256": "e7fa70fcaef8fb7fd57b24abf78330111caa2b0320ec16f50fbf5c4506fbf755"
+        },
+        {
+          "path": "freshstart/decklists/dragapult_ex.deck.csv",
+          "sha256": "730515d5b8e9d6f7b9a87c160cd87b43c95535c917688d2b15f46d82fc054485"
+        },
+        {
+          "path": "freshstart/decklists/grimmsnarl_marnie.deck.csv",
+          "sha256": "92b92bac9f9163ecff933b3dc39294d2cc154c8684f3c8497877661419ebc59d"
+        },
+        {
+          "path": "freshstart/decklists/iono_bellibolt_ex.deck.csv",
+          "sha256": "1c45981c48dc80c68aaeab37d157e361e0b45479e02501e1809f87d537d8d491"
+        },
+        {
+          "path": "freshstart/decklists/kangaskhan_crustle.deck.csv",
+          "sha256": "704270a2922dabe9e04a8a7da824317b637d727107f6e70afcd90c1bb1264447"
+        },
+        {
+          "path": "freshstart/decklists/mega_kangaskhan_toolbox.deck.csv",
+          "sha256": "5e6ff39035d9d5b37ce0908929b87a56fdb8d1dfe6fc712c90353511756bf5ea"
+        },
+        {
+          "path": "freshstart/decklists/mega_lopunny_ex.deck.csv",
+          "sha256": "efeb7b1eed235cce405c24d5d3e7a24955054e48fc09982ddfd5c75f54a62fe0"
+        },
+        {
+          "path": "freshstart/decklists/mega_lucario_ex.deck.csv",
+          "sha256": "9c7e86786a8ec0cff272283cdcf733a859f3a4ef4d26923b009ad652936ddcd4"
+        },
+        {
+          "path": "freshstart/decklists/mega_lucario_ex_variant_2.deck.csv",
+          "sha256": "c2f58250f2c01880842710b55dfa595b40155b8382e8fc000bbceb7a7859aa5e"
+        },
+        {
+          "path": "freshstart/decklists/mega_starmie_froslass.deck.csv",
+          "sha256": "9eb66e588e7609346b64bc0b0a623927180aae43f9a76bca2803a6c16eacb689"
+        },
+        {
+          "path": "freshstart/decklists/team_rockets_mewtwo_ex.deck.csv",
+          "sha256": "e2f02e3d29a37c3c126daf92c920693a6d25ec00943e2ee725422dbf27604b73"
+        }
+      ],
+      "resolved_catalog_sha256": "1c7a69fab4dc60f7f50403907dd962f85fc7b4231827685fe9cc21deb7eef936"
+    },
+    "freeze_script_path": "scripts/freeze_dipplin_replay_holdout.py",
+    "freeze_script_sha256": "d1f194ea96ea25087a1e6a86da31681c76d49ce203ffc57e46398cef09c0cbae",
+    "inventory_path": "data/dipplin_replay_eval/seed_inventory.json",
+    "inventory_sha256": "f8842979b81427d8552db7cab8e67b4f86c6b186d69ff6f2ae664e06600736ce",
+    "metadata_sources": [
+      {
+        "metadata_cache_path": "data/dipplin_replay_eval/cache/episode_metadata/submission-55175199.json",
+        "metadata_cache_sha256": "23e6230071d79895f8a1ad8f8a2532cba5a72f8e06bd83935d6ba077d0442129",
+        "selected_episode_count": 6,
+        "submission_id": 55175199
+      },
+      {
+        "metadata_cache_path": "data/dipplin_replay_eval/cache/episode_metadata/submission-55185538.json",
+        "metadata_cache_sha256": "f4a3b230a50679e2a312f9ea2224f648d38f2ee0f7da9d330cf697e28e051146",
+        "selected_episode_count": 12,
+        "submission_id": 55185538
+      },
+      {
+        "metadata_cache_path": "data/dipplin_replay_eval/cache/episode_metadata/submission-55288239.json",
+        "metadata_cache_sha256": "24da49f667017d4a1f97d8d4078aaff2b49e6b90e54c72042faf2f86fa9c4fd3",
+        "selected_episode_count": 6,
+        "submission_id": 55288239
+      },
+      {
+        "metadata_cache_path": "data/dipplin_replay_eval/cache/episode_metadata/submission-55289327.json",
+        "metadata_cache_sha256": "9f70d44cd70b031c06d651cf9aea74935645add46c19ffcc1e1bd9353a99aecb",
+        "selected_episode_count": 19,
+        "submission_id": 55289327
+      },
+      {
+        "metadata_cache_path": "data/dipplin_replay_eval/cache/episode_metadata/submission-55404784.json",
+        "metadata_cache_sha256": "074e2a0d8360e8a7c28973102d5bf416b66a25a02594336a6d644f2937fa81e2",
+        "selected_episode_count": 12,
+        "submission_id": 55404784
+      },
+      {
+        "metadata_cache_path": "data/dipplin_replay_eval/cache/episode_metadata/submission-55429378.json",
+        "metadata_cache_sha256": "2bdfd9f8a2969ba2d67104508b6ab36b1b8bc5df1d18987a4806ccaf926208ad",
+        "selected_episode_count": 16,
+        "submission_id": 55429378
+      },
+      {
+        "metadata_cache_path": "data/dipplin_replay_eval/cache/episode_metadata/submission-55430091.json",
+        "metadata_cache_sha256": "4e9b0b27f4ec474b22fcce75ff3b6d23cc7640aba96456de01f2e4d37b3de763",
+        "selected_episode_count": 9,
+        "submission_id": 55430091
+      }
+    ]
+  },
+  "schema_version": 1,
+  "sealed": false,
+  "selection_provenance": {
+    "dev_smoke_episode_ids": [
+      90415058,
+      90367171,
+      89463202
+    ],
+    "excluded_reason": "PP kawada 55408594 influenced D0/S1 development and is contaminated DEV data; Magist 55336470 failed the metadata-only deck handshake and was Grimmsnarl rather than Dipplin.",
+    "excluded_submission_ids": [
+      55408594,
+      55336470
+    ],
+    "expected_expert_reward_is_integrity_only": true,
+    "limitations_before_freeze": [
+      "Seed rows are provisional until API identity, source timestamp, and replay deck handshakes all verify.",
+      "Opponent archetypes in the frozen manifests must be derived from the full replay deck, not team-level survey labels.",
+      "No replay in FINAL_HOLDOUT may be inspected beyond deck/order/outcome metadata before the policy is frozen."
+    ],
+    "selection_method": "Fixed candidate submissions, pilot-diverse deterministic episode allocation, with priority for opponents not known as Grimmsnarl or Alakazam; one invalid survey-linked source was replaced reward-blind by unique-opponent SHA order before any action-level evaluation",
+    "selection_used_outcome": false,
+    "source": "Bounded local Kaggle metadata/cache audit plus current EpisodeService metadata on 2026-08-12/13"
+  },
+  "split": "VALIDATION"
+}
