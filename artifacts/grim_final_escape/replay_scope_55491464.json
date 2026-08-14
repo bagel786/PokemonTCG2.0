@@ -1,0 +1,23 @@
+{
+  "candidate": "artifacts/grim_final_escape/candidate",
+  "control": "artifacts/grim_damage_conversion/candidates/a2_damage_v0",
+  "scope": "escape",
+  "replays": "data/replays/55491464",
+  "counts": {
+    "decisions": 739,
+    "candidate_illegal": 0,
+    "changed": 0,
+    "changed_outside_scope": 0
+  },
+  "change_rate": 0.0,
+  "candidate_errors": 0,
+  "control_errors": 0,
+  "latency_ms": {
+    "p50": 0.39091601502150297,
+    "p95": 0.7356669520959258,
+    "p99": 2.0237090066075325,
+    "max": 22.96875003958121
+  },
+  "representative_changes": [],
+  "passed_scope": true
+}

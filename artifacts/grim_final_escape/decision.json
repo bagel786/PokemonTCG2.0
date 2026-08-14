@@ -1,0 +1,73 @@
+{
+  "schema": "grim-final-escape-decision-v1",
+  "date": "2026-08-14",
+  "decision": "REJECT_ESCAPE_ONLY_RETAIN_A2_DAMAGE_V0",
+  "candidate_tree_sha256": "6B17428FDC373A693902F2661C179779DE52E1E1FD918FA1A6EC799E51681DE7",
+  "immutable_fallback": {
+    "archive": "artifacts/grim_damage_conversion/winner/grim_a2_damage_v0.tar.gz",
+    "archive_sha256": "A44B676F5CA135747B5D4D6923C7FB350A66369D188315B6AC0F291D23CA69E7",
+    "tree_sha256": "13426288358D597EAD809E45C364C7F7B9274A6EEBF55DDD942142E3326535C3",
+    "model_sha256": "B19871A9F1499C2460AE266E58194ACAB1D8C90B390FA5CF24ED94B9A2B6BDA8",
+    "deck_sha256": "92B92BAC9F9163ECFF933B3DC39294D2CC154C8684F3C8497877661419EBC59D"
+  },
+  "scope_gate": {
+    "decisions": 4659,
+    "changed": 8,
+    "change_rate": 0.0017171066752522,
+    "games_changed": 4,
+    "both_actual_orders": true,
+    "out_of_scope_changes": 0,
+    "illegal_actions": 0,
+    "candidate_errors": 0,
+    "control_errors": 0,
+    "passed": true
+  },
+  "fresh_replay_check": {
+    "submission_id": 55491464,
+    "games": 8,
+    "decisions": 739,
+    "changed": 0,
+    "errors": 0,
+    "passed": true
+  },
+  "determinism": {
+    "engine_sha256": "867E3F9BB87E0B48889A44B5D4B04F5D2D434B2A0788D1B2BCFE0CAEBCB5AB78",
+    "tasks": 4,
+    "mismatches": 0,
+    "passed": true
+  },
+  "strength_gate": {
+    "base_seed": 202608145000,
+    "pairs": 500,
+    "engine_games": 1000,
+    "candidate_wins": 239,
+    "control_wins": 245,
+    "candidate_only_wins": 0,
+    "control_only_wins": 6,
+    "paired_difference": -0.012,
+    "paired_95_ci": [-0.021553596913428327, -0.0024464030865716715],
+    "first": {
+      "pairs": 250,
+      "candidate_wins": 132,
+      "control_wins": 136,
+      "paired_difference": -0.016,
+      "paired_95_ci": [-0.03158496954745864, -0.00041503045254136575]
+    },
+    "second": {
+      "pairs": 250,
+      "candidate_wins": 107,
+      "control_wins": 109,
+      "paired_difference": -0.008,
+      "paired_95_ci": [-0.019064944681621468, 0.0030649446816214676]
+    },
+    "candidate_policy_errors": 0,
+    "control_policy_errors": 0,
+    "opponent_policy_errors": 0,
+    "production_engine_preserved": true,
+    "passed": false
+  },
+  "trained": false,
+  "submission_package_built": false,
+  "uploaded": false,
+  "stop": true
+}

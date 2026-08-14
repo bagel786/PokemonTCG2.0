@@ -1,0 +1,33 @@
+{
+  "base": "artifacts/grim_damage_conversion/candidates/a2_damage_v0",
+  "base_tree_sha256": "13426288358D597EAD809E45C364C7F7B9274A6EEBF55DDD942142E3326535C3",
+  "candidate": "artifacts/grim_final_escape/candidate",
+  "candidate_tree_sha256": "6B17428FDC373A693902F2661C179779DE52E1E1FD918FA1A6EC799E51681DE7",
+  "disabled": [
+    "punk_up",
+    "legacy_grim_guardrails",
+    "search",
+    "reranking",
+    "training"
+  ],
+  "enabled": [
+    "damage_v0",
+    "dead_support_escape"
+  ],
+  "escape_reasons": [
+    "variance_floor:attach_to_escape_dead_support",
+    "variance_floor:complete_escape_retreat",
+    "variance_floor:dead_support_retreat_to_ready_grim",
+    "variance_floor:escape_promote_ready_grim"
+  ],
+  "frozen_deck_sha256": "92B92BAC9F9163ECFF933B3DC39294D2CC154C8684F3C8497877661419EBC59D",
+  "frozen_model_sha256": "B19871A9F1499C2460AE266E58194ACAB1D8C90B390FA5CF24ED94B9A2B6BDA8",
+  "modified_runtime_sha256": {
+    "main.py": "9089DDC3C29CE63B15BE3E9F5C8809B086981CC31F504F07F96CA2B1C70A1C66",
+    "ptcg_ai/card_ids.py": "241CD2E759827AA14DA53CDE8F7893B17DA5B7061F88C2A9E476A1A8A7159756",
+    "ptcg_ai/grim_guardrails.py": "B2DD3C5E4ABE467E03DD518F5D6ED37D66B8DD545A561CA1A06B7526D2280D2C",
+    "ptcg_ai/grim_variance_floor.py": "7DA04E6BDD11031E5CFADC83F48E91EA35E93D56C21546F110E03EB50FB1F714",
+    "ptcg_ai/model.py": "5338EC81CC37DD4D21E7EBF0B8A114100F798E100483888FD35AC473A5FC2553"
+  },
+  "schema": "grim-a2-damage-v0-escape-only-build-v1"
+}

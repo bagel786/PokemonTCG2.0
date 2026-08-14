@@ -1,0 +1,140 @@
+{
+  "candidate": "artifacts/grim_final_escape/candidate",
+  "control": "artifacts/grim_damage_conversion/candidates/a2_damage_v0",
+  "scope": "escape",
+  "replays": "data/replays/55399728",
+  "counts": {
+    "decisions": 4659,
+    "candidate_illegal": 0,
+    "changed": 8,
+    "changed_outside_scope": 0,
+    "intervention:variance_floor:dead_support_retreat_to_ready_grim": 10,
+    "intervention:variance_floor:escape_promote_ready_grim": 11,
+    "intervention:variance_floor:attach_to_escape_dead_support": 8,
+    "intervention:variance_floor:complete_escape_retreat": 5
+  },
+  "change_rate": 0.0017171066752522,
+  "candidate_errors": 0,
+  "control_errors": 0,
+  "latency_ms": {
+    "p50": 0.37050002720206976,
+    "p95": 0.6519579910673201,
+    "p99": 1.010666019283235,
+    "max": 39.42845796700567
+  },
+  "representative_changes": [
+    {
+      "episode": 91589378,
+      "step": 68,
+      "order": "second",
+      "context": 0,
+      "effect": null,
+      "reason": "variance_floor:attach_to_escape_dead_support",
+      "control": [
+        11
+      ],
+      "candidate": [
+        2
+      ]
+    },
+    {
+      "episode": 91589378,
+      "step": 74,
+      "order": "second",
+      "context": 0,
+      "effect": null,
+      "reason": "variance_floor:attach_to_escape_dead_support",
+      "control": [
+        8
+      ],
+      "candidate": [
+        4
+      ]
+    },
+    {
+      "episode": 91589378,
+      "step": 76,
+      "order": "second",
+      "context": 0,
+      "effect": null,
+      "reason": "variance_floor:attach_to_escape_dead_support",
+      "control": [
+        8
+      ],
+      "candidate": [
+        4
+      ]
+    },
+    {
+      "episode": 91592197,
+      "step": 36,
+      "order": "first",
+      "context": 0,
+      "effect": null,
+      "reason": "variance_floor:dead_support_retreat_to_ready_grim",
+      "control": [
+        0
+      ],
+      "candidate": [
+        1
+      ]
+    },
+    {
+      "episode": 91637381,
+      "step": 189,
+      "order": "first",
+      "context": 0,
+      "effect": null,
+      "reason": "variance_floor:complete_escape_retreat",
+      "control": [
+        3
+      ],
+      "candidate": [
+        8
+      ]
+    },
+    {
+      "episode": 91637381,
+      "step": 193,
+      "order": "first",
+      "context": 0,
+      "effect": null,
+      "reason": "variance_floor:dead_support_retreat_to_ready_grim",
+      "control": [
+        3
+      ],
+      "candidate": [
+        7
+      ]
+    },
+    {
+      "episode": 91637381,
+      "step": 197,
+      "order": "first",
+      "context": 0,
+      "effect": null,
+      "reason": "variance_floor:dead_support_retreat_to_ready_grim",
+      "control": [
+        3
+      ],
+      "candidate": [
+        6
+      ]
+    },
+    {
+      "episode": 91658842,
+      "step": 81,
+      "order": "first",
+      "context": 3,
+      "effect": null,
+      "reason": "variance_floor:escape_promote_ready_grim",
+      "control": [
+        2
+      ],
+      "candidate": [
+        0
+      ]
+    }
+  ],
+  "passed_scope": true
+}

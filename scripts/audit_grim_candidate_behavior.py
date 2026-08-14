@@ -26,8 +26,11 @@ def intervention_reason(agent: ExternalSubmissionAgent, scope: str) -> str | Non
     order = getattr(router, "actual_order", None)
     selected = getattr(router, f"policy_{order}", None)
     policy = getattr(selected, "policy", None)
-    layer = getattr(policy, "wave1_rail", None) if scope == "punk" else getattr(policy, "damage_solver", None)
-    return getattr(layer, "last_intervention", None)
+    if scope == "punk":
+        return getattr(getattr(policy, "wave1_rail", None), "last_intervention", None)
+    if scope == "damage":
+        return getattr(getattr(policy, "damage_solver", None), "last_intervention", None)
+    return getattr(policy, "escape_last_intervention", None)
 
 
 def errors(agent: ExternalSubmissionAgent) -> int:
@@ -41,7 +44,7 @@ def main() -> int:
     parser.add_argument("--replays", type=Path, default=ROOT / "data/replays/55399728")
     parser.add_argument("--submission-id", type=int, default=55399728)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--scope", choices=("punk", "damage"), default="punk")
+    parser.add_argument("--scope", choices=("punk", "damage", "escape"), default="punk")
     args = parser.parse_args()
     metadata = json.loads((args.replays / "episodes_metadata.json").read_text())
     meta = {int(row["id"]): row for row in metadata}
@@ -80,11 +83,17 @@ def main() -> int:
                 counts["changed"] += int(changed)
                 effect = (select.get("effect") or select.get("contextCard") or {}).get("id")
                 context = int(select.get("context", -1))
-                scoped = (
-                    effect == 648 and context in {21, 22, 43}
-                    if args.scope == "punk"
-                    else (effect == 112 and context == 13) or (effect == 648 and context == 15)
-                )
+                if args.scope == "punk":
+                    scoped = effect == 648 and context in {21, 22, 43}
+                elif args.scope == "damage":
+                    scoped = (effect == 112 and context == 13) or (effect == 648 and context == 15)
+                else:
+                    scoped = reason in {
+                        "variance_floor:attach_to_escape_dead_support",
+                        "variance_floor:complete_escape_retreat",
+                        "variance_floor:dead_support_retreat_to_ready_grim",
+                        "variance_floor:escape_promote_ready_grim",
+                    }
                 counts["changed_outside_scope"] += int(changed and not scoped)
                 if changed and len(changes) < 50:
                     changes.append({"episode": episode, "step": step_index,
