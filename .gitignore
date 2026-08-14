@@ -85,3 +85,7 @@ __pycache__/
 node_modules/
 Microsoft/
 episode-*-replay.json
+data/dragapult_emergency/
+data/meta/*cache.json
+data/meta/*progress.json
+data/meta_survey/
