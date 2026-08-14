@@ -84,13 +84,15 @@ def main() -> int:
     api = authenticate()
     existing = api.competition_submissions(COMPETITION, page_size=100)
     description_prefix = "grim-a2-damage-v0-copy-"
+    day_stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%d")
     if any(
-        str(getattr(row, "description", "")).startswith(description_prefix)
+        str(getattr(row, "description", "")).startswith(f"{description_prefix}")
+        and str(getattr(row, "description", "")).endswith(f"-{day_stamp}")
         and "ERROR" not in status_name(row)
         and "FAILED" not in status_name(row)
         for row in existing
     ):
-        raise SystemExit("refusing duplicate damage-v0 copy upload run")
+        raise SystemExit(f"refusing duplicate damage-v0 copy upload run for {day_stamp}")
 
     today_utc = dt.datetime.now(dt.timezone.utc).date()
     used_today = sum(
@@ -114,7 +116,7 @@ def main() -> int:
     write_ledger(ledger)
 
     for position, arm in enumerate(("A", "B"), 1):
-        description = f"{description_prefix}{arm}-20260813"
+        description = f"{description_prefix}{arm}-{day_stamp}"
         response = api.competition_submit(str(archive), description, COMPETITION, quiet=False)
         submission_id = int(getattr(response, "ref", 0) or getattr(response, "id", 0) or 0)
         if not submission_id:
