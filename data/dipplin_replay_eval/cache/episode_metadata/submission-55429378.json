@@ -1,0 +1,423 @@
+{
+  "episodes": [
+    {
+      "agents": [
+        {
+          "id": 203764245,
+          "initialScore": 910.9549597968919,
+          "reward": -1,
+          "submissionId": 55429378,
+          "teamId": 16601361,
+          "updatedScore": 885.9287517027354
+        },
+        {
+          "id": 203764249,
+          "index": 1,
+          "initialScore": 1031.3659886077824,
+          "reward": 1,
+          "submissionId": 55427852,
+          "teamId": 16371723,
+          "updatedScore": 1037.624671764054
+        }
+      ],
+      "createTime": "2026-08-11T10:29:50.621276400Z",
+      "endTime": "2026-08-11T10:35:50.541289500Z",
+      "id": 91948588,
+      "state": "COMPLETED",
+      "type": "EPISODE_TYPE_PUBLIC"
+    },
+    {
+      "agents": [
+        {
+          "id": 203771829,
+          "initialScore": 924.0392685503938,
+          "reward": 1,
+          "submissionId": 55429378,
+          "teamId": 16601361,
+          "updatedScore": 958.0770787792869
+        },
+        {
+          "id": 203771830,
+          "index": 1,
+          "initialScore": 957.4671083954232,
+          "reward": -1,
+          "submissionId": 55322389,
+          "teamId": 16379865,
+          "updatedScore": 952.8188291319678
+        }
+      ],
+      "createTime": "2026-08-11T10:45:52.135395900Z",
+      "endTime": "2026-08-11T10:48:37.280901600Z",
+      "id": 91952376,
+      "state": "COMPLETED",
+      "type": "EPISODE_TYPE_PUBLIC"
+    },
+    {
+      "agents": [
+        {
+          "id": 203801957,
+          "initialScore": 1042.9828107627848,
+          "reward": 1,
+          "submissionId": 55429378,
+          "teamId": 16601361,
+          "updatedScore": 1053.5557838397656
+        },
+        {
+          "id": 203801958,
+          "index": 1,
+          "initialScore": 1028.8881046097476,
+          "reward": -1,
+          "submissionId": 55299922,
+          "teamId": 16501184,
+          "updatedScore": 1024.7031339066482
+        }
+      ],
+      "createTime": "2026-08-11T11:49:50.687139100Z",
+      "endTime": "2026-08-11T12:01:50.506648700Z",
+      "id": 91967437,
+      "state": "COMPLETED",
+      "type": "EPISODE_TYPE_PUBLIC"
+    },
+    {
+      "agents": [
+        {
+          "id": 203807669,
+          "initialScore": 1053.5557838397656,
+          "reward": 1,
+          "submissionId": 55429378,
+          "teamId": 16601361,
+          "updatedScore": 1060.3964363318205
+        },
+        {
+          "id": 203807670,
+          "index": 1,
+          "initialScore": 942.8826028551081,
+          "reward": -1,
+          "submissionId": 55308983,
+          "teamId": 16418623,
+          "updatedScore": 940.0647564230989
+        }
+      ],
+      "createTime": "2026-08-11T12:01:50.735529700Z",
+      "endTime": "2026-08-11T12:04:35.475845200Z",
+      "id": 91970292,
+      "state": "COMPLETED",
+      "type": "EPISODE_TYPE_PUBLIC"
+    },
+    {
+      "agents": [
+        {
+          "id": 203811423,
+          "initialScore": 1072.7000915468209,
+          "reward": 1,
+          "submissionId": 55430865,
+          "teamId": 16371280,
+          "updatedScore": 1088.3230834633778
+        },
+        {
+          "id": 203811424,
+          "index": 1,
+          "initialScore": 1055.430851270956,
+          "reward": -1,
+          "submissionId": 55429378,
+          "teamId": 16601361,
+          "updatedScore": 1046.645817777527
+        }
+      ],
+      "createTime": "2026-08-11T12:09:51.062601700Z",
+      "endTime": "2026-08-11T12:17:12.389602400Z",
+      "id": 91972171,
+      "state": "COMPLETED",
+      "type": "EPISODE_TYPE_PUBLIC"
+    },
+    {
+      "agents": [
+        {
+          "id": 203815203,
+          "initialScore": 1027.7675124033228,
+          "reward": -1,
+          "submissionId": 55429378,
+          "teamId": 16601361,
+          "updatedScore": 1018.9216463070377
+        },
+        {
+          "id": 203815207,
+          "index": 1,
+          "initialScore": 1026.4725845992334,
+          "reward": 1,
+          "submissionId": 55367704,
+          "teamId": 16385817,
+          "updatedScore": 1030.928836933177
+        }
+      ],
+      "createTime": "2026-08-11T12:17:50.776622200Z",
+      "endTime": "2026-08-11T12:24:53.957504600Z",
+      "id": 91974062,
+      "state": "COMPLETED",
+      "type": "EPISODE_TYPE_PUBLIC"
+    },
+    {
+      "agents": [
+        {
+          "id": 203816672,
+          "initialScore": 1036.2735762424372,
+          "reward": -1,
+          "submissionId": 55429378,
+          "teamId": 16601361,
+          "updatedScore": 1027.7675124033228
+        },
+        {
+          "id": 203816688,
+          "index": 1,
+          "initialScore": 1029.3314873506529,
+          "reward": 1,
+          "submissionId": 55431662,
+          "teamId": 16375647,
+          "updatedScore": 1064.1771062423625
+        }
+      ],
+      "createTime": "2026-08-11T12:21:50.921102300Z",
+      "endTime": "2026-08-11T12:24:51.867199100Z",
+      "id": 91974796,
+      "state": "COMPLETED",
+      "type": "EPISODE_TYPE_PUBLIC"
+    },
+    {
+      "agents": [
+        {
+          "id": 204020128,
+          "initialScore": 1029.5059249547655,
+          "reward": -1,
+          "submissionId": 55429378,
+          "teamId": 16601361,
+          "updatedScore": 1021.7282336020213
+        },
+        {
+          "id": 204020132,
+          "index": 1,
+          "initialScore": 960.2625095067284,
+          "reward": 1,
+          "submissionId": 55434459,
+          "teamId": 16536318,
+          "updatedScore": 968.6674064438728
+        }
+      ],
+      "createTime": "2026-08-11T19:33:50.725413400Z",
+      "endTime": "2026-08-11T19:35:14.641332200Z",
+      "id": 92076513,
+      "state": "COMPLETED",
+      "type": "EPISODE_TYPE_PUBLIC"
+    },
+    {
+      "agents": [
+        {
+          "id": 204057565,
+          "initialScore": 1027.348840842164,
+          "reward": 1,
+          "submissionId": 55429378,
+          "teamId": 16601361,
+          "updatedScore": 1032.6493366482316
+        },
+        {
+          "id": 204057566,
+          "index": 1,
+          "initialScore": 998.9203018954399,
+          "reward": -1,
+          "submissionId": 55437946,
+          "teamId": 16553454,
+          "updatedScore": 993.601088708993
+        }
+      ],
+      "createTime": "2026-08-11T20:53:50.850504900Z",
+      "endTime": "2026-08-11T20:56:58.539294300Z",
+      "id": 92095226,
+      "state": "COMPLETED",
+      "type": "EPISODE_TYPE_PUBLIC"
+    },
+    {
+      "agents": [
+        {
+          "id": 204058843,
+          "initialScore": 1032.6493366482316,
+          "reward": 1,
+          "submissionId": 55429378,
+          "teamId": 16601361,
+          "updatedScore": 1038.1203772025965
+        },
+        {
+          "id": 204058844,
+          "index": 1,
+          "initialScore": 1030.0478513995358,
+          "reward": -1,
+          "submissionId": 55441073,
+          "teamId": 16452272,
+          "updatedScore": 1008.6805962376183
+        }
+      ],
+      "createTime": "2026-08-11T21:02:34.546037500Z",
+      "endTime": "2026-08-11T21:05:19.332664300Z",
+      "id": 92095864,
+      "state": "COMPLETED",
+      "type": "EPISODE_TYPE_PUBLIC"
+    },
+    {
+      "agents": [
+        {
+          "id": 204139926,
+          "initialScore": 989.981182182354,
+          "reward": -1,
+          "submissionId": 55442597,
+          "teamId": 16371280,
+          "updatedScore": 981.7969034529413
+        },
+        {
+          "id": 204139929,
+          "index": 1,
+          "initialScore": 1032.4213530413613,
+          "reward": 1,
+          "submissionId": 55429378,
+          "teamId": 16601361,
+          "updatedScore": 1036.9215256048553
+        }
+      ],
+      "createTime": "2026-08-11T23:55:10.716949Z",
+      "endTime": "2026-08-12T00:01:59.259369Z",
+      "id": 92136403,
+      "state": "COMPLETED",
+      "type": "EPISODE_TYPE_PUBLIC"
+    },
+    {
+      "agents": [
+        {
+          "id": 204143845,
+          "initialScore": 1036.9215256048553,
+          "reward": 1,
+          "submissionId": 55429378,
+          "teamId": 16601361,
+          "updatedScore": 1041.5538610603103
+        },
+        {
+          "id": 204143846,
+          "index": 1,
+          "initialScore": 1004.1926468021005,
+          "reward": -1,
+          "submissionId": 55441845,
+          "teamId": 16663985,
+          "updatedScore": 998.7616216221668
+        }
+      ],
+      "createTime": "2026-08-12T00:03:10.713739600Z",
+      "endTime": "2026-08-12T00:06:25.485045300Z",
+      "id": 92138360,
+      "state": "COMPLETED",
+      "type": "EPISODE_TYPE_PUBLIC"
+    },
+    {
+      "agents": [
+        {
+          "id": 204434069,
+          "initialScore": 1022.5182782774083,
+          "reward": -1,
+          "submissionId": 55429378,
+          "teamId": 16601361,
+          "updatedScore": 1017.9193542149866
+        },
+        {
+          "id": 204434070,
+          "index": 1,
+          "initialScore": 1013.353462512044,
+          "reward": 1,
+          "submissionId": 55452422,
+          "teamId": 16371829,
+          "updatedScore": 1021.2966581615613
+        }
+      ],
+      "createTime": "2026-08-12T10:23:48.383696500Z",
+      "endTime": "2026-08-12T10:29:09.291940400Z",
+      "id": 92283452,
+      "state": "COMPLETED",
+      "type": "EPISODE_TYPE_PUBLIC"
+    },
+    {
+      "agents": [
+        {
+          "id": 204446717,
+          "initialScore": 1001.6361818331364,
+          "reward": 1,
+          "submissionId": 55455825,
+          "teamId": 16375635,
+          "updatedScore": 1028.7871303195777
+        },
+        {
+          "id": 204446718,
+          "index": 1,
+          "initialScore": 1008.511410554191,
+          "reward": -1,
+          "submissionId": 55429378,
+          "teamId": 16601361,
+          "updatedScore": 1004.1986790895681
+        }
+      ],
+      "createTime": "2026-08-12T10:51:43.518926400Z",
+      "endTime": "2026-08-12T10:55:15.251504900Z",
+      "id": 92289775,
+      "state": "COMPLETED",
+      "type": "EPISODE_TYPE_PUBLIC"
+    },
+    {
+      "agents": [
+        {
+          "id": 204626279,
+          "initialScore": 1004.3384765846075,
+          "reward": -1,
+          "submissionId": 55429378,
+          "teamId": 16601361,
+          "updatedScore": 1000.5673394904742
+        },
+        {
+          "id": 204626280,
+          "index": 1,
+          "initialScore": 1043.2159143105532,
+          "reward": 1,
+          "submissionId": 55462611,
+          "teamId": 16385817,
+          "updatedScore": 1056.38938067908
+        }
+      ],
+      "createTime": "2026-08-12T17:18:03.552470800Z",
+      "endTime": "2026-08-12T17:25:08.272020600Z",
+      "id": 92379542,
+      "state": "COMPLETED",
+      "type": "EPISODE_TYPE_PUBLIC"
+    },
+    {
+      "agents": [
+        {
+          "id": 204628199,
+          "initialScore": 962.6075992864623,
+          "reward": 1,
+          "submissionId": 55462641,
+          "teamId": 16446941,
+          "updatedScore": 979.5157870482418
+        },
+        {
+          "id": 204628200,
+          "index": 1,
+          "initialScore": 1000.5673394904742,
+          "reward": -1,
+          "submissionId": 55429378,
+          "teamId": 16601361,
+          "updatedScore": 995.6049767145505
+        }
+      ],
+      "createTime": "2026-08-12T17:22:04.060832200Z",
+      "endTime": "2026-08-12T17:29:26.246353Z",
+      "id": 92380504,
+      "state": "COMPLETED",
+      "type": "EPISODE_TYPE_PUBLIC"
+    }
+  ],
+  "schema_version": 1,
+  "source_endpoint": "https://www.kaggle.com/api/i/competitions.EpisodeService/ListEpisodes",
+  "submission_id": 55429378
+}
