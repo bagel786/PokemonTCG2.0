@@ -309,12 +309,18 @@ class Rollout:
 class SeededSearchBackend:
     """Search adapter for the isolated engine's evaluation-only RNG reset."""
 
-    def __init__(self, dll_path: str | Path):
+    def __init__(self, dll_path: str | Path, *, initialize: bool = True):
         self.dll_path = Path(dll_path).resolve()
         self.lib = ctypes.CDLL(str(self.dll_path))
         self.lib.GameInitialize.argtypes = []
         self.lib.GameInitialize.restype = None
-        self.lib.GameInitialize()
+        # A process that already used the same native library for seeded source
+        # gameplay has initialized the global immutable card/attack tables.
+        # Initializing those tables twice is forbidden by the engine.  Existing
+        # callers retain the old standalone behavior; shared experiment
+        # infrastructure can explicitly reuse the initialized library.
+        if initialize:
+            self.lib.GameInitialize()
         self.lib.AgentStart.argtypes = []
         self.lib.AgentStart.restype = ctypes.c_void_p
         self.lib.SearchSetSeed.argtypes = [ctypes.c_void_p, ctypes.c_uint32]
