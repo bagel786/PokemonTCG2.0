@@ -10,6 +10,7 @@ data/grim_breakthrough_*/
 data/grim_strength_*/
 data/grim_source_clones_*/
 data/a2_err_1/
+data/a2_err_1_corrected/
 data/replays/
 data/processed/
 *.pyc

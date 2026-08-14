@@ -6,6 +6,7 @@ from scripts.build_a2_err_corpus import (
     balance_corrections,
     infer_daily_strength,
     input_fingerprint,
+    episode_outcomes,
     rank_band,
 )
 from ptcg_ai.features import DecisionFeatures
@@ -78,3 +79,8 @@ def test_balancing_hits_four_strata_and_caps_without_duplication():
     assert result["max_pilot_fraction"] <= 0.15 + 1e-9
     assert result["max_date_fraction"] <= 0.30 + 1e-9
     assert all(row["final_training_weight"] > 0 for row in rows)
+
+
+def test_draws_are_not_complete_win_loss_games():
+    assert episode_outcomes({"rewards": [0, 0]}) is None
+    assert episode_outcomes({"rewards": [1, -1]}) == (1.0, 0.0)

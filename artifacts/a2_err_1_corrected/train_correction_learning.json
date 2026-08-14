@@ -1,0 +1,460 @@
+{
+  "base_rank_2_or_3_invariant_failures": 0,
+  "corrections": "/Users/safiullahbaig/Projects/pokemonTCG2.0/data/a2_err_1_corrected/certified/train_corrections.jsonl.gz",
+  "experiment": "A2-ERR-1",
+  "models": {
+    "epoch_1": {
+      "by_action_family": {
+        "ABILITY": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.7629104054446267,
+          "promoted_to_semantic_rank1": 0.09584158415841584,
+          "rows": 5050,
+          "semantic_top1": 0.09584158415841584,
+          "semantic_top3": 0.906930693069307
+        },
+        "ATTACH": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.24230649231285448,
+          "promoted_to_semantic_rank1": 0.42940397350993376,
+          "rows": 3775,
+          "semantic_top1": 0.42940397350993376,
+          "semantic_top3": 0.9798675496688741
+        },
+        "EVOLVE": {
+          "mean_elite_minus_rejected_semantic_max_logit": -1.1526277173744452,
+          "promoted_to_semantic_rank1": 0.06637362637362637,
+          "rows": 2275,
+          "semantic_top1": 0.06637362637362637,
+          "semantic_top3": 0.8312087912087912
+        },
+        "PLAY": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.17509696428920743,
+          "promoted_to_semantic_rank1": 0.3801753077209996,
+          "rows": 10724,
+          "semantic_top1": 0.3801753077209996,
+          "semantic_top3": 0.9928198433420365
+        },
+        "SWITCH / promotion": {
+          "mean_elite_minus_rejected_semantic_max_logit": -1.397890113519319,
+          "promoted_to_semantic_rank1": 0.1202572347266881,
+          "rows": 1555,
+          "semantic_top1": 0.1202572347266881,
+          "semantic_top3": 0.9884244372990354
+        },
+        "other": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.2660257431628918,
+          "promoted_to_semantic_rank1": 0.3919104653445906,
+          "rows": 5093,
+          "semantic_top1": 0.3919104653445906,
+          "semantic_top3": 0.9984292165717652
+        },
+        "target selection": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.820525847506415,
+          "promoted_to_semantic_rank1": 0.22630844382414514,
+          "rows": 14330,
+          "semantic_top1": 0.22630844382414514,
+          "semantic_top3": 0.9789253314724354
+        }
+      },
+      "by_outcome_order": {
+        "loss-first": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.621155673096905,
+          "promoted_to_semantic_rank1": 0.26022894707015753,
+          "rows": 8823,
+          "semantic_top1": 0.26022894707015753,
+          "semantic_top3": 0.972118327099626
+        },
+        "loss-second": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.5965483853259225,
+          "promoted_to_semantic_rank1": 0.2750903251706142,
+          "rows": 9964,
+          "semantic_top1": 0.2750903251706142,
+          "semantic_top3": 0.9713970293054998
+        },
+        "win-first": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.5598985432017716,
+          "promoted_to_semantic_rank1": 0.27258403361344535,
+          "rows": 13328,
+          "semantic_top1": 0.27258403361344535,
+          "semantic_top3": 0.9678871548619448
+        },
+        "win-second": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.5302988388082807,
+          "promoted_to_semantic_rank1": 0.2890427622344905,
+          "rows": 10687,
+          "semantic_top1": 0.2890427622344905,
+          "semantic_top3": 0.9648170674651446
+        }
+      },
+      "by_rank_band": {
+        "1-20": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.7359402237621575,
+          "promoted_to_semantic_rank1": 0.24436319317489336,
+          "rows": 9846,
+          "semantic_top1": 0.24436319317489336,
+          "semantic_top3": 0.9681088767011985
+        },
+        "21-40": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.5376887382254609,
+          "promoted_to_semantic_rank1": 0.28367402562005994,
+          "rows": 18345,
+          "semantic_top1": 0.28367402562005994,
+          "semantic_top3": 0.9706186971926956
+        },
+        "41-70": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.5094879709363155,
+          "promoted_to_semantic_rank1": 0.2839641366094039,
+          "rows": 14611,
+          "semantic_top1": 0.2839641366094039,
+          "semantic_top3": 0.9670111559783725
+        }
+      },
+      "overall": {
+        "mean_elite_minus_rejected_semantic_max_logit": -0.5736670269907665,
+        "promoted_to_semantic_rank1": 0.2747301527965983,
+        "rows": 42802,
+        "semantic_top1": 0.2747301527965983,
+        "semantic_top3": 0.9688098686977245
+      }
+    },
+    "epoch_2": {
+      "by_action_family": {
+        "ABILITY": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.5437991362515062,
+          "promoted_to_semantic_rank1": 0.14594059405940593,
+          "rows": 5050,
+          "semantic_top1": 0.14594059405940593,
+          "semantic_top3": 0.902970297029703
+        },
+        "ATTACH": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.08623296856090723,
+          "promoted_to_semantic_rank1": 0.4643708609271523,
+          "rows": 3775,
+          "semantic_top1": 0.4643708609271523,
+          "semantic_top3": 0.9737748344370861
+        },
+        "EVOLVE": {
+          "mean_elite_minus_rejected_semantic_max_logit": -1.0493615192895407,
+          "promoted_to_semantic_rank1": 0.0698901098901099,
+          "rows": 2275,
+          "semantic_top1": 0.0698901098901099,
+          "semantic_top3": 0.7920879120879121
+        },
+        "PLAY": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.04124561479090755,
+          "promoted_to_semantic_rank1": 0.4366840731070496,
+          "rows": 10724,
+          "semantic_top1": 0.4366840731070496,
+          "semantic_top3": 0.9917941066766132
+        },
+        "SWITCH / promotion": {
+          "mean_elite_minus_rejected_semantic_max_logit": -1.1120546287662347,
+          "promoted_to_semantic_rank1": 0.16141479099678457,
+          "rows": 1555,
+          "semantic_top1": 0.16141479099678457,
+          "semantic_top3": 0.985209003215434
+        },
+        "other": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.13951471372458688,
+          "promoted_to_semantic_rank1": 0.4248969173375221,
+          "rows": 5093,
+          "semantic_top1": 0.4248969173375221,
+          "semantic_top3": 0.9958766935008836
+        },
+        "target selection": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.6457741211863223,
+          "promoted_to_semantic_rank1": 0.2618283321702722,
+          "rows": 14330,
+          "semantic_top1": 0.2618283321702722,
+          "semantic_top3": 0.9731332868108863
+        }
+      },
+      "by_outcome_order": {
+        "loss-first": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.4455616887053786,
+          "promoted_to_semantic_rank1": 0.31315878952737164,
+          "rows": 8823,
+          "semantic_top1": 0.31315878952737164,
+          "semantic_top3": 0.9662246401450754
+        },
+        "loss-second": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.42009163979292874,
+          "promoted_to_semantic_rank1": 0.318546768366118,
+          "rows": 9964,
+          "semantic_top1": 0.318546768366118,
+          "semantic_top3": 0.9660778803693296
+        },
+        "win-first": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.4067555530821862,
+          "promoted_to_semantic_rank1": 0.31129951980792314,
+          "rows": 13328,
+          "semantic_top1": 0.31129951980792314,
+          "semantic_top3": 0.9612845138055222
+        },
+        "win-second": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.3796056119861578,
+          "promoted_to_semantic_rank1": 0.31935997005707867,
+          "rows": 10687,
+          "semantic_top1": 0.31935997005707867,
+          "semantic_top3": 0.9600449143819594
+        }
+      },
+      "by_rank_band": {
+        "1-20": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.5489197491134494,
+          "promoted_to_semantic_rank1": 0.28590290473288643,
+          "rows": 9846,
+          "semantic_top1": 0.28590290473288643,
+          "semantic_top3": 0.9618119033109892
+        },
+        "21-40": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.377683886722376,
+          "promoted_to_semantic_rank1": 0.32532025074952303,
+          "rows": 18345,
+          "semantic_top1": 0.32532025074952303,
+          "semantic_top3": 0.9656582174979559
+        },
+        "41-70": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.36012540643533864,
+          "promoted_to_semantic_rank1": 0.32277051536513585,
+          "rows": 14611,
+          "semantic_top1": 0.32277051536513585,
+          "semantic_top3": 0.9607829717336254
+        }
+      },
+      "overall": {
+        "mean_elite_minus_rejected_semantic_max_logit": -0.4110804884145541,
+        "promoted_to_semantic_rank1": 0.31538245876360915,
+        "rows": 42802,
+        "semantic_top1": 0.31538245876360915,
+        "semantic_top3": 0.9631092005046493
+      }
+    },
+    "epoch_3": {
+      "by_action_family": {
+        "ABILITY": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.46471068124959963,
+          "promoted_to_semantic_rank1": 0.15663366336633663,
+          "rows": 5050,
+          "semantic_top1": 0.15663366336633663,
+          "semantic_top3": 0.8984158415841584
+        },
+        "ATTACH": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.029681838174529424,
+          "promoted_to_semantic_rank1": 0.4762913907284768,
+          "rows": 3775,
+          "semantic_top1": 0.4762913907284768,
+          "semantic_top3": 0.974569536423841
+        },
+        "EVOLVE": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.8865345806603904,
+          "promoted_to_semantic_rank1": 0.08967032967032967,
+          "rows": 2275,
+          "semantic_top1": 0.08967032967032967,
+          "semantic_top3": 0.7964835164835165
+        },
+        "PLAY": {
+          "mean_elite_minus_rejected_semantic_max_logit": 0.05296069608166875,
+          "promoted_to_semantic_rank1": 0.5002797463632973,
+          "rows": 10724,
+          "semantic_top1": 0.5002797463632973,
+          "semantic_top3": 0.9923535994032078
+        },
+        "SWITCH / promotion": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.896185620498044,
+          "promoted_to_semantic_rank1": 0.19485530546623794,
+          "rows": 1555,
+          "semantic_top1": 0.19485530546623794,
+          "semantic_top3": 0.9768488745980708
+        },
+        "other": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.13086643178969032,
+          "promoted_to_semantic_rank1": 0.40545847241311606,
+          "rows": 5093,
+          "semantic_top1": 0.40545847241311606,
+          "semantic_top3": 0.9927351266444139
+        },
+        "target selection": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.5188670622162775,
+          "promoted_to_semantic_rank1": 0.2916957431960921,
+          "rows": 14330,
+          "semantic_top1": 0.2916957431960921,
+          "semantic_top3": 0.9674808094905792
+        }
+      },
+      "by_outcome_order": {
+        "loss-first": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.3356473778571778,
+          "promoted_to_semantic_rank1": 0.33900034002040125,
+          "rows": 8823,
+          "semantic_top1": 0.33900034002040125,
+          "semantic_top3": 0.962937776266576
+        },
+        "loss-second": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.312516302994962,
+          "promoted_to_semantic_rank1": 0.34855479727017263,
+          "rows": 9964,
+          "semantic_top1": 0.34855479727017263,
+          "semantic_top3": 0.961762344439984
+        },
+        "win-first": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.31560530703367234,
+          "promoted_to_semantic_rank1": 0.33913565426170467,
+          "rows": 13328,
+          "semantic_top1": 0.33913565426170467,
+          "semantic_top3": 0.9597839135654261
+        },
+        "win-second": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.292081326299246,
+          "promoted_to_semantic_rank1": 0.34827360344343594,
+          "rows": 10687,
+          "semantic_top1": 0.34827360344343594,
+          "semantic_top3": 0.957986338542154
+        }
+      },
+      "by_rank_band": {
+        "1-20": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.4318520250829913,
+          "promoted_to_semantic_rank1": 0.31830184846638226,
+          "rows": 9846,
+          "semantic_top1": 0.31830184846638226,
+          "semantic_top3": 0.9574446475726183
+        },
+        "21-40": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.2819052175398125,
+          "promoted_to_semantic_rank1": 0.3539929136004361,
+          "rows": 18345,
+          "semantic_top1": 0.3539929136004361,
+          "semantic_top3": 0.9629871899700191
+        },
+        "41-70": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.2723717520666289,
+          "promoted_to_semantic_rank1": 0.3475463691739101,
+          "rows": 14611,
+          "semantic_top1": 0.3475463691739101,
+          "semantic_top3": 0.9592772568612689
+        }
+      },
+      "overall": {
+        "mean_elite_minus_rejected_semantic_max_logit": -0.3131440101906572,
+        "promoted_to_semantic_rank1": 0.3435820756039437,
+        "rows": 42802,
+        "semantic_top1": 0.3435820756039437,
+        "semantic_top3": 0.9604457735619831
+      }
+    },
+    "exact_a2": {
+      "by_action_family": {
+        "ABILITY": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.8080121514230671,
+          "promoted_to_semantic_rank1": 0.0,
+          "rows": 5050,
+          "semantic_top1": 0.0,
+          "semantic_top3": 1.0
+        },
+        "ATTACH": {
+          "mean_elite_minus_rejected_semantic_max_logit": -1.39108758986391,
+          "promoted_to_semantic_rank1": 0.0,
+          "rows": 3775,
+          "semantic_top1": 0.0,
+          "semantic_top3": 1.0
+        },
+        "EVOLVE": {
+          "mean_elite_minus_rejected_semantic_max_logit": -1.0477460841556172,
+          "promoted_to_semantic_rank1": 0.0,
+          "rows": 2275,
+          "semantic_top1": 0.0,
+          "semantic_top3": 1.0
+        },
+        "PLAY": {
+          "mean_elite_minus_rejected_semantic_max_logit": -0.9901944709186543,
+          "promoted_to_semantic_rank1": 0.0,
+          "rows": 10724,
+          "semantic_top1": 0.0,
+          "semantic_top3": 1.0
+        },
+        "SWITCH / promotion": {
+          "mean_elite_minus_rejected_semantic_max_logit": -1.8393498580172132,
+          "promoted_to_semantic_rank1": 0.0,
+          "rows": 1555,
+          "semantic_top1": 0.0,
+          "semantic_top3": 1.0
+        },
+        "other": {
+          "mean_elite_minus_rejected_semantic_max_logit": -1.342674348856643,
+          "promoted_to_semantic_rank1": 0.0,
+          "rows": 5093,
+          "semantic_top1": 0.0,
+          "semantic_top3": 1.0
+        },
+        "target selection": {
+          "mean_elite_minus_rejected_semantic_max_logit": -1.2858048882909945,
+          "promoted_to_semantic_rank1": 0.0,
+          "rows": 14330,
+          "semantic_top1": 0.0,
+          "semantic_top3": 1.0
+        }
+      },
+      "by_outcome_order": {
+        "loss-first": {
+          "mean_elite_minus_rejected_semantic_max_logit": -1.198275764303576,
+          "promoted_to_semantic_rank1": 0.0,
+          "rows": 8823,
+          "semantic_top1": 0.0,
+          "semantic_top3": 1.0
+        },
+        "loss-second": {
+          "mean_elite_minus_rejected_semantic_max_logit": -1.2066963498537822,
+          "promoted_to_semantic_rank1": 0.0,
+          "rows": 9964,
+          "semantic_top1": 0.0,
+          "semantic_top3": 1.0
+        },
+        "win-first": {
+          "mean_elite_minus_rejected_semantic_max_logit": -1.16459578239009,
+          "promoted_to_semantic_rank1": 0.0,
+          "rows": 13328,
+          "semantic_top1": 0.0,
+          "semantic_top3": 1.0
+        },
+        "win-second": {
+          "mean_elite_minus_rejected_semantic_max_logit": -1.1547353153432554,
+          "promoted_to_semantic_rank1": 0.0,
+          "rows": 10687,
+          "semantic_top1": 0.0,
+          "semantic_top3": 1.0
+        }
+      },
+      "by_rank_band": {
+        "1-20": {
+          "mean_elite_minus_rejected_semantic_max_logit": -1.3596145377038287,
+          "promoted_to_semantic_rank1": 0.0,
+          "rows": 9846,
+          "semantic_top1": 0.0,
+          "semantic_top3": 1.0
+        },
+        "21-40": {
+          "mean_elite_minus_rejected_semantic_max_logit": -1.1338241536932767,
+          "promoted_to_semantic_rank1": 0.0,
+          "rows": 18345,
+          "semantic_top1": 0.0,
+          "semantic_top3": 1.0
+        },
+        "41-70": {
+          "mean_elite_minus_rejected_semantic_max_logit": -1.113649275438161,
+          "promoted_to_semantic_rank1": 0.0,
+          "rows": 14611,
+          "semantic_top1": 0.0,
+          "semantic_top3": 1.0
+        }
+      },
+      "overall": {
+        "mean_elite_minus_rejected_semantic_max_logit": -1.1788771179188362,
+        "promoted_to_semantic_rank1": 0.0,
+        "rows": 42802,
+        "semantic_top1": 0.0,
+        "semantic_top3": 1.0
+      }
+    }
+  },
+  "stage": "original train-correction learning audit"
+}

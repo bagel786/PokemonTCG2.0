@@ -147,8 +147,16 @@ def episode_decks(episode: dict) -> tuple[tuple[int, ...], tuple[int, ...]]:
     return result[0], result[1]
 
 
+def episode_outcomes(episode: dict) -> tuple[float, float] | None:
+    """Return one winner and one loser; reject unresolved games and 0/0 draws."""
+    outcomes = tuple(episode_reward(episode, seat) for seat in (0, 1))
+    if outcomes not in ((0.0, 1.0), (1.0, 0.0)):
+        return None
+    return float(outcomes[0]), float(outcomes[1])
+
+
 def game_complete(episode: dict) -> bool:
-    return all(episode_reward(episode, seat) in (0.0, 1.0) for seat in (0, 1))
+    return episode_outcomes(episode) is not None
 
 
 def download_dataset(date: str, destination: Path, kaggle: Path = KAGGLE) -> Path:
@@ -229,8 +237,11 @@ def extract_day(
                     print(json.dumps({"date": date, "members": number, **counters}), flush=True)
                 continue
             counters["exact_episodes_seen"] += 1
-            if not game_complete(episode):
-                counters["incomplete_exact_episodes"] += 1
+            outcomes = episode_outcomes(episode)
+            if outcomes is None:
+                observed = tuple(episode_reward(episode, seat) for seat in (0, 1))
+                counter = "draw_exact_episodes" if observed == (0.0, 0.0) else "incomplete_exact_episodes"
+                counters[counter] += 1
                 continue
             _, _, first_player = episode_order(episode)
             if first_player not in (0, 1):
@@ -242,7 +253,7 @@ def extract_day(
                 if seat_errors:
                     counters["excluded_malformed_game_seats"] += 1
                     continue
-                reward = episode_reward(episode, seat)
+                reward = outcomes[seat]
                 opponent = 1 - seat
                 game_meta = {
                     "source": "official_kaggle_daily_complete",
@@ -254,6 +265,9 @@ def extract_day(
                     "outcome": "win" if reward == 1.0 else "loss",
                     "actual_order": "first" if first_player == seat else "second",
                     "create_time": manifest_row["create_time"],
+                    "episode_min_score": min(low, high),
+                    "episode_max_score": max(low, high),
+                    "strict_both_ge_1050": min(low, high) >= 1050.0,
                     "hero_deck_sha256": deck_hash(decks[seat]),
                     "opponent_deck_sha256": deck_hash(decks[opponent]),
                     "opponent_archetype": classify(decks[opponent], archetype_catalog),
@@ -490,6 +504,7 @@ def certify(
     )
 
     evaluated = []
+    strict_holdout_extras = []
     excluded = Counter()
     duplicate_keys = Counter()
     seen_keys = set()
@@ -511,11 +526,15 @@ def certify(
                 excluded["teacher_rank_unresolved"] += 1
                 continue
             teacher_rank = int(strength["rank"])
-            if teacher_rank > 70:
+            teacher_qualified_top70 = teacher_rank <= 70
+            strict_holdout = bool(
+                row["source_date"] == HOLDOUT_DATE and row.get("strict_both_ge_1050", False)
+            )
+            if not teacher_qualified_top70 and not strict_holdout:
                 excluded["teacher_rank_over_70"] += 1
                 continue
             band = rank_band(teacher_rank)
-            if band == "41-70" and not include_rank_41_70:
+            if teacher_qualified_top70 and band == "41-70" and not include_rank_41_70:
                 excluded["rank_41_70_band_removed"] += 1
                 continue
             opponent_strength = rank_maps[date].get(str(row["opponent_identity"]), {})
@@ -525,14 +544,15 @@ def certify(
                 "opponent_source_date_rank": opponent_strength.get("rank"),
                 "opponent_source_date_rating": opponent_strength.get("rating"),
                 "rank_band": band,
-                "base_rank_weight": RANK_WEIGHTS[band],
-                "strict_both_ge_1050": bool(
-                    float(strength["rating"]) >= 1050
-                    and float(opponent_strength.get("rating", -math.inf)) >= 1050
-                ),
+                "base_rank_weight": RANK_WEIGHTS.get(band, 0.0),
+                "teacher_qualified_top70": teacher_qualified_top70,
+                # The manifest's unordered score pair is sufficient: if its
+                # minimum is >=1050, both episode participants meet the gate.
+                "strict_both_ge_1050": strict_holdout,
             })
             try:
-                evaluated.append(evaluate_row(row, model))
+                item = evaluate_row(row, model)
+                (evaluated if teacher_qualified_top70 else strict_holdout_extras).append(item)
             except Exception:
                 excluded["a2_inference_or_feature_error"] += 1
 
@@ -614,6 +634,10 @@ def certify(
     for pilot, games in pilot_games.items():
         pilots[pilot]["games"] = len(games)
 
+    # Gate A is the union of the qualified top-70 holdout and the independent
+    # manifest-defined strict population.  Strict rows outside top 70 are
+    # diagnostics only and can never enter optimization or corpus statistics.
+    qualified_rows["holdout"].extend(dict(item.row) for item in strict_holdout_extras)
     train_corrections = [row for row in corrections if row["source_date"] in TRAIN_DATES]
     holdout_corrections = [row for row in corrections if row["source_date"] == HOLDOUT_DATE]
     balancing = balance_corrections(train_corrections)
@@ -687,6 +711,11 @@ def certify(
         float(item.row["opponent_source_date_rating"])
         for item in evaluated if item.row.get("opponent_source_date_rating") is not None
     ]
+    strict_holdout_rows = [row for row in qualified_rows["holdout"] if row["strict_both_ge_1050"]]
+    strict_holdout_game_seats = {
+        (str(row["episode_id"]), int(row["seat"])): row["outcome"]
+        for row in strict_holdout_rows
+    }
     report = {
         "experiment": "A2-ERR-1",
         "stage": "pre-training corpus certification",
@@ -719,7 +748,14 @@ def certify(
             "minimum": min(opponent_ratings) if opponent_ratings else None,
             "median": statistics.median(opponent_ratings) if opponent_ratings else None,
             "maximum": max(opponent_ratings) if opponent_ratings else None,
-            "both_players_ge_1050_decisions": sum(item.row["strict_both_ge_1050"] for item in evaluated),
+            "both_players_ge_1050_decisions": len(strict_holdout_rows),
+        },
+        "strict_aug13_holdout": {
+            "definition": "official manifest min_score >= 1050; independent of inferred teacher rank",
+            "game_seats": len(strict_holdout_game_seats),
+            "decisions": len(strict_holdout_rows),
+            "wins": sum(outcome == "win" for outcome in strict_holdout_game_seats.values()),
+            "losses": sum(outcome == "loss" for outcome in strict_holdout_game_seats.values()),
         },
         "duplicate_episode_ids_across_days": duplicate_episode_ids,
         "duplicate_decision_keys": len(duplicate_keys),
@@ -744,7 +780,7 @@ def certify(
         "notes": {
             "rank_41_70_included": include_rank_41_70,
             "opponent_archetype": "classified from the opponent's official replay deck handshake",
-            "strict_subset": "both inferred source-date ratings >=1050",
+            "strict_subset": "official episode manifest min_score >=1050, independent of top-70 qualification",
             "loss_labels": "positive demonstrations; never negative labels",
         },
     }

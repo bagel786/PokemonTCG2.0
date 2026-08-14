@@ -118,13 +118,18 @@ def finalize(metric: Counter) -> dict:
 
 
 def gate_a_subsets(row: dict) -> list[str]:
-    result = ["all_top70"]
-    if int(row["teacher_source_date_rank"]) <= 20:
-        result.append("rank_1_20")
-    if row["outcome"] == "loss" and row["actual_order"] == "first":
-        result.append("loss_first")
-    if row["outcome"] == "loss" and row["actual_order"] == "second":
-        result.append("loss_second")
+    result = []
+    teacher_qualified_top70 = row.get(
+        "teacher_qualified_top70", int(row["teacher_source_date_rank"]) <= 70
+    )
+    if teacher_qualified_top70:
+        result.append("all_top70")
+        if int(row["teacher_source_date_rank"]) <= 20:
+            result.append("rank_1_20")
+        if row["outcome"] == "loss" and row["actual_order"] == "first":
+            result.append("loss_first")
+        if row["outcome"] == "loss" and row["actual_order"] == "second":
+            result.append("loss_second")
     if row.get("strict_both_ge_1050"):
         result.extend([
             "strict_all",

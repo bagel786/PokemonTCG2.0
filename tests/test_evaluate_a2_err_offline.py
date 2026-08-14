@@ -1,4 +1,4 @@
-from training.evaluate_a2_err_offline import decide_gate_a, decide_gate_b
+from training.evaluate_a2_err_offline import decide_gate_a, decide_gate_b, gate_a_subsets
 
 
 def metric(delta, top3_delta=0.0):
@@ -41,3 +41,14 @@ def test_gate_b_uses_frozen_thresholds_exactly():
     assert decide_gate_b(overall, integrity)["status"] == "PASS"
     overall["semantic_greedy_change_rate"] = 0.030001
     assert decide_gate_b(overall, integrity)["status"] == "FAIL"
+
+
+def test_strict_holdout_is_independent_of_top70_teacher_filter():
+    row = {
+        "teacher_source_date_rank": 143,
+        "teacher_qualified_top70": False,
+        "strict_both_ge_1050": True,
+        "outcome": "loss",
+        "actual_order": "second",
+    }
+    assert gate_a_subsets(row) == ["strict_all", "strict_loss", "strict_second"]

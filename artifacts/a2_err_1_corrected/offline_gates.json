@@ -1,0 +1,698 @@
+{
+  "aug13_holdout": {
+    "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/data/a2_err_1_corrected/certified/aug13_holdout.jsonl.gz",
+    "sha256": "8dba211ffa28149c21e08826d30e056c9780fc0b20b5309477639016dc6c80fc"
+  },
+  "base": {
+    "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/grim_damage_conversion/candidates/a2_damage_v0/policy_weights.npz",
+    "sha256": "b19871a9f1499c2460ae266e58194acab1d8c90b390fa5cf24ed94b9a2b6bda8"
+  },
+  "checkpoints": {
+    "epoch_1": {
+      "gate_a": {
+        "checks": {
+          "first_top1_regression_at_most_0_5pp": false,
+          "loss_semantic_top1_delta_at_least_3pp": false,
+          "second_top1_regression_at_most_0_5pp": false,
+          "semantic_top3_regression_at_most_0_25pp": false,
+          "win_semantic_top1_delta_at_least_1pp": false
+        },
+        "missing_subsets": [],
+        "status": "FAIL",
+        "subsets": {
+          "all_top70": {
+            "base_top1": 0.8010870049449815,
+            "base_top3": 0.9856105492938922,
+            "candidate_top1": 0.7867866530048558,
+            "candidate_top3": 0.9828930369314385,
+            "mean_per_state_kl": 0.0696826665549636,
+            "semantic_greedy_change_rate": 0.12234447735928904,
+            "single_semantic_decisions": 22447,
+            "states": 23630,
+            "top1_delta_pp": -1.4300351940125688,
+            "top3_delta_pp": -0.27175123624537667
+          },
+          "loss_first": {
+            "base_top1": 0.797962226640159,
+            "base_top3": 0.9828528827037774,
+            "candidate_top1": 0.7927435387673957,
+            "candidate_top3": 0.9806163021868787,
+            "mean_per_state_kl": 0.06619151602252753,
+            "semantic_greedy_change_rate": 0.10621147463252727,
+            "single_semantic_decisions": 4024,
+            "states": 4218,
+            "top1_delta_pp": -0.5218687872763361,
+            "top3_delta_pp": -0.22365805168986785
+          },
+          "loss_second": {
+            "base_top1": 0.8042398145081153,
+            "base_top3": 0.9880755216959258,
+            "candidate_top1": 0.789002981119576,
+            "candidate_top3": 0.9860881086452468,
+            "mean_per_state_kl": 0.06708715428221972,
+            "semantic_greedy_change_rate": 0.11162127929069031,
+            "single_semantic_decisions": 6038,
+            "states": 6316,
+            "top1_delta_pp": -1.5236833388539317,
+            "top3_delta_pp": -0.19874130506790655
+          },
+          "rank_1_20": {
+            "base_top1": 0.8093689004554326,
+            "base_top3": 0.9879635653871177,
+            "candidate_top1": 0.7882238126219909,
+            "candidate_top3": 0.9860117111255693,
+            "mean_per_state_kl": 0.06864222516200981,
+            "semantic_greedy_change_rate": 0.11832298136645963,
+            "single_semantic_decisions": 3074,
+            "states": 3220,
+            "top1_delta_pp": -2.114508783344171,
+            "top3_delta_pp": -0.19518542615484247
+          },
+          "strict_all": {
+            "base_top1": 0.8106721788393814,
+            "base_top3": 0.9879804011636809,
+            "candidate_top1": 0.7938294288776604,
+            "candidate_top3": 0.9853774307150512,
+            "mean_per_state_kl": 0.0689224328257971,
+            "semantic_greedy_change_rate": 0.1228275157003067,
+            "single_semantic_decisions": 13062,
+            "states": 13694,
+            "top1_delta_pp": -1.684274996172097,
+            "top3_delta_pp": -0.2602970448629671
+          },
+          "strict_first": {
+            "base_top1": 0.808641975308642,
+            "base_top3": 0.9864197530864197,
+            "candidate_top1": 0.7942901234567902,
+            "candidate_top3": 0.9839506172839506,
+            "mean_per_state_kl": 0.06676863363564875,
+            "semantic_greedy_change_rate": 0.12020573108008817,
+            "single_semantic_decisions": 6480,
+            "states": 6805,
+            "top1_delta_pp": -1.4351851851851838,
+            "top3_delta_pp": -0.24691358024691024
+          },
+          "strict_loss": {
+            "base_top1": 0.8044468995995029,
+            "base_top3": 0.9870183676287806,
+            "candidate_top1": 0.7940892141969341,
+            "candidate_top3": 0.9842563181880956,
+            "mean_per_state_kl": 0.06663515544331398,
+            "semantic_greedy_change_rate": 0.11478882563219912,
+            "single_semantic_decisions": 7241,
+            "states": 7553,
+            "top1_delta_pp": -1.0357685402568761,
+            "top3_delta_pp": -0.27620494406850327
+          },
+          "strict_second": {
+            "base_top1": 0.8126709206927986,
+            "base_top3": 0.9895168641750228,
+            "candidate_top1": 0.7933758735946521,
+            "candidate_top3": 0.9867821330902461,
+            "mean_per_state_kl": 0.07104996998488664,
+            "semantic_greedy_change_rate": 0.12541733197851648,
+            "single_semantic_decisions": 6582,
+            "states": 6889,
+            "top1_delta_pp": -1.9295047098146445,
+            "top3_delta_pp": -0.27347310847767314
+          },
+          "strict_win": {
+            "base_top1": 0.8184160797113897,
+            "base_top3": 0.9891771173337914,
+            "candidate_top1": 0.7935062704002749,
+            "candidate_top3": 0.9867720322968562,
+            "mean_per_state_kl": 0.07173562384841603,
+            "semantic_greedy_change_rate": 0.1327145416056017,
+            "single_semantic_decisions": 5821,
+            "states": 6141,
+            "top1_delta_pp": -2.490980931111486,
+            "top3_delta_pp": -0.24050850369352617
+          }
+        }
+      },
+      "gate_b": {
+        "checks": {
+          "all_frozen_parameter_arrays_byte_identical": true,
+          "count_outputs_identical": true,
+          "mean_per_state_kl_at_most_0_02": false,
+          "semantic_greedy_change_rate_at_most_3pct": false,
+          "semantic_top1_regression_at_most_0_5pp": false,
+          "semantic_top3_regression_at_most_0_1pp": false,
+          "value_outputs_identical": true,
+          "zero_non_finite_values": true,
+          "zero_policy_runtime_errors": true
+        },
+        "integrity": {
+          "count_output_mismatches": 0,
+          "frozen_array_audit": {
+            "all_frozen_arrays_byte_identical": true,
+            "frozen_arrays": {
+              "area_embedding": true,
+              "attack_embedding": true,
+              "card_embedding": true,
+              "context_embedding": true,
+              "count_b": true,
+              "count_w": true,
+              "global_b": true,
+              "global_w": true,
+              "model_schema_version": true,
+              "numeric_b": true,
+              "numeric_w": true,
+              "state_embedding": true,
+              "type_embedding": true,
+              "value_b": true,
+              "value_w": true
+            },
+            "mutable_arrays_changed": {
+              "option_b": true,
+              "option_w": true,
+              "score_b": true,
+              "score_w": true
+            }
+          },
+          "non_finite_values": 0,
+          "policy_runtime_errors": 0,
+          "value_output_mismatches": 0
+        },
+        "metrics": {
+          "overall": {
+            "base_top1": 0.8271396970223787,
+            "base_top3": 0.989299266834921,
+            "candidate_top1": 0.7920281036622285,
+            "candidate_top3": 0.9844374771447926,
+            "mean_per_state_kl": 0.06922090371838967,
+            "semantic_greedy_change_rate": 0.1196757490875138,
+            "single_semantic_decisions": 333622,
+            "states": 353430,
+            "top1_delta_pp": -3.511159336015013,
+            "top3_delta_pp": -0.4861789690128404
+          },
+          "team_holdout.jsonl.gz": {
+            "base_top1": 0.8271391912220157,
+            "base_top3": 0.9908149721263605,
+            "candidate_top1": 0.7890186709140784,
+            "candidate_top3": 0.9858596584373064,
+            "mean_per_state_kl": 0.06931330504311053,
+            "semantic_greedy_change_rate": 0.1188998896210322,
+            "single_semantic_decisions": 113010,
+            "states": 119588,
+            "top1_delta_pp": -3.8120520307937333,
+            "top3_delta_pp": -0.49553136890541083
+          },
+          "temporal_holdout.jsonl.gz": {
+            "base_top1": 0.8297215223543146,
+            "base_top3": 0.9884811183437636,
+            "candidate_top1": 0.7964800543803522,
+            "candidate_top3": 0.9838853874969522,
+            "mean_per_state_kl": 0.06930100708056348,
+            "semantic_greedy_change_rate": 0.12071779278022653,
+            "single_semantic_decisions": 135343,
+            "states": 143384,
+            "top1_delta_pp": -3.3241467973962435,
+            "top3_delta_pp": -0.4595730846811419
+          },
+          "validation.jsonl.gz": {
+            "base_top1": 0.8230423717881059,
+            "base_top3": 0.9885890534660897,
+            "candidate_top1": 0.7889502632844293,
+            "candidate_top3": 0.9834289132040953,
+            "mean_per_state_kl": 0.06897177561360668,
+            "semantic_greedy_change_rate": 0.11904972473413075,
+            "single_semantic_decisions": 85269,
+            "states": 90458,
+            "top1_delta_pp": -3.409210850367661,
+            "top3_delta_pp": -0.5160140261994406
+          }
+        },
+        "status": "FAIL"
+      },
+      "offline_status": "FAIL",
+      "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/a2_err_1_corrected/training/epoch_1/policy_weights.npz",
+      "sha256": "182062f3c7df2d06cd4c42c363ed4e32dc44241bcf7d8d5a254db89902ee1b75"
+    },
+    "epoch_2": {
+      "gate_a": {
+        "checks": {
+          "first_top1_regression_at_most_0_5pp": false,
+          "loss_semantic_top1_delta_at_least_3pp": false,
+          "second_top1_regression_at_most_0_5pp": false,
+          "semantic_top3_regression_at_most_0_25pp": false,
+          "win_semantic_top1_delta_at_least_1pp": false
+        },
+        "missing_subsets": [],
+        "status": "FAIL",
+        "subsets": {
+          "all_top70": {
+            "base_top1": 0.8010870049449815,
+            "base_top3": 0.9856105492938922,
+            "candidate_top1": 0.7769412393638349,
+            "candidate_top3": 0.9811110616117967,
+            "mean_per_state_kl": 0.10319499826388281,
+            "semantic_greedy_change_rate": 0.1509098603470165,
+            "single_semantic_decisions": 22447,
+            "states": 23630,
+            "top1_delta_pp": -2.414576558114667,
+            "top3_delta_pp": -0.44994876820955154
+          },
+          "loss_first": {
+            "base_top1": 0.797962226640159,
+            "base_top3": 0.9828528827037774,
+            "candidate_top1": 0.7800695825049702,
+            "candidate_top3": 0.981858846918489,
+            "mean_per_state_kl": 0.10264195769837657,
+            "semantic_greedy_change_rate": 0.14129919393077287,
+            "single_semantic_decisions": 4024,
+            "states": 4218,
+            "top1_delta_pp": -1.7892644135188873,
+            "top3_delta_pp": -0.09940357852883386
+          },
+          "loss_second": {
+            "base_top1": 0.8042398145081153,
+            "base_top3": 0.9880755216959258,
+            "candidate_top1": 0.7803908578999669,
+            "candidate_top3": 0.984266313348791,
+            "mean_per_state_kl": 0.10239098381480735,
+            "semantic_greedy_change_rate": 0.14107029765674478,
+            "single_semantic_decisions": 6038,
+            "states": 6316,
+            "top1_delta_pp": -2.3848956608148453,
+            "top3_delta_pp": -0.3809208347134829
+          },
+          "rank_1_20": {
+            "base_top1": 0.8093689004554326,
+            "base_top3": 0.9879635653871177,
+            "candidate_top1": 0.7807417046193884,
+            "candidate_top3": 0.9843851659076123,
+            "mean_per_state_kl": 0.1024157237673356,
+            "semantic_greedy_change_rate": 0.14782608695652175,
+            "single_semantic_decisions": 3074,
+            "states": 3220,
+            "top1_delta_pp": -2.862719583604423,
+            "top3_delta_pp": -0.3578399479505445
+          },
+          "strict_all": {
+            "base_top1": 0.8106721788393814,
+            "base_top3": 0.9879804011636809,
+            "candidate_top1": 0.7816567141325984,
+            "candidate_top3": 0.9826979023120502,
+            "mean_per_state_kl": 0.10255413319554386,
+            "semantic_greedy_change_rate": 0.15211041331970207,
+            "single_semantic_decisions": 13062,
+            "states": 13694,
+            "top1_delta_pp": -2.9015464706782956,
+            "top3_delta_pp": -0.5282498851630679
+          },
+          "strict_first": {
+            "base_top1": 0.808641975308642,
+            "base_top3": 0.9864197530864197,
+            "candidate_top1": 0.779783950617284,
+            "candidate_top3": 0.9817901234567902,
+            "mean_per_state_kl": 0.09992250396675229,
+            "semantic_greedy_change_rate": 0.1518001469507715,
+            "single_semantic_decisions": 6480,
+            "states": 6805,
+            "top1_delta_pp": -2.885802469135801,
+            "top3_delta_pp": -0.4629629629629539
+          },
+          "strict_loss": {
+            "base_top1": 0.8044468995995029,
+            "base_top3": 0.9870183676287806,
+            "candidate_top1": 0.7830410164341942,
+            "candidate_top3": 0.9830133959397873,
+            "mean_per_state_kl": 0.10249222409019039,
+            "semantic_greedy_change_rate": 0.14245994968886536,
+            "single_semantic_decisions": 7241,
+            "states": 7553,
+            "top1_delta_pp": -2.140588316530867,
+            "top3_delta_pp": -0.4004971688993275
+          },
+          "strict_second": {
+            "base_top1": 0.8126709206927986,
+            "base_top3": 0.9895168641750228,
+            "candidate_top1": 0.7835004557885141,
+            "candidate_top3": 0.98359161349134,
+            "mean_per_state_kl": 0.10515367404355125,
+            "semantic_greedy_change_rate": 0.15241689650166934,
+            "single_semantic_decisions": 6582,
+            "states": 6889,
+            "top1_delta_pp": -2.917046490428443,
+            "top3_delta_pp": -0.592525068368277
+          },
+          "strict_win": {
+            "base_top1": 0.8184160797113897,
+            "base_top3": 0.9891771173337914,
+            "candidate_top1": 0.779934719120426,
+            "candidate_top3": 0.9823054457996908,
+            "mean_per_state_kl": 0.10263027706018031,
+            "semantic_greedy_change_rate": 0.16397980784888455,
+            "single_semantic_decisions": 5821,
+            "states": 6141,
+            "top1_delta_pp": -3.8481360590963742,
+            "top3_delta_pp": -0.6871671534100621
+          }
+        }
+      },
+      "gate_b": {
+        "checks": {
+          "all_frozen_parameter_arrays_byte_identical": true,
+          "count_outputs_identical": true,
+          "mean_per_state_kl_at_most_0_02": false,
+          "semantic_greedy_change_rate_at_most_3pct": false,
+          "semantic_top1_regression_at_most_0_5pp": false,
+          "semantic_top3_regression_at_most_0_1pp": false,
+          "value_outputs_identical": true,
+          "zero_non_finite_values": true,
+          "zero_policy_runtime_errors": true
+        },
+        "integrity": {
+          "count_output_mismatches": 0,
+          "frozen_array_audit": {
+            "all_frozen_arrays_byte_identical": true,
+            "frozen_arrays": {
+              "area_embedding": true,
+              "attack_embedding": true,
+              "card_embedding": true,
+              "context_embedding": true,
+              "count_b": true,
+              "count_w": true,
+              "global_b": true,
+              "global_w": true,
+              "model_schema_version": true,
+              "numeric_b": true,
+              "numeric_w": true,
+              "state_embedding": true,
+              "type_embedding": true,
+              "value_b": true,
+              "value_w": true
+            },
+            "mutable_arrays_changed": {
+              "option_b": true,
+              "option_w": true,
+              "score_b": true,
+              "score_w": true
+            }
+          },
+          "non_finite_values": 0,
+          "policy_runtime_errors": 0,
+          "value_output_mismatches": 0
+        },
+        "metrics": {
+          "overall": {
+            "base_top1": 0.8271396970223787,
+            "base_top3": 0.989299266834921,
+            "candidate_top1": 0.7783959091426824,
+            "candidate_top3": 0.9816498911942259,
+            "mean_per_state_kl": 0.099895865394854,
+            "semantic_greedy_change_rate": 0.14511784511784512,
+            "single_semantic_decisions": 333622,
+            "states": 353430,
+            "top1_delta_pp": -4.874378787969624,
+            "top3_delta_pp": -0.7649375640695122
+          },
+          "team_holdout.jsonl.gz": {
+            "base_top1": 0.8271391912220157,
+            "base_top3": 0.9908149721263605,
+            "candidate_top1": 0.7757632067958588,
+            "candidate_top3": 0.9829661091938766,
+            "mean_per_state_kl": 0.10023528622561445,
+            "semantic_greedy_change_rate": 0.14376024350269256,
+            "single_semantic_decisions": 113010,
+            "states": 119588,
+            "top1_delta_pp": -5.137598442615698,
+            "top3_delta_pp": -0.784886293248388
+          },
+          "temporal_holdout.jsonl.gz": {
+            "base_top1": 0.8297215223543146,
+            "base_top3": 0.9884811183437636,
+            "candidate_top1": 0.7829071322491743,
+            "candidate_top3": 0.9810629290026082,
+            "mean_per_state_kl": 0.0997926677263712,
+            "semantic_greedy_change_rate": 0.14654354739719913,
+            "single_semantic_decisions": 135343,
+            "states": 143384,
+            "top1_delta_pp": -4.681439010514032,
+            "top3_delta_pp": -0.7418189341155457
+          },
+          "validation.jsonl.gz": {
+            "base_top1": 0.8230423717881059,
+            "base_top3": 0.9885890534660897,
+            "candidate_top1": 0.7747246947894311,
+            "candidate_top3": 0.9808371154815936,
+            "mean_per_state_kl": 0.09961071909698596,
+            "semantic_greedy_change_rate": 0.14465276703000288,
+            "single_semantic_decisions": 85269,
+            "states": 90458,
+            "top1_delta_pp": -4.831767699867484,
+            "top3_delta_pp": -0.7751937984496138
+          }
+        },
+        "status": "FAIL"
+      },
+      "offline_status": "FAIL",
+      "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/a2_err_1_corrected/training/epoch_2/policy_weights.npz",
+      "sha256": "4932adc663139ee2ae219cc480a9e2cff7177a261513e6983bc2f3bc9bdc6d6b"
+    },
+    "epoch_3": {
+      "gate_a": {
+        "checks": {
+          "first_top1_regression_at_most_0_5pp": false,
+          "loss_semantic_top1_delta_at_least_3pp": false,
+          "second_top1_regression_at_most_0_5pp": false,
+          "semantic_top3_regression_at_most_0_25pp": false,
+          "win_semantic_top1_delta_at_least_1pp": false
+        },
+        "missing_subsets": [],
+        "status": "FAIL",
+        "subsets": {
+          "all_top70": {
+            "base_top1": 0.8010870049449815,
+            "base_top3": 0.9856105492938922,
+            "candidate_top1": 0.7703924800641511,
+            "candidate_top3": 0.98039827148394,
+            "mean_per_state_kl": 0.12653474058675443,
+            "semantic_greedy_change_rate": 0.17037663986457893,
+            "single_semantic_decisions": 22447,
+            "states": 23630,
+            "top1_delta_pp": -3.0694524880830465,
+            "top3_delta_pp": -0.5212277809952259
+          },
+          "loss_first": {
+            "base_top1": 0.797962226640159,
+            "base_top3": 0.9828528827037774,
+            "candidate_top1": 0.7718687872763419,
+            "candidate_top3": 0.9823558648111332,
+            "mean_per_state_kl": 0.1292001595846268,
+            "semantic_greedy_change_rate": 0.16524419155998105,
+            "single_semantic_decisions": 4024,
+            "states": 4218,
+            "top1_delta_pp": -2.609343936381714,
+            "top3_delta_pp": -0.04970178926441138
+          },
+          "loss_second": {
+            "base_top1": 0.8042398145081153,
+            "base_top3": 0.9880755216959258,
+            "candidate_top1": 0.7755879430274926,
+            "candidate_top3": 0.9832726068234515,
+            "mean_per_state_kl": 0.12692779592370057,
+            "semantic_greedy_change_rate": 0.16260291323622547,
+            "single_semantic_decisions": 6038,
+            "states": 6316,
+            "top1_delta_pp": -2.865187148062276,
+            "top3_delta_pp": -0.48029148724743065
+          },
+          "rank_1_20": {
+            "base_top1": 0.8093689004554326,
+            "base_top3": 0.9879635653871177,
+            "candidate_top1": 0.7735849056603774,
+            "candidate_top3": 0.9847104749512037,
+            "mean_per_state_kl": 0.12667234270484964,
+            "semantic_greedy_change_rate": 0.17080745341614906,
+            "single_semantic_decisions": 3074,
+            "states": 3220,
+            "top1_delta_pp": -3.578399479505523,
+            "top3_delta_pp": -0.3253090435914041
+          },
+          "strict_all": {
+            "base_top1": 0.8106721788393814,
+            "base_top3": 0.9879804011636809,
+            "candidate_top1": 0.7721635277905374,
+            "candidate_top3": 0.9816260909508497,
+            "mean_per_state_kl": 0.12604393680465434,
+            "semantic_greedy_change_rate": 0.17160800350518476,
+            "single_semantic_decisions": 13062,
+            "states": 13694,
+            "top1_delta_pp": -3.8508651048843934,
+            "top3_delta_pp": -0.6354310212831171
+          },
+          "strict_first": {
+            "base_top1": 0.808641975308642,
+            "base_top3": 0.9864197530864197,
+            "candidate_top1": 0.7680555555555556,
+            "candidate_top3": 0.9808641975308642,
+            "mean_per_state_kl": 0.12314566383522542,
+            "semantic_greedy_change_rate": 0.17207935341660544,
+            "single_semantic_decisions": 6480,
+            "states": 6805,
+            "top1_delta_pp": -4.058641975308641,
+            "top3_delta_pp": -0.5555555555555536
+          },
+          "strict_loss": {
+            "base_top1": 0.8044468995995029,
+            "base_top3": 0.9870183676287806,
+            "candidate_top1": 0.7725452285595912,
+            "candidate_top3": 0.9816323712194448,
+            "mean_per_state_kl": 0.1279879978197067,
+            "semantic_greedy_change_rate": 0.16470276711240567,
+            "single_semantic_decisions": 7241,
+            "states": 7553,
+            "top1_delta_pp": -3.1901671039911705,
+            "top3_delta_pp": -0.5385996409335791
+          },
+          "strict_second": {
+            "base_top1": 0.8126709206927986,
+            "base_top3": 0.9895168641750228,
+            "candidate_top1": 0.776207839562443,
+            "candidate_top3": 0.9823761774536615,
+            "mean_per_state_kl": 0.12890687011238522,
+            "semantic_greedy_change_rate": 0.17114240092901728,
+            "single_semantic_decisions": 6582,
+            "states": 6889,
+            "top1_delta_pp": -3.646308113035557,
+            "top3_delta_pp": -0.7140686721361367
+          },
+          "strict_win": {
+            "base_top1": 0.8184160797113897,
+            "base_top3": 0.9891771173337914,
+            "candidate_top1": 0.7716887132795053,
+            "candidate_top3": 0.9816182786462807,
+            "mean_per_state_kl": 0.12365287788156443,
+            "semantic_greedy_change_rate": 0.18010096075557727,
+            "single_semantic_decisions": 5821,
+            "states": 6141,
+            "top1_delta_pp": -4.672736643188447,
+            "top3_delta_pp": -0.7558838687510727
+          }
+        }
+      },
+      "gate_b": {
+        "checks": {
+          "all_frozen_parameter_arrays_byte_identical": true,
+          "count_outputs_identical": true,
+          "mean_per_state_kl_at_most_0_02": false,
+          "semantic_greedy_change_rate_at_most_3pct": false,
+          "semantic_top1_regression_at_most_0_5pp": false,
+          "semantic_top3_regression_at_most_0_1pp": false,
+          "value_outputs_identical": true,
+          "zero_non_finite_values": true,
+          "zero_policy_runtime_errors": true
+        },
+        "integrity": {
+          "count_output_mismatches": 0,
+          "frozen_array_audit": {
+            "all_frozen_arrays_byte_identical": true,
+            "frozen_arrays": {
+              "area_embedding": true,
+              "attack_embedding": true,
+              "card_embedding": true,
+              "context_embedding": true,
+              "count_b": true,
+              "count_w": true,
+              "global_b": true,
+              "global_w": true,
+              "model_schema_version": true,
+              "numeric_b": true,
+              "numeric_w": true,
+              "state_embedding": true,
+              "type_embedding": true,
+              "value_b": true,
+              "value_w": true
+            },
+            "mutable_arrays_changed": {
+              "option_b": true,
+              "option_w": true,
+              "score_b": true,
+              "score_w": true
+            }
+          },
+          "non_finite_values": 0,
+          "policy_runtime_errors": 0,
+          "value_output_mismatches": 0
+        },
+        "metrics": {
+          "overall": {
+            "base_top1": 0.8271396970223787,
+            "base_top3": 0.989299266834921,
+            "candidate_top1": 0.7697004394194628,
+            "candidate_top3": 0.9808885505152538,
+            "mean_per_state_kl": 0.12143999291103223,
+            "semantic_greedy_change_rate": 0.16243669184845655,
+            "single_semantic_decisions": 333622,
+            "states": 353430,
+            "top1_delta_pp": -5.7439257602915905,
+            "top3_delta_pp": -0.8410716319667166
+          },
+          "team_holdout.jsonl.gz": {
+            "base_top1": 0.8271391912220157,
+            "base_top3": 0.9908149721263605,
+            "candidate_top1": 0.7674719051411379,
+            "candidate_top3": 0.9819396513582869,
+            "mean_per_state_kl": 0.12188589880190027,
+            "semantic_greedy_change_rate": 0.1613623440478978,
+            "single_semantic_decisions": 113010,
+            "states": 119588,
+            "top1_delta_pp": -5.966728608087779,
+            "top3_delta_pp": -0.8875320768073625
+          },
+          "temporal_holdout.jsonl.gz": {
+            "base_top1": 0.8297215223543146,
+            "base_top3": 0.9884811183437636,
+            "candidate_top1": 0.7745727521925774,
+            "candidate_top3": 0.9804644495836504,
+            "mean_per_state_kl": 0.12128196708958588,
+            "semantic_greedy_change_rate": 0.16329576521787648,
+            "single_semantic_decisions": 135343,
+            "states": 143384,
+            "top1_delta_pp": -5.514877016173725,
+            "top3_delta_pp": -0.8016668760113199
+          },
+          "validation.jsonl.gz": {
+            "base_top1": 0.8230423717881059,
+            "base_top3": 0.9885890534660897,
+            "candidate_top1": 0.7649204282916418,
+            "candidate_top3": 0.9801686427658352,
+            "mean_per_state_kl": 0.12110097790633087,
+            "semantic_greedy_change_rate": 0.16249530168697074,
+            "single_semantic_decisions": 85269,
+            "states": 90458,
+            "top1_delta_pp": -5.812194349646416,
+            "top3_delta_pp": -0.8420410700254566
+          }
+        },
+        "status": "FAIL"
+      },
+      "offline_status": "FAIL",
+      "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/a2_err_1_corrected/training/epoch_3/policy_weights.npz",
+      "sha256": "228026bed011806ece47729f98374e4c0f60154126265eee4caa87bc470823ff"
+    }
+  },
+  "experiment": "A2-ERR-1",
+  "gameplay_authorized": false,
+  "legacy_aug6_a2_holdout": [
+    {
+      "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/data/multiday_processed/validation.jsonl.gz",
+      "sha256": "154c652745f0df4b2fd3ef1f6864fecc90c1a4703d3d4eb3e4e32303790ab812"
+    },
+    {
+      "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/data/multiday_processed/team_holdout.jsonl.gz",
+      "sha256": "97bd9494d584ce9f46b73b75bea1e0775170b134e5982fa67e95ca1cd0d90401"
+    },
+    {
+      "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/data/multiday_processed/temporal_holdout.jsonl.gz",
+      "sha256": "6f310e6e8e9eb9ab48bdedbe756ea4fd388d1b59588518fadcf117bfc7e5e6fb"
+    }
+  ],
+  "legacy_holdout_interpretation": "unchanged Aug-6-created A2 validation, whole-team holdout, and temporal holdout union; each split also reported separately",
+  "selected_earliest_checkpoint": null,
+  "stage": "offline promotion gates",
+  "status": "FAIL"
+}

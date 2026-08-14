@@ -38,6 +38,29 @@ A2_ERR_TRAINABLE = ("option_linear", "score")
 A2_ERR_MUTABLE_ARRAYS = frozenset({"option_w", "option_b", "score_w", "score_b"})
 
 
+def semantic_option_key(option: dict) -> tuple:
+    return (
+        int(option["option_type"]), int(option["context"]),
+        int(option["source_card"]), int(option["target_card"]),
+        int(option["attack_id"]), int(option["area"]), int(option["in_play_area"]),
+        tuple(
+            round(float(value), 6)
+            for index, value in enumerate(option["numeric"])
+            if index not in (9, 10, 11)
+        ),
+    )
+
+
+def semantic_groups(rows: list[dict]) -> list[list[list[int]]]:
+    result = []
+    for row in rows:
+        groups = {}
+        for index, option in enumerate(row["features"]["options"]):
+            groups.setdefault(semantic_option_key(option), []).append(index)
+        result.append(list(groups.values()))
+    return result
+
+
 def segmented_kl(student_logits: torch.Tensor, teacher_logits: torch.Tensor, batch: dict) -> torch.Tensor:
     terms = []
     for record_index, (start, end) in enumerate(batch["record_options"]):
@@ -102,12 +125,22 @@ def a2_rejected_margin_loss(
         actions = batch["record_actions"][record_index]
         if len(actions) != 1 or end - start < 2:
             raise ValueError("ERR correction batch contains a non-single or forced row")
+        groups = batch.get("record_semantic_groups")
+        if groups is None:
+            raise ValueError("ERR correction batch is missing semantic equivalence groups")
+        record_groups = groups[record_index]
         label = int(actions[0])
         rejected = int(torch.argmax(teacher_logits[start:end]).item())
-        if rejected == label:
+        elite_group = next((group for group in record_groups if label in group), None)
+        rejected_group = next((group for group in record_groups if rejected in group), None)
+        if elite_group is None or rejected_group is None:
+            raise ValueError("ERR semantic equivalence group does not cover the correction")
+        if elite_group is rejected_group:
             raise ValueError("ERR correction no longer disagrees with exact A2 top-1")
         weight = batch["weights"][record_index]
-        delta = student_logits[start + label] - student_logits[start + rejected]
+        elite_indices = torch.tensor([start + value for value in elite_group], device=student_logits.device)
+        rejected_indices = torch.tensor([start + value for value in rejected_group], device=student_logits.device)
+        delta = torch.max(student_logits[elite_indices]) - torch.max(student_logits[rejected_indices])
         terms.append(F.softplus(float(margin) - delta) * weight)
         weights.append(weight)
     return torch.stack(terms).sum() / torch.stack(weights).sum().clamp_min(1e-6)
@@ -233,7 +266,9 @@ def train_a2_err(args: argparse.Namespace) -> list[Path]:
             if not correction_rows:
                 break
             side_count = len(correction_rows) // 2
-            correction_batch = move(collate(correction_rows), device)
+            correction_batch = collate(correction_rows)
+            correction_batch["record_semantic_groups"] = semantic_groups(correction_rows)
+            correction_batch = move(correction_batch, device)
             anchor_batch = move(collate(take_rows(anchor_iterator, side_count)), device)
             rehearsal_batch = move(collate(take_rows(rehearsal_iterator, side_count)), device)
 
