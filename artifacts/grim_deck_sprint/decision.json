@@ -1,0 +1,38 @@
+{
+  "candidate": "hammer1_minus_tool",
+  "candidate_deck_sha256": "1afef8d626b1d6b88f1ac70550e1a44f72ee1be3b8739dea82ec923e42d974c5",
+  "change": {
+    "add": {"card_id": 1081, "name": "Enhanced Hammer", "count": 1},
+    "remove": {"card_id": 1137, "name": "Tool Scrapper", "count": 1}
+  },
+  "decision": "REJECT",
+  "fallback": {
+    "a2_damage_v0_archive_sha256": "a44b676f5ca135747b5d4d6923c7fb350a66369d188315b6ac0f291d23ca69e7",
+    "canonical_deck_sha256": "92b92bac9f9163ecff933b3dc39294d2cc154c8684f3c8497877661419ebc59d",
+    "policy_sha256": "b19871a9f1499c2460ae266e58194acab1d8c90b390fa5cf24ed94b9a2b6bda8"
+  },
+  "hard_gate_failure": {
+    "gate": "no_opponent_stratum_below_minus_1pp",
+    "opponent": "master_v1",
+    "paired_delta": -0.03333333333333333,
+    "paired_95_ci": [-0.07902607687332863, 0.01235941020666196],
+    "candidate_wins": 316,
+    "control_wins": 336,
+    "pairs": 600,
+    "actual_first_delta": 0.016666666666666666,
+    "actual_second_delta": -0.08333333333333333
+  },
+  "preceding_confirmation": {
+    "opponent": "a2_damage_v0",
+    "paired_delta": 0.005,
+    "paired_95_ci": [-0.043600468127386764, 0.05360046812738676],
+    "candidate_wins": 306,
+    "control_wins": 303,
+    "pairs": 600,
+    "actual_first_delta": -0.016666666666666666,
+    "actual_second_delta": 0.02666666666666667
+  },
+  "policy_errors": 0,
+  "production_engine_preserved": true,
+  "remaining_confirmation_strata": "NOT_RUN_AFTER_HARD_GATE"
+}

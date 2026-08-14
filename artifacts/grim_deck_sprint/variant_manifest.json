@@ -1,0 +1,346 @@
+{
+  "base": "artifacts/grim_damage_conversion/candidates/a2_damage_v0/deck.csv",
+  "base_sha256": "92b92bac9f9163ecff933b3dc39294d2cc154c8684f3c8497877661419ebc59d",
+  "variants": {
+    "boss3_minus_tool": {
+      "changes": [
+        {
+          "add": {
+            "id": 1182,
+            "name": "Boss's Orders"
+          },
+          "remove": {
+            "id": 1137,
+            "name": "Tool Scrapper"
+          }
+        }
+      ],
+      "path": "artifacts/grim_deck_sprint/decks/boss3_minus_tool.csv",
+      "sha256": "ea457049f5ade3239bf243047918b5f340a27539afb0f4d78fc6fd6520078bfb"
+    },
+    "candy4_minus_morgrem": {
+      "changes": [
+        {
+          "add": {
+            "id": 1079,
+            "name": "Rare Candy"
+          },
+          "remove": {
+            "id": 647,
+            "name": "Marnie's Morgrem"
+          }
+        }
+      ],
+      "path": "artifacts/grim_deck_sprint/decks/candy4_minus_morgrem.csv",
+      "sha256": "6ddcd1203ded2f4af9cd9b5e1f638fea482b90080dd5f83e568dc52e634d743f"
+    },
+    "candy4_minus_pokepad": {
+      "changes": [
+        {
+          "add": {
+            "id": 1079,
+            "name": "Rare Candy"
+          },
+          "remove": {
+            "id": 1152,
+            "name": "Poke Pad"
+          }
+        }
+      ],
+      "path": "artifacts/grim_deck_sprint/decks/candy4_minus_pokepad.csv",
+      "sha256": "6270d5018eb15cfb0598c64ff8bb2dee6e7db66bce229fdba8cf47b1bb1f33c4"
+    },
+    "candy4_minus_stretcher": {
+      "changes": [
+        {
+          "add": {
+            "id": 1079,
+            "name": "Rare Candy"
+          },
+          "remove": {
+            "id": 1097,
+            "name": "Night Stretcher"
+          }
+        }
+      ],
+      "path": "artifacts/grim_deck_sprint/decks/candy4_minus_stretcher.csv",
+      "sha256": "de51516f376288be562c1f590b84e3b5ad1f8c7ae711178126157f7b44eadef0"
+    },
+    "candy4_minus_tool": {
+      "changes": [
+        {
+          "add": {
+            "id": 1079,
+            "name": "Rare Candy"
+          },
+          "remove": {
+            "id": 1137,
+            "name": "Tool Scrapper"
+          }
+        }
+      ],
+      "path": "artifacts/grim_deck_sprint/decks/candy4_minus_tool.csv",
+      "sha256": "5b60b068dbb9b869449be4d18f1ae7a246b2b99fa7e8a94d46facec53ba820f6"
+    },
+    "fan1_minus_tool": {
+      "changes": [
+        {
+          "add": {
+            "id": 1161,
+            "name": "Handheld Fan"
+          },
+          "remove": {
+            "id": 1137,
+            "name": "Tool Scrapper"
+          }
+        }
+      ],
+      "path": "artifacts/grim_deck_sprint/decks/fan1_minus_tool.csv",
+      "sha256": "a9f374e5690a47f7737e75da2b4bea25680e650dbfb01f74d6e279244be0930f"
+    },
+    "froslass3_minus_tool": {
+      "changes": [
+        {
+          "add": {
+            "id": 104,
+            "name": "Froslass"
+          },
+          "remove": {
+            "id": 1137,
+            "name": "Tool Scrapper"
+          }
+        }
+      ],
+      "path": "artifacts/grim_deck_sprint/decks/froslass3_minus_tool.csv",
+      "sha256": "bfdd06321aece7fc77a21084f232aa566ff9efc37c379c87437d34792a6b4ad3"
+    },
+    "froslass_line3_minus_tool_stretcher": {
+      "changes": [
+        {
+          "add": {
+            "id": 860,
+            "name": "Snorunt"
+          },
+          "remove": {
+            "id": 1137,
+            "name": "Tool Scrapper"
+          }
+        },
+        {
+          "add": {
+            "id": 104,
+            "name": "Froslass"
+          },
+          "remove": {
+            "id": 1097,
+            "name": "Night Stretcher"
+          }
+        }
+      ],
+      "path": "artifacts/grim_deck_sprint/decks/froslass_line3_minus_tool_stretcher.csv",
+      "sha256": "8452d6fc0d5c99ade5637bde4320ef52909da19f1e1958b9be0a37c1e75f96e9"
+    },
+    "gear2_minus_tool": {
+      "changes": [
+        {
+          "add": {
+            "id": 1122,
+            "name": "Pokegear 3.0"
+          },
+          "remove": {
+            "id": 1137,
+            "name": "Tool Scrapper"
+          }
+        }
+      ],
+      "path": "artifacts/grim_deck_sprint/decks/gear2_minus_tool.csv",
+      "sha256": "9bf3d77d39c8c3e99853b789e9ec968ff3146cc94ff7b88a1a2e895f3404c0e4"
+    },
+    "grim4_candy4_minus_tool_stretcher": {
+      "changes": [
+        {
+          "add": {
+            "id": 648,
+            "name": "Marnie's Grimmsnarl ex"
+          },
+          "remove": {
+            "id": 1137,
+            "name": "Tool Scrapper"
+          }
+        },
+        {
+          "add": {
+            "id": 1079,
+            "name": "Rare Candy"
+          },
+          "remove": {
+            "id": 1097,
+            "name": "Night Stretcher"
+          }
+        }
+      ],
+      "path": "artifacts/grim_deck_sprint/decks/grim4_candy4_minus_tool_stretcher.csv",
+      "sha256": "afd5ecec4079b94279d65b38429d79cfd4463b74e376463ebd4ad914670001c6"
+    },
+    "grim4_minus_morgrem": {
+      "changes": [
+        {
+          "add": {
+            "id": 648,
+            "name": "Marnie's Grimmsnarl ex"
+          },
+          "remove": {
+            "id": 647,
+            "name": "Marnie's Morgrem"
+          }
+        }
+      ],
+      "path": "artifacts/grim_deck_sprint/decks/grim4_minus_morgrem.csv",
+      "sha256": "462ca63dd1c05a2947658bbb17a60a5404458323f151a8d58f0ce8d6b7f3d609"
+    },
+    "grim4_minus_pokepad": {
+      "changes": [
+        {
+          "add": {
+            "id": 648,
+            "name": "Marnie's Grimmsnarl ex"
+          },
+          "remove": {
+            "id": 1152,
+            "name": "Poke Pad"
+          }
+        }
+      ],
+      "path": "artifacts/grim_deck_sprint/decks/grim4_minus_pokepad.csv",
+      "sha256": "3d984ea6f51e31152f5d6bc69df78631cbcc4cab7c31bd0211c5c447ef23f063"
+    },
+    "grim4_minus_stretcher": {
+      "changes": [
+        {
+          "add": {
+            "id": 648,
+            "name": "Marnie's Grimmsnarl ex"
+          },
+          "remove": {
+            "id": 1097,
+            "name": "Night Stretcher"
+          }
+        }
+      ],
+      "path": "artifacts/grim_deck_sprint/decks/grim4_minus_stretcher.csv",
+      "sha256": "1585a6bdc429f8aaa93daca41795dfc9396809dd6dcaba099e546b7da7f76a0f"
+    },
+    "grim4_minus_tool": {
+      "changes": [
+        {
+          "add": {
+            "id": 648,
+            "name": "Marnie's Grimmsnarl ex"
+          },
+          "remove": {
+            "id": 1137,
+            "name": "Tool Scrapper"
+          }
+        }
+      ],
+      "path": "artifacts/grim_deck_sprint/decks/grim4_minus_tool.csv",
+      "sha256": "a3f9f54d2e58ab5b7c03b408e546bdecebefcd1e7d5dc7527efb25cd2c5747c5"
+    },
+    "hammer1_minus_tool": {
+      "changes": [
+        {
+          "add": {
+            "id": 1081,
+            "name": "Enhanced Hammer"
+          },
+          "remove": {
+            "id": 1137,
+            "name": "Tool Scrapper"
+          }
+        }
+      ],
+      "path": "artifacts/grim_deck_sprint/decks/hammer1_minus_tool.csv",
+      "sha256": "1afef8d626b1d6b88f1ac70550e1a44f72ee1be3b8739dea82ec923e42d974c5"
+    },
+    "risky_ruins1_minus_spikemuth": {
+      "changes": [
+        {
+          "add": {
+            "id": 1260,
+            "name": "Risky Ruins"
+          },
+          "remove": {
+            "id": 1259,
+            "name": "Spikemuth Gym"
+          }
+        }
+      ],
+      "path": "artifacts/grim_deck_sprint/decks/risky_ruins1_minus_spikemuth.csv",
+      "sha256": "727b0b26c68279aa9e9ec68bedd9ebcf72fcaf63d9ab8394f4b52cb641ce75e2"
+    },
+    "snorunt3_minus_tool": {
+      "changes": [
+        {
+          "add": {
+            "id": 860,
+            "name": "Snorunt"
+          },
+          "remove": {
+            "id": 1137,
+            "name": "Tool Scrapper"
+          }
+        }
+      ],
+      "path": "artifacts/grim_deck_sprint/decks/snorunt3_minus_tool.csv",
+      "sha256": "2365d60723c43c8d2b102c9087f288009ea556e53071f894f18581eaeb886653"
+    },
+    "stretcher4_minus_tool": {
+      "changes": [
+        {
+          "add": {
+            "id": 1097,
+            "name": "Night Stretcher"
+          },
+          "remove": {
+            "id": 1137,
+            "name": "Tool Scrapper"
+          }
+        }
+      ],
+      "path": "artifacts/grim_deck_sprint/decks/stretcher4_minus_tool.csv",
+      "sha256": "59d0b8247a0cb2e27b1f8a7b1b7840799dcf1fdc677358227f7d2c7c7d38440b"
+    },
+    "switch1_minus_tool": {
+      "changes": [
+        {
+          "add": {
+            "id": 1123,
+            "name": "Switch"
+          },
+          "remove": {
+            "id": 1137,
+            "name": "Tool Scrapper"
+          }
+        }
+      ],
+      "path": "artifacts/grim_deck_sprint/decks/switch1_minus_tool.csv",
+      "sha256": "9b18558de5974f149ffbd92bc3ee13f8ab31304d6cb769642a97ead959ef783c"
+    },
+    "xerosic1_minus_petrel": {
+      "changes": [
+        {
+          "add": {
+            "id": 1197,
+            "name": "Xerosic's Machinations"
+          },
+          "remove": {
+            "id": 1219,
+            "name": "Team Rocket's Petrel"
+          }
+        }
+      ],
+      "path": "artifacts/grim_deck_sprint/decks/xerosic1_minus_petrel.csv",
+      "sha256": "d0a1b74f22ccc0ef6ec855307bf7a3f6f8e1cfb15dc8bb7d7987ad181f71500b"
+    }
+  }
+}

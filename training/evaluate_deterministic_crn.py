@@ -82,6 +82,23 @@ def sha256_path(path: Path) -> str:
     return digest.hexdigest()
 
 
+def load_deck(path: Path) -> list[int]:
+    deck = [int(line) for line in path.read_text().splitlines() if line.strip()]
+    if len(deck) != 60:
+        raise ValueError(f"deck override must contain 60 cards: {path}")
+    return deck
+
+
+def parse_env(values: Iterable[str]) -> dict[str, str]:
+    env: dict[str, str] = {}
+    for value in values:
+        key, separator, item = value.partition("=")
+        if not separator or not key:
+            raise ValueError(f"environment override must be KEY=VALUE: {value}")
+        env[key] = item
+    return env
+
+
 class SeededEngine:
     """Thin ctypes adapter for the isolated BattleStartSeeded export."""
 
@@ -187,7 +204,9 @@ def _run_game(task: dict[str, Any]) -> dict[str, Any]:
     max_decisions = int(task.get("max_decisions", 2_000))
 
     hero = ExternalSubmissionAgent(hero_path, {})
-    opponent = ExternalSubmissionAgent(opponent_path, {})
+    opponent = ExternalSubmissionAgent(opponent_path, task.get("opponent_env") or {})
+    if task.get("hero_deck"):
+        hero.deck = load_deck(Path(task["hero_deck"]))
     agents = {hero_seat: hero, 1 - hero_seat: opponent}
     decks = [hero.deck, opponent.deck] if hero_seat == 0 else [opponent.deck, hero.deck]
     battle_ptr = 0
@@ -428,6 +447,9 @@ def paired_evaluation(
     workers: int,
     max_decisions: int,
     actual_orders: tuple[str, ...] = ("first", "second"),
+    candidate_deck: Path | None = None,
+    control_deck: Path | None = None,
+    opponent_env: dict[str, str] | None = None,
 ) -> dict[str, Any]:
     if not actual_orders:
         raise ValueError("actual_orders must contain at least one order")
@@ -445,6 +467,7 @@ def paired_evaluation(
             seed = base_seed + order_index * 1_000_000 + pair_index
             physical_seat = pair_index % 2
             for arm, hero in (("candidate", candidate), ("control", control)):
+                deck_override = candidate_deck if arm == "candidate" else control_deck
                 tasks.append(
                     {
                         "task_id": f"{order}-{pair_index:05d}-{arm}",
@@ -452,7 +475,9 @@ def paired_evaluation(
                         "arm": arm,
                         "engine": str(engine.resolve()),
                         "hero": str(hero.resolve()),
+                        "hero_deck": str(deck_override.resolve()) if deck_override else None,
                         "opponent": str(opponent.resolve()),
+                        "opponent_env": dict(opponent_env or {}),
                         "seed": seed,
                         "actual_order": order,
                         "physical_seat": physical_seat,
@@ -479,10 +504,15 @@ def paired_evaluation(
         "production_engine_preserved": production_before == production_after,
         "candidate": str(candidate.resolve()),
         "candidate_sha256": sha256_path(candidate),
+        "candidate_deck": str(candidate_deck.resolve()) if candidate_deck else str((candidate / "deck.csv").resolve()),
+        "candidate_deck_sha256": sha256_file(candidate_deck if candidate_deck else candidate / "deck.csv"),
         "control": str(control.resolve()),
         "control_sha256": sha256_path(control),
+        "control_deck": str(control_deck.resolve()) if control_deck else str((control / "deck.csv").resolve()),
+        "control_deck_sha256": sha256_file(control_deck if control_deck else control / "deck.csv"),
         "opponent": str(opponent.resolve()),
         "opponent_sha256": sha256_path(opponent),
+        "opponent_env": dict(opponent_env or {}),
         "pairs_per_order": pairs_per_order,
         "actual_orders": list(actual_orders),
         "games": len(rows),
@@ -524,8 +554,11 @@ def main() -> int:
     paired = subparsers.add_parser("paired", help="paired temporal/control arms on common engine seeds")
     paired.add_argument("--engine", type=Path, default=DEFAULT_ENGINE)
     paired.add_argument("--candidate", type=Path, default=DEFAULT_CANDIDATE)
+    paired.add_argument("--candidate-deck", type=Path)
     paired.add_argument("--control", type=Path, default=DEFAULT_CONTROL)
+    paired.add_argument("--control-deck", type=Path)
     paired.add_argument("--opponent", type=Path, default=DEFAULT_CONTROL)
+    paired.add_argument("--opponent-env", action="append", default=[], metavar="KEY=VALUE")
     paired.add_argument("--production-engine", type=Path, default=DEFAULT_PRODUCTION_ENGINE)
     paired.add_argument("--output", type=Path, required=True)
     paired.add_argument("--base-seed", type=int, default=2026082301)
@@ -559,6 +592,9 @@ def main() -> int:
             workers=args.workers,
             max_decisions=args.max_decisions,
             actual_orders=("first", "second") if args.actual_order == "both" else (args.actual_order,),
+            candidate_deck=args.candidate_deck,
+            control_deck=args.control_deck,
+            opponent_env=parse_env(args.opponent_env),
         )
     printable = {key: value for key, value in result.items() if key not in {"rows", "runs", "trace_files"}}
     print(json.dumps(printable, indent=2, sort_keys=True))
