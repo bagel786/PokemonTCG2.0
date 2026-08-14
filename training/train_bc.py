@@ -130,6 +130,7 @@ def collate(rows):
     counts = []
     values = []
     weights = []
+    record_grimmsnarl = []
     record_options = []
     record_actions = []
     record_rejected_actions = []
@@ -162,6 +163,7 @@ def collate(rows):
         counts.append(len(row["action"]))
         values.append(float(row["reward"] > 0))
         weights.append(float(row.get("sample_weight", 1.0)))
+        record_grimmsnarl.append(bool(row.get("opponent_grimmsnarl", False)))
         record_actions.append([int(index) for index in row["action"]])
         rejected = row.get("rejected_action")
         record_rejected_actions.append(
@@ -169,6 +171,10 @@ def collate(rows):
         )
     if len(feature_versions) != 1:
         raise ValueError(f"a batch cannot mix feature schemas: {sorted(feature_versions)}")
+    record_action_groups = [
+        row.get("action_groups") if isinstance(row.get("action_groups"), list) else None
+        for row in rows
+    ]
     feature_version = next(iter(feature_versions))
     count_maximum = V2_COUNT_CLASSES - 1 if feature_version >= 2 else MAX_SELECT_COUNT - 1
     counts = [min(count_maximum, value) for value in counts]
@@ -268,9 +274,11 @@ def collate(rows):
         "counts": long(counts),
         "values": floating(values),
         "weights": floating(weights),
+        "record_grimmsnarl": record_grimmsnarl,
         "record_options": record_options,
         "record_actions": record_actions,
         "record_rejected_actions": record_rejected_actions,
+        "record_action_groups": record_action_groups,
         "feature_version": feature_version,
     }
 
