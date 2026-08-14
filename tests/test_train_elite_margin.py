@@ -1,6 +1,7 @@
+import pytest
 import torch
 
-from training.train_elite_margin import segmented_kl, top3_margin_loss
+from training.train_elite_margin import a2_rejected_margin_loss, segmented_kl, top3_margin_loss
 
 
 def batch(actions):
@@ -28,3 +29,11 @@ def test_segmented_kl_is_zero_for_identical_per_decision_distributions():
     logits = torch.tensor([1.0, 2.0, -3.0, 4.0])
     value = segmented_kl(logits, logits, batch([0]))
     assert abs(value.item()) < 1e-6
+
+
+def test_a2_err_margin_uses_frozen_a2_top1_not_students_strongest_other():
+    student = torch.tensor([0.1, 0.5, 9.0])
+    teacher = torch.tensor([2.0, 1.0, 0.0])
+    loss = a2_rejected_margin_loss(student, teacher, batch([1]), margin=0.2)
+    expected = torch.nn.functional.softplus(torch.tensor(0.2 - (0.5 - 0.1)))
+    assert float(loss) == pytest.approx(float(expected))
