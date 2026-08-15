@@ -1,0 +1,9 @@
+{
+  "always_request_first": true,
+  "candidate_failure_fallback": "exact_d842",
+  "exact_d842_model_sha256": "D842F85ABFC44AF9F41979F91795E22C92C179B62E04D5A0A2F9C734E70AF1C3",
+  "label": "ZOO_SECOND_ARM_z_replayrefresh",
+  "order_source": "latched_current.firstPlayer",
+  "policy_first_sha256": "B19871A9F1499C2460AE266E58194ACAB1D8C90B390FA5CF24ED94B9A2B6BDA8",
+  "policy_second_sha256": "1482F3490C7444A29B63512BE988E55BF7EAE5685F76211E5941B3FE0D7D320A"
+}

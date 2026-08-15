@@ -90,7 +90,8 @@ data/meta/*cache.json
 data/meta/*progress.json
 data/meta_survey/
 
-# sprint_870 experiment workspace: keep results/scripts/reports, exclude duplicated binaries
+# sprint_870 experiment workspace: keep results/scripts/reports/patches, exclude duplicated binaries
+!artifacts/sprint_870/
 artifacts/sprint_870/*
 !artifacts/sprint_870/*.json
 !artifacts/sprint_870/*.md
@@ -99,31 +100,24 @@ artifacts/sprint_870/*
 !artifacts/sprint_870/exp*/
 artifacts/sprint_870/exp*/*
 !artifacts/sprint_870/exp*/main.py
+!artifacts/sprint_870/exp*/order_policy_manifest.json
 !artifacts/sprint_870/exp*/ptcg_ai/
 artifacts/sprint_870/exp*/ptcg_ai/*
 !artifacts/sprint_870/exp*/ptcg_ai/*.py
 !artifacts/sprint_870/exp*/ptcg_ai/*.json
-!artifacts/sprint_870/exp*/order_policy_manifest.json
-!artifacts/sprint_870/exp*/deck.csv
 !artifacts/sprint_870/zoo/
 artifacts/sprint_870/zoo/*
-!artifacts/sprint_870/zoo/*/main.py
-!artifacts/sprint_870/zoo/*/ptcg_ai/
-artifacts/sprint_870/zoo/*/ptcg_ai/*
-!artifacts/sprint_870/zoo/*/ptcg_ai/*.py
-!artifacts/sprint_870/zoo/*/ptcg_ai/*.json
+!artifacts/sprint_870/zoo/*/
+artifacts/sprint_870/zoo/*/*
 !artifacts/sprint_870/zoo/*/order_policy_manifest.json
-!artifacts/sprint_870/zoo/*/deck.csv
 !artifacts/sprint_870/seat1_data/
-artifacts/sprint_870/seat1_data/*
-!artifacts/sprint_870/seat1_data/*.json
+!artifacts/sprint_870/mirror_data/
 !artifacts/sprint_870/seat1_train/
 artifacts/sprint_870/seat1_train/*
 !artifacts/sprint_870/seat1_train/*.json
+!artifacts/sprint_870/seat1_train/*.log
 !artifacts/sprint_870/mirror_train/
 artifacts/sprint_870/mirror_train/*
 !artifacts/sprint_870/mirror_train/*.json
-!artifacts/sprint_870/mirror_data/
-artifacts/sprint_870/mirror_data/*
-!artifacts/sprint_870/opponents/
-artifacts/sprint_870/opponents/*
+!artifacts/sprint_870/mirror_train/*.log
+artifacts/sprint_870/opponents/

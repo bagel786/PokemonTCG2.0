@@ -1,0 +1,9 @@
+{
+  "always_request_first": true,
+  "candidate_failure_fallback": "exact_d842",
+  "exact_d842_model_sha256": "D842F85ABFC44AF9F41979F91795E22C92C179B62E04D5A0A2F9C734E70AF1C3",
+  "label": "SEAT1_HEADS_PROBE",
+  "order_source": "latched_current.firstPlayer",
+  "policy_first_sha256": "B19871A9F1499C2460AE266E58194ACAB1D8C90B390FA5CF24ED94B9A2B6BDA8",
+  "policy_second_sha256": "6A56BB0913196B43CF9A9C09A15BA53336DD27E37D472CE0C89C519F86CAAC34"
+}
