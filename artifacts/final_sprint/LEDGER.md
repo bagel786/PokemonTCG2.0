@@ -32,3 +32,9 @@ Frozen champion C0 = exact A2+Damage V0 (archive A44B676F…, tree 13426288…, 
 ## Open
 - EXP-21 (punk-first + playid-second, independent mechanisms per arm): built, screens pending.
 - Monitor 55532521: validation + first 5-10 games trajectory.
+
+## EXP-20 post-submission regressions (all first-order, zero errors)
+- Starmie v2: +5.0pp (200 pairs, ns, disc 38/28)
+- Dipplin D1: +7.0pp (100 pairs, CI [+1.25,+12.75] SIGNIFICANT, disc 8/1)
+- EXP-21 (punk-first + playid-second) vs C0 B0: -0.25pp (first -0.5, second 0.0 w/ 82-82 disc) -> playid-second = noise on fresh seeds. KILL. Only punk-first remains.
+- Submission 55532521 live: 4 rated games 2W-2L (W vs 460, L vs 722, W vs 591, L vs 740; score 615.6). Expected-rating ordering, no mechanism failure.
