@@ -1,0 +1,26 @@
+{
+  "actor": "/Users/safiullahbaig/Projects/pokemonTCG2.0/trace_rl_pilot/rl_candidate.npz",
+  "critic_export_prohibited": true,
+  "critic_training_only": "/Users/safiullahbaig/Projects/pokemonTCG2.0/trace_rl_pilot/rl_critic.pt",
+  "history": [
+    {
+      "actor_steps": 278,
+      "approximate_kl": 0.00018850487403589423,
+      "auxiliary_loss": 0.0,
+      "critic_loss": 0.5051284162930662,
+      "entropy": 0.07364111964543946,
+      "epoch": 1,
+      "policy_loss": 0.0002074774993788519,
+      "q_fraction": 0.0,
+      "ratio_max": 1.0934368629249738,
+      "ratio_mean": 1.0002271147083035,
+      "ratio_min": 0.9150047797522098
+    }
+  ],
+  "public_actor_private_critic_separation": true,
+  "public_agent_imitation": false,
+  "schema_version": 5,
+  "seed": 2026080901,
+  "status": "complete",
+  "terminal_reward_only": true
+}

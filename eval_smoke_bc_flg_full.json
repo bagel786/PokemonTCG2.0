@@ -1,0 +1,544 @@
+{
+  "artifact_provenance": {
+    "artifact_a_schema": "external:nonstandard",
+    "artifact_a_sha256": "d0d47a92f666d6034e4dad582aa5657ff07e65dc478185e0cb47d1586fd73a10",
+    "artifact_b_schema": 2,
+    "artifact_b_sha256": "13426288358d597ead809e45c364c7f7b9274a6eebf55ddd942142e3326535c3",
+    "deck_a_sha256": "730515d5b8e9d6f7b9a87c160cd87b43c95535c917688d2b15f46d82fc054485",
+    "deck_b_sha256": "92b92bac9f9163ecff933b3dc39294d2cc154c8684f3c8497877661419ebc59d",
+    "engine_binary": "libcg.dylib",
+    "engine_sha256": "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30",
+    "model_a_schema": null,
+    "model_a_sha256": null,
+    "model_b_schema": null,
+    "model_b_sha256": null,
+    "runtime_environment": {
+      "process_ptcg": {},
+      "submission_a_overrides": {},
+      "submission_b_overrides": {}
+    },
+    "seed": 20260729,
+    "source_bundle_sha256": "",
+    "source_commit": "8812344d9be0bdd07dd0ddc68814dc763b64860e",
+    "submission_a": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/dragapult_eval",
+    "submission_a_sha256": "d0d47a92f666d6034e4dad582aa5657ff07e65dc478185e0cb47d1586fd73a10",
+    "submission_b": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/a2_damage_v0",
+    "submission_b_sha256": "13426288358d597ead809e45c364c7f7b9274a6eebf55ddd942142e3326535c3",
+    "worker": "MacBook-Air-8.local"
+  },
+  "decisions": 1798,
+  "deck_a": "artifacts/dragapult_eval/deck.csv",
+  "deck_b": "artifacts/a2_damage_v0/deck.csv",
+  "elapsed_seconds": 2.119490623474121,
+  "first_player_results_a": {
+    "first": {
+      "games": 5,
+      "win_rate": 0.2,
+      "wins": 1
+    },
+    "second": {
+      "games": 5,
+      "win_rate": 0.0,
+      "wins": 0
+    }
+  },
+  "game_metrics": {
+    "blowout_loss_rate": 0.7,
+    "by_actual_order": {
+      "first": {
+        "blowout_loss_rate": 0.6,
+        "catastrophic_floor_rate": 0.6,
+        "games": 5,
+        "illegal_actions": 0,
+        "mean_first_productive_attack_own_turn": 4.0,
+        "policy_errors": 0,
+        "total_attacks": 11,
+        "win_rate": 0.2,
+        "wins": 1,
+        "zero_attack_rate": 0.0,
+        "zero_prize_rate": 0.2
+      },
+      "second": {
+        "blowout_loss_rate": 0.8,
+        "catastrophic_floor_rate": 0.8,
+        "games": 5,
+        "illegal_actions": 0,
+        "mean_first_productive_attack_own_turn": 2.0,
+        "policy_errors": 0,
+        "total_attacks": 14,
+        "win_rate": 0.0,
+        "wins": 0,
+        "zero_attack_rate": 0.2,
+        "zero_prize_rate": 0.4
+      }
+    },
+    "catastrophic_floor_rate": 0.7,
+    "games": 10,
+    "illegal_actions": 0,
+    "mean_first_productive_attack_own_turn": 3.111111111111111,
+    "policy_errors": 0,
+    "total_attacks": 25,
+    "win_rate": 0.1,
+    "wins": 1,
+    "zero_attack_rate": 0.1,
+    "zero_prize_rate": 0.3
+  },
+  "games": 10,
+  "games_detail": [
+    {
+      "actual_order": "first",
+      "blowout_loss": 1,
+      "board_width_after_own_turn": {
+        "1": 6,
+        "2": 6
+      },
+      "catastrophic_floor_game": 1,
+      "dead_support_active_with_ready_bench_grim": 0,
+      "energy_after_own_turn": {
+        "2": 2,
+        "3": 3,
+        "4": 4
+      },
+      "ever_attacked": true,
+      "first_grim_own_turn": null,
+      "first_productive_attack_own_turn": 2,
+      "first_ready_grim_own_turn": null,
+      "illegal_actions": 0,
+      "late_dead_support_active_turns": 0,
+      "marnies_bodies_after_own_turn": {
+        "1": 0,
+        "2": 0
+      },
+      "physical_seat": 0,
+      "policy_errors": 0,
+      "prizes_conceded": 6,
+      "prizes_taken": 1,
+      "ready_attackers_after_own_turn": {
+        "2": 0,
+        "3": 0,
+        "4": 0
+      },
+      "shadow_bullet_attacks": 0,
+      "total_attacks": 3,
+      "trapped_support_active_turns": 0,
+      "win": 0,
+      "zero_attack_game": 0,
+      "zero_prize_game": 0
+    },
+    {
+      "actual_order": "second",
+      "blowout_loss": 1,
+      "board_width_after_own_turn": {
+        "1": 2,
+        "2": 2
+      },
+      "catastrophic_floor_game": 1,
+      "dead_support_active_with_ready_bench_grim": 0,
+      "energy_after_own_turn": {
+        "2": 2,
+        "3": 3,
+        "4": 3
+      },
+      "ever_attacked": false,
+      "first_grim_own_turn": null,
+      "first_productive_attack_own_turn": null,
+      "first_ready_grim_own_turn": null,
+      "illegal_actions": 0,
+      "late_dead_support_active_turns": 42,
+      "marnies_bodies_after_own_turn": {
+        "1": 0,
+        "2": 0
+      },
+      "physical_seat": 1,
+      "policy_errors": 0,
+      "prizes_conceded": 6,
+      "prizes_taken": 0,
+      "ready_attackers_after_own_turn": {
+        "2": 0,
+        "3": 0,
+        "4": 0
+      },
+      "shadow_bullet_attacks": 0,
+      "total_attacks": 0,
+      "trapped_support_active_turns": 0,
+      "win": 0,
+      "zero_attack_game": 1,
+      "zero_prize_game": 1
+    },
+    {
+      "actual_order": "first",
+      "blowout_loss": 1,
+      "board_width_after_own_turn": {
+        "1": 3,
+        "2": 5
+      },
+      "catastrophic_floor_game": 1,
+      "dead_support_active_with_ready_bench_grim": 0,
+      "energy_after_own_turn": {
+        "2": 2,
+        "3": 4,
+        "4": 2
+      },
+      "ever_attacked": true,
+      "first_grim_own_turn": null,
+      "first_productive_attack_own_turn": 3,
+      "first_ready_grim_own_turn": null,
+      "illegal_actions": 0,
+      "late_dead_support_active_turns": 1,
+      "marnies_bodies_after_own_turn": {
+        "1": 0,
+        "2": 0
+      },
+      "physical_seat": 0,
+      "policy_errors": 0,
+      "prizes_conceded": 6,
+      "prizes_taken": 2,
+      "ready_attackers_after_own_turn": {
+        "2": 0,
+        "3": 0,
+        "4": 0
+      },
+      "shadow_bullet_attacks": 0,
+      "total_attacks": 1,
+      "trapped_support_active_turns": 0,
+      "win": 0,
+      "zero_attack_game": 0,
+      "zero_prize_game": 0
+    },
+    {
+      "actual_order": "second",
+      "blowout_loss": 1,
+      "board_width_after_own_turn": {
+        "1": 6,
+        "2": 6
+      },
+      "catastrophic_floor_game": 1,
+      "dead_support_active_with_ready_bench_grim": 0,
+      "energy_after_own_turn": {
+        "2": 2,
+        "3": 3,
+        "4": 4
+      },
+      "ever_attacked": true,
+      "first_grim_own_turn": null,
+      "first_productive_attack_own_turn": 3,
+      "first_ready_grim_own_turn": null,
+      "illegal_actions": 0,
+      "late_dead_support_active_turns": 0,
+      "marnies_bodies_after_own_turn": {
+        "1": 0,
+        "2": 0
+      },
+      "physical_seat": 1,
+      "policy_errors": 0,
+      "prizes_conceded": 6,
+      "prizes_taken": 0,
+      "ready_attackers_after_own_turn": {
+        "2": 0,
+        "3": 0,
+        "4": 0
+      },
+      "shadow_bullet_attacks": 0,
+      "total_attacks": 2,
+      "trapped_support_active_turns": 0,
+      "win": 0,
+      "zero_attack_game": 0,
+      "zero_prize_game": 1
+    },
+    {
+      "actual_order": "first",
+      "blowout_loss": 0,
+      "board_width_after_own_turn": {
+        "1": 1,
+        "2": 4
+      },
+      "catastrophic_floor_game": 0,
+      "dead_support_active_with_ready_bench_grim": 0,
+      "energy_after_own_turn": {
+        "2": 2,
+        "3": 2,
+        "4": 3
+      },
+      "ever_attacked": true,
+      "first_grim_own_turn": null,
+      "first_productive_attack_own_turn": 2,
+      "first_ready_grim_own_turn": null,
+      "illegal_actions": 0,
+      "late_dead_support_active_turns": 0,
+      "marnies_bodies_after_own_turn": {
+        "1": 0,
+        "2": 0
+      },
+      "physical_seat": 0,
+      "policy_errors": 0,
+      "prizes_conceded": 3,
+      "prizes_taken": 6,
+      "ready_attackers_after_own_turn": {
+        "2": 0,
+        "3": 0,
+        "4": 0
+      },
+      "shadow_bullet_attacks": 0,
+      "total_attacks": 5,
+      "trapped_support_active_turns": 0,
+      "win": 1,
+      "zero_attack_game": 0,
+      "zero_prize_game": 0
+    },
+    {
+      "actual_order": "second",
+      "blowout_loss": 1,
+      "board_width_after_own_turn": {
+        "1": 2,
+        "2": 3
+      },
+      "catastrophic_floor_game": 1,
+      "dead_support_active_with_ready_bench_grim": 0,
+      "energy_after_own_turn": {
+        "2": 2,
+        "3": 4,
+        "4": 1
+      },
+      "ever_attacked": true,
+      "first_grim_own_turn": null,
+      "first_productive_attack_own_turn": 1,
+      "first_ready_grim_own_turn": null,
+      "illegal_actions": 0,
+      "late_dead_support_active_turns": 0,
+      "marnies_bodies_after_own_turn": {
+        "1": 0,
+        "2": 0
+      },
+      "physical_seat": 1,
+      "policy_errors": 0,
+      "prizes_conceded": 6,
+      "prizes_taken": 1,
+      "ready_attackers_after_own_turn": {
+        "2": 0,
+        "3": 0,
+        "4": 0
+      },
+      "shadow_bullet_attacks": 0,
+      "total_attacks": 6,
+      "trapped_support_active_turns": 0,
+      "win": 0,
+      "zero_attack_game": 0,
+      "zero_prize_game": 0
+    },
+    {
+      "actual_order": "first",
+      "blowout_loss": 0,
+      "board_width_after_own_turn": {
+        "1": 4,
+        "2": 4
+      },
+      "catastrophic_floor_game": 0,
+      "dead_support_active_with_ready_bench_grim": 0,
+      "energy_after_own_turn": {
+        "2": 2,
+        "3": 1,
+        "4": 2
+      },
+      "ever_attacked": true,
+      "first_grim_own_turn": null,
+      "first_productive_attack_own_turn": 9,
+      "first_ready_grim_own_turn": null,
+      "illegal_actions": 0,
+      "late_dead_support_active_turns": 0,
+      "marnies_bodies_after_own_turn": {
+        "1": 0,
+        "2": 0
+      },
+      "physical_seat": 0,
+      "policy_errors": 0,
+      "prizes_conceded": 6,
+      "prizes_taken": 5,
+      "ready_attackers_after_own_turn": {
+        "2": 0,
+        "3": 0,
+        "4": 0
+      },
+      "shadow_bullet_attacks": 0,
+      "total_attacks": 1,
+      "trapped_support_active_turns": 0,
+      "win": 0,
+      "zero_attack_game": 0,
+      "zero_prize_game": 0
+    },
+    {
+      "actual_order": "second",
+      "blowout_loss": 1,
+      "board_width_after_own_turn": {
+        "1": 4,
+        "2": 6
+      },
+      "catastrophic_floor_game": 1,
+      "dead_support_active_with_ready_bench_grim": 0,
+      "energy_after_own_turn": {
+        "2": 2,
+        "3": 3,
+        "4": 3
+      },
+      "ever_attacked": true,
+      "first_grim_own_turn": null,
+      "first_productive_attack_own_turn": 1,
+      "first_ready_grim_own_turn": null,
+      "illegal_actions": 0,
+      "late_dead_support_active_turns": 35,
+      "marnies_bodies_after_own_turn": {
+        "1": 0,
+        "2": 0
+      },
+      "physical_seat": 1,
+      "policy_errors": 0,
+      "prizes_conceded": 6,
+      "prizes_taken": 1,
+      "ready_attackers_after_own_turn": {
+        "2": 0,
+        "3": 0,
+        "4": 0
+      },
+      "shadow_bullet_attacks": 0,
+      "total_attacks": 3,
+      "trapped_support_active_turns": 0,
+      "win": 0,
+      "zero_attack_game": 0,
+      "zero_prize_game": 0
+    },
+    {
+      "actual_order": "first",
+      "blowout_loss": 1,
+      "board_width_after_own_turn": {
+        "1": 5,
+        "2": 6
+      },
+      "catastrophic_floor_game": 1,
+      "dead_support_active_with_ready_bench_grim": 0,
+      "energy_after_own_turn": {
+        "2": 0,
+        "3": 1,
+        "4": 3
+      },
+      "ever_attacked": true,
+      "first_grim_own_turn": null,
+      "first_productive_attack_own_turn": 4,
+      "first_ready_grim_own_turn": null,
+      "illegal_actions": 0,
+      "late_dead_support_active_turns": 0,
+      "marnies_bodies_after_own_turn": {
+        "1": 0,
+        "2": 0
+      },
+      "physical_seat": 0,
+      "policy_errors": 0,
+      "prizes_conceded": 6,
+      "prizes_taken": 0,
+      "ready_attackers_after_own_turn": {
+        "2": 0,
+        "3": 0,
+        "4": 0
+      },
+      "shadow_bullet_attacks": 0,
+      "total_attacks": 1,
+      "trapped_support_active_turns": 0,
+      "win": 0,
+      "zero_attack_game": 0,
+      "zero_prize_game": 1
+    },
+    {
+      "actual_order": "second",
+      "blowout_loss": 0,
+      "board_width_after_own_turn": {
+        "1": 3,
+        "2": 4
+      },
+      "catastrophic_floor_game": 0,
+      "dead_support_active_with_ready_bench_grim": 0,
+      "energy_after_own_turn": {
+        "2": 3,
+        "3": 4,
+        "4": 1
+      },
+      "ever_attacked": true,
+      "first_grim_own_turn": null,
+      "first_productive_attack_own_turn": 3,
+      "first_ready_grim_own_turn": null,
+      "illegal_actions": 0,
+      "late_dead_support_active_turns": 0,
+      "marnies_bodies_after_own_turn": {
+        "1": 0,
+        "2": 0
+      },
+      "physical_seat": 1,
+      "policy_errors": 0,
+      "prizes_conceded": 6,
+      "prizes_taken": 3,
+      "ready_attackers_after_own_turn": {
+        "2": 0,
+        "3": 0,
+        "4": 0
+      },
+      "shadow_bullet_attacks": 0,
+      "total_attacks": 3,
+      "trapped_support_active_turns": 0,
+      "win": 0,
+      "zero_attack_game": 0,
+      "zero_prize_game": 0
+    }
+  ],
+  "hero_policy_errors": 0,
+  "hero_telemetry": {
+    "mirror_activations": 0.0
+  },
+  "intervention_counts": {},
+  "model_a": "heuristic",
+  "model_b": "heuristic",
+  "opponent_policy_errors": 0,
+  "opponent_results_a": {
+    "a2_damage_v0": {
+      "games": 10,
+      "wilson_95": [
+        0.01787574951572113,
+        0.4041563854975721
+      ],
+      "win_rate": 0.1,
+      "wins": 1
+    }
+  },
+  "opponent_runtime_stats": {},
+  "opponent_search_stats": {},
+  "overall": {
+    "games": 10,
+    "wilson_95": [
+      0.01787574951572113,
+      0.4041563854975721
+    ],
+    "win_rate": 0.1,
+    "wins": 1
+  },
+  "rng_provenance": {
+    "engine": "unpaired_std_random_device",
+    "paired_deals": false,
+    "python_numpy_seed_schedule": 20260729
+  },
+  "seat_results_a": {
+    "0": {
+      "games": 5,
+      "win_rate": 0.2,
+      "wins": 1
+    },
+    "1": {
+      "games": 5,
+      "win_rate": 0.0,
+      "wins": 0
+    }
+  },
+  "submission_a": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/dragapult_eval",
+  "submission_b": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/a2_damage_v0",
+  "wilson_95": [
+    0.01787574951572113,
+    0.4041563854975721
+  ],
+  "win_rate_a": 0.1,
+  "wins_a": 1
+}

@@ -1,0 +1,12 @@
+{
+  "behavior_temperature": 0.15,
+  "critic_private_actor_public": true,
+  "errors": 0,
+  "games": 50,
+  "q_compare_rate": 0.0,
+  "rows": 5099,
+  "seed": 20260864,
+  "status": "complete",
+  "terminal_reward_only": true,
+  "wins": 9
+}

@@ -186,8 +186,8 @@ def _run_game(task: dict[str, Any]) -> dict[str, Any]:
     capture_trace = bool(task.get("capture_trace", False))
     max_decisions = int(task.get("max_decisions", 2_000))
 
-    hero = ExternalSubmissionAgent(hero_path, {})
-    opponent = ExternalSubmissionAgent(opponent_path, {})
+    hero = ExternalSubmissionAgent(hero_path, dict(task.get("hero_env") or {}))
+    opponent = ExternalSubmissionAgent(opponent_path, dict(task.get("opponent_env") or {}))
     agents = {hero_seat: hero, 1 - hero_seat: opponent}
     decks = [hero.deck, opponent.deck] if hero_seat == 0 else [opponent.deck, hero.deck]
     battle_ptr = 0
@@ -428,7 +428,11 @@ def paired_evaluation(
     workers: int,
     max_decisions: int,
     actual_orders: tuple[str, ...] = ("first", "second"),
+    hero_env: dict[str, str] | None = None,
+    opponent_env: dict[str, str] | None = None,
 ) -> dict[str, Any]:
+    hero_env = dict(hero_env or {})
+    opponent_env = dict(opponent_env or {})
     if not actual_orders:
         raise ValueError("actual_orders must contain at least one order")
     if len(set(actual_orders)) != len(actual_orders) or any(
@@ -458,6 +462,8 @@ def paired_evaluation(
                         "physical_seat": physical_seat,
                         "capture_trace": False,
                         "max_decisions": max_decisions,
+                        "hero_env": hero_env,
+                        "opponent_env": opponent_env,
                     }
                 )
     started = time.time()
@@ -533,6 +539,8 @@ def main() -> int:
     paired.add_argument("--actual-order", choices=("both", "first", "second"), default="both")
     paired.add_argument("--workers", type=int, default=max(1, (mp.cpu_count() or 2) - 1))
     paired.add_argument("--max-decisions", type=int, default=2_000)
+    paired.add_argument("--hero-env", type=json.loads, default={})
+    paired.add_argument("--opponent-env", type=json.loads, default={})
     args = parser.parse_args()
 
     if args.mode == "prove":
@@ -559,6 +567,8 @@ def main() -> int:
             workers=args.workers,
             max_decisions=args.max_decisions,
             actual_orders=("first", "second") if args.actual_order == "both" else (args.actual_order,),
+            hero_env=args.hero_env,
+            opponent_env=args.opponent_env,
         )
     printable = {key: value for key, value in result.items() if key not in {"rows", "runs", "trace_files"}}
     print(json.dumps(printable, indent=2, sort_keys=True))
