@@ -8,7 +8,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from training.train_bc import collate
-from dragapult_emergency_train import semantic_group_loss
+from dragapult_emergency_train import semantic_group_loss, apply_grim_weight
 
 def create_mock_row(action_groups=None, grim=None, action=[0], options=2):
     features = {
@@ -73,25 +73,25 @@ def test_semantic_group_loss_differs():
     assert sem_loss < 0.1  # It should be near zero because the predicted option 1 is in the group
 
 def test_grim_weighting():
-    # In dragapult_emergency_train, it does:
-    # tagged = batch.get("record_grimmsnarl")
-    # if tagged and args.grim_weight > 0:
-    #     for i in range(len(tagged)):
-    #         if tagged[i]: batch["weights"][i] *= args.grim_weight
     batch = collate([
         create_mock_row(grim=True),
         create_mock_row(grim=False)
     ])
-    weights = batch["weights"].clone()
     
-    # Simulate the logic
-    grim_weight = 2.0
-    tagged = batch.get("record_grimmsnarl")
-    if tagged and grim_weight > 0:
-        for i in range(len(tagged)):
-            if tagged[i]:
-                batch["weights"][i] *= grim_weight
+    apply_grim_weight(batch, 2.0)
                 
     assert batch["weights"][0].item() == 2.0
     assert batch["weights"][1].item() == 1.0
 
+def test_grim_weighting_zero_is_noop():
+    batch = collate([create_mock_row(grim=True)])
+    apply_grim_weight(batch, 0.0)
+    assert batch["weights"][0].item() == 1.0
+
+def test_grim_weighting_absent_is_noop():
+    batch = collate([create_mock_row()])
+    # Manually remove it to simulate an older collate or unexpected absence
+    if "record_grimmsnarl" in batch:
+        del batch["record_grimmsnarl"]
+    apply_grim_weight(batch, 2.0)
+    assert batch["weights"][0].item() == 1.0

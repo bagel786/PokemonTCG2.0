@@ -47,6 +47,17 @@ _CONTEXT_NAMES = {
 }
 
 
+def apply_grim_weight(batch: dict, grim_weight: float) -> None:
+    if not grim_weight:
+        return
+    tagged = batch.get("record_grimmsnarl")
+    if not tagged:
+        return
+    for index, flagged in enumerate(tagged):
+        if flagged:
+            batch["weights"][index] *= grim_weight
+
+
 def semantic_group_loss(logits: torch.Tensor, batch: dict) -> tuple[torch.Tensor, int, int]:
     losses: list[torch.Tensor] = []
     exact = total = 0
@@ -190,15 +201,6 @@ def main() -> int:
     if grim_weight:
         print(f"grimmsnarl row weight multiplier: {grim_weight}", flush=True)
 
-    def adjust_weights(batch: dict) -> None:
-        if not grim_weight:
-            return
-        tagged = batch.get("record_grimmsnarl")
-        if not tagged:
-            return
-        for index, flagged in enumerate(tagged):
-            if flagged:
-                batch["weights"][index] *= grim_weight
 
     def run_epoch(epoch: int, training: bool) -> dict:
         if training:
@@ -215,7 +217,7 @@ def main() -> int:
                                   feature_version=5, validation=not training,
                                   team_weights=team_weights if training else None):
             batch = move(batch, device)
-            adjust_weights(batch)
+            apply_grim_weight(batch, grim_weight)
             if training:
                 logits, counts = model(batch)
                 if loss_fn is not None:
