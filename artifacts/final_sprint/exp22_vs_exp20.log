@@ -1,0 +1,82 @@
+{
+  "actual_orders": [
+    "first"
+  ],
+  "base_seed": 202608162200,
+  "candidate": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/final_sprint/exp22_punk_ct_first_only",
+  "candidate_sha256": "2a392132091f856cd3b972be95824e234c293adc904ec2ddad5ee81792b5eba0",
+  "control": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/final_sprint/exp20_punk_first_only",
+  "control_sha256": "f829b856ca032315c563bc2cfcd547b4874d35961831d3d2d9e85b380bf7e7f3",
+  "elapsed_seconds": 131.15169715881348,
+  "engine": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/deterministic_engine/bin/libcg_seeded.dylib",
+  "engine_sha256": "867e3f9bb87e0b48889a44b5d4b04f5d2d434b2a0788d1b2bcfe0caebcb5ab78",
+  "games": 800,
+  "opponent": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/grim_variance_floor/candidates/B0",
+  "opponent_sha256": "0c15b56adf3b09c654505a152309fdc9f8401579a495da714347d98ae735003c",
+  "orders": {
+    "first": {
+      "candidate_decisions": 77247,
+      "candidate_draws": 0,
+      "candidate_policy_errors": 0,
+      "candidate_win_rate": 0.57,
+      "candidate_wins": 228,
+      "concordant": 374,
+      "control_decisions": 77417,
+      "control_draws": 0,
+      "control_policy_errors": 0,
+      "control_win_rate": 0.56,
+      "control_wins": 224,
+      "discordant_candidate_wins": 15,
+      "discordant_control_wins": 11,
+      "method": "paired_win_indicator_difference_normal_95_ci",
+      "opponent_policy_errors": 0,
+      "paired_95_ci": [
+        -0.014996775604749617,
+        0.03499677560474962
+      ],
+      "paired_difference": 0.01,
+      "paired_one_sided_95_lower": -0.010977955380753189,
+      "paired_standard_error": 0.01275369129326916,
+      "pairs": 400
+    }
+  },
+  "overall": {
+    "candidate_decisions": 77247,
+    "candidate_draws": 0,
+    "candidate_policy_errors": 0,
+    "candidate_win_rate": 0.57,
+    "candidate_wins": 228,
+    "concordant": 374,
+    "control_decisions": 77417,
+    "control_draws": 0,
+    "control_policy_errors": 0,
+    "control_win_rate": 0.56,
+    "control_wins": 224,
+    "discordant_candidate_wins": 15,
+    "discordant_control_wins": 11,
+    "method": "paired_win_indicator_difference_normal_95_ci",
+    "opponent_policy_errors": 0,
+    "paired_95_ci": [
+      -0.014996775604749617,
+      0.03499677560474962
+    ],
+    "paired_difference": 0.01,
+    "paired_one_sided_95_lower": -0.010977955380753189,
+    "paired_standard_error": 0.01275369129326916,
+    "pairs": 400
+  },
+  "pairs_per_order": 400,
+  "production_engine": "/Users/safiullahbaig/Projects/pokemonTCG2.0/vendor/cg/libcg.dylib",
+  "production_engine_preserved": true,
+  "production_engine_sha256_after": "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30",
+  "production_engine_sha256_before": "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30",
+  "rng_provenance": {
+    "deviceRand": false,
+    "engine": "local_seeded_mt19937",
+    "entrypoint": "BattleStartSeeded",
+    "native_gameplay_random_device": false,
+    "same_actual_order_and_physical_seat_within_pair": true,
+    "same_seed_within_candidate_control_pair": true
+  },
+  "workers": 8
+}

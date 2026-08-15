@@ -38,3 +38,8 @@ Frozen champion C0 = exact A2+Damage V0 (archive A44B676F…, tree 13426288…, 
 - Dipplin D1: +7.0pp (100 pairs, CI [+1.25,+12.75] SIGNIFICANT, disc 8/1)
 - EXP-21 (punk-first + playid-second) vs C0 B0: -0.25pp (first -0.5, second 0.0 w/ 82-82 disc) -> playid-second = noise on fresh seeds. KILL. Only punk-first remains.
 - Submission 55532521 live: 4 rated games 2W-2L (W vs 460, L vs 722, W vs 591, L vs 740; score 615.6). Expected-rating ordering, no mechanism failure.
+
+## Afternoon updates
+- EXP-20 vs C0 B0 first-order BIG (1000 fresh pairs): -0.2pp (disc 112/114). B0 pooled first-seat remains +1.17pp over 5 cells.
+- EXP-22 (punk count+target, NO activate, first-only): +2.0pp fresh B0 (600p, disc 75/63); head-to-head vs EXP-20 +1.0pp (400p, ns). Kept as reserve; not replacing 55532521 (diff not decisive, would cost live trajectory).
+- 55532521 live @12:30 CT: 7 rated, 4W-3L, score 679.1; wins vs <700, losses vs 641-740 (expected ordering, no mechanism failure).
