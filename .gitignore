@@ -121,3 +121,21 @@ artifacts/sprint_870/mirror_train/*
 !artifacts/sprint_870/mirror_train/*.json
 !artifacts/sprint_870/mirror_train/*.log
 artifacts/sprint_870/opponents/
+
+# final_sprint artifacts: keep results/ledger/scripts, exclude package binaries
+!artifacts/final_sprint/
+artifacts/final_sprint/*
+!artifacts/final_sprint/*.json
+!artifacts/final_sprint/*.md
+!artifacts/final_sprint/*.sh
+!artifacts/final_sprint/*.py
+!artifacts/final_sprint/*.log
+!artifacts/final_sprint/*.tar.gz
+!artifacts/final_sprint/exp*/
+artifacts/final_sprint/exp*/*
+!artifacts/final_sprint/exp*/main.py
+!artifacts/final_sprint/exp*/order_policy_manifest.json
+!artifacts/final_sprint/exp*/ptcg_ai/
+artifacts/final_sprint/exp*/ptcg_ai/*
+!artifacts/final_sprint/exp*/ptcg_ai/*.py
+!artifacts/final_sprint/exp*/ptcg_ai/*.json

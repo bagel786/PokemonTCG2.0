@@ -1,0 +1,1127 @@
+{
+ "by_bucket": {
+  "Alakazam|order0": {
+   "div": 4,
+   "div_in_win_games": 2
+  },
+  "Alakazam|order1": {
+   "div": 8,
+   "div_in_win_games": 5
+  },
+  "Grimmsnarl ex (mirror)|order1": {
+   "div": 33,
+   "div_in_win_games": 18
+  },
+  "Mega Froslass ex|order1": {
+   "div": 3,
+   "div_in_win_games": 0
+  },
+  "Mega Kangaskhan ex|order1": {
+   "div": 4,
+   "div_in_win_games": 1
+  },
+  "Mega Lucario ex|order1": {
+   "div": 8,
+   "div_in_win_games": 6
+  },
+  "Mega Starmie ex|order1": {
+   "div": 1,
+   "div_in_win_games": 1
+  },
+  "Ogerpon ex|order1": {
+   "div": 4,
+   "div_in_win_games": 0
+  },
+  "other (Budew)|order0": {
+   "div": 1,
+   "div_in_win_games": 1
+  },
+  "other (Budew)|order1": {
+   "div": 5,
+   "div_in_win_games": 2
+  },
+  "other (Kyogre)|order1": {
+   "div": 1,
+   "div_in_win_games": 1
+  },
+  "other (Marnie's Impidimp)|order1": {
+   "div": 1,
+   "div_in_win_games": 1
+  }
+ },
+ "by_ctx": {
+  "21": 38,
+  "22": 17,
+  "43": 18
+ },
+ "candidate": "artifacts/final_sprint/exp20_punk_first_only",
+ "control": "artifacts/grim_damage_conversion/winner/extracted",
+ "ctl_mismatches": 69,
+ "divergences": 73,
+ "rows": [
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 43,
+   "episode": 93287859,
+   "seat_order": 1,
+   "sub": 55513649,
+   "turn": 7,
+   "win": true
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [],
+   "ctl": [
+    0
+   ],
+   "ctx": 22,
+   "episode": 93287859,
+   "seat_order": 1,
+   "sub": 55513649,
+   "turn": 7,
+   "win": true
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    2
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 21,
+   "episode": 93193183,
+   "seat_order": 1,
+   "sub": 55513649,
+   "turn": 10,
+   "win": false
+  },
+  {
+   "arch": "Ogerpon ex",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 43,
+   "episode": 93154588,
+   "seat_order": 1,
+   "sub": 55513649,
+   "turn": 14,
+   "win": false
+  },
+  {
+   "arch": "Ogerpon ex",
+   "cand": [],
+   "ctl": [
+    0
+   ],
+   "ctx": 22,
+   "episode": 93154588,
+   "seat_order": 1,
+   "sub": 55513649,
+   "turn": 14,
+   "win": false
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    0
+   ],
+   "ctl": [
+    2
+   ],
+   "ctx": 21,
+   "episode": 93129629,
+   "seat_order": 1,
+   "sub": 55513649,
+   "turn": 13,
+   "win": false
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 21,
+   "episode": 93124896,
+   "seat_order": 1,
+   "sub": 55513649,
+   "turn": 3,
+   "win": false
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 21,
+   "episode": 93118425,
+   "seat_order": 1,
+   "sub": 55513649,
+   "turn": 3,
+   "win": true
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 43,
+   "episode": 93118425,
+   "seat_order": 1,
+   "sub": 55513649,
+   "turn": 5,
+   "win": true
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 21,
+   "episode": 93117488,
+   "seat_order": 1,
+   "sub": 55513649,
+   "turn": 3,
+   "win": false
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 43,
+   "episode": 93117488,
+   "seat_order": 1,
+   "sub": 55513649,
+   "turn": 7,
+   "win": false
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    2
+   ],
+   "ctx": 21,
+   "episode": 93114704,
+   "seat_order": 1,
+   "sub": 55513649,
+   "turn": 8,
+   "win": true
+  },
+  {
+   "arch": "Mega Lucario ex",
+   "cand": [],
+   "ctl": [
+    0
+   ],
+   "ctx": 22,
+   "episode": 93113766,
+   "seat_order": 1,
+   "sub": 55513649,
+   "turn": 9,
+   "win": true
+  },
+  {
+   "arch": "Mega Lucario ex",
+   "cand": [
+    0,
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 22,
+   "episode": 93108198,
+   "seat_order": 1,
+   "sub": 55513649,
+   "turn": 9,
+   "win": true
+  },
+  {
+   "arch": "Alakazam",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 21,
+   "episode": 93104479,
+   "seat_order": 1,
+   "sub": 55513649,
+   "turn": 4,
+   "win": true
+  },
+  {
+   "arch": "Alakazam",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    2
+   ],
+   "ctx": 21,
+   "episode": 93104479,
+   "seat_order": 1,
+   "sub": 55513649,
+   "turn": 4,
+   "win": true
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    2
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 21,
+   "episode": 93100764,
+   "seat_order": 1,
+   "sub": 55513649,
+   "turn": 7,
+   "win": false
+  },
+  {
+   "arch": "Ogerpon ex",
+   "cand": [
+    0
+   ],
+   "ctl": [
+    1
+   ],
+   "ctx": 21,
+   "episode": 93337199,
+   "seat_order": 1,
+   "sub": 55513642,
+   "turn": 12,
+   "win": false
+  },
+  {
+   "arch": "Ogerpon ex",
+   "cand": [],
+   "ctl": [
+    0
+   ],
+   "ctx": 22,
+   "episode": 93337199,
+   "seat_order": 1,
+   "sub": 55513642,
+   "turn": 12,
+   "win": false
+  },
+  {
+   "arch": "other (Budew)",
+   "cand": [
+    2
+   ],
+   "ctl": [
+    1
+   ],
+   "ctx": 21,
+   "episode": 93336490,
+   "seat_order": 1,
+   "sub": 55513642,
+   "turn": 6,
+   "win": false
+  },
+  {
+   "arch": "other (Budew)",
+   "cand": [],
+   "ctl": [
+    0
+   ],
+   "ctx": 22,
+   "episode": 93306559,
+   "seat_order": 1,
+   "sub": 55513642,
+   "turn": 12,
+   "win": true
+  },
+  {
+   "arch": "Alakazam",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 43,
+   "episode": 93257625,
+   "seat_order": 1,
+   "sub": 55513642,
+   "turn": 10,
+   "win": true
+  },
+  {
+   "arch": "Mega Froslass ex",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 21,
+   "episode": 93133323,
+   "seat_order": 1,
+   "sub": 55513642,
+   "turn": 6,
+   "win": false
+  },
+  {
+   "arch": "Mega Froslass ex",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 43,
+   "episode": 93133323,
+   "seat_order": 1,
+   "sub": 55513642,
+   "turn": 12,
+   "win": false
+  },
+  {
+   "arch": "Mega Froslass ex",
+   "cand": [],
+   "ctl": [
+    0
+   ],
+   "ctx": 22,
+   "episode": 93133323,
+   "seat_order": 1,
+   "sub": 55513642,
+   "turn": 12,
+   "win": false
+  },
+  {
+   "arch": "Mega Starmie ex",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 43,
+   "episode": 93127731,
+   "seat_order": 1,
+   "sub": 55513642,
+   "turn": 5,
+   "win": true
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    2
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 21,
+   "episode": 93124936,
+   "seat_order": 1,
+   "sub": 55513642,
+   "turn": 8,
+   "win": true
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 21,
+   "episode": 93121233,
+   "seat_order": 1,
+   "sub": 55513642,
+   "turn": 3,
+   "win": true
+  },
+  {
+   "arch": "Alakazam",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 21,
+   "episode": 93119385,
+   "seat_order": 0,
+   "sub": 55513642,
+   "turn": 3,
+   "win": true
+  },
+  {
+   "arch": "Mega Lucario ex",
+   "cand": [],
+   "ctl": [
+    0
+   ],
+   "ctx": 22,
+   "episode": 93117519,
+   "seat_order": 1,
+   "sub": 55513642,
+   "turn": 14,
+   "win": true
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    2
+   ],
+   "ctx": 21,
+   "episode": 93115649,
+   "seat_order": 1,
+   "sub": 55513642,
+   "turn": 5,
+   "win": false
+  },
+  {
+   "arch": "Alakazam",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 43,
+   "episode": 93112851,
+   "seat_order": 0,
+   "sub": 55513642,
+   "turn": 5,
+   "win": true
+  },
+  {
+   "arch": "Mega Lucario ex",
+   "cand": [
+    2
+   ],
+   "ctl": [
+    1
+   ],
+   "ctx": 21,
+   "episode": 93110061,
+   "seat_order": 1,
+   "sub": 55513642,
+   "turn": 9,
+   "win": false
+  },
+  {
+   "arch": "Alakazam",
+   "cand": [
+    0
+   ],
+   "ctl": [
+    1
+   ],
+   "ctx": 21,
+   "episode": 93104482,
+   "seat_order": 1,
+   "sub": 55513642,
+   "turn": 6,
+   "win": true
+  },
+  {
+   "arch": "Alakazam",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 43,
+   "episode": 92958664,
+   "seat_order": 1,
+   "sub": 55491471,
+   "turn": 6,
+   "win": false
+  },
+  {
+   "arch": "other (Budew)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 21,
+   "episode": 92947543,
+   "seat_order": 1,
+   "sub": 55491471,
+   "turn": 5,
+   "win": true
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 21,
+   "episode": 92943867,
+   "seat_order": 1,
+   "sub": 55491471,
+   "turn": 4,
+   "win": true
+  },
+  {
+   "arch": "Alakazam",
+   "cand": [
+    0
+   ],
+   "ctl": [
+    1
+   ],
+   "ctx": 21,
+   "episode": 92904093,
+   "seat_order": 1,
+   "sub": 55491471,
+   "turn": 8,
+   "win": false
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 43,
+   "episode": 92810062,
+   "seat_order": 1,
+   "sub": 55491471,
+   "turn": 6,
+   "win": true
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [],
+   "ctl": [
+    0
+   ],
+   "ctx": 22,
+   "episode": 92810062,
+   "seat_order": 1,
+   "sub": 55491471,
+   "turn": 6,
+   "win": true
+  },
+  {
+   "arch": "other (Budew)",
+   "cand": [
+    0
+   ],
+   "ctl": [
+    1
+   ],
+   "ctx": 21,
+   "episode": 92804397,
+   "seat_order": 0,
+   "sub": 55491471,
+   "turn": 7,
+   "win": true
+  },
+  {
+   "arch": "Mega Lucario ex",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 21,
+   "episode": 92797053,
+   "seat_order": 1,
+   "sub": 55491471,
+   "turn": 3,
+   "win": true
+  },
+  {
+   "arch": "Mega Lucario ex",
+   "cand": [],
+   "ctl": [
+    0
+   ],
+   "ctx": 22,
+   "episode": 92797053,
+   "seat_order": 1,
+   "sub": 55491471,
+   "turn": 7,
+   "win": true
+  },
+  {
+   "arch": "Alakazam",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 21,
+   "episode": 92794218,
+   "seat_order": 1,
+   "sub": 55491471,
+   "turn": 7,
+   "win": true
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 21,
+   "episode": 92784860,
+   "seat_order": 1,
+   "sub": 55491471,
+   "turn": 5,
+   "win": false
+  },
+  {
+   "arch": "Alakazam",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 43,
+   "episode": 92777421,
+   "seat_order": 0,
+   "sub": 55491471,
+   "turn": 13,
+   "win": false
+  },
+  {
+   "arch": "Alakazam",
+   "cand": [],
+   "ctl": [
+    0
+   ],
+   "ctx": 22,
+   "episode": 92777421,
+   "seat_order": 0,
+   "sub": 55491471,
+   "turn": 13,
+   "win": false
+  },
+  {
+   "arch": "other (Kyogre)",
+   "cand": [],
+   "ctl": [
+    0
+   ],
+   "ctx": 22,
+   "episode": 92776510,
+   "seat_order": 1,
+   "sub": 55491471,
+   "turn": 11,
+   "win": true
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [],
+   "ctl": [
+    0
+   ],
+   "ctx": 22,
+   "episode": 92774611,
+   "seat_order": 1,
+   "sub": 55491471,
+   "turn": 6,
+   "win": true
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 21,
+   "episode": 92773671,
+   "seat_order": 1,
+   "sub": 55491471,
+   "turn": 4,
+   "win": true
+  },
+  {
+   "arch": "Mega Lucario ex",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 21,
+   "episode": 93055646,
+   "seat_order": 1,
+   "sub": 55491464,
+   "turn": 8,
+   "win": false
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 43,
+   "episode": 92959636,
+   "seat_order": 1,
+   "sub": 55491464,
+   "turn": 7,
+   "win": true
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [],
+   "ctl": [
+    0
+   ],
+   "ctx": 22,
+   "episode": 92959636,
+   "seat_order": 1,
+   "sub": 55491464,
+   "turn": 7,
+   "win": true
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    2
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 21,
+   "episode": 92946879,
+   "seat_order": 1,
+   "sub": 55491464,
+   "turn": 9,
+   "win": false
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    2
+   ],
+   "ctl": [
+    1
+   ],
+   "ctx": 21,
+   "episode": 92928036,
+   "seat_order": 1,
+   "sub": 55491464,
+   "turn": 5,
+   "win": false
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 43,
+   "episode": 92848122,
+   "seat_order": 1,
+   "sub": 55491464,
+   "turn": 5,
+   "win": true
+  },
+  {
+   "arch": "Mega Kangaskhan ex",
+   "cand": [
+    0
+   ],
+   "ctl": [
+    1
+   ],
+   "ctx": 21,
+   "episode": 92833231,
+   "seat_order": 1,
+   "sub": 55491464,
+   "turn": 12,
+   "win": true
+  },
+  {
+   "arch": "Alakazam",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 43,
+   "episode": 92802662,
+   "seat_order": 1,
+   "sub": 55491464,
+   "turn": 7,
+   "win": false
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 43,
+   "episode": 92800761,
+   "seat_order": 1,
+   "sub": 55491464,
+   "turn": 6,
+   "win": false
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [],
+   "ctl": [
+    0
+   ],
+   "ctx": 22,
+   "episode": 92800761,
+   "seat_order": 1,
+   "sub": 55491464,
+   "turn": 6,
+   "win": false
+  },
+  {
+   "arch": "other (Budew)",
+   "cand": [
+    0
+   ],
+   "ctl": [
+    1
+   ],
+   "ctx": 21,
+   "episode": 92793331,
+   "seat_order": 1,
+   "sub": 55491464,
+   "turn": 6,
+   "win": false
+  },
+  {
+   "arch": "Mega Lucario ex",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 21,
+   "episode": 92785806,
+   "seat_order": 1,
+   "sub": 55491464,
+   "turn": 9,
+   "win": true
+  },
+  {
+   "arch": "other (Marnie's Impidimp)",
+   "cand": [
+    0
+   ],
+   "ctl": [
+    1
+   ],
+   "ctx": 21,
+   "episode": 92780221,
+   "seat_order": 1,
+   "sub": 55491464,
+   "turn": 5,
+   "win": true
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 21,
+   "episode": 92777432,
+   "seat_order": 1,
+   "sub": 55491464,
+   "turn": 3,
+   "win": false
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 43,
+   "episode": 92775590,
+   "seat_order": 1,
+   "sub": 55491464,
+   "turn": 8,
+   "win": false
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [],
+   "ctl": [
+    0
+   ],
+   "ctx": 22,
+   "episode": 92775590,
+   "seat_order": 1,
+   "sub": 55491464,
+   "turn": 8,
+   "win": false
+  },
+  {
+   "arch": "Mega Kangaskhan ex",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    2
+   ],
+   "ctx": 21,
+   "episode": 92772741,
+   "seat_order": 1,
+   "sub": 55491464,
+   "turn": 8,
+   "win": false
+  },
+  {
+   "arch": "Mega Kangaskhan ex",
+   "cand": [],
+   "ctl": [
+    0
+   ],
+   "ctx": 22,
+   "episode": 92772741,
+   "seat_order": 1,
+   "sub": 55491464,
+   "turn": 14,
+   "win": false
+  },
+  {
+   "arch": "Mega Kangaskhan ex",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 43,
+   "episode": 92772741,
+   "seat_order": 1,
+   "sub": 55491464,
+   "turn": 14,
+   "win": false
+  },
+  {
+   "arch": "other (Budew)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 21,
+   "episode": 92771925,
+   "seat_order": 1,
+   "sub": 55491464,
+   "turn": 6,
+   "win": false
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 21,
+   "episode": 92771806,
+   "seat_order": 1,
+   "sub": 55491464,
+   "turn": 3,
+   "win": true
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 43,
+   "episode": 92771806,
+   "seat_order": 1,
+   "sub": 55491464,
+   "turn": 7,
+   "win": true
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    2
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 21,
+   "episode": 92769963,
+   "seat_order": 1,
+   "sub": 55491464,
+   "turn": 6,
+   "win": true
+  }
+ ]
+}

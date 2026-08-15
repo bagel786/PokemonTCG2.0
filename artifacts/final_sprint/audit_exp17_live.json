@@ -1,0 +1,221 @@
+{
+ "by_bucket": {
+  "Alakazam|order0": {
+   "div": 2,
+   "div_in_win_games": 2
+  },
+  "Archaludon ex|order0": {
+   "div": 1,
+   "div_in_win_games": 1
+  },
+  "Grimmsnarl ex (mirror)|order1": {
+   "div": 4,
+   "div_in_win_games": 3
+  },
+  "Mega Lucario ex|order0": {
+   "div": 1,
+   "div_in_win_games": 0
+  },
+  "Mega Lucario ex|order1": {
+   "div": 1,
+   "div_in_win_games": 0
+  },
+  "Ogerpon ex|order1": {
+   "div": 1,
+   "div_in_win_games": 1
+  },
+  "other (Kyogre)|order1": {
+   "div": 2,
+   "div_in_win_games": 2
+  }
+ },
+ "by_ctx": {
+  "1": 12
+ },
+ "candidate": "artifacts/final_sprint/exp17_setup_tier",
+ "control": "artifacts/grim_damage_conversion/winner/extracted",
+ "ctl_mismatches": 69,
+ "divergences": 12,
+ "rows": [
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    0
+   ],
+   "ctl": [
+    1
+   ],
+   "ctx": 1,
+   "episode": 93281633,
+   "seat_order": 1,
+   "sub": 55513649,
+   "turn": 0,
+   "win": true
+  },
+  {
+   "arch": "Mega Lucario ex",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 1,
+   "episode": 93130470,
+   "seat_order": 0,
+   "sub": 55513649,
+   "turn": 0,
+   "win": false
+  },
+  {
+   "arch": "Alakazam",
+   "cand": [
+    2
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 1,
+   "episode": 93128600,
+   "seat_order": 0,
+   "sub": 55513649,
+   "turn": 0,
+   "win": true
+  },
+  {
+   "arch": "other (Kyogre)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 1,
+   "episode": 93116567,
+   "seat_order": 1,
+   "sub": 55513649,
+   "turn": 0,
+   "win": true
+  },
+  {
+   "arch": "other (Kyogre)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 1,
+   "episode": 93116567,
+   "seat_order": 1,
+   "sub": 55513649,
+   "turn": 0,
+   "win": true
+  },
+  {
+   "arch": "Archaludon ex",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 1,
+   "episode": 93128613,
+   "seat_order": 0,
+   "sub": 55513642,
+   "turn": 0,
+   "win": true
+  },
+  {
+   "arch": "Alakazam",
+   "cand": [
+    0
+   ],
+   "ctl": [
+    1
+   ],
+   "ctx": 1,
+   "episode": 93119385,
+   "seat_order": 0,
+   "sub": 55513642,
+   "turn": 0,
+   "win": true
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    0
+   ],
+   "ctl": [
+    1
+   ],
+   "ctx": 1,
+   "episode": 92958909,
+   "seat_order": 1,
+   "sub": 55491471,
+   "turn": 0,
+   "win": true
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 1,
+   "episode": 92943867,
+   "seat_order": 1,
+   "sub": 55491471,
+   "turn": 0,
+   "win": true
+  },
+  {
+   "arch": "Ogerpon ex",
+   "cand": [
+    0
+   ],
+   "ctl": [
+    1
+   ],
+   "ctx": 1,
+   "episode": 92925408,
+   "seat_order": 1,
+   "sub": 55491471,
+   "turn": 0,
+   "win": true
+  },
+  {
+   "arch": "Grimmsnarl ex (mirror)",
+   "cand": [
+    1
+   ],
+   "ctl": [
+    0
+   ],
+   "ctx": 1,
+   "episode": 92856699,
+   "seat_order": 1,
+   "sub": 55491471,
+   "turn": 0,
+   "win": false
+  },
+  {
+   "arch": "Mega Lucario ex",
+   "cand": [
+    0
+   ],
+   "ctl": [
+    1
+   ],
+   "ctx": 1,
+   "episode": 92831609,
+   "seat_order": 1,
+   "sub": 55491471,
+   "turn": 0,
+   "win": false
+  }
+ ]
+}

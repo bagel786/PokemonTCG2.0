@@ -1,0 +1,34 @@
+# FINAL SPRINT LEDGER — Aug 15 (submission day)
+
+Frozen champion C0 = exact A2+Damage V0 (archive A44B676F…, tree 13426288…, model B19871A9…, deck 92B92BAC…). Verified on disk.
+
+## Trace mining (236 live games, 4 subs)
+- Mirror 84 games: first 18/42 (42.9%), second 22/42 (52.4%). Anomaly confirmed.
+- Mirror-first = race to first Grimmsnarl ex (W first_grim 2.71 vs L 3.0; opp first_grim W 3.67 vs L 3.42). Mostly draw-driven; T2 candy misses with pieces in hand: 3W/4L (symmetric).
+- Snorunt setup-active: 6/24 mirror-first losses (only 2 with a choice available).
+- T1 Gym search fetched Impidimp with 647/648 available in 4/42 mirror-first losses (9 games, 5 had no Impidimp on board = correct fetch).
+- Alakazam losses (20): attacker exhaustion after first Grim KO (no second attacker ready, no energy stock).
+
+## Experiments (all paired CRN vs exact C0, zero policy errors)
+- EXP-16 gym search tier: -3.0pp; T1-gated: **-3.33pp [CI -5.4,-1.2] SIGNIFICANT → KILL**
+- EXP-18 candy-T2 push: -0.8pp → KILL
+- EXP-17 setup-active tier: +1.0pp first cell; fresh B0 -0.4, m1 -0.1 → KILL
+- punk_target fresh: B0 -1.3pp / m1 -0.4pp (1000p each) → KILL (sprint-870 positives were seed noise)
+- EXP-1 full punk fresh: +0.5pp (first +2.8, second -1.8)
+- **EXP-20 = full punk, FIRST arm only** (second arm byte-identical):
+    first-seat cells: B0 fresh +2.75 (disc 50/39), B0 +1.83, B0b +2.83, m1 0.00, m1b +1.25, rr +0.33, rrb +2.75, a2ctl -1.25
+    **Alakazam 2.4a SEARCH-ON first order: +3.0pp (100 pairs, disc 10/7, 0 errors; C0 baseline 75.0%)**
+    second-order control: exactly 0 discordant.
+    → pooled first-seat ~+1.5pp across 9 cells. PASSED gates as narrow/large-bucket/zero-regression candidate.
+- Live audit tool built (scripts/audit_live_rails.py) - fixed cross-game latch artifact by replaying handshake per game.
+
+## SUBMISSION
+- **55532521** "punk-first-rail-20260815" = exp20_punk_first_only.tar.gz (sha 6D26061ED9F33B0ED0966BFDA542F6DCACB27EE887C61668FFE4267D52ACFF59)
+  - submitted 2026-08-15 17:05 UTC (12:05 CDT)
+  - mechanism: order-conditional full Punk Up rail (activate/count/target tier) on the actual-first arm only; actual-second arm = exact C0.
+  - active pair: 55513649 (C0, 798.2) + 55532521 (challenger).
+- 4 submissions remain.
+
+## Open
+- EXP-21 (punk-first + playid-second, independent mechanisms per arm): built, screens pending.
+- Monitor 55532521: validation + first 5-10 games trajectory.

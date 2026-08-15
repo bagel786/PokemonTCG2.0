@@ -1,0 +1,108 @@
+{
+  "actual_orders": [
+    "first",
+    "second"
+  ],
+  "base_seed": 202608160100,
+  "candidate": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/final_sprint/exp16_gym_tier",
+  "candidate_sha256": "312cbf78ee9285a53c9759201bbcf1d7136f811b25495c89aeff373edd20b459",
+  "control": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/grim_damage_conversion/winner/extracted",
+  "control_sha256": "13426288358d597ead809e45c364c7f7b9274a6eebf55ddd942142e3326535c3",
+  "elapsed_seconds": 156.6815152168274,
+  "engine": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/deterministic_engine/bin/libcg_seeded.dylib",
+  "engine_sha256": "867e3f9bb87e0b48889a44b5d4b04f5d2d434b2a0788d1b2bcfe0caebcb5ab78",
+  "games": 1200,
+  "opponent": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/grim_variance_floor/candidates/B0",
+  "opponent_sha256": "0c15b56adf3b09c654505a152309fdc9f8401579a495da714347d98ae735003c",
+  "orders": {
+    "first": {
+      "candidate_decisions": 57903,
+      "candidate_draws": 1,
+      "candidate_policy_errors": 0,
+      "candidate_win_rate": 0.5333333333333333,
+      "candidate_wins": 160,
+      "concordant": 286,
+      "control_decisions": 58364,
+      "control_draws": 1,
+      "control_policy_errors": 0,
+      "control_win_rate": 0.5533333333333333,
+      "control_wins": 166,
+      "discordant_candidate_wins": 4,
+      "discordant_control_wins": 10,
+      "method": "paired_win_indicator_difference_normal_95_ci",
+      "opponent_policy_errors": 0,
+      "paired_95_ci": [
+        -0.044380724249957204,
+        0.004380724249957203
+      ],
+      "paired_difference": -0.02,
+      "paired_one_sided_95_lower": -0.040460948786085346,
+      "paired_standard_error": 0.012439373601897405,
+      "pairs": 300
+    },
+    "second": {
+      "candidate_decisions": 59181,
+      "candidate_draws": 0,
+      "candidate_policy_errors": 0,
+      "candidate_win_rate": 0.56,
+      "candidate_wins": 168,
+      "concordant": 272,
+      "control_decisions": 59834,
+      "control_draws": 0,
+      "control_policy_errors": 0,
+      "control_win_rate": 0.6066666666666667,
+      "control_wins": 182,
+      "discordant_candidate_wins": 7,
+      "discordant_control_wins": 21,
+      "method": "paired_win_indicator_difference_normal_95_ci",
+      "opponent_policy_errors": 0,
+      "paired_95_ci": [
+        -0.08088856273310072,
+        -0.012444770600232621
+      ],
+      "paired_difference": -0.04666666666666667,
+      "paired_one_sided_95_lower": -0.0753865871907369,
+      "paired_standard_error": 0.017460471894571533,
+      "pairs": 300
+    }
+  },
+  "overall": {
+    "candidate_decisions": 117084,
+    "candidate_draws": 1,
+    "candidate_policy_errors": 0,
+    "candidate_win_rate": 0.5466666666666666,
+    "candidate_wins": 328,
+    "concordant": 558,
+    "control_decisions": 118198,
+    "control_draws": 1,
+    "control_policy_errors": 0,
+    "control_win_rate": 0.58,
+    "control_wins": 348,
+    "discordant_candidate_wins": 11,
+    "discordant_control_wins": 31,
+    "method": "paired_win_indicator_difference_normal_95_ci",
+    "opponent_policy_errors": 0,
+    "paired_95_ci": [
+      -0.054352198771090626,
+      -0.01231446789557604
+    ],
+    "paired_difference": -0.03333333333333333,
+    "paired_one_sided_95_lower": -0.05097292126576837,
+    "paired_standard_error": 0.010724107995632278,
+    "pairs": 600
+  },
+  "pairs_per_order": 300,
+  "production_engine": "/Users/safiullahbaig/Projects/pokemonTCG2.0/vendor/cg/libcg.dylib",
+  "production_engine_preserved": true,
+  "production_engine_sha256_after": "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30",
+  "production_engine_sha256_before": "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30",
+  "rng_provenance": {
+    "deviceRand": false,
+    "engine": "local_seeded_mt19937",
+    "entrypoint": "BattleStartSeeded",
+    "native_gameplay_random_device": false,
+    "same_actual_order_and_physical_seat_within_pair": true,
+    "same_seed_within_candidate_control_pair": true
+  },
+  "workers": 8
+}
