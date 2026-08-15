@@ -82,14 +82,14 @@ def iter_rows(paths: Iterable[Path]) -> Iterable[dict[str, Any]]:
                 yield row
 
 
-def complete_logprob(logits: torch.Tensor, counts: torch.Tensor, batch: dict, record: int, action: list[int]) -> torch.Tensor:
+def complete_logprob(logits: torch.Tensor, counts: torch.Tensor, batch: dict, record: int, action: list[int], temperature: float = 1.0) -> torch.Tensor:
     start, end = batch["record_options"][record]
-    local = logits[start:end]
+    local = logits[start:end] / temperature
     minimum = int(round(float(batch["global"][record, 28].item()) * 9))
     maximum = int(round(float(batch["global"][record, 29].item()) * 9))
     logprob = local.sum() * 0
     if minimum != maximum:
-        logprob = logprob + F.log_softmax(counts[record, minimum:maximum + 1], dim=0)[len(action) - minimum]
+        logprob = logprob + F.log_softmax(counts[record, minimum:maximum + 1] / temperature, dim=0)[len(action) - minimum]
     available = torch.ones(len(local), dtype=torch.bool, device=local.device)
     for index in action:
         step = local.masked_fill(~available, -torch.inf)
@@ -123,9 +123,9 @@ def iter_batches(paths: list[Path], batch_size: int, seed: int) -> Iterable[dict
         yield _batch(rows[start:start + batch_size])
 
 
-def actor_loss(actor, critic, batch, clip_ratio: float, entropy_weight: float, auxiliary_weight: float) -> tuple[torch.Tensor, dict[str, float]]:
+def actor_loss(actor, critic, batch, clip_ratio: float, entropy_weight: float, auxiliary_weight: float, temperature: float = 1.0) -> tuple[torch.Tensor, dict[str, float]]:
     logits, counts = actor(batch)
-    logprobs = torch.stack([complete_logprob(logits, counts, batch, index, action) for index, action in enumerate(batch["record_actions"])])
+    logprobs = torch.stack([complete_logprob(logits, counts, batch, index, action, temperature=temperature) for index, action in enumerate(batch["record_actions"])])
     with torch.no_grad():
         values = critic(batch["private"])
         outcome_advantage = batch["terminal_reward"] - torch.tanh(values)
@@ -154,6 +154,9 @@ def actor_loss(actor, critic, batch, clip_ratio: float, entropy_weight: float, a
         "auxiliary_loss": float(auxiliary.detach()),
         "approximate_kl": float(approximate_kl.detach()),
         "q_fraction": float(q_mask.float().mean()),
+        "ratio_mean": float(ratio.mean().detach()),
+        "ratio_min": float(ratio.min().detach()),
+        "ratio_max": float(ratio.max().detach()),
     }
 
 
@@ -170,7 +173,7 @@ def train(args) -> dict[str, Any]:
     hard_stopped = False
     for epoch in range(args.epochs):
         totals: dict[str, float] = {"batches": 0}
-        for raw in iter_batches(list(map(Path, args.rollouts)), args.batch_size, args.seed + epoch):
+        for batch_idx, raw in enumerate(iter_batches(list(map(Path, args.rollouts)), args.batch_size, args.seed + epoch)):
             batch = move(raw, device)
             critic_logits = critic(batch["private"])
             critic_loss = F.mse_loss(torch.tanh(critic_logits), batch["terminal_reward"])
@@ -179,22 +182,27 @@ def train(args) -> dict[str, Any]:
             torch.nn.utils.clip_grad_norm_(critic.parameters(), 1.0)
             critic_optimizer.step()
 
-            loss, metrics = actor_loss(actor, critic, batch, args.clip_ratio, args.entropy_weight, args.auxiliary_weight)
+            loss, metrics = actor_loss(actor, critic, batch, args.clip_ratio, args.entropy_weight, args.auxiliary_weight, args.temperature)
             if not torch.isfinite(loss):
                 raise FloatingPointError("non-finite outcome-RL actor loss")
             if metrics["approximate_kl"] > args.hard_kl:
+                print(f"Epoch {epoch} Batch {batch_idx}: Hard KL stop triggered (KL: {metrics['approximate_kl']:.6f} > {args.hard_kl}). Step Taken: False")
                 hard_stopped = True
                 break
             actor_optimizer.zero_grad(set_to_none=True)
             loss.backward()
-            torch.nn.utils.clip_grad_norm_(actor.parameters(), 1.0)
+            grad_norm = torch.nn.utils.clip_grad_norm_(actor.parameters(), 1.0)
             actor_optimizer.step()
-            totals["batches"] += 1
+            totals["batches"] = totals.get("batches", 0) + 1
+            totals["actor_steps"] = totals.get("actor_steps", 0) + 1
             totals["critic_loss"] = totals.get("critic_loss", 0.0) + float(critic_loss.detach())
             for key, value in metrics.items():
                 totals[key] = totals.get(key, 0.0) + value
-        count = max(1.0, totals.pop("batches"))
-        record = {"epoch": epoch + 1, **{key: value / count for key, value in totals.items()}}
+            
+            print(f"Epoch {epoch} Batch {batch_idx}: Actor Loss: {float(loss):.4f}, Critic Loss: {float(critic_loss):.4f}, KL: {metrics['approximate_kl']:.6f}, Ratio (Mean/Min/Max): {metrics['ratio_mean']:.4f}/{metrics['ratio_min']:.4f}/{metrics['ratio_max']:.4f}, Grad Norm: {float(grad_norm):.4f}, Step Taken: True")
+
+        count = max(1.0, totals.get("batches", 0))
+        record = {"epoch": epoch + 1, "actor_steps": totals.get("actor_steps", 0), **{key: value / count for key, value in totals.items() if key not in ["batches", "actor_steps"]}}
         history.append(record)
         if hard_stopped:
             break
@@ -234,6 +242,7 @@ def main() -> int:
     parser.add_argument("--entropy-weight", type=float, default=0.005)
     parser.add_argument("--auxiliary-weight", type=float, default=0.20)
     parser.add_argument("--hard-kl", type=float, default=0.03)
+    parser.add_argument("--temperature", type=float, default=1.0)
     parser.add_argument("--seed", type=int, default=2026080901)
     parser.add_argument("--allow-local-smoke", action="store_true")
     args = parser.parse_args()

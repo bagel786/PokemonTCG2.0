@@ -14,11 +14,11 @@ echo "Training Dragapult Outcome RL Pilot..."
     --manifest "trace_rl_pilot/rl_manifest.json" \
     --allow-local-smoke \
     --epochs 1 \
-    --actor-lr 1e-5 \
+    --actor-lr 2e-6 \
     --critic-lr 2e-4 \
     --clip-ratio 0.10 \
     --entropy-weight 0 \
     --auxiliary-weight 0 \
-    --hard-kl 0.01
-
-echo "Training Complete."
+    --hard-kl 0.01 \
+    --temperature 0.15 \
+    --seed 2026080901
