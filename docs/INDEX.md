@@ -8,6 +8,7 @@ This directory contains research, logs, and sprint plans for the project. The fi
 Core project architecture, experimental findings, and high-level strategy documents.
 *   `PROJECT_SUMMARY.md` - Overall system overview and agent pipeline.
 *   `OPERATIONS.md` - Runbooks for cloud/Azure tasks and general ops.
+*   `KAGGLE_API_RATE_LIMITS.md` - READ BEFORE any Kaggle API work: rate-limit forensics, safe endpoints, rules (429 handling, daily-dataset bulk path).
 *   `EXPERIMENTS.md` - Running log of major experimental setups and results.
 *   `RL_PLAN.md` - Reinforcement learning strategy and architecture.
 

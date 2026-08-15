@@ -476,3 +476,9 @@ class DirectPolicy:
         self._trace(obs, features, result)
         self._remember(obs, features, result)
         return result
+    @property
+    def telemetry(self):
+        return {
+            "fallback": self.fallback_telemetry,
+            "shield": dict(self.shield_telemetry.counts) if hasattr(self, "shield_telemetry") else {}
+        }

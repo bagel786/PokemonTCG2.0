@@ -23,7 +23,7 @@ from cg.game import battle_finish, battle_select, battle_start, visualize_data
 from ptcg_ai.direct import DirectPolicy
 from ptcg_ai.external import ExternalSubmissionAgent
 from ptcg_ai.features import EVENT_HISTORY_LENGTH, encode_observation, public_state_summary
-from ptcg_ai.heuristic import GrimmsnarlHeuristic
+from ptcg_ai.heuristic import GarchompHeuristic
 from ptcg_ai.safety import sanitize_selection
 from training.private_critic import encode_private_visualize
 from training.q_boost import compare_actions
@@ -78,7 +78,7 @@ def collect_game(actor_path: Path, hero_deck: list[int], opponent_path: Path, se
     opponent_deck = [int(line) for line in (opponent_path / "deck.csv").read_text().splitlines() if line.strip()]
     seat = seed % 2
     decks = [hero_deck, opponent_deck] if seat == 0 else [opponent_deck, hero_deck]
-    fallback = GrimmsnarlHeuristic()
+    fallback = None
     actor = DirectPolicy(actor_path, fallback)
     opponent = ExternalSubmissionAgent(opponent_path, {})
     rng = np.random.default_rng(seed)
@@ -120,7 +120,7 @@ def collect_game(actor_path: Path, hero_deck: list[int], opponent_path: Path, se
                     "action": action,
                     "old_logprob": old_logprob,
                     "terminal_reward": 0.0,
-                    "baseline_action": actor.fallback.choose(obs),
+                    "baseline_action": None,
                     "supported_context": True,
                     "seat": seat,
                     "actual_order": "first" if first_player == seat else "second",
