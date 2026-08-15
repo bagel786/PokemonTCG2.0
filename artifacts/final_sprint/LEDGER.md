@@ -43,3 +43,7 @@ Frozen champion C0 = exact A2+Damage V0 (archive A44B676F…, tree 13426288…, 
 - EXP-20 vs C0 B0 first-order BIG (1000 fresh pairs): -0.2pp (disc 112/114). B0 pooled first-seat remains +1.17pp over 5 cells.
 - EXP-22 (punk count+target, NO activate, first-only): +2.0pp fresh B0 (600p, disc 75/63); head-to-head vs EXP-20 +1.0pp (400p, ns). Kept as reserve; not replacing 55532521 (diff not decisive, would cost live trajectory).
 - 55532521 live @12:30 CT: 7 rated, 4W-3L, score 679.1; wins vs <700, losses vs 641-740 (expected ordering, no mechanism failure).
+
+## a2ctl gate
+- EXP-20 vs A2-ordered first-order fresh (400p): -0.25pp (ns, disc 45/46). No regression vs prior live agent.
+- 55532521 live @12:50 CT: 9 rated, 5W-4L, score 660.3. Perfect rating-ordering (wins <700, losses 641-740). Matches C0 live behavior.
