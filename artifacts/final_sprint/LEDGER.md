@@ -58,3 +58,10 @@ Gates vs exact C0 (paired CRN, zero errors, all cells):
 Package: exp23_identity_trained.tar.gz sha 0734B60C089EEA9C2E40550B8E9C6DC3983957210794BA245C4C00BD9D4E7096
 Sterile smoke: PASS (60-card deck, identity flag ON, model CEFE6118...).
 NOT YET SUBMITTED - awaiting user go-ahead (autonomy expired 7pm CT).
+
+## EXP-23 final validation record (Aug 16)
+- Fresh-seed m1 confirmation: +5.75pp [CI +1.3,+10.2] SIG (800p, disc 187/141) - SECOND independent significant m1 cell.
+- FINAL: 4 significant cells (B0-fresh +4.17, m1 +6.38, m1-fresh +5.75, rr +6.25), 0 negative cells, 5,300 pairs, zero errors.
+- Alakazam (NO_SEARCH -0.75 / SEARCH-ON -2.0, both ns), starmie +2.0, dipplin +0.5.
+- Recent C0 ladder diagnosis (55537754 725.6 / 55537760 581.0): 29-game sample losses = mirror 33%, Crustle 17%, Kangaskhan 17%, Alakazam 8%. Field-shift + TrueSkill reversion; EXP-20 converged to same ~724 as C0 (rail neutral as predicted).
+- Recommendation: replace 55537760 with EXP-23, keep 55537754 as hedge. Awaiting user go-ahead.
