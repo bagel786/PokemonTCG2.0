@@ -1,0 +1,26 @@
+{
+  "dipplin": {
+    "by_bucket": {
+      "before_main1": 18,
+      "later": 7
+    },
+    "detected": 25,
+    "false_positives_on_negatives": 0,
+    "fp_rate": 0.0,
+    "games": 25,
+    "negative_games": 150,
+    "recall": 1.0
+  },
+  "lucario": {
+    "by_bucket": {
+      "before_main1": 25,
+      "later": 8
+    },
+    "detected": 33,
+    "false_positives_on_negatives": 0,
+    "fp_rate": 0.0,
+    "games": 33,
+    "negative_games": 150,
+    "recall": 1.0
+  }
+}

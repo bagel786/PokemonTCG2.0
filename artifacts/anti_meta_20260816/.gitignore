@@ -1,0 +1,9 @@
+raw_*/
+rawneg_*/
+packages/
+train/
+eval/
+*.log
+!train/
+train/*
+!train/*.npz

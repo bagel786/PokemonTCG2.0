@@ -1,0 +1,262 @@
+{
+  "capture_counts": {
+    "captured": 17,
+    "no_disagreements": 8
+  },
+  "games": 25,
+  "games_with_disagreement": 17,
+  "never_detected": 0,
+  "opportunity_capture": 1.0,
+  "results": [
+    {
+      "archetype": "dipplin_variant",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "92808324",
+      "first_disagreement": 114,
+      "lock_time": 6,
+      "n_decisions": 138,
+      "n_disagreements": 1
+    },
+    {
+      "archetype": "dipplin_variant",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "92810023",
+      "first_disagreement": 80,
+      "lock_time": 10,
+      "n_decisions": 127,
+      "n_disagreements": 3
+    },
+    {
+      "archetype": "dipplin_variant",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "92814915",
+      "first_disagreement": 43,
+      "lock_time": 14,
+      "n_decisions": 133,
+      "n_disagreements": 2
+    },
+    {
+      "archetype": "dipplin_variant",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "92827760",
+      "first_disagreement": 69,
+      "lock_time": 8,
+      "n_decisions": 94,
+      "n_disagreements": 1
+    },
+    {
+      "archetype": "dipplin_variant",
+      "captured": "no_disagreements",
+      "detected": true,
+      "episode_id": "92828781",
+      "first_disagreement": null,
+      "lock_time": 13,
+      "n_decisions": 65,
+      "n_disagreements": 0
+    },
+    {
+      "archetype": "dipplin_variant",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "92839094",
+      "first_disagreement": 47,
+      "lock_time": 18,
+      "n_decisions": 107,
+      "n_disagreements": 2
+    },
+    {
+      "archetype": "dipplin_variant",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "92839817",
+      "first_disagreement": 100,
+      "lock_time": 67,
+      "n_decisions": 118,
+      "n_disagreements": 2
+    },
+    {
+      "archetype": "dipplin_variant",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "92845607",
+      "first_disagreement": 84,
+      "lock_time": 6,
+      "n_decisions": 124,
+      "n_disagreements": 2
+    },
+    {
+      "archetype": "dipplin_variant",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "92863259",
+      "first_disagreement": 29,
+      "lock_time": 22,
+      "n_decisions": 174,
+      "n_disagreements": 4
+    },
+    {
+      "archetype": "dipplin_variant",
+      "captured": "no_disagreements",
+      "detected": true,
+      "episode_id": "92915887",
+      "first_disagreement": null,
+      "lock_time": 14,
+      "n_decisions": 120,
+      "n_disagreements": 0
+    },
+    {
+      "archetype": "dipplin_variant",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "92927206",
+      "first_disagreement": 92,
+      "lock_time": 7,
+      "n_decisions": 95,
+      "n_disagreements": 1
+    },
+    {
+      "archetype": "dipplin_variant",
+      "captured": "no_disagreements",
+      "detected": true,
+      "episode_id": "92928136",
+      "first_disagreement": null,
+      "lock_time": 11,
+      "n_decisions": 95,
+      "n_disagreements": 0
+    },
+    {
+      "archetype": "dipplin_variant",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "92938577",
+      "first_disagreement": 113,
+      "lock_time": 16,
+      "n_decisions": 174,
+      "n_disagreements": 2
+    },
+    {
+      "archetype": "dipplin_variant",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "92988683",
+      "first_disagreement": 86,
+      "lock_time": 12,
+      "n_decisions": 161,
+      "n_disagreements": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93002559",
+      "first_disagreement": 21,
+      "lock_time": 6,
+      "n_decisions": 93,
+      "n_disagreements": 1
+    },
+    {
+      "archetype": "dipplin_variant",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93011066",
+      "first_disagreement": 84,
+      "lock_time": 11,
+      "n_decisions": 158,
+      "n_disagreements": 4
+    },
+    {
+      "archetype": "dipplin_variant",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93012944",
+      "first_disagreement": 26,
+      "lock_time": 6,
+      "n_decisions": 112,
+      "n_disagreements": 3
+    },
+    {
+      "archetype": "dipplin_variant",
+      "captured": "no_disagreements",
+      "detected": true,
+      "episode_id": "93037090",
+      "first_disagreement": null,
+      "lock_time": 15,
+      "n_decisions": 111,
+      "n_disagreements": 0
+    },
+    {
+      "archetype": "dipplin_exact",
+      "captured": "no_disagreements",
+      "detected": true,
+      "episode_id": "93066774",
+      "first_disagreement": null,
+      "lock_time": 18,
+      "n_decisions": 159,
+      "n_disagreements": 0
+    },
+    {
+      "archetype": "dipplin_exact",
+      "captured": "no_disagreements",
+      "detected": true,
+      "episode_id": "93069573",
+      "first_disagreement": null,
+      "lock_time": 13,
+      "n_decisions": 111,
+      "n_disagreements": 0
+    },
+    {
+      "archetype": "dipplin_variant",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93075093",
+      "first_disagreement": 50,
+      "lock_time": 23,
+      "n_decisions": 100,
+      "n_disagreements": 1
+    },
+    {
+      "archetype": "dipplin_exact",
+      "captured": "no_disagreements",
+      "detected": true,
+      "episode_id": "93075152",
+      "first_disagreement": null,
+      "lock_time": 12,
+      "n_decisions": 120,
+      "n_disagreements": 0
+    },
+    {
+      "archetype": "dipplin_variant",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93083288",
+      "first_disagreement": 91,
+      "lock_time": 24,
+      "n_decisions": 181,
+      "n_disagreements": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "captured": "no_disagreements",
+      "detected": true,
+      "episode_id": "93089798",
+      "first_disagreement": null,
+      "lock_time": 15,
+      "n_decisions": 100,
+      "n_disagreements": 0
+    },
+    {
+      "archetype": "dipplin_variant",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93091858",
+      "first_disagreement": 98,
+      "lock_time": 21,
+      "n_decisions": 129,
+      "n_disagreements": 2
+    }
+  ]
+}

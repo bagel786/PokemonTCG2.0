@@ -1,0 +1,375 @@
+{
+  "date": "2026-08-15",
+  "counts": {
+    "games": 4669,
+    "target_dipplin_exact": 5,
+    "target_lucario_family": 27,
+    "target_dipplin_variant": 7,
+    "neg_kept": 150,
+    "result_grim_win_dipplin": 4,
+    "result_grim_win_lucario": 14,
+    "result_grim_loss_dipplin": 8,
+    "result_grim_loss_lucario": 13
+  },
+  "row_counts": {
+    "rows_wins_dipplin_exact": 162,
+    "rows_wins_lucario_family": 1215,
+    "rows_wins_dipplin_variant": 180,
+    "rows_losses_dipplin_variant": 289,
+    "rows_losses_lucario_family": 1048,
+    "rows_losses_dipplin_exact": 129
+  },
+  "units": [
+    {
+      "episode_id": "93143761",
+      "target_archetype": "dipplin_exact",
+      "grim_team": "\u4f60\u597d\u54c7",
+      "target_team": "motono0223",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93148048",
+      "target_archetype": "lucario_family",
+      "grim_team": "atsushi11o7",
+      "target_team": "The Blos",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93158319",
+      "target_archetype": "lucario_family",
+      "grim_team": "DL",
+      "target_team": "\ub300\ub2f5\ud574\ub4dc\ub9ac\ub294\uac8c\uc778\uc9c0\uc0c1\uc815",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93163611",
+      "target_archetype": "lucario_family",
+      "grim_team": "GrimmsnaRL",
+      "target_team": "seven",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93168282",
+      "target_archetype": "lucario_family",
+      "grim_team": "GuerillaMoon",
+      "target_team": "\ub300\ub2f5\ud574\ub4dc\ub9ac\ub294\uac8c\uc778\uc9c0\uc0c1\uc815",
+      "result": "grim_win",
+      "grim_seat": 1,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93213938",
+      "target_archetype": "dipplin_exact",
+      "grim_team": "Ars Noveau",
+      "target_team": "motono0223",
+      "result": "grim_win",
+      "grim_seat": 1,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93228851",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "B\u1eedu Ph\u1ea1m Qu\u1ed1c",
+      "target_team": "Budew",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93232561",
+      "target_archetype": "lucario_family",
+      "grim_team": "atsushi11o7",
+      "target_team": "Dragonite",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93245998",
+      "target_archetype": "lucario_family",
+      "grim_team": "kurigen",
+      "target_team": "ONE PIECE",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93247794",
+      "target_archetype": "lucario_family",
+      "grim_team": "kurigen",
+      "target_team": "\ub300\ub2f5\ud574\ub4dc\ub9ac\ub294\uac8c\uc778\uc9c0\uc0c1\uc815",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93261909",
+      "target_archetype": "lucario_family",
+      "grim_team": "Dries @ Tufa Labs",
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93273667",
+      "target_archetype": "lucario_family",
+      "grim_team": "S. B.",
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93278229",
+      "target_archetype": "lucario_family",
+      "grim_team": "\u4f60\u597d\u54c7",
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93279871",
+      "target_archetype": "lucario_family",
+      "grim_team": "h_noson",
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93281816",
+      "target_archetype": "lucario_family",
+      "grim_team": "Gemini ch.",
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93285438",
+      "target_archetype": "lucario_family",
+      "grim_team": "Dries @ Tufa Labs",
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93286326",
+      "target_archetype": "lucario_family",
+      "grim_team": "huaiyuyoung",
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93291616",
+      "target_archetype": "lucario_family",
+      "grim_team": "Phil_Hellmuth",
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "result": "grim_win",
+      "grim_seat": 1,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93297938",
+      "target_archetype": "lucario_family",
+      "grim_team": "Phil_Hellmuth",
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93322720",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "Shang Bo",
+      "target_team": "perrodawn",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93329975",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "Shang Bo",
+      "target_team": "perrodawn",
+      "result": "grim_win",
+      "grim_seat": 1,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93333586",
+      "target_archetype": "lucario_family",
+      "grim_team": "YumeNeko",
+      "target_team": "seven",
+      "result": "grim_win",
+      "grim_seat": 1,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93337284",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "Phil_Hellmuth",
+      "target_team": "perrodawn",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93343399",
+      "target_archetype": "lucario_family",
+      "grim_team": "arai9953",
+      "target_team": "Saber",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93343429",
+      "target_archetype": "lucario_family",
+      "grim_team": "Arthurs Torres24",
+      "target_team": "Unown Gradiant",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93348014",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "Concord_k",
+      "target_team": "PP kawada",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93348757",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "h_noson",
+      "target_team": "Budew",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93351554",
+      "target_archetype": "lucario_family",
+      "grim_team": "\u6211\u8111\u5b50\u4e0d\u592a\u597d",
+      "target_team": "Saber",
+      "result": "grim_win",
+      "grim_seat": 1,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93360622",
+      "target_archetype": "lucario_family",
+      "grim_team": "atsushi11o7",
+      "target_team": "Saber",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93376454",
+      "target_archetype": "lucario_family",
+      "grim_team": "fsun",
+      "target_team": "Sixth Sense",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93377354",
+      "target_archetype": "lucario_family",
+      "grim_team": "Algorithm Supernova",
+      "target_team": "Sixth Sense",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93389036",
+      "target_archetype": "dipplin_exact",
+      "grim_team": "Shang Bo",
+      "target_team": "pokemon",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93389923",
+      "target_archetype": "dipplin_exact",
+      "grim_team": "base_camp_2002",
+      "target_team": "pokemon",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93413898",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "neibyr",
+      "target_team": "perrodawn",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93418511",
+      "target_archetype": "lucario_family",
+      "grim_team": "yoshitaka agent",
+      "target_team": "Gijs Smit",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93423652",
+      "target_archetype": "lucario_family",
+      "grim_team": "Ayanokoji Fan Club",
+      "target_team": "lollipop947",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93429943",
+      "target_archetype": "dipplin_exact",
+      "grim_team": "neibyr",
+      "target_team": "pokemon",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93456563",
+      "target_archetype": "lucario_family",
+      "grim_team": "Dries @ Tufa Labs",
+      "target_team": "sadwat",
+      "result": "grim_win",
+      "grim_seat": 1,
+      "date": "2026-08-15"
+    },
+    {
+      "episode_id": "93457417",
+      "target_archetype": "lucario_family",
+      "grim_team": "Kento Umeda",
+      "target_team": "sadwat",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-15"
+    }
+  ]
+}

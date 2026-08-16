@@ -1,0 +1,780 @@
+{
+  "date": "2026-08-13",
+  "counts": {
+    "games": 4615,
+    "target_dipplin_variant": 32,
+    "target_lucario_family": 48,
+    "target_dipplin_exact": 4,
+    "neg_kept": 200,
+    "result_grim_win_dipplin": 19,
+    "result_grim_loss_dipplin": 17,
+    "result_grim_loss_lucario": 24,
+    "result_grim_win_lucario": 24
+  },
+  "row_counts": {
+    "rows_wins_dipplin_variant": 1365,
+    "rows_wins_lucario_family": 2030,
+    "rows_wins_dipplin_exact": 105,
+    "rows_losses_dipplin_variant": 754,
+    "rows_losses_lucario_family": 1990,
+    "rows_losses_dipplin_exact": 154
+  },
+  "units": [
+    {
+      "episode_id": "92475330",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "Roman Nesterov",
+      "target_team": "pokemon master",
+      "result": "grim_win",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92490301",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "S. B.",
+      "target_team": "pokemon master",
+      "result": "grim_win",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92491883",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "hatry",
+      "target_team": "kwa",
+      "result": "grim_win",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92495662",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "AlphaTcg",
+      "target_team": "kwa",
+      "result": "grim_win",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92496597",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "NguyenThanhNhan",
+      "target_team": "kwa",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92498455",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "Yi-Chia Chen",
+      "target_team": "kwa",
+      "result": "grim_win",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92498556",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "YumeNeko",
+      "target_team": "aca-ta",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92501145",
+      "target_archetype": "lucario_family",
+      "grim_team": "\u54c8\u57fa\u7c73\u5357\u5317\u7eff\u8c46",
+      "target_team": "ONE PIECE",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92502141",
+      "target_archetype": "lucario_family",
+      "grim_team": "yumizu",
+      "target_team": "ONE PIECE",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92503111",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "rmizuta",
+      "target_team": "kwa",
+      "result": "grim_win",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92504885",
+      "target_archetype": "lucario_family",
+      "grim_team": "\u54c8\u57fa\u7c73\u5357\u5317\u7eff\u8c46",
+      "target_team": "Octavi Grau",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92506021",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "\u4f60\u597d\u54c7",
+      "target_team": "kwa",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92507041",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "S. B.",
+      "target_team": "aca-ta",
+      "result": "grim_win",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92511641",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "Raihan Ramadistra",
+      "target_team": "kwa",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92516259",
+      "target_archetype": "lucario_family",
+      "grim_team": "BarrelAged",
+      "target_team": "Octavi Grau",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92520026",
+      "target_archetype": "lucario_family",
+      "grim_team": "BarrelAged",
+      "target_team": "Octavi Grau",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92535826",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "Infernape",
+      "target_team": "Dominic Peel & Rory Neville",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92540320",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "Matsu",
+      "target_team": "kwa",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92541316",
+      "target_archetype": "lucario_family",
+      "grim_team": "\u54c8\u57fa\u7c73\u5357\u5317\u7eff\u8c46",
+      "target_team": "Rmy",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92544053",
+      "target_archetype": "lucario_family",
+      "grim_team": "Matsu",
+      "target_team": "ONE PIECE",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92556267",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "S. B.",
+      "target_team": "pokemon master",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92558814",
+      "target_archetype": "lucario_family",
+      "grim_team": "Matsu",
+      "target_team": "Meghana284",
+      "result": "grim_win",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92559739",
+      "target_archetype": "lucario_family",
+      "grim_team": "hatry",
+      "target_team": "mackerel is all you need",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92559759",
+      "target_archetype": "lucario_family",
+      "grim_team": "S. B.",
+      "target_team": "Meghana284",
+      "result": "grim_win",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92559867",
+      "target_archetype": "lucario_family",
+      "grim_team": "YumeNeko",
+      "target_team": "M Sato",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92560723",
+      "target_archetype": "lucario_family",
+      "grim_team": "cununn",
+      "target_team": "Meghana284",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92564599",
+      "target_archetype": "lucario_family",
+      "grim_team": "Phil_Hellmuth",
+      "target_team": "M Sato",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92565390",
+      "target_archetype": "lucario_family",
+      "grim_team": "Dries @ Tufa Labs",
+      "target_team": "Rmy",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92566337",
+      "target_archetype": "lucario_family",
+      "grim_team": "Dries @ Tufa Labs",
+      "target_team": "Rmy",
+      "result": "grim_win",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92567450",
+      "target_archetype": "lucario_family",
+      "grim_team": "Dilyorbek Muhammadjonov",
+      "target_team": "e-toppo + kurupical",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92571940",
+      "target_archetype": "lucario_family",
+      "grim_team": "Dilyorbek Muhammadjonov",
+      "target_team": "Rmy",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92592488",
+      "target_archetype": "lucario_family",
+      "grim_team": "Gaurav Goswami",
+      "target_team": "Dipam Chakraborty",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92596236",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "cununn",
+      "target_team": "Louis & Emile",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92599045",
+      "target_archetype": "lucario_family",
+      "grim_team": "cununn",
+      "target_team": "Dipam Chakraborty",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92600909",
+      "target_archetype": "lucario_family",
+      "grim_team": "Phil_Hellmuth",
+      "target_team": "Dipam Chakraborty",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92602785",
+      "target_archetype": "lucario_family",
+      "grim_team": "Phil_Hellmuth",
+      "target_team": "Dipam Chakraborty",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92603756",
+      "target_archetype": "lucario_family",
+      "grim_team": "YumeNeko",
+      "target_team": "Dipam Chakraborty",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92606483",
+      "target_archetype": "lucario_family",
+      "grim_team": "NguyenThanhNhan",
+      "target_team": "Dipam Chakraborty",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92609336",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "Roman Nesterov",
+      "target_team": "Louis & Emile",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92613160",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "yumizu",
+      "target_team": "Louis & Emile",
+      "result": "grim_win",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92619548",
+      "target_archetype": "lucario_family",
+      "grim_team": "fsun",
+      "target_team": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92620365",
+      "target_archetype": "lucario_family",
+      "grim_team": "Togawa Sakiko",
+      "target_team": "The Blos",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92620599",
+      "target_archetype": "lucario_family",
+      "grim_team": "hatry",
+      "target_team": "M Sato",
+      "result": "grim_win",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92622356",
+      "target_archetype": "lucario_family",
+      "grim_team": "Malyshev Danil",
+      "target_team": "Sixth Sense",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92624049",
+      "target_archetype": "lucario_family",
+      "grim_team": "\u4f60\u597d\u54c7",
+      "target_team": "lollipop947",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92626131",
+      "target_archetype": "lucario_family",
+      "grim_team": "GuerillaMoon",
+      "target_team": "Sixth Sense",
+      "result": "grim_win",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92638177",
+      "target_archetype": "lucario_family",
+      "grim_team": "Ken Zhou",
+      "target_team": "lollipop947",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92648329",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "yumizu",
+      "target_team": "hinox13",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92658655",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "neibyr",
+      "target_team": "Louis & Emile",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92661515",
+      "target_archetype": "lucario_family",
+      "grim_team": "yumizu",
+      "target_team": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92673691",
+      "target_archetype": "dipplin_exact",
+      "grim_team": "Phil_Hellmuth",
+      "target_team": "motono0223",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92675690",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "Shang Bo",
+      "target_team": "sobameshi",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92678387",
+      "target_archetype": "dipplin_exact",
+      "grim_team": "MtN",
+      "target_team": "motono0223",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92682167",
+      "target_archetype": "dipplin_exact",
+      "grim_team": "Pokopia",
+      "target_team": "motono0223",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92682244",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "yumizu",
+      "target_team": "Louis & Emile",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92688753",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "yoshitaka agent",
+      "target_team": "Louis & Emile",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92692279",
+      "target_archetype": "lucario_family",
+      "grim_team": "Yaroslav",
+      "target_team": "LiamK",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92695888",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "yoshitaka agent",
+      "target_team": "EliKal",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92697939",
+      "target_archetype": "lucario_family",
+      "grim_team": "Pokopia",
+      "target_team": "Pokemon Fan",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92699693",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "Ken Zhou",
+      "target_team": "PP kawada",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92700650",
+      "target_archetype": "lucario_family",
+      "grim_team": "Phil_Hellmuth",
+      "target_team": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92701768",
+      "target_archetype": "lucario_family",
+      "grim_team": "Pokopia",
+      "target_team": "Sixth Sense",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92704411",
+      "target_archetype": "lucario_family",
+      "grim_team": "Phil_Hellmuth",
+      "target_team": "Sixth Sense",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92714732",
+      "target_archetype": "lucario_family",
+      "grim_team": "Yigit Kayali",
+      "target_team": "LiamK",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92715770",
+      "target_archetype": "lucario_family",
+      "grim_team": "\u2615 Psyduck Needs Coffee",
+      "target_team": "Sixth Sense",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92718368",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "yoshitaka agent",
+      "target_team": "aca-ta",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92723863",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "matsurih",
+      "target_team": "PP kawada",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92726622",
+      "target_archetype": "lucario_family",
+      "grim_team": "less",
+      "target_team": "Funky",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92732189",
+      "target_archetype": "lucario_family",
+      "grim_team": "hatry",
+      "target_team": "Funky",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92736849",
+      "target_archetype": "lucario_family",
+      "grim_team": "matsurih",
+      "target_team": "Funky",
+      "result": "grim_win",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92738926",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "yumizu",
+      "target_team": "pokemon master",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92739628",
+      "target_archetype": "lucario_family",
+      "grim_team": "S. B.",
+      "target_team": "Funky",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92749840",
+      "target_archetype": "lucario_family",
+      "grim_team": "huaiyuyoung",
+      "target_team": "Funky",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92752643",
+      "target_archetype": "lucario_family",
+      "grim_team": "S. B.",
+      "target_team": "Funky",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92754486",
+      "target_archetype": "lucario_family",
+      "grim_team": "Pokopia",
+      "target_team": "Funky",
+      "result": "grim_win",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92763810",
+      "target_archetype": "lucario_family",
+      "grim_team": "Phil_Hellmuth",
+      "target_team": "Funky",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92774010",
+      "target_archetype": "lucario_family",
+      "grim_team": "hatry",
+      "target_team": "Funky",
+      "result": "grim_win",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92786675",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "Ayanokoji Fan Club",
+      "target_team": "Agent 33",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92790619",
+      "target_archetype": "lucario_family",
+      "grim_team": "Arthurs Torres24",
+      "target_team": "Funky",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92794116",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "flxwld",
+      "target_team": "Agent 33",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92794992",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "less",
+      "target_team": "PP kawada",
+      "result": "grim_loss",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92795979",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "Phil_Hellmuth",
+      "target_team": "Agent 33",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92797868",
+      "target_archetype": "dipplin_exact",
+      "grim_team": "Roman Nesterov",
+      "target_team": "motono0223",
+      "result": "grim_win",
+      "grim_seat": 0,
+      "date": "2026-08-13"
+    },
+    {
+      "episode_id": "92803471",
+      "target_archetype": "dipplin_variant",
+      "grim_team": "Pok\u00e9sonic",
+      "target_team": "aca-ta",
+      "result": "grim_loss",
+      "grim_seat": 1,
+      "date": "2026-08-13"
+    }
+  ]
+}

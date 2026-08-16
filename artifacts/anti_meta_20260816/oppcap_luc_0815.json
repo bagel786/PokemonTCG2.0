@@ -1,0 +1,282 @@
+{
+  "capture_counts": {
+    "captured": 25,
+    "no_disagreements": 2
+  },
+  "games": 27,
+  "games_with_disagreement": 25,
+  "never_detected": 1,
+  "opportunity_capture": 1.0,
+  "results": [
+    {
+      "archetype": "lucario_family",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93148048",
+      "first_disagreement": 140,
+      "lock_time": 5,
+      "n_decisions": 143,
+      "n_disagreements": 1
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93158319",
+      "first_disagreement": 54,
+      "lock_time": 5,
+      "n_decisions": 113,
+      "n_disagreements": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93163611",
+      "first_disagreement": 24,
+      "lock_time": 22,
+      "n_decisions": 229,
+      "n_disagreements": 14
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93168282",
+      "first_disagreement": 122,
+      "lock_time": 6,
+      "n_decisions": 184,
+      "n_disagreements": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93232561",
+      "first_disagreement": 73,
+      "lock_time": 5,
+      "n_decisions": 191,
+      "n_disagreements": 6
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93245998",
+      "first_disagreement": 5,
+      "lock_time": 4,
+      "n_decisions": 176,
+      "n_disagreements": 6
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93247794",
+      "first_disagreement": 74,
+      "lock_time": 16,
+      "n_decisions": 124,
+      "n_disagreements": 6
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "no_disagreements",
+      "detected": true,
+      "episode_id": "93261909",
+      "first_disagreement": null,
+      "lock_time": 6,
+      "n_decisions": 129,
+      "n_disagreements": 0
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93273667",
+      "first_disagreement": 92,
+      "lock_time": 14,
+      "n_decisions": 140,
+      "n_disagreements": 9
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93278229",
+      "first_disagreement": 48,
+      "lock_time": 11,
+      "n_decisions": 112,
+      "n_disagreements": 1
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93279871",
+      "first_disagreement": 43,
+      "lock_time": 15,
+      "n_decisions": 154,
+      "n_disagreements": 3
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93281816",
+      "first_disagreement": 59,
+      "lock_time": 15,
+      "n_decisions": 138,
+      "n_disagreements": 5
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93285438",
+      "first_disagreement": 80,
+      "lock_time": 22,
+      "n_decisions": 170,
+      "n_disagreements": 3
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93286326",
+      "first_disagreement": 110,
+      "lock_time": 5,
+      "n_decisions": 121,
+      "n_disagreements": 1
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93291616",
+      "first_disagreement": 54,
+      "lock_time": 11,
+      "n_decisions": 146,
+      "n_disagreements": 6
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93297938",
+      "first_disagreement": 42,
+      "lock_time": 5,
+      "n_decisions": 162,
+      "n_disagreements": 7
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "no_disagreements",
+      "detected": false,
+      "episode_id": "93333586",
+      "first_disagreement": null,
+      "lock_time": null,
+      "n_decisions": 27,
+      "n_disagreements": 0
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93343399",
+      "first_disagreement": 128,
+      "lock_time": 31,
+      "n_decisions": 190,
+      "n_disagreements": 6
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93343429",
+      "first_disagreement": 30,
+      "lock_time": 17,
+      "n_decisions": 172,
+      "n_disagreements": 1
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93351554",
+      "first_disagreement": 20,
+      "lock_time": 17,
+      "n_decisions": 185,
+      "n_disagreements": 1
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93360622",
+      "first_disagreement": 27,
+      "lock_time": 25,
+      "n_decisions": 122,
+      "n_disagreements": 4
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93376454",
+      "first_disagreement": 61,
+      "lock_time": 33,
+      "n_decisions": 181,
+      "n_disagreements": 3
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93377354",
+      "first_disagreement": 55,
+      "lock_time": 15,
+      "n_decisions": 195,
+      "n_disagreements": 3
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93418511",
+      "first_disagreement": 80,
+      "lock_time": 11,
+      "n_decisions": 136,
+      "n_disagreements": 3
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93423652",
+      "first_disagreement": 54,
+      "lock_time": 5,
+      "n_decisions": 162,
+      "n_disagreements": 3
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93456563",
+      "first_disagreement": 53,
+      "lock_time": 15,
+      "n_decisions": 212,
+      "n_disagreements": 6
+    },
+    {
+      "archetype": "lucario_family",
+      "captured": "captured",
+      "detected": true,
+      "episode_id": "93457417",
+      "first_disagreement": 58,
+      "lock_time": 37,
+      "n_decisions": 191,
+      "n_disagreements": 8
+    }
+  ]
+}

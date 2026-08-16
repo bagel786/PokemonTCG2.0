@@ -149,3 +149,9 @@ artifacts/final_sprint/exp*/ptcg_ai/*
 !artifacts/dragapult_frozen/**
 !artifacts/dragapult_gates/
 !artifacts/dragapult_gates/**
+!artifacts/anti_meta_20260816/
+artifacts/anti_meta_20260816/*
+!artifacts/anti_meta_20260816/.gitignore
+!artifacts/anti_meta_20260816/*.json
+!artifacts/anti_meta_20260816/*.jsonl.gz
+!artifacts/anti_meta_20260816/*.jsonl
