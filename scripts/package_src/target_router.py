@@ -18,6 +18,7 @@ from cg.api import OptionType, SelectContext, to_observation_class
 
 from .agent import CompetitionAgent
 from .safety import sanitize_selection
+from .surgical import SurgicalOverlay
 
 DIP_DISTINCTIVE = {88, 89, 90, 1245}
 DIP_COMMON = {42, 92, 93}
@@ -112,6 +113,7 @@ class TargetRouterAgent:
         self.forced = os.environ.get("PTCG_TARGET_ROUTE", "")
         if self.forced.startswith("force_"):
             self.forced = self.forced[len("force_"):]
+        self.surgical = SurgicalOverlay()
         self.errors = 0
 
     def _reset(self) -> list[int]:
@@ -120,6 +122,7 @@ class TargetRouterAgent:
         self.pending = None
         self.conflicted = False
         self.errors = 0
+        self.surgical.reset()
         for agent in (self.exact, self.policy_first, self.policy_second, self.dip, self.luc):
             if agent is None:
                 continue
@@ -203,4 +206,12 @@ class TargetRouterAgent:
         if after != before:
             self.errors += after - before
             return self.exact(obs_dict)
-        return sanitize_selection(obs.select, action, len(action))
+        action = sanitize_selection(obs.select, action, len(action))
+        if self.route in ("dipplin", "lucario"):
+            ranked = []
+            policy = getattr(selected, "policy", None)
+            if policy is not None:
+                ranked = list(getattr(policy, "last_ranked", []) or [])
+            action = self.surgical.intercept(obs, self.route, action, ranked)
+            action = sanitize_selection(obs.select, action, len(action))
+        return action

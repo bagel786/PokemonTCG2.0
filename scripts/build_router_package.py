@@ -34,6 +34,7 @@ def main() -> int:
     parser.add_argument("--base", choices=("e23", "c0"), default="e23")
     parser.add_argument("--dip-model", default="")
     parser.add_argument("--luc-model", default="")
+    parser.add_argument("--surgical-default", default="", help="bake PTCG_SURGICAL default into main.py")
     parser.add_argument("--out-dir", default="artifacts/anti_meta_20260816/packages")
     args = parser.parse_args()
 
@@ -50,11 +51,31 @@ def main() -> int:
     (dst / "ptcg_ai" / "target_router.py").write_text(
         (ROOT / "scripts" / "package_src" / "target_router.py").read_text()
     )
+    (dst / "ptcg_ai" / "surgical.py").write_text(
+        (ROOT / "scripts" / "package_src" / "surgical.py").read_text()
+    )
+    model_py = dst / "ptcg_ai" / "model.py"
+    text = model_py.read_text()
+    if "last_ranked" not in text:
+        text = text.replace(
+            "        self.damage_solver = GrimDamageSolver(enabled)",
+            "        self.damage_solver = GrimDamageSolver(enabled)\n        self.last_ranked = []",
+        )
+        text = text.replace(
+            "        ranked, desired, _ = self.damage_solver.apply(obs, ranked, desired)\n        return sanitize_selection(obs.select, ranked, desired)",
+            "        ranked, desired, _ = self.damage_solver.apply(obs, ranked, desired)\n        self.last_ranked = list(ranked)\n        return sanitize_selection(obs.select, ranked, desired)",
+        )
+        model_py.write_text(text)
+    surgical_line = (
+        f"os.environ.setdefault('PTCG_SURGICAL', '{args.surgical_default}')\n"
+        if args.surgical_default else ""
+    )
     main_py = (
         '"""EXP-23 target-router package (evaluation build)."""\n\n'
         "import os\n"
-        "os.environ['PTCG_GRIM_DAMAGE_SOLVER'] = 'v0'\n\n"
-        "from ptcg_ai.target_router import TargetRouterAgent\n"
+        "os.environ['PTCG_GRIM_DAMAGE_SOLVER'] = 'v0'\n"
+        + surgical_line +
+        "\nfrom ptcg_ai.target_router import TargetRouterAgent\n"
         "import ptcg_ai.features as _features\n"
         "_features.PLAY_IDENTITY_ENABLED = True\n\n"
         "_AGENT = TargetRouterAgent()\n\n"
