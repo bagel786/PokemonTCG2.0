@@ -1,0 +1,895 @@
+{
+  "dev": {
+    "counts": {
+      "all_main": 1587,
+      "eligible": 492,
+      "fired": 355,
+      "neither": 214,
+      "phase_mid": 180,
+      "exp23": 81,
+      "rule": 60,
+      "phase_late": 157,
+      "eligible_no_attack": 137,
+      "phase_early": 18
+    },
+    "detail": [
+      {
+        "episode_id": "92502141",
+        "team": "ONE PIECE",
+        "turn": 5,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92502141",
+        "team": "ONE PIECE",
+        "turn": 5,
+        "side": "exp23",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92502141",
+        "team": "ONE PIECE",
+        "turn": 5,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92502141",
+        "team": "ONE PIECE",
+        "turn": 5,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92502141",
+        "team": "ONE PIECE",
+        "turn": 5,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92502141",
+        "team": "ONE PIECE",
+        "turn": 5,
+        "side": "rule",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92502141",
+        "team": "ONE PIECE",
+        "turn": 7,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92502141",
+        "team": "ONE PIECE",
+        "turn": 7,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92502141",
+        "team": "ONE PIECE",
+        "turn": 7,
+        "side": "rule",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92502141",
+        "team": "ONE PIECE",
+        "turn": 9,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92502141",
+        "team": "ONE PIECE",
+        "turn": 9,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92502141",
+        "team": "ONE PIECE",
+        "turn": 9,
+        "side": "rule",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92504885",
+        "team": "Octavi Grau",
+        "turn": 3,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92504885",
+        "team": "Octavi Grau",
+        "turn": 3,
+        "side": "rule",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92504885",
+        "team": "Octavi Grau",
+        "turn": 5,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92504885",
+        "team": "Octavi Grau",
+        "turn": 5,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92504885",
+        "team": "Octavi Grau",
+        "turn": 5,
+        "side": "rule",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92504885",
+        "team": "Octavi Grau",
+        "turn": 7,
+        "side": "rule",
+        "play_card": 646
+      },
+      {
+        "episode_id": "92504885",
+        "team": "Octavi Grau",
+        "turn": 9,
+        "side": "rule",
+        "play_card": 646
+      },
+      {
+        "episode_id": "92504885",
+        "team": "Octavi Grau",
+        "turn": 11,
+        "side": "rule",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92520026",
+        "team": "Octavi Grau",
+        "turn": 5,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92520026",
+        "team": "Octavi Grau",
+        "turn": 5,
+        "side": "exp23",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92520026",
+        "team": "Octavi Grau",
+        "turn": 7,
+        "side": "exp23",
+        "play_card": 646
+      },
+      {
+        "episode_id": "92520026",
+        "team": "Octavi Grau",
+        "turn": 11,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92520026",
+        "team": "Octavi Grau",
+        "turn": 11,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92520026",
+        "team": "Octavi Grau",
+        "turn": 11,
+        "side": "rule",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92558814",
+        "team": "Meghana284",
+        "turn": 6,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92558814",
+        "team": "Meghana284",
+        "turn": 6,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92558814",
+        "team": "Meghana284",
+        "turn": 6,
+        "side": "exp23",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92558814",
+        "team": "Meghana284",
+        "turn": 10,
+        "side": "exp23",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92558814",
+        "team": "Meghana284",
+        "turn": 10,
+        "side": "exp23",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92559759",
+        "team": "Meghana284",
+        "turn": 6,
+        "side": "exp23",
+        "play_card": 646
+      },
+      {
+        "episode_id": "92559759",
+        "team": "Meghana284",
+        "turn": 6,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92559759",
+        "team": "Meghana284",
+        "turn": 6,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92559759",
+        "team": "Meghana284",
+        "turn": 6,
+        "side": "exp23",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92559759",
+        "team": "Meghana284",
+        "turn": 8,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92559759",
+        "team": "Meghana284",
+        "turn": 8,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92559759",
+        "team": "Meghana284",
+        "turn": 8,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92559759",
+        "team": "Meghana284",
+        "turn": 8,
+        "side": "exp23",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92559759",
+        "team": "Meghana284",
+        "turn": 8,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92559759",
+        "team": "Meghana284",
+        "turn": 8,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92559759",
+        "team": "Meghana284",
+        "turn": 8,
+        "side": "rule",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92559759",
+        "team": "Meghana284",
+        "turn": 10,
+        "side": "exp23",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92559759",
+        "team": "Meghana284",
+        "turn": 10,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92559759",
+        "team": "Meghana284",
+        "turn": 10,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92559759",
+        "team": "Meghana284",
+        "turn": 10,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92559759",
+        "team": "Meghana284",
+        "turn": 10,
+        "side": "rule",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92559759",
+        "team": "Meghana284",
+        "turn": 12,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92559759",
+        "team": "Meghana284",
+        "turn": 12,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92559759",
+        "team": "Meghana284",
+        "turn": 12,
+        "side": "neither",
+        "play_card": 1097
+      }
+    ]
+  },
+  "held": {
+    "counts": {
+      "all_main": 292,
+      "eligible": 91,
+      "eligible_no_attack": 18,
+      "fired": 73,
+      "neither": 48,
+      "phase_mid": 23,
+      "rule": 11,
+      "phase_late": 49,
+      "exp23": 14,
+      "phase_early": 1
+    },
+    "detail": [
+      {
+        "episode_id": "92559739",
+        "team": "mackerel is all you need",
+        "turn": 5,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92559739",
+        "team": "mackerel is all you need",
+        "turn": 5,
+        "side": "rule",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92559739",
+        "team": "mackerel is all you need",
+        "turn": 7,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92559739",
+        "team": "mackerel is all you need",
+        "turn": 7,
+        "side": "rule",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92559739",
+        "team": "mackerel is all you need",
+        "turn": 9,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92559739",
+        "team": "mackerel is all you need",
+        "turn": 9,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92559739",
+        "team": "mackerel is all you need",
+        "turn": 9,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92559739",
+        "team": "mackerel is all you need",
+        "turn": 9,
+        "side": "rule",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92559739",
+        "team": "mackerel is all you need",
+        "turn": 11,
+        "side": "exp23",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92559739",
+        "team": "mackerel is all you need",
+        "turn": 11,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "92559739",
+        "team": "mackerel is all you need",
+        "turn": 11,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92559739",
+        "team": "mackerel is all you need",
+        "turn": 11,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92559739",
+        "team": "mackerel is all you need",
+        "turn": 11,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92559739",
+        "team": "mackerel is all you need",
+        "turn": 11,
+        "side": "rule",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92559739",
+        "team": "mackerel is all you need",
+        "turn": 13,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92559739",
+        "team": "mackerel is all you need",
+        "turn": 13,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92559739",
+        "team": "mackerel is all you need",
+        "turn": 13,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92559739",
+        "team": "mackerel is all you need",
+        "turn": 13,
+        "side": "rule",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92559739",
+        "team": "mackerel is all you need",
+        "turn": 15,
+        "side": "exp23",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92622356",
+        "team": "Sixth Sense",
+        "turn": 9,
+        "side": "exp23",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92626131",
+        "team": "Sixth Sense",
+        "turn": 6,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92626131",
+        "team": "Sixth Sense",
+        "turn": 6,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92626131",
+        "team": "Sixth Sense",
+        "turn": 6,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92626131",
+        "team": "Sixth Sense",
+        "turn": 6,
+        "side": "exp23",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92626131",
+        "team": "Sixth Sense",
+        "turn": 8,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92626131",
+        "team": "Sixth Sense",
+        "turn": 8,
+        "side": "exp23",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "92626131",
+        "team": "Sixth Sense",
+        "turn": 8,
+        "side": "exp23",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "93286326",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 7,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "93286326",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 7,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "93286326",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 7,
+        "side": "exp23",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "93291616",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 4,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "93291616",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 4,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "93291616",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 4,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "93291616",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 4,
+        "side": "exp23",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "93291616",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 6,
+        "side": "neither",
+        "play_card": 860
+      },
+      {
+        "episode_id": "93291616",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 6,
+        "side": "neither",
+        "play_card": 860
+      },
+      {
+        "episode_id": "93291616",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 8,
+        "side": "neither",
+        "play_card": 646
+      },
+      {
+        "episode_id": "93291616",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 8,
+        "side": "neither",
+        "play_card": 646
+      },
+      {
+        "episode_id": "93291616",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 8,
+        "side": "neither",
+        "play_card": 646
+      },
+      {
+        "episode_id": "93291616",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 8,
+        "side": "neither",
+        "play_card": 646
+      },
+      {
+        "episode_id": "93291616",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 8,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "93291616",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 8,
+        "side": "exp23",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "93291616",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 8,
+        "side": "rule",
+        "play_card": 860
+      },
+      {
+        "episode_id": "93291616",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 10,
+        "side": "neither",
+        "play_card": 860
+      },
+      {
+        "episode_id": "93291616",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 10,
+        "side": "neither",
+        "play_card": 860
+      },
+      {
+        "episode_id": "93291616",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 10,
+        "side": "rule",
+        "play_card": 860
+      },
+      {
+        "episode_id": "93291616",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 12,
+        "side": "rule",
+        "play_card": 860
+      },
+      {
+        "episode_id": "93297938",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 3,
+        "side": "rule",
+        "play_card": 860
+      },
+      {
+        "episode_id": "93297938",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 9,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "93297938",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 9,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "93297938",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 9,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "93297938",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 9,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "93297938",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 9,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "93297938",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 9,
+        "side": "exp23",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "93297938",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 11,
+        "side": "neither",
+        "play_card": 646
+      },
+      {
+        "episode_id": "93297938",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 11,
+        "side": "neither",
+        "play_card": 646
+      },
+      {
+        "episode_id": "93297938",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 11,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "93297938",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 11,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "93297938",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 11,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "93297938",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 11,
+        "side": "neither",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "93297938",
+        "team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+        "turn": 11,
+        "side": "rule",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "93456563",
+        "team": "sadwat",
+        "turn": 4,
+        "side": "rule",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "93456563",
+        "team": "sadwat",
+        "turn": 6,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "93456563",
+        "team": "sadwat",
+        "turn": 6,
+        "side": "exp23",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "93456563",
+        "team": "sadwat",
+        "turn": 6,
+        "side": "exp23",
+        "play_card": 646
+      },
+      {
+        "episode_id": "93456563",
+        "team": "sadwat",
+        "turn": 6,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "93456563",
+        "team": "sadwat",
+        "turn": 6,
+        "side": "exp23",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "93456563",
+        "team": "sadwat",
+        "turn": 8,
+        "side": "exp23",
+        "play_card": 1152
+      },
+      {
+        "episode_id": "93456563",
+        "team": "sadwat",
+        "turn": 10,
+        "side": "neither",
+        "play_card": 860
+      },
+      {
+        "episode_id": "93456563",
+        "team": "sadwat",
+        "turn": 14,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "93456563",
+        "team": "sadwat",
+        "turn": 14,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "93456563",
+        "team": "sadwat",
+        "turn": 14,
+        "side": "neither",
+        "play_card": 1097
+      },
+      {
+        "episode_id": "93456563",
+        "team": "sadwat",
+        "turn": 14,
+        "side": "neither",
+        "play_card": 1097
+      }
+    ]
+  }
+}

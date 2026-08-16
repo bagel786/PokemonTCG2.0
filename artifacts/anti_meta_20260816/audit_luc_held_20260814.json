@@ -1,0 +1,1283 @@
+{
+  "fires": [
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          14,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          14,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 4
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 4
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 4
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 4
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 4
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 4
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          14,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 4
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          14,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 4
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 4
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 4
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 4
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 4
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 4
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 4
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 4
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 4
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 4
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 4
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 4
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 6
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_agrees_base",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 6
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 8
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 8
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 8
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 8
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 8
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 8
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 8
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 8
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          14,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 8
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 8
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 8
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 8
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 8
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 8
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 8
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 8
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 10
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 10
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 10
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 10
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 10
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92816512",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+      "turn": 10
+    }
+  ],
+  "stats": {
+    "fires_luc_veto": 1,
+    "fires_luc_veto_miss": 72,
+    "fires_total": 73,
+    "luc_veto_miss_teacher_agrees_surgical": 10,
+    "luc_veto_miss_teacher_neither": 62,
+    "luc_veto_teacher_agrees_base": 1
+  }
+}

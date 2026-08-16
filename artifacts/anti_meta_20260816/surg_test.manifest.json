@@ -1,0 +1,13 @@
+{
+  "archive": "artifacts/anti_meta_20260816/surg_test.tar.gz",
+  "archive_sha256": "26e28ad8cd26996cbf68c1e9a680d323c66fd038ef2db5678fdf7db41ab5aec4",
+  "base_model": "EXP-23 CEFE61189BC6F4E3",
+  "deck_csv_sha256": "92b92bac9f9163ecff933b3dc39294d2cc154c8684f3c8497877661419ebc59d",
+  "name": "surg_test",
+  "surgical_default": "dip_b",
+  "verification": {
+    "deck_cards": 60,
+    "ok": true,
+    "problems": []
+  }
+}

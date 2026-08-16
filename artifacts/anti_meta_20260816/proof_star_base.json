@@ -1,0 +1,235 @@
+{
+  "claim": "same seed, agents, order, and physical seat produce byte-identical public-state/action/outcome traces",
+  "engine": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/deterministic_engine/bin/libcg_seeded.dylib",
+  "engine_sha256": "867e3f9bb87e0b48889a44b5d4b04f5d2d434b2a0788d1b2bcfe0caebcb5ab78",
+  "excluded_from_trace": [
+    "search_begin_input (opaque raw-struct search snapshot is not byte-stable across process starts; downstream public observations, selected actions, and outcomes remain covered)"
+  ],
+  "hero_sha256": "83489e0c80c631763c65375d2a7a34d28d6aa9fbb1d11e89d130c83b1e27f1c0",
+  "mismatches": {
+    "single_b": [
+      "first-000",
+      "first-001",
+      "second-000",
+      "second-001"
+    ],
+    "workers_3": [
+      "first-000",
+      "first-001",
+      "second-000",
+      "second-001"
+    ]
+  },
+  "opponent_sha256": "1b73779da7dcc93c8f121090bb0f1ae2d9b10b798ca4c70447b0ce1d6d01c0db",
+  "passed": false,
+  "runs": {
+    "single_a": [
+      {
+        "actual_order": "first",
+        "arm": null,
+        "decisions": 145,
+        "draw": 0,
+        "hero_policy_errors": 0,
+        "opponent_policy_errors": 0,
+        "pair_index": -1,
+        "physical_seat": 0,
+        "seed": 2026081679,
+        "task_id": "first-000",
+        "trace_bytes": 23041,
+        "trace_sha256": "a5a92f16bdff2e9ddd9baff0162629b67c7be90c66186db2a9dd79219876a086",
+        "win": 1
+      },
+      {
+        "actual_order": "first",
+        "arm": null,
+        "decisions": 134,
+        "draw": 0,
+        "hero_policy_errors": 0,
+        "opponent_policy_errors": 0,
+        "pair_index": -1,
+        "physical_seat": 1,
+        "seed": 2026081680,
+        "task_id": "first-001",
+        "trace_bytes": 21297,
+        "trace_sha256": "8b85ebe7fa4038dd07daeae74b2e30e4aae561dc0411b763f7491c1f6e6f9e59",
+        "win": 1
+      },
+      {
+        "actual_order": "second",
+        "arm": null,
+        "decisions": 220,
+        "draw": 0,
+        "hero_policy_errors": 0,
+        "opponent_policy_errors": 0,
+        "pair_index": -1,
+        "physical_seat": 0,
+        "seed": 2026181679,
+        "task_id": "second-000",
+        "trace_bytes": 34865,
+        "trace_sha256": "6d709d179f5f554afa6f02c71f198728c82bdc44893f60340bab9ef5cf9c78e0",
+        "win": 1
+      },
+      {
+        "actual_order": "second",
+        "arm": null,
+        "decisions": 104,
+        "draw": 0,
+        "hero_policy_errors": 0,
+        "opponent_policy_errors": 0,
+        "pair_index": -1,
+        "physical_seat": 1,
+        "seed": 2026181680,
+        "task_id": "second-001",
+        "trace_bytes": 16531,
+        "trace_sha256": "2db1301acf8d3458153ace7c569750eeb5d0e3c54ed02986cffc2928c291b606",
+        "win": 1
+      }
+    ],
+    "single_b": [
+      {
+        "actual_order": "first",
+        "arm": null,
+        "decisions": 173,
+        "draw": 0,
+        "hero_policy_errors": 0,
+        "opponent_policy_errors": 0,
+        "pair_index": -1,
+        "physical_seat": 0,
+        "seed": 2026081679,
+        "task_id": "first-000",
+        "trace_bytes": 27487,
+        "trace_sha256": "1f88965e0a9a15bd3ddd7a3919d5ea95a94d76b9817ca07edc7d50deb5936362",
+        "win": 1
+      },
+      {
+        "actual_order": "first",
+        "arm": null,
+        "decisions": 125,
+        "draw": 0,
+        "hero_policy_errors": 0,
+        "opponent_policy_errors": 0,
+        "pair_index": -1,
+        "physical_seat": 1,
+        "seed": 2026081680,
+        "task_id": "first-001",
+        "trace_bytes": 19864,
+        "trace_sha256": "9b4cd03e7c54bf45edfa1c6ad01bfce76e20a8cea5b02aafdd78b40fb19d60ee",
+        "win": 0
+      },
+      {
+        "actual_order": "second",
+        "arm": null,
+        "decisions": 188,
+        "draw": 0,
+        "hero_policy_errors": 0,
+        "opponent_policy_errors": 0,
+        "pair_index": -1,
+        "physical_seat": 0,
+        "seed": 2026181679,
+        "task_id": "second-000",
+        "trace_bytes": 29827,
+        "trace_sha256": "0351e76eb5b05b33ef3c9191123a7d45b29c90f145154f39b861fda2bd92aac0",
+        "win": 0
+      },
+      {
+        "actual_order": "second",
+        "arm": null,
+        "decisions": 104,
+        "draw": 0,
+        "hero_policy_errors": 0,
+        "opponent_policy_errors": 0,
+        "pair_index": -1,
+        "physical_seat": 1,
+        "seed": 2026181680,
+        "task_id": "second-001",
+        "trace_bytes": 16531,
+        "trace_sha256": "37d7abc177696e6c44400db3df680445f3485f519c6a152d82f01e0177c1e0fa",
+        "win": 1
+      }
+    ],
+    "workers_3": [
+      {
+        "actual_order": "first",
+        "arm": null,
+        "decisions": 163,
+        "draw": 0,
+        "hero_policy_errors": 0,
+        "opponent_policy_errors": 0,
+        "pair_index": -1,
+        "physical_seat": 0,
+        "seed": 2026081679,
+        "task_id": "first-000",
+        "trace_bytes": 25881,
+        "trace_sha256": "bdea110b19dd1e42ee449e8fea2b5100800743514c8e3834dcd303a1345fd47e",
+        "win": 1
+      },
+      {
+        "actual_order": "first",
+        "arm": null,
+        "decisions": 115,
+        "draw": 0,
+        "hero_policy_errors": 0,
+        "opponent_policy_errors": 0,
+        "pair_index": -1,
+        "physical_seat": 1,
+        "seed": 2026081680,
+        "task_id": "first-001",
+        "trace_bytes": 18251,
+        "trace_sha256": "2f4c72e9752abb9dc398e9e8f3ebbc67a4f2a22e058118d2337bb6191145b3d3",
+        "win": 1
+      },
+      {
+        "actual_order": "second",
+        "arm": null,
+        "decisions": 207,
+        "draw": 0,
+        "hero_policy_errors": 0,
+        "opponent_policy_errors": 0,
+        "pair_index": -1,
+        "physical_seat": 0,
+        "seed": 2026181679,
+        "task_id": "second-000",
+        "trace_bytes": 32833,
+        "trace_sha256": "6d3ebee660a7975d62e8fcf2000c046251465360bb081744168bf0e88fb2fb01",
+        "win": 1
+      },
+      {
+        "actual_order": "second",
+        "arm": null,
+        "decisions": 104,
+        "draw": 0,
+        "hero_policy_errors": 0,
+        "opponent_policy_errors": 0,
+        "pair_index": -1,
+        "physical_seat": 1,
+        "seed": 2026181680,
+        "task_id": "second-001",
+        "trace_bytes": 16531,
+        "trace_sha256": "f356d1d0662e16f89160eb940357002692b6ee060807802ec2ff2999101836aa",
+        "win": 1
+      }
+    ]
+  },
+  "seeds_per_order": 2,
+  "tasks": 4,
+  "trace_files": {
+    "single_a": {
+      "first-000": "a5a92f16bdff2e9ddd9baff0162629b67c7be90c66186db2a9dd79219876a086",
+      "first-001": "8b85ebe7fa4038dd07daeae74b2e30e4aae561dc0411b763f7491c1f6e6f9e59",
+      "second-000": "6d709d179f5f554afa6f02c71f198728c82bdc44893f60340bab9ef5cf9c78e0",
+      "second-001": "2db1301acf8d3458153ace7c569750eeb5d0e3c54ed02986cffc2928c291b606"
+    },
+    "single_b": {
+      "first-000": "1f88965e0a9a15bd3ddd7a3919d5ea95a94d76b9817ca07edc7d50deb5936362",
+      "first-001": "9b4cd03e7c54bf45edfa1c6ad01bfce76e20a8cea5b02aafdd78b40fb19d60ee",
+      "second-000": "0351e76eb5b05b33ef3c9191123a7d45b29c90f145154f39b861fda2bd92aac0",
+      "second-001": "37d7abc177696e6c44400db3df680445f3485f519c6a152d82f01e0177c1e0fa"
+    },
+    "workers_3": {
+      "first-000": "bdea110b19dd1e42ee449e8fea2b5100800743514c8e3834dcd303a1345fd47e",
+      "first-001": "2f4c72e9752abb9dc398e9e8f3ebbc67a4f2a22e058118d2337bb6191145b3d3",
+      "second-000": "6d3ebee660a7975d62e8fcf2000c046251465360bb081744168bf0e88fb2fb01",
+      "second-001": "f356d1d0662e16f89160eb940357002692b6ee060807802ec2ff2999101836aa"
+    }
+  }
+}

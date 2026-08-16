@@ -109,3 +109,74 @@ corpora, and clean negative results narrowing the search.
 
 ## Commit
 `<FINAL_SHA>` (push to origin/experiment/anti-meta-data-20260816)
+
+================================================================
+90-MINUTE SURGICAL FOLLOW-UP (13:26–14:56 CDT)
+================================================================
+
+CURRENT TIME: 14:38 CDT (at final edit)
+
+BRANCH/COMMIT: experiment/anti-meta-data-20260816 @ 4714cb2 (pushed)
+
+## Starmie parity anomaly — RESOLVED (not a bug)
+p_parity_starmie showed 21/21 discordant pairs with delta 0. Determinism
+proof on the BASE EXP-23 package vs starmie_v2_boss_atk FAILED (base disagrees
+with itself across repeats): the starmie opponent package is nondeterministic.
+Router parity is clean on deterministic opponents (B0 0/0, AZ 0/0, luc_b0 0/0).
+
+## DIP RULE A — FESTIVAL GROUNDS DENIAL (dip_a)
+Runtime: route locked dipplin + Festival Grounds in play + stadium not played
++ Spikemuth legally playable + base action is NOT attack/retreat/ability.
+
+Real-replay audit (08-13, 56 fires, 10 target teams, mostly mid-game):
+  teacher agrees surgical 18, agrees base 2, neither 36 -> 90% approval on
+  decisive states; teachers frequently did a third thing (attack) instead.
+
+Gameplay paired CRN (60 pairs/order, forced-route, 0 errors):
+  D0: +0.8pp (5-4 disc)   D1: +0.8pp (5-4 disc)   same sign, tiny magnitude.
+
+VERDICT A: NEUTRAL-WEAK. Not promotable alone.
+
+## DIP RULE B — THWACKEY TRAP (dip_b)
+Runtime: route locked dipplin + Boss playable + supporter not played +
+opponent bench Thwackey with 0 energy + base action not attack/retreat/ability
++ base action doesn't already play Boss; follow-up EFFECT_TARGET selects the
+0-energy Thwackey via latch.
+
+Real-replay audit (08-13, 77 fires, 9 target teams, 70 mid-game):
+  teacher agrees surgical 45, agrees base 3, neither 29 -> 94% approval on
+  decisive states.
+
+Gameplay paired CRN (60 pairs/order, forced-route):
+  D1: <PENDING>   D0: <PENDING>
+
+VERDICT B: <PENDING>
+
+## DIP AB COMBINATION
+<PENDING — only if A and B both safe>
+
+## LUCARIO SEMANTIC ANALYSIS
+Real Lucario win rows: 4,434 total, 1,342 EXP-23 vs teacher disagreements.
+Dominant clusters (MAIN):
+  EXP-23 PLAY:PokePad(1152) -> teacher ABILITY:Munkidori(112): 28 (10 teams, late-heavy)
+  EXP-23 PLAY:PokePad(1152) -> teacher ATTACK:937: 28 (11 teams)
+  EXP-23 PLAY:PokePad(1152) -> teacher ABILITY:Spikemuth(1259): 25 (15 teams)
+  EXP-23 PLAY:NightStretcher(1097) -> teacher Munkidori/attack: 22+20
+  EXP-23 PLAY:Snorunt(860) -> teacher attack: 20
+  early: PLAY:Spikemuth(1259)/PokePad -> teacher Poffin(1086): 24
+=> confirms CERT-B late dev-play drift inside Lucario states.
+
+LUC VETO rule tested (MAIN single PLAY of {1152,1097,860,646} -> first
+model-ranked ATTACK), corpus-level dev/holdout split by target-team identity
+(16 dev / 4 heldout teams, frozen crc32%3):
+  DEV:  eligible 492, fired 355; rule 60 / exp23 81 / neither 214 -> approval 42.6%
+  HELD: eligible 91, fired 73; rule 11 / exp23 14 / neither 48 -> approval 44.0%
+=> deterministic correction cannot express the teacher alternative (which
+attack / which ability / targets). VERDICT: KILL. No Lucario rule.
+
+## OFF-TARGET PARITY
+B0: 0 discordant, 0 errors. AZ NO_SEARCH: 0 discordant, 0 errors.
+<PENDING: surgical-package parity reruns>
+
+## FINAL
+<PENDING>

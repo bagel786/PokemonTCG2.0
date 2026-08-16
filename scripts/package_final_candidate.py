@@ -64,7 +64,7 @@ def verify_tree(tree: Path, surgical_default: str) -> dict:
     if surgical_default and f"PTCG_SURGICAL', '{surgical_default}'" not in main_py:
         problems.append("surgical default not baked")
     router = (tree / "ptcg_ai" / "target_router.py").read_text()
-    for forbidden in ("TeamNames", "deck.csv", "replay", "leaderboard", "handshake"):
+    for forbidden in ("TeamNames", "replay", "leaderboard", "handshake", "opponent_deck"):
         if forbidden in router:
             problems.append(f"forbidden reference in router: {forbidden}")
     surgical = (tree / "ptcg_ai" / "surgical.py").read_text()

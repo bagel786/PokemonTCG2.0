@@ -1,0 +1,3649 @@
+{
+  "fires": [
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92475330",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "pokemon master",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92475330",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "pokemon master",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92475330",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "pokemon master",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92475330",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ],
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "pokemon master",
+      "turn": 8
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92475330",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "pokemon master",
+      "turn": 8
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92475330",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_base",
+      "surg_semantic_len": 1,
+      "target_team": "pokemon master",
+      "turn": 8
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92475330",
+      "recorded": [
+        [
+          13,
+          null,
+          0,
+          937,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "pokemon master",
+      "turn": 8
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92496597",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "kwa",
+      "turn": 3
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92496597",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "kwa",
+      "turn": 7
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92498455",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "kwa",
+      "turn": 4
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92498455",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "kwa",
+      "turn": 4
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92498455",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "kwa",
+      "turn": 4
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92498455",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ],
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "kwa",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92503111",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ],
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "kwa",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92503111",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "kwa",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92503111",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "kwa",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92507041",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "aca-ta",
+      "turn": 4
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92507041",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "aca-ta",
+      "turn": 4
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92507041",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "aca-ta",
+      "turn": 4
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92511641",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "kwa",
+      "turn": 9
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92540320",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "kwa",
+      "turn": 4
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92540320",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "kwa",
+      "turn": 4
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92540320",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "kwa",
+      "turn": 4
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92540320",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "kwa",
+      "turn": 4
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92540320",
+      "recorded": null,
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "kwa",
+      "turn": 4
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92556267",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "pokemon master",
+      "turn": 7
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92556267",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "pokemon master",
+      "turn": 7
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92596236",
+      "recorded": null,
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 3
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92596236",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 3
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92596236",
+      "recorded": [
+        [
+          9,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_agrees_base",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 3
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92596236",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92596236",
+      "recorded": [
+        [
+          14,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92596236",
+      "recorded": [
+        [
+          9,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_base",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 7
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92596236",
+      "recorded": [
+        [
+          13,
+          null,
+          0,
+          936,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 7
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92609336",
+      "recorded": null,
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 3
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92609336",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 3
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92613160",
+      "recorded": null,
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92613160",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92613160",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92613160",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92613160",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92613160",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92613160",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92613160",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92613160",
+      "recorded": null,
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92613160",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92613160",
+      "recorded": null,
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 10
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92648329",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "hinox13",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92648329",
+      "recorded": [
+        [
+          10,
+          null,
+          0,
+          0,
+          5,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "hinox13",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92648329",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "hinox13",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92648329",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "hinox13",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92648329",
+      "recorded": [
+        [
+          14,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "hinox13",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92648329",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "hinox13",
+      "turn": 7
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92648329",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "hinox13",
+      "turn": 7
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92648329",
+      "recorded": [
+        [
+          14,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "hinox13",
+      "turn": 7
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92648329",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ],
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "hinox13",
+      "turn": 9
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92648329",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "hinox13",
+      "turn": 9
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92648329",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "hinox13",
+      "turn": 9
+    },
+    {
+      "archetype": "dipplin_exact",
+      "base_semantic_len": 1,
+      "episode_id": "92673691",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "motono0223",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_exact",
+      "base_semantic_len": 1,
+      "episode_id": "92673691",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "motono0223",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_exact",
+      "base_semantic_len": 1,
+      "episode_id": "92673691",
+      "recorded": [
+        [
+          14,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "motono0223",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_exact",
+      "base_semantic_len": 1,
+      "episode_id": "92673691",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "motono0223",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92675690",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ],
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "sobameshi",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92675690",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "sobameshi",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92675690",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "sobameshi",
+      "turn": 11
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92675690",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "sobameshi",
+      "turn": 11
+    },
+    {
+      "archetype": "dipplin_exact",
+      "base_semantic_len": 1,
+      "episode_id": "92682167",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "motono0223",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_exact",
+      "base_semantic_len": 1,
+      "episode_id": "92682167",
+      "recorded": [
+        [
+          10,
+          null,
+          0,
+          0,
+          7,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "motono0223",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_exact",
+      "base_semantic_len": 1,
+      "episode_id": "92682167",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "motono0223",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_exact",
+      "base_semantic_len": 1,
+      "episode_id": "92682167",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "motono0223",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_exact",
+      "base_semantic_len": 1,
+      "episode_id": "92682167",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "motono0223",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92682244",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92682244",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92682244",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92682244",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92682244",
+      "recorded": null,
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92682244",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ],
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 7
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92682244",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 7
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92682244",
+      "recorded": [
+        [
+          10,
+          null,
+          0,
+          0,
+          7,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 7
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92682244",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 7
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92682244",
+      "recorded": [
+        [
+          13,
+          null,
+          0,
+          936,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 7
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92682244",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 7
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92682244",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_base",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 7
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92688753",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92688753",
+      "recorded": [
+        [
+          10,
+          null,
+          0,
+          0,
+          5,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Louis & Emile",
+      "turn": 7
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92695888",
+      "recorded": null,
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "EliKal",
+      "turn": 3
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92699693",
+      "recorded": null,
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "PP kawada",
+      "turn": 8
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92718368",
+      "recorded": null,
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "aca-ta",
+      "turn": 2
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92723863",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "PP kawada",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92723863",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "PP kawada",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92723863",
+      "recorded": null,
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "PP kawada",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92723863",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "PP kawada",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92723863",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_agrees_base",
+      "surg_semantic_len": 1,
+      "target_team": "PP kawada",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92723863",
+      "recorded": null,
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "PP kawada",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92723863",
+      "recorded": null,
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "PP kawada",
+      "turn": 7
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92738926",
+      "recorded": null,
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "pokemon master",
+      "turn": 9
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92738926",
+      "recorded": null,
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "pokemon master",
+      "turn": 11
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92786675",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ],
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Agent 33",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92786675",
+      "recorded": [
+        [
+          14,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Agent 33",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92794116",
+      "recorded": null,
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Agent 33",
+      "turn": 2
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92794116",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Agent 33",
+      "turn": 2
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92794116",
+      "recorded": null,
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Agent 33",
+      "turn": 4
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92794116",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Agent 33",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92794116",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Agent 33",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92794116",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Agent 33",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92794116",
+      "recorded": [
+        [
+          14,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Agent 33",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92794116",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Agent 33",
+      "turn": 8
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92794116",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Agent 33",
+      "turn": 8
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92794992",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "PP kawada",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92794992",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "PP kawada",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92794992",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "PP kawada",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92794992",
+      "recorded": [
+        [
+          10,
+          null,
+          0,
+          0,
+          5,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "PP kawada",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92794992",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "PP kawada",
+      "turn": 7
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92794992",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "PP kawada",
+      "turn": 7
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92794992",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "PP kawada",
+      "turn": 7
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92794992",
+      "recorded": [
+        [
+          10,
+          null,
+          0,
+          0,
+          5,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "PP kawada",
+      "turn": 7
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92794992",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "PP kawada",
+      "turn": 7
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92794992",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "PP kawada",
+      "turn": 7
+    },
+    {
+      "archetype": "dipplin_exact",
+      "base_semantic_len": 1,
+      "episode_id": "92797868",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "motono0223",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_exact",
+      "base_semantic_len": 1,
+      "episode_id": "92797868",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "motono0223",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_exact",
+      "base_semantic_len": 1,
+      "episode_id": "92797868",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "motono0223",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_exact",
+      "base_semantic_len": 1,
+      "episode_id": "92797868",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "motono0223",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_exact",
+      "base_semantic_len": 1,
+      "episode_id": "92797868",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "motono0223",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_exact",
+      "base_semantic_len": 1,
+      "episode_id": "92797868",
+      "recorded": null,
+      "rule": "dip_a",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "motono0223",
+      "turn": 5
+    },
+    {
+      "archetype": "dipplin_exact",
+      "base_semantic_len": 1,
+      "episode_id": "92797868",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "motono0223",
+      "turn": 7
+    },
+    {
+      "archetype": "dipplin_exact",
+      "base_semantic_len": 1,
+      "episode_id": "92797868",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "motono0223",
+      "turn": 9
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92803471",
+      "recorded": null,
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "aca-ta",
+      "turn": 4
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92803471",
+      "recorded": [
+        [
+          14,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "aca-ta",
+      "turn": 4
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92803471",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "aca-ta",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92803471",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "aca-ta",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92803471",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "aca-ta",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92803471",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "aca-ta",
+      "turn": 6
+    },
+    {
+      "archetype": "dipplin_variant",
+      "base_semantic_len": 1,
+      "episode_id": "92803471",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "dip_b",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "aca-ta",
+      "turn": 6
+    }
+  ],
+  "stats": {
+    "dip_a_teacher_agrees_base": 2,
+    "dip_a_teacher_agrees_surgical": 18,
+    "dip_a_teacher_neither": 36,
+    "dip_b_teacher_agrees_base": 3,
+    "dip_b_teacher_agrees_surgical": 45,
+    "dip_b_teacher_neither": 29,
+    "fires_dip_a": 56,
+    "fires_dip_b": 77,
+    "fires_total": 133
+  }
+}

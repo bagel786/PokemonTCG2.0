@@ -1,0 +1,1725 @@
+{
+  "fires": [
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92559739",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "mackerel is all you need",
+      "turn": 1
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92559739",
+      "recorded": [
+        [
+          9,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "mackerel is all you need",
+      "turn": 5
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92559739",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "mackerel is all you need",
+      "turn": 5
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92559739",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "mackerel is all you need",
+      "turn": 5
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92559739",
+      "recorded": null,
+      "rule": "luc_veto",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "mackerel is all you need",
+      "turn": 7
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92559739",
+      "recorded": [
+        [
+          12,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "mackerel is all you need",
+      "turn": 7
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92559739",
+      "recorded": null,
+      "rule": "luc_veto",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "mackerel is all you need",
+      "turn": 9
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92559739",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "mackerel is all you need",
+      "turn": 9
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92559739",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_agrees_base",
+      "surg_semantic_len": 1,
+      "target_team": "mackerel is all you need",
+      "turn": 9
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92559739",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "mackerel is all you need",
+      "turn": 9
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92559739",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "mackerel is all you need",
+      "turn": 11
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92559739",
+      "recorded": [
+        [
+          13,
+          null,
+          0,
+          937,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "mackerel is all you need",
+      "turn": 11
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92559739",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_agrees_base",
+      "surg_semantic_len": 1,
+      "target_team": "mackerel is all you need",
+      "turn": 11
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92559739",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_agrees_base",
+      "surg_semantic_len": 1,
+      "target_team": "mackerel is all you need",
+      "turn": 11
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92559739",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_agrees_base",
+      "surg_semantic_len": 1,
+      "target_team": "mackerel is all you need",
+      "turn": 11
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92559739",
+      "recorded": [
+        [
+          13,
+          null,
+          0,
+          937,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "mackerel is all you need",
+      "turn": 11
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92559739",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_agrees_base",
+      "surg_semantic_len": 1,
+      "target_team": "mackerel is all you need",
+      "turn": 13
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92559739",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_agrees_base",
+      "surg_semantic_len": 1,
+      "target_team": "mackerel is all you need",
+      "turn": 13
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92559739",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_agrees_base",
+      "surg_semantic_len": 1,
+      "target_team": "mackerel is all you need",
+      "turn": 13
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92559739",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_agrees_base",
+      "surg_semantic_len": 1,
+      "target_team": "mackerel is all you need",
+      "turn": 13
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92559739",
+      "recorded": null,
+      "rule": "luc_veto",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "mackerel is all you need",
+      "turn": 15
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92622356",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 1
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92622356",
+      "recorded": [
+        [
+          10,
+          null,
+          0,
+          0,
+          7,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 3
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92622356",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 3
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92622356",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 3
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92622356",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 9
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92626131",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_agrees_base",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 6
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92626131",
+      "recorded": [
+        [
+          9,
+          null,
+          0,
+          0,
+          2,
+          5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 6
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92626131",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_agrees_base",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 6
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92626131",
+      "recorded": [
+        [
+          13,
+          null,
+          0,
+          937,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 6
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92626131",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_agrees_base",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 8
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92626131",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_agrees_base",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 8
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92626131",
+      "recorded": [
+        [
+          12,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 8
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92701768",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_agrees_base",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 5
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92701768",
+      "recorded": [
+        [
+          13,
+          null,
+          0,
+          937,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 5
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92701768",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_agrees_base",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 5
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92701768",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ],
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 7
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92701768",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 7
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92701768",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 7
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92701768",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ],
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 9
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92704411",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 1
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92704411",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 1
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92704411",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 3
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92704411",
+      "recorded": [
+        [
+          14,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 3
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92704411",
+      "recorded": [
+        [
+          14,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 3
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92704411",
+      "recorded": [
+        [
+          14,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 3
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92704411",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 3
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92704411",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 3
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92704411",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 3
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92704411",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 3
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92704411",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 3
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92704411",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 3
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92704411",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 3
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92704411",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 3
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92704411",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 3
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92704411",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 3
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92704411",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 3
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92704411",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 5
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92704411",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 5
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92715770",
+      "recorded": [
+        [
+          8,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 2
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92715770",
+      "recorded": [
+        [
+          9,
+          null,
+          0,
+          0,
+          2,
+          4,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 4
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92715770",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 4
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92715770",
+      "recorded": [
+        [
+          14,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 4
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92715770",
+      "recorded": null,
+      "rule": "luc_veto_miss",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 4
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92715770",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto_miss",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 4
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92715770",
+      "recorded": [
+        [
+          7,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_agrees_base",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 8
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92715770",
+      "recorded": null,
+      "rule": "luc_veto",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 8
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92715770",
+      "recorded": [
+        [
+          13,
+          null,
+          0,
+          937,
+          0,
+          0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "rule": "luc_veto",
+      "side": "teacher_agrees_surgical",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 10
+    },
+    {
+      "archetype": "lucario_family",
+      "base_semantic_len": 1,
+      "episode_id": "92715770",
+      "recorded": null,
+      "rule": "luc_veto",
+      "side": "teacher_neither",
+      "surg_semantic_len": 1,
+      "target_team": "Sixth Sense",
+      "turn": 12
+    }
+  ],
+  "stats": {
+    "fires_luc_veto": 34,
+    "fires_luc_veto_miss": 35,
+    "fires_total": 69,
+    "luc_veto_miss_teacher_agrees_surgical": 8,
+    "luc_veto_miss_teacher_neither": 27,
+    "luc_veto_teacher_agrees_base": 15,
+    "luc_veto_teacher_agrees_surgical": 5,
+    "luc_veto_teacher_neither": 14
+  }
+}
