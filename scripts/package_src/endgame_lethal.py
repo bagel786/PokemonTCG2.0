@@ -37,7 +37,9 @@ from .card_ids import (
 MAX_PRIZES_TRIGGER = 2
 MAX_DEPTH = 6
 MAX_NODES = 400
-TIME_BUDGET_MS = 150.0
+# Deterministic budget only: wall-clock caps make search outcomes depend on
+# machine load and break common-random-number pairing. 400 engine steps is a
+# few tens of milliseconds on the reference box.
 
 # Cards whose outcome depends on hidden deck order or hidden prize contents.
 # Excluding them makes every searched line provable from public state alone:
@@ -158,9 +160,6 @@ class EndgameLethal:
             me = int(obs.current.yourIndex)
             root_turn = int(obs.current.turn)
 
-            def expired() -> bool:
-                return (time.perf_counter() - started) * 1000.0 >= TIME_BUDGET_MS
-
             def dfs(state, depth: int) -> bool:
                 nonlocal nodes
                 child_obs = state.observation
@@ -180,7 +179,7 @@ class EndgameLethal:
                     key=lambda pair: (self._option_priority(pair[1]), pair[0]),
                 )
                 for index, option in ordered:
-                    if expired() or nodes >= MAX_NODES:
+                    if nodes >= MAX_NODES:
                         return False
                     nodes += 1
                     if option.type == OptionType.PLAY and self._play_card_id(child_obs, option) in DECK_ORDER_DEPENDENT_PLAYS:
@@ -206,7 +205,7 @@ class EndgameLethal:
                 key=lambda pair: (self._option_priority(pair[1]), pair[0]),
             )
             for index, option in ordered:
-                if expired() or nodes >= MAX_NODES:
+                if nodes >= MAX_NODES:
                     break
                 nodes += 1
                 if option.type == OptionType.PLAY and self._play_card_id(obs, option) in DECK_ORDER_DEPENDENT_PLAYS:

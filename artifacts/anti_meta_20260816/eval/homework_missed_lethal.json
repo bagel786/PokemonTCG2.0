@@ -1,0 +1,670 @@
+{
+  "family_breakdown": {},
+  "games": [
+    {
+      "base": 0,
+      "decisions": [],
+      "episode": 93715535,
+      "missed": 0,
+      "n_decisions": 5,
+      "no_lethal": 5,
+      "won": false
+    },
+    {
+      "base": 0,
+      "decisions": [],
+      "episode": 93699067,
+      "missed": 0,
+      "n_decisions": 28,
+      "no_lethal": 28,
+      "won": false
+    },
+    {
+      "base": 0,
+      "decisions": [],
+      "episode": 93693193,
+      "missed": 0,
+      "n_decisions": 2,
+      "no_lethal": 2,
+      "won": false
+    },
+    {
+      "base": 0,
+      "decisions": [],
+      "episode": 93692845,
+      "missed": 0,
+      "n_decisions": 18,
+      "no_lethal": 18,
+      "won": true
+    },
+    {
+      "base": 0,
+      "decisions": [],
+      "episode": 93685951,
+      "missed": 0,
+      "n_decisions": 37,
+      "no_lethal": 37,
+      "won": false
+    },
+    {
+      "base": 8,
+      "decisions": [
+        {
+          "chosen": null,
+          "ctx": 0,
+          "label": "MISSED_LETHAL",
+          "override": {
+            "attack_id": 937,
+            "type": 13
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": null,
+          "ctx": 16,
+          "label": "MISSED_LETHAL",
+          "override": {
+            "type": 3
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": {
+            "type": 0
+          },
+          "ctx": 40,
+          "label": "BASE_LETHAL",
+          "override": {
+            "type": 0
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": {
+            "type": 3
+          },
+          "ctx": 13,
+          "label": "BASE_LETHAL",
+          "override": {
+            "type": 3
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": {
+            "card_id": 1219,
+            "type": 7
+          },
+          "ctx": 0,
+          "label": "MISSED_LETHAL",
+          "override": {
+            "attack_id": 937,
+            "type": 13
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": null,
+          "ctx": 16,
+          "label": "MISSED_LETHAL",
+          "override": {
+            "type": 3
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": {
+            "type": 0
+          },
+          "ctx": 40,
+          "label": "BASE_LETHAL",
+          "override": {
+            "type": 0
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": {
+            "type": 3
+          },
+          "ctx": 13,
+          "label": "BASE_LETHAL",
+          "override": {
+            "type": 3
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": {
+            "card_id": 1219,
+            "type": 7
+          },
+          "ctx": 0,
+          "label": "MISSED_LETHAL",
+          "override": {
+            "attack_id": 937,
+            "type": 13
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": {
+            "type": 9
+          },
+          "ctx": 0,
+          "label": "MISSED_LETHAL",
+          "override": {
+            "attack_id": 937,
+            "type": 13
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": {
+            "attack_id": 937,
+            "type": 13
+          },
+          "ctx": 0,
+          "label": "BASE_LETHAL",
+          "override": {
+            "attack_id": 937,
+            "type": 13
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": {
+            "type": 3
+          },
+          "ctx": 15,
+          "label": "BASE_LETHAL",
+          "override": {
+            "type": 3
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": {
+            "type": 3
+          },
+          "ctx": 7,
+          "label": "BASE_LETHAL",
+          "override": {
+            "type": 3
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": {
+            "type": 3
+          },
+          "ctx": 7,
+          "label": "BASE_LETHAL",
+          "override": {
+            "type": 3
+          },
+          "prizes": 1
+        }
+      ],
+      "episode": 93685047,
+      "missed": 6,
+      "n_decisions": 33,
+      "no_lethal": 19,
+      "won": true
+    },
+    {
+      "base": 7,
+      "decisions": [
+        {
+          "chosen": null,
+          "ctx": 7,
+          "label": "MISSED_LETHAL",
+          "override": {
+            "type": 3
+          },
+          "prizes": 2
+        },
+        {
+          "chosen": {
+            "type": 9
+          },
+          "ctx": 0,
+          "label": "MISSED_LETHAL",
+          "override": {
+            "attack_id": 937,
+            "type": 13
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": null,
+          "ctx": 16,
+          "label": "MISSED_LETHAL",
+          "override": {
+            "type": 3
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": {
+            "type": 0
+          },
+          "ctx": 40,
+          "label": "BASE_LETHAL",
+          "override": {
+            "type": 0
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": {
+            "type": 3
+          },
+          "ctx": 13,
+          "label": "BASE_LETHAL",
+          "override": {
+            "type": 3
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": {
+            "card_id": 1086,
+            "type": 7
+          },
+          "ctx": 0,
+          "label": "MISSED_LETHAL",
+          "override": {
+            "attack_id": 937,
+            "type": 13
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": null,
+          "ctx": 7,
+          "label": "MISSED_LETHAL",
+          "override": {
+            "type": 3
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": null,
+          "ctx": 7,
+          "label": "MISSED_LETHAL",
+          "override": {
+            "type": 3
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": {
+            "type": 9
+          },
+          "ctx": 0,
+          "label": "MISSED_LETHAL",
+          "override": {
+            "attack_id": 937,
+            "type": 13
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": {
+            "attack_id": 937,
+            "type": 13
+          },
+          "ctx": 0,
+          "label": "BASE_LETHAL",
+          "override": {
+            "attack_id": 937,
+            "type": 13
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": {
+            "attack_id": 937,
+            "type": 13
+          },
+          "ctx": 0,
+          "label": "BASE_LETHAL",
+          "override": {
+            "attack_id": 937,
+            "type": 13
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": {
+            "type": 3
+          },
+          "ctx": 15,
+          "label": "BASE_LETHAL",
+          "override": {
+            "type": 3
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": {
+            "type": 3
+          },
+          "ctx": 7,
+          "label": "BASE_LETHAL",
+          "override": {
+            "type": 3
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": {
+            "type": 3
+          },
+          "ctx": 7,
+          "label": "BASE_LETHAL",
+          "override": {
+            "type": 3
+          },
+          "prizes": 1
+        }
+      ],
+      "episode": 93684142,
+      "missed": 7,
+      "n_decisions": 42,
+      "no_lethal": 28,
+      "won": true
+    },
+    {
+      "base": 0,
+      "decisions": [],
+      "episode": 93683291,
+      "missed": 0,
+      "n_decisions": 4,
+      "no_lethal": 4,
+      "won": true
+    },
+    {
+      "base": 0,
+      "decisions": [],
+      "episode": 93682335,
+      "missed": 0,
+      "n_decisions": 20,
+      "no_lethal": 20,
+      "won": true
+    },
+    {
+      "base": 0,
+      "decisions": [],
+      "episode": 93681449,
+      "missed": 0,
+      "n_decisions": 28,
+      "no_lethal": 28,
+      "won": true
+    },
+    {
+      "base": 0,
+      "decisions": [],
+      "episode": 93680533,
+      "missed": 0,
+      "n_decisions": 3,
+      "no_lethal": 3,
+      "won": false
+    },
+    {
+      "base": 0,
+      "decisions": [],
+      "episode": 93679642,
+      "missed": 0,
+      "n_decisions": 17,
+      "no_lethal": 17,
+      "won": true
+    },
+    {
+      "base": 0,
+      "decisions": [],
+      "episode": 93678750,
+      "missed": 0,
+      "n_decisions": 22,
+      "no_lethal": 22,
+      "won": true
+    },
+    {
+      "base": 0,
+      "decisions": [],
+      "episode": 93677628,
+      "missed": 0,
+      "n_decisions": 48,
+      "no_lethal": 48,
+      "won": false
+    },
+    {
+      "base": 0,
+      "decisions": [],
+      "episode": 93676804,
+      "missed": 0,
+      "n_decisions": 44,
+      "no_lethal": 44,
+      "won": true
+    },
+    {
+      "base": 0,
+      "decisions": [],
+      "episode": 93676921,
+      "missed": 0,
+      "n_decisions": 28,
+      "no_lethal": 28,
+      "won": true
+    },
+    {
+      "base": 1,
+      "decisions": [
+        {
+          "chosen": null,
+          "ctx": 0,
+          "label": "MISSED_LETHAL",
+          "override": {
+            "attack_id": 937,
+            "type": 13
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": null,
+          "ctx": 15,
+          "label": "MISSED_LETHAL",
+          "override": {
+            "type": 3
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": null,
+          "ctx": 7,
+          "label": "MISSED_LETHAL",
+          "override": {
+            "type": 3
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": {
+            "type": 3
+          },
+          "ctx": 7,
+          "label": "BASE_LETHAL",
+          "override": {
+            "type": 3
+          },
+          "prizes": 1
+        }
+      ],
+      "episode": 93676003,
+      "missed": 3,
+      "n_decisions": 17,
+      "no_lethal": 13,
+      "won": true
+    },
+    {
+      "base": 0,
+      "decisions": [],
+      "episode": 93675087,
+      "missed": 0,
+      "n_decisions": 46,
+      "no_lethal": 46,
+      "won": true
+    },
+    {
+      "base": 0,
+      "decisions": [],
+      "episode": 93674154,
+      "missed": 0,
+      "n_decisions": 3,
+      "no_lethal": 3,
+      "won": false
+    },
+    {
+      "base": 0,
+      "decisions": [],
+      "episode": 93673237,
+      "missed": 0,
+      "n_decisions": 36,
+      "no_lethal": 36,
+      "won": false
+    },
+    {
+      "base": 0,
+      "decisions": [],
+      "episode": 93672319,
+      "missed": 0,
+      "n_decisions": 36,
+      "no_lethal": 36,
+      "won": true
+    },
+    {
+      "base": 0,
+      "decisions": [],
+      "episode": 93671387,
+      "missed": 0,
+      "n_decisions": 33,
+      "no_lethal": 33,
+      "won": false
+    },
+    {
+      "base": 0,
+      "decisions": [],
+      "episode": 93670440,
+      "missed": 0,
+      "n_decisions": 4,
+      "no_lethal": 4,
+      "won": false
+    },
+    {
+      "base": 2,
+      "decisions": [
+        {
+          "chosen": null,
+          "ctx": 0,
+          "label": "MISSED_LETHAL",
+          "override": {
+            "attack_id": 937,
+            "type": 13
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": null,
+          "ctx": 15,
+          "label": "MISSED_LETHAL",
+          "override": {
+            "type": 3
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": {
+            "type": 3
+          },
+          "ctx": 7,
+          "label": "BASE_LETHAL",
+          "override": {
+            "type": 3
+          },
+          "prizes": 1
+        },
+        {
+          "chosen": {
+            "type": 3
+          },
+          "ctx": 7,
+          "label": "BASE_LETHAL",
+          "override": {
+            "type": 3
+          },
+          "prizes": 1
+        }
+      ],
+      "episode": 93669503,
+      "missed": 2,
+      "n_decisions": 47,
+      "no_lethal": 43,
+      "won": true
+    },
+    {
+      "base": 0,
+      "decisions": [],
+      "episode": 93668609,
+      "missed": 0,
+      "n_decisions": 3,
+      "no_lethal": 3,
+      "won": false
+    },
+    {
+      "base": 0,
+      "decisions": [],
+      "episode": 93667663,
+      "missed": 0,
+      "n_decisions": 10,
+      "no_lethal": 10,
+      "won": true
+    },
+    {
+      "base": 0,
+      "decisions": [],
+      "episode": 93666757,
+      "missed": 0,
+      "n_decisions": 26,
+      "no_lethal": 26,
+      "won": true
+    },
+    {
+      "base": 0,
+      "decisions": [],
+      "episode": 93665870,
+      "missed": 0,
+      "n_decisions": 31,
+      "no_lethal": 31,
+      "won": true
+    },
+    {
+      "base": 0,
+      "decisions": [],
+      "episode": 93665757,
+      "missed": 0,
+      "n_decisions": 3,
+      "no_lethal": 3,
+      "won": false
+    }
+  ],
+  "labels": {
+    "BASE_LETHAL": 18,
+    "MISSED_LETHAL": 18,
+    "NO_LETHAL": 638
+  },
+  "lost_games": 12,
+  "missed_lethal_in_wins": 4,
+  "rescue_rate": 0.0,
+  "rescued_losses": 0,
+  "won_games": 17
+}
