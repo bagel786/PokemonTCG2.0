@@ -58,6 +58,23 @@ class SerialData(ctypes.Structure):
     ]
 
 
+def load_deck(path: Path) -> list[int]:
+    deck = [int(line) for line in path.read_text().splitlines() if line.strip()]
+    if len(deck) != 60:
+        raise ValueError(f"deck override must contain 60 cards: {path}")
+    return deck
+
+
+def parse_env(values: Iterable[str]) -> dict[str, str]:
+    parsed: dict[str, str] = {}
+    for item in values:
+        if "=" not in item:
+            raise ValueError(f"env override must be KEY=VALUE: {item}")
+        key, value = item.split("=", 1)
+        parsed[key] = value
+    return parsed
+
+
 def sha256_file(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as handle:
