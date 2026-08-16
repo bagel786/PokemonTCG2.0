@@ -1,0 +1,17 @@
+merged rows: 47653
+A2 sha256: b19871a9f1499c2460ae266e58194acab1d8c90b390fa5cf24ed94b9a2b6bda8
+{"action_kl": 0.09271479971796916, "candidate": "identity_heads_1e4", "count_kl": 0.0001897824728033233, "count_loss": 0.03564832639275389, "device": "cpu", "elapsed_seconds": 21.23930335044861, "epoch": 1, "fresh_fraction": 1.0, "fresh_records": 38254, "hard_records": 0, "loss": 0.834931842577266, "option_loss": 0.779622984931567, "records": 38254, "rehearsal_records": 0, "single_top1": 0.7223394633705156, "validation": {"loss": 0.7536708125930498, "records": 3361, "single_top1": 0.7239109996866187}, "value_loss": 0.00015651123736039292}
+{"action_kl": 0.11477625999821144, "candidate": "identity_heads_1e4", "count_kl": 0.0005725746352990534, "count_loss": 0.034534048473893575, "device": "cpu", "elapsed_seconds": 44.3135621547699, "epoch": 2, "fresh_fraction": 1.0, "fresh_records": 38254, "hard_records": 0, "loss": 0.7932007695762625, "option_loss": 0.7270972895729453, "records": 38254, "rehearsal_records": 0, "single_top1": 0.7381807219009511, "validation": {"loss": 0.7452810901823728, "records": 3361, "single_top1": 0.7276715763083673}, "value_loss": 0.00010265040154293294}
+{"action_kl": 0.11942612081251947, "candidate": "identity_heads_1e4", "count_kl": 0.0008527839636628708, "count_loss": 0.0339766307839857, "device": "cpu", "elapsed_seconds": 72.90034222602844, "epoch": 3, "fresh_fraction": 1.0, "fresh_records": 38254, "hard_records": 0, "loss": 0.7826775064026873, "option_loss": 0.7143562633331717, "records": 38254, "rehearsal_records": 0, "single_top1": 0.7442376736919999, "validation": {"loss": 0.7395225642551023, "records": 3361, "single_top1": 0.7295518646192416}, "value_loss": 7.42716798338563e-05}
+training done in 74s
+{
+ "best_validation_loss": 0.7395225642551023,
+ "epochs_completed": 3,
+ "frozen_parameters_verified": true,
+ "initial_model": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/grim_damage_conversion/winner/extracted/policy_weights.npz",
+ "learning_rate": 0.0001,
+ "module_learning_rates": {},
+ "output": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/final_sprint/identity_train/train/identity_heads_1e4.npz",
+ "seed": 20260816,
+ "sha256": "cefe61189bc6f4e316212b19c99450e4b91ff1e5493f4467a95041c30fd96984"
+}

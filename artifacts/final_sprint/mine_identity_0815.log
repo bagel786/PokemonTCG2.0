@@ -1,0 +1,22 @@
+grim signature deck: 60 cards
+episode files: 486
+  err 93164628.json JSONDecodeError Expecting ',' delimiter: line 1 column 1441793 (char 1441792)
+statuses: {'non_grim': 395, 'grim': 90, 'error': 1}
+rows: 4205 units: 99
+{
+ "date": "2026-08-15",
+ "feature_version": 2,
+ "mirror_units": 18,
+ "play_identity_fix": true,
+ "rows": 4205,
+ "statuses": {
+  "error": 1,
+  "grim": 90,
+  "non_grim": 395
+ },
+ "unit_seats": {
+  "0": 51,
+  "1": 48
+ },
+ "units": 99
+}

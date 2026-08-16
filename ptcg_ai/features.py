@@ -7,6 +7,9 @@ from typing import Any
 
 from cg.api import AreaType, LogType, OptionType
 
+
+PLAY_IDENTITY_ENABLED = False  # sprint-870 identity fix; gates PLAY hand-index binding for v2
+
 from .prevention import attack_nullified
 from .view import attack_table, card_table, cards_in_play, option_source_card, option_target_pokemon, prize_value
 
@@ -486,6 +489,19 @@ def encode_option(
         if feature_version < 4 and option.type == OptionType.PLAY and option.area is None
         else option_source_card(obs, option)
     )
+    if (
+        PLAY_IDENTITY_ENABLED
+        and selected is None
+        and option.type == OptionType.PLAY
+    ):
+        # Identity-fix for the v2 schema: bind PLAY options to hand[option.index]
+        # (the shipped v2 encoder leaves them blind: source_card=0 for 100% of
+        # PLAY options at train and inference time).
+        state = obs.current
+        hand = state.players[state.yourIndex].hand or []
+        index = getattr(option, "index", None)
+        if index is not None and 0 <= index < len(hand) and hand[index] is not None:
+            selected = hand[index]
     target = option_target_pokemon(obs, option)
     source = selected
     if option.type == OptionType.CARD:

@@ -1,0 +1,29 @@
+grim signature deck: 60 cards
+episode files: 3579
+  500/3579 rows=7294
+  1000/3579 rows=14084
+  1500/3579 rows=21947
+  2000/3579 rows=28992
+  2500/3579 rows=32703
+  3000/3579 rows=39658
+  3500/3579 rows=43037
+  err 93089772.json JSONDecodeError Expecting ':' delimiter: line 1 column 1835009 (char 1835008)
+statuses: {'non_grim': 2629, 'grim': 949, 'error': 1}
+rows: 43448 units: 1035
+{
+ "date": "2026-08-14",
+ "feature_version": 2,
+ "mirror_units": 172,
+ "play_identity_fix": true,
+ "rows": 43448,
+ "statuses": {
+  "error": 1,
+  "grim": 949,
+  "non_grim": 2629
+ },
+ "unit_seats": {
+  "0": 525,
+  "1": 510
+ },
+ "units": 1035
+}

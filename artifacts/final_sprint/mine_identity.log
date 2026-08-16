@@ -1,0 +1,13 @@
+grim signature deck: 60 cards
+episode files: 3579
+  500/3579 rows=7294
+  1000/3579 rows=14084
+Traceback (most recent call last):
+  File "/Users/safiullahbaig/Projects/pokemonTCG2.0/scripts/mine_identity_data.py", line 76, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/Users/safiullahbaig/Projects/pokemonTCG2.0/scripts/mine_identity_data.py", line 52, in main
+    handle.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/gzip.py", line 289, in write
+    self.fileobj.write(self.compress.compress(data))
+OSError: [Errno 28] No space left on device
