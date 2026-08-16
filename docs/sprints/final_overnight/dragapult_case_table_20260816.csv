@@ -1,0 +1,8 @@
+episode,policy,seat,order,result,archetype,conf,first_grim,tempo,final_prizes,decisive,notes
+93730597,EXP23 55556726,1,second,LOSS,dragapult,6,4,normal,2v1,"T8: promote Munkidori[10]; Boss+Lillie turn, retreat; no 2nd attacker online when Grim retired","Grim t4 KO Meowth ex, 2 attacks then retreated at 130HP; promoted Munkidori died to Phantom Dive; game ends with Morgrem/Impidimp vs Dragapult ex+Fez"
+93673237,EXP23 55556726,0,first,LOSS,dragapult,6,5,normal,2v1,T7: ShadowBullet splash selected on benched Tera Dragapult ex (engine re-prompted),2nd Grim evolved t7 but arrived with 300HP after checkup; close race lost 2v1
+93671387,EXP23 55556726,1,second,LOSS,dragapult,5,6,normal,2v5,T8: two Grims both worn; splash targets Drakloak x2 (never lethal),double-Grim line present but both ran out of tempo vs 2x Dragapult ex + Fez; lost 4 prizes taken
+93745631,DIP_B 55562629 (EXP23 base),0,first,LOSS,dragapult,6,7,normal,2v1,T9: ShadowBullet splash selected on benched Tera Dragapult ex; 30 dmg wasted (T10 confirms 290->290),"only ONE ctx15 prompt, engine accepted, damage prevented by Tera; lost 2v1"
+93699067,EXP23 55556726,1,second,LOSS,dragapult,5,14,structural,2v1,n/a structural,first Grim t14
+93685951,EXP23 55556726,0,first,LOSS,dragapult,5,11,structural,1v1,n/a structural,first Grim t11
+93679642,EXP23 55556726,0,first,WIN,dragapult,5,7,normal,1v5,dominant,SAME Tera-splash selection seen at T7 (splash on benched Tera Dragapult ex) yet won 5 prizes
