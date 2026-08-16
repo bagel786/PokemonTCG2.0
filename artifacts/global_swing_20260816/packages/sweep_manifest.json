@@ -1,0 +1,54 @@
+{
+  "alphas": {
+    "0.6": {
+      "model_hashes": {
+        "policy_first.npz": "8727a7bac53087db4e749abd036c1f22c60c657910fc3a95c75992edbb16aa92",
+        "policy_second.npz": "8727a7bac53087db4e749abd036c1f22c60c657910fc3a95c75992edbb16aa92",
+        "policy_weights.npz": "8727a7bac53087db4e749abd036c1f22c60c657910fc3a95c75992edbb16aa92"
+      },
+      "tree": "/Users/safiullahbaig/Projects/pokemonTCG2.0-sprint/artifacts/global_swing_20260816/packages/exp23_alpha_0p6"
+    },
+    "0.75": {
+      "model_hashes": {
+        "policy_first.npz": "4703d42df2845b31a78c65176d5c8603dcf8f5d4d87d0f69d8cf8764d7f63e94",
+        "policy_second.npz": "4703d42df2845b31a78c65176d5c8603dcf8f5d4d87d0f69d8cf8764d7f63e94",
+        "policy_weights.npz": "4703d42df2845b31a78c65176d5c8603dcf8f5d4d87d0f69d8cf8764d7f63e94"
+      },
+      "tree": "/Users/safiullahbaig/Projects/pokemonTCG2.0-sprint/artifacts/global_swing_20260816/packages/exp23_alpha_0p75"
+    },
+    "0.875": {
+      "model_hashes": {
+        "policy_first.npz": "c6e534c3c0ba431fd9733ba695c20746856abd4fe78a0eb7a67994f1ba42aa9e",
+        "policy_second.npz": "c6e534c3c0ba431fd9733ba695c20746856abd4fe78a0eb7a67994f1ba42aa9e",
+        "policy_weights.npz": "c6e534c3c0ba431fd9733ba695c20746856abd4fe78a0eb7a67994f1ba42aa9e"
+      },
+      "tree": "/Users/safiullahbaig/Projects/pokemonTCG2.0-sprint/artifacts/global_swing_20260816/packages/exp23_alpha_0p875"
+    },
+    "0.95": {
+      "model_hashes": {
+        "policy_first.npz": "f657b808eadc53cb66deb5729afae622eceaa753e73bf2396b3bdb80e24d1715",
+        "policy_second.npz": "f657b808eadc53cb66deb5729afae622eceaa753e73bf2396b3bdb80e24d1715",
+        "policy_weights.npz": "f657b808eadc53cb66deb5729afae622eceaa753e73bf2396b3bdb80e24d1715"
+      },
+      "tree": "/Users/safiullahbaig/Projects/pokemonTCG2.0-sprint/artifacts/global_swing_20260816/packages/exp23_alpha_0p95"
+    },
+    "1.0": {
+      "model_hashes": {
+        "policy_first.npz": "e7c91ac276764de7627736ec88e997b2f6f9ce047eaa8ddfa754107309e0c616",
+        "policy_second.npz": "e7c91ac276764de7627736ec88e997b2f6f9ce047eaa8ddfa754107309e0c616",
+        "policy_weights.npz": "e7c91ac276764de7627736ec88e997b2f6f9ce047eaa8ddfa754107309e0c616"
+      },
+      "tree": "/Users/safiullahbaig/Projects/pokemonTCG2.0-sprint/artifacts/global_swing_20260816/packages/exp23_alpha_1p0"
+    }
+  },
+  "base_a2": {
+    "policy_first.npz": "b19871a9f1499c2460ae266e58194acab1d8c90b390fa5cf24ed94b9a2b6bda8",
+    "policy_second.npz": "b19871a9f1499c2460ae266e58194acab1d8c90b390fa5cf24ed94b9a2b6bda8",
+    "policy_weights.npz": "b19871a9f1499c2460ae266e58194acab1d8c90b390fa5cf24ed94b9a2b6bda8"
+  },
+  "base_exp23": {
+    "policy_first.npz": "cefe61189bc6f4e316212b19c99450e4b91ff1e5493f4467a95041c30fd96984",
+    "policy_second.npz": "cefe61189bc6f4e316212b19c99450e4b91ff1e5493f4467a95041c30fd96984",
+    "policy_weights.npz": "cefe61189bc6f4e316212b19c99450e4b91ff1e5493f4467a95041c30fd96984"
+  }
+}

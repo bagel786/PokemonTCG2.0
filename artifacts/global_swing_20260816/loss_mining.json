@@ -1,0 +1,189 @@
+{
+  "clusters": [
+    {
+      "c0_family": 7,
+      "context": 0,
+      "distinct_lost_episodes": 10,
+      "distinct_won_episodes": 17,
+      "exp23_family": 7,
+      "lost_decisions": 32,
+      "won_decisions": 50
+    },
+    {
+      "c0_family": 10,
+      "context": 0,
+      "distinct_lost_episodes": 10,
+      "distinct_won_episodes": 14,
+      "exp23_family": 7,
+      "lost_decisions": 27,
+      "won_decisions": 54
+    },
+    {
+      "c0_family": 9,
+      "context": 0,
+      "distinct_lost_episodes": 6,
+      "distinct_won_episodes": 8,
+      "exp23_family": 7,
+      "lost_decisions": 12,
+      "won_decisions": 19
+    },
+    {
+      "c0_family": 3,
+      "context": 13,
+      "distinct_lost_episodes": 3,
+      "distinct_won_episodes": 4,
+      "exp23_family": 3,
+      "lost_decisions": 6,
+      "won_decisions": 4
+    },
+    {
+      "c0_family": 3,
+      "context": 7,
+      "distinct_lost_episodes": 5,
+      "distinct_won_episodes": 9,
+      "exp23_family": 3,
+      "lost_decisions": 6,
+      "won_decisions": 13
+    },
+    {
+      "c0_family": 8,
+      "context": 0,
+      "distinct_lost_episodes": 3,
+      "distinct_won_episodes": 2,
+      "exp23_family": 7,
+      "lost_decisions": 5,
+      "won_decisions": 2
+    },
+    {
+      "c0_family": 9,
+      "context": 0,
+      "distinct_lost_episodes": 1,
+      "distinct_won_episodes": 1,
+      "exp23_family": 13,
+      "lost_decisions": 3,
+      "won_decisions": 1
+    },
+    {
+      "c0_family": 10,
+      "context": 0,
+      "distinct_lost_episodes": 2,
+      "distinct_won_episodes": 2,
+      "exp23_family": 10,
+      "lost_decisions": 3,
+      "won_decisions": 2
+    },
+    {
+      "c0_family": 7,
+      "context": 0,
+      "distinct_lost_episodes": 1,
+      "distinct_won_episodes": 2,
+      "exp23_family": 10,
+      "lost_decisions": 2,
+      "won_decisions": 2
+    },
+    {
+      "c0_family": 3,
+      "context": 21,
+      "distinct_lost_episodes": 2,
+      "distinct_won_episodes": 3,
+      "exp23_family": 3,
+      "lost_decisions": 2,
+      "won_decisions": 3
+    },
+    {
+      "c0_family": 7,
+      "context": 0,
+      "distinct_lost_episodes": 1,
+      "distinct_won_episodes": 0,
+      "exp23_family": 8,
+      "lost_decisions": 1,
+      "won_decisions": 0
+    },
+    {
+      "c0_family": 8,
+      "context": 0,
+      "distinct_lost_episodes": 1,
+      "distinct_won_episodes": 0,
+      "exp23_family": 13,
+      "lost_decisions": 1,
+      "won_decisions": 0
+    },
+    {
+      "c0_family": 12,
+      "context": 0,
+      "distinct_lost_episodes": 1,
+      "distinct_won_episodes": 0,
+      "exp23_family": 8,
+      "lost_decisions": 1,
+      "won_decisions": 0
+    },
+    {
+      "c0_family": "MULTI",
+      "context": 22,
+      "distinct_lost_episodes": 1,
+      "distinct_won_episodes": 3,
+      "exp23_family": "MULTI",
+      "lost_decisions": 1,
+      "won_decisions": 3
+    },
+    {
+      "c0_family": 3,
+      "context": 16,
+      "distinct_lost_episodes": 1,
+      "distinct_won_episodes": 2,
+      "exp23_family": 3,
+      "lost_decisions": 1,
+      "won_decisions": 2
+    },
+    {
+      "c0_family": 3,
+      "context": 15,
+      "distinct_lost_episodes": 1,
+      "distinct_won_episodes": 3,
+      "exp23_family": 3,
+      "lost_decisions": 1,
+      "won_decisions": 4
+    },
+    {
+      "c0_family": 7,
+      "context": 0,
+      "distinct_lost_episodes": 1,
+      "distinct_won_episodes": 2,
+      "exp23_family": 13,
+      "lost_decisions": 1,
+      "won_decisions": 2
+    },
+    {
+      "c0_family": "MULTI",
+      "context": 5,
+      "distinct_lost_episodes": 1,
+      "distinct_won_episodes": 2,
+      "exp23_family": "MULTI",
+      "lost_decisions": 1,
+      "won_decisions": 2
+    },
+    {
+      "c0_family": 3,
+      "context": 4,
+      "distinct_lost_episodes": 1,
+      "distinct_won_episodes": 1,
+      "exp23_family": 3,
+      "lost_decisions": 1,
+      "won_decisions": 1
+    },
+    {
+      "c0_family": 9,
+      "context": 0,
+      "distinct_lost_episodes": 1,
+      "distinct_won_episodes": 3,
+      "exp23_family": 10,
+      "lost_decisions": 1,
+      "won_decisions": 3
+    }
+  ],
+  "disagreements": 300,
+  "lost_episodes": 12,
+  "total_decisions": 2725,
+  "units": 29,
+  "won_episodes": 17
+}
