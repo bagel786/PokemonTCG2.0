@@ -210,8 +210,22 @@ class TargetRouterAgent:
             self.errors += after - before
             return self.exact(obs_dict)
         action = sanitize_selection(obs.select, action, len(action))
-        endgame_action = self.endgame.try_override(obs_dict)
+        endgame_action = self.endgame.try_override(obs_dict, list(action))
         if endgame_action is not None:
+            # The executed action differs from the base policy's proposal inside
+            # a possibly stateful subprompt chain: drop stale solver state and
+            # the surgical Boss latch so no follow-up prompt can misfire.
+            for agent in (self.exact, self.policy_first, self.policy_second):
+                if agent is None:
+                    continue
+                policy = getattr(agent, "policy", None)
+                solver = getattr(policy, "damage_solver", None)
+                if solver is not None and hasattr(solver, "reset"):
+                    try:
+                        solver.reset()
+                    except Exception:
+                        pass
+            self.surgical.boss_thwackey_latch = False
             return sanitize_selection(obs.select, endgame_action, len(endgame_action))
         if self.route in ("dipplin", "lucario"):
             ranked = []

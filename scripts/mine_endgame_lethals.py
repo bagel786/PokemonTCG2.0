@@ -67,6 +67,10 @@ def _run_game(task: dict) -> dict:
     decks = [hero.deck, opponent.deck] if hero_seat == 0 else [opponent.deck, hero.deck]
     solver = EndgameLethal(hero.deck)
     rows = []
+    eligible = 0
+    overrides = 0
+    base_abstentions = 0
+    no_proof = 0
     latencies: list[float] = []
     battle_ptr = 0
     try:
@@ -74,28 +78,46 @@ def _run_game(task: dict) -> dict:
         while True:
             obs = to_observation_class(raw)
             if obs.current is not None and int(obs.current.result) >= 0:
-                return {"seed": seed, "rows": rows, "latencies": latencies}
+                return {
+                    "seed": seed,
+                    "rows": rows,
+                    "latencies": latencies,
+                    "eligible": eligible,
+                    "overrides": overrides,
+                    "base_abstentions": base_abstentions,
+                    "no_proof": no_proof,
+                }
             if obs.select.context == SelectContext.IS_FIRST:
                 action = _forced_order(obs.select, hero_seat, order)
             else:
                 acting = int(obs.current.yourIndex)
                 if acting == hero_seat:
                     action = hero(raw)
-                    override = solver.try_override(raw)
-                    if override is not None:
-                        chosen_family = _action_family(obs, list(action))
-                        override_family = _action_family(obs, list(override))
-                        rows.append(
-                            {
-                                "ctx": int(obs.select.context),
-                                "prizes": len(obs.current.players[hero_seat].prize or []),
-                                "differs": chosen_family != override_family,
-                                "chosen": chosen_family,
-                                "override": override_family,
-                            }
-                        )
-                    for fire in solver.fires:
-                        latencies.append(float(fire.get("elapsed_ms", 0.0)))
+                    prizes = len(obs.current.players[hero_seat].prize or [])
+                    if prizes <= 2 and obs.select.option:
+                        eligible += 1
+                        before = len(solver.fires)
+                        override = solver.try_override(raw, list(action))
+                        after = len(solver.fires)
+                        if override is not None:
+                            overrides += 1
+                            chosen_family = _action_family(obs, list(action))
+                            override_family = _action_family(obs, list(override))
+                            rows.append(
+                                {
+                                    "ctx": int(obs.select.context),
+                                    "prizes": prizes,
+                                    "differs": chosen_family != override_family,
+                                    "chosen": chosen_family,
+                                    "override": override_family,
+                                }
+                            )
+                        elif solver.last_abstain == "base_already_lethal":
+                            base_abstentions += 1
+                        else:
+                            no_proof += 1
+                        for fire in solver.fires[before:after]:
+                            latencies.append(float(fire.get("elapsed_ms", 0.0)))
                 else:
                     action = opponent(raw)
             raw = engine.select(battle_ptr, action)
@@ -136,10 +158,15 @@ def main() -> int:
     ctx = mp.get_context("spawn")
     all_rows: list[dict] = []
     latencies: list[float] = []
+    eligible = overrides = base_abstentions = no_proof = 0
     with ctx.Pool(args.workers) as pool:
         for result in pool.imap_unordered(_run_game, tasks, chunksize=1):
             all_rows.extend(result["rows"])
             latencies.extend(result["latencies"])
+            eligible += result["eligible"]
+            overrides += result["overrides"]
+            base_abstentions += result["base_abstentions"]
+            no_proof += result["no_proof"]
     latencies.sort()
     missed = [row for row in all_rows if row["differs"]]
     from collections import Counter
@@ -156,9 +183,11 @@ def main() -> int:
     summary = {
         "games": len(tasks),
         "elapsed_seconds": round(time.time() - started, 1),
-        "eligible_decisions": len(all_rows),
-        "fires": len(latencies),
-        "fire_rate": len(latencies) / max(1, len(all_rows)),
+        "eligible_decisions": eligible,
+        "successful_proofs": len(latencies),
+        "actual_overrides": overrides,
+        "base_already_lethal_abstentions": base_abstentions,
+        "no_proof_abstentions": no_proof,
         "missed_lethals": len(missed),
         "family_breakdown": dict(family_breakdown),
         "latency_ms": {

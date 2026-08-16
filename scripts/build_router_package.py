@@ -35,6 +35,7 @@ def main() -> int:
     parser.add_argument("--dip-model", default="")
     parser.add_argument("--luc-model", default="")
     parser.add_argument("--surgical-default", default="", help="bake PTCG_SURGICAL default into main.py")
+    parser.add_argument("--endgame-default", default="1", help="bake PTCG_ENDGAME_LETHAL default into main.py")
     parser.add_argument("--out-dir", default="artifacts/anti_meta_20260816/packages")
     args = parser.parse_args()
 
@@ -71,7 +72,7 @@ def main() -> int:
         "import os\n"
         "os.environ['PTCG_GRIM_DAMAGE_SOLVER'] = 'v0'\n"
         + surgical_line +
-        "os.environ.setdefault('PTCG_ENDGAME_LETHAL', '1')\n"
+        f"os.environ.setdefault('PTCG_ENDGAME_LETHAL', '{args.endgame_default}')\n"
         "\nfrom ptcg_ai.target_router import TargetRouterAgent\n"
         "import ptcg_ai.features as _features\n"
         "_features.PLAY_IDENTITY_ENABLED = True\n\n"
