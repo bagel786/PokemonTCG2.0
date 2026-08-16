@@ -1,0 +1,409 @@
+{
+  "distinct_lost_games_rescuable": 0,
+  "eligible_decisions": 653,
+  "family_breakdown_lost_games": {},
+  "games": [
+    {
+      "base": 0,
+      "episode": 93715535,
+      "missed": 0,
+      "n_decisions": 5,
+      "no_lethal": 5,
+      "rescues": [],
+      "won": false
+    },
+    {
+      "base": 0,
+      "episode": 93699067,
+      "missed": 0,
+      "n_decisions": 27,
+      "no_lethal": 27,
+      "rescues": [],
+      "won": false
+    },
+    {
+      "base": 0,
+      "episode": 93693193,
+      "missed": 0,
+      "n_decisions": 2,
+      "no_lethal": 2,
+      "rescues": [],
+      "won": false
+    },
+    {
+      "base": 0,
+      "episode": 93692845,
+      "missed": 0,
+      "n_decisions": 17,
+      "no_lethal": 17,
+      "rescues": [],
+      "won": true
+    },
+    {
+      "base": 0,
+      "episode": 93685951,
+      "missed": 0,
+      "n_decisions": 36,
+      "no_lethal": 36,
+      "rescues": [],
+      "won": false
+    },
+    {
+      "base": 11,
+      "episode": 93685047,
+      "missed": 2,
+      "n_decisions": 32,
+      "no_lethal": 19,
+      "rescues": [
+        {
+          "chosen": {
+            "type": 10
+          },
+          "ctx": 0,
+          "label": "MISSED_LETHAL_RESCUE",
+          "override": {
+            "attack_id": 937,
+            "type": 13
+          },
+          "prizes": 1,
+          "winning_line": [
+            {
+              "action": [
+                7
+              ],
+              "ctx": 0
+            },
+            {
+              "action": [
+                0
+              ],
+              "ctx": 15
+            },
+            {
+              "action": [
+                0
+              ],
+              "ctx": 7
+            }
+          ]
+        },
+        {
+          "chosen": {
+            "type": 10
+          },
+          "ctx": 0,
+          "label": "MISSED_LETHAL_RESCUE",
+          "override": {
+            "attack_id": 937,
+            "type": 13
+          },
+          "prizes": 1,
+          "winning_line": [
+            {
+              "action": [
+                6
+              ],
+              "ctx": 0
+            },
+            {
+              "action": [
+                0
+              ],
+              "ctx": 15
+            },
+            {
+              "action": [
+                0
+              ],
+              "ctx": 7
+            }
+          ]
+        }
+      ],
+      "won": true
+    },
+    {
+      "base": 11,
+      "episode": 93684142,
+      "missed": 2,
+      "n_decisions": 41,
+      "no_lethal": 28,
+      "rescues": [
+        {
+          "chosen": {
+            "type": 10
+          },
+          "ctx": 0,
+          "label": "MISSED_LETHAL_RESCUE",
+          "override": {
+            "attack_id": 937,
+            "type": 13
+          },
+          "prizes": 1,
+          "winning_line": [
+            {
+              "action": [
+                5
+              ],
+              "ctx": 0
+            },
+            {
+              "action": [
+                0
+              ],
+              "ctx": 15
+            },
+            {
+              "action": [
+                0
+              ],
+              "ctx": 7
+            }
+          ]
+        },
+        {
+          "chosen": {
+            "card_id": 1231,
+            "type": 7
+          },
+          "ctx": 0,
+          "label": "MISSED_LETHAL_RESCUE",
+          "override": {
+            "attack_id": 937,
+            "type": 13
+          },
+          "prizes": 1,
+          "winning_line": [
+            {
+              "action": [
+                4
+              ],
+              "ctx": 0
+            },
+            {
+              "action": [
+                0
+              ],
+              "ctx": 15
+            },
+            {
+              "action": [
+                0
+              ],
+              "ctx": 7
+            }
+          ]
+        }
+      ],
+      "won": true
+    },
+    {
+      "base": 0,
+      "episode": 93683291,
+      "missed": 0,
+      "n_decisions": 4,
+      "no_lethal": 4,
+      "rescues": [],
+      "won": true
+    },
+    {
+      "base": 1,
+      "episode": 93682335,
+      "missed": 0,
+      "n_decisions": 19,
+      "no_lethal": 18,
+      "rescues": [],
+      "won": true
+    },
+    {
+      "base": 0,
+      "episode": 93681449,
+      "missed": 0,
+      "n_decisions": 27,
+      "no_lethal": 27,
+      "rescues": [],
+      "won": true
+    },
+    {
+      "base": 0,
+      "episode": 93680533,
+      "missed": 0,
+      "n_decisions": 3,
+      "no_lethal": 3,
+      "rescues": [],
+      "won": false
+    },
+    {
+      "base": 0,
+      "episode": 93679642,
+      "missed": 0,
+      "n_decisions": 16,
+      "no_lethal": 16,
+      "rescues": [],
+      "won": true
+    },
+    {
+      "base": 0,
+      "episode": 93678750,
+      "missed": 0,
+      "n_decisions": 21,
+      "no_lethal": 21,
+      "rescues": [],
+      "won": true
+    },
+    {
+      "base": 0,
+      "episode": 93677628,
+      "missed": 0,
+      "n_decisions": 47,
+      "no_lethal": 47,
+      "rescues": [],
+      "won": false
+    },
+    {
+      "base": 0,
+      "episode": 93676804,
+      "missed": 0,
+      "n_decisions": 43,
+      "no_lethal": 43,
+      "rescues": [],
+      "won": true
+    },
+    {
+      "base": 0,
+      "episode": 93676921,
+      "missed": 0,
+      "n_decisions": 27,
+      "no_lethal": 27,
+      "rescues": [],
+      "won": true
+    },
+    {
+      "base": 3,
+      "episode": 93676003,
+      "missed": 0,
+      "n_decisions": 16,
+      "no_lethal": 13,
+      "rescues": [],
+      "won": true
+    },
+    {
+      "base": 0,
+      "episode": 93675087,
+      "missed": 0,
+      "n_decisions": 45,
+      "no_lethal": 45,
+      "rescues": [],
+      "won": true
+    },
+    {
+      "base": 0,
+      "episode": 93674154,
+      "missed": 0,
+      "n_decisions": 3,
+      "no_lethal": 3,
+      "rescues": [],
+      "won": false
+    },
+    {
+      "base": 0,
+      "episode": 93673237,
+      "missed": 0,
+      "n_decisions": 35,
+      "no_lethal": 35,
+      "rescues": [],
+      "won": false
+    },
+    {
+      "base": 0,
+      "episode": 93672319,
+      "missed": 0,
+      "n_decisions": 35,
+      "no_lethal": 35,
+      "rescues": [],
+      "won": true
+    },
+    {
+      "base": 0,
+      "episode": 93671387,
+      "missed": 0,
+      "n_decisions": 32,
+      "no_lethal": 32,
+      "rescues": [],
+      "won": false
+    },
+    {
+      "base": 0,
+      "episode": 93670440,
+      "missed": 0,
+      "n_decisions": 4,
+      "no_lethal": 4,
+      "rescues": [],
+      "won": false
+    },
+    {
+      "base": 3,
+      "episode": 93669503,
+      "missed": 0,
+      "n_decisions": 46,
+      "no_lethal": 43,
+      "rescues": [],
+      "won": true
+    },
+    {
+      "base": 0,
+      "episode": 93668609,
+      "missed": 0,
+      "n_decisions": 3,
+      "no_lethal": 3,
+      "rescues": [],
+      "won": false
+    },
+    {
+      "base": 0,
+      "episode": 93667663,
+      "missed": 0,
+      "n_decisions": 9,
+      "no_lethal": 9,
+      "rescues": [],
+      "won": true
+    },
+    {
+      "base": 0,
+      "episode": 93666757,
+      "missed": 0,
+      "n_decisions": 25,
+      "no_lethal": 25,
+      "rescues": [],
+      "won": true
+    },
+    {
+      "base": 0,
+      "episode": 93665870,
+      "missed": 0,
+      "n_decisions": 30,
+      "no_lethal": 30,
+      "rescues": [],
+      "won": true
+    },
+    {
+      "base": 0,
+      "episode": 93665757,
+      "missed": 0,
+      "n_decisions": 3,
+      "no_lethal": 3,
+      "rescues": [],
+      "won": false
+    }
+  ],
+  "labels": {
+    "BASE_ALREADY_LETHAL": 29,
+    "MISSED_LETHAL_RESCUE": 4,
+    "NO_PROVED_LETHAL": 620
+  },
+  "lost_games": 12,
+  "lost_games_reaching_endgame": 12,
+  "missed_lethal_in_wins": 2,
+  "rescue_rate": 0.0,
+  "won_games": 17
+}
