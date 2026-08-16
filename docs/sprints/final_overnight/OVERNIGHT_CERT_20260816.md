@@ -70,14 +70,27 @@ Per-team corpus size (rows / episodes in merged corpus):
 | Dreamer | 108 | 1 |
 | TMTA | 97 | 1 |
 
-**Frozen assignment (predeclared, deterministic):**
+**Frozen assignment (predeclared, deterministic; v2 re-freeze BEFORE any
+candidate evaluation — v1 assigned by team-name alphabetics, v2 incorporates
+the pre-existing team-quality metadata below, which existed before the freeze
+and was not derived from any EXP-23 evaluation):**
 
-- **CERT-B (certification) = {Dreamer, GrimmsnaRL, Mint120, TMTA}**
-  (4 teams, 23 episodes, 2,358 mined rows). Primary evaluation set for full
-  EXP-23 tonight. Rule: the four alphabetically-smallest teams.
-- **CERT-C (sealed reserve) = {lollipop947, matsurih}**
-  (2 teams, 38 episodes, 3,680 mined rows). NOT to be inspected for full EXP-23.
-  Reserved for any router/shield built after seeing CERT-B evidence.
+Pre-existing quality metadata (`data/meta/top_team_archetypes_147.json`):
+matsurih rank 23 (1083.6), lollipop947 rank 73 (1017.6, pure Grim identity),
+TMTA rank 162 (968.7), Mint120 rank 221 (948.8), Dreamer/GrimmsnaRL below
+top-147.
+
+- **CERT-B (certification) = {Dreamer, GrimmsnaRL, lollipop947, Mint120, TMTA}**
+  (5 teams, 40 episodes, 3,996 mined rows). Primary evaluation set for full
+  EXP-23. Includes the strongest pure-Grim unseen identity available
+  (lollipop947); excludes the single strongest identity (matsurih) to keep an
+  untouched high-quality judge.
+- **CERT-C (sealed reserve) = {matsurih}**
+  (1 team, 21 episodes, 2,042 mined rows; rank 23). NOT inspected for full
+  EXP-23. Reserved as the untouched judge for any router/shield built after
+  seeing CERT-B evidence. Single-team size is deliberate: 2,042 rows is ample
+  power for a small-router gate, and concentrating the seal in one identity
+  maximizes its independence.
 - **CERT-A (temporal holdout): NOT AVAILABLE.** No fresh dump exists that
   post-dates EXP-23 training; the next daily dump publishes after the
   submission deadline. Per explicit directive, we do NOT fabricate CERT-A.
