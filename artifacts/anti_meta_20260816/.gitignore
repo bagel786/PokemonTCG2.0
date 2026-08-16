@@ -7,3 +7,6 @@ eval/
 !train/
 train/*
 !train/*.npz
+!eval/
+eval/*
+!eval/*.json
