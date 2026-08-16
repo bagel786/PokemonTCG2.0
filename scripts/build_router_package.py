@@ -48,12 +48,8 @@ def main() -> int:
         for f in ("policy_first.npz", "policy_second.npz", "policy_weights.npz"):
             shutil.copy2(C0_TREE / f, dst / f)
 
-    (dst / "ptcg_ai" / "target_router.py").write_text(
-        (ROOT / "scripts" / "package_src" / "target_router.py").read_text()
-    )
-    (dst / "ptcg_ai" / "surgical.py").write_text(
-        (ROOT / "scripts" / "package_src" / "surgical.py").read_text()
-    )
+    for module in ("target_router.py", "surgical.py", "endgame_lethal.py", "search.py", "archetypes.py"):
+        shutil.copy2(ROOT / "ptcg_ai" / module, dst / "ptcg_ai" / module)
     model_py = dst / "ptcg_ai" / "model.py"
     text = model_py.read_text()
     if "last_ranked" not in text:
