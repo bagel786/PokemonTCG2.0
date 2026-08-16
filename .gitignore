@@ -139,3 +139,11 @@ artifacts/final_sprint/exp*/*
 artifacts/final_sprint/exp*/ptcg_ai/*
 !artifacts/final_sprint/exp*/ptcg_ai/*.py
 !artifacts/final_sprint/exp*/ptcg_ai/*.json
+
+# dragapult sprint evidence (kill verdict, no submission)
+!artifacts/dragapult_candidates/
+!artifacts/dragapult_candidates/**
+!artifacts/dragapult_frozen/
+!artifacts/dragapult_frozen/**
+!artifacts/dragapult_gates/
+!artifacts/dragapult_gates/**

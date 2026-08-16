@@ -1,0 +1,109 @@
+{
+  "artifact_provenance": {
+    "artifact_a_schema": "external:nonstandard",
+    "artifact_a_sha256": "89525d32e86f6de09cab0fe571449f76d635f5ad224620e3a0bb0bff502a9acc",
+    "artifact_b_schema": "external:nonstandard",
+    "artifact_b_sha256": "e562a10ca1c9b851d4554e6ab11c8ecbface62264da7091a660b4c91484fa85e",
+    "deck_a_sha256": "7de13bef632ec2184394bd986926e857d452bf7bf3ac3450427672e0b76dbc8f",
+    "deck_b_sha256": "77024e449190fe285a16a61c2c20c2f490aef05862c24464f838cab0ac0b8995",
+    "engine_binary": "libcg.dylib",
+    "engine_sha256": "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30",
+    "model_a_schema": null,
+    "model_a_sha256": null,
+    "model_b_schema": null,
+    "model_b_sha256": null,
+    "runtime_environment": {
+      "process_ptcg": {},
+      "submission_a_overrides": {},
+      "submission_b_overrides": {}
+    },
+    "seed": 202608161100,
+    "source_bundle_sha256": "",
+    "source_commit": "8137a81bc901247b093d909b1fdb1dcf151c42b0",
+    "submission_a": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/dragapult_eval",
+    "submission_a_sha256": "89525d32e86f6de09cab0fe571449f76d635f5ad224620e3a0bb0bff502a9acc",
+    "submission_b": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/dragapult_opponents",
+    "submission_b_sha256": "e562a10ca1c9b851d4554e6ab11c8ecbface62264da7091a660b4c91484fa85e",
+    "worker": "MacBook-Air-8.local"
+  },
+  "decisions": 7998,
+  "deck_a": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/dragapult_eval/deck.csv",
+  "deck_b": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/dragapult_opponents/deck.csv",
+  "elapsed_seconds": 211.05894207954407,
+  "first_player_results_a": {
+    "first": {
+      "games": 60,
+      "win_rate": 0.1,
+      "wins": 6
+    },
+    "second": {
+      "games": 0,
+      "win_rate": 0.0,
+      "wins": 0
+    }
+  },
+  "games": 60,
+  "hero_policy_errors": 0,
+  "hero_telemetry": {
+    "mirror_activations": 0.0
+  },
+  "model_a": "heuristic",
+  "model_b": "heuristic",
+  "opponent_policy_errors": 0,
+  "opponent_results_a": {
+    "dragapult_opponents": {
+      "games": 60,
+      "wilson_95": [
+        0.04664219945723587,
+        0.20149694492511044
+      ],
+      "win_rate": 0.1,
+      "wins": 6
+    }
+  },
+  "opponent_runtime_stats": {},
+  "opponent_search_stats": {
+    "begin_none": 0.0,
+    "begin_raise": 0.0,
+    "calls": 2651.0,
+    "lethal": 55.0,
+    "not_main": 1175.0,
+    "rollout_steps": 236591.0,
+    "searched": 1476.0,
+    "step_raise": 0.0
+  },
+  "overall": {
+    "games": 60,
+    "wilson_95": [
+      0.04664219945723587,
+      0.20149694492511044
+    ],
+    "win_rate": 0.1,
+    "wins": 6
+  },
+  "rng_provenance": {
+    "engine": "unpaired_std_random_device",
+    "paired_deals": false,
+    "python_numpy_seed_schedule": 202608161100
+  },
+  "seat_results_a": {
+    "0": {
+      "games": 30,
+      "win_rate": 0.1,
+      "wins": 3
+    },
+    "1": {
+      "games": 30,
+      "win_rate": 0.1,
+      "wins": 3
+    }
+  },
+  "submission_a": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/dragapult_eval",
+  "submission_b": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/dragapult_opponents",
+  "wilson_95": [
+    0.04664219945723587,
+    0.20149694492511044
+  ],
+  "win_rate_a": 0.1,
+  "wins_a": 6
+}
