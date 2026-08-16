@@ -1,0 +1,108 @@
+{
+  "actual_orders": [
+    "first",
+    "second"
+  ],
+  "base_seed": 202608170400,
+  "candidate": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/final_sprint/exp23_identity_trained",
+  "candidate_sha256": "83489e0c80c631763c65375d2a7a34d28d6aa9fbb1d11e89d130c83b1e27f1c0",
+  "control": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/grim_damage_conversion/winner/extracted",
+  "control_sha256": "13426288358d597ead809e45c364c7f7b9274a6eebf55ddd942142e3326535c3",
+  "elapsed_seconds": 271.9407968521118,
+  "engine": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/deterministic_engine/bin/libcg_seeded.dylib",
+  "engine_sha256": "867e3f9bb87e0b48889a44b5d4b04f5d2d434b2a0788d1b2bcfe0caebcb5ab78",
+  "games": 1600,
+  "opponent": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/grim_damage_conversion/opponents/replay_refresh",
+  "opponent_sha256": "30e45955b67893514c8ee077cac15d46fc207efe781cbce1b94242defda4cbdc",
+  "orders": {
+    "first": {
+      "candidate_decisions": 78572,
+      "candidate_draws": 1,
+      "candidate_policy_errors": 0,
+      "candidate_win_rate": 0.585,
+      "candidate_wins": 234,
+      "concordant": 241,
+      "control_decisions": 77791,
+      "control_draws": 0,
+      "control_policy_errors": 0,
+      "control_win_rate": 0.5175,
+      "control_wins": 207,
+      "discordant_candidate_wins": 93,
+      "discordant_control_wins": 66,
+      "method": "paired_win_indicator_difference_normal_95_ci",
+      "opponent_policy_errors": 0,
+      "paired_95_ci": [
+        0.005992675528890955,
+        0.12900732447110905
+      ],
+      "paired_difference": 0.0675,
+      "paired_one_sided_95_lower": 0.015881426118844473,
+      "paired_standard_error": 0.03138186464459091,
+      "pairs": 400
+    },
+    "second": {
+      "candidate_decisions": 78404,
+      "candidate_draws": 0,
+      "candidate_policy_errors": 0,
+      "candidate_win_rate": 0.5425,
+      "candidate_wins": 217,
+      "concordant": 245,
+      "control_decisions": 77397,
+      "control_draws": 1,
+      "control_policy_errors": 0,
+      "control_win_rate": 0.485,
+      "control_wins": 194,
+      "discordant_candidate_wins": 89,
+      "discordant_control_wins": 66,
+      "method": "paired_win_indicator_difference_normal_95_ci",
+      "opponent_policy_errors": 0,
+      "paired_95_ci": [
+        -0.003318652119202861,
+        0.11831865211920287
+      ],
+      "paired_difference": 0.0575,
+      "paired_one_sided_95_lower": 0.006459378175488972,
+      "paired_standard_error": 0.031030494743236426,
+      "pairs": 400
+    }
+  },
+  "overall": {
+    "candidate_decisions": 156976,
+    "candidate_draws": 1,
+    "candidate_policy_errors": 0,
+    "candidate_win_rate": 0.56375,
+    "candidate_wins": 451,
+    "concordant": 486,
+    "control_decisions": 155188,
+    "control_draws": 1,
+    "control_policy_errors": 0,
+    "control_win_rate": 0.50125,
+    "control_wins": 401,
+    "discordant_candidate_wins": 182,
+    "discordant_control_wins": 132,
+    "method": "paired_win_indicator_difference_normal_95_ci",
+    "opponent_policy_errors": 0,
+    "paired_95_ci": [
+      0.019276233641341255,
+      0.10572376635865874
+    ],
+    "paired_difference": 0.0625,
+    "paired_one_sided_95_lower": 0.026225471780938266,
+    "paired_standard_error": 0.02205334725515484,
+    "pairs": 800
+  },
+  "pairs_per_order": 400,
+  "production_engine": "/Users/safiullahbaig/Projects/pokemonTCG2.0/vendor/cg/libcg.dylib",
+  "production_engine_preserved": true,
+  "production_engine_sha256_after": "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30",
+  "production_engine_sha256_before": "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30",
+  "rng_provenance": {
+    "deviceRand": false,
+    "engine": "local_seeded_mt19937",
+    "entrypoint": "BattleStartSeeded",
+    "native_gameplay_random_device": false,
+    "same_actual_order_and_physical_seat_within_pair": true,
+    "same_seed_within_candidate_control_pair": true
+  },
+  "workers": 8
+}

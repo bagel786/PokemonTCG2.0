@@ -47,3 +47,14 @@ Frozen champion C0 = exact A2+Damage V0 (archive A44B676F…, tree 13426288…, 
 ## a2ctl gate
 - EXP-20 vs A2-ordered first-order fresh (400p): -0.25pp (ns, disc 45/46). No regression vs prior live agent.
 - 55532521 live @12:50 CT: 9 rated, 5W-4L, score 660.3. Perfect rating-ordering (wins <700, losses 641-740). Matches C0 live behavior.
+
+## EXP-23 IDENTITY-FIXED RETRAIN — THE BREAKTHROUGH
+Mechanism: v2 encoder defect fixed (PLAY options were identity-blind: source_card=0 for 100% of 110,966 training rows). Retrained heads from A2 on 47,653 fresh elite Grim decisions (Aug 14-15 top-episode dumps, mined WITH identity bound), lr 1e-4, 3 epochs, KL anchor 0.5, seed 20260816. Model sha CEFE61189BC6F4E3.
+
+Gates vs exact C0 (paired CRN, zero errors, all cells):
+  B0 800p: +3.38pp (ns) | B0 fresh 1200p: +4.17pp SIG [+0.7,+7.6] | m1 800p: +6.38pp SIG [+2.1,+10.6] | rr 800p: +6.25pp SIG [+1.9,+10.6] | az24 NO_SEARCH 400p: -0.75pp ns | az24 SEARCH-ON 100p: -2.0pp ns | starmie 400p: +2.0pp ns | dipplin 200p: +0.5pp ns
+  6 positive / 2 neutral / 0 negative cells. Grim-family pooled ~+5pp. First candidate ever with 3 significant cells.
+
+Package: exp23_identity_trained.tar.gz sha 0734B60C089EEA9C2E40550B8E9C6DC3983957210794BA245C4C00BD9D4E7096
+Sterile smoke: PASS (60-card deck, identity flag ON, model CEFE6118...).
+NOT YET SUBMITTED - awaiting user go-ahead (autonomy expired 7pm CT).
