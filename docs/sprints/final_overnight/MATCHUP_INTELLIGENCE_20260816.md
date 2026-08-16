@@ -8,16 +8,16 @@
   tempo-structural (first Grim at turn 11 and turn 14 — lost before policy
   could matter). The other 3 have normal tempo (Grim t4/t5/t6) and end as close
   prize races (2v1, 2v1, 1v1 remaining) — THOSE are the policy-relevant pool.
-- **Best concrete state family (from policy zoo): TBD — see section 3.
-  If the zoo shows no clean c0==d842!=EXP23 consensus enriched in losses,
-  the honest recommendation is NO IMPLEMENTATION.**
+- **Best concrete state family: NONE FOUND.** The policy zoo (c0+d842 vs
+  EXP23 on our own game states) shows consensus disagreements at 7.7% of loss
+  decisions vs 8.4% of win decisions - the old-policy consensus does NOT
+  enrich in losses. No cheap matchup residual exists.
 - Old-policy consensus: measured directly on our loss states (section 3).
 - Estimated risk of any new Dragapult rule: HIGH (prior broad Dragapult
-  surgery already failed; 40% elite-deck ceiling). Anything promoted must be
-  a single exact public predicate.
-- Recommended next experiment: if zoo consensus exists → tiny matchup-gated
-  residual (semantic, fail-closed, CRN vs dragapult_opponents with
-  fresh-process verification). If not → KEEP DIP_B + EXP23, no new upload.
+  surgery already failed; 40% elite-deck ceiling).
+- **Recommended next experiment: NO IMPLEMENTATION. KEEP DIP_B + EXP23.**
+  The only remaining defensible lane is a manual expert-bank semantic study
+  (Task B) if Pro has time, not a rule.
 
 ---
 
@@ -64,8 +64,22 @@ Notes:
 
 ## 3. Policy zoo (c0/d842 consensus vs EXP23 on loss states)
 
-TBD — running at write time. (script: scripts/policy_zoo_loss_states.py,
-output: artifacts/global_swing_20260816/policy_zoo_exp23.json)
+Method: walked EXP23's own 14 losses + 6 matched wins with c0 (A2) and d842
+(5k) policies; counted decisions where c0 == d842 != EXP23's recorded action
+(excluding forced decisions).
+
+| population | decisions | consensus disagreements | rate |
+|---|---|---|---|
+| losses (14 games) | 1169 | 90 | 7.7% |
+| wins (6 games) | 605 | 51 | 8.4% |
+
+- Context: MAIN dominates (80/90 in losses; 45/51 in wins); small counts in
+  DAMAGE(13), TO_HAND(7) contexts - all at background rates.
+- Band: loss consensus splits early 36 / mid 44 / late 10.
+- VERDICT: no loss enrichment - no old-policy-consensus residual. KILL.
+
+Script: scripts/policy_zoo_flat.py; output:
+artifacts/global_swing_20260816/policy_zoo_exp23.json
 
 ## 4. Expert replay bank — NOT built this sprint
 
@@ -77,9 +91,9 @@ overnight worktree artifacts/overnight_20260816/heldout_raw/2026-08-13/14/15.
 
 ## 5. Top-5 opportunity queue (preliminary)
 
-1. DRAGAPULT close-race states: EXP23 differs from old-policy consensus in
-   normal-tempo losses → matchup-gated residual. EVIDENCE: zoo section 3.
-   VERDICT: TBD (PRO REVIEW if consensus exists, else KILL).
+1. DRAGAPULT close-race states: 3 normal-tempo close losses exist, but the
+   policy zoo shows NO consensus/loss enrichment and prior broad surgery
+   failed. VERDICT: KILL (no actionable state family).
 2. CRUSTLE ex-damage-immunity exact states (Munkidori bypass / Boss escape):
    only 1 live loss, structural. Historical 4-6. VERDICT: NEED MORE DATA.
 3. GRIM MIRROR close races: EXP23 already 6-3; DIP_B 1-2 sample is too small.
