@@ -61,7 +61,7 @@ def replay_split(row: dict) -> str:
     return "validation" if split_bucket(row.get("episode_id", "")) == 0 else "train"
 
 
-def iter_rows(paths, shuffle_files=True, required_card=0, validation=False, feature_version=0, team_weights=None):
+def iter_rows(paths, shuffle_files=True, required_card=0, validation=False, feature_version=0, team_weights=None, deck_weights=None, deck_default_weight=1.0):
     paths = list(paths)
     if shuffle_files:
         random.shuffle(paths)
@@ -78,11 +78,14 @@ def iter_rows(paths, shuffle_files=True, required_card=0, validation=False, feat
                 selected = split != "train" if validation else split == "train"
                 if selected:
                     configured = float((team_weights or {}).get(row.get("team"), 1.0))
+                    deck_hash = row.get("deck_hash")
+                    if deck_hash is not None and (deck_weights or deck_default_weight != 1.0):
+                        configured *= float((deck_weights or {}).get(deck_hash, deck_default_weight))
                     row["sample_weight"] = 1.0 if validation else float(row.get("sample_weight", 1.0)) * configured
                     yield row
 
 
-def iter_batches(paths, batch_size, max_records=0, required_card=0, validation=False, feature_version=0, team_weights=None, shuffle_buffer=20_000):
+def iter_batches(paths, batch_size, max_records=0, required_card=0, validation=False, feature_version=0, team_weights=None, deck_weights=None, deck_default_weight=1.0, shuffle_buffer=20_000):
     batch = []
     seen = 0
     source = iter_rows(
@@ -92,6 +95,8 @@ def iter_batches(paths, batch_size, max_records=0, required_card=0, validation=F
         validation=validation,
         feature_version=feature_version,
         team_weights=team_weights,
+        deck_weights=deck_weights,
+        deck_default_weight=deck_default_weight,
     )
 
     def shuffled_rows():
@@ -131,6 +136,10 @@ def collate(rows):
     values = []
     weights = []
     record_grimmsnarl = []
+    record_starmie = []
+    record_dipplin = []
+    record_alakazam = []
+    record_reward = []
     record_options = []
     record_actions = []
     record_rejected_actions = []
@@ -164,6 +173,10 @@ def collate(rows):
         values.append(float(row["reward"] > 0))
         weights.append(float(row.get("sample_weight", 1.0)))
         record_grimmsnarl.append(bool(row.get("opponent_grimmsnarl", False)))
+        record_starmie.append(bool(row.get("opponent_starmie", False)))
+        record_dipplin.append(bool(row.get("opponent_dipplin", False)))
+        record_alakazam.append(bool(row.get("opponent_alakazam", False)))
+        record_reward.append(float(row.get("reward", 0.0)))
         record_actions.append([int(index) for index in row["action"]])
         rejected = row.get("rejected_action")
         record_rejected_actions.append(
@@ -275,6 +288,10 @@ def collate(rows):
         "values": floating(values),
         "weights": floating(weights),
         "record_grimmsnarl": record_grimmsnarl,
+        "record_starmie": record_starmie,
+        "record_dipplin": record_dipplin,
+        "record_alakazam": record_alakazam,
+        "record_reward": record_reward,
         "record_options": record_options,
         "record_actions": record_actions,
         "record_rejected_actions": record_rejected_actions,

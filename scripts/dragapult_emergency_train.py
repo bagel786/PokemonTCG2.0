@@ -165,13 +165,31 @@ def main() -> int:
                         help="ordered newline-delimited team names for modest quality weighting")
     parser.add_argument("--grim-weight", type=float, default=0.0,
                         help="multiply sample_weight by this for rows tagged opponent_grimmsnarl")
+    parser.add_argument("--starmie-weight", type=float, default=0.0,
+                        help="multiply sample_weight by this for rows tagged opponent_starmie")
+    parser.add_argument("--dipplin-weight", type=float, default=0.0,
+                        help="multiply sample_weight by this for rows tagged opponent_dipplin")
+    parser.add_argument("--alakazam-weight", type=float, default=0.0,
+                        help="multiply sample_weight by this for rows tagged opponent_alakazam")
+    parser.add_argument("--win-weight", type=float, default=0.0,
+                        help="multiply sample_weight by this for rows from winning episodes (reward>0)")
+    parser.add_argument("--loss-weight", type=float, default=0.0,
+                        help="multiply sample_weight by this for rows from losing episodes (reward<=0)")
+    parser.add_argument("--frozen-hash", default="",
+                        help="deck hash that keeps weight 1.0; every other deck hash gets --other-deck-weight")
+    parser.add_argument("--other-deck-weight", type=float, default=1.0,
+                        help="multiplier for rows whose deck hash differs from --frozen-hash")
     parser.add_argument("--seed", type=int, default=20260814)
+    parser.add_argument("--device", default="", help="force torch device (cpu/mps/cuda)")
     args = parser.parse_args()
 
     random.seed(args.seed)
     np.random.seed(args.seed)
     torch.manual_seed(args.seed)
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    if args.device:
+        device = torch.device(args.device)
+    else:
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"device: {device}", flush=True)
 
     model = DirectPolicyNet().to(device)
@@ -189,16 +207,46 @@ def main() -> int:
     grim_weight = float(args.grim_weight)
     if grim_weight:
         print(f"grimmsnarl row weight multiplier: {grim_weight}", flush=True)
+    starmie_weight = float(args.starmie_weight)
+    dipplin_weight = float(args.dipplin_weight)
+    alakazam_weight = float(args.alakazam_weight)
+    win_weight = float(args.win_weight)
+    loss_weight = float(args.loss_weight)
+    deck_weights = None
+    deck_default_weight = 1.0
+    if args.frozen_hash:
+        deck_weights = {args.frozen_hash: 1.0}
+        deck_default_weight = float(args.other_deck_weight)
+        print(f"deck weights: frozen={args.frozen_hash} x1.0 others x{deck_default_weight}", flush=True)
+    if win_weight or loss_weight:
+        print(f"outcome weights: win x{win_weight or 1.0} loss x{loss_weight or 1.0}", flush=True)
 
     def adjust_weights(batch: dict) -> None:
-        if not grim_weight:
+        if not (grim_weight or starmie_weight or dipplin_weight or alakazam_weight
+                or win_weight or loss_weight):
             return
-        tagged = batch.get("record_grimmsnarl")
-        if not tagged:
-            return
-        for index, flagged in enumerate(tagged):
-            if flagged:
-                batch["weights"][index] *= grim_weight
+        for key, multiplier in (("record_grimmsnarl", grim_weight),
+                                ("record_starmie", starmie_weight),
+                                ("record_dipplin", dipplin_weight),
+                                ("record_alakazam", alakazam_weight)):
+            if not multiplier:
+                continue
+            tagged = batch.get(key)
+            if not tagged:
+                continue
+            for index, flagged in enumerate(tagged):
+                if flagged:
+                    batch["weights"][index] *= multiplier
+        if win_weight or loss_weight:
+            rewards = batch.get("record_reward")
+            if not rewards:
+                return
+            for index, reward in enumerate(rewards):
+                if reward > 0:
+                    if win_weight:
+                        batch["weights"][index] *= win_weight
+                elif loss_weight:
+                    batch["weights"][index] *= loss_weight
 
     def run_epoch(epoch: int, training: bool) -> dict:
         if training:
@@ -213,7 +261,9 @@ def main() -> int:
         agreement = None
         for batch in iter_batches(source, args.batch_size, max_records,
                                   feature_version=5, validation=not training,
-                                  team_weights=team_weights if training else None):
+                                  team_weights=team_weights if training else None,
+                                  deck_weights=deck_weights if training else None,
+                                  deck_default_weight=deck_default_weight):
             batch = move(batch, device)
             adjust_weights(batch)
             if training:

@@ -35,6 +35,9 @@ OUT_ROOT = ROOT / "data" / "dragapult_emergency" / "shards"
 
 DRAGAPULT_CARDS = {119, 120, 121}  # Dreepy, Drakloak, Dragapult ex
 _GRIMSNARL_CARDS = {646, 647, 648}  # Marnie's Impidimp, Morgrem, Grimmsnarl ex
+_STARMIE_CARDS = {860, 861, 1030, 1031}  # Snorunt, Mega Froslass ex, Staryu, Mega Starmie ex
+_DIPPLIN_CARDS = {89, 90, 92, 93}  # Grookey, Thwackey, Applin, Dipplin
+_ALAKAZAM_CARDS = {741, 742, 743}  # Abra, Kadabra, Alakazam
 
 
 def _semantic_option(option: dict) -> tuple:
@@ -134,6 +137,12 @@ def main() -> int:
                 opponent_deck and _GRIMSNARL_CARDS & set(opponent_deck))
             opponent_dragapult = bool(
                 opponent_deck and DRAGAPULT_CARDS & set(opponent_deck))
+            opponent_starmie = bool(
+                opponent_deck and _STARMIE_CARDS & set(opponent_deck))
+            opponent_dipplin = bool(
+                opponent_deck and _DIPPLIN_CARDS & set(opponent_deck))
+            opponent_alakazam = bool(
+                opponent_deck and _ALAKAZAM_CARDS & set(opponent_deck))
             count = 0
             deck = None
             skip = False
@@ -146,9 +155,13 @@ def main() -> int:
                 row = decision.to_json()
                 row["source_submission_id"] = sid
                 row["teacher_team_id"] = tid
+                row["deck_hash"] = deck_sig(deck) if deck else None
                 row["episode_create_time"] = create_by_ep.get(ep_id, "")
                 row["opponent_grimmsnarl"] = opponent_grimmsnarl
                 row["opponent_dragapult"] = opponent_dragapult
+                row["opponent_starmie"] = opponent_starmie
+                row["opponent_dipplin"] = opponent_dipplin
+                row["opponent_alakazam"] = opponent_alakazam
                 try:
                     row["action_groups"] = action_equivalence_groups(row["features"], row["action"])
                 except ValueError:
