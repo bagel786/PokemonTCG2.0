@@ -1,0 +1,375 @@
+{
+  "per_archetype": {
+    "alakazam": {
+      "draws": 0,
+      "games": 18,
+      "losses": 7,
+      "submissions": [
+        "55537754",
+        "55556726",
+        "55562629"
+      ],
+      "win_rate": 0.6111111111111112,
+      "wins": 11
+    },
+    "bellibolt": {
+      "draws": 0,
+      "games": 1,
+      "losses": 1,
+      "submissions": [
+        "55556726"
+      ],
+      "win_rate": 0.0,
+      "wins": 0
+    },
+    "crustle/kangaskhan": {
+      "draws": 0,
+      "games": 1,
+      "losses": 1,
+      "submissions": [
+        "55537754"
+      ],
+      "win_rate": 0.0,
+      "wins": 0
+    },
+    "dragapult": {
+      "draws": 0,
+      "games": 8,
+      "losses": 5,
+      "submissions": [
+        "55537754",
+        "55556726"
+      ],
+      "win_rate": 0.375,
+      "wins": 3
+    },
+    "grimmsnarl": {
+      "draws": 0,
+      "games": 32,
+      "losses": 20,
+      "submissions": [
+        "55537754",
+        "55556726",
+        "55562629"
+      ],
+      "win_rate": 0.375,
+      "wins": 12
+    },
+    "lucario": {
+      "draws": 0,
+      "games": 6,
+      "losses": 1,
+      "submissions": [
+        "55556726"
+      ],
+      "win_rate": 0.8333333333333334,
+      "wins": 5
+    },
+    "other[Applin,Basic {G} Energy,Grookey]": {
+      "draws": 0,
+      "games": 1,
+      "losses": 0,
+      "submissions": [
+        "55537754"
+      ],
+      "win_rate": 1.0,
+      "wins": 1
+    },
+    "other[Basic {F} Energy,Rock Fighting Energy,Lunatone]": {
+      "draws": 0,
+      "games": 1,
+      "losses": 0,
+      "submissions": [
+        "55562629"
+      ],
+      "win_rate": 1.0,
+      "wins": 1
+    },
+    "other[Basic {G} Energy,Grookey,Thwackey]": {
+      "draws": 0,
+      "games": 1,
+      "losses": 0,
+      "submissions": [
+        "55562629"
+      ],
+      "win_rate": 1.0,
+      "wins": 1
+    },
+    "other[Basic {G} Energy,Grow Grass Energy,Teal Mask Ogerpon ex]": {
+      "draws": 0,
+      "games": 2,
+      "losses": 2,
+      "submissions": [
+        "55537754",
+        "55556726"
+      ],
+      "win_rate": 0.0,
+      "wins": 0
+    },
+    "other[Basic {G} Energy,Mist Energy,Grow Grass Energy]": {
+      "draws": 0,
+      "games": 1,
+      "losses": 0,
+      "submissions": [
+        "55537754"
+      ],
+      "win_rate": 1.0,
+      "wins": 1
+    },
+    "other[Basic {G} Energy,Rellor,Grookey]": {
+      "draws": 0,
+      "games": 1,
+      "losses": 1,
+      "submissions": [
+        "55556726"
+      ],
+      "win_rate": 0.0,
+      "wins": 0
+    },
+    "other[Basic {M} Energy,Relicanth,Duraludon]": {
+      "draws": 0,
+      "games": 3,
+      "losses": 0,
+      "submissions": [
+        "55537754",
+        "55562629"
+      ],
+      "win_rate": 1.0,
+      "wins": 3
+    },
+    "other[Basic {R} Energy,Dudunsparce,Dunsparce]": {
+      "draws": 0,
+      "games": 1,
+      "losses": 1,
+      "submissions": [
+        "55556726"
+      ],
+      "win_rate": 0.0,
+      "wins": 0
+    },
+    "other[Basic {W} Energy,Cinderace,Staryu]": {
+      "draws": 0,
+      "games": 1,
+      "losses": 0,
+      "submissions": [
+        "55562629"
+      ],
+      "win_rate": 1.0,
+      "wins": 1
+    },
+    "other[Basic {W} Energy,Kyogre,Snover]": {
+      "draws": 0,
+      "games": 1,
+      "losses": 0,
+      "submissions": [
+        "55562629"
+      ],
+      "win_rate": 1.0,
+      "wins": 1
+    },
+    "other[Basic {W} Energy,Staryu,Mega Starmie ex]": {
+      "draws": 0,
+      "games": 1,
+      "losses": 0,
+      "submissions": [
+        "55537754"
+      ],
+      "win_rate": 1.0,
+      "wins": 1
+    },
+    "other[Grow Grass Energy,Dwebble,Crustle]": {
+      "draws": 0,
+      "games": 1,
+      "losses": 0,
+      "submissions": [
+        "55537754"
+      ],
+      "win_rate": 1.0,
+      "wins": 1
+    },
+    "other[Mist Energy,Enriching Energy,Dudunsparce]": {
+      "draws": 0,
+      "games": 1,
+      "losses": 1,
+      "submissions": [
+        "55537754"
+      ],
+      "win_rate": 0.0,
+      "wins": 0
+    },
+    "other[Mist Energy,Rock Fighting Energy,Great Tusk]": {
+      "draws": 0,
+      "games": 1,
+      "losses": 0,
+      "submissions": [
+        "55537754"
+      ],
+      "win_rate": 1.0,
+      "wins": 1
+    }
+  },
+  "per_submission": {
+    "55537754": {
+      "by_archetype": {
+        "alakazam": {
+          "d": 0,
+          "l": 6,
+          "w": 4
+        },
+        "crustle/kangaskhan": {
+          "d": 0,
+          "l": 1,
+          "w": 0
+        },
+        "dragapult": {
+          "d": 0,
+          "l": 0,
+          "w": 2
+        },
+        "grimmsnarl": {
+          "d": 0,
+          "l": 16,
+          "w": 5
+        },
+        "other[Applin,Basic {G} Energy,Grookey]": {
+          "d": 0,
+          "l": 0,
+          "w": 1
+        },
+        "other[Basic {G} Energy,Grow Grass Energy,Teal Mask Ogerpon ex]": {
+          "d": 0,
+          "l": 1,
+          "w": 0
+        },
+        "other[Basic {G} Energy,Mist Energy,Grow Grass Energy]": {
+          "d": 0,
+          "l": 0,
+          "w": 1
+        },
+        "other[Basic {M} Energy,Relicanth,Duraludon]": {
+          "d": 0,
+          "l": 0,
+          "w": 2
+        },
+        "other[Basic {W} Energy,Staryu,Mega Starmie ex]": {
+          "d": 0,
+          "l": 0,
+          "w": 1
+        },
+        "other[Grow Grass Energy,Dwebble,Crustle]": {
+          "d": 0,
+          "l": 0,
+          "w": 1
+        },
+        "other[Mist Energy,Enriching Energy,Dudunsparce]": {
+          "d": 0,
+          "l": 1,
+          "w": 0
+        },
+        "other[Mist Energy,Rock Fighting Energy,Great Tusk]": {
+          "d": 0,
+          "l": 0,
+          "w": 1
+        }
+      },
+      "draws": 0,
+      "episodes": 43,
+      "losses": 25,
+      "skipped_unknown_seat": 0,
+      "wins": 18
+    },
+    "55556726": {
+      "by_archetype": {
+        "alakazam": {
+          "d": 0,
+          "l": 1,
+          "w": 6
+        },
+        "bellibolt": {
+          "d": 0,
+          "l": 1,
+          "w": 0
+        },
+        "dragapult": {
+          "d": 0,
+          "l": 5,
+          "w": 1
+        },
+        "grimmsnarl": {
+          "d": 0,
+          "l": 3,
+          "w": 6
+        },
+        "lucario": {
+          "d": 0,
+          "l": 1,
+          "w": 5
+        },
+        "other[Basic {G} Energy,Grow Grass Energy,Teal Mask Ogerpon ex]": {
+          "d": 0,
+          "l": 1,
+          "w": 0
+        },
+        "other[Basic {G} Energy,Rellor,Grookey]": {
+          "d": 0,
+          "l": 1,
+          "w": 0
+        },
+        "other[Basic {R} Energy,Dudunsparce,Dunsparce]": {
+          "d": 0,
+          "l": 1,
+          "w": 0
+        }
+      },
+      "draws": 0,
+      "episodes": 32,
+      "losses": 14,
+      "skipped_unknown_seat": 0,
+      "wins": 18
+    },
+    "55562629": {
+      "by_archetype": {
+        "alakazam": {
+          "d": 0,
+          "l": 0,
+          "w": 1
+        },
+        "grimmsnarl": {
+          "d": 0,
+          "l": 1,
+          "w": 1
+        },
+        "other[Basic {F} Energy,Rock Fighting Energy,Lunatone]": {
+          "d": 0,
+          "l": 0,
+          "w": 1
+        },
+        "other[Basic {G} Energy,Grookey,Thwackey]": {
+          "d": 0,
+          "l": 0,
+          "w": 1
+        },
+        "other[Basic {M} Energy,Relicanth,Duraludon]": {
+          "d": 0,
+          "l": 0,
+          "w": 1
+        },
+        "other[Basic {W} Energy,Cinderace,Staryu]": {
+          "d": 0,
+          "l": 0,
+          "w": 1
+        },
+        "other[Basic {W} Energy,Kyogre,Snover]": {
+          "d": 0,
+          "l": 0,
+          "w": 1
+        }
+      },
+      "draws": 0,
+      "episodes": 8,
+      "losses": 1,
+      "skipped_unknown_seat": 0,
+      "wins": 7
+    }
+  }
+}
