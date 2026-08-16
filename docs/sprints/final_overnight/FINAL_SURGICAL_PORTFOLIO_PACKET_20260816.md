@@ -55,13 +55,13 @@ Built from ALL 30 EXP23 live games (submission 55556726 replays, incl. search_be
 
 All paired vs exact EXP23 control. Package: router_endgame (EXP23 + DIP_B + ENDGAME).
 
-- vs B0 Grim mirror — time-budget build: 60p +1.1pp (1-0 discordant), 100p +0.5pp (1-0),
-  40p +1.25pp (1-0). **Final deterministic build (v2) 60p: TBD (running at write time).**
-- vs Alakazam 2.4a — time-budget build: 60p exact parity (0 discordants, 0 errors).
-  **Final deterministic build (v2) 60p: TBD (running).**
+- vs B0 Grim mirror (deterministic package): 60p +0.83pp (1-0 discordants), 0 errors;
+  earlier time-budget cells: 60p +1.1pp, 100p +0.5pp, 40p +1.25pp (all 1-0, 0 errors).
+  TOTAL mirror rescues: 4 candidate-only discordant wins / 520 pairs, 0 control-only.
+- vs Alakazam 2.4a (deterministic package): 60p exact parity (0 discordants, 0 errors).
 - vs Dipplin D1 (forced route, dip_b + endgame) — first run INVALIDATED (package was
-  rebuilt mid-run; also time-budget nondeterminism). **Clean rerun on deterministic
-  package: TBD.**
+  rebuilt mid-run; also time-budget nondeterminism). Clean rerun: TBD (running at
+  packet draft time).
 - **vs Dragapult — SCREEN INVALIDATED.** The available dragapult opponent is
   NONDETERMINISTIC: plain EXP23 control flips win/loss across same-seed reruns
   (verified: 5 runs → mixed outcomes, varying decision counts). Paired-CRN assumptions
