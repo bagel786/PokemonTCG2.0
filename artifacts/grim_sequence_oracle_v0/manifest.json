@@ -1,0 +1,703 @@
+{
+  "architecture": {
+    "alternatives_per_boundary": 3,
+    "baseline": "exact deployed A2+Damage V0",
+    "board_evaluator_used": false,
+    "candidate_prior": "frozen A2 option/count ranking only",
+    "maximum_deliberate_deviations": 2,
+    "nested_prompts_branchable": true,
+    "plan": "sparse stable-semantic deviations within current hero turn",
+    "plan_budget_per_root": 64,
+    "unavailable_plan_behavior": "invalidate remaining plan and fall back to exact A2+Damage V0",
+    "value_head_used": false
+  },
+  "coverage": {
+    "cleanup_errors": 0,
+    "engine_errors": 0,
+    "incomplete_rollouts": 0,
+    "plan_world_errors": 0,
+    "policy_errors": 0,
+    "root_errors": 0,
+    "roots": 60
+  },
+  "decision_reason": "paired win delta +0.312 pp; 3 independent rescue roots with two actual deviations; maximum recurring nonbaseline family 4",
+  "engine": {
+    "entrypoint": "SearchSetSeed",
+    "production_path": "vendor/cg/cg.dll",
+    "production_sha256_after": "EAE88634E26DC31D94150A4D8202FC9D32596B8C688EF67E14CB4088CD4D5771",
+    "production_sha256_before": "EAE88634E26DC31D94150A4D8202FC9D32596B8C688EF67E14CB4088CD4D5771",
+    "production_unchanged": true,
+    "seeded_search_path": "artifacts/grim_sequence_oracle_v0/engine/libcg.dylib",
+    "seeded_search_sha256": "C257A121C07943C13B81CD276CFD6A88E035820E1678C64701A38692183B172E",
+    "seeded_source_tree_sha256": "9C56D2CD64D55BE9B6734DCDB55E32C6A8A8DEBAA92BFF32F4429EE7A74FA547"
+  },
+  "experiment": "grim_sequence_oracle_v0",
+  "outputs": {
+    "raw_results": {
+      "path": "artifacts/grim_sequence_oracle_v0/stage1_raw_results.jsonl.gz",
+      "sha256": "4FED0067E8A2C04533428459379D0B25ABC07F4E9FADD08FF03CA3A5F389D953"
+    },
+    "roots": {
+      "path": "artifacts/grim_sequence_oracle_v0/stage1_roots.jsonl.gz",
+      "sha256": "FD98F2792F349E75A77917FB94C380B26409C604CDFB04DE2622D3A418765032"
+    }
+  },
+  "packages": {
+    "a2": {
+      "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/grim_damage_conversion/candidates/a2_damage_v0",
+      "tree_sha256_after": "13426288358D597EAD809E45C364C7F7B9274A6EEBF55DDD942142E3326535C3",
+      "tree_sha256_before": "13426288358D597EAD809E45C364C7F7B9274A6EEBF55DDD942142E3326535C3",
+      "unchanged": true
+    },
+    "d842": {
+      "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/grim_variance_floor/candidates/B0",
+      "tree_sha256_after": "0C15B56ADF3B09C654505A152309FDC9F8401579A495DA714347D98AE735003C",
+      "tree_sha256_before": "0C15B56ADF3B09C654505A152309FDC9F8401579A495DA714347D98AE735003C",
+      "unchanged": true
+    },
+    "master_v1": {
+      "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/grim_damage_conversion/opponents/master_v1",
+      "tree_sha256_after": "8A06EBAB47CC60ED981DFADA85972EB8A62E732E349F01C2A3085262079F06E8",
+      "tree_sha256_before": "8A06EBAB47CC60ED981DFADA85972EB8A62E732E349F01C2A3085262079F06E8",
+      "unchanged": true
+    },
+    "replay_refresh": {
+      "path": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/grim_damage_conversion/opponents/replay_refresh",
+      "tree_sha256_after": "30E45955B67893514C8EE077CAC15D46FC207EFE781CBCE1B94242DEFDA4CBDC",
+      "tree_sha256_before": "30E45955B67893514C8EE077CAC15D46FC207EFE781CBCE1B94242DEFDA4CBDC",
+      "unchanged": true
+    }
+  },
+  "recommendation": "SEQUENCE_SEARCH_WEAK",
+  "result": {
+    "by_actual_order": {
+      "first": {
+        "baseline_only_wins": 22,
+        "baseline_terminal_wins": 275,
+        "candidate_only_wins": 24,
+        "candidate_only_wins_with_two_actual_deviations": 0,
+        "candidate_worlds_by_executed_deviations": {
+          "0": 352,
+          "1": 128
+        },
+        "confirmation_worlds": 480,
+        "downside_rate": 0.04791666666666667,
+        "independent_rescue_roots": 5,
+        "independent_two_actual_deviation_rescue_roots": 0,
+        "oracle_terminal_wins": 277,
+        "paired_mean_terminal_delta": 0.00625,
+        "paired_win_delta_pp": 0.4166666666666667,
+        "rescue_roots": [
+          "414A9044BA7BCD9339B165F5A7CF5347D4CD1034531D86C7F39D48C6BEBBF801",
+          "84D0B01664C2B8273030A7CAA2EE155122535BDF03A70459B146F94060F79336",
+          "E3BB0C523BA1D5CD843563172A95A309D244959D0A7555AF0DB26BF1C2975165",
+          "F1DA6291C4D1FFCE756B492F5728488C43EC9DA5822411A8F95E5BEB9CF6BEE3",
+          "F310D42AF671881A5F6CCF720873A4F6A0B2900298E477D59DABD440941C9481"
+        ],
+        "roots": 30,
+        "selected_mechanism_families": {
+          "attach -> tutor": 1,
+          "baseline": 22,
+          "evolve -> tutor": 1,
+          "main": 3,
+          "main -> tutor": 1,
+          "play": 1,
+          "play -> tutor": 1
+        },
+        "selected_plans_by_deviations": {
+          "0": 22,
+          "1": 4,
+          "2": 4
+        },
+        "terminal_delta_variance": 0.3861821503131524,
+        "two_actual_deviation_rescue_roots": [],
+        "worlds_better_worse_equal": {
+          "better": 24,
+          "equal": 433,
+          "worse": 23
+        }
+      },
+      "second": {
+        "baseline_only_wins": 31,
+        "baseline_terminal_wins": 235,
+        "candidate_only_wins": 32,
+        "candidate_only_wins_with_two_actual_deviations": 12,
+        "candidate_worlds_by_executed_deviations": {
+          "0": 256,
+          "1": 144,
+          "2": 80
+        },
+        "confirmation_worlds": 480,
+        "downside_rate": 0.06458333333333334,
+        "independent_rescue_roots": 7,
+        "independent_two_actual_deviation_rescue_roots": 3,
+        "oracle_terminal_wins": 236,
+        "paired_mean_terminal_delta": 0.004166666666666667,
+        "paired_win_delta_pp": 0.20833333333333334,
+        "rescue_roots": [
+          "185D7125E24A19DF90B28491B1AD6CFBA14AFEA97F6519A2FA325282A78C5915",
+          "2F6FCD3111CB94B198852C4F6D827D3D7EFDC0A99C867CA41AD444233F2B0F6E",
+          "3405EB137F18B5BD3984C0989E9741B4EC169EB3E655DF0B1986C5F5210E1211",
+          "434A4EE6D344E85FD2805DE9F5E6B360EF1354E2AB09A7843B4ECCC8B9716580",
+          "8A0843AE30E860C8532E1B57F08FC522A3D4DC9E26B2BC84821D12CC4B668D91",
+          "A7362261B1C56148790C374C77438395B9FEAE2E76B90F9BEB5700CEEBB88A33",
+          "FBA2DE8E2FCDDE834CDA4AE2C3E9661EA90D2A2ECD6CD9053156668C177C79FB"
+        ],
+        "roots": 30,
+        "selected_mechanism_families": {
+          "attach -> main": 2,
+          "baseline": 16,
+          "evolve -> main": 1,
+          "evolve -> tutor": 1,
+          "main": 1,
+          "main -> tutor": 1,
+          "play": 2,
+          "play -> resource-attach": 1,
+          "play -> tutor": 1,
+          "remove-damage-counter-count -> play": 1,
+          "remove-damage-counter-count -> target-manipulation": 1,
+          "target-manipulation -> tutor": 2
+        },
+        "selected_plans_by_deviations": {
+          "0": 16,
+          "1": 3,
+          "2": 11
+        },
+        "terminal_delta_variance": 0.5260786360473209,
+        "two_actual_deviation_rescue_roots": [
+          "2F6FCD3111CB94B198852C4F6D827D3D7EFDC0A99C867CA41AD444233F2B0F6E",
+          "3405EB137F18B5BD3984C0989E9741B4EC169EB3E655DF0B1986C5F5210E1211",
+          "A7362261B1C56148790C374C77438395B9FEAE2E76B90F9BEB5700CEEBB88A33"
+        ],
+        "worlds_better_worse_equal": {
+          "better": 32,
+          "equal": 417,
+          "worse": 31
+        }
+      }
+    },
+    "by_opponent": {
+      "d842": {
+        "baseline_only_wins": 21,
+        "baseline_terminal_wins": 169,
+        "candidate_only_wins": 18,
+        "candidate_only_wins_with_two_actual_deviations": 6,
+        "candidate_worlds_by_executed_deviations": {
+          "0": 208,
+          "1": 96,
+          "2": 16
+        },
+        "confirmation_worlds": 320,
+        "downside_rate": 0.06875,
+        "independent_rescue_roots": 2,
+        "independent_two_actual_deviation_rescue_roots": 1,
+        "oracle_terminal_wins": 166,
+        "paired_mean_terminal_delta": -0.021875,
+        "paired_win_delta_pp": -0.9375,
+        "rescue_roots": [
+          "2F6FCD3111CB94B198852C4F6D827D3D7EFDC0A99C867CA41AD444233F2B0F6E",
+          "8A0843AE30E860C8532E1B57F08FC522A3D4DC9E26B2BC84821D12CC4B668D91"
+        ],
+        "roots": 20,
+        "selected_mechanism_families": {
+          "attach -> main": 1,
+          "baseline": 13,
+          "main": 1,
+          "main -> tutor": 1,
+          "play": 2,
+          "play -> resource-attach": 1,
+          "target-manipulation -> tutor": 1
+        },
+        "selected_plans_by_deviations": {
+          "0": 13,
+          "1": 3,
+          "2": 4
+        },
+        "terminal_delta_variance": 0.4916829937304075,
+        "two_actual_deviation_rescue_roots": [
+          "2F6FCD3111CB94B198852C4F6D827D3D7EFDC0A99C867CA41AD444233F2B0F6E"
+        ],
+        "worlds_better_worse_equal": {
+          "better": 18,
+          "equal": 280,
+          "worse": 22
+        }
+      },
+      "master_v1": {
+        "baseline_only_wins": 15,
+        "baseline_terminal_wins": 177,
+        "candidate_only_wins": 20,
+        "candidate_only_wins_with_two_actual_deviations": 4,
+        "candidate_worlds_by_executed_deviations": {
+          "0": 224,
+          "1": 64,
+          "2": 32
+        },
+        "confirmation_worlds": 320,
+        "downside_rate": 0.046875,
+        "independent_rescue_roots": 4,
+        "independent_two_actual_deviation_rescue_roots": 1,
+        "oracle_terminal_wins": 182,
+        "paired_mean_terminal_delta": 0.03125,
+        "paired_win_delta_pp": 1.5625,
+        "rescue_roots": [
+          "84D0B01664C2B8273030A7CAA2EE155122535BDF03A70459B146F94060F79336",
+          "A7362261B1C56148790C374C77438395B9FEAE2E76B90F9BEB5700CEEBB88A33",
+          "E3BB0C523BA1D5CD843563172A95A309D244959D0A7555AF0DB26BF1C2975165",
+          "FBA2DE8E2FCDDE834CDA4AE2C3E9661EA90D2A2ECD6CD9053156668C177C79FB"
+        ],
+        "roots": 20,
+        "selected_mechanism_families": {
+          "baseline": 14,
+          "evolve -> main": 1,
+          "evolve -> tutor": 2,
+          "main": 2,
+          "remove-damage-counter-count -> play": 1
+        },
+        "selected_plans_by_deviations": {
+          "0": 14,
+          "1": 2,
+          "2": 4
+        },
+        "terminal_delta_variance": 0.43789184952978055,
+        "two_actual_deviation_rescue_roots": [
+          "A7362261B1C56148790C374C77438395B9FEAE2E76B90F9BEB5700CEEBB88A33"
+        ],
+        "worlds_better_worse_equal": {
+          "better": 20,
+          "equal": 285,
+          "worse": 15
+        }
+      },
+      "replay_refresh": {
+        "baseline_only_wins": 17,
+        "baseline_terminal_wins": 164,
+        "candidate_only_wins": 18,
+        "candidate_only_wins_with_two_actual_deviations": 2,
+        "candidate_worlds_by_executed_deviations": {
+          "0": 176,
+          "1": 112,
+          "2": 32
+        },
+        "confirmation_worlds": 320,
+        "downside_rate": 0.053125,
+        "independent_rescue_roots": 6,
+        "independent_two_actual_deviation_rescue_roots": 1,
+        "oracle_terminal_wins": 165,
+        "paired_mean_terminal_delta": 0.00625,
+        "paired_win_delta_pp": 0.3125,
+        "rescue_roots": [
+          "185D7125E24A19DF90B28491B1AD6CFBA14AFEA97F6519A2FA325282A78C5915",
+          "3405EB137F18B5BD3984C0989E9741B4EC169EB3E655DF0B1986C5F5210E1211",
+          "414A9044BA7BCD9339B165F5A7CF5347D4CD1034531D86C7F39D48C6BEBBF801",
+          "434A4EE6D344E85FD2805DE9F5E6B360EF1354E2AB09A7843B4ECCC8B9716580",
+          "F1DA6291C4D1FFCE756B492F5728488C43EC9DA5822411A8F95E5BEB9CF6BEE3",
+          "F310D42AF671881A5F6CCF720873A4F6A0B2900298E477D59DABD440941C9481"
+        ],
+        "roots": 20,
+        "selected_mechanism_families": {
+          "attach -> main": 1,
+          "attach -> tutor": 1,
+          "baseline": 11,
+          "main": 1,
+          "main -> tutor": 1,
+          "play": 1,
+          "play -> tutor": 2,
+          "remove-damage-counter-count -> target-manipulation": 1,
+          "target-manipulation -> tutor": 1
+        },
+        "selected_plans_by_deviations": {
+          "0": 11,
+          "1": 2,
+          "2": 7
+        },
+        "terminal_delta_variance": 0.43883228840125393,
+        "two_actual_deviation_rescue_roots": [
+          "3405EB137F18B5BD3984C0989E9741B4EC169EB3E655DF0B1986C5F5210E1211"
+        ],
+        "worlds_better_worse_equal": {
+          "better": 18,
+          "equal": 285,
+          "worse": 17
+        }
+      }
+    },
+    "by_own_turn_ordinal": {
+      "2": {
+        "baseline_only_wins": 53,
+        "baseline_terminal_wins": 510,
+        "candidate_only_wins": 56,
+        "candidate_only_wins_with_two_actual_deviations": 12,
+        "candidate_worlds_by_executed_deviations": {
+          "0": 608,
+          "1": 272,
+          "2": 80
+        },
+        "confirmation_worlds": 960,
+        "downside_rate": 0.05625,
+        "independent_rescue_roots": 12,
+        "independent_two_actual_deviation_rescue_roots": 3,
+        "oracle_terminal_wins": 513,
+        "paired_mean_terminal_delta": 0.005208333333333333,
+        "paired_win_delta_pp": 0.3125,
+        "rescue_roots": [
+          "185D7125E24A19DF90B28491B1AD6CFBA14AFEA97F6519A2FA325282A78C5915",
+          "2F6FCD3111CB94B198852C4F6D827D3D7EFDC0A99C867CA41AD444233F2B0F6E",
+          "3405EB137F18B5BD3984C0989E9741B4EC169EB3E655DF0B1986C5F5210E1211",
+          "414A9044BA7BCD9339B165F5A7CF5347D4CD1034531D86C7F39D48C6BEBBF801",
+          "434A4EE6D344E85FD2805DE9F5E6B360EF1354E2AB09A7843B4ECCC8B9716580",
+          "84D0B01664C2B8273030A7CAA2EE155122535BDF03A70459B146F94060F79336",
+          "8A0843AE30E860C8532E1B57F08FC522A3D4DC9E26B2BC84821D12CC4B668D91",
+          "A7362261B1C56148790C374C77438395B9FEAE2E76B90F9BEB5700CEEBB88A33",
+          "E3BB0C523BA1D5CD843563172A95A309D244959D0A7555AF0DB26BF1C2975165",
+          "F1DA6291C4D1FFCE756B492F5728488C43EC9DA5822411A8F95E5BEB9CF6BEE3",
+          "F310D42AF671881A5F6CCF720873A4F6A0B2900298E477D59DABD440941C9481",
+          "FBA2DE8E2FCDDE834CDA4AE2C3E9661EA90D2A2ECD6CD9053156668C177C79FB"
+        ],
+        "roots": 60,
+        "selected_mechanism_families": {
+          "attach -> main": 2,
+          "attach -> tutor": 1,
+          "baseline": 38,
+          "evolve -> main": 1,
+          "evolve -> tutor": 2,
+          "main": 4,
+          "main -> tutor": 2,
+          "play": 3,
+          "play -> resource-attach": 1,
+          "play -> tutor": 2,
+          "remove-damage-counter-count -> play": 1,
+          "remove-damage-counter-count -> target-manipulation": 1,
+          "target-manipulation -> tutor": 2
+        },
+        "selected_plans_by_deviations": {
+          "0": 38,
+          "1": 7,
+          "2": 15
+        },
+        "terminal_delta_variance": 0.4556558481056656,
+        "two_actual_deviation_rescue_roots": [
+          "2F6FCD3111CB94B198852C4F6D827D3D7EFDC0A99C867CA41AD444233F2B0F6E",
+          "3405EB137F18B5BD3984C0989E9741B4EC169EB3E655DF0B1986C5F5210E1211",
+          "A7362261B1C56148790C374C77438395B9FEAE2E76B90F9BEB5700CEEBB88A33"
+        ],
+        "worlds_better_worse_equal": {
+          "better": 56,
+          "equal": 850,
+          "worse": 54
+        }
+      }
+    },
+    "overall": {
+      "baseline_only_wins": 53,
+      "baseline_terminal_wins": 510,
+      "candidate_only_wins": 56,
+      "candidate_only_wins_with_two_actual_deviations": 12,
+      "candidate_worlds_by_executed_deviations": {
+        "0": 608,
+        "1": 272,
+        "2": 80
+      },
+      "cluster_bootstrap_95_pp": [
+        -1.4583333333333333,
+        1.9791666666666667
+      ],
+      "confirmation_worlds": 960,
+      "downside_rate": 0.05625,
+      "independent_rescue_roots": 12,
+      "independent_two_actual_deviation_rescue_roots": 3,
+      "oracle_terminal_wins": 513,
+      "paired_mean_terminal_delta": 0.005208333333333333,
+      "paired_win_delta_pp": 0.3125,
+      "rescue_roots": [
+        "185D7125E24A19DF90B28491B1AD6CFBA14AFEA97F6519A2FA325282A78C5915",
+        "2F6FCD3111CB94B198852C4F6D827D3D7EFDC0A99C867CA41AD444233F2B0F6E",
+        "3405EB137F18B5BD3984C0989E9741B4EC169EB3E655DF0B1986C5F5210E1211",
+        "414A9044BA7BCD9339B165F5A7CF5347D4CD1034531D86C7F39D48C6BEBBF801",
+        "434A4EE6D344E85FD2805DE9F5E6B360EF1354E2AB09A7843B4ECCC8B9716580",
+        "84D0B01664C2B8273030A7CAA2EE155122535BDF03A70459B146F94060F79336",
+        "8A0843AE30E860C8532E1B57F08FC522A3D4DC9E26B2BC84821D12CC4B668D91",
+        "A7362261B1C56148790C374C77438395B9FEAE2E76B90F9BEB5700CEEBB88A33",
+        "E3BB0C523BA1D5CD843563172A95A309D244959D0A7555AF0DB26BF1C2975165",
+        "F1DA6291C4D1FFCE756B492F5728488C43EC9DA5822411A8F95E5BEB9CF6BEE3",
+        "F310D42AF671881A5F6CCF720873A4F6A0B2900298E477D59DABD440941C9481",
+        "FBA2DE8E2FCDDE834CDA4AE2C3E9661EA90D2A2ECD6CD9053156668C177C79FB"
+      ],
+      "roots": 60,
+      "selected_mechanism_families": {
+        "attach -> main": 2,
+        "attach -> tutor": 1,
+        "baseline": 38,
+        "evolve -> main": 1,
+        "evolve -> tutor": 2,
+        "main": 4,
+        "main -> tutor": 2,
+        "play": 3,
+        "play -> resource-attach": 1,
+        "play -> tutor": 2,
+        "remove-damage-counter-count -> play": 1,
+        "remove-damage-counter-count -> target-manipulation": 1,
+        "target-manipulation -> tutor": 2
+      },
+      "selected_plans_by_deviations": {
+        "0": 38,
+        "1": 7,
+        "2": 15
+      },
+      "terminal_delta_variance": 0.4556558481056656,
+      "two_actual_deviation_rescue_roots": [
+        "2F6FCD3111CB94B198852C4F6D827D3D7EFDC0A99C867CA41AD444233F2B0F6E",
+        "3405EB137F18B5BD3984C0989E9741B4EC169EB3E655DF0B1986C5F5210E1211",
+        "A7362261B1C56148790C374C77438395B9FEAE2E76B90F9BEB5700CEEBB88A33"
+      ],
+      "worlds_better_worse_equal": {
+        "better": 56,
+        "equal": 850,
+        "worse": 54
+      }
+    }
+  },
+  "runtime": {
+    "wall_seconds": 1023.0921932909987,
+    "workers": 8
+  },
+  "sampling": {
+    "base_seed": 4200000000,
+    "by_actual_order": {
+      "first": 30,
+      "second": 30
+    },
+    "by_lineage": {
+      "d842": 20,
+      "master_v1": 20,
+      "replay_refresh": 20
+    },
+    "by_lineage_order": {
+      "d842:first": 10,
+      "d842:second": 10,
+      "master_v1:first": 10,
+      "master_v1:second": 10,
+      "replay_refresh:first": 10,
+      "replay_refresh:second": 10
+    },
+    "by_own_turn_ordinal": {
+      "2": 60
+    },
+    "errors": [],
+    "games_per_lineage_order_cell": 10,
+    "roots": 60,
+    "selection_rule": "first branching MAIN decision on hero own-turn ordinal 2; one state per independently seeded base game; outcome blind",
+    "unique_games": 60
+  },
+  "schema_version": 1,
+  "status": "complete",
+  "structural_regression_tests": {
+    "attack_terminates_via_native_turn_boundary": true,
+    "candidate_order_invariant": true,
+    "fresh_root_per_plan": true,
+    "generated_nested_deviation_candidates": true,
+    "generated_two_deviation_candidates": true,
+    "max_deliberate_deviations": 2,
+    "nested_boundaries_eligible": true,
+    "no_shared_mutable_rng": true,
+    "option_reordering_detail": {
+      "expected_after_reorder": [
+        5
+      ],
+      "original_action": [
+        0
+      ],
+      "passed": true,
+      "persisted_identity": {
+        "context": 0,
+        "context_card": null,
+        "effect": null,
+        "maximum": 1,
+        "minimum": 1,
+        "options": [
+          {
+            "option_type": 9,
+            "payload": {
+              "area": 2,
+              "source": {
+                "id": 647,
+                "player_index": 0,
+                "serial": 23
+              },
+              "target": {
+                "id": 646,
+                "serial": 22
+              },
+              "target_area": 5
+            }
+          }
+        ],
+        "select_type": 0
+      },
+      "resolved_after_reorder": [
+        5
+      ]
+    },
+    "order_invariance_detail": {
+      "a_then_b": {
+        "a": {
+          "action_trace_sha256": "2A58A2ED8116FE888C32413280CD44ABED0140E7249C06652C28F1662AC562EA",
+          "draw": 0,
+          "executed_deviations": 0,
+          "invalidated": false,
+          "result": 0,
+          "score": 1.0,
+          "steps": 263,
+          "win": 1
+        },
+        "b": {
+          "action_trace_sha256": "2A58A2ED8116FE888C32413280CD44ABED0140E7249C06652C28F1662AC562EA",
+          "draw": 0,
+          "executed_deviations": 0,
+          "invalidated": true,
+          "result": 0,
+          "score": 1.0,
+          "steps": 263,
+          "win": 1
+        }
+      },
+      "b_then_a": {
+        "a": {
+          "action_trace_sha256": "2A58A2ED8116FE888C32413280CD44ABED0140E7249C06652C28F1662AC562EA",
+          "draw": 0,
+          "executed_deviations": 0,
+          "invalidated": false,
+          "result": 0,
+          "score": 1.0,
+          "steps": 263,
+          "win": 1
+        },
+        "b": {
+          "action_trace_sha256": "2A58A2ED8116FE888C32413280CD44ABED0140E7249C06652C28F1662AC562EA",
+          "draw": 0,
+          "executed_deviations": 0,
+          "invalidated": true,
+          "result": 0,
+          "score": 1.0,
+          "steps": 263,
+          "win": 1
+        }
+      },
+      "fresh_roots": 5,
+      "hidden_seed": 8896251626911068624,
+      "independent_fresh_root_per_evaluation": true,
+      "passed": true,
+      "release_errors": 0,
+      "repeat_a": {
+        "action_trace_sha256": "2A58A2ED8116FE888C32413280CD44ABED0140E7249C06652C28F1662AC562EA",
+        "draw": 0,
+        "executed_deviations": 0,
+        "invalidated": false,
+        "result": 0,
+        "score": 1.0,
+        "steps": 263,
+        "win": 1
+      },
+      "rollout_seed_uint32": 1160096541,
+      "search_ends": 5,
+      "shared_mutable_rng_between_arms": false
+    },
+    "policy_engine_errors_fail_closed": true,
+    "raw_prompt_local_indices_persisted": false,
+    "repeat_stable_terminal_result": true,
+    "semantic_actions_survive_option_reordering": true,
+    "synthetic": {
+      "deviations": [
+        [
+          "munk_active",
+          "attach_active"
+        ],
+        [
+          "attached_active",
+          "retreat"
+        ]
+      ],
+      "hard_coded_in_runtime": false,
+      "passed": true,
+      "winning_trace": [
+        "attach_active",
+        "retreat",
+        "promote_grim",
+        "shadow_bullet"
+      ]
+    },
+    "synthetic_stranded_munk_discoverable": true,
+    "truncation_terminal_value": null
+  },
+  "terminal_evaluation": {
+    "candidate_controls_future_hero_turns": false,
+    "hero_continuation": "exact deployed A2+Damage V0",
+    "opponent_continuation": "exact authentic deterministic lineage package",
+    "rollout_cap": 768,
+    "score": {
+      "draw": 0,
+      "loss": -1,
+      "win": 1
+    },
+    "truncation_value": null
+  },
+  "two_stage_worlds": {
+    "candidate_evaluation_order_invariant": true,
+    "confirmation": {
+      "base_seed": 4103000000,
+      "fresh_and_disjoint": true,
+      "worlds": 16
+    },
+    "fresh_root_per_plan": true,
+    "hidden_worlds": "public-consistent registered authentic opponent deck",
+    "matched_hidden_determinization": true,
+    "matched_rollout_seed": true,
+    "proposal": {
+      "base_seed": 4102000000,
+      "worlds": 4
+    }
+  },
+  "winning_sequence_families": {
+    "attach -> main": 1,
+    "attach -> tutor": 1,
+    "evolve -> tutor": 2,
+    "main": 2,
+    "play": 1,
+    "play -> tutor": 2,
+    "remove-damage-counter-count -> play": 1,
+    "remove-damage-counter-count -> target-manipulation": 1,
+    "target-manipulation -> tutor": 1
+  },
+  "winning_two_deviation_traces": [
+    {
+      "actual_order": "second",
+      "family": "attach -> main",
+      "lineage": "d842",
+      "root_id": "2F6FCD3111CB94B198852C4F6D827D3D7EFDC0A99C867CA41AD444233F2B0F6E",
+      "steps": [
+        "ATTACH card_7 at_MAIN",
+        "END at_MAIN"
+      ]
+    },
+    {
+      "actual_order": "second",
+      "family": "remove-damage-counter-count -> target-manipulation",
+      "lineage": "replay_refresh",
+      "root_id": "3405EB137F18B5BD3984C0989E9741B4EC169EB3E655DF0B1986C5F5210E1211",
+      "steps": [
+        "NUMBER at_REMOVE_DAMAGE_COUNTER_COUNT",
+        "CARD card_112 at_DAMAGE_COUNTER"
+      ]
+    },
+    {
+      "actual_order": "second",
+      "family": "remove-damage-counter-count -> play",
+      "lineage": "master_v1",
+      "root_id": "A7362261B1C56148790C374C77438395B9FEAE2E76B90F9BEB5700CEEBB88A33",
+      "steps": [
+        "NUMBER at_REMOVE_DAMAGE_COUNTER_COUNT",
+        "PLAY card_1219 at_MAIN"
+      ]
+    }
+  ]
+}

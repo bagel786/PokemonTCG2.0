@@ -1,0 +1,1024 @@
+{
+  "label": "A0 PLAY OPPORTUNITY + BLINDNESS AUDIT \u2014 DESCRIPTIVE, NOT GAMEPLAY CAUSAL",
+  "source": {
+    "replays": "/Users/safiullahbaig/Projects/pokemonTCG2.0/data/replays/55399728",
+    "submission_id": 55399728,
+    "games": 50,
+    "model": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/grim_damage_conversion/winner/extracted/policy_weights.npz",
+    "model_sha256": "B19871A9F1499C2460AE266E58194ACAB1D8C90B390FA5CF24ED94B9A2B6BDA8",
+    "model_is_r0": true
+  },
+  "counts": {
+    "decisions": 4659,
+    "main_prompts": 2062,
+    "play_prompts": 2062,
+    "multi_prompts": 775,
+    "multi_prompts_early": 185,
+    "permutations": 3918,
+    "perm_changed": 1578
+  },
+  "opportunity": {
+    "games_total": 50,
+    "games_with_multi": 50,
+    "loss_games_with_multi": 23,
+    "second_games": 18,
+    "second_loss_games_with_multi": 9,
+    "early_second_multi_games": 16,
+    "early_second_multi_loss_games": 9,
+    "prompts_total": 2062,
+    "prompts_multi": 775,
+    "prompts_multi_early_second": 86,
+    "theoretical_max_uplift_pp": 46.0,
+    "theoretical_max_uplift_second_pp": 50.0,
+    "theoretical_max_uplift_early_second_pp": 50.0
+  },
+  "agreement": {
+    "play_prompts": 2062,
+    "card_level_agreement": 2062,
+    "card_level_agreement_rate": 1.0,
+    "strict_option_agreement": 2062,
+    "strict_option_agreement_rate": 1.0,
+    "disagree_prompts": 0
+  },
+  "trainer_stats": {
+    "Boss\u2019s Orders": {
+      "playable": 184,
+      "playable_multi": 151,
+      "recorded_played": 31,
+      "recorded_agree": 31,
+      "recorded_strict_agree": 31,
+      "a2_played": 31,
+      "a2_agree": 31
+    },
+    "Buddy-Buddy Poffin": {
+      "playable": 291,
+      "playable_multi": 245,
+      "recorded_played": 86,
+      "recorded_agree": 86,
+      "recorded_strict_agree": 86,
+      "a2_played": 86,
+      "a2_agree": 86
+    },
+    "Dawn": {
+      "playable": 113,
+      "playable_multi": 93,
+      "recorded_played": 18,
+      "recorded_agree": 18,
+      "recorded_strict_agree": 18,
+      "a2_played": 18,
+      "a2_agree": 18
+    },
+    "Lillie's Determination": {
+      "recorded_played": 80,
+      "recorded_agree": 80,
+      "recorded_strict_agree": 80,
+      "a2_played": 80,
+      "a2_agree": 80,
+      "playable": 316,
+      "playable_multi": 248
+    },
+    "Marnie's Impidimp": {
+      "recorded_played": 86,
+      "recorded_agree": 86,
+      "recorded_strict_agree": 86,
+      "a2_played": 86,
+      "a2_agree": 86,
+      "playable": 188,
+      "playable_multi": 129
+    },
+    "Munkidori": {
+      "recorded_played": 107,
+      "recorded_agree": 107,
+      "recorded_strict_agree": 107,
+      "a2_played": 107,
+      "a2_agree": 107,
+      "playable": 180,
+      "playable_multi": 138
+    },
+    "Night Stretcher": {
+      "recorded_played": 74,
+      "recorded_agree": 74,
+      "recorded_strict_agree": 74,
+      "a2_played": 74,
+      "a2_agree": 74,
+      "playable": 199,
+      "playable_multi": 155
+    },
+    "Pok\u00e9 Pad": {
+      "playable": 234,
+      "playable_multi": 172,
+      "recorded_played": 101,
+      "recorded_agree": 101,
+      "recorded_strict_agree": 101,
+      "a2_played": 101,
+      "a2_agree": 101
+    },
+    "Pok\u00e9gear 3.0": {
+      "playable": 52,
+      "playable_multi": 44,
+      "recorded_played": 19,
+      "recorded_agree": 19,
+      "recorded_strict_agree": 19,
+      "a2_played": 19,
+      "a2_agree": 19
+    },
+    "Rare Candy": {
+      "playable": 119,
+      "playable_multi": 82,
+      "recorded_played": 48,
+      "recorded_agree": 48,
+      "recorded_strict_agree": 48,
+      "a2_played": 48,
+      "a2_agree": 48
+    },
+    "Snorunt": {
+      "recorded_played": 25,
+      "recorded_agree": 25,
+      "recorded_strict_agree": 25,
+      "a2_played": 25,
+      "a2_agree": 25,
+      "playable": 81,
+      "playable_multi": 67
+    },
+    "Spikemuth Gym": {
+      "playable": 158,
+      "playable_multi": 115,
+      "recorded_played": 59,
+      "recorded_agree": 59,
+      "recorded_strict_agree": 59,
+      "a2_played": 59,
+      "a2_agree": 59
+    },
+    "Team Rocket's Petrel": {
+      "playable": 356,
+      "playable_multi": 279,
+      "recorded_played": 72,
+      "recorded_agree": 72,
+      "recorded_strict_agree": 72,
+      "a2_played": 72,
+      "a2_agree": 72
+    },
+    "Tool Scrapper": {
+      "recorded_played": 9,
+      "recorded_agree": 9,
+      "recorded_strict_agree": 9,
+      "a2_played": 9,
+      "a2_agree": 9,
+      "playable": 21,
+      "playable_multi": 14
+    },
+    "Unfair Stamp": {
+      "recorded_played": 25,
+      "recorded_agree": 25,
+      "recorded_strict_agree": 25,
+      "a2_played": 25,
+      "a2_agree": 25,
+      "playable": 55,
+      "playable_multi": 38
+    }
+  },
+  "permutation_diagnostic": {
+    "eligible_prompts": 775,
+    "rotations_tested": 3918,
+    "rotations_changed": 1578,
+    "rotation_change_rate": 0.40275650842266464,
+    "prompts_with_any_change": 484,
+    "prompt_change_rate": 0.6245161290322581,
+    "changes_by_archetype": {
+      "Grimmsnarl": 105,
+      "Alakazam": 143,
+      "Crustle": 78,
+      "Garchomp": 27,
+      "unknown": 45,
+      "Lucario": 46,
+      "Archaludon": 34,
+      "Dragapult": 6
+    }
+  },
+  "by_archetype": {
+    "Grimmsnarl": 383,
+    "Alakazam": 546,
+    "Crustle": 372,
+    "Garchomp": 114,
+    "unknown": 264,
+    "Lucario": 208,
+    "Archaludon": 143,
+    "Dragapult": 32
+  },
+  "by_order": {
+    "first": 1393,
+    "second": 669
+  },
+  "multi_by_order": {
+    "first": 523,
+    "second": 252
+  },
+  "multi_early_second_by_archetype": {
+    "Lucario": 21,
+    "unknown": 17,
+    "Garchomp": 2,
+    "Alakazam": 4,
+    "Crustle": 7,
+    "Grimmsnarl": 33,
+    "Dragapult": 2
+  },
+  "disagreement_examples": [],
+  "permutation_examples": [
+    {
+      "episode": 91574390,
+      "step": 5,
+      "order": "first",
+      "archetype": "Grimmsnarl",
+      "a2_semantic": [
+        "Snorunt"
+      ],
+      "changed_rotations": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "playable": [
+        "Pok\u00e9 Pad",
+        "Snorunt",
+        "Spikemuth Gym"
+      ],
+      "hand_size": 8
+    },
+    {
+      "episode": 91574390,
+      "step": 6,
+      "order": "first",
+      "archetype": "Grimmsnarl",
+      "a2_semantic": [
+        "Pok\u00e9 Pad"
+      ],
+      "changed_rotations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "playable": [
+        "Pok\u00e9 Pad",
+        "Spikemuth Gym"
+      ],
+      "hand_size": 7
+    },
+    {
+      "episode": 91574390,
+      "step": 8,
+      "order": "first",
+      "archetype": "Grimmsnarl",
+      "a2_semantic": [
+        "Snorunt"
+      ],
+      "changed_rotations": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "playable": [
+        "Snorunt",
+        "Spikemuth Gym"
+      ],
+      "hand_size": 7
+    },
+    {
+      "episode": 91574390,
+      "step": 24,
+      "order": "first",
+      "archetype": "Grimmsnarl",
+      "a2_semantic": [
+        "Marnie's Impidimp"
+      ],
+      "changed_rotations": [
+        1,
+        2,
+        3
+      ],
+      "playable": [
+        "Dawn",
+        "Marnie's Impidimp",
+        "Team Rocket's Petrel"
+      ],
+      "hand_size": 4
+    },
+    {
+      "episode": 91574390,
+      "step": 27,
+      "order": "first",
+      "archetype": "Grimmsnarl",
+      "a2_semantic": [
+        "Team Rocket's Petrel"
+      ],
+      "changed_rotations": [
+        1,
+        2
+      ],
+      "playable": [
+        "Dawn",
+        "Team Rocket's Petrel"
+      ],
+      "hand_size": 4
+    },
+    {
+      "episode": 91574390,
+      "step": 63,
+      "order": "first",
+      "archetype": "Grimmsnarl",
+      "a2_semantic": [
+        "Lillie's Determination"
+      ],
+      "changed_rotations": [
+        1,
+        2
+      ],
+      "playable": [
+        "Lillie's Determination",
+        "Pok\u00e9 Pad",
+        "Pok\u00e9gear 3.0"
+      ],
+      "hand_size": 3
+    },
+    {
+      "episode": 91574390,
+      "step": 64,
+      "order": "first",
+      "archetype": "Grimmsnarl",
+      "a2_semantic": [
+        "Night Stretcher"
+      ],
+      "changed_rotations": [
+        2,
+        3
+      ],
+      "playable": [
+        "Marnie's Impidimp",
+        "Night Stretcher"
+      ],
+      "hand_size": 6
+    },
+    {
+      "episode": 91574390,
+      "step": 109,
+      "order": "first",
+      "archetype": "Grimmsnarl",
+      "a2_semantic": [
+        "Pok\u00e9 Pad"
+      ],
+      "changed_rotations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "playable": [
+        "Pok\u00e9 Pad",
+        "Team Rocket's Petrel"
+      ],
+      "hand_size": 6
+    },
+    {
+      "episode": 91574390,
+      "step": 111,
+      "order": "first",
+      "archetype": "Grimmsnarl",
+      "a2_semantic": [
+        "Munkidori"
+      ],
+      "changed_rotations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "playable": [
+        "Munkidori",
+        "Team Rocket's Petrel"
+      ],
+      "hand_size": 6
+    },
+    {
+      "episode": 91574491,
+      "step": 13,
+      "order": "first",
+      "archetype": "Alakazam",
+      "a2_semantic": [
+        "Dawn"
+      ],
+      "changed_rotations": [
+        1,
+        2,
+        3
+      ],
+      "playable": [
+        "Boss\u2019s Orders",
+        "Dawn"
+      ],
+      "hand_size": 6
+    },
+    {
+      "episode": 91574491,
+      "step": 36,
+      "order": "first",
+      "archetype": "Alakazam",
+      "a2_semantic": [
+        "Rare Candy"
+      ],
+      "changed_rotations": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "playable": [
+        "Boss\u2019s Orders",
+        "Rare Candy"
+      ],
+      "hand_size": 7
+    },
+    {
+      "episode": 91574491,
+      "step": 48,
+      "order": "first",
+      "archetype": "Alakazam",
+      "a2_semantic": [
+        "Night Stretcher"
+      ],
+      "changed_rotations": [
+        1,
+        2,
+        3
+      ],
+      "playable": [
+        "Boss\u2019s Orders",
+        "Night Stretcher"
+      ],
+      "hand_size": 5
+    },
+    {
+      "episode": 91574491,
+      "step": 67,
+      "order": "first",
+      "archetype": "Alakazam",
+      "a2_semantic": [
+        "Marnie's Impidimp"
+      ],
+      "changed_rotations": [
+        4
+      ],
+      "playable": [
+        "Marnie's Impidimp",
+        "Team Rocket's Petrel"
+      ],
+      "hand_size": 5
+    },
+    {
+      "episode": 91574491,
+      "step": 86,
+      "order": "first",
+      "archetype": "Alakazam",
+      "a2_semantic": [
+        "Lillie's Determination"
+      ],
+      "changed_rotations": [
+        4,
+        5
+      ],
+      "playable": [
+        "Lillie's Determination",
+        "Marnie's Impidimp"
+      ],
+      "hand_size": 6
+    },
+    {
+      "episode": 91574491,
+      "step": 87,
+      "order": "first",
+      "archetype": "Alakazam",
+      "a2_semantic": [
+        "Munkidori"
+      ],
+      "changed_rotations": [
+        5
+      ],
+      "playable": [
+        "Buddy-Buddy Poffin",
+        "Munkidori"
+      ],
+      "hand_size": 6
+    },
+    {
+      "episode": 91574491,
+      "step": 98,
+      "order": "first",
+      "archetype": "Alakazam",
+      "a2_semantic": [
+        "Pok\u00e9 Pad"
+      ],
+      "changed_rotations": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "playable": [
+        "Pok\u00e9 Pad",
+        "Team Rocket's Petrel"
+      ],
+      "hand_size": 8
+    },
+    {
+      "episode": 91575404,
+      "step": 5,
+      "order": "first",
+      "archetype": "Crustle",
+      "a2_semantic": [
+        "Pok\u00e9 Pad"
+      ],
+      "changed_rotations": [
+        3,
+        4,
+        5
+      ],
+      "playable": [
+        "Buddy-Buddy Poffin",
+        "Pok\u00e9 Pad"
+      ],
+      "hand_size": 6
+    },
+    {
+      "episode": 91575404,
+      "step": 7,
+      "order": "first",
+      "archetype": "Crustle",
+      "a2_semantic": [
+        "Munkidori"
+      ],
+      "changed_rotations": [
+        3,
+        4,
+        5
+      ],
+      "playable": [
+        "Buddy-Buddy Poffin",
+        "Munkidori"
+      ],
+      "hand_size": 6
+    },
+    {
+      "episode": 91575404,
+      "step": 23,
+      "order": "first",
+      "archetype": "Crustle",
+      "a2_semantic": [
+        "Lillie's Determination"
+      ],
+      "changed_rotations": [
+        1,
+        2
+      ],
+      "playable": [
+        "Dawn",
+        "Lillie's Determination"
+      ],
+      "hand_size": 4
+    },
+    {
+      "episode": 91575404,
+      "step": 36,
+      "order": "first",
+      "archetype": "Crustle",
+      "a2_semantic": [],
+      "changed_rotations": [
+        4,
+        5,
+        6
+      ],
+      "playable": [
+        "Lillie's Determination",
+        "Night Stretcher",
+        "Team Rocket's Petrel"
+      ],
+      "hand_size": 7
+    },
+    {
+      "episode": 91575404,
+      "step": 41,
+      "order": "first",
+      "archetype": "Crustle",
+      "a2_semantic": [
+        "Lillie's Determination"
+      ],
+      "changed_rotations": [
+        3,
+        4
+      ],
+      "playable": [
+        "Lillie's Determination",
+        "Night Stretcher",
+        "Team Rocket's Petrel"
+      ],
+      "hand_size": 6
+    },
+    {
+      "episode": 91575404,
+      "step": 43,
+      "order": "first",
+      "archetype": "Crustle",
+      "a2_semantic": [
+        "Pok\u00e9 Pad"
+      ],
+      "changed_rotations": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "playable": [
+        "Pok\u00e9 Pad",
+        "Rare Candy",
+        "Spikemuth Gym"
+      ],
+      "hand_size": 7
+    },
+    {
+      "episode": 91575404,
+      "step": 45,
+      "order": "first",
+      "archetype": "Crustle",
+      "a2_semantic": [
+        "Rare Candy"
+      ],
+      "changed_rotations": [
+        2,
+        3,
+        4
+      ],
+      "playable": [
+        "Pok\u00e9 Pad",
+        "Rare Candy",
+        "Spikemuth Gym"
+      ],
+      "hand_size": 7
+    },
+    {
+      "episode": 91575404,
+      "step": 51,
+      "order": "first",
+      "archetype": "Crustle",
+      "a2_semantic": [
+        "Spikemuth Gym"
+      ],
+      "changed_rotations": [
+        2
+      ],
+      "playable": [
+        "Pok\u00e9 Pad",
+        "Spikemuth Gym"
+      ],
+      "hand_size": 5
+    },
+    {
+      "episode": 91575404,
+      "step": 65,
+      "order": "first",
+      "archetype": "Crustle",
+      "a2_semantic": [
+        "Tool Scrapper"
+      ],
+      "changed_rotations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "playable": [
+        "Marnie's Impidimp",
+        "Munkidori",
+        "Tool Scrapper"
+      ],
+      "hand_size": 6
+    },
+    {
+      "episode": 91575404,
+      "step": 71,
+      "order": "first",
+      "archetype": "Crustle",
+      "a2_semantic": [
+        "Munkidori"
+      ],
+      "changed_rotations": [
+        1,
+        2
+      ],
+      "playable": [
+        "Marnie's Impidimp",
+        "Munkidori"
+      ],
+      "hand_size": 5
+    },
+    {
+      "episode": 91575404,
+      "step": 97,
+      "order": "first",
+      "archetype": "Crustle",
+      "a2_semantic": [
+        "Team Rocket's Petrel"
+      ],
+      "changed_rotations": [
+        7
+      ],
+      "playable": [
+        "Lillie's Determination",
+        "Team Rocket's Petrel"
+      ],
+      "hand_size": 8
+    },
+    {
+      "episode": 91575404,
+      "step": 123,
+      "order": "first",
+      "archetype": "Crustle",
+      "a2_semantic": [
+        "Pok\u00e9 Pad"
+      ],
+      "changed_rotations": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "playable": [
+        "Lillie's Determination",
+        "Marnie's Impidimp",
+        "Pok\u00e9 Pad"
+      ],
+      "hand_size": 11
+    },
+    {
+      "episode": 91575404,
+      "step": 125,
+      "order": "first",
+      "archetype": "Crustle",
+      "a2_semantic": [
+        "Marnie's Impidimp"
+      ],
+      "changed_rotations": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "playable": [
+        "Lillie's Determination",
+        "Marnie's Impidimp"
+      ],
+      "hand_size": 11
+    },
+    {
+      "episode": 91575404,
+      "step": 155,
+      "order": "first",
+      "archetype": "Crustle",
+      "a2_semantic": [
+        "Night Stretcher"
+      ],
+      "changed_rotations": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "playable": [
+        "Night Stretcher",
+        "Rare Candy",
+        "Team Rocket's Petrel"
+      ],
+      "hand_size": 9
+    },
+    {
+      "episode": 91575404,
+      "step": 157,
+      "order": "first",
+      "archetype": "Crustle",
+      "a2_semantic": [
+        "Team Rocket's Petrel"
+      ],
+      "changed_rotations": [
+        1,
+        2
+      ],
+      "playable": [
+        "Rare Candy",
+        "Team Rocket's Petrel"
+      ],
+      "hand_size": 9
+    },
+    {
+      "episode": 91576352,
+      "step": 5,
+      "order": "first",
+      "archetype": "Alakazam",
+      "a2_semantic": [
+        "Buddy-Buddy Poffin"
+      ],
+      "changed_rotations": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "playable": [
+        "Buddy-Buddy Poffin",
+        "Spikemuth Gym"
+      ],
+      "hand_size": 7
+    },
+    {
+      "episode": 91576352,
+      "step": 23,
+      "order": "first",
+      "archetype": "Alakazam",
+      "a2_semantic": [
+        "Rare Candy"
+      ],
+      "changed_rotations": [
+        2,
+        3
+      ],
+      "playable": [
+        "Boss\u2019s Orders",
+        "Rare Candy",
+        "Team Rocket's Petrel"
+      ],
+      "hand_size": 7
+    },
+    {
+      "episode": 91576352,
+      "step": 33,
+      "order": "first",
+      "archetype": "Alakazam",
+      "a2_semantic": [
+        "Team Rocket's Petrel"
+      ],
+      "changed_rotations": [
+        2
+      ],
+      "playable": [
+        "Boss\u2019s Orders",
+        "Team Rocket's Petrel"
+      ],
+      "hand_size": 4
+    },
+    {
+      "episode": 91576352,
+      "step": 58,
+      "order": "first",
+      "archetype": "Alakazam",
+      "a2_semantic": [
+        "Team Rocket's Petrel"
+      ],
+      "changed_rotations": [
+        2,
+        3,
+        4
+      ],
+      "playable": [
+        "Boss\u2019s Orders",
+        "Team Rocket's Petrel"
+      ],
+      "hand_size": 6
+    },
+    {
+      "episode": 91576352,
+      "step": 96,
+      "order": "first",
+      "archetype": "Alakazam",
+      "a2_semantic": [
+        "Dawn"
+      ],
+      "changed_rotations": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "playable": [
+        "Boss\u2019s Orders",
+        "Dawn",
+        "Munkidori",
+        "Spikemuth Gym",
+        "Unfair Stamp"
+      ],
+      "hand_size": 7
+    },
+    {
+      "episode": 91576352,
+      "step": 99,
+      "order": "first",
+      "archetype": "Alakazam",
+      "a2_semantic": [
+        "Munkidori"
+      ],
+      "changed_rotations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "playable": [
+        "Munkidori",
+        "Spikemuth Gym",
+        "Unfair Stamp"
+      ],
+      "hand_size": 8
+    },
+    {
+      "episode": 91576352,
+      "step": 100,
+      "order": "first",
+      "archetype": "Alakazam",
+      "a2_semantic": [
+        "Munkidori"
+      ],
+      "changed_rotations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "playable": [
+        "Munkidori",
+        "Spikemuth Gym",
+        "Unfair Stamp"
+      ],
+      "hand_size": 7
+    },
+    {
+      "episode": 91576352,
+      "step": 102,
+      "order": "first",
+      "archetype": "Alakazam",
+      "a2_semantic": [
+        "Unfair Stamp"
+      ],
+      "changed_rotations": [
+        1,
+        2,
+        3
+      ],
+      "playable": [
+        "Spikemuth Gym",
+        "Unfair Stamp"
+      ],
+      "hand_size": 5
+    },
+    {
+      "episode": 91576352,
+      "step": 103,
+      "order": "first",
+      "archetype": "Alakazam",
+      "a2_semantic": [
+        "Night Stretcher"
+      ],
+      "changed_rotations": [
+        1,
+        2
+      ],
+      "playable": [
+        "Munkidori",
+        "Night Stretcher"
+      ],
+      "hand_size": 5
+    }
+  ],
+  "parse_failures": {}
+}

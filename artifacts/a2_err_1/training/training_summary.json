@@ -1,0 +1,145 @@
+{
+  "anchor_data": "/Users/safiullahbaig/Projects/pokemonTCG2.0/data/a2_err_1/certified/aug8_12_qualified_kl.jsonl.gz",
+  "anchor_data_sha256": "041b8cd1cff266dc1a9fad15726e159bca716ddf06f9017a97628abebc9b2089",
+  "base": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/grim_damage_conversion/candidates/a2_damage_v0/policy_weights.npz",
+  "base_sha256": "b19871a9f1499c2460ae266e58194acab1d8c90b390fa5cf24ed94b9a2b6bda8",
+  "batch_mass": {
+    "a2_rehearsal_kl_only": 0.25,
+    "corrections": 0.5,
+    "qualified_kl_only": 0.25
+  },
+  "batch_size": 256,
+  "checkpoint_selection": "none; evaluate epochs 1, 2, 3 and select earliest passing all offline gates",
+  "corrections": "/Users/safiullahbaig/Projects/pokemonTCG2.0/data/a2_err_1/certified/train_corrections.jsonl.gz",
+  "corrections_sha256": "ba71a12fd73f135343a407b86bc1e7e61ab6f41d215206a16a8bf8ae22f07f4d",
+  "deterministic_algorithms": true,
+  "device": "cpu",
+  "epochs": 3,
+  "experiment": "A2-ERR-1",
+  "gradient_clip": 1.0,
+  "history": [
+    {
+      "anchor_rows": 21405,
+      "batches": 335,
+      "checkpoint": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/a2_err_1/training/epoch_1/policy_weights.npz",
+      "checkpoint_sha256": "80c5d41d22a5024189746c91bb14b336af41ea8a73e6015c236fe8373a64a68b",
+      "correction_rows": 42810,
+      "epoch": 1,
+      "frozen_array_audit": {
+        "all_frozen_arrays_byte_identical": true,
+        "frozen_arrays": {
+          "area_embedding": true,
+          "attack_embedding": true,
+          "card_embedding": true,
+          "context_embedding": true,
+          "count_b": true,
+          "count_w": true,
+          "global_b": true,
+          "global_w": true,
+          "model_schema_version": true,
+          "numeric_b": true,
+          "numeric_w": true,
+          "state_embedding": true,
+          "type_embedding": true,
+          "value_b": true,
+          "value_w": true
+        },
+        "mutable_arrays_changed": {
+          "option_b": true,
+          "option_w": true,
+          "score_b": true,
+          "score_w": true
+        }
+      },
+      "kl_loss": 0.059538833465350265,
+      "margin_loss": 1.41798872912108,
+      "rehearsal_rows": 21405
+    },
+    {
+      "anchor_rows": 21405,
+      "batches": 335,
+      "checkpoint": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/a2_err_1/training/epoch_2/policy_weights.npz",
+      "checkpoint_sha256": "ae5d8b6f1c64f805dad1cd68319ffc78bd9dfcd251e75d0b4d542a47ec7c4b8b",
+      "correction_rows": 42810,
+      "epoch": 2,
+      "frozen_array_audit": {
+        "all_frozen_arrays_byte_identical": true,
+        "frozen_arrays": {
+          "area_embedding": true,
+          "attack_embedding": true,
+          "card_embedding": true,
+          "context_embedding": true,
+          "count_b": true,
+          "count_w": true,
+          "global_b": true,
+          "global_w": true,
+          "model_schema_version": true,
+          "numeric_b": true,
+          "numeric_w": true,
+          "state_embedding": true,
+          "type_embedding": true,
+          "value_b": true,
+          "value_w": true
+        },
+        "mutable_arrays_changed": {
+          "option_b": true,
+          "option_w": true,
+          "score_b": true,
+          "score_w": true
+        }
+      },
+      "kl_loss": 0.11308848808950453,
+      "margin_loss": 1.218750498899773,
+      "rehearsal_rows": 21405
+    },
+    {
+      "anchor_rows": 21405,
+      "batches": 335,
+      "checkpoint": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/a2_err_1/training/epoch_3/policy_weights.npz",
+      "checkpoint_sha256": "7b8d4833102f0e55cc136c6ef88f9e306e6a39ef546e2f60ad63235d8d9dfe81",
+      "correction_rows": 42810,
+      "epoch": 3,
+      "frozen_array_audit": {
+        "all_frozen_arrays_byte_identical": true,
+        "frozen_arrays": {
+          "area_embedding": true,
+          "attack_embedding": true,
+          "card_embedding": true,
+          "context_embedding": true,
+          "count_b": true,
+          "count_w": true,
+          "global_b": true,
+          "global_w": true,
+          "model_schema_version": true,
+          "numeric_b": true,
+          "numeric_w": true,
+          "state_embedding": true,
+          "type_embedding": true,
+          "value_b": true,
+          "value_w": true
+        },
+        "mutable_arrays_changed": {
+          "option_b": true,
+          "option_w": true,
+          "score_b": true,
+          "score_w": true
+        }
+      },
+      "kl_loss": 0.1431533862628154,
+      "margin_loss": 1.1213459852916092,
+      "rehearsal_rows": 21405
+    }
+  ],
+  "kl_weight": 1.0,
+  "learning_rate": 3e-05,
+  "margin": 0.2,
+  "mechanism": "exact_a2_top1_pairwise_margin_plus_frozen_a2_option_kl",
+  "rehearsal_data": "/Users/safiullahbaig/Projects/pokemonTCG2.0/data/multiday_processed/train.jsonl.gz",
+  "rehearsal_data_sha256": "9f849a8ae33895db3b2fe35d38d8d0ab15fbdcb2c2d38ce8fe5a5d2697d4637c",
+  "seed": 20260814,
+  "trainable_modules": [
+    "option_linear",
+    "score"
+  ],
+  "weight_decay": 0.0001
+}

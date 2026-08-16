@@ -1,0 +1,129 @@
+{
+  "claim": "same seed, agents, order, and physical seat produce byte-identical public-state/action/outcome traces",
+  "engine": "/Users/safiullahbaig/Projects/pokemonTCG2.0/artifacts/deterministic_engine/bin/libcg_seeded.dylib",
+  "engine_sha256": "867e3f9bb87e0b48889a44b5d4b04f5d2d434b2a0788d1b2bcfe0caebcb5ab78",
+  "excluded_from_trace": [
+    "search_begin_input (opaque raw-struct search snapshot is not byte-stable across process starts; downstream public observations, selected actions, and outcomes remain covered)"
+  ],
+  "hero_sha256": "b77646f40d145db0ad96deabaf4366da3d99da334fa91403c4e5fefac9e166d1",
+  "mismatches": {
+    "single_b": [],
+    "workers_2": []
+  },
+  "opponent_sha256": "13426288358d597ead809e45c364c7f7b9274a6eebf55ddd942142e3326535c3",
+  "passed": true,
+  "runs": {
+    "single_a": [
+      {
+        "actual_order": "first",
+        "arm": null,
+        "decisions": 138,
+        "draw": 0,
+        "hero_policy_errors": 0,
+        "opponent_policy_errors": 0,
+        "pair_index": -1,
+        "physical_seat": 0,
+        "seed": 3300000000,
+        "task_id": "first-000",
+        "trace_bytes": 22045,
+        "trace_sha256": "d289ccb96343fdd9029dd5087190037ddf82f726800e9535419e54992eb1c083",
+        "win": 1
+      },
+      {
+        "actual_order": "second",
+        "arm": null,
+        "decisions": 166,
+        "draw": 0,
+        "hero_policy_errors": 0,
+        "opponent_policy_errors": 0,
+        "pair_index": -1,
+        "physical_seat": 0,
+        "seed": 3300100000,
+        "task_id": "second-000",
+        "trace_bytes": 26620,
+        "trace_sha256": "efae2a20a735d7987affd155496d965d22735fae9ad38553b67d7f332097f8b5",
+        "win": 0
+      }
+    ],
+    "single_b": [
+      {
+        "actual_order": "first",
+        "arm": null,
+        "decisions": 138,
+        "draw": 0,
+        "hero_policy_errors": 0,
+        "opponent_policy_errors": 0,
+        "pair_index": -1,
+        "physical_seat": 0,
+        "seed": 3300000000,
+        "task_id": "first-000",
+        "trace_bytes": 22045,
+        "trace_sha256": "d289ccb96343fdd9029dd5087190037ddf82f726800e9535419e54992eb1c083",
+        "win": 1
+      },
+      {
+        "actual_order": "second",
+        "arm": null,
+        "decisions": 166,
+        "draw": 0,
+        "hero_policy_errors": 0,
+        "opponent_policy_errors": 0,
+        "pair_index": -1,
+        "physical_seat": 0,
+        "seed": 3300100000,
+        "task_id": "second-000",
+        "trace_bytes": 26620,
+        "trace_sha256": "efae2a20a735d7987affd155496d965d22735fae9ad38553b67d7f332097f8b5",
+        "win": 0
+      }
+    ],
+    "workers_2": [
+      {
+        "actual_order": "first",
+        "arm": null,
+        "decisions": 138,
+        "draw": 0,
+        "hero_policy_errors": 0,
+        "opponent_policy_errors": 0,
+        "pair_index": -1,
+        "physical_seat": 0,
+        "seed": 3300000000,
+        "task_id": "first-000",
+        "trace_bytes": 22045,
+        "trace_sha256": "d289ccb96343fdd9029dd5087190037ddf82f726800e9535419e54992eb1c083",
+        "win": 1
+      },
+      {
+        "actual_order": "second",
+        "arm": null,
+        "decisions": 166,
+        "draw": 0,
+        "hero_policy_errors": 0,
+        "opponent_policy_errors": 0,
+        "pair_index": -1,
+        "physical_seat": 0,
+        "seed": 3300100000,
+        "task_id": "second-000",
+        "trace_bytes": 26620,
+        "trace_sha256": "efae2a20a735d7987affd155496d965d22735fae9ad38553b67d7f332097f8b5",
+        "win": 0
+      }
+    ]
+  },
+  "seeds_per_order": 1,
+  "tasks": 2,
+  "trace_files": {
+    "single_a": {
+      "first-000": "d289ccb96343fdd9029dd5087190037ddf82f726800e9535419e54992eb1c083",
+      "second-000": "efae2a20a735d7987affd155496d965d22735fae9ad38553b67d7f332097f8b5"
+    },
+    "single_b": {
+      "first-000": "d289ccb96343fdd9029dd5087190037ddf82f726800e9535419e54992eb1c083",
+      "second-000": "efae2a20a735d7987affd155496d965d22735fae9ad38553b67d7f332097f8b5"
+    },
+    "workers_2": {
+      "first-000": "d289ccb96343fdd9029dd5087190037ddf82f726800e9535419e54992eb1c083",
+      "second-000": "efae2a20a735d7987affd155496d965d22735fae9ad38553b67d7f332097f8b5"
+    }
+  }
+}

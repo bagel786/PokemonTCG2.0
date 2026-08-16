@@ -1,0 +1,18 @@
+{
+  "games": 6,
+  "wins": 4,
+  "losses": 2,
+  "opportunities": 2,
+  "games_with_opportunity": 2,
+  "loss_games_with_opportunity": 1,
+  "theoretical_max_uplift_pp": 16.666666666666668,
+  "stamp_in_search": 1,
+  "stamp_playable_after_retrieval": 1,
+  "r0_played_petrel_at_opportunity": 0,
+  "opponent_hand_size_distribution": {
+    "16": 1,
+    "19": 1
+  },
+  "errors": [],
+  "elapsed_seconds": 2
+}

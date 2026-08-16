@@ -8,6 +8,8 @@ from training.evaluate_deterministic_crn import (
     DEFAULT_ENGINE,
     _public_observation_sha256,
     get_engine,
+    load_deck,
+    parse_env,
     paired_summary,
 )
 
@@ -42,6 +44,26 @@ def test_paired_summary_rejects_seed_or_schedule_mismatch():
     control = [row(0, win=0, seed=999), row(1, win=1)]
     with pytest.raises(ValueError, match="paired schedules differ"):
         paired_summary(candidate, control)
+
+
+def test_load_deck_requires_exactly_sixty_cards(tmp_path):
+    valid = tmp_path / "valid.csv"
+    valid.write_text("7\n" * 60)
+    assert load_deck(valid) == [7] * 60
+
+    invalid = tmp_path / "invalid.csv"
+    invalid.write_text("7\n" * 59)
+    with pytest.raises(ValueError, match="60 cards"):
+        load_deck(invalid)
+
+
+def test_parse_env_requires_key_value_pairs():
+    assert parse_env(["NO_SEARCH=1", "DIRECT_POLICY=1"]) == {
+        "NO_SEARCH": "1",
+        "DIRECT_POLICY": "1",
+    }
+    with pytest.raises(ValueError, match="KEY=VALUE"):
+        parse_env(["NO_SEARCH"])
 
 
 @pytest.mark.skipif(not DEFAULT_ENGINE.exists(), reason="isolated deterministic DLL has not been built")

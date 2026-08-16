@@ -61,6 +61,7 @@ RUNTIME_DEPENDENCIES = (
     "prevention.json",
     "tactical_shield.py",
     "grim_guardrails.py",
+    "grim_variance_floor.py",
     "grim_runtime_policy.py",
 )
 FORBIDDEN_RUNTIME_FILES = frozenset(
@@ -76,6 +77,11 @@ SEARCH_DISABLED_RATIONALE = (
     "decisions and nondeterministic classifications; runtime native search "
     "is therefore disabled in this candidate"
 )
+VARIANCE_CONFIGS = {
+    "B1": {"punk_up_floor": False, "dead_active_escape": False},
+    "B2": {"punk_up_floor": True, "dead_active_escape": False},
+    "B3": {"punk_up_floor": True, "dead_active_escape": True},
+}
 
 
 class BuildError(RuntimeError):
@@ -216,10 +222,17 @@ def copy_runtime_dependencies(stage: str | Path) -> dict[str, str]:
     return hashes
 
 
-def patch_model_and_agent(stage: str | Path) -> dict[str, dict[str, str]]:
+def patch_model_and_agent(
+    stage: str | Path,
+    *,
+    variance_config: Mapping[str, bool] | None = None,
+) -> dict[str, dict[str, str]]:
     """Patch only freshly extracted model.py and agent.py via strict anchors."""
 
     stage = Path(stage)
+    variance_config = dict(variance_config or VARIANCE_CONFIGS["B3"])
+    if set(variance_config) != {"punk_up_floor", "dead_active_escape"}:
+        raise BuildError("variance config must specify Punk Up and escape flags")
     model = stage / "ptcg_ai" / "model.py"
     original_model_hash = sha256_file(model)
     source = model.read_text(encoding="utf-8")
@@ -241,9 +254,22 @@ def patch_model_and_agent(stage: str | Path) -> dict[str, dict[str, str]]:
         + "from .grim_runtime_policy import GrimRuntimePolicy, SearchDisabledProof\n",
     )
     source = source.replace(
+        "from .grim_runtime_policy import GrimRuntimePolicy, SearchDisabledProof\n",
+        "from .grim_runtime_policy import GrimRuntimePolicy, SearchDisabledProof\n"
+        "from .grim_variance_floor import GrimVarianceConfig, GrimVarianceFloorDirector\n",
+    )
+    source = source.replace(
         init_anchor,
         init_anchor
         + "        self.runtime_policy = GrimRuntimePolicy(proof=SearchDisabledProof())\n",
+    )
+    source = source.replace(
+        "        self.runtime_policy = GrimRuntimePolicy(proof=SearchDisabledProof())\n",
+        "        self.runtime_policy = GrimRuntimePolicy(proof=SearchDisabledProof())\n"
+        "        self.runtime_policy.guardrail = GrimVarianceFloorDirector(\n"
+        f"            GrimVarianceConfig(punk_up_floor={bool(variance_config['punk_up_floor'])}, "
+        f"dead_active_escape={bool(variance_config['dead_active_escape'])})\n"
+        "        )\n",
     )
     source = source.replace(
         choose_anchor,
@@ -308,15 +334,22 @@ def _assert_search_disabled_tree(stage: Path) -> None:
         raise BuildError("broad GrimFloorController is forbidden")
 
 
-def stage_candidate(base_archive: str | Path, destination: str | Path) -> dict[str, Any]:
+def stage_candidate(
+    base_archive: str | Path,
+    destination: str | Path,
+    *,
+    variant: str,
+) -> dict[str, Any]:
     base_archive = Path(base_archive)
     destination = Path(destination)
+    if variant not in VARIANCE_CONFIGS:
+        raise BuildError(f"unknown Grim variance candidate: {variant}")
     if any(destination.iterdir()):
         raise BuildError(f"candidate stage must be empty: {destination}")
     safe_extract(base_archive, destination)
     frozen = verify_frozen_tree(destination)
     runtime_hashes = copy_runtime_dependencies(destination)
-    patches = patch_model_and_agent(destination)
+    patches = patch_model_and_agent(destination, variance_config=VARIANCE_CONFIGS[variant])
     # Model, deck, and every engine payload must remain byte-identical after patching.
     _require_hash(destination, "policy_weights.npz", FROZEN_MODEL_SHA256)
     _require_hash(destination, "deck.csv", FROZEN_RAW_DECK_SHA256)
@@ -328,14 +361,15 @@ def stage_candidate(base_archive: str | Path, destination: str | Path) -> dict[s
 
     internal = {
         "schema_version": 1,
-        "label": "ORIGINAL_5K_GRIM_GUARDRAIL_SEARCH_DISABLED_V1",
+            "label": f"ORIGINAL_5K_GRIM_GUARDRAIL_SEARCH_DISABLED_{variant}",
         "policy_status": "development_candidate_not_evaluated",
         "frozen": {
             "base_archive_sha256": FROZEN_ARCHIVE_SHA256,
             **frozen,
         },
         "runtime": {
-            "guardrail": "GrimGuardrailDirector",
+            "guardrail": f"GrimVarianceFloorDirector({variant})",
+            "variance_config": dict(VARIANCE_CONFIGS[variant]),
             "coordinator": "GrimRuntimePolicy",
             "tactical_allowlist": ["end_with_productive_attack", "nullified_attack"],
             "broad_floor_controller": False,
@@ -472,6 +506,7 @@ def build_candidate(
     *,
     base_archive: str | Path = DEFAULT_BASE,
     output_dir: str | Path = DEFAULT_OUTPUT,
+    variant: str,
 ) -> dict[str, Any]:
     base_archive = Path(base_archive).resolve()
     output_dir = Path(output_dir).resolve()
@@ -489,8 +524,8 @@ def build_candidate(
         second = work / "second"
         first.mkdir()
         second.mkdir()
-        first_internal = stage_candidate(base_archive, first)
-        second_internal = stage_candidate(base_archive, second)
+        first_internal = stage_candidate(base_archive, first, variant=variant)
+        second_internal = stage_candidate(base_archive, second, variant=variant)
         if first_internal != second_internal:
             raise BuildError("fresh stage manifests differ")
         first_tar = work / "first.tar.gz"
@@ -544,12 +579,17 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--base-archive", type=Path, default=DEFAULT_BASE)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--variant", choices=sorted(VARIANCE_CONFIGS), required=True)
     return parser.parse_args(argv)
 
 
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
-    result = build_candidate(base_archive=args.base_archive, output_dir=args.output_dir)
+    result = build_candidate(
+        base_archive=args.base_archive,
+        output_dir=args.output_dir,
+        variant=args.variant,
+    )
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0
 

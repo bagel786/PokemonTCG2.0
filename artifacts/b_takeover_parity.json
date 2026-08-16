@@ -1,0 +1,24 @@
+{
+  "prompts": 4659,
+  "orders": {
+    "second": 1531,
+    "first": 3128
+  },
+  "window_prompts": 371,
+  "window_diffs": 13,
+  "window_intervention_rate": 0.03504043126684636,
+  "non_window_diffs": 0,
+  "non_window_examples": [],
+  "diff_contexts_in_window": {
+    "5": 3,
+    "0": 5,
+    "3": 1,
+    "7": 4
+  },
+  "diff_turns_in_window": {
+    "2": 8,
+    "4": 5
+  },
+  "candidate_errors": 0,
+  "control_errors": 0
+}

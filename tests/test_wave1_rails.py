@@ -108,6 +108,44 @@ def test_punk_up_limits_energy_and_funds_active_grim_first():
     assert reason == "punk_up_target"
 
 
+def test_punk_only_applies_exactly_punk_up_rules():
+    active = pokemon(MARNIES_GRIMMSNARL_EX, energies=[EnergyType.DARKNESS])
+    bench = pokemon(MARNIES_MORGREM, 2)
+    me = player(active=[active], bench=[bench])
+    select = selection(
+        SelectContext.ATTACH_TO,
+        [Option(OptionType.CARD, area=AreaType.DECK, index=i, playerIndex=0) for i in range(5)],
+        effect=card(MARNIES_GRIMMSNARL_EX), minimum=0, maximum=5,
+    )
+    _, desired, reason = Wave1Rail("punk_only").apply(observation(select, me), list(range(5)), 5)
+    assert desired == 3
+    assert reason == "punk_up_energy_count"
+
+
+def test_punk_only_does_not_apply_setup_munk_or_attack_floor():
+    me = player(hand=[card(MUNKIDORI), card(MARNIES_IMPIDIMP, 2)])
+    setup = selection(SelectContext.SETUP_ACTIVE_POKEMON, [
+        Option(OptionType.CARD, area=AreaType.HAND, index=0, playerIndex=0),
+        Option(OptionType.CARD, area=AreaType.HAND, index=1, playerIndex=0),
+    ])
+    ranked, desired, reason = Wave1Rail("punk_only").apply(observation(setup, me, turn=0), [0, 1], 1)
+    assert (ranked, desired, reason) == ([0, 1], 1, None)
+
+    damaged = player(active=[pokemon(MARNIES_GRIMMSNARL_EX, hp=260, max_hp=320)])
+    munk = selection(SelectContext.REMOVE_DAMAGE_COUNTER, [
+        Option(OptionType.CARD, area=AreaType.ACTIVE, index=0, playerIndex=0),
+    ], effect=card(MUNKIDORI))
+    ranked, desired, reason = Wave1Rail("punk_only").apply(observation(munk, damaged), [0], 1)
+    assert (ranked, desired, reason) == ([0], 1, None)
+
+    attack = selection(SelectContext.MAIN, [
+        Option(OptionType.ATTACK, attackId=SHADOW_BULLET), Option(OptionType.END),
+    ])
+    ranked, desired, reason = Wave1Rail("punk_only").apply(observation(attack, damaged), [1, 0], 1)
+    assert (ranked, desired, reason) == ([1, 0], 1, None)
+    assert Wave1Rail("punk_only").apply_post_shield(observation(attack, damaged), [1, 0], 1) == ([1, 0], 1, None)
+
+
 def test_munk_damage_source_prefers_damaged_grim_over_munk():
     grim = pokemon(MARNIES_GRIMMSNARL_EX, hp=260, max_hp=320)
     munk = pokemon(MUNKIDORI, 2, hp=50, max_hp=110)
