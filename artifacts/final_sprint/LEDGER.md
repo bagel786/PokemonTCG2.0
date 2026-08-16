@@ -65,3 +65,18 @@ NOT YET SUBMITTED - awaiting user go-ahead (autonomy expired 7pm CT).
 - Alakazam (NO_SEARCH -0.75 / SEARCH-ON -2.0, both ns), starmie +2.0, dipplin +0.5.
 - Recent C0 ladder diagnosis (55537754 725.6 / 55537760 581.0): 29-game sample losses = mirror 33%, Crustle 17%, Kangaskhan 17%, Alakazam 8%. Field-shift + TrueSkill reversion; EXP-20 converged to same ~724 as C0 (rail neutral as predicted).
 - Recommendation: replace 55537760 with EXP-23, keep 55537754 as hedge. Awaiting user go-ahead.
+
+## FINAL DAY — Aug 16 (submission day, 10:17 CDT handoff)
+
+- **EXP23 SUBMITTED 15:23 UTC** as ref `55556726` (description "exp23-identity-trained-full-20260816"). Tar sha 0734B60C… verified pre-submit; model files inside tar verified CEFE6118…; main.py PLAY_IDENTITY_ENABLED=True confirmed; manifest inside tar still stale (B198/CONTROLLED_LADDER_PROBE) — NOT rebuilt per directive.
+- Active pair now: 55556726 (EXP23) + 55537754 (C0). 4 submissions remain (5 at handoff).
+- **CERT-B (overnight run, 40 units, 529 decisive): 0.440 [0.389,0.488] — FAILS frozen 55% bar.** first 0.403, second 0.475; early 0.57 / mid 0.52 / late 0.30. 0 policy errors.
+- Calibration (overnight): d842 0.431, EXP20 0.211 → metric ranks correctly.
+- **CERT-B(0813) (today, 16 units, 169 decisive): 0.455 [0.354,0.566]; late 0.304 replicated; first=second (no order asymmetry).** Rules out C0 home-field confound. 104 episodes re-downloaded today (0813 dump).
+- Field wave-1 (overnight, 7 cells, 100p/order, 0 errors): MACRO +1.8pp. Extensions today: az24nos +200p (-4.5) → pooled az24nos 800p ≈ -1.6pp; d842 +200p (+6.5) → pooled d842 400p +2.5pp; az24 search-on fresh 200p pending.
+- Grim-family pooled ≈ +4.5pp (~3,600 pairs, 4 significant cells). Meta-weighted (renorm 54% coverage) ≈ +2.0pp.
+- Late-game anatomy (233 rows): EXP23 plays basics/supporters late (Impidimp/Petrel/Snorunt/Froslass) where elite+C0 use abilities/attacks → 0.30 late approval.
+- **H23-S: NOT BUILT** — 0813 shows no order asymmetry; both arms positive on Grim mirrors at big N. CERT-C (matsurih) remains sealed.
+- Live (by ~12:40 CDT): 6 games 5W-1L, score 884.4, 0 errors, parity 505/505 (byte-identical to local pkg; earlier 3W-3L was a seat-ID bug in audit script, fixed via submissionId metadata). Sterile smoke of exact tar re-passed today.
+- Recommendation: keep active pair EXP23+C0, zero further submissions, preserve 4. Decision packet: docs/sprints/final_overnight/FINAL_DECISION_PACKET_20260816.md.
+

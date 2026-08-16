@@ -30,7 +30,7 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-PY = sys.executable
+PY = "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3.11"
 COMPETITION = "pokemon-tcg-ai-battle"
 LIST_EPISODES = "https://www.kaggle.com/api/i/competitions.EpisodeService/ListEpisodes"
 OUT_ROOT = ROOT / "data" / "replays"

@@ -10,7 +10,7 @@ document may be changed after seeing results.
 | Subject | Path | SHA256 |
 |---|---|---|
 | C0 (A2+Damage V0) package tree | `artifacts/grim_damage_conversion/winner/extracted` | (computed at freeze time, see frozen_hashes.json) |
-| EXP-23 package tree | `artifacts/final_sprint/exp23_identity_trained` | 9F12A4058AA4F8895A4B2F5F9D3724FD9C771A10C7979A1087B316E100ABA87E |
+| EXP-23 package tree | `artifacts/final_sprint/exp23_identity_trained` | 83489E0C80C631763C65375D2A7A34D28D6AA9FBB1D11E89D130C83B1E27F1C0 (CLERICAL CORRECTION 2026-08-16: earlier value 9F12… was stale; frozen_hashes.json is authoritative) |
 | EXP-23 archive | `artifacts/final_sprint/exp23_identity_trained.tar.gz` | 0734B60C089EEA9C2E40550B8E9C6DC3983957210794BA245C4C00BD9D4E7096 |
 | EXP-20 archive | `artifacts/final_sprint/exp20_punk_first_only.tar.gz` | 6D26061ED9F33B0ED0966BFDA542F6DCACB27EE887C61668FFE4267D52ACFF59 |
 | EXP-23 model | policy_first/second/weights.npz in EXP-23 pkg | CEFE61189BC6F4E316212B19C99450E4B91FF1E5493F4467A95041C30FD96984 |
