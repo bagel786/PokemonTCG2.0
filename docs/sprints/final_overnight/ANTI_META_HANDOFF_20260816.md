@@ -150,10 +150,16 @@ Real-replay audit (08-13, 77 fires, 9 target teams, 70 mid-game):
 Gameplay paired CRN (60 pairs/order, forced-route):
   D1: <PENDING>   D0: <PENDING>
 
-VERDICT B: <PENDING>
+VERDICT B: PASS — D1 +3.3pp (CI [-1.3,+7.9], 6-2 disc), D0 +6.7pp
+(CI [+0.2,+13.1] SIGNIFICANT, 12-4 disc). 0 policy errors. Same sign on both
+target policies and both actual orders. Combined with 94% teacher approval on
+real replays (45:3) and the mechanical rationale (0-energy Thwackey = no
+Festival Lead second attack, no Boom Boom Groove; exact list has no Switch),
+this is the promotion rule.
 
 ## DIP AB COMBINATION
-<PENDING — only if A and B both safe>
+NOT TESTED (time). Code order is deterministic: B evaluates before A at MAIN.
+Shipped candidate enables dip_b ONLY (A is weak-positive: +0.8/+0.8).
 
 ## LUCARIO SEMANTIC ANALYSIS
 Real Lucario win rows: 4,434 total, 1,342 EXP-23 vs teacher disagreements.
@@ -179,4 +185,29 @@ B0: 0 discordant, 0 errors. AZ NO_SEARCH: 0 discordant, 0 errors.
 <PENDING: surgical-package parity reruns>
 
 ## FINAL
-<PENDING>
+
+**PROMOTE: EXP23_DIP_SURGICAL (dip_b only)**
+
+- archive: `artifacts/anti_meta_20260816/exp23_dip_surgical.tar.gz`
+- archive SHA256: `977f9e6e23c1898c4726fb630560a45e1218848a51e2b0de822cd7e0526048ce`
+- commit: <FINAL_SHA>
+- base: exact EXP-23 (CEFE6118, PLAY identity ON, v0 damage solver)
+- enabled route: Dipplin (frozen public detector) -> DIP_B_THWACKEY_TRAP
+- no specialist npz, no Lucario rule, off-target = exact EXP-23 (B0 0/0,
+  AZ 0/0 discordant, 0 errors)
+- sterile extract verified: main.py/deck.csv root, 60 cards, 0 policy errors
+  in seeded complete games vs D1 (forced route) and B0 (non-target)
+
+EVIDENCE SUMMARY
+- DIP_B gameplay: D1 +3.3pp / D0 +6.7pp (significant), 0 errors, 480 games
+- DIP_B semantic: 45:3 teacher approval on 08-13 real replays
+- Detector: 0 FP / 725 negatives, 100% recall Dipplin, 100% opp capture
+- Lucario: KILL (veto approval 43-44%, no deterministic rule qualifies)
+- DIP_A: kept out (weak +0.8/+0.8); available via PTCG_SURGICAL env
+
+RISKS
+- Target-policy breadth: validated on D0+D1 (the two available local Dipplin
+  policies); real ladder Dipplin variety was covered semantically (9 teams).
+- Rule fires ~1-2x per game in mid-game; effect is tempo denial, not a
+  guaranteed win swing. CIs overlap zero on D1.
+- AB interaction untested (dip_a excluded for this reason).

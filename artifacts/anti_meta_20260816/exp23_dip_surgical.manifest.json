@@ -1,0 +1,13 @@
+{
+  "archive": "artifacts/anti_meta_20260816/exp23_dip_surgical.tar.gz",
+  "archive_sha256": "977f9e6e23c1898c4726fb630560a45e1218848a51e2b0de822cd7e0526048ce",
+  "base_model": "EXP-23 CEFE61189BC6F4E3",
+  "deck_csv_sha256": "92b92bac9f9163ecff933b3dc39294d2cc154c8684f3c8497877661419ebc59d",
+  "name": "exp23_dip_surgical",
+  "surgical_default": "dip_b",
+  "verification": {
+    "deck_cards": 60,
+    "ok": true,
+    "problems": []
+  }
+}
