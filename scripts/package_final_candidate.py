@@ -63,6 +63,10 @@ def verify_tree(tree: Path, surgical_default: str) -> dict:
         problems.append("PLAY identity not enabled")
     if surgical_default and f"PTCG_SURGICAL', '{surgical_default}'" not in main_py:
         problems.append("surgical default not baked")
+    if "PTCG_ENDGAME_LETHAL" not in main_py:
+        problems.append("endgame lethal flag not baked")
+    if not (tree / "ptcg_ai" / "endgame_lethal.py").exists():
+        problems.append("endgame_lethal module missing")
     router = (tree / "ptcg_ai" / "target_router.py").read_text()
     for forbidden in ("TeamNames", "replay", "leaderboard", "handshake", "opponent_deck"):
         if forbidden in router:

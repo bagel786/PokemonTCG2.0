@@ -107,6 +107,20 @@ class EndgameLethal:
             return None
         return int(card.id)
 
+    @staticmethod
+    def _option_priority(option) -> int:
+        priority = {
+            OptionType.ATTACK: 0,
+            OptionType.ABILITY: 1,
+            OptionType.RETREAT: 2,
+            OptionType.EVOLVE: 3,
+            OptionType.PLAY: 4,
+            OptionType.ATTACH: 5,
+            OptionType.END: 6,
+            OptionType.DISCARD: 7,
+        }
+        return priority.get(option.type, 8)
+
     def try_override(self, obs_dict: dict) -> list[int] | None:
         """Return a terminal-win action for the current prompt, or None."""
         if os.environ.get("PTCG_ENDGAME_LETHAL", "1").lower() in {"0", "false", "off", "no"}:
@@ -161,7 +175,11 @@ class EndgameLethal:
                     return False
                 if depth >= MAX_DEPTH:
                     return False
-                for index, option in enumerate(child_obs.select.option):
+                ordered = sorted(
+                    enumerate(child_obs.select.option),
+                    key=lambda pair: (self._option_priority(pair[1]), pair[0]),
+                )
+                for index, option in ordered:
                     if expired() or nodes >= MAX_NODES:
                         return False
                     nodes += 1
@@ -183,7 +201,11 @@ class EndgameLethal:
                 return False
 
             winning_first: int | None = None
-            for index, option in enumerate(obs.select.option):
+            ordered = sorted(
+                enumerate(obs.select.option),
+                key=lambda pair: (self._option_priority(pair[1]), pair[0]),
+            )
+            for index, option in ordered:
                 if expired() or nodes >= MAX_NODES:
                     break
                 nodes += 1

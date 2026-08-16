@@ -71,6 +71,7 @@ def main() -> int:
         "import os\n"
         "os.environ['PTCG_GRIM_DAMAGE_SOLVER'] = 'v0'\n"
         + surgical_line +
+        "os.environ.setdefault('PTCG_ENDGAME_LETHAL', '1')\n"
         "\nfrom ptcg_ai.target_router import TargetRouterAgent\n"
         "import ptcg_ai.features as _features\n"
         "_features.PLAY_IDENTITY_ENABLED = True\n\n"

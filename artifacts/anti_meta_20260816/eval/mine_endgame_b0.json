@@ -1,0 +1,228 @@
+{
+  "elapsed_seconds": 28.0,
+  "eligible_decisions": 145,
+  "family_breakdown": {
+    "(0, {'type': 10}, {'type': 7, 'card_id': 1182})": 8,
+    "(0, {'type': 10}, {'type': 7, 'card_id': 1219})": 1,
+    "(0, {'type': 10}, {'type': 8})": 4,
+    "(0, {'type': 10}, {'type': 9})": 3,
+    "(0, {'type': 13, 'attack_id': 936}, {'type': 9})": 1,
+    "(0, {'type': 13, 'attack_id': 937}, {'type': 10})": 4,
+    "(0, {'type': 13, 'attack_id': 937}, {'type': 7, 'card_id': 1182})": 1,
+    "(0, {'type': 13, 'attack_id': 937}, {'type': 7, 'card_id': 1219})": 1,
+    "(0, {'type': 13, 'attack_id': 937}, {'type': 8})": 3,
+    "(0, {'type': 13, 'attack_id': 937}, {'type': 9})": 2,
+    "(0, {'type': 7, 'card_id': 1080}, {'type': 7, 'card_id': 1219})": 1,
+    "(0, {'type': 7, 'card_id': 1097}, {'type': 8})": 1,
+    "(0, {'type': 7, 'card_id': 1122}, {'type': 13, 'attack_id': 937})": 1,
+    "(0, {'type': 7, 'card_id': 112}, {'type': 7, 'card_id': 1219})": 1,
+    "(0, {'type': 7, 'card_id': 1152}, {'type': 10})": 2,
+    "(0, {'type': 7, 'card_id': 1152}, {'type': 8})": 1,
+    "(0, {'type': 7, 'card_id': 1182}, {'type': 9})": 1,
+    "(0, {'type': 7, 'card_id': 1227}, {'type': 10})": 1,
+    "(0, {'type': 7, 'card_id': 1227}, {'type': 7, 'card_id': 1182})": 1,
+    "(0, {'type': 7, 'card_id': 1227}, {'type': 8})": 2,
+    "(0, {'type': 7, 'card_id': 646}, {'type': 7, 'card_id': 1182})": 1,
+    "(0, {'type': 7, 'card_id': 646}, {'type': 9})": 1,
+    "(0, {'type': 7, 'card_id': 860}, {'type': 7, 'card_id': 646})": 1,
+    "(0, {'type': 9}, {'type': 8})": 1
+  },
+  "fire_rate": 5.158620689655172,
+  "fires": 748,
+  "games": 60,
+  "latency_ms": {
+    "max": 150.0,
+    "p50": 28.48,
+    "p95": 141.29
+  },
+  "missed_examples": [
+    {
+      "chosen": {
+        "card_id": 1227,
+        "type": 7
+      },
+      "ctx": 0,
+      "differs": true,
+      "override": {
+        "type": 8
+      },
+      "prizes": 1
+    },
+    {
+      "chosen": {
+        "card_id": 1122,
+        "type": 7
+      },
+      "ctx": 0,
+      "differs": true,
+      "override": {
+        "attack_id": 937,
+        "type": 13
+      },
+      "prizes": 1
+    },
+    {
+      "chosen": {
+        "type": 10
+      },
+      "ctx": 0,
+      "differs": true,
+      "override": {
+        "card_id": 1219,
+        "type": 7
+      },
+      "prizes": 1
+    },
+    {
+      "chosen": {
+        "card_id": 112,
+        "type": 7
+      },
+      "ctx": 0,
+      "differs": true,
+      "override": {
+        "card_id": 1219,
+        "type": 7
+      },
+      "prizes": 1
+    },
+    {
+      "chosen": {
+        "attack_id": 937,
+        "type": 13
+      },
+      "ctx": 0,
+      "differs": true,
+      "override": {
+        "card_id": 1219,
+        "type": 7
+      },
+      "prizes": 1
+    },
+    {
+      "chosen": {
+        "type": 10
+      },
+      "ctx": 0,
+      "differs": true,
+      "override": {
+        "card_id": 1182,
+        "type": 7
+      },
+      "prizes": 1
+    },
+    {
+      "chosen": {
+        "attack_id": 937,
+        "type": 13
+      },
+      "ctx": 0,
+      "differs": true,
+      "override": {
+        "type": 9
+      },
+      "prizes": 1
+    },
+    {
+      "chosen": {
+        "type": 10
+      },
+      "ctx": 0,
+      "differs": true,
+      "override": {
+        "card_id": 1182,
+        "type": 7
+      },
+      "prizes": 1
+    },
+    {
+      "chosen": {
+        "card_id": 646,
+        "type": 7
+      },
+      "ctx": 0,
+      "differs": true,
+      "override": {
+        "card_id": 1182,
+        "type": 7
+      },
+      "prizes": 1
+    },
+    {
+      "chosen": {
+        "card_id": 1227,
+        "type": 7
+      },
+      "ctx": 0,
+      "differs": true,
+      "override": {
+        "card_id": 1182,
+        "type": 7
+      },
+      "prizes": 1
+    },
+    {
+      "chosen": {
+        "card_id": 860,
+        "type": 7
+      },
+      "ctx": 0,
+      "differs": true,
+      "override": {
+        "card_id": 646,
+        "type": 7
+      },
+      "prizes": 1
+    },
+    {
+      "chosen": {
+        "type": 10
+      },
+      "ctx": 0,
+      "differs": true,
+      "override": {
+        "card_id": 1182,
+        "type": 7
+      },
+      "prizes": 1
+    },
+    {
+      "chosen": {
+        "type": 10
+      },
+      "ctx": 0,
+      "differs": true,
+      "override": {
+        "card_id": 1182,
+        "type": 7
+      },
+      "prizes": 1
+    },
+    {
+      "chosen": {
+        "attack_id": 937,
+        "type": 13
+      },
+      "ctx": 0,
+      "differs": true,
+      "override": {
+        "card_id": 1182,
+        "type": 7
+      },
+      "prizes": 1
+    },
+    {
+      "chosen": {
+        "attack_id": 937,
+        "type": 13
+      },
+      "ctx": 0,
+      "differs": true,
+      "override": {
+        "type": 10
+      },
+      "prizes": 1
+    }
+  ],
+  "missed_lethals": 44
+}
