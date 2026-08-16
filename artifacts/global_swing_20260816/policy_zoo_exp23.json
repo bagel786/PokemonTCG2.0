@@ -1,0 +1,245 @@
+{
+  "consensus_by_band": {
+    "('loss', 'early')": 36,
+    "('loss', 'late')": 10,
+    "('loss', 'mid')": 44,
+    "('win', 'early')": 31,
+    "('win', 'mid')": 20
+  },
+  "consensus_by_ctx": {
+    "('loss', 0)": 80,
+    "('loss', 13)": 4,
+    "('loss', 4)": 1,
+    "('loss', 5)": 1,
+    "('loss', 7)": 4,
+    "('win', 0)": 45,
+    "('win', 21)": 1,
+    "('win', 5)": 1,
+    "('win', 7)": 4
+  },
+  "consensus_c0d842_vs_exp23": {
+    "loss": 90,
+    "win": 51
+  },
+  "consensus_rate": {
+    "loss": 0.077,
+    "win": 0.0843
+  },
+  "distinct_episodes_with_consensus": {
+    "loss": 14,
+    "win": 6
+  },
+  "examples": [
+    {
+      "c0": [
+        3
+      ],
+      "context": 0,
+      "d842": [
+        3
+      ],
+      "elite": [
+        1
+      ],
+      "episode": "episode-93736000-replay",
+      "forced": false,
+      "label": "loss",
+      "step": 11,
+      "turn": 2
+    },
+    {
+      "c0": [
+        1
+      ],
+      "context": 0,
+      "d842": [
+        1
+      ],
+      "elite": [
+        0
+      ],
+      "episode": "episode-93736000-replay",
+      "forced": false,
+      "label": "loss",
+      "step": 16,
+      "turn": 2
+    },
+    {
+      "c0": [
+        4
+      ],
+      "context": 0,
+      "d842": [
+        4
+      ],
+      "elite": [
+        1
+      ],
+      "episode": "episode-93730597-replay",
+      "forced": false,
+      "label": "loss",
+      "step": 11,
+      "turn": 2
+    },
+    {
+      "c0": [
+        1
+      ],
+      "context": 0,
+      "d842": [
+        1
+      ],
+      "elite": [
+        0
+      ],
+      "episode": "episode-93730597-replay",
+      "forced": false,
+      "label": "loss",
+      "step": 33,
+      "turn": 4
+    },
+    {
+      "c0": [
+        11
+      ],
+      "context": 0,
+      "d842": [
+        11
+      ],
+      "elite": [
+        6
+      ],
+      "episode": "episode-93730597-replay",
+      "forced": false,
+      "label": "loss",
+      "step": 36,
+      "turn": 4
+    },
+    {
+      "c0": [
+        7
+      ],
+      "context": 0,
+      "d842": [
+        7
+      ],
+      "elite": [
+        5
+      ],
+      "episode": "episode-93730597-replay",
+      "forced": false,
+      "label": "loss",
+      "step": 79,
+      "turn": 6
+    },
+    {
+      "c0": [
+        6
+      ],
+      "context": 0,
+      "d842": [
+        6
+      ],
+      "elite": [
+        5
+      ],
+      "episode": "episode-93730597-replay",
+      "forced": false,
+      "label": "loss",
+      "step": 133,
+      "turn": 8
+    },
+    {
+      "c0": [
+        6
+      ],
+      "context": 0,
+      "d842": [
+        6
+      ],
+      "elite": [
+        2
+      ],
+      "episode": "episode-93715535-replay",
+      "forced": false,
+      "label": "loss",
+      "step": 60,
+      "turn": 5
+    },
+    {
+      "c0": [
+        3
+      ],
+      "context": 0,
+      "d842": [
+        3
+      ],
+      "elite": [
+        2
+      ],
+      "episode": "episode-93715535-replay",
+      "forced": false,
+      "label": "loss",
+      "step": 173,
+      "turn": 11
+    },
+    {
+      "c0": [
+        1
+      ],
+      "context": 0,
+      "d842": [
+        1
+      ],
+      "elite": [
+        0
+      ],
+      "episode": "episode-93715535-replay",
+      "forced": false,
+      "label": "loss",
+      "step": 176,
+      "turn": 11
+    },
+    {
+      "c0": [
+        5
+      ],
+      "context": 0,
+      "d842": [
+        5
+      ],
+      "elite": [
+        6
+      ],
+      "episode": "episode-93699067-replay",
+      "forced": false,
+      "label": "loss",
+      "step": 17,
+      "turn": 2
+    },
+    {
+      "c0": [
+        2
+      ],
+      "context": 0,
+      "d842": [
+        2
+      ],
+      "elite": [
+        1
+      ],
+      "episode": "episode-93699067-replay",
+      "forced": false,
+      "label": "loss",
+      "step": 19,
+      "turn": 2
+    }
+  ],
+  "loss_units": 14,
+  "total_decisions": {
+    "loss": 1169,
+    "win": 605
+  },
+  "units": 20,
+  "win_units": 6
+}
