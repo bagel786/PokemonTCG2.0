@@ -23,7 +23,9 @@ revealed pokemon lines per replay.
 
 - 55556726 EXP23 (ACTIVE): 18-14. dragapult 1-5, grim 6-3, alakazam 6-1,
   lucario 5-1, bellibolt 0-1, others 0-3 (Ogerpon, Rellor/Grookey, Dudunsparce).
-- 55562629 DIP_B (ACTIVE): 7-1 (8 games, too few to conclude).
+- 55562629 DIP_B (ACTIVE): 7-1 (8 games) at first fetch; UPDATED 16:55 CDT:
+  12 games, 8W-4L. New losses: Grimmsnarl mirror (grim now 1-2), Crustle/Kangaskhan (0-1),
+  Dragapult (0-1). New win: Alakazam (2-0). Still a small sample.
 - 55537754 grim_a2_damage_v0: 18-25. Mirror 5-16 drove the record.
 - 55513649 copy-A: 35-31. Mirror 14-14, lucario 4-5.
 

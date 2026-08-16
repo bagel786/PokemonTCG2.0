@@ -1,0 +1,150 @@
+{
+  "per_archetype": {
+    "alakazam": {
+      "draws": 0,
+      "games": 2,
+      "losses": 0,
+      "submissions": [
+        "55562629"
+      ],
+      "win_rate": 1.0,
+      "wins": 2
+    },
+    "crustle/kangaskhan": {
+      "draws": 0,
+      "games": 1,
+      "losses": 1,
+      "submissions": [
+        "55562629"
+      ],
+      "win_rate": 0.0,
+      "wins": 0
+    },
+    "dragapult": {
+      "draws": 0,
+      "games": 1,
+      "losses": 1,
+      "submissions": [
+        "55562629"
+      ],
+      "win_rate": 0.0,
+      "wins": 0
+    },
+    "grimmsnarl": {
+      "draws": 0,
+      "games": 3,
+      "losses": 2,
+      "submissions": [
+        "55562629"
+      ],
+      "win_rate": 0.3333333333333333,
+      "wins": 1
+    },
+    "other[Basic {F} Energy,Rock Fighting Energy,Lunatone]": {
+      "draws": 0,
+      "games": 1,
+      "losses": 0,
+      "submissions": [
+        "55562629"
+      ],
+      "win_rate": 1.0,
+      "wins": 1
+    },
+    "other[Basic {G} Energy,Grookey,Thwackey]": {
+      "draws": 0,
+      "games": 1,
+      "losses": 0,
+      "submissions": [
+        "55562629"
+      ],
+      "win_rate": 1.0,
+      "wins": 1
+    },
+    "other[Basic {M} Energy,Relicanth,Duraludon]": {
+      "draws": 0,
+      "games": 1,
+      "losses": 0,
+      "submissions": [
+        "55562629"
+      ],
+      "win_rate": 1.0,
+      "wins": 1
+    },
+    "other[Basic {W} Energy,Cinderace,Staryu]": {
+      "draws": 0,
+      "games": 1,
+      "losses": 0,
+      "submissions": [
+        "55562629"
+      ],
+      "win_rate": 1.0,
+      "wins": 1
+    },
+    "other[Basic {W} Energy,Kyogre,Snover]": {
+      "draws": 0,
+      "games": 1,
+      "losses": 0,
+      "submissions": [
+        "55562629"
+      ],
+      "win_rate": 1.0,
+      "wins": 1
+    }
+  },
+  "per_submission": {
+    "55562629": {
+      "by_archetype": {
+        "alakazam": {
+          "d": 0,
+          "l": 0,
+          "w": 2
+        },
+        "crustle/kangaskhan": {
+          "d": 0,
+          "l": 1,
+          "w": 0
+        },
+        "dragapult": {
+          "d": 0,
+          "l": 1,
+          "w": 0
+        },
+        "grimmsnarl": {
+          "d": 0,
+          "l": 2,
+          "w": 1
+        },
+        "other[Basic {F} Energy,Rock Fighting Energy,Lunatone]": {
+          "d": 0,
+          "l": 0,
+          "w": 1
+        },
+        "other[Basic {G} Energy,Grookey,Thwackey]": {
+          "d": 0,
+          "l": 0,
+          "w": 1
+        },
+        "other[Basic {M} Energy,Relicanth,Duraludon]": {
+          "d": 0,
+          "l": 0,
+          "w": 1
+        },
+        "other[Basic {W} Energy,Cinderace,Staryu]": {
+          "d": 0,
+          "l": 0,
+          "w": 1
+        },
+        "other[Basic {W} Energy,Kyogre,Snover]": {
+          "d": 0,
+          "l": 0,
+          "w": 1
+        }
+      },
+      "draws": 0,
+      "episodes": 12,
+      "losses": 4,
+      "skipped_unknown_seat": 0,
+      "wins": 8
+    }
+  }
+}
