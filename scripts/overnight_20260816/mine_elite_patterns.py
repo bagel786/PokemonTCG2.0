@@ -40,7 +40,7 @@ def zone_of(obs, area, index, player_index):
 def source_card(obs, opt):
     """Resolve the card an option refers to (PLAY: hand fallback; else area)."""
     otype = int(opt.get('type', -1))
-    if otype == 1 and opt.get('area') is None:
+    if otype == 7 and opt.get('area') is None:
         return zone_of(obs, AreaType.HAND, opt.get('index'), obs['current']['yourIndex'])
     return zone_of(obs, opt.get('area'), opt.get('index'), opt.get('playerIndex'))
 

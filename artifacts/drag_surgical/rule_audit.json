@@ -1,0 +1,18 @@
+{
+ "A": {
+  "drag_decisions": 13149,
+  "fires": 6,
+  "L": 4,
+  "W": 2
+ },
+ "B": {
+  "drag_decisions": 13149
+ },
+ "C": {
+  "drag_decisions": 13149,
+  "fires": 374,
+  "L": 235,
+  "W": 139,
+  "elite_skipped_support": 224
+ }
+}

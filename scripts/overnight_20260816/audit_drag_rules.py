@@ -129,7 +129,7 @@ def main() -> None:
                 for idx in action:
                     if 0 <= idx < len(opts):
                         o = opts[idx]
-                        if int(o.get('type', -1)) == 1 and o.get('area') is None:
+                        if int(o.get('type', -1)) == 7 and o.get('area') is None:
                             c = (hand[idx] if 0 <= idx < len(hand) else None)
                             out.add(name(c))
                 return out
@@ -150,7 +150,7 @@ def main() -> None:
                 for idx in pkg_act:
                     if 0 <= idx < len(opts):
                         o = opts[idx]
-                        if int(o.get('type', -1)) == 2 and o.get('area') is None:
+                        if int(o.get('type', -1)) == 8 and o.get('area') is None:
                             c = (hand[idx] if 0 <= idx < len(hand) else None)
                             pkg_attach.add(name(c))
                 if 'Basic {D} Energy' in pkg_attach:
@@ -160,7 +160,7 @@ def main() -> None:
                     for idx in elite_act:
                         if 0 <= idx < len(opts):
                             o = opts[idx]
-                            if int(o.get('type', -1)) == 2 and o.get('area') is None:
+                            if int(o.get('type', -1)) == 8 and o.get('area') is None:
                                 c = (hand[idx] if 0 <= idx < len(hand) else None)
                                 elite_attach.add(name(c))
                     if 'Basic {D} Energy' not in elite_attach:

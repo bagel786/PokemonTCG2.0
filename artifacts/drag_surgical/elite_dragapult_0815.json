@@ -1,0 +1,1402 @@
+[
+ {
+  "ep": "93143782",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "Gemini ch.",
+  "opp_team": "Unown Gradiant",
+  "n_steps": 232
+ },
+ {
+  "ep": "93144673",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "Gemini ch.",
+  "opp_team": "Unown Gradiant",
+  "n_steps": 145
+ },
+ {
+  "ep": "93142804",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+  "opp_team": "Unown Gradiant",
+  "n_steps": 224
+ },
+ {
+  "ep": "93144717",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "Gemini ch.",
+  "opp_team": "MTamago",
+  "n_steps": 56
+ },
+ {
+  "ep": "93145629",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "YumeNeko",
+  "opp_team": "MissingNo.",
+  "n_steps": 252
+ },
+ {
+  "ep": "93146209",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "Yaroslav",
+  "opp_team": "\u674e\u79c9\u53e1\uff08ntumlnoob\uff09",
+  "n_steps": 229
+ },
+ {
+  "ep": "93149324",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "NguyenThanhNhan",
+  "opp_team": "Unown Gradiant",
+  "n_steps": 256
+ },
+ {
+  "ep": "93149921",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "yumizu",
+  "opp_team": "\u674e\u79c9\u53e1\uff08ntumlnoob\uff09",
+  "n_steps": 240
+ },
+ {
+  "ep": "93152003",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "Ken Zhou",
+  "opp_team": "JB Bryant",
+  "n_steps": 184
+ },
+ {
+  "ep": "93153921",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+  "opp_team": "THIRD PTCG Club",
+  "n_steps": 195
+ },
+ {
+  "ep": "93155633",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "atsushi11o7",
+  "opp_team": "\u674e\u79c9\u53e1\uff08ntumlnoob\uff09",
+  "n_steps": 294
+ },
+ {
+  "ep": "93159206",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "NguyenThanhNhan",
+  "opp_team": "\u674e\u79c9\u53e1\uff08ntumlnoob\uff09",
+  "n_steps": 168
+ },
+ {
+  "ep": "93161916",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "atsushi11o7",
+  "opp_team": "\u674e\u79c9\u53e1\uff08ntumlnoob\uff09",
+  "n_steps": 218
+ },
+ {
+  "ep": "93162007",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "atsushi11o7",
+  "opp_team": "\u30ab\u30f3\u30c8\u30fc\u5730\u65b9\u30de\u30b9\u30bf\u30fc(KantoRegionMaster)",
+  "n_steps": 195
+ },
+ {
+  "ep": "93162786",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "yumizu",
+  "opp_team": "@kdcyberdude",
+  "n_steps": 245
+ },
+ {
+  "ep": "93165458",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "GrimmsnaRL",
+  "opp_team": "\u30ab\u30f3\u30c8\u30fc\u5730\u65b9\u30de\u30b9\u30bf\u30fc(KantoRegionMaster)",
+  "n_steps": 230
+ },
+ {
+  "ep": "93165637",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "Saber",
+  "opp_team": "Funky",
+  "n_steps": 192
+ },
+ {
+  "ep": "93166346",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "fsun",
+  "opp_team": "LumenLiquidity",
+  "n_steps": 169
+ },
+ {
+  "ep": "93164617",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "redblackbst",
+  "opp_team": "@kdcyberdude",
+  "n_steps": 236
+ },
+ {
+  "ep": "93167369",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "AlphaTCG",
+  "opp_team": "\u674e\u79c9\u53e1\uff08ntumlnoob\uff09",
+  "n_steps": 162
+ },
+ {
+  "ep": "93168235",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "NguyenThanhNhan",
+  "opp_team": "@kdcyberdude",
+  "n_steps": 195
+ },
+ {
+  "ep": "93173583",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "fsun",
+  "opp_team": "\u30ab\u30f3\u30c8\u30fc\u5730\u65b9\u30de\u30b9\u30bf\u30fc(KantoRegionMaster)",
+  "n_steps": 175
+ },
+ {
+  "ep": "93173662",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "Gemini ch.",
+  "opp_team": "fishcat",
+  "n_steps": 184
+ },
+ {
+  "ep": "93173756",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "NguyenThanhNhan",
+  "opp_team": "\u674e\u79c9\u53e1\uff08ntumlnoob\uff09",
+  "n_steps": 181
+ },
+ {
+  "ep": "93178218",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "atsushi11o7",
+  "opp_team": "Unown Gradiant",
+  "n_steps": 221
+ },
+ {
+  "ep": "93212723",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "MtN",
+  "opp_team": "Klein Houmani",
+  "n_steps": 191
+ },
+ {
+  "ep": "93212757",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "S. B.",
+  "opp_team": "Mew World Order",
+  "n_steps": 195
+ },
+ {
+  "ep": "93225261",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "kurigen",
+  "opp_team": "Budew",
+  "n_steps": 170
+ },
+ {
+  "ep": "93225304",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "Yaroslav",
+  "opp_team": "Mew World Order",
+  "n_steps": 226
+ },
+ {
+  "ep": "93226114",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "Ken Zhou",
+  "opp_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+  "n_steps": 260
+ },
+ {
+  "ep": "93226999",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "kurigen",
+  "opp_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+  "n_steps": 208
+ },
+ {
+  "ep": "93228869",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "kurigen",
+  "opp_team": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
+  "n_steps": 281
+ },
+ {
+  "ep": "93230552",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "GuerillaMoon",
+  "opp_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+  "n_steps": 198
+ },
+ {
+  "ep": "93231547",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "kurigen",
+  "opp_team": "@kdcyberdude",
+  "n_steps": 183
+ },
+ {
+  "ep": "93237772",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "fsun",
+  "opp_team": "RtoABC",
+  "n_steps": 184
+ },
+ {
+  "ep": "93237933",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "Gemini ch.",
+  "opp_team": "Mew World Order",
+  "n_steps": 192
+ },
+ {
+  "ep": "93241294",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "NguyenThanhNhan",
+  "opp_team": "haggle",
+  "n_steps": 180
+ },
+ {
+  "ep": "93244232",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "B\u1eedu Ph\u1ea1m Qu\u1ed1c",
+  "opp_team": "Boseiju",
+  "n_steps": 242
+ },
+ {
+  "ep": "93244102",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "Dries @ Tufa Labs",
+  "opp_team": "\u5b9d\u7cd5\u624b",
+  "n_steps": 221
+ },
+ {
+  "ep": "93243047",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "atsushi11o7",
+  "opp_team": "\u30ab\u30f3\u30c8\u30fc\u5730\u65b9\u30de\u30b9\u30bf\u30fc(KantoRegionMaster)",
+  "n_steps": 230
+ },
+ {
+  "ep": "93245880",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "Gaurav Goswami",
+  "opp_team": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
+  "n_steps": 207
+ },
+ {
+  "ep": "93245908",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "Dries @ Tufa Labs",
+  "opp_team": "RtoABC",
+  "n_steps": 176
+ },
+ {
+  "ep": "93246670",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "atsushi11o7",
+  "opp_team": "\u30ab\u30f3\u30c8\u30fc\u5730\u65b9\u30de\u30b9\u30bf\u30fc(KantoRegionMaster)",
+  "n_steps": 207
+ },
+ {
+  "ep": "93246881",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "B\u1eedu Ph\u1ea1m Qu\u1ed1c",
+  "opp_team": "JB Bryant",
+  "n_steps": 75
+ },
+ {
+  "ep": "93248653",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "Dries @ Tufa Labs",
+  "opp_team": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
+  "n_steps": 198
+ },
+ {
+  "ep": "93247780",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "Dries @ Tufa Labs",
+  "opp_team": "Mew World Order",
+  "n_steps": 170
+ },
+ {
+  "ep": "93249641",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "\u6211\u8111\u5b50\u4e0d\u592a\u597d",
+  "opp_team": "THIRD PTCG Club",
+  "n_steps": 267
+ },
+ {
+  "ep": "93250493",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "Dries @ Tufa Labs",
+  "opp_team": "Raihan Ramadistra",
+  "n_steps": 203
+ },
+ {
+  "ep": "93254946",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "Phil_Hellmuth",
+  "opp_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+  "n_steps": 165
+ },
+ {
+  "ep": "93257405",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "Phil_Hellmuth",
+  "opp_team": "HSBMAX",
+  "n_steps": 220
+ },
+ {
+  "ep": "93258307",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "Ars Noveau",
+  "opp_team": "HSBMAX",
+  "n_steps": 212
+ },
+ {
+  "ep": "93259248",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "Yaroslav",
+  "opp_team": "HSBMAX",
+  "n_steps": 153
+ },
+ {
+  "ep": "93263707",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "lollipop947",
+  "opp_team": "tennogh",
+  "n_steps": 300
+ },
+ {
+  "ep": "93268465",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "Mint120",
+  "opp_team": "RtoABC",
+  "n_steps": 180
+ },
+ {
+  "ep": "93266464",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "Shang Bo",
+  "opp_team": "HSBMAX",
+  "n_steps": 226
+ },
+ {
+  "ep": "93267400",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "atsushi11o7",
+  "opp_team": "tennogh",
+  "n_steps": 152
+ },
+ {
+  "ep": "93275380",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "h_noson",
+  "opp_team": "\uc11c\uc8fc\uc601",
+  "n_steps": 221
+ },
+ {
+  "ep": "93279067",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "huaiyuyoung",
+  "opp_team": "tennogh",
+  "n_steps": 203
+ },
+ {
+  "ep": "93278204",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "atsushi11o7",
+  "opp_team": "tennogh",
+  "n_steps": 298
+ },
+ {
+  "ep": "93279983",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "tennogh",
+  "opp_team": "\uc11c\uc8fc\uc601",
+  "n_steps": 155
+ },
+ {
+  "ep": "93280682",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "pika pika pikachu",
+  "opp_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+  "n_steps": 284
+ },
+ {
+  "ep": "93280722",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "Phil_Hellmuth",
+  "opp_team": "Majkel1337",
+  "n_steps": 176
+ },
+ {
+  "ep": "93283508",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "Ars Noveau",
+  "opp_team": "Kh0a",
+  "n_steps": 220
+ },
+ {
+  "ep": "93282673",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "Ars Noveau",
+  "opp_team": "ONE PIECE",
+  "n_steps": 165
+ },
+ {
+  "ep": "93284291",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "haggle",
+  "opp_team": "Raihan Ramadistra",
+  "n_steps": 139
+ },
+ {
+  "ep": "93285383",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "\u4f60\u597d\u54c7",
+  "opp_team": "ONE PIECE",
+  "n_steps": 208
+ },
+ {
+  "ep": "93289791",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "Phil_Hellmuth",
+  "opp_team": "Mew World Order",
+  "n_steps": 95
+ },
+ {
+  "ep": "93287989",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "Gemini ch.",
+  "opp_team": "Kh0a",
+  "n_steps": 215
+ },
+ {
+  "ep": "93291597",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "To be happy",
+  "opp_team": "Kh0a",
+  "n_steps": 310
+ },
+ {
+  "ep": "93292335",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "\u6211\u8111\u5b50\u4e0d\u592a\u597d",
+  "opp_team": "fishcat",
+  "n_steps": 160
+ },
+ {
+  "ep": "93292469",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "kokun syu",
+  "opp_team": "Kh0a",
+  "n_steps": 239
+ },
+ {
+  "ep": "93298621",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "alexstatyg",
+  "opp_team": "fishcat",
+  "n_steps": 89
+ },
+ {
+  "ep": "93299706",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "Phil_Hellmuth",
+  "opp_team": "fishcat",
+  "n_steps": 197
+ },
+ {
+  "ep": "93304078",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "Yaroslav",
+  "opp_team": "fishcat",
+  "n_steps": 149
+ },
+ {
+  "ep": "93319171",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "GrimmsnaRL",
+  "opp_team": "hirune924",
+  "n_steps": 223
+ },
+ {
+  "ep": "93317381",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "fsun",
+  "opp_team": "hirune924",
+  "n_steps": 195
+ },
+ {
+  "ep": "93321845",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "Gemini ch.",
+  "opp_team": "\u3057\u3093\u3074\u306e\u3057\u305a\u304f\ud83d\udca7",
+  "n_steps": 193
+ },
+ {
+  "ep": "93323712",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "Shang Bo",
+  "opp_team": "\u3057\u3093\u3074\u306e\u3057\u305a\u304f\ud83d\udca7",
+  "n_steps": 150
+ },
+ {
+  "ep": "93323939",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "Gemini ch.",
+  "opp_team": "hirune924",
+  "n_steps": 168
+ },
+ {
+  "ep": "93326531",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "\u6211\u8111\u5b50\u4e0d\u592a\u597d",
+  "opp_team": "JB Bryant",
+  "n_steps": 160
+ },
+ {
+  "ep": "93327329",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "\u5897\u6b96\u3059\u308bG",
+  "opp_team": "\u3084\u308b\u6c17\u5143\u6c17\u30df\u30ef\u30cf\u30eb\u30ad",
+  "n_steps": 168
+ },
+ {
+  "ep": "93328343",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "neibyr",
+  "opp_team": "Raihan Ramadistra",
+  "n_steps": 159
+ },
+ {
+  "ep": "93332555",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "Shang Bo",
+  "opp_team": "\u30ab\u30f3\u30c8\u30fc\u5730\u65b9\u30de\u30b9\u30bf\u30fc(KantoRegionMaster)",
+  "n_steps": 278
+ },
+ {
+  "ep": "93335504",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "\u4f60\u597d\u54c7",
+  "opp_team": "\u3057\u3093\u3074\u306e\u3057\u305a\u304f\ud83d\udca7",
+  "n_steps": 210
+ },
+ {
+  "ep": "93341727",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "G",
+  "opp_team": "youtube.com/@BigBugginnings",
+  "n_steps": 247
+ },
+ {
+  "ep": "93342524",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "Concord_k",
+  "opp_team": "tennogh",
+  "n_steps": 184
+ },
+ {
+  "ep": "93342527",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "\u85e4\u7530\u3000\u4f51",
+  "opp_team": "Boseiju",
+  "n_steps": 221
+ },
+ {
+  "ep": "93343349",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "Ash Ketchum",
+  "opp_team": "KawattaTaido",
+  "n_steps": 171
+ },
+ {
+  "ep": "93343532",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "G",
+  "opp_team": "HSBMAX",
+  "n_steps": 211
+ },
+ {
+  "ep": "93344265",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "GuerillaMoon",
+  "opp_team": "KawattaTaido",
+  "n_steps": 147
+ },
+ {
+  "ep": "93344464",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "G",
+  "opp_team": "RtoABC",
+  "n_steps": 171
+ },
+ {
+  "ep": "93345273",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "Concord_k",
+  "opp_team": "HSBMAX",
+  "n_steps": 225
+ },
+ {
+  "ep": "93346181",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "Concord_k",
+  "opp_team": "Klein Houmani",
+  "n_steps": 170
+ },
+ {
+  "ep": "93347044",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "Shang Bo",
+  "opp_team": "flg",
+  "n_steps": 183
+ },
+ {
+  "ep": "93348981",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "G",
+  "opp_team": "{{ team_name }} \ud83c\udfc6",
+  "n_steps": 226
+ },
+ {
+  "ep": "93349888",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "G",
+  "opp_team": "Pokemon Siuuuu",
+  "n_steps": 230
+ },
+ {
+  "ep": "93355202",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "Phil_Hellmuth",
+  "opp_team": "saeNeko",
+  "n_steps": 235
+ },
+ {
+  "ep": "93365920",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "Shu Kato",
+  "opp_team": "Mew World Order",
+  "n_steps": 176
+ },
+ {
+  "ep": "93363206",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "\u6211\u8111\u5b50\u4e0d\u592a\u597d",
+  "opp_team": "tennogh",
+  "n_steps": 249
+ },
+ {
+  "ep": "93367523",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "huaiyuyoung",
+  "opp_team": "Yichen Ao",
+  "n_steps": 235
+ },
+ {
+  "ep": "93367529",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "Phil_Hellmuth",
+  "opp_team": "LumenLiquidity",
+  "n_steps": 212
+ },
+ {
+  "ep": "93368486",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "\u4f60\u597d\u54c7",
+  "opp_team": "213tubo",
+  "n_steps": 215
+ },
+ {
+  "ep": "93369549",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "Dries @ Tufa Labs",
+  "opp_team": "tennogh",
+  "n_steps": 67
+ },
+ {
+  "ep": "93373885",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "Dries @ Tufa Labs",
+  "opp_team": "213tubo",
+  "n_steps": 199
+ },
+ {
+  "ep": "93374019",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "yoshitaka agent",
+  "opp_team": "tennogh",
+  "n_steps": 196
+ },
+ {
+  "ep": "93374767",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "\u2615 Psyduck Needs Coffee",
+  "opp_team": "matsurih",
+  "n_steps": 171
+ },
+ {
+  "ep": "93379986",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "Kirderf",
+  "opp_team": "youtube.com/@BigBugginnings",
+  "n_steps": 254
+ },
+ {
+  "ep": "93380128",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "\u6211\u8111\u5b50\u4e0d\u592a\u597d",
+  "opp_team": "Lunariz",
+  "n_steps": 229
+ },
+ {
+  "ep": "93382716",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "\u2615 Psyduck Needs Coffee",
+  "opp_team": "\u54c8\u57fa\u7c73\u5357\u5317\u7eff\u8c46",
+  "n_steps": 224
+ },
+ {
+  "ep": "93383739",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "Dries @ Tufa Labs",
+  "opp_team": "Lunariz",
+  "n_steps": 242
+ },
+ {
+  "ep": "93383742",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "NguyenThanhNhan",
+  "opp_team": "matsurih",
+  "n_steps": 242
+ },
+ {
+  "ep": "93384649",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "huaiyuyoung",
+  "opp_team": "matsurih",
+  "n_steps": 192
+ },
+ {
+  "ep": "93386491",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "Yaroslav",
+  "opp_team": "213tubo",
+  "n_steps": 223
+ },
+ {
+  "ep": "93389175",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "huaiyuyoung",
+  "opp_team": "213tubo",
+  "n_steps": 195
+ },
+ {
+  "ep": "93390775",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "Yaroslav",
+  "opp_team": "\u54c8\u57fa\u7c73\u5357\u5317\u7eff\u8c46",
+  "n_steps": 204
+ },
+ {
+  "ep": "93397823",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "\u2615 Psyduck Needs Coffee",
+  "opp_team": "\uc11c\uc8fc\uc601",
+  "n_steps": 217
+ },
+ {
+  "ep": "93398032",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "huaiyuyoung",
+  "opp_team": "DECEM",
+  "n_steps": 171
+ },
+ {
+  "ep": "93398923",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "kurigen",
+  "opp_team": "\u54c8\u57fa\u7c73\u5357\u5317\u7eff\u8c46",
+  "n_steps": 152
+ },
+ {
+  "ep": "93400477",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "neibyr",
+  "opp_team": "tennogh",
+  "n_steps": 222
+ },
+ {
+  "ep": "93400726",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "kurigen",
+  "opp_team": "DECEM",
+  "n_steps": 196
+ },
+ {
+  "ep": "93402501",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "kurigen",
+  "opp_team": "Kh0a",
+  "n_steps": 243
+ },
+ {
+  "ep": "93403390",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "fsun",
+  "opp_team": "Dominic Peel & Rory Neville",
+  "n_steps": 234
+ },
+ {
+  "ep": "93404114",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "YumeNeko",
+  "opp_team": "\u0410zat Akhtyamov",
+  "n_steps": 196
+ },
+ {
+  "ep": "93404253",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "Phil_Hellmuth",
+  "opp_team": "Raihan Ramadistra",
+  "n_steps": 204
+ },
+ {
+  "ep": "93412126",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "neibyr",
+  "opp_team": "Ant",
+  "n_steps": 192
+ },
+ {
+  "ep": "93412957",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "huaiyuyoung",
+  "opp_team": "Yi-Chia Chen",
+  "n_steps": 237
+ },
+ {
+  "ep": "93409383",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "Ken Zhou",
+  "opp_team": "Yi-Chia Chen",
+  "n_steps": 199
+ },
+ {
+  "ep": "93409417",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "neibyr",
+  "opp_team": "Mew World Order",
+  "n_steps": 215
+ },
+ {
+  "ep": "93410269",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "kurigen",
+  "opp_team": "Yi-Chia Chen",
+  "n_steps": 203
+ },
+ {
+  "ep": "93410308",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "neibyr",
+  "opp_team": "\u3057\u3093\u3074\u306e\u3057\u305a\u304f\ud83d\udca7",
+  "n_steps": 202
+ },
+ {
+  "ep": "93413825",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "Shang Bo",
+  "opp_team": "Pokk\u00e9n",
+  "n_steps": 154
+ },
+ {
+  "ep": "93413880",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "huaiyuyoung",
+  "opp_team": "\u0410zat Akhtyamov",
+  "n_steps": 194
+ },
+ {
+  "ep": "93415697",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "NguyenThanhNhan",
+  "opp_team": "\u0410zat Akhtyamov",
+  "n_steps": 213
+ },
+ {
+  "ep": "93417484",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "Shang Bo",
+  "opp_team": "\u0410zat Akhtyamov",
+  "n_steps": 233
+ },
+ {
+  "ep": "93419266",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "neibyr",
+  "opp_team": "Dominic Peel & Rory Neville",
+  "n_steps": 173
+ },
+ {
+  "ep": "93420164",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "base_camp_2002",
+  "opp_team": "Majkel1337",
+  "n_steps": 174
+ },
+ {
+  "ep": "93421830",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "Dries @ Tufa Labs",
+  "opp_team": "Sixth Sense",
+  "n_steps": 234
+ },
+ {
+  "ep": "93421938",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "yoshitaka agent",
+  "opp_team": "\u0410zat Akhtyamov",
+  "n_steps": 145
+ },
+ {
+  "ep": "93418341",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "Masatoshi Hidaka",
+  "opp_team": "Yi-Chia Chen",
+  "n_steps": 237
+ },
+ {
+  "ep": "93418523",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "fsun",
+  "opp_team": "Lunariz",
+  "n_steps": 248
+ },
+ {
+  "ep": "93418542",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "nsytsqdtn",
+  "opp_team": "fishcat",
+  "n_steps": 238
+ },
+ {
+  "ep": "93422834",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "Dries @ Tufa Labs",
+  "opp_team": "\u0410zat Akhtyamov",
+  "n_steps": 231
+ },
+ {
+  "ep": "93422868",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "MoriBob",
+  "opp_team": "Majkel1337",
+  "n_steps": 265
+ },
+ {
+  "ep": "93423750",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "Dries @ Tufa Labs",
+  "opp_team": "Majkel1337",
+  "n_steps": 210
+ },
+ {
+  "ep": "93424615",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "MoriBob",
+  "opp_team": "\u0410zat Akhtyamov",
+  "n_steps": 220
+ },
+ {
+  "ep": "93428166",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "G",
+  "opp_team": "\u0410zat Akhtyamov",
+  "n_steps": 206
+ },
+ {
+  "ep": "93428880",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "Phil_Hellmuth",
+  "opp_team": "\u674e\u79c9\u53e1\uff08ntumlnoob\uff09",
+  "n_steps": 216
+ },
+ {
+  "ep": "93428929",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "Gemini ch.",
+  "opp_team": "EliKal",
+  "n_steps": 183
+ },
+ {
+  "ep": "93428954",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "Ayanokoji Fan Club",
+  "opp_team": "Petit Canard",
+  "n_steps": 206
+ },
+ {
+  "ep": "93429832",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "neibyr",
+  "opp_team": "RtoABC",
+  "n_steps": 175
+ },
+ {
+  "ep": "93429843",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "S. B.",
+  "opp_team": "Petit Canard",
+  "n_steps": 151
+ },
+ {
+  "ep": "93427270",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "haggle",
+  "opp_team": "Yi-Chia Chen",
+  "n_steps": 290
+ },
+ {
+  "ep": "93429945",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "fsun",
+  "opp_team": "Majkel1337",
+  "n_steps": 205
+ },
+ {
+  "ep": "93430893",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "neibyr",
+  "opp_team": "Petit Canard",
+  "n_steps": 189
+ },
+ {
+  "ep": "93431688",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "Ayanokoji Fan Club",
+  "opp_team": "haggle",
+  "n_steps": 204
+ },
+ {
+  "ep": "93434328",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "huaiyuyoung",
+  "opp_team": "Sixth Sense",
+  "n_steps": 222
+ },
+ {
+  "ep": "93434332",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "huaiyuyoung",
+  "opp_team": "Petit Canard",
+  "n_steps": 188
+ },
+ {
+  "ep": "93436114",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "kurigen",
+  "opp_team": "Petit Canard",
+  "n_steps": 279
+ },
+ {
+  "ep": "93436147",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "Ayanokoji Fan Club",
+  "opp_team": "Klein Houmani",
+  "n_steps": 174
+ },
+ {
+  "ep": "93436843",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "GuerillaMoon",
+  "opp_team": "perrodawn",
+  "n_steps": 180
+ },
+ {
+  "ep": "93437172",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "Dries @ Tufa Labs",
+  "opp_team": "213tubo",
+  "n_steps": 204
+ },
+ {
+  "ep": "93437858",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "MoriBob",
+  "opp_team": "EliKal",
+  "n_steps": 138
+ },
+ {
+  "ep": "93437890",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "Dries @ Tufa Labs",
+  "opp_team": "Petit Canard",
+  "n_steps": 263
+ },
+ {
+  "ep": "93437896",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "\u2615 Psyduck Needs Coffee",
+  "opp_team": "Petit Canard",
+  "n_steps": 144
+ },
+ {
+  "ep": "93438765",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "Ayanokoji Fan Club",
+  "opp_team": "Sixth Sense",
+  "n_steps": 197
+ },
+ {
+  "ep": "93440620",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "Ayanokoji Fan Club",
+  "opp_team": "youtube.com/@BigBugginnings",
+  "n_steps": 139
+ },
+ {
+  "ep": "93442327",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "Yaroslav",
+  "opp_team": "EliKal",
+  "n_steps": 231
+ },
+ {
+  "ep": "93443306",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "Ayanokoji Fan Club",
+  "opp_team": "\u3057\u3093\u3074\u306e\u3057\u305a\u304f\ud83d\udca7",
+  "n_steps": 194
+ },
+ {
+  "ep": "93444118",
+  "grim_seat": 1,
+  "won": true,
+  "grim_team": "G",
+  "opp_team": "LumenLiquidity",
+  "n_steps": 226
+ },
+ {
+  "ep": "93444998",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "\u2615 Psyduck Needs Coffee",
+  "opp_team": "LumenLiquidity",
+  "n_steps": 262
+ },
+ {
+  "ep": "93445044",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "kurigen",
+  "opp_team": "EliKal",
+  "n_steps": 241
+ },
+ {
+  "ep": "93447691",
+  "grim_seat": 0,
+  "won": true,
+  "grim_team": "\u4f60\u597d\u54c7",
+  "opp_team": "LumenLiquidity",
+  "n_steps": 269
+ },
+ {
+  "ep": "93449539",
+  "grim_seat": 1,
+  "won": false,
+  "grim_team": "GuerillaMoon",
+  "opp_team": "EliKal",
+  "n_steps": 186
+ },
+ {
+  "ep": "93451301",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "senkin13",
+  "opp_team": "LumenLiquidity",
+  "n_steps": 199
+ },
+ {
+  "ep": "93454786",
+  "grim_seat": 0,
+  "won": false,
+  "grim_team": "huaiyuyoung",
+  "opp_team": "\u30ab\u30f3\u30c8\u30fc\u5730\u65b9\u30de\u30b9\u30bf\u30fc(KantoRegionMaster)",
+  "n_steps": 221
+ }
+]
