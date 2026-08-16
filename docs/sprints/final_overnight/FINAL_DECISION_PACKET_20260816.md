@@ -37,14 +37,17 @@ Branch: `final/overnight-20260816` @ `9d974bb` (+ today's uncommitted eval outpu
   - Non-Grim: az24nos pooled 800p ≈ **-1.6pp ns** (Alakazam = 19% meta), az24 search-on -2.0 ns (100p), starmie +1.7 (600p), dipplin +1.0 (400p)
   - Wave-1 7-cell macro (100p/order): **+1.8pp**; meta-weighted (renormalized, 54% coverage): **≈ +2.0pp**
   - Both arms positive on Grim mirrors at big N (first +2.5…+6.8, second +2.0…+9.0)
-- **Live (11:55 CDT):** 25 games vs real opponents, **16W-8L (67%)**, score 844.6 (path 600→910→770→845).
-  Zero errors; parity 2027/2027 decisions byte-identical to local package.
-  - **Matchup ledger (EXP23 vs C0's 43-game bank, same day):**
-    - Grim mirror: **EXP23 5W-1L (83%)** vs C0 5W-15L (25%) — field's +4.5pp mirror gain REPRODUCED LIVE
-    - Dragapult: **EXP23 1W-3L** vs C0 2W-0L (n=2) — FLAG: live weak spot (incl. 2 losses to same opponent 55556789 "tellurium_rrr", a new Dragapult ex/Dusknoir deck; our late boards show bench-cluttered basics — consistent with the CERT-B late-game PLAY divergence: extra Impidimp/Snorunt bench bodies are Phantom Dive/Dusknoir fodder)
-    - Alakazam: EXP23 5W-0L vs C0 4W-6L
-    - n per cell is small; treat as behavioral signal, not proof
-  - Dragapult is 10.1% of ladder meta and NOT in the local field panel (no authentic opponent package exists).
+- **Live (14:00 CDT):** 27 games vs real opponents, **17W-10L (63%)**, score ~840 band.
+  Zero errors; self-parity byte-identical on all fetched replays.
+  - **Matchup ledger:**
+    - Grim mirror: **5W-1L (83%)** — field's +4.5pp mirror gain REPRODUCED LIVE
+    - Alakazam: **6W-0L** — local az24 proxy (-1.6pp) under-predicted; live very beatable
+    - Dragapult: **1W-4L (20%)** — live weak spot (deck-level 40% elite baseline; see
+      DRAGAPULT_SURGICAL_HANDOFF — no safe policy fix found, mostly structural/tempo)
+    - Dipplin 0-1, other 5-4
+  - Loss causes: tempo (first Grim ≥ t8) in 3, close prize races in 6, Munk-clutter
+    co-occurring in 6. No policy blunders or mechanism failures identified.
+  - Full detail: `docs/sprints/final_overnight/EXP23_LIVE_LOSS_ANALYSIS_20260816.md`
 - **Late-game divergence anatomy (233 CERT-B late decisive rows):**
   - c0_approved 112: elite+C0 agree on ABILITY activations (Munkidori 44, Spikemuth 18), attacks, energy
   - cand_approved 48: EXP23 matches elite on plays (Night Stretcher, Spikemuth, Rare Candy)
