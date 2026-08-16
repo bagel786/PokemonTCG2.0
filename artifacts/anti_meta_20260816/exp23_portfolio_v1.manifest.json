@@ -1,0 +1,13 @@
+{
+  "archive": "artifacts/anti_meta_20260816/exp23_portfolio_v1.tar.gz",
+  "archive_sha256": "b654b05084c6fef7ae497e71143024d2327650cff838341d904954d1b4d37a5c",
+  "base_model": "EXP-23 CEFE61189BC6F4E3",
+  "deck_csv_sha256": "92b92bac9f9163ecff933b3dc39294d2cc154c8684f3c8497877661419ebc59d",
+  "name": "exp23_portfolio_v1",
+  "surgical_default": "dip_b",
+  "verification": {
+    "deck_cards": 60,
+    "ok": true,
+    "problems": []
+  }
+}

@@ -4,7 +4,7 @@
 
 ## 1. Time, branch, commit
 
-- Packet written: 15:55 CDT (2026-08-16)
+- Packet written: 16:15 CDT (2026-08-16)
 - Branch: `final/surgical-portfolio-20260816` (worktree `pokemonTCG2.0-sprint`)
 - Frozen bases (untouched):
   - `final/overnight-20260816` @ `de532fa` (EXP23 live-loss analysis)
@@ -59,9 +59,9 @@ All paired vs exact EXP23 control. Package: router_endgame (EXP23 + DIP_B + ENDG
   earlier time-budget cells: 60p +1.1pp, 100p +0.5pp, 40p +1.25pp (all 1-0, 0 errors).
   TOTAL mirror rescues: 4 candidate-only discordant wins / 520 pairs, 0 control-only.
 - vs Alakazam 2.4a (deterministic package): 60p exact parity (0 discordants, 0 errors).
-- vs Dipplin D1 (forced route, dip_b + endgame) — first run INVALIDATED (package was
-  rebuilt mid-run; also time-budget nondeterminism). Clean rerun: TBD (running at
-  packet draft time).
+- vs Dipplin D1 (forced route, dip_b + endgame), clean deterministic rerun 40p/order:
+  overall +2.5pp (4-2 discordants), 0 policy errors. DIP_B value preserved with the
+  endgame layer on top.
 - **vs Dragapult — SCREEN INVALIDATED.** The available dragapult opponent is
   NONDETERMINISTIC: plain EXP23 control flips win/loss across same-seed reruns
   (verified: 5 runs → mixed outcomes, varying decision counts). Paired-CRN assumptions
@@ -109,19 +109,24 @@ All paired vs exact EXP23 control. Package: router_endgame (EXP23 + DIP_B + ENDG
 
 - Tree: `artifacts/anti_meta_20260816/packages/router_endgame` (built by
   `scripts/build_router_package.py` from EXP-23 identity tree + router/surgical/endgame modules)
-- Sterile archive + sha256 + manifest: TBD (built with `scripts/package_final_candidate.py`)
-- Smoke: TBD
+- Sterile archive: `artifacts/anti_meta_20260816/exp23_portfolio_v1.tar.gz`
+- **SHA256: `b654b05084c6fef7ae497e71143024d2327650cff838341d904954d1b4d37a5c`**
+- Manifest: `artifacts/anti_meta_20260816/exp23_portfolio_v1.manifest.json`
+- deck.csv sha256 `92b92bac9f9163ecff933b3dc39294d2cc154c8684f3c8497877661419ebc59d`
+- Sterile smoke (extracted archive vs B0, 3 pairs/order): 0 policy errors, 0
+  discordants, candidate tree sha256 `82280f544ddc4971f5c0adb781786582926104c087b2f91b3ba48cf9e6a001d9`
 
 ## 10. Recommended Kaggle action
 
-- **SUBMIT exp23_portfolio_v1** (if final screens confirm: B0 nonnegative with 0 reverse
-  discordants, az exact parity, D1 dipplin cell nonnegative, 0 policy errors everywhere,
-  sterile smoke passes).
-- The live evidence says the solver won't rescue EXP23's current losses (structural),
-  but it converts a small number of genuine seeded mirror losses with near-zero risk,
-  and DIP_B alone was already a recommended submit. **If any final screen shows a
-  negative discordant count or any policy error: KEEP EXP23 (drop endgame), or fall back
-  to the certified DIP_B-only archive.**
+- **SUBMIT exp23_portfolio_v1 NOW.**
+- Final screens (deterministic package): B0 4-0 discordant rescues / 520 pairs,
+  Alakazam exact parity 240 pairs, Dipplin D1 +2.5pp (4-2), 0 policy errors
+  everywhere, sterile smoke clean.
+- Live evidence shows the solver won't rescue EXP23's current losses (structural),
+  but it converts genuine seeded mirror losses with near-zero risk, and DIP_B was
+  already a recommended submit. If higher-reasoning review disagrees, the rollback
+  candidates are: EXP23 alone, or the certified DIP_B-only archive
+  (sha 977f9e6e23c1898c4726fb630560a45e1218848a51e2b0de822cd7e0526048ce).
 
 ## 11. Remaining known risks
 
@@ -136,5 +141,4 @@ All paired vs exact EXP23 control. Package: router_endgame (EXP23 + DIP_B + ENDG
 
 - Crustle CRN screen (no opponent package) — section 6.
 - Lucario complete-turn causal scan — section 7.
-- Dragapult CRN cell — invalid evaluator — section 8.
-- Final v2 screens (B0/az/D1 on deterministic package) were running at packet draft time.
+- Dragapult CRN cell — invalid evaluator (opponent nondeterministic) — section 8.
