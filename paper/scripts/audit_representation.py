@@ -15,6 +15,7 @@ import gzip
 import hashlib
 import json
 import subprocess
+import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -23,6 +24,7 @@ import torch
 
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
 PLAY = 7
 OPTION_NAMES = {
     0: "number", 1: "yes", 2: "no", 3: "card", 4: "tool_card",
