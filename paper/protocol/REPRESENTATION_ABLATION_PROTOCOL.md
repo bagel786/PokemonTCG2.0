@@ -4,6 +4,12 @@ Frozen before training or evaluating the missing cell. This secondary
 mechanistic experiment asks whether the observed behavior is attributable to
 the PLAY-source representation, head retraining, or their interaction.
 
+Protocol amendment (before any corpus derivation, training batch, or gameplay
+evaluation): the first invocation at commit `a976a2b` exited at import time with
+`ModuleNotFoundError: training`. The runner was amended only to prepend the
+repository root to `sys.path`. No data, seed, package, training setting, endpoint,
+or analysis rule changed; the failed invocation produced no result file.
+
 ## Four cells
 
 | Cell | Encoder | Policy weights | Frozen package/model evidence |
