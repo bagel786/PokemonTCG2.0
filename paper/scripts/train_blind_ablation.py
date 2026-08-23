@@ -167,6 +167,17 @@ def main() -> int:
     model_hashes = {path.name: sha256_file(path) for path in policy_paths}
     if len(set(model_hashes.values())) != 1:
         raise AssertionError("ablation package policy files are not byte-identical")
+    order_manifest_path = package / "order_policy_manifest.json"
+    order_manifest = json.loads(order_manifest_path.read_text(encoding="utf-8"))
+    order_manifest.update({
+        "label": "PAPER_ABLATION_C3_BLIND_TRAINED",
+        "policy_first_sha256": model_hashes["policy_first.npz"].upper(),
+        "policy_second_sha256": model_hashes["policy_second.npz"].upper(),
+        "provenance_note": "Mechanistic blind-encoder cell; not a deployment candidate.",
+    })
+    order_manifest_path.write_text(
+        json.dumps(order_manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
     report = {
         "schema_version": 1,
         "cell": "blind_encoder_same_training",
@@ -181,6 +192,7 @@ def main() -> int:
         "package": str(package.relative_to(ROOT)),
         "package_tree_sha256": sha256_tree(package),
         "package_policy_hashes": model_hashes,
+        "package_order_manifest_sha256": sha256_file(order_manifest_path),
         "script": str(Path(__file__).resolve().relative_to(ROOT)),
         "script_sha256": sha256_file(Path(__file__).resolve()),
         "realized_rehearsal_records": sum(

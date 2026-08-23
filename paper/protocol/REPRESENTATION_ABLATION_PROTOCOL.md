@@ -17,6 +17,15 @@ written phrase “four simple C1-relative” was internally inconsistent with th
 listed contrasts. No gameplay result had been generated or inspected when this
 wording was corrected.
 
+Packaging amendment (before any C3 gameplay): inspection found that copying C0
+also copied its non-executable order-policy manifest, whose policy hashes still
+named A2. The training driver was amended to rewrite that manifest with the
+already produced C3 policy hashes and a mechanistic-cell label, then rerun from
+the frozen corpus and seed. The manifest is not read by `main.py` or the order
+router; this prevents a new stale-provenance record without changing policy
+code, weights, data, hyperparameters, endpoints, or the gameplay schedule. C2
+gameplay already in progress is unaffected and uses a separate frozen package.
+
 ## Four cells
 
 | Cell | Encoder | Policy weights | Frozen package/model evidence |
