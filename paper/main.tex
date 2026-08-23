@@ -1,0 +1,613 @@
+\documentclass[aps,reprint,superscriptaddress,longbibliography]{revtex4-2}
+
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+
+\input{results_macros.tex}
+\input{diagnostic_macros.tex}
+
+\newcommand{\EXP}{\textsc{exp23}}
+\newcommand{\Ctl}{\textsc{c0}}
+\newcommand{\pp}{percentage points}
+
+\begin{document}
+
+\title{Representation Repair under Distribution Shift in a Partially Observable Card Game}
+
+\author{[Author name requires human confirmation]}
+\email{[Corresponding-author email required]}
+\affiliation{[Affiliation and postal address require human confirmation]}
+\date{August 23, 2026}
+
+\begin{abstract}
+Sequential policies with variable legal-action sets can fail because distinct
+legal actions are mapped to the same policy input.  We study an instance in a
+partially observable stochastic card-game simulator.  The historical encoder
+represented ordinary PLAY options without binding each option to the observed
+hand item that it selected.  We repaired that binding and fine-tuned only four
+policy heads of a frozen baseline on recent expert-replay decisions while
+retaining a distillation anchor.  We compared the resulting policy, \EXP, with
+the frozen control, \Ctl, in a preregistered common-random-number experiment over
+seven fixed opponent policies and both actual turn orders.  The equal-weight
+paired win-probability difference was \PrimaryEffectPP\ \pp\ (95\% stratified
+paired-bootstrap interval [\PrimaryCILowPP, \PrimaryCIHighPP]; \PrimaryPairs\
+pairs).  \PrimaryInference\ In a separate episode-clustered reanalysis of
+retained replay units, \EXP\ approval among binary candidate--control
+disagreements was \ReplayApproval\ (95\% interval [\ReplayApprovalCILow,
+\ReplayApprovalCIHigh]); \ReplayApprovalInference\ A matched four-cell
+ablation and two retained null experiments constrain mechanistic attribution.
+The study separates representation validity, imitation agreement, paired
+gameplay performance, and robustness across opponent groups; it does not claim
+universal improvement or superhuman play.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Imperfect-information games are useful environments for studying sequential
+decision making because an agent must act from a partial view of a stochastic
+process while anticipating another policy.  Poker systems such as DeepStack and
+Pluribus illustrate the scientific difficulty of this class
+\cite{moravcik2017deepstack,brown2019pluribus}; they are context, not empirical
+comparators for the card-game agent studied here.  Our question is narrower:
+what happens when a concrete legal-action representation defect is repaired,
+and do offline imitation metrics rank the repaired policy in the same way as
+paired simulated outcomes?
+
+The distinction matters because a representation can be more faithful to the
+available observation without increasing agreement with a held-out
+demonstrator.  Conversely, a policy can improve terminal outcomes against a
+defined opponent set without reproducing more historical actions.  Sequential
+imitation learning is exposed to distribution shift because a learned policy
+changes the states it visits \cite{ross2011dagger}.  The present study does not
+implement DAgger and claims none of its guarantees; that work establishes why
+held-out action agreement and on-policy outcomes answer different questions.
+
+Legal-action interfaces add a separate representational hazard.  Invalid-action
+masking controls which outputs may be selected but does not ensure that two
+valid outputs are distinguishable \cite{huang2022invalidmasking}.  Set and
+relational models provide a general vocabulary for retaining item identity in
+variable collections \cite{zaheer2017deepsets}.  Here the defect was bounded:
+an ordinary PLAY option carried an index into the observed hand, but the v2
+feature path left its source-identity field at zero.  Different legal plays
+could therefore have identical option features where their selected item should
+have distinguished them.
+
+We contribute (i) a corpus-level audit of this aliasing; (ii) an identity-aware
+repair coupled to a heads-only, baseline-anchored imitation update; (iii) a
+fresh, paired, order-balanced gameplay confirmation; (iv) a matched four-cell
+representation-by-training ablation; and (v) an explicit comparison with
+episode-clustered expert-action agreement and retained null experiments.  The
+reporting follows recommendations to quantify aggregate uncertainty and preserve
+artifact provenance \cite{agarwal2021statistical,pineau2021reproducibility}.
+The opponents are a frozen engineering population rather than a probability
+sample.  Public competition rating and rank are not outcomes in this paper.
+
+\begin{figure*}
+  \includegraphics[width=\textwidth]{figures/fig01_pipeline.pdf}
+  \caption{Policy and evaluation pipeline.  Candidate and control see the same
+  opponent, actual order, physical seat, and engine seed within each pair.  The
+  restricted engine and opponent implementations are fixed inputs rather than
+  redistributable contributions.}
+  \label{fig:pipeline}
+\end{figure*}
+
+\section{Formal problem setting}
+
+We model the simulator as a finite-horizon partially observable stochastic
+game.  At engine step $t$, the acting agent receives observation $o_t$ and a
+variable legal-action collection
+$A_t=\{a_{t1},\ldots,a_{tK_t}\}$.  The observation contains only information
+exposed by the competition interface.  A policy scores each legal action,
+\begin{equation}
+  s_\theta(o_t,a_{tj})=h_\theta\!\left(g_\theta(o_t),
+  \phi_\theta(o_t,a_{tj})\right),
+\end{equation}
+and selects from $A_t$ subject to deterministic runtime constraints.  Here
+$g_\theta$ represents global observation features and $\phi_\theta$ represents
+one legal option.  Because $K_t$ varies, option identity is part of the policy
+contract rather than merely an output label.
+
+For a fixed observation, an action-identity collision occurs when distinct
+legal actions $a\neq a'$ have the same blind option signature on the fields used
+to distinguish them.  The defect examined here concerns ordinary PLAY options
+whose legal-option indices refer to different entries of the observed hand.
+The historical encoder assigned source identity zero; the repair resolves the
+in-range index and binds the selected observed item.  This is a factual repair
+to an observed feature, not a claim that all remaining state or action aliasing
+is eliminated.
+
+For paired evaluation, let $W^{(1)}_{ci}$ and $W^{(0)}_{ci}$ be \EXP\ and
+\Ctl\ win indicators for paired unit $i$ in opponent-by-order cell $c$.
+Losses and draws are zero for the primary endpoint.  Define
+\begin{equation}
+ D_{ci}=W^{(1)}_{ci}-W^{(0)}_{ci}, \qquad
+ \widehat\Delta=\frac{1}{14}\sum_{c=1}^{14}
+       \frac{1}{n_c}\sum_{i=1}^{n_c}D_{ci}.
+ \label{eq:estimand}
+\end{equation}
+Every $n_c$ equals 200, so $\widehat\Delta$ also equals the mean over all
+2,800 paired units after complete execution.  The estimand is finite-population:
+it concerns the seven frozen opponents, two actual-order conditions, policy
+packages, and engine build named in the protocol.
+
+The replay estimand is different.  At a recorded decision where \EXP\ and
+\Ctl\ select semantically different actions, the recorded expert action may
+approve \EXP, approve \Ctl, or approve neither.  Approval is
+\begin{equation}
+  \widehat A=\frac{N_{\EXP}}{N_{\EXP}+N_{\Ctl}},
+\end{equation}
+with neither-approved cases reported as abstentions.  Episodes, not decisions,
+are the uncertainty clusters because within-episode decisions are dependent
+\cite{field2007clustered}.  This conditional quantity is not gameplay value.
+
+\section{Environment and frozen baseline}
+
+The environment is a two-player, partially observable card-game simulator
+supplied for a competition.  The engine exposes observations, legal actions,
+and actual turn order.  Its rules, binaries, card database, deck material, and
+third-party opponent packages are neither claimed as contributions nor included
+in the sanitized release.  End-to-end engine replication requires separately
+authorized access.
+
+The frozen control \Ctl\ is the A2 neural policy with a deterministic Damage V0
+runtime layer.  Both actual-order arms load byte-identical A2 weights (SHA-256
+\texttt{b19871a9...b6bda8}); the control package tree is
+\texttt{13426288...535c3}.  Damage V0 is post-policy logic, not a separately
+trained damage model.  \EXP\ enables the identity-aware encoder and loads
+byte-identical trained heads in all three packaged policy files (model
+\texttt{cefe6118...96984}, tree \texttt{83489e0c...7f1c0}, archive
+\texttt{0734b60c...e7096}).  Full digests and hash algorithms are in the
+supplement and claim ledger.
+
+One archived \EXP\ order-policy manifest incorrectly names the A2 model hash,
+and one historical certificate reports a stale candidate tree hash.  Direct
+archive-member bytes, the tracked frozen-hash inventory, and every evaluation
+record agree on the hashes above.  Following the prespecified evidence
+hierarchy, bytes and raw evaluation records are authoritative; the inconsistent
+metadata are preserved and disclosed.
+
+\section{Representation defect and identity-aware intervention}
+
+The historical v2 branch resolved ordinary PLAY options with no explicit board
+area to no source object.  The feature serializer then emitted
+\texttt{source\_card=0}.  The repair is deliberately narrow: with its package
+flag enabled, an in-range legal-option index resolves
+\texttt{hand[option.index]} and serializes that observed item's identity.  It
+does not inspect hidden state.  A parity audit over 4,659 decisions and 24,065
+options found 2,853 changed PLAY source values across 658 decisions, all in the
+main-action context, and no other feature changes.
+
+The retained corpus contains \CorpusDecisions\ decisions and
+\OrdinaryPlayOptions\ ordinary PLAY options.  Reconstructing the blind encoder
+left \UnresolvedPlayOptions\ of those options unresolved; the repaired rows
+bound all of them.  Of \PlayStates\ states containing PLAY, \MultiIdentityStates\
+(\MultiIdentityStatePct\%) exposed at least two distinct PLAY identities.
+Seventeen exact blind-signature groups contained multiple source identities,
+covering \CollisionInstancePct\% of PLAY-option instances.  All affected
+options occurred in the main-action context.  Source-frequency outputs use
+anonymous tokens so no proprietary card names or identifiers enter the release.
+
+\begin{figure*}
+  \includegraphics[width=\textwidth]{figures/fig02_action_aliasing.pdf}
+  \caption{The bounded encoding defect and repair.  Before repair, distinct
+  observed items could map to the same zero-source option vector.  After repair,
+  the in-range hand index binds the source identity.  Symbols are abstract and
+  do not depict game assets.}
+  \label{fig:aliasing}
+\end{figure*}
+
+Applying the two trained heads directly to retained feature rows produced an
+overall index-exact disagreement rate of \AllHeadDisagreementPct\%.  The rate
+was \MultiHeadDisagreementPct\% in multi-identity states and
+\OtherHeadDisagreementPct\% elsewhere (Table~\ref{tab:representation}).  This
+locates policy-head sensitivity; it omits production runtime constraints and is
+not a gameplay or causal subgroup estimate.
+
+\input{tables/representation.tex}
+
+\section{Replay data and conservative heads-only training}
+
+The retained feature corpus contains 47,653 decisions: 38,254 training rows,
+3,361 internal-validation rows, and 6,038 rows from six held-out teams.  It
+spans 472 episode identifiers and 69 team labels.  The split manifest gives
+held-out-team precedence and records no duplicate keys.  A nominal temporal
+holdout is invalid: its eight files are empty stubs and supply no rows.  The
+original Aug. 14--15 replay observations used to mine the corpus were deleted by
+the historical pipeline, so the retained feature rows---not end-to-end replay
+extraction---are the reproducible training source.  The accompanying data card
+documents intended use and privacy boundaries in the spirit of dataset
+documentation practice \cite{gebru2021datasheets}.
+
+\begin{figure*}
+  \includegraphics[width=\textwidth]{figures/fig03_dataset_provenance.pdf}
+  \caption{Retained data split and experimental provenance.  Counts come from
+  the frozen manifest.  The missing source replays limit feature-extraction
+  reproducibility but do not alter the retained-row transform used in the
+  four-cell ablation.}
+  \label{fig:provenance}
+\end{figure*}
+
+Training initialized student and teacher from A2, froze all parameters outside
+the option-linear, score, count, and value heads, and optimized the student on
+CPU for three epochs with AdamW.  The learning rate was $10^{-4}$, weight decay
+$10^{-5}$, batch size 256, seed 20260816, gradient-norm limit 1.0, and KL
+distillation weight 0.5.  Eight of 19 exported arrays changed, exactly those of
+the four trainable heads; frozen arrays were byte-preserved.
+
+The configured fresh-data weight was 0.999.  Historical batch rounding made the
+implied rehearsal target zero: each epoch processed 38,254 fresh and zero
+rehearsal rows.  We therefore use \emph{conservative} only for frozen parameter
+scope, baseline initialization, and KL anchoring.  We do not describe the
+realized update as a 99.9/0.1 mixture or claim a formal safe-improvement
+guarantee.  Baseline-anchored policy improvement provides related motivation,
+not a theorem for this update \cite{laroche2019spibb}.
+
+\section{Evaluation protocol and statistical analysis}
+
+The fresh protocol was committed before result access.  It freezes \Ctl, \EXP,
+the seeded engine, production-engine integrity sentinel, seven opponent package
+hashes, actual-first and actual-second conditions, disjoint seed ranges,
+physical-seat alternation, and 200 candidate--control pairs in every cell.
+Within a pair, candidate and control share opponent, engine seed, actual order,
+physical seat, and opponent environment.  Common random numbers can reduce
+nuisance variation when a valid coupling is implemented \cite{glasserman1992crn};
+we verify the coupling fields in every retained pair rather than inferring it
+from the design label.
+
+The complete schedule comprises \PrimaryPairs\ paired units and \PrimaryGames\
+engine games.  The binary primary outcome maps a win to one and loss or draw to
+zero.  The secondary utility maps win, draw, and loss to $1,0,-1$.  An exception,
+nonterminal truncation, illegal action, candidate/control/opponent policy error,
+incomplete pair, hash drift, production-sentinel change, or pairing mismatch
+invalidates a cell rather than being deleted or imputed.  All scheduled fresh
+pairs completed with zero policy errors.  The frozen runner did not record
+per-game latency; parallel wall time is not substituted.
+
+The primary interval uses 100,000 bootstrap replicates.  Each replicate resamples
+complete candidate--control pairs with replacement independently within all 14
+cells, then averages the cell means.  The exact two-sided McNemar test conditions
+on candidate-only plus control-only wins.  Fourteen individual cell tests are
+secondary and Holm-adjusted together.  Opponent, order, family, and utility
+summaries remain descriptive.  No meta-weighted estimate is computed because
+the historical frozen weight file is absent.
+
+The four-cell ablation reuses the same engine, opponents, seeds, orders, seats,
+pair counts, and \Ctl\ arms.  C1 is blind encoder plus A2; C2 is identity-aware
+encoder plus unchanged A2; C3 is blind encoder plus matched retraining; C4 is
+identity-aware encoder plus matched retraining (\EXP).  C2 and C3 are
+mechanistic, not deployment candidates.  Five binary contrasts are Holm-adjusted;
+the difference-in-differences interaction is descriptive.  The C3 transform
+zeroed exactly 37,199 source fields in 47,653 retained rows, completed all three
+epochs, realized zero rehearsal rows, and exported model hash
+\texttt{d22d0b52...8b70}.
+
+\section{Primary gameplay results}
+
+% Claims GAME-001 and GAME-C01--GAME-C14.
+Across the frozen population, \EXP\ produced \PrimaryCandidateWins\ wins and
+\Ctl\ produced \PrimaryControlWins.  These marginal counts do not replace the
+paired analysis because both policies may win or fail to win in the same pair.
+The primary paired difference was \PrimaryEffectPP\ \pp\ (95\% interval
+[\PrimaryCILowPP, \PrimaryCIHighPP]).  Discordant outcomes included
+\PrimaryCandidateOnly\ \EXP-only and \PrimaryControlOnly\ \Ctl-only wins; the
+exact two-sided McNemar value was \PrimaryMcNemarP.  \PrimaryInference
+Candidate/control draw totals were \PrimaryCandidateDraws/\PrimaryControlDraws.
+The secondary win/draw/loss utility effect was \UtilityEffect\ (95\% interval
+[\UtilityCILow, \UtilityCIHigh]).
+
+\begin{figure*}
+  \includegraphics[width=0.86\textwidth]{figures/fig04_gameplay_forest.pdf}
+  \caption{Fresh paired effects by opponent, averaged over actual order, and
+  the preregistered equal-weight primary effect.  Intervals are paired
+  within-cell bootstrap intervals.  Opponents are a fixed population; individual
+  points are secondary.}
+  \label{fig:gameplay}
+\end{figure*}
+
+\input{results.tex}
+
+Actual-first and actual-second effects were \FirstEffectPP\ \pp\ (95\% interval
+[\FirstCILowPP, \FirstCIHighPP]) and \SecondEffectPP\ \pp\
+([\SecondCILowPP, \SecondCIHighPP]), respectively.  The defined Grim-family
+aggregate was \GrimEffectPP\ \pp\ ([\GrimCILowPP, \GrimCIHighPP]); the other
+three frozen opponents yielded \OtherEffectPP\ \pp\ ([\OtherCILowPP,
+\OtherCIHighPP]).  These are fixed-group summaries, not estimates for unseen
+opponents or policy families.
+
+\section{Four-cell representation-by-training ablation}
+
+The ablation analyzes contrasts on the same 2,800 worlds rather than comparing
+four unrelated marginal scores (Table~\ref{tab:ablation}).  Identity activation
+with original A2 (C2--C1) changed win probability by
+\AblationEncoderOnlyPP\ \pp\ (95\% interval
+[\AblationEncoderOnlyCILowPP, \AblationEncoderOnlyCIHighPP]).  Matched training
+under blind encoding (C3--C1) changed it by \AblationBlindTrainingPP\ \pp\
+([\AblationBlindTrainingCILowPP, \AblationBlindTrainingCIHighPP]).  Training
+within identity-aware encoding (C4--C2) was \AblationIdentityTrainingPP\ \pp\
+([\AblationIdentityTrainingCILowPP, \AblationIdentityTrainingCIHighPP]), while
+the post-training encoder contrast (C4--C3) was
+\AblationPostTrainingEncoderPP\ \pp\
+([\AblationPostTrainingEncoderCILowPP,
+\AblationPostTrainingEncoderCIHighPP]).  The difference-in-differences
+interaction was \AblationInteractionPP\ \pp\
+([\AblationInteractionCILowPP, \AblationInteractionCIHighPP]).  Mechanistic
+attribution follows these intervals; a positive C4--C1 result alone cannot be
+assigned entirely to the encoder repair.
+
+\input{tables/ablation.tex}
+
+\section{Held-out disagreement under distribution shift}
+
+Two offline diagnostics address different layers.  First, direct head inference
+on 6,038 held-out-team feature rows produced 821 index-exact head disagreements.
+Of 579 binary decisive cases, \EXP\ matched the recorded action 271 times and
+\Ctl\ 308 times; 242 additional disagreements were abstentions.  \EXP\ approval
+was \HeadHoldoutApproval\ (episode-bootstrap 95\% interval
+[\HeadHoldoutCILow, \HeadHoldoutCIHigh]).  \HeadApprovalInference\ This is a
+head-only diagnostic without runtime constraints.
+
+Second, we ran the unchanged historical semantic-action evaluator on retained
+2026-08-13 replay units that were not part of the missing Aug. 14--15 source
+set.  Among \ReplayApprovalDisagreements\ semantic disagreements,
+\ReplayApprovalCandidate\ approved \EXP, \ReplayApprovalControl\ approved
+\Ctl, and \ReplayApprovalAbstain\ were abstentions.  The
+\ReplayApprovalDecisive\ binary decisions across \ReplayApprovalEpisodes\
+episodes yielded approval \ReplayApproval\ (95\% interval
+[\ReplayApprovalCILow, \ReplayApprovalCIHigh]); the equal-team mean was
+\ReplayTeamBalancedApproval.  \ReplayApprovalInference\ Table~\ref{tab:heldout}
+separates multi-identity and other decision states.
+
+\input{tables/heldout.tex}
+
+\begin{figure*}
+  \includegraphics[width=0.90\textwidth]{figures/fig05_gameplay_vs_expert.pdf}
+  \caption{Gameplay and expert-action agreement are different estimands and
+  use different axes.  Panel A shows the paired terminal win difference.
+  Panel B shows \EXP\ approval conditional on binary policy disagreement;
+  neither-approved cases are abstentions.  The panels must not be numerically
+  pooled or subtracted.}
+  \label{fig:metrics}
+\end{figure*}
+
+The mismatch is substantively expected.  Replay approval asks which policy
+reproduces one historical action in states generated by historical agents.  It
+does not reward a different action for downstream value.  Paired gameplay
+instead compares terminal outcomes on trajectories induced by each policy.
+The estimands differ in state distribution, conditioning, horizon, and analysis
+unit.  Their disagreement demonstrates metric dependence under distribution
+shift; it does not establish that expert data are poor or that simulated
+gameplay is unbiased.
+
+\section{Negative and null experiments}
+
+Two bounded experiments retain raw artifacts sufficient for independent
+reaggregation (Table~\ref{tab:negative}).  An actual-second two-turn temporal
+takeover produced \TemporalEffectPP\ \pp\ over \TemporalPairs\ paired units
+across three fixed internal opponents, with an opponent-stratified paired
+bootstrap interval [\TemporalCILowPP, \TemporalCIHighPP].  The interval spans
+zero, so that confirmation did not demonstrate benefit.  A preceding positive
+selection screen was not pooled with confirmation, and the result does not show
+that temporal policies fail generally.
+
+A bounded second-own-turn sequence oracle evaluated \SequenceWorlds\ worlds in
+\SequenceRoots\ root clusters against three fixed opponents, permitting at most
+two semantic deviations.  Its effect was \SequenceEffectPP\ \pp\ with
+root-cluster interval [\SequenceCILowPP, \SequenceCIHighPP], far below its
+prespecified +3-point gate.  This constrains one proposal-and-confirmation
+procedure; it is not a test of planning as a class.
+
+\input{tables/negative.tex}
+
+\begin{figure*}
+  \includegraphics[width=0.80\textwidth]{figures/fig06_negative_forest.pdf}
+  \caption{Retained null results with surviving raw evidence.  The temporal
+  interval resamples paired units within opponent; the oracle interval resamples
+  root clusters.  PPO, expected-Q, and the older Turn Director are absent because
+  their underlying result rows do not survive.}
+  \label{fig:negative}
+\end{figure*}
+
+Project audits also describe a shielded actor-only PPO update, an expected-Q
+labeling exercise, and an older Turn Director.  Their exact result rows or
+packages are absent, so their reported numerical estimates are excluded from
+the evidentiary manuscript.  They are retained as summary-only provenance
+entries rather than silently promoted to raw evidence or generalized as
+failures of reinforcement learning and search.
+
+\section{Discussion}
+
+The case separates four quantities that are often collapsed: representational
+validity, held-out imitation agreement, paired gameplay value, and robustness
+across opponent populations.  Binding a legal action to the observed item it
+selects repairs a factual defect.  It does not imply that inherited embeddings
+are calibrated, that every downstream choice improves, or that the recorded
+expert action is uniquely valuable.  The four-cell results are therefore
+essential to distinguish encoding, training, and their interaction.
+
+The restricted update is a practical audit pattern for a competent baseline.
+Freezing most parameters and retaining a baseline-distillation term reduces the
+dimensions in which learning can move.  It does not provide a monotonic policy
+improvement guarantee, particularly because the realized stream contained no
+rehearsal rows and because replay and gameplay state distributions differ.
+
+Paired common-random-number evaluation improves the comparison of two fixed
+policies when seeds and exogenous conditions can be coupled.  Pairing does not
+make the result universal: opponent packages, actual order, engine build,
+runtime constraints, and decks remain part of the estimand.  Similarly, a
+clustered replay interval respects episode dependence but cannot turn a
+conditional imitation proxy into long-horizon value.
+
+The negative results and evidence conflicts narrow the story.  Additional
+temporal or bounded sequence structure did not automatically produce detectable
+benefit in their frozen tests.  Historical favorable aggregate claims were not
+used when their rows, weights, or estimator could not be reconstructed.  This
+reduces apparent evidence but provides a direct, auditable path from every
+included number to retained bytes.
+
+\section{Limitations}
+
+First, the seven opponents are a deliberately frozen convenience population,
+several with related development histories.  They are neither random nor
+exhaustive.  Bootstrap intervals describe seed variation under this battery and
+do not support population-wide generalization.
+
+Second, only one training seed and one retained corpus were evaluated.  The C2
+identity-only cell supplies a previously zero feature to weights not trained for
+it; C2 and C3 are mechanistic diagnostics.  Head-only disagreement omits runtime
+constraints, and collision-state associations do not identify a causal
+subgroup effect.
+
+Third, original replay observations for the retained Aug. 14--15 feature corpus
+and an original environment lock are missing.  The nominal temporal holdout is
+empty.  Training can be repeated from retained feature rows, but feature mining
+cannot be reconstructed from source replays.  The fresh runner did not store
+per-game latency.
+
+Fourth, the third-party engine, source, binaries, card data, decks, private
+replays, and opponent implementations cannot be redistributed under the
+available terms and privacy constraints.  The release reproduces statistics,
+tables, and figures from processed outcomes, not engine trajectories.  Rights
+review is also required before redistributing policy weights or placing a
+permissive license on the companion package.
+
+Fifth, historical seven-policy and meta-weighted aggregates lack their raw wave
+files and frozen weight table.  Historical CERT-B prose calls 529 disagreements
+``decisive,'' although its reconstructed binary denominator is 398, and its
+episode rows are absent.  These values are recorded as conflicts or unsupported
+and omitted from the main evidence.
+
+Finally, author identity, affiliations, corresponding-author ORCID, CRediT
+roles, funding, conflicts, acknowledgments, complete historical AI-tool use,
+archive DOI, and release ownership are not established by repository evidence.
+They require human confirmation before submission.
+
+\section{Conclusion}
+
+Distinct observed card plays were legal yet not identity-distinguishable to the
+historical option encoder.  We repaired that binding, applied a restricted
+baseline-anchored update, and evaluated the result with paired simulation and
+episode-clustered replay diagnostics.  \PrimaryInference\ The offline approval
+interval did not establish a corresponding improvement in expert-action
+agreement.  The broader methodological recommendation is to audit legal-action
+identity explicitly, match representation and training ablations, pair
+stochastic evaluations at their natural unit, and preserve negative results and
+provenance conflicts alongside favorable findings.
+
+\begin{acknowledgments}
+Acknowledgment of the competition organizer, engine provider, data contributors,
+compute providers, and human reviewers requires permission and author
+confirmation.  Funding and grant identifiers have not been established from the
+repository and must be supplied or explicitly declared absent.
+\end{acknowledgments}
+
+\section*{Artificial-intelligence assistance disclosure}
+
+OpenAI Codex, operating with a GPT-5-family model whose exact deployed snapshot
+identifier was not exposed in the session, provided substantive assistance in
+August 2026.  Under human direction it helped audit repository artifacts; draft
+and review Python, \LaTeX, and release files; implement statistical checks and
+visualizations; verify bibliographic metadata; and draft and edit prose.  Bounded
+Codex worker agents performed evidence and literature audits.  Every admitted
+number was required to trace to retained raw evidence or a frozen new protocol;
+outputs were checked through hashes, executable regeneration, tests, source
+inspection, and rendered-PDF review.  No generative-image model was used.  The
+human authors remain responsible for all content and must add any substantive
+earlier AI use not recoverable from repository history.  AI systems are not
+authors.
+
+\section*{Author contributions}
+
+CRediT roles for conceptualization, methodology, software, validation, formal
+analysis, investigation, data curation, visualization, writing, supervision,
+administration, and funding acquisition require author-confirmed names.  They
+are intentionally not inferred from Git history.
+
+\section*{Competing interests}
+
+No reliable conflict statement was found in the repository.  Every author must
+confirm relevant financial and nonfinancial interests before submission; the
+corresponding author may state that none exist only after that review.
+
+\section*{Data Availability Statement}
+
+The sanitized companion package contains processed one-row-per-paired-unit
+outcomes, statistical summaries, figure inputs, scripts, protocols, and hashes
+needed to regenerate all reported tables and figures from processed data.  The
+tournament engine and source, card database, deck files, private replay
+observations, and third-party opponent packages are not redistributed because of
+organizer terms, third-party rights, and privacy constraints.  Exact gameplay
+regeneration requires separately authorized organizer access to the engine build
+identified by hash.  The retained feature corpus and policy packages are local
+ignored artifacts; their hashes, counts, transformations, and aggregates are
+reported, but they are excluded from the sanitized release pending rights
+review.  Repository DOI, archival location, maintainer contact, and any
+controlled-access process must be supplied before submission.
+
+\appendix
+
+\section{Encoder and corpus audit}
+
+The audit streams the retained gzip corpus, identifies ordinary PLAY options by
+option type and absence of an explicit raw area, and constructs an exact blind
+signature from option type, context, zero source, target, attack, area,
+in-play-area, and numeric fields.  A collision group must contain more than one
+positive repaired source identity.  Counts are exact over decoded rows.  The
+source-frequency table replaces identifiers with stable anonymous ranks.  The
+corpus hash is \texttt{a3d28e9c...dcdc40}; manifest hash is
+\texttt{8c13a5de...1a774}.  This audit verifies retained-row behavior but not the
+provenance of A2's original training corpus.
+
+\section{Training and four-cell provenance}
+
+The missing C3 cell was generated after its protocol was committed.  A first
+invocation failed at import time before reading or writing data; the protocol
+records the import-only restart and subsequent path-only repair.  The derived
+blind gzip uses a fixed timestamp and hash \texttt{b0167f91...b111e}.  All
+37,199 affected fields changed from nonzero to zero and no affected field was
+already zero.  Training completed three epochs; validation selected the best
+checkpoint under the frozen training function; all frozen parameters were
+unchanged.  Package policy files are byte-identical and the package tree hash is
+\texttt{e8122eea...415a6}.  Complete histories and hashes are machine-readable.
+
+\section{Statistical algorithms}
+
+For each primary bootstrap replicate $b$, let $I^{(b)}_{ci}$ be $n_c$ indices
+sampled with replacement from cell $c$.  We compute
+\begin{equation}
+ \widehat\Delta^{(b)}=\frac{1}{14}\sum_c\frac{1}{n_c}
+   \sum_{i\in I^{(b)}_c}D_{ci},
+\end{equation}
+and take the 2.5 and 97.5 percentiles.  McNemar's exact two-sided value is twice
+the smaller Binomial$(b+c,0.5)$ tail, clipped at one, where $b$ and $c$ are the
+two discordant directions.  Holm adjustment orders the 14 cell values and
+enforces monotone step-down adjusted values.  Ablation bootstrap draws reuse a
+paired world across all four cells.  Replay bootstraps sample episode identifiers;
+the sequence-oracle interval samples roots.  Seeds, replicate counts, and draw
+handling are fixed in the protocols and summary JSON.
+
+\section{Evidence exclusions and reproducibility boundary}
+
+Surviving historical files contain 5,500 nominal direct pair records, including
+600 exact overlapping B0 pairs.  One proposed reconstruction of four favorable
+runs has exactly 3,600 pairs but a raw-row effect of +5.472 \pp, not the reported
+approximately +4.5.  The seven-policy field JSON, aggregation code, and
+\texttt{meta\_weights.json} do not survive.  Historical CERT-B rows do not
+survive, preventing reconstruction of its clustered interval.  These values are
+recorded in the ledger but excluded from evidentiary results.
+
+The branch requested as \texttt{grim-5k-variance-floor} existed locally only as
+\texttt{archive/grim-5k-variance-floor}.  Large packages and engines are ignored
+files fixed by hash rather than Git objects.  The release therefore supports
+processed-result reproducibility.  Engine-level trajectory reproduction remains
+conditional on lawful third-party access and cannot be guaranteed by the
+authors' package.
+
+\bibliography{references}
+
+\end{document}

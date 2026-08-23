@@ -17,6 +17,12 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "vendor"))
+OPTION_NAMES = {
+    0: "number", 1: "yes", 2: "no", 3: "card", 4: "tool_card",
+    5: "energy_card", 6: "energy", 7: "play", 8: "attach", 9: "evolve",
+    10: "ability", 11: "discard", 12: "retreat", 13: "attack", 14: "end",
+    15: "skill", 16: "special_condition",
+}
 
 
 def sha256_file(path: Path) -> str:
@@ -47,6 +53,18 @@ def identity_state(obs_dict: dict) -> str:
             )
         source_cards.append(int(selected.id if selected is not None else option.cardId or 0))
     return "multi_play_identity" if len({value for value in source_cards if value > 0}) >= 2 else "other"
+
+
+def action_family(obs_dict: dict, action: list[int]) -> str:
+    from scripts.overnight_20260816 import replay_disagreement as historical
+
+    obs = historical.to_observation_class(obs_dict)
+    option_types = sorted({
+        int(obs.select.option[index].type)
+        for index in action
+        if 0 <= int(index) < len(obs.select.option)
+    })
+    return "+".join(OPTION_NAMES.get(value, str(value)) for value in option_types) or "empty"
 
 
 def bootstrap(rows: list[dict], iterations: int, seed: int) -> dict:
@@ -115,12 +133,25 @@ def main() -> int:
                 "team": str(row.get("team", "")),
                 "hero_order": str(row.get("hero_order", "unknown")),
                 "turn": int(row.get("turn", -1)),
+                "turn_band": "early" if int(row.get("turn", -1)) <= 3 else (
+                    "mid" if int(row.get("turn", -1)) <= 7 else "late"
+                ),
+                "context": str(row.get("context", "unknown")),
+                "action_family": action_family(row["obs"], row["elite"]),
                 "cls": str(row["cls"]),
                 "identity_state": identity_state(row["obs"]),
             })
     groups = defaultdict(list)
     for row in rows:
         groups[row["identity_state"]].append(row)
+    team_names = sorted({row["team"] for row in rows})
+    team_results = {
+        f"heldout_team_{index + 1}": bootstrap(
+            [row for row in rows if row["team"] == team], args.iterations, 20260840 + index
+        )
+        for index, team in enumerate(team_names)
+    }
+    team_approvals = [value["approval"] for value in team_results.values() if value["approval"] is not None]
     sanitized = {
         "schema_version": 1,
         "label": "fresh_reanalysis_of_retained_2026_08_13_heldout_replays",
@@ -154,12 +185,20 @@ def main() -> int:
             name: bootstrap([row for row in rows if row["hero_order"] == name], args.iterations, 20260830 + index)
             for index, name in enumerate(sorted({row["hero_order"] for row in rows}))
         },
-        "by_team": {
-            f"heldout_team_{index + 1}": bootstrap(
-                [row for row in rows if row["team"] == team], args.iterations, 20260840 + index
-            )
-            for index, team in enumerate(sorted({row["team"] for row in rows}))
+        "by_turn_band": {
+            name: bootstrap([row for row in rows if row["turn_band"] == name], args.iterations, 20260850 + index)
+            for index, name in enumerate(sorted({row["turn_band"] for row in rows}))
         },
+        "by_context": {
+            name: bootstrap([row for row in rows if row["context"] == name], args.iterations, 20260860 + index)
+            for index, name in enumerate(sorted({row["context"] for row in rows}))
+        },
+        "by_action_family": {
+            name: bootstrap([row for row in rows if row["action_family"] == name], args.iterations, 20260870 + index)
+            for index, name in enumerate(sorted({row["action_family"] for row in rows}))
+        },
+        "by_team": team_results,
+        "team_balanced_approval": float(np.mean(team_approvals)) if team_approvals else None,
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(sanitized, indent=2, sort_keys=True) + "\n", encoding="utf-8")

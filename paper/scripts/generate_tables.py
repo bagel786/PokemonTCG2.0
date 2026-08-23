@@ -40,6 +40,9 @@ def main() -> int:
     values = {
         "CorpusDecisions": f"{corpus['decisions']:,}",
         "OrdinaryPlayOptions": f"{corpus['ordinary_play_options']:,}",
+        "UnresolvedPlayOptions": f"{corpus['baseline_unresolved_play_options']:,}",
+        "UnresolvedPlayPct": pct(corpus["baseline_unresolved_proportion"]),
+        "PlayStates": f"{corpus['states_with_play']:,}",
         "MultiIdentityStates": f"{corpus['states_with_two_or_more_play_identities']:,}",
         "MultiIdentityStatePct": pct(corpus["multi_identity_proportion_of_play_states"]),
         "CollisionGroups": str(corpus["blind_signature_collision_groups"]),
@@ -51,22 +54,63 @@ def main() -> int:
         "HeadHoldoutCILow": f"{head_approval['episode_bootstrap_95_ci'][0]:.3f}",
         "HeadHoldoutCIHigh": f"{head_approval['episode_bootstrap_95_ci'][1]:.3f}",
         "HeadHoldoutDecisive": f"{head_approval['decisive']:,}",
+        "HeadHoldoutCandidate": f"{head_approval['candidate_approved']:,}",
+        "HeadHoldoutControl": f"{head_approval['control_approved']:,}",
+        "HeadHoldoutAbstain": f"{head_approval['abstain']:,}",
         "ReplayApproval": f"{replay_approval['approval']:.3f}",
         "ReplayApprovalCILow": f"{replay_approval['episode_bootstrap_95_ci'][0]:.3f}",
         "ReplayApprovalCIHigh": f"{replay_approval['episode_bootstrap_95_ci'][1]:.3f}",
         "ReplayApprovalDecisive": f"{replay_approval['binary_decisive']:,}",
         "ReplayApprovalDisagreements": f"{replay_approval['disagreements']:,}",
         "ReplayApprovalAbstain": f"{replay_approval['abstain']:,}",
+        "ReplayApprovalCandidate": f"{replay_approval['candidate_approved']:,}",
+        "ReplayApprovalControl": f"{replay_approval['control_approved']:,}",
+        "ReplayApprovalEpisodes": f"{replay_approval['episodes']:,}",
+        "ReplayTeamBalancedApproval": f"{heldout['team_balanced_approval']:.3f}",
         "AblationEncoderOnlyPP": pct(contrasts["C2-C1"]["effect"], 2),
+        "AblationEncoderOnlyCILowPP": pct(contrasts["C2-C1"]["ci_low"], 2),
+        "AblationEncoderOnlyCIHighPP": pct(contrasts["C2-C1"]["ci_high"], 2),
         "AblationBlindTrainingPP": pct(contrasts["C3-C1"]["effect"], 2),
+        "AblationBlindTrainingCILowPP": pct(contrasts["C3-C1"]["ci_low"], 2),
+        "AblationBlindTrainingCIHighPP": pct(contrasts["C3-C1"]["ci_high"], 2),
         "AblationIdentityTrainingPP": pct(contrasts["C4-C2"]["effect"], 2),
+        "AblationIdentityTrainingCILowPP": pct(contrasts["C4-C2"]["ci_low"], 2),
+        "AblationIdentityTrainingCIHighPP": pct(contrasts["C4-C2"]["ci_high"], 2),
         "AblationPostTrainingEncoderPP": pct(contrasts["C4-C3"]["effect"], 2),
+        "AblationPostTrainingEncoderCILowPP": pct(contrasts["C4-C3"]["ci_low"], 2),
+        "AblationPostTrainingEncoderCIHighPP": pct(contrasts["C4-C3"]["ci_high"], 2),
         "AblationInteractionPP": pct(interaction["effect"], 2),
+        "AblationInteractionCILowPP": pct(interaction["ci_low"], 2),
+        "AblationInteractionCIHighPP": pct(interaction["ci_high"], 2),
+        "AblationPairs": f"{interaction['pairs']:,}",
         "TemporalEffectPP": pct(negatives["temporal_two_turn_takeover"]["effect"], 3),
+        "TemporalCILowPP": pct(negatives["temporal_two_turn_takeover"]["ci_low"], 3),
+        "TemporalCIHighPP": pct(negatives["temporal_two_turn_takeover"]["ci_high"], 3),
+        "TemporalPairs": f"{negatives['temporal_two_turn_takeover']['n']:,}",
         "SequenceEffectPP": pct(negatives["bounded_sequence_oracle"]["effect"], 3),
+        "SequenceCILowPP": pct(negatives["bounded_sequence_oracle"]["ci_low"], 3),
+        "SequenceCIHighPP": pct(negatives["bounded_sequence_oracle"]["ci_high"], 3),
+        "SequenceWorlds": f"{negatives['bounded_sequence_oracle']['n']:,}",
+        "SequenceRoots": f"{negatives['bounded_sequence_oracle']['clusters']:,}",
     }
     for name, value in values.items():
         macros.append(f"\\newcommand{{\\{name}}}{{{value}}}")
+    replay_ci = replay_approval["episode_bootstrap_95_ci"]
+    if replay_ci[0] > 0.5:
+        replay_inference = "The interval lay above one half."
+    elif replay_ci[1] < 0.5:
+        replay_inference = "The interval lay below one half."
+    else:
+        replay_inference = "The interval included one half."
+    head_ci = head_approval["episode_bootstrap_95_ci"]
+    if head_ci[0] > 0.5:
+        head_inference = "The interval lay above one half."
+    elif head_ci[1] < 0.5:
+        head_inference = "The interval lay below one half."
+    else:
+        head_inference = "The interval included one half."
+    macros.append(f"\\newcommand{{\\ReplayApprovalInference}}{{{replay_inference}}}")
+    macros.append(f"\\newcommand{{\\HeadApprovalInference}}{{{head_inference}}}")
     (ROOT / "paper/diagnostic_macros.tex").write_text("\n".join(macros) + "\n", encoding="utf-8")
 
     tables = ROOT / "paper/tables"
