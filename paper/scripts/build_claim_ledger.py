@@ -100,7 +100,7 @@ def main() -> int:
         "VERIFIED", "artifacts/final_sprint/identity_train/train_manifest.json; merged_decisions.jsonl.gz", "manifest counts and direct row scan",
         "final/overnight-20260816", "b7ce5ba7578b125e9fc6fa25b57c33a91c00dddf",
         "a3d28e9c3ab650a1ec3c1cf708fc7684dc5258a86469d622871e7efe25dcdc40", "paper/scripts/audit_representation.py",
-        "47,653 total; 38,254 train; 3,361 internal validation; 6,038 six-team holdout", "decisions", "47,653", "manifest audit and direct scan",
+        "47,653 total; 38,254 train; 3,361 internal validation; 6,038 six-team holdout; 472 episodes; 69 team labels; 8 empty temporal stubs", "decisions/episodes/teams", "47,653", "manifest audit and direct scan",
         "Nominal temporal holdout contains only empty stubs and is not a valid holdout.", "INCLUDE")
     add("TRAIN-001", "Replay data and training", "EXP23 used a heads-only update with the frozen settings stated in the paper.",
         "VERIFIED", "scripts/train_identity_fix.py; training/replay_refresh.py; artifacts/final_sprint/train_identity.log",
@@ -216,7 +216,7 @@ def main() -> int:
         "CONFLICT", "artifacts/final_sprint/exp23_vs_ctl_B0_p1200b.json; exp23_vs_ctl_m1_p800.json; exp23_vs_ctl_m1_p800_fresh.json; exp23_vs_ctl_rr_p800.json",
         "root rows", "final/overnight-20260816", "05657c656c04d88b0352bb0db6f9e2a5dce4b234", "multiple; see statistical_summary source inventory",
         "paper/scripts/analyze_results.py", "3,600 selected rows yield +5.472 pp, not +4.5 pp", "percentage points", "3,600 nominal pairs",
-        "retrospective pooling; overlapping/selected historical schedules", "The sample size and effect do not describe the same estimator.", "OMIT")
+        "retrospective pooling; overlapping/selected historical schedules", "The nine surviving files contain 5,500 nominal pairs; 600 B0 pairs overlap exactly. The sample size and effect do not describe the same estimator.", "OMIT")
     add("HIST-UNSUP-001", "Evidence audit", "Historical seven-policy equal macro was +1.8 pp.", "UNSUPPORTED",
         "docs/sprints/final_overnight/OVERNIGHT_CERT_20260816.md", "summary text only", "final/overnight-20260816", "de532fa52f41d6bb4dece2c3af41175fed15e952",
         "", "artifact search", "+1.8", "percentage points", "reported 7 policies", "not reproducible",

@@ -122,6 +122,11 @@ def main() -> int:
     for source, destination in PROCESSED.items():
         copy_required(ROOT / source, RELEASE / "data/processed" / destination)
     copy_required(ROOT / "paper/claim_ledger.csv", RELEASE / "docs/claim_ledger.csv")
+    for supplement in (
+        "DATA_CARD.md", "MODEL_CARD.md", "PROVENANCE_AUDIT.md",
+        "REPRODUCIBILITY_CHECKLIST.md", "RIGHTS_AND_ACCESS_AUDIT.md",
+    ):
+        copy_required(ROOT / "paper/supplement" / supplement, RELEASE / "docs" / supplement)
     for protocol in sorted((ROOT / "paper/protocol").glob("*.md")):
         copy_required(protocol, RELEASE / "docs/protocols" / protocol.name)
     for script in ("build_figures.py", "generate_tables.py"):
