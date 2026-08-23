@@ -27,13 +27,13 @@ EXPECTED_CONTROL = "13426288358d597ead809e45c364c7f7b9274a6eebf55ddd942142e33265
 EXPECTED_ENGINE = "867e3f9bb87e0b48889a44b5d4b04f5d2d434b2a0788d1b2bcfe0caebcb5ab78"
 EXPECTED_PRODUCTION_ENGINE = "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30"
 EXPECTED_FRESH = {
-    "grim_b0.json": ("B0", "baseline", "0c15b56a"),
-    "grim_d842_runtime.json": ("d842_runtime", "internal_learned", "7db753d6"),
-    "grim_master_v1.json": ("master_v1", "internal_learned", "8a06ebab"),
-    "grim_replay_refresh.json": ("replay_refresh", "internal_learned", "30e45955"),
-    "starmie.json": ("starmie", "external", "1b73779d"),
-    "dipplin.json": ("dipplin", "external", "076ae8de"),
-    "alakazam_no_search.json": ("alakazam_no_search", "external", "5d443388"),
+    "grim_b0.json": ("B0", "Grim", "baseline", "0c15b56a"),
+    "grim_d842_runtime.json": ("d842_runtime", "Grim", "internal_learned", "7db753d6"),
+    "grim_master_v1.json": ("master_v1", "Grim", "internal_learned", "8a06ebab"),
+    "grim_replay_refresh.json": ("replay_refresh", "Grim", "internal_learned", "30e45955"),
+    "starmie_v2_boss_atk.json": ("starmie", "Other", "external", "1b73779d"),
+    "dipplin_d1.json": ("dipplin", "Other", "external", "076ae8de"),
+    "alakazam_2_4a_no_search.json": ("alakazam_no_search", "Other", "external", "5d443388"),
 }
 
 
@@ -58,7 +58,7 @@ def outcome(row: dict) -> str:
 
 
 def pair_rows(payload: dict, source: Path, experiment: str, opponent: str,
-              family: str) -> list[dict]:
+              family: str, role: str) -> list[dict]:
     grouped: dict[tuple[str, int], dict[str, dict]] = defaultdict(dict)
     for row in payload["rows"]:
         grouped[(str(row["actual_order"]), int(row["pair_index"]))][str(row["arm"])] = row
@@ -81,6 +81,7 @@ def pair_rows(payload: dict, source: Path, experiment: str, opponent: str,
             "control_hash": payload["control_sha256"],
             "opponent": opponent,
             "opponent_family": family,
+            "opponent_role": role,
             "opponent_hash": payload["opponent_sha256"],
             "seed": int(candidate["seed"]),
             "pair_index": pair_index,
@@ -201,7 +202,7 @@ def main() -> int:
     canonical: list[dict] = []
     fresh: list[dict] = []
     source_inventory = []
-    for filename, (opponent, family, opponent_prefix) in EXPECTED_FRESH.items():
+    for filename, (opponent, family, role, opponent_prefix) in EXPECTED_FRESH.items():
         path = args.fresh_dir / filename
         if not path.is_file():
             raise FileNotFoundError(f"missing preregistered cell: {path}")
@@ -219,7 +220,7 @@ def main() -> int:
         }
         if not all(checks.values()):
             raise ValueError(f"{path}: frozen-protocol check failed: {checks}")
-        rows = pair_rows(payload, path, "fresh_confirmation", opponent, family)
+        rows = pair_rows(payload, path, "fresh_confirmation", opponent, family, role)
         canonical.extend(rows)
         fresh.extend(rows)
         source_inventory.append({"path": str(path.relative_to(ROOT)), "sha256": sha256_file(path)})
@@ -228,12 +229,15 @@ def main() -> int:
     for path in sorted(historical_dir.glob("exp23_vs_*.json")):
         payload = json.loads(path.read_text(encoding="utf-8"))
         opponent = Path(str(payload["opponent"])).name
-        rows = pair_rows(payload, path, "historical_exploratory", opponent, "historical")
+        rows = pair_rows(
+            payload, path, "historical_exploratory", opponent, "historical", "historical"
+        )
         canonical.extend(rows)
         source_inventory.append({"path": str(path.relative_to(ROOT)), "sha256": sha256_file(path)})
 
     canonical_fields = [
         "experiment", "candidate_hash", "control_hash", "opponent", "opponent_family",
+        "opponent_role",
         "opponent_hash", "seed", "pair_index", "actual_order", "physical_seat",
         "candidate_outcome", "control_outcome", "candidate_win", "control_win",
         "candidate_draw", "control_draw", "candidate_error", "control_error",

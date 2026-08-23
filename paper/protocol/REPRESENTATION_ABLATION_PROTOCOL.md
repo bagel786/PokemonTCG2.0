@@ -10,6 +10,13 @@ evaluation): the first invocation at commit `a976a2b` exited at import time with
 repository root to `sys.path`. No data, seed, package, training setting, endpoint,
 or analysis rule changed; the failed invocation produced no result file.
 
+Analysis clarification (after C3 training but before any C2/C3 gameplay): the
+contrast list now explicitly includes the separately preregistered C4-C1 result,
+and states that Holm adjustment covers the five binary contrasts. The originally
+written phrase “four simple C1-relative” was internally inconsistent with the
+listed contrasts. No gameplay result had been generated or inspected when this
+wording was corrected.
+
 ## Four cells
 
 | Cell | Encoder | Policy weights | Frozen package/model evidence |
@@ -57,13 +64,15 @@ occurs. No opponent, seed, package, or endpoint may be changed after results are
 inspected.
 
 The primary contrasts are C2-C1 (encoder only), C3-C1 (training under blind
-encoding), C4-C2 (training under identity encoding), C4-C3 (encoder effect
-after training), and the difference-in-differences interaction
+encoding), C4-C1 (the separately preregistered fresh confirmation), C4-C2
+(training under identity encoding), C4-C3 (encoder effect after training), and
+the difference-in-differences interaction
 `C4 - C3 - C2 + C1`. Each is the equal-weight mean of the 14 opponent-by-order
 cells. Ninety-five-percent intervals use 100,000 paired, within-cell bootstrap
 draws with seed 20260824. Exact two-sided McNemar tests and Holm adjustment
-across the four simple C1-relative cell/order-aggregated contrasts are
-secondary. The interaction is descriptive with its paired bootstrap interval.
+across the five simple binary contrasts are secondary. The interaction is
+descriptive with its paired bootstrap interval because it is not a binary
+McNemar contrast.
 Draws count as non-wins. Policy or opponent errors, incomplete pairs, package
 hash drift, production-engine mutation, or seed/seat mismatch invalidate the
 affected run and are reported rather than silently excluded.
