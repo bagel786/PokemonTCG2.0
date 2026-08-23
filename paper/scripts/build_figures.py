@@ -11,8 +11,11 @@ import numpy as np
 from matplotlib.patches import FancyArrowPatch, FancyBboxPatch, Polygon
 
 
-ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "paper/figures"
+SCRIPT_DIR = Path(__file__).resolve().parent
+IS_RELEASE = (SCRIPT_DIR.parent / "data/processed").is_dir()
+ROOT = SCRIPT_DIR.parent if IS_RELEASE else Path(__file__).resolve().parents[2]
+DATA = ROOT / "data/processed" if IS_RELEASE else ROOT / "paper/data"
+OUT = ROOT / "figures" if IS_RELEASE else ROOT / "paper/figures"
 BLUE = "#0072B2"
 ORANGE = "#E69F00"
 PURPLE = "#6A3D9A"
@@ -21,7 +24,7 @@ LIGHT = "#E8EEF2"
 
 
 def load(path: str) -> dict:
-    return json.loads((ROOT / path).read_text(encoding="utf-8"))
+    return json.loads((DATA / path).read_text(encoding="utf-8"))
 
 
 def setup() -> None:
@@ -238,10 +241,10 @@ def figure_negative(negative: dict) -> None:
 
 def main() -> int:
     setup()
-    stats = load("paper/data/statistical_summary.json")
-    representation = load("paper/data/representation_audit.json")
-    heldout = load("paper/data/heldout_0813_summary.json")
-    negative = load("paper/data/negative_results.json")
+    stats = load("statistical_summary.json")
+    representation = load("representation_audit.json")
+    heldout = load("heldout_0813_summary.json")
+    negative = load("negative_results.json")
     figure_pipeline()
     figure_aliasing(representation)
     figure_provenance()

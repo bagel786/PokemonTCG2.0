@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "Author metadata is incomplete; cite only after the corresponding author updates this file."
+title: "Representation Repair under Distribution Shift in a Partially Observable Card Game: Processed Methods Package"
+type: software
+version: "0.1.0-review"
+date-released: 2026-08-23
+authors:
+  - family-names: "[REQUIRED]"
+    given-names: "[REQUIRED]"
+repository-code: "https://github.com/bagel786/PokemonTCG2.0"
+license: "LicenseRef-No-License-Rights-Review-Required"
