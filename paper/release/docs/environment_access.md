@@ -17,11 +17,20 @@ To attempt an authorized engine-level reproduction:
    restricted implementation material into this package.
 4. Verify candidate, control, and opponent package digests separately and obtain
    any needed permissions from their owners.
-5. Run the frozen seed/order/seat schedule in the included protocols. Preserve
-   incomplete pairs and fail closed on errors or digest drift.
-6. Export only the minimal processed row schema used by
-   `evaluation/verify_processed.py`, after conducting privacy and rights review.
+5. Run the frozen seed/order/seat schedule in the included PEVL protocol. Record
+   the requested and engine-consumed seed separately, preserve incomplete units,
+   and fail closed on errors or digest drift.
+6. Apply the PEVL gates in order: artifact identity, seed-namespace integrity,
+   schedule parity, identical-arm record parity, repeat/worker parity, bounded
+   stochastic-source audit, cross-arm event alignment when observable, and the
+   prespecified statistical-admission rule. Do not replace a failed gate with a
+   favorable subset selected after inspection.
+7. Export only the minimal processed schemas consumed by
+   `evaluation/verify_processed.py` and `evaluation/verify_pevl.py`, after
+   conducting privacy and rights review. Full traces may remain restricted when
+   their contents cannot lawfully be redistributed; retain their hashes and
+   sanitized aggregate audit records where permitted.
 
 The authors cannot guarantee that organizer access remains available. Processed
-result reproduction and engine-trajectory reproduction are therefore distinct
-levels of reproducibility.
+result reproduction, synthetic method verification, and engine-trajectory
+reproduction are therefore distinct levels of reproducibility.

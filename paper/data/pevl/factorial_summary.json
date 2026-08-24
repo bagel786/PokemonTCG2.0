@@ -1,0 +1,170 @@
+{
+  "admission_decision": "admit_with_bounded_wording",
+  "analysis_id": "factorial",
+  "cell_win_rates": {
+    "C1": 0.618,
+    "C2": 0.621,
+    "C3": 0.6075,
+    "C4": 0.6235
+  },
+  "contrasts": {
+    "interaction": {
+      "bootstrap_95_ci": [
+        -0.018500000000000027,
+        0.044499999999999984
+      ],
+      "bootstrap_draws": 100000,
+      "bootstrap_seed": 2026083117,
+      "estimate": 0.013,
+      "resampling": "paired units within each of ten opponent-by-order strata"
+    },
+    "primary_c4_minus_c1": {
+      "bootstrap_95_ci": [
+        -0.02049999999999999,
+        0.03149999999999999
+      ],
+      "bootstrap_draws": 100000,
+      "bootstrap_seed": 2026083117,
+      "estimate": 0.0055,
+      "resampling": "paired units within each of ten opponent-by-order strata"
+    },
+    "representation_main": {
+      "bootstrap_95_ci": [
+        -0.01075000000000002,
+        0.02999999999999998
+      ],
+      "bootstrap_draws": 100000,
+      "bootstrap_seed": 2026083117,
+      "estimate": 0.0095,
+      "resampling": "paired units within each of ten opponent-by-order strata"
+    },
+    "training_main": {
+      "bootstrap_95_ci": [
+        -0.02025000000000001,
+        0.012499999999999994
+      ],
+      "bootstrap_draws": 100000,
+      "bootstrap_seed": 2026083117,
+      "estimate": -0.004,
+      "resampling": "paired units within each of ten opponent-by-order strata"
+    }
+  },
+  "control_mismatch_units": 0,
+  "games": 12000,
+  "pevl_levels": {
+    "level_6": "stochastic sources were inspected and trace divergence can localize plausible mechanisms; the audit does not prove a unique causal source",
+    "level_7": "not established because the restricted engine exposes no event identifiers or event-keyed streams",
+    "level_8": "seed-matched finite-population contrasts admitted; counterfactual and full-CRN wording prohibited",
+    "levels_1_to_5": "supported only for the frozen artifacts, schedules, and exercised serial/parallel execution contexts"
+  },
+  "primary_mcnemar": {
+    "c1_only_wins": 347,
+    "c4_only_wins": 358,
+    "exact_two_sided_p": 0.7064831563628252,
+    "role": "secondary"
+  },
+  "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",
+  "schema_version": 1,
+  "simple_effects_descriptive": {
+    "c2_minus_c1": 0.003,
+    "c3_minus_c1": -0.0105,
+    "c4_minus_c1": 0.0055,
+    "c4_minus_c2": 0.0025,
+    "c4_minus_c3": 0.016
+  },
+  "sources": [
+    {
+      "cell": "C2",
+      "opponent": "b0",
+      "path": "paper/data/pevl/factorial/raw/c2_b0.json",
+      "sha256": "c849b67724232f827d9fcca7a336e6182ac94c7807c4b624ed3e7a195bdbf55d"
+    },
+    {
+      "cell": "C2",
+      "opponent": "d842",
+      "path": "paper/data/pevl/factorial/raw/c2_d842.json",
+      "sha256": "13d67523036b175d547bcbcf9a05087c47825250b17222899a443677143e9cd9"
+    },
+    {
+      "cell": "C2",
+      "opponent": "master",
+      "path": "paper/data/pevl/factorial/raw/c2_master.json",
+      "sha256": "27ada4a5546673f83017a6605b69b571e52ba44977e3bc566bc6adc4155a346c"
+    },
+    {
+      "cell": "C2",
+      "opponent": "replay",
+      "path": "paper/data/pevl/factorial/raw/c2_replay.json",
+      "sha256": "ef51759755e705025644090dabbbeb98d41159fd0562ad2560bb8264d16d514d"
+    },
+    {
+      "cell": "C2",
+      "opponent": "alakazam_no_search",
+      "path": "paper/data/pevl/factorial/raw/c2_alakazam_no_search.json",
+      "sha256": "36d508dc4419371878b0c12458d340657944b7bbe7e2f56bad1e510772ca42ba"
+    },
+    {
+      "cell": "C3",
+      "opponent": "b0",
+      "path": "paper/data/pevl/factorial/raw/c3_b0.json",
+      "sha256": "2e2e2fd12e970b51621e22af7828b7d9ba2e76391f9451a2043c5c183aa8f1a4"
+    },
+    {
+      "cell": "C3",
+      "opponent": "d842",
+      "path": "paper/data/pevl/factorial/raw/c3_d842.json",
+      "sha256": "c9a9e180ebed69d4466cae5aa7e5f2a0c13c45e4857608fd60d519bf4b233b21"
+    },
+    {
+      "cell": "C3",
+      "opponent": "master",
+      "path": "paper/data/pevl/factorial/raw/c3_master.json",
+      "sha256": "218758bec05ab48833c653d2825d3fba14db9f37186f54980c4137ce1eaf4c6e"
+    },
+    {
+      "cell": "C3",
+      "opponent": "replay",
+      "path": "paper/data/pevl/factorial/raw/c3_replay.json",
+      "sha256": "c2ab92fb07a567881d895d6a87df025f52279916b3e92f32198685882d36a998"
+    },
+    {
+      "cell": "C3",
+      "opponent": "alakazam_no_search",
+      "path": "paper/data/pevl/factorial/raw/c3_alakazam_no_search.json",
+      "sha256": "b885d8d9685bf77b3e210d978ac810c78de7509197e75681bac27868df6acaf6"
+    },
+    {
+      "cell": "C4",
+      "opponent": "b0",
+      "path": "paper/data/pevl/factorial/raw/c4_b0.json",
+      "sha256": "64eb94ced8c4704819d2fc29fbf71411d83eac9c0abee94bd5f4fe26bb625110"
+    },
+    {
+      "cell": "C4",
+      "opponent": "d842",
+      "path": "paper/data/pevl/factorial/raw/c4_d842.json",
+      "sha256": "306a91fbb888e2851935964e83d24822c66c38e181450db8b0e750c10dc15327"
+    },
+    {
+      "cell": "C4",
+      "opponent": "master",
+      "path": "paper/data/pevl/factorial/raw/c4_master.json",
+      "sha256": "f9db7c96705cbd39fc26ebe6dc255dcd4e7b15f773b88015b8ec2dbbb59eff75"
+    },
+    {
+      "cell": "C4",
+      "opponent": "replay",
+      "path": "paper/data/pevl/factorial/raw/c4_replay.json",
+      "sha256": "3f188e641c7f332f5fa601cacd8dba6237dbab91b19075f04caa8b4f3090780f"
+    },
+    {
+      "cell": "C4",
+      "opponent": "alakazam_no_search",
+      "path": "paper/data/pevl/factorial/raw/c4_alakazam_no_search.json",
+      "sha256": "513cfef6d6ad4e2a7e2bcd0b7138ec038d907ad32e29385f8947482be292ff34"
+    }
+  ],
+  "status": "ADMITTED_SEED_MATCHED",
+  "target_population": "five prospectively frozen determinism-eligible opponent packages by two actual orders",
+  "units": 2000
+}

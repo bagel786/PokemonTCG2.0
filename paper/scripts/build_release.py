@@ -4,8 +4,10 @@
 from __future__ import annotations
 
 import ctypes
+import csv
 import hashlib
 import importlib.metadata
+import io
 import json
 import math
 import os
@@ -19,6 +21,8 @@ from pathlib import Path, PurePosixPath
 
 ROOT = Path(__file__).resolve().parents[2]
 RELEASE = ROOT / "paper" / "release"
+PEVL_PROTOCOL_COMMIT = "803257f102232763fc88d28c14b668f9b62eb277"
+PEVL_PROTOCOL_SHA256 = "8b9329b948a054fc7252b9c2662490890e0a8439ad852393c6e25f537c8b887e"
 
 # These are the only hand-maintained files consumed from the current release
 # scaffold. Everything else is rebuilt in a clean staging directory.
@@ -27,11 +31,13 @@ STATIC_INPUTS = {
     "CITATION.cff",
     "LICENSE",
     "docs/environment_access.md",
+    "evaluation/verify_pevl.py",
     "evaluation/verify_processed.py",
     "src/abstract_engine.py",
 }
 PROTOCOL_FILES = {
     "FRESH_CONFIRMATION_PROTOCOL.md",
+    "PEVL_PROSPECTIVE_PROTOCOL.md",
     "REPRESENTATION_ABLATION_PROTOCOL.md",
 }
 PROCESSED = {
@@ -48,15 +54,30 @@ PROCESSED = {
     "paper/data/ablation/summary.json": "ablation_summary.json",
     "paper/data/ablation/contrasts.csv": "ablation_contrasts.csv",
     "paper/data/ablation/training_report.json": "ablation_training_report.json",
+    "paper/data/pevl/trace_preflight_summary.json": "pevl_trace_preflight_summary.json",
+    "paper/data/pevl/timed_search_stress_summary.json": "pevl_timed_search_stress_summary.json",
+    "paper/data/pevl/factorial_summary.json": "pevl_factorial_summary.json",
+    "paper/data/pevl/summary.json": "pevl_summary.json",
+    "paper/data/seed_namespace_audit.json": "seed_namespace_audit.json",
+    "paper/data/stochastic_source_audit.json": "stochastic_source_audit.json",
+}
+CONDITIONAL_FACTORIAL_PROCESSED = {
+    "paper/data/pevl/factorial/units.csv": "pevl_factorial_units.csv",
 }
 SUPPLEMENTS = {
     "DATA_CARD.md",
+    "LITERATURE_AUDIT.md",
     "MODEL_CARD.md",
+    "PEVL_FRAMEWORK.md",
     "PROVENANCE_AUDIT.md",
     "REPRODUCIBILITY_CHECKLIST.md",
     "RIGHTS_AND_ACCESS_AUDIT.md",
 }
-RELEASE_SCRIPTS = {"build_figures.py", "generate_tables.py"}
+RELEASE_SCRIPTS = {
+    "build_figures.py",
+    "build_pevl_artifacts.py",
+    "generate_tables.py",
+}
 GENERATED_FILES = {
     "generated/diagnostic_macros.tex",
     "generated/tables/ablation.tex",
@@ -64,6 +85,12 @@ GENERATED_FILES = {
     "generated/tables/negative.tex",
     "generated/tables/primary.tex",
     "generated/tables/representation.tex",
+    "generated/tables/pevl_ladder.tex",
+    "generated/tables/pevl_retrospective_audit.tex",
+    "generated/tables/pevl_prospective_audit.tex",
+}
+CONDITIONAL_FACTORIAL_GENERATED_FILES = {
+    "generated/tables/pevl_factorial.tex",
 }
 FIGURE_STEMS = {
     "fig01_pipeline",
@@ -72,6 +99,24 @@ FIGURE_STEMS = {
     "fig04_gameplay_forest",
     "fig05_gameplay_vs_expert",
     "fig06_negative_forest",
+    "fig_pevl_01_ladder",
+    "fig_pevl_02_synthetic",
+    "fig_pevl_03_historical_parity",
+    "fig_pevl_04_stress",
+}
+CONDITIONAL_FACTORIAL_FIGURE_STEMS = {"fig_pevl_05_factorial"}
+SYNTHETIC_FILES = {
+    "README.md",
+    "__init__.py",
+    "pevl_synthetic.py",
+    "results/MANIFEST.sha256",
+    "results/pevl_matrix.csv",
+    "results/pevl_results.json",
+    "results/pevl_results.schema.json",
+}
+TERMINAL_FACTORIAL_SUPPRESSIONS = {
+    "SUPPRESSED_BY_PREFLIGHT",
+    "SUPPRESSED_CONTROL_PARITY_FAILURE",
 }
 
 PROHIBITED_SUFFIXES = {
@@ -131,6 +176,19 @@ IDENTIFIER_REPLACEMENTS = (
     (r"lollipop947", "Team5"),
     (r"matsurih", "Team6"),
 )
+CANONICAL_RELEASE_IDENTIFIERS = {
+    "b0": "Matched1",
+    "d842": "Matched2",
+    "d842-runtime": "Matched2",
+    "master": "Matched3",
+    "master-v1": "Matched3",
+    "replay": "Matched4",
+    "replay-refresh": "Matched4",
+    "alakazam-no-search": "Broader3",
+    "alakazam_no_search": "Broader3",
+    "starmie": "Broader1",
+    "dipplin": "Broader2",
+}
 PROHIBITED_IDENTITY_PATTERNS = tuple(
     re.compile(pattern, re.IGNORECASE) for pattern, _ in IDENTIFIER_REPLACEMENTS
 )
@@ -266,20 +324,39 @@ def printable_binary_text(data: bytes, minimum_run: int = 6) -> str:
     )
 
 
-def expected_files(protocol_names: set[str], *, include_manifest: bool) -> set[str]:
+def expected_files(
+    protocol_names: set[str],
+    *,
+    factorial_admitted: bool,
+    include_manifest: bool,
+) -> set[str]:
     files = set(STATIC_INPUTS)
     files.update({"environment.yml", "requirements-lock.txt"})
     files.update(f"data/processed/{destination}" for destination in PROCESSED.values())
+    if factorial_admitted:
+        files.update(
+            f"data/processed/{destination}"
+            for destination in CONDITIONAL_FACTORIAL_PROCESSED.values()
+        )
     files.update(f"docs/{name}" for name in SUPPLEMENTS)
     files.add("docs/claim_ledger.csv")
     files.update(f"docs/protocols/{name}" for name in protocol_names)
     files.update(f"scripts/{name}" for name in RELEASE_SCRIPTS)
     files.update(GENERATED_FILES)
+    if factorial_admitted:
+        files.update(CONDITIONAL_FACTORIAL_GENERATED_FILES)
     files.update(
         f"figures/{stem}.{suffix}"
         for stem in FIGURE_STEMS
         for suffix in ("pdf", "png")
     )
+    if factorial_admitted:
+        files.update(
+            f"figures/{stem}.{suffix}"
+            for stem in CONDITIONAL_FACTORIAL_FIGURE_STEMS
+            for suffix in ("pdf", "png")
+        )
+    files.update(f"synthetic/{name}" for name in SYNTHETIC_FILES)
     if include_manifest:
         files.add("MANIFEST.sha256")
     return files
@@ -388,11 +465,26 @@ def sanitize_text(value: str) -> str:
     return sanitized
 
 
+def sanitize_identifier_atom(value: str) -> str:
+    replacement = CANONICAL_RELEASE_IDENTIFIERS.get(value.casefold())
+    return replacement if replacement is not None else sanitize_text(value)
+
+
+def sanitize_csv_text(value: str) -> str:
+    source = io.StringIO(value, newline="")
+    destination = io.StringIO(newline="")
+    reader = csv.reader(source)
+    writer = csv.writer(destination, lineterminator="\n")
+    for row in reader:
+        writer.writerow(sanitize_identifier_atom(cell) for cell in row)
+    return destination.getvalue()
+
+
 def sanitize_json(value):
     if isinstance(value, dict):
         sanitized = {}
         for key, item in value.items():
-            clean_key = sanitize_text(str(key))
+            clean_key = sanitize_identifier_atom(str(key))
             if clean_key in sanitized:
                 raise ValueError(f"identifier sanitization created duplicate JSON key: {clean_key}")
             sanitized[clean_key] = sanitize_json(item)
@@ -400,7 +492,7 @@ def sanitize_json(value):
     if isinstance(value, list):
         return [sanitize_json(item) for item in value]
     if isinstance(value, str):
-        return sanitize_text(value)
+        return sanitize_identifier_atom(value)
     return value
 
 
@@ -417,8 +509,16 @@ def copy_processed(source: Path, destination: Path) -> None:
             json.dumps(sanitize_json(payload), indent=2, sort_keys=True) + "\n",
             encoding="utf-8",
         )
+    elif source.suffix == ".csv":
+        destination.write_text(
+            sanitize_csv_text(source.read_text(encoding="utf-8")),
+            encoding="utf-8",
+        )
     else:
-        destination.write_text(sanitize_text(source.read_text(encoding="utf-8")), encoding="utf-8")
+        destination.write_text(
+            sanitize_text(source.read_text(encoding="utf-8")),
+            encoding="utf-8",
+        )
 
 
 def update_release_summary(stage: Path) -> None:
@@ -445,6 +545,87 @@ def update_release_summary(stage: Path) -> None:
     summary_path.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
+def validate_pevl_release_state(stage: Path) -> dict[str, object]:
+    """Resolve only terminal PEVL branches before constructing the exact tree.
+
+    The released ``verify_pevl.py`` performs the full row-level verification.
+    This early gate exists so an unresolved branch cannot influence which
+    conditional files are admitted to the staging allow-list.
+    """
+
+    paths = {
+        "preflight": stage / "data/processed/pevl_trace_preflight_summary.json",
+        "stress": stage / "data/processed/pevl_timed_search_stress_summary.json",
+        "factorial": stage / "data/processed/pevl_factorial_summary.json",
+        "combined": stage / "data/processed/pevl_summary.json",
+    }
+    payloads = {name: load_json_strict(path) for name, path in paths.items()}
+    preflight = payloads["preflight"]
+    stress = payloads["stress"]
+    factorial = payloads["factorial"]
+    combined = payloads["combined"]
+    expected_headers = {
+        "preflight": "trace_preflight",
+        "stress": "timed_search_stress",
+        "factorial": "factorial",
+    }
+    for name, analysis_id in expected_headers.items():
+        payload = payloads[name]
+        if payload.get("schema_version") != 1 or payload.get("analysis_id") != analysis_id:
+            raise ValueError(f"released {name} PEVL header mismatch")
+    preflight_status = preflight.get("status")
+    if preflight_status not in {"PASS", "FAIL"}:
+        raise ValueError(f"trace preflight is not terminal: {preflight_status!r}")
+    stress_status = stress.get("status")
+    if stress_status not in {"TRACE_PARITY", "TRACE_DIVERGENCE"}:
+        raise ValueError(f"timed-search stress is not terminal: {stress_status!r}")
+    factorial_status = factorial.get("status")
+    allowed_factorial = {"ADMITTED_SEED_MATCHED", *TERMINAL_FACTORIAL_SUPPRESSIONS}
+    if factorial_status not in allowed_factorial:
+        raise ValueError(f"factorial branch is unresolved: {factorial_status!r}")
+    factorial_admitted = factorial_status == "ADMITTED_SEED_MATCHED"
+    if factorial_admitted and preflight_status != "PASS":
+        raise ValueError("admitted factorial conflicts with a non-PASS preflight")
+    if factorial_status == "SUPPRESSED_BY_PREFLIGHT" and preflight_status != "FAIL":
+        raise ValueError("preflight suppression conflicts with a PASS preflight")
+    if (
+        factorial_status == "SUPPRESSED_CONTROL_PARITY_FAILURE"
+        and preflight_status != "PASS"
+    ):
+        raise ValueError("factorial control-parity suppression lacks a PASS preflight")
+    if (
+        combined.get("schema_version") != 1
+        or combined.get("framework") != "Paired Evaluation Validity Ladder"
+        or combined.get("protocol") != "paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md"
+    ):
+        raise ValueError("combined PEVL summary header mismatch")
+    for key, payload in {
+        "prospective_trace_preflight": preflight,
+        "timed_search_stress": stress,
+        "gated_factorial": factorial,
+    }.items():
+        if combined.get(key) != payload:
+            raise ValueError(
+                f"sanitized combined PEVL summary differs from standalone {key}"
+            )
+    return {
+        "preflight": preflight_status,
+        "timed_search_stress": stress_status,
+        "factorial": factorial_status,
+        "factorial_admitted": factorial_admitted,
+    }
+
+
+def copy_synthetic_testbed(stage: Path) -> None:
+    # The release tree contains the standalone implementation.  The
+    # development-tree entry point under paper/synthetic is intentionally a
+    # thin wrapper around it and is therefore not itself redistributable as a
+    # standalone file.
+    source_root = RELEASE / "synthetic"
+    for relative in sorted(SYNTHETIC_FILES):
+        copy_required(source_root / relative, stage / "synthetic" / relative)
+
+
 def purge_python_caches(root: Path) -> None:
     for path in sorted(root.rglob("__pycache__"), reverse=True):
         if path.is_symlink():
@@ -458,7 +639,7 @@ def write_environment(stage: Path) -> None:
     numpy_version = importlib.metadata.version("numpy")
     matplotlib_version = importlib.metadata.version("matplotlib")
     (stage / "environment.yml").write_text(
-        "name: representation-repair-processed\n"
+        "name: pevl-processed-methods\n"
         "channels:\n  - conda-forge\n"
         "dependencies:\n"
         f"  - python={python_version}\n"
@@ -568,17 +749,51 @@ def protocol_names() -> set[str]:
         )
     if any(not safe_relative(name) for name in PROTOCOL_FILES):
         raise RuntimeError(f"unsafe protocol filename: {sorted(PROTOCOL_FILES)}")
+    protocol_path = ROOT / "paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md"
+    if sha256(protocol_path) != PEVL_PROTOCOL_SHA256:
+        raise RuntimeError("frozen PEVL protocol working-tree bytes have drifted")
+    blob = subprocess.run(
+        [
+            "git",
+            "show",
+            f"{PEVL_PROTOCOL_COMMIT}:paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md",
+        ],
+        cwd=ROOT,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if (
+        blob.returncode != 0
+        or hashlib.sha256(blob.stdout).hexdigest() != PEVL_PROTOCOL_SHA256
+    ):
+        raise RuntimeError(
+            "frozen PEVL protocol does not match its declared Git commit"
+        )
     return set(PROTOCOL_FILES)
 
 
-def build_stage(stage: Path, protocols: set[str]) -> tuple[dict[str, int], dict[str, int]]:
+def build_stage(
+    stage: Path,
+    protocols: set[str],
+) -> tuple[dict[str, int], dict[str, int], dict[str, object]]:
     for relative in sorted(STATIC_INPUTS):
         copy_required(RELEASE / relative, stage / relative)
-    verifier = stage / "evaluation/verify_processed.py"
-    expected_verifier_sha256 = sha256(verifier)
+    verifiers = {
+        stage / "evaluation/verify_processed.py",
+        stage / "evaluation/verify_pevl.py",
+    }
+    expected_verifier_sha256 = {
+        verifier: sha256(verifier) for verifier in verifiers
+    }
     for source, destination in PROCESSED.items():
         copy_processed(ROOT / source, stage / "data/processed" / destination)
     update_release_summary(stage)
+    pevl_state = validate_pevl_release_state(stage)
+    factorial_admitted = bool(pevl_state["factorial_admitted"])
+    if factorial_admitted:
+        for source, destination in CONDITIONAL_FACTORIAL_PROCESSED.items():
+            copy_processed(ROOT / source, stage / "data/processed" / destination)
     copy_required(ROOT / "paper/claim_ledger.csv", stage / "docs/claim_ledger.csv", sanitize=True)
     for name in sorted(SUPPLEMENTS):
         copy_required(ROOT / "paper/supplement" / name, stage / "docs" / name, sanitize=True)
@@ -586,30 +801,70 @@ def build_stage(stage: Path, protocols: set[str]) -> tuple[dict[str, int], dict[
         copy_required(ROOT / "paper/protocol" / name, stage / "docs/protocols" / name, sanitize=True)
     for name in sorted(RELEASE_SCRIPTS):
         copy_required(ROOT / "paper/scripts" / name, stage / "scripts" / name, sanitize=True)
+    copy_synthetic_testbed(stage)
     write_environment(stage)
 
     protected_inputs = capture_file_digests(stage)
     subprocess.run([sys.executable, "-B", "scripts/generate_tables.py"], cwd=stage, check=True)
     subprocess.run([sys.executable, "-B", "scripts/build_figures.py"], cwd=stage, check=True)
+    subprocess.run(
+        [
+            sys.executable,
+            "-B",
+            "scripts/build_pevl_artifacts.py",
+            "--synthetic",
+            "synthetic/results/pevl_results.json",
+            "--historical",
+            "data/processed/ablation_summary.json",
+            "--preflight",
+            "data/processed/pevl_trace_preflight_summary.json",
+            "--stress",
+            "data/processed/pevl_timed_search_stress_summary.json",
+            "--factorial",
+            "data/processed/pevl_factorial_summary.json",
+            "--combined",
+            "data/processed/pevl_summary.json",
+            "--figures-dir",
+            "figures",
+            "--tables-dir",
+            "generated/tables",
+        ],
+        cwd=stage,
+        check=True,
+    )
     purge_python_caches(stage)
     validate_unchanged(stage, protected_inputs, "release generators")
 
-    without_manifest = expected_files(protocols, include_manifest=False)
+    without_manifest = expected_files(
+        protocols,
+        factorial_admitted=factorial_admitted,
+        include_manifest=False,
+    )
     validate_exact_tree(stage, without_manifest)
     scan = scan_release(stage)
-    validate_regular_within(stage, verifier)
-    if sha256(verifier) != expected_verifier_sha256:
-        raise RuntimeError("released verifier changed during staged generation")
+    for verifier in verifiers:
+        validate_regular_within(stage, verifier)
+        if sha256(verifier) != expected_verifier_sha256[verifier]:
+            raise RuntimeError(f"released verifier changed during staged generation: {verifier.name}")
     protected_release = capture_file_digests(stage)
-    subprocess.run([sys.executable, "-B", "evaluation/verify_processed.py"], cwd=stage, check=True)
+    for verifier in ("verify_processed.py", "verify_pevl.py"):
+        subprocess.run(
+            [sys.executable, "-B", f"evaluation/{verifier}"],
+            cwd=stage,
+            check=True,
+        )
     purge_python_caches(stage)
     validate_exact_tree(stage, without_manifest)
-    validate_unchanged(stage, protected_release, "release verifier")
+    validate_unchanged(stage, protected_release, "release verifiers")
     scan = scan_release(stage)
     write_manifest(stage, without_manifest)
-    with_manifest = expected_files(protocols, include_manifest=True)
+    with_manifest = expected_files(
+        protocols,
+        factorial_admitted=factorial_admitted,
+        include_manifest=True,
+    )
     manifest_report = verify_manifest(stage, with_manifest)
-    return scan, manifest_report
+    return scan, manifest_report, pevl_state
 
 
 def publish_transactionally(stage: Path) -> str:
@@ -679,7 +934,7 @@ def main() -> int:
     protocols = protocol_names()
     stage = Path(tempfile.mkdtemp(prefix=".release-stage-", dir=RELEASE.parent))
     try:
-        scan, manifest_report = build_stage(stage, protocols)
+        scan, manifest_report, pevl_state = build_stage(stage, protocols)
         manifest_sha = sha256(stage / "MANIFEST.sha256")
         publication = publish_transactionally(stage)
     finally:
@@ -689,6 +944,7 @@ def main() -> int:
         "release": str(RELEASE.relative_to(ROOT)),
         "manifest_sha256": manifest_sha,
         "manifest": manifest_report,
+        "pevl": pevl_state,
         "scan": scan,
         "publication": publication,
     }, indent=2, sort_keys=True))

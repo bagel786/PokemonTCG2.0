@@ -1,0 +1,29 @@
+{
+  "complete": true,
+  "completed_jobs": 2,
+  "exact_reproducibility_passed": false,
+  "execution_commit": "deeefa1af26ee4749aeb56417c3e89a24a6140d2",
+  "expected_jobs": 2,
+  "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",
+  "rows": [
+    {
+      "opponent": "starmie",
+      "passed": false,
+      "restricted_source": "artifacts/pevl_20260824/stress/starmie/proof.json",
+      "restricted_source_sha256": "533a4a9a0228e9e5ae3dd5b1a9a170586dd1aac48fe97044a163cecce2f2f720",
+      "safe_source": "paper/data/pevl/stress/raw/starmie.json",
+      "safe_source_sha256": "cf0fe2bc85e702c5713ddbd6b6aab0697244c5364d06c8b8f310ce8f5251adb3"
+    },
+    {
+      "opponent": "dipplin",
+      "passed": false,
+      "restricted_source": "artifacts/pevl_20260824/stress/dipplin/proof.json",
+      "restricted_source_sha256": "4bf084e8dc7622a654d89a2260132d3781b0cd13c41095ef912145301a9a9b99",
+      "safe_source": "paper/data/pevl/stress/raw/dipplin.json",
+      "safe_source_sha256": "9e602ec4f55201a534582519664d0be9f2be320d976719c5cb223ceb5284ba22"
+    }
+  ],
+  "schema_version": 1,
+  "stage": "stress",
+  "status": "TRACE_DIVERGENCE"
+}

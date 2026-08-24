@@ -1,0 +1,177 @@
+{
+  "admission_decision": "admit_factorial_acquisition",
+  "complete": true,
+  "completed_jobs": 20,
+  "execution_commit": "deeefa1af26ee4749aeb56417c3e89a24a6140d2",
+  "executions": 3000,
+  "expected_jobs": 20,
+  "failures": [],
+  "passed": true,
+  "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",
+  "rows": [
+    {
+      "arm": "c1",
+      "job": "c1_b0",
+      "opponent": "b0",
+      "passed": true,
+      "source": "paper/data/pevl/preflight/raw/c1_b0.json",
+      "source_sha256": "c19205bb2b5593a069b2257fd9f802e6ac25594bd9d6246afd6f632a74f7e3cd"
+    },
+    {
+      "arm": "c1",
+      "job": "c1_d842",
+      "opponent": "d842",
+      "passed": true,
+      "source": "paper/data/pevl/preflight/raw/c1_d842.json",
+      "source_sha256": "2cb1af06351851a4790acba58bb43125a0bf933f857980bf5a2c0da65437a5ef"
+    },
+    {
+      "arm": "c1",
+      "job": "c1_master",
+      "opponent": "master",
+      "passed": true,
+      "source": "paper/data/pevl/preflight/raw/c1_master.json",
+      "source_sha256": "10a802240062830dc922a4dab352a37e567519fac2884cf24728c027ca4fd999"
+    },
+    {
+      "arm": "c1",
+      "job": "c1_replay",
+      "opponent": "replay",
+      "passed": true,
+      "source": "paper/data/pevl/preflight/raw/c1_replay.json",
+      "source_sha256": "53ffb50029bf614fe95d3bc9a9e9bee6c32757880ccdc1f99ac5e6f220f34749"
+    },
+    {
+      "arm": "c1",
+      "job": "c1_alakazam_no_search",
+      "opponent": "alakazam_no_search",
+      "passed": true,
+      "source": "paper/data/pevl/preflight/raw/c1_alakazam_no_search.json",
+      "source_sha256": "7844c370c35a6ecdc6ab05d3e902fb7e0fb10d623093ddc9f5ea0bdf10919b41"
+    },
+    {
+      "arm": "c2",
+      "job": "c2_b0",
+      "opponent": "b0",
+      "passed": true,
+      "source": "paper/data/pevl/preflight/raw/c2_b0.json",
+      "source_sha256": "72a48bebe8f4a6f003228f47aba1f43489d9892e2e3973f631a4d51a2252fba7"
+    },
+    {
+      "arm": "c2",
+      "job": "c2_d842",
+      "opponent": "d842",
+      "passed": true,
+      "source": "paper/data/pevl/preflight/raw/c2_d842.json",
+      "source_sha256": "ae1843682bcaf3d1a511fe8ce194705baaede500c6faefa9301f276daaa82f00"
+    },
+    {
+      "arm": "c2",
+      "job": "c2_master",
+      "opponent": "master",
+      "passed": true,
+      "source": "paper/data/pevl/preflight/raw/c2_master.json",
+      "source_sha256": "76e39b00ea0baa009a310cae096d48e99ff8ec459942c2305f325cdd4f1c40e6"
+    },
+    {
+      "arm": "c2",
+      "job": "c2_replay",
+      "opponent": "replay",
+      "passed": true,
+      "source": "paper/data/pevl/preflight/raw/c2_replay.json",
+      "source_sha256": "b7ec500f183238f0b211568694dea5028334044be282a8fd15dcc2cecef43958"
+    },
+    {
+      "arm": "c2",
+      "job": "c2_alakazam_no_search",
+      "opponent": "alakazam_no_search",
+      "passed": true,
+      "source": "paper/data/pevl/preflight/raw/c2_alakazam_no_search.json",
+      "source_sha256": "5e320f89a3962cd37940cfc27f931b318e7b73763ef1e281bd4b0fd7d6a024c8"
+    },
+    {
+      "arm": "c3",
+      "job": "c3_b0",
+      "opponent": "b0",
+      "passed": true,
+      "source": "paper/data/pevl/preflight/raw/c3_b0.json",
+      "source_sha256": "c59a044956d175fb6f0d43eed1e6888c9c195d59d63929dd5c5f9bb63da99b6a"
+    },
+    {
+      "arm": "c3",
+      "job": "c3_d842",
+      "opponent": "d842",
+      "passed": true,
+      "source": "paper/data/pevl/preflight/raw/c3_d842.json",
+      "source_sha256": "8d95ff7549773601f8cd0e34873d4dbcc008c5393cfa1a58d80186fb1df2c5ca"
+    },
+    {
+      "arm": "c3",
+      "job": "c3_master",
+      "opponent": "master",
+      "passed": true,
+      "source": "paper/data/pevl/preflight/raw/c3_master.json",
+      "source_sha256": "a1772522229932dfbd66e73bad6747a1b98b881b9da00236c3589aedf367aad5"
+    },
+    {
+      "arm": "c3",
+      "job": "c3_replay",
+      "opponent": "replay",
+      "passed": true,
+      "source": "paper/data/pevl/preflight/raw/c3_replay.json",
+      "source_sha256": "e814c53e6b5bbf680494e81dea2669cef7093fd4af9936ad0c244a38cb2834af"
+    },
+    {
+      "arm": "c3",
+      "job": "c3_alakazam_no_search",
+      "opponent": "alakazam_no_search",
+      "passed": true,
+      "source": "paper/data/pevl/preflight/raw/c3_alakazam_no_search.json",
+      "source_sha256": "8c902bc88d5740b94d21e31576914455e5a6901917301b10a0614525da5c523f"
+    },
+    {
+      "arm": "c4",
+      "job": "c4_b0",
+      "opponent": "b0",
+      "passed": true,
+      "source": "paper/data/pevl/preflight/raw/c4_b0.json",
+      "source_sha256": "55866a9c661bb9b6ac317a8e0a2c35b4459fa272ac7f849eee7adc7a3c0b1891"
+    },
+    {
+      "arm": "c4",
+      "job": "c4_d842",
+      "opponent": "d842",
+      "passed": true,
+      "source": "paper/data/pevl/preflight/raw/c4_d842.json",
+      "source_sha256": "a05e64dadef9961d0feb517633f3cb25b2aa1210262d57dd6120db24ed846665"
+    },
+    {
+      "arm": "c4",
+      "job": "c4_master",
+      "opponent": "master",
+      "passed": true,
+      "source": "paper/data/pevl/preflight/raw/c4_master.json",
+      "source_sha256": "d237172118b87a0e423d563147aaa992ab2e54f5754f90475d64a0ecb6c222b1"
+    },
+    {
+      "arm": "c4",
+      "job": "c4_replay",
+      "opponent": "replay",
+      "passed": true,
+      "source": "paper/data/pevl/preflight/raw/c4_replay.json",
+      "source_sha256": "65fa19c99c178085e74efdee058561ba21fd998052ae64a2b0ec7c9e35e780ec"
+    },
+    {
+      "arm": "c4",
+      "job": "c4_alakazam_no_search",
+      "opponent": "alakazam_no_search",
+      "passed": true,
+      "source": "paper/data/pevl/preflight/raw/c4_alakazam_no_search.json",
+      "source_sha256": "ef193827053b6d32b9e1d8c0be33fe6c9ca5f1eb9368449d85249f87537ab716"
+    }
+  ],
+  "schema_version": 1,
+  "stage": "preflight",
+  "status": "PASS",
+  "trajectory_units": 1000
+}

@@ -1,0 +1,82 @@
+% Verified manuscript values generated from checked-in machine-readable results.
+% Sources:
+%   paper/synthetic/results/pevl_results.json
+%   paper/data/seed_namespace_audit.json
+%   paper/data/ablation/summary.json
+%   paper/data/statistical_summary.json
+%   paper/data/representation_audit.json
+%   paper/data/pevl/trace_preflight_summary.json
+%   paper/data/pevl/timed_search_stress_summary.json (when complete)
+%   paper/data/pevl/factorial_summary.json (when complete)
+%   paper/data/pevl/summary.json (combined admission state)
+%
+% Prospective preflight, timed-search, and factorial result macros are
+% intentionally absent.
+% The manuscript exposes those branches only when a results generator validates
+% the corresponding analyzer output above and defines:
+%   \PEVLPreflightReady
+%   \PEVLTimedStressReady
+%   \PEVLTimedStressAbstractSentence
+%   \PEVLTimedStressResultsParagraph
+%   \PEVLTimedStressTableRows
+%   \PEVLFactorialReady
+%   \PEVLFactorialAbstractSentence
+%   \PEVLFactorialResultsParagraph
+%   \PEVLFactorialResultsTable
+% A terminal suppression uses the same complete family (with an empty table)
+% and additionally exposes:
+%   \PEVLFactorialSuppressedReady
+% A readiness macro must be emitted only with its complete macro family; missing
+% members then fail compilation. These macros must never be populated manually
+% or with fallback values.
+
+\newcommand{\PEVLSyntheticModes}{5}
+\newcommand{\PEVLDrawShiftSharedEvents}{5}
+\newcommand{\PEVLDrawShiftMisalignedEvents}{4}
+
+\newcommand{\PEVLHistoricalUnits}{2,800}
+\newcommand{\PEVLHistoricalGames}{5,600}
+\newcommand{\PEVLHistoricalNarrowedSeeds}{2,800}
+\newcommand{\PEVLHistoricalUniqueEngineSeeds}{2,800}
+\newcommand{\PEVLHistoricalSeedCollisions}{0}
+\newcommand{\PEVLHistoricalOutcomeMismatch}{210}
+\newcommand{\PEVLHistoricalOutcomeMismatchPct}{7.50}
+\newcommand{\PEVLHistoricalSerializedMismatch}{458}
+\newcommand{\PEVLHistoricalSerializedMismatchPct}{16.36}
+\newcommand{\PEVLStarmieUnits}{400}
+\newcommand{\PEVLStarmieOutcomeMismatch}{191}
+\newcommand{\PEVLStarmieOutcomeMismatchPct}{47.75}
+\newcommand{\PEVLStarmieSerializedMismatch}{377}
+\newcommand{\PEVLStarmieSerializedMismatchPct}{94.25}
+\newcommand{\PEVLDipplinUnits}{400}
+\newcommand{\PEVLDipplinOutcomeMismatch}{19}
+\newcommand{\PEVLDipplinOutcomeMismatchPct}{4.75}
+\newcommand{\PEVLDipplinSerializedMismatch}{81}
+\newcommand{\PEVLDipplinSerializedMismatchPct}{20.25}
+\newcommand{\PEVLOtherHistoricalUnits}{2,000}
+\newcommand{\PEVLOtherOutcomeMismatch}{0}
+\newcommand{\PEVLOtherSerializedMismatch}{0}
+\newcommand{\PEVLHistoricalEffectPP}{2.786}
+\newcommand{\PEVLHistoricalCILowPP}{0.679}
+\newcommand{\PEVLHistoricalCIHighPP}{4.929}
+
+\newcommand{\PEVLRepresentationOptions}{37,199}
+\newcommand{\PEVLRepresentationMultiIdentityStates}{9,776}
+\newcommand{\PEVLRepresentationExactCollisions}{0}
+
+\InputIfFileExists{pevl_results_macros.tex}{}{%
+  \PackageError{PEVL}{Terminal PEVL result macros are missing}{%
+    Run analyze_pevl.py and build_pevl_result_macros.py before compiling.}%
+}
+\ifdefined\PEVLPreflightReady\else
+  \PackageError{PEVL}{Trace-preflight results are not terminal}{%
+    A complete terminal preflight analysis is required.}%
+\fi
+\ifdefined\PEVLTimedStressReady\else
+  \PackageError{PEVL}{Timed-search stress results are not terminal}{%
+    A complete terminal stress analysis is required.}%
+\fi
+\ifdefined\PEVLFactorialReady\else
+  \PackageError{PEVL}{Factorial admission result is not terminal}{%
+    A complete admitted or suppressed factorial branch is required.}%
+\fi

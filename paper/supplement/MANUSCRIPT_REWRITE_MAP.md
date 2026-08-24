@@ -16,7 +16,7 @@ The narrative should follow one sequence:
 
 1. Seed pairing can be useful, but a shared seed is only one piece of evidence.
 2. PEVL separates eight increasingly demanding validation/admission levels.
-3. A fully open synthetic testbed shows which levels detect five known modes.
+3. A self-contained synthetic testbed shows which levels detect five known modes.
 4. A restricted game-agent pipeline supplies a real black-box case: an apparently favorable comparison coexisted with a failed repeated-control gate.
 5. A prospectively frozen trace/stress protocol tests the revised workflow.
 6. The factorial is reported only if all required gates pass; otherwise its suppression is itself the planned result.
@@ -52,7 +52,7 @@ Paragraph 4 should identify the black-box setting: restricted simulator, third-p
 Paragraph 5 should give four contributions:
 
 1. the eight-level PEVL and its claim-admission vocabulary;
-2. an open synthetic counterexample/remediation suite;
+2. a self-contained synthetic counterexample/remediation suite;
 3. a real retrospective failure in which a seemingly matched game-agent design failed identical-control parity;
 4. a prospectively frozen trace/stress evaluation and conditional factorial demonstration.
 
@@ -94,7 +94,7 @@ End with the exact admission vocabulary used later:
 
 ### III. Methods (1,500--1,900 words)
 
-#### A. Open synthetic validation suite
+#### A. Self-contained synthetic validation suite
 
 Describe the standard-library-only testbed and its deterministic fixtures. Use the checked-in `paper/synthetic/results/pevl_results.json` and `pevl_matrix.csv` as the evidence source.
 
@@ -220,7 +220,7 @@ Organize the discussion around implications, not the development story.
 
 Retain and reorganize these limitations:
 
-- PEVL is evaluated in one open synthetic suite and one restricted game domain; it is not yet a universal standard.
+- PEVL is evaluated in one self-contained synthetic suite and one restricted game domain; it is not yet a universal standard.
 - Synthetic clocks and process state are injected deterministic fixtures, not measurements of live operating-system behavior.
 - The restricted engine cannot satisfy Level 7, so even passing game results remain seed-matched and implementation-conditional.
 - Opponents are fixed engineering populations, not probability samples; the five factorial opponents were prospectively redefined after the historical audit and do not represent the full competition field.
@@ -233,7 +233,7 @@ Move detailed corpus-loss, stale-manifest, historical-aggregate, and unavailable
 
 ### VII. Conclusion (120--180 words)
 
-Conclude with the distinction among schedule matching, reproducible execution, and event alignment. State that PEVL makes paired evaluation fail closed by connecting evidence to allowed claims. Mention the real parity failure and the open synthetic testbed. End with a bounded recommendation: record exact consumed seeds, test identical arms and execution contexts at trace level, audit stochastic sources, and suppress any contrast whose required gate fails.
+Conclude with the distinction among schedule matching, reproducible execution, and event alignment. State that PEVL makes paired evaluation fail closed by connecting evidence to allowed claims. Mention the real parity failure and the self-contained synthetic testbed. End with a bounded recommendation: record exact consumed seeds, test identical arms and execution contexts at trace level, audit stochastic sources, and suppress any contrast whose required gate fails.
 
 Do not conclude with agent strength, offline agreement, or the representation repair alone.
 
@@ -265,7 +265,7 @@ Do not conclude with agent strength, offline agreement, or the representation re
 |---|---|
 | `paper/supplement/PEVL_FRAMEWORK.md` | Source of exact level definitions and claim vocabulary; compress into Section II and Table I. |
 | `paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md` | Controlling source for all prospective methods, stopping rules, estimands, and reporting branches. |
-| `paper/synthetic/results/pevl_results.json` and `pevl_matrix.csv` | Primary evidence for open synthetic results and detection matrix. |
+| `paper/synthetic/results/pevl_results.json` and `pevl_matrix.csv` | Primary evidence for the synthetic results and detection matrix. |
 | `paper/data/seed_namespace_audit.json` | Historical Level-2 result and prospective no-collision verification. |
 | `paper/data/ablation/summary.json` | Historical Level-4 mismatch counts, by-opponent localization, source audit, and fail-closed decision. |
 | `paper/data/statistical_summary.json` | Historical one-execution C4--C1 estimate, conditional interval, and exact scope. |
@@ -391,6 +391,6 @@ The rewrite is not complete until the following generated outputs exist and trac
 - All prospective statistics, macros, tables, and figures regenerate from frozen raw outputs.
 - Every displayed number has a claim-ledger entry and source hash; no summary prose becomes evidence.
 - All new bibliography keys resolve and the current Sharma v3 title is used.
-- Data Availability distinguishes the open synthetic suite and processed audit package from restricted engine/opponent/card assets.
+- Data Availability distinguishes the self-contained synthetic suite and processed audit package from restricted engine/opponent/card assets, while preserving the unresolved license boundary.
 - The release verifier, red-team audit, LaTeX compilation, reference resolution, full-page PDF rendering, and visual review all pass after the rewrite.
 - Human authors complete authorship, affiliation, ORCID, CRediT, funding, conflict, acknowledgment, AI-use, rights/license, repository, and DOI metadata before submission.

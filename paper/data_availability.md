@@ -1,40 +1,39 @@
 # Data Availability Statement
 
-The intended sanitized private-review companion package under `paper/release/` is
-designed to contain the processed one-row-per-paired-unit outcome tables,
-statistical summaries, figure inputs, analysis scripts, protocols, hashes, and
-environment specification needed to regenerate reported tables and figures from
-processed outcomes and recorded summary files. Its verifier is intended to
-check the primary row schedule, marginal counts, discordant counts, exact
-McNemar calculation, and equal-weight point estimate. It will also preserve the
-failed four-cell validation result, including all repeated C1 outcomes and the
-210/2,800 mismatch count, rather than deleting mismatched units. It does not
-independently recompute every interval or statistic from engine trajectories.
+The companion package under `paper/release/` is designed to preserve the
+evidence needed to inspect the Paired Evaluation Validity Ladder (PEVL) and to
+regenerate the manuscript's processed results, tables, and figures. It contains
+the self-contained synthetic simulator and fixtures; frozen protocols; artifact
+and seed-namespace records; bounded stochastic-source audits; processed
+historical repeated-control records; prospective preflight, timed-search, and
+factorial analysis outputs; analysis and verification programs; and a
+cryptographic manifest. The release verifier checks the frozen inventories,
+row schedules, aggregate counts, admission status, and the conditional presence
+or absence of factorial effect artifacts. The synthetic component is prepared
+for redistribution but remains under a no-license placeholder until ownership
+and licensing are approved by the authors.
 
-The underlying tournament engine, engine source and binaries, card database,
-deck files, private replay observations, and third-party opponent packages are
-not redistributed. They are subject to organizer terms, third-party rights,
-and privacy constraints. Exact end-to-end gameplay regeneration therefore
-requires separately authorized access from the competition organizer and the
-same engine build identified by SHA-256 in the protocols. The repository's
-competition-use license also imposes retention and redistribution restrictions;
-the authors cannot grant access rights they do not possess.
+The restricted case-study artifacts are not sufficient for independent
+end-to-end gameplay replay. The tournament engine and source, engine binaries,
+card database, decks, private replay observations, full restricted traces,
+third-party opponent packages, and policy packages are excluded because of
+organizer terms, third-party rights, privacy constraints, or unresolved release
+authority. Exact gameplay regeneration therefore requires separately authorized
+access to the engine and packages identified by the SHA-256 records in the
+protocols. Restricted full traces used for local diagnostic localization are
+not redistributed; the companion package retains only safe processed summaries
+and digests.
 
-The retained identity feature corpus and original policy packages are local,
-ignored artifacts. Their cryptographic digests, row counts, transformation
-rules, and derived aggregate results are reported, but the corpus and packages
-are not part of the sanitized release pending a rights review. The original
-Aug. 14--15 replay observations used to mine that corpus no longer survive, so
-feature extraction cannot be reconstructed from those raw replays.
+The retained identity-feature corpus and original policy packages also remain
+local pending rights review. Their digests, sizes, transformations, and derived
+aggregates are documented. Some original historical replay observations no
+longer survive, so feature extraction from those observations cannot be
+reconstructed even with authorized engine access; this limitation is stated in
+the manuscript and provenance audit.
 
-The processed primary results document an engine-seed-, order-, and seat-matched
-schedule, not complete opponent-randomness coupling. Starmie and Dipplin use
-wall-clock-bounded search, and the released processed records cannot recover or
-resample unrecorded process-scheduling and runtime-state variation.
-
-Repository DOI, archival location, maintainer contact, and any controlled-access
-request procedure: **to be supplied by the corresponding author before
-submission**. Once supplied, the authors must add a formal reference-list
-citation for the released data/software package (creators, title, year, version,
-repository, and persistent identifier) and cite it in the manuscript Data
-Availability Statement.
+Repository DOI, archival location, version, creators, maintainer contact,
+approved license, and any controlled-access request procedure must be supplied
+by the corresponding author before submission. Once those facts are available,
+the archived software/data object must receive a formal reference-list citation
+and the final manuscript and submission form must point to that persistent
+record. Until then, `paper/release/LICENSE` grants no redistribution rights.

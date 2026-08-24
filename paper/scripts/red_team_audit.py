@@ -24,8 +24,8 @@ REQUIRED_CLAIM_FIELDS = [
 ]
 RELEASE_STATIC_FILES = {
     "README.md", "CITATION.cff", "LICENSE", "docs/environment_access.md",
-    "evaluation/verify_processed.py", "src/abstract_engine.py",
-    "environment.yml", "requirements-lock.txt",
+    "evaluation/verify_pevl.py", "evaluation/verify_processed.py",
+    "src/abstract_engine.py", "environment.yml", "requirements-lock.txt",
 }
 RELEASE_PROCESSED_FILES = {
     "canonical_results.csv", "statistical_summary.json", "fresh_cell_summary.csv",
@@ -33,13 +33,19 @@ RELEASE_PROCESSED_FILES = {
     "representation_source_cards.csv", "heldout_0813_summary.json",
     "negative_results.json", "negative_results.csv", "ablation_canonical.csv",
     "ablation_summary.json", "ablation_contrasts.csv", "ablation_training_report.json",
+    "pevl_trace_preflight_summary.json", "pevl_timed_search_stress_summary.json",
+    "pevl_factorial_summary.json", "pevl_summary.json",
+    "seed_namespace_audit.json", "stochastic_source_audit.json",
 }
+RELEASE_FACTORIAL_PROCESSED_FILES = {"pevl_factorial_units.csv"}
 RELEASE_DOC_FILES = {
-    "DATA_CARD.md", "MODEL_CARD.md", "PROVENANCE_AUDIT.md",
-    "REPRODUCIBILITY_CHECKLIST.md", "RIGHTS_AND_ACCESS_AUDIT.md",
+    "DATA_CARD.md", "LITERATURE_AUDIT.md", "MODEL_CARD.md", "PEVL_FRAMEWORK.md",
+    "PROVENANCE_AUDIT.md", "REPRODUCIBILITY_CHECKLIST.md",
+    "RIGHTS_AND_ACCESS_AUDIT.md",
 }
 RELEASE_PROTOCOL_FILES = {
     "FRESH_CONFIRMATION_PROTOCOL.md",
+    "PEVL_PROSPECTIVE_PROTOCOL.md",
     "REPRESENTATION_ABLATION_PROTOCOL.md",
 }
 RELEASE_GENERATED_FILES = {
@@ -49,10 +55,31 @@ RELEASE_GENERATED_FILES = {
     "generated/tables/negative.tex",
     "generated/tables/primary.tex",
     "generated/tables/representation.tex",
+    "generated/tables/pevl_ladder.tex",
+    "generated/tables/pevl_retrospective_audit.tex",
+    "generated/tables/pevl_prospective_audit.tex",
 }
+RELEASE_FACTORIAL_GENERATED_FILES = {"generated/tables/pevl_factorial.tex"}
 RELEASE_FIGURE_STEMS = {
     "fig01_pipeline", "fig02_action_aliasing", "fig03_dataset_provenance",
     "fig04_gameplay_forest", "fig05_gameplay_vs_expert", "fig06_negative_forest",
+    "fig_pevl_01_ladder", "fig_pevl_02_synthetic",
+    "fig_pevl_03_historical_parity", "fig_pevl_04_stress",
+}
+RELEASE_FACTORIAL_FIGURE_STEMS = {"fig_pevl_05_factorial"}
+RELEASE_SCRIPT_FILES = {
+    "scripts/build_figures.py",
+    "scripts/build_pevl_artifacts.py",
+    "scripts/generate_tables.py",
+}
+RELEASE_SYNTHETIC_FILES = {
+    "synthetic/README.md",
+    "synthetic/__init__.py",
+    "synthetic/pevl_synthetic.py",
+    "synthetic/results/MANIFEST.sha256",
+    "synthetic/results/pevl_matrix.csv",
+    "synthetic/results/pevl_results.json",
+    "synthetic/results/pevl_results.schema.json",
 }
 RELEASE_PROHIBITED_SUFFIXES = {
     ".dylib", ".dll", ".so", ".exe", ".npz", ".npy", ".pt", ".pth",
@@ -261,7 +288,13 @@ def used_citations(tex: str) -> set[str]:
 
 def defined_commands() -> set[str]:
     commands = set()
-    for path in (PAPER / "main.tex", PAPER / "results_macros.tex", PAPER / "diagnostic_macros.tex"):
+    for path in (
+        PAPER / "main.tex",
+        PAPER / "results_macros.tex",
+        PAPER / "diagnostic_macros.tex",
+        PAPER / "pevl_macros.tex",
+        PAPER / "pevl_results_macros.tex",
+    ):
         text = path.read_text(encoding="utf-8")
         commands.update(re.findall(r"\\newcommand\{\\([A-Za-z]+)\}", text))
     return commands
@@ -279,19 +312,51 @@ def safe_release_path(value: str) -> bool:
     )
 
 
+def factorial_is_admitted(path: Path) -> bool:
+    """Return true only for the one terminal branch that admits unit rows."""
+
+    try:
+        payload = load_json_strict(path)
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError):
+        return False
+    return (
+        payload.get("schema_version") == 1
+        and payload.get("analysis_id") == "factorial"
+        and payload.get("status") == "ADMITTED_SEED_MATCHED"
+        and payload.get("admission_decision") == "admit_with_bounded_wording"
+    )
+
+
 def expected_release_files() -> set[str]:
+    factorial_admitted = factorial_is_admitted(
+        RELEASE / "data/processed/pevl_factorial_summary.json"
+    )
     files = set(RELEASE_STATIC_FILES)
     files.update(f"data/processed/{name}" for name in RELEASE_PROCESSED_FILES)
+    if factorial_admitted:
+        files.update(
+            f"data/processed/{name}"
+            for name in RELEASE_FACTORIAL_PROCESSED_FILES
+        )
     files.update(f"docs/{name}" for name in RELEASE_DOC_FILES)
     files.add("docs/claim_ledger.csv")
     files.update(f"docs/protocols/{name}" for name in RELEASE_PROTOCOL_FILES)
-    files.update({"scripts/build_figures.py", "scripts/generate_tables.py"})
+    files.update(RELEASE_SCRIPT_FILES)
     files.update(RELEASE_GENERATED_FILES)
+    if factorial_admitted:
+        files.update(RELEASE_FACTORIAL_GENERATED_FILES)
     files.update(
         f"figures/{stem}.{suffix}"
         for stem in RELEASE_FIGURE_STEMS
         for suffix in ("pdf", "png")
     )
+    if factorial_admitted:
+        files.update(
+            f"figures/{stem}.{suffix}"
+            for stem in RELEASE_FACTORIAL_FIGURE_STEMS
+            for suffix in ("pdf", "png")
+        )
+    files.update(RELEASE_SYNTHETIC_FILES)
     files.add("MANIFEST.sha256")
     return files
 
@@ -439,7 +504,8 @@ def main() -> int:
     failures = []
     required = [
         "main.tex", "main.pdf", "references.bib", "results.tex", "results_macros.tex",
-        "diagnostic_macros.tex", "claim_ledger.csv", "cover_letter.md",
+        "diagnostic_macros.tex", "pevl_macros.tex", "pevl_results_macros.tex",
+        "claim_ledger.csv", "cover_letter.md",
         "data_availability.md", "ai_disclosure.md", "author_contributions.md",
         "conflict_of_interest.md", "limitations.md", "word_count.json",
     ]
@@ -500,11 +566,26 @@ def main() -> int:
             f"included={bad_include}, duplicates={duplicate_ids}"
         )
 
-    figures = sorted((PAPER / "figures").glob("fig*.pdf"))
-    pngs = sorted((PAPER / "figures").glob("fig*.png"))
-    checks["six_figures_two_formats"] = len(figures) == 6 and len(pngs) == 6
-    if not checks["six_figures_two_formats"]:
-        failures.append(f"figure count pdf/png = {len(figures)}/{len(pngs)}")
+    source_figure_stems = set(RELEASE_FIGURE_STEMS)
+    if factorial_is_admitted(PAPER / "data/pevl/factorial_summary.json"):
+        source_figure_stems.update(RELEASE_FACTORIAL_FIGURE_STEMS)
+    observed_pdf_stems = {
+        path.stem for path in (PAPER / "figures").glob("fig*.pdf")
+    }
+    observed_png_stems = {
+        path.stem for path in (PAPER / "figures").glob("fig*.png")
+    }
+    figures_ok = (
+        observed_pdf_stems == source_figure_stems
+        and observed_png_stems == source_figure_stems
+    )
+    checks["exact_figures_two_formats"] = figures_ok
+    if not figures_ok:
+        failures.append(
+            "figure set mismatch: "
+            f"expected={sorted(source_figure_stems)}, "
+            f"pdf={sorted(observed_pdf_stems)}, png={sorted(observed_png_stems)}"
+        )
 
     overlap_report = tracked_markdown_overlap(tex, width=12)
     overlap_ok = not overlap_report["overlaps"] and not overlap_report["errors"]
@@ -537,35 +618,70 @@ def main() -> int:
     if release_content_errors:
         failures.append(f"release content errors: {release_content_errors}")
 
-    verifier = RELEASE / "evaluation/verify_processed.py"
-    verifier_path_error = validate_regular_within(RELEASE, verifier)
-    verifier_gate_ok = not manifest_errors and not release_content_errors and not verifier_path_error
+    verifiers = {
+        "processed": RELEASE / "evaluation/verify_processed.py",
+        "pevl": RELEASE / "evaluation/verify_pevl.py",
+    }
+    verifier_path_errors = {
+        name: validate_regular_within(RELEASE, path)
+        for name, path in verifiers.items()
+    }
+    verifier_gate_ok = (
+        not manifest_errors
+        and not release_content_errors
+        and not any(verifier_path_errors.values())
+    )
     checks["release_verifier_execution_gate"] = verifier_gate_ok
     if verifier_gate_ok:
-        verification = subprocess.run(
-            [sys.executable, "-B", "evaluation/verify_processed.py"],
-            cwd=RELEASE,
-            text=True,
-            capture_output=True,
-            check=False,
-        )
-        verifier_ok = verification.returncode == 0
-        verifier_detail = (verification.stderr or verification.stdout).strip()[-2000:]
+        verifier_results = {}
+        for name, path in verifiers.items():
+            verification = subprocess.run(
+                [sys.executable, "-B", f"evaluation/{path.name}"],
+                cwd=RELEASE,
+                text=True,
+                capture_output=True,
+                check=False,
+            )
+            verifier_results[name] = {
+                "passed": verification.returncode == 0,
+                "detail": (verification.stderr or verification.stdout).strip()[-2_000:],
+            }
     else:
-        verifier_ok = False
-        verifier_detail = (
-            "release verifier execution blocked until manifest, content, and ancestry checks pass: "
-            f"manifest_errors={manifest_errors}, content_errors={release_content_errors}, "
-            f"path_error={verifier_path_error}"
-        )
-    checks["release_processed_verifier"] = verifier_ok
-    if not verifier_ok:
-        failures.append(f"release processed verifier failed: {verifier_detail}")
+        verifier_results = {
+            name: {
+                "passed": False,
+                "detail": (
+                    "release verifier execution blocked until manifest, content, "
+                    "and ancestry checks pass: "
+                    f"manifest_errors={manifest_errors}, "
+                    f"content_errors={release_content_errors}, "
+                    f"path_errors={verifier_path_errors}"
+                ),
+            }
+            for name in verifiers
+        }
+    for name, result in verifier_results.items():
+        checks[f"release_{name}_verifier"] = result["passed"]
+        if not result["passed"]:
+            failures.append(
+                f"release {name} verifier failed: {result['detail']}"
+            )
 
     license_text = (RELEASE / "LICENSE").read_text(encoding="utf-8") \
         if (RELEASE / "LICENSE").is_file() else ""
     citation_text = (RELEASE / "CITATION.cff").read_text(encoding="utf-8") \
         if (RELEASE / "CITATION.cff").is_file() else ""
+    release_readme_text = (RELEASE / "README.md").read_text(encoding="utf-8") \
+        if (RELEASE / "README.md").is_file() else ""
+    pevl_release_framing = (
+        "A Validity Ladder for Seed-Matched Evaluation of Game-Playing Agents"
+        in citation_text
+        and "Paired Evaluation Validity Ladder" in release_readme_text
+        and "evaluation/verify_pevl.py" in release_readme_text
+    )
+    checks["release_pevl_title_and_verifier_documented"] = pevl_release_framing
+    if not pevl_release_framing:
+        failures.append("release title or README is not aligned with the PEVL methods package")
     rights_blocker_preserved = "NO LICENSE GRANTED" in license_text
     authorship_blocker_preserved = bool(re.search(
         r"(?m)^\s+(?:family-names|given-names)\s*:\s*[\"']?\[REQUIRED\]",

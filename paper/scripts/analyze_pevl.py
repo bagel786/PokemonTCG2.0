@@ -20,6 +20,16 @@ DATA = ROOT / "paper/data/pevl"
 PREFLIGHT_RAW = DATA / "preflight/raw"
 FACTORIAL_RAW = DATA / "factorial/raw"
 DEFAULT_STRESS_ROOT = ROOT / "artifacts/pevl_20260824/stress"
+TRACE_PREFLIGHT_OUTPUT = DATA / "trace_preflight_summary.json"
+TIMED_STRESS_OUTPUT = DATA / "timed_search_stress_summary.json"
+FACTORIAL_OUTPUT = DATA / "factorial_summary.json"
+COMBINED_OUTPUT = DATA / "summary.json"
+PROTOCOL_ID = "PEVL_PROSPECTIVE_PROTOCOL_20260824"
+ORDER_SEED_OFFSET = 1_000_000
+MAX_DECISIONS = 2_000
+UINT32_MODULUS = 1 << 32
+SEED_CONVERSION_RULE = "engine_seed_uint32 = scheduled_seed & 0xffffffff"
+PROCESS_START_METHOD = "spawn"
 
 ARMS = ("c1", "c2", "c3", "c4")
 CELLS = ("c2", "c3", "c4")
@@ -38,6 +48,23 @@ RUNS = (
     "parallel_reverse",
 )
 ORDERS = ("first", "second")
+
+PROOF_SIGNATURE_FIELDS = (
+    "public_trace_sha256",
+    "trace_bytes",
+    "win",
+    "draw",
+    "decisions",
+    "hero_policy_errors",
+    "opponent_policy_errors",
+)
+
+PREFLIGHT_ENDPOINT_FIELDS = {
+    "trace": ("public_trace_sha256", "trace_bytes"),
+    "outcome": ("win", "draw"),
+    "error": ("hero_policy_errors", "opponent_policy_errors"),
+    "decision_count": ("decisions",),
+}
 
 EXPECTED_HASHES = {
     "engine": "867e3f9bb87e0b48889a44b5d4b04f5d2d434b2a0788d1b2bcfe0caebcb5ab78",
@@ -97,6 +124,8 @@ def binary_bootstrap(values: Iterable[int], *, seed: int, draws: int = 100_000) 
     vector = np.asarray(list(values), dtype=np.float64)
     if not len(vector):
         raise ValueError("binary bootstrap requires at least one cluster")
+    if draws < 1 or not np.all(np.isin(vector, [0.0, 1.0])):
+        raise ValueError("binary bootstrap requires positive draws and binary cluster values")
     rng = np.random.default_rng(seed)
     estimates = np.empty(draws, dtype=np.float64)
     cursor = 0
@@ -124,6 +153,197 @@ def row_map(rows: list[dict[str, Any]]) -> dict[tuple[str, int], dict[str, Any]]
     return mapped
 
 
+def is_sha256(value: Any) -> bool:
+    text = str(value or "")
+    return len(text) == 64 and all(character in "0123456789abcdef" for character in text)
+
+
+def expected_proof_tasks(count: int, base_seed: int) -> dict[str, dict[str, int | str]]:
+    return {
+        f"{order}-{index:03d}": {
+            "actual_order": order,
+            "pair_index": index,
+            "scheduled_seed": base_seed + (ORDER_SEED_OFFSET if order == "second" else 0) + index,
+            "physical_seat": index % 2,
+            "base_enqueue_position": order_index * count + index,
+        }
+        for order_index, order in enumerate(ORDERS)
+        for index in range(count)
+    }
+
+
+def proof_rows_by_task(
+    payload: dict[str, Any],
+    *,
+    path: Path,
+    count: int,
+    base_seed: int,
+    variants: dict[str, tuple[int, str]],
+) -> dict[str, dict[str, dict[str, Any]]]:
+    expected = expected_proof_tasks(count, base_seed)
+    if set(payload.get("runs", {})) != set(variants):
+        raise ValueError(f"{path}: unexpected execution variants")
+    seed_conversion = payload.get("seed_conversion", {})
+    environment = payload.get("execution_environment", {})
+    plan = payload.get("execution_plan", {})
+    plan_variants = plan.get("variants", [])
+    if not isinstance(plan_variants, list):
+        raise ValueError(f"{path}: invalid execution plan variants")
+    plan_by_name = {
+        str(item.get("name")): item
+        for item in plan_variants
+        if isinstance(item, dict)
+    }
+    expected_profile = (
+        "legacy_three_run"
+        if set(variants) == {"single_a", "single_b", "workers_8"}
+        else "explicit_variants"
+    )
+    top_checks = {
+        "conversion_requested_field": seed_conversion.get("requested_field") == "scheduled_seed",
+        "conversion_engine_field": seed_conversion.get("engine_field") == "engine_seed_uint32",
+        "conversion_rule": seed_conversion.get("rule") == SEED_CONVERSION_RULE,
+        "conversion_modulus": seed_conversion.get("modulus") == UINT32_MODULUS,
+        "collision_check": seed_conversion.get("schedule_wide_distinct_seed_collision_check")
+        == "passed",
+        "environment_start_method": environment.get("process_start_method")
+        == PROCESS_START_METHOD,
+        "python_hash_seed": environment.get("python_hash_seed") == "0",
+        "plan_profile": plan.get("profile") == expected_profile,
+        "plan_start_method": plan.get("process_start_method") == PROCESS_START_METHOD,
+        "plan_variant_count": len(plan_variants) == len(variants),
+        "plan_variant_names": set(plan_by_name) == set(variants),
+        "run_uuid": bool(payload.get("run_uuid")),
+        "schedule_fingerprint": is_sha256(payload.get("schedule_fingerprint_sha256")),
+        "run_fingerprint": is_sha256(payload.get("run_fingerprint_sha256")),
+    }
+    for run, (workers, direction) in variants.items():
+        planned = plan_by_name.get(run, {})
+        top_checks[f"plan_{run}"] = (
+            planned.get("workers") == workers
+            and planned.get("schedule_direction") == direction
+        )
+    if not all(top_checks.values()):
+        raise ValueError(f"{path}: invalid proof execution metadata: {top_checks}")
+    mapped: dict[str, dict[str, dict[str, Any]]] = {}
+    total = len(expected)
+    for run, (workers, direction) in variants.items():
+        rows = payload["runs"][run]
+        by_task: dict[str, dict[str, Any]] = {}
+        for row in rows:
+            task_id = str(row["task_id"])
+            if task_id in by_task:
+                raise ValueError(f"{path}: duplicate {run} task {task_id}")
+            by_task[task_id] = row
+        if len(rows) != total or set(by_task) != set(expected):
+            raise ValueError(f"{path}: incomplete {run} proof schedule")
+        for task_id, scheduled in expected.items():
+            row = by_task[task_id]
+            base_enqueue = int(scheduled["base_enqueue_position"])
+            expected_enqueue = base_enqueue if direction == "forward" else total - 1 - base_enqueue
+            elapsed = float(row.get("elapsed_wall_seconds", -1))
+            decisions = int(row.get("decisions", -1))
+            win = int(row.get("win", -1))
+            draw = int(row.get("draw", -1))
+            checks = {
+                "actual_order": row.get("actual_order") == scheduled["actual_order"],
+                "pair_index": int(row.get("pair_index", -1)) == -1,
+                "arm": row.get("arm") is None,
+                "legacy_seed": int(row.get("seed", -1)) == scheduled["scheduled_seed"],
+                "scheduled_seed": int(row.get("scheduled_seed", -1)) == scheduled["scheduled_seed"],
+                "requested_seed": int(row.get("requested_seed", -1)) == scheduled["scheduled_seed"],
+                "engine_seed": int(row.get("engine_seed_uint32", -1))
+                == (int(scheduled["scheduled_seed"]) & 0xFFFFFFFF),
+                "seed_conversion_rule": row.get("seed_conversion_rule") == SEED_CONVERSION_RULE,
+                "physical_seat": int(row.get("physical_seat", -1)) == scheduled["physical_seat"],
+                "workers": int(row.get("worker_count", -1)) == workers,
+                "direction": row.get("schedule_direction") == direction,
+                "variant": row.get("execution_variant") == run,
+                "enqueue_position": int(row.get("enqueue_position", -1)) == expected_enqueue,
+                "max_decisions": int(row.get("max_decisions", -1)) == MAX_DECISIONS,
+                "process_start_method": row.get("process_start_method") == PROCESS_START_METHOD,
+                "worker_pid": int(row.get("worker_pid", -1)) > 0,
+                "worker_process_name": bool(row.get("worker_process_name")),
+                "elapsed_wall_seconds": math.isfinite(elapsed) and elapsed >= 0.0,
+                "outcome": win in {0, 1} and draw in {0, 1} and win + draw <= 1,
+                "decisions": 0 <= decisions <= MAX_DECISIONS,
+                "policy_errors": int(row.get("hero_policy_errors", -1)) >= 0
+                and int(row.get("opponent_policy_errors", -1)) >= 0,
+                "trace_mode": row.get("trace_mode") == payload.get("trace_mode"),
+                "trace_sha": row.get("trace_sha256") == row.get("public_trace_sha256"),
+                "trace_bytes": int(row.get("trace_bytes", 0)) > 0,
+                "hero_env": row.get("hero_env") == payload.get("hero_env"),
+                "opponent_env": row.get("opponent_env") == payload.get("opponent_env"),
+                "protocol_id": row.get("protocol_id") == payload.get("protocol_id"),
+                "protocol_commit": row.get("protocol_commit") == payload.get("protocol_commit"),
+                "run_uuid": row.get("run_uuid") == payload.get("run_uuid"),
+                "schedule_fingerprint": row.get("schedule_fingerprint_sha256")
+                == payload.get("schedule_fingerprint_sha256"),
+                "run_fingerprint": row.get("run_fingerprint_sha256")
+                == payload.get("run_fingerprint_sha256"),
+            }
+            checks["trace_digest"] = is_sha256(row.get("public_trace_sha256"))
+            if not all(checks.values()):
+                raise ValueError(f"{path}: invalid {run}/{task_id} metadata: {checks}")
+        mapped[run] = by_task
+    return mapped
+
+
+def validate_proof_mismatches(
+    payload: dict[str, Any],
+    by_run: dict[str, dict[str, dict[str, Any]]],
+    *,
+    path: Path,
+    run_order: tuple[str, ...],
+) -> set[str]:
+    reference = by_run[run_order[0]]
+    computed_by_run = {
+        run: {
+            task_id
+            for task_id, row in by_run[run].items()
+            if tuple(row[field] for field in PROOF_SIGNATURE_FIELDS)
+            != tuple(reference[task_id][field] for field in PROOF_SIGNATURE_FIELDS)
+        }
+        for run in run_order[1:]
+    }
+    reported = payload.get("mismatches", {})
+    if not isinstance(reported, dict) or set(reported) != set(computed_by_run):
+        raise ValueError(f"{path}: invalid proof mismatch inventory")
+    reported_by_run = {run: {str(task_id) for task_id in reported[run]} for run in reported}
+    if reported_by_run != computed_by_run:
+        raise ValueError(f"{path}: reported and computed proof mismatches differ")
+    computed = set().union(*computed_by_run.values()) if computed_by_run else set()
+    if bool(payload.get("passed")) != (not computed):
+        raise ValueError(f"{path}: proof admission flag contradicts trace records")
+    return computed
+
+
+def proof_endpoint_mismatches(
+    by_run: dict[str, dict[str, dict[str, Any]]],
+    *,
+    run_order: tuple[str, ...],
+) -> dict[str, set[str]]:
+    """Return task IDs that disagree with the reference run by endpoint.
+
+    These endpoint-specific inventories are deliberately derived from the same
+    validated proof rows as the aggregate admission signature.  Reporting them
+    separately prevents a zero aggregate from being silently reused for four
+    conceptually different checks in the manuscript.
+    """
+
+    reference = by_run[run_order[0]]
+    return {
+        endpoint: {
+            task_id
+            for run in run_order[1:]
+            for task_id, row in by_run[run].items()
+            if tuple(row[field] for field in fields)
+            != tuple(reference[task_id][field] for field in fields)
+        }
+        for endpoint, fields in PREFLIGHT_ENDPOINT_FIELDS.items()
+    }
+
+
 def analyze_preflight() -> dict[str, Any]:
     expected = {
         (arm, opponent): PREFLIGHT_RAW / f"{arm}_{opponent}.json"
@@ -133,6 +353,8 @@ def analyze_preflight() -> dict[str, Any]:
     missing = [str(path.relative_to(ROOT)) for path in expected.values() if not path.exists()]
     if missing:
         return {
+            "schema_version": 1,
+            "analysis_id": "trace_preflight",
             "status": "NOT_RUN" if len(missing) == len(expected) else "INCOMPLETE",
             "admission_decision": "suppress",
             "expected_files": len(expected),
@@ -156,23 +378,64 @@ def analyze_preflight() -> dict[str, Any]:
             raise ValueError(f"{path}: second-order seed offset drift")
         if payload.get("seeds_per_order") != 25 or payload.get("tasks") != 50:
             raise ValueError(f"{path}: incomplete preflight schedule")
-        if payload.get("trace_mode") != "digest":
+        if (
+            payload.get("protocol_id") != PROTOCOL_ID
+            or payload.get("max_decisions") != MAX_DECISIONS
+            or payload.get("hero_env") != {}
+        ):
+            raise ValueError(f"{path}: preflight execution configuration drift")
+        if (
+            payload.get("trace_mode") != "digest"
+            or payload.get("trace_payload_files_written") is not False
+            or payload.get("trace_files") != {}
+        ):
             raise ValueError(f"{path}: preflight did not use digest traces")
-        if set(payload.get("runs", {})) != {"single_a", "single_b", "workers_8"}:
-            raise ValueError(f"{path}: unexpected execution variants")
         expected_env = {"NO_SEARCH": "1"} if opponent == "alakazam_no_search" else {}
         if payload.get("opponent_env") != expected_env:
             raise ValueError(f"{path}: opponent environment drift")
-        mismatch_units = sorted({
-            task_id
-            for task_ids in payload.get("mismatches", {}).values()
-            for task_id in task_ids
-        })
+        by_run = proof_rows_by_task(
+            payload,
+            path=path,
+            count=25,
+            base_seed=TRACE_BASES[opponent],
+            variants={
+                "single_a": (1, "forward"),
+                "single_b": (1, "forward"),
+                "workers_8": (8, "forward"),
+            },
+        )
+        computed_mismatches = validate_proof_mismatches(
+            payload,
+            by_run,
+            path=path,
+            run_order=("single_a", "single_b", "workers_8"),
+        )
+        endpoint_mismatches = proof_endpoint_mismatches(
+            by_run,
+            run_order=("single_a", "single_b", "workers_8"),
+        )
+        if set().union(*endpoint_mismatches.values()) != computed_mismatches:
+            raise ValueError(
+                f"{path}: endpoint mismatch inventories do not reproduce the "
+                "aggregate proof signature"
+            )
+        if any(
+            int(row["hero_policy_errors"]) or int(row["opponent_policy_errors"])
+            for run in by_run.values()
+            for row in run.values()
+        ):
+            raise ValueError(f"{path}: preflight contains policy errors")
         rows.append({
             "arm": arm.upper(),
             "opponent": opponent,
             "passed": bool(payload.get("passed")),
-            "mismatch_units": len(mismatch_units),
+            "mismatch_units": len(computed_mismatches),
+            "trace_mismatch_units": len(endpoint_mismatches["trace"]),
+            "outcome_mismatch_units": len(endpoint_mismatches["outcome"]),
+            "error_mismatch_units": len(endpoint_mismatches["error"]),
+            "decision_count_mismatch_units": len(
+                endpoint_mismatches["decision_count"]
+            ),
             "trajectory_units": 50,
             "executions": 150,
             "source": str(path.relative_to(ROOT)),
@@ -183,6 +446,8 @@ def analyze_preflight() -> dict[str, Any]:
         raise ValueError(f"preflight mixes protocol commits: {sorted(protocol_commits)}")
     passed = all(row["passed"] and row["mismatch_units"] == 0 for row in rows)
     return {
+        "schema_version": 1,
+        "analysis_id": "trace_preflight",
         "status": "PASS" if passed else "FAIL",
         "admission_decision": "admit_factorial_acquisition" if passed else "suppress_factorial",
         "protocol_commit": next(iter(protocol_commits)),
@@ -191,6 +456,14 @@ def analyze_preflight() -> dict[str, Any]:
         "trajectory_units": sum(row["trajectory_units"] for row in rows),
         "executions": sum(row["executions"] for row in rows),
         "mismatch_units": sum(row["mismatch_units"] for row in rows),
+        "trace_mismatch_units": sum(row["trace_mismatch_units"] for row in rows),
+        "outcome_mismatch_units": sum(
+            row["outcome_mismatch_units"] for row in rows
+        ),
+        "error_mismatch_units": sum(row["error_mismatch_units"] for row in rows),
+        "decision_count_mismatch_units": sum(
+            row["decision_count_mismatch_units"] for row in rows
+        ),
         "rows": rows,
         "claim_boundary": (
             "Passing establishes within-arm public-state/action trace reproducibility "
@@ -206,7 +479,9 @@ def first_trace_divergence(proof_path: Path, task_id: str) -> dict[str, Any] | N
         path = proof_path.parent / "determinism_traces" / run / f"{task_id}.jsonl"
         if not path.exists():
             raise FileNotFoundError(path)
-        traces[run] = path.read_bytes().splitlines()
+        # Preserve line endings so a digest difference caused only by a missing
+        # terminal newline is still localized instead of being silently erased.
+        traces[run] = path.read_bytes().splitlines(keepends=True)
     limit = max(len(lines) for lines in traces.values())
     for index in range(limit):
         observed = {
@@ -242,6 +517,8 @@ def analyze_stress(stress_root: Path) -> dict[str, Any]:
     missing = [str(path) for path in paths.values() if not path.exists()]
     if missing:
         return {
+            "schema_version": 1,
+            "analysis_id": "timed_search_stress",
             "status": "NOT_RUN" if len(missing) == len(paths) else "INCOMPLETE",
             "expected_files": len(paths),
             "missing_files": missing,
@@ -262,26 +539,47 @@ def analyze_stress(stress_root: Path) -> dict[str, Any]:
             raise ValueError(f"{path}: opponent hash drift")
         if payload.get("base_seed") != STRESS_BASES[opponent]:
             raise ValueError(f"{path}: base seed drift")
+        if payload.get("order_seed_offset") != ORDER_SEED_OFFSET:
+            raise ValueError(f"{path}: second-order seed offset drift")
         if payload.get("seeds_per_order") != 50 or payload.get("tasks") != 100:
             raise ValueError(f"{path}: incomplete stress schedule")
+        if (
+            payload.get("protocol_id") != PROTOCOL_ID
+            or payload.get("max_decisions") != MAX_DECISIONS
+            or payload.get("hero_env") != {}
+            or payload.get("opponent_env") != {}
+        ):
+            raise ValueError(f"{path}: stress execution configuration drift")
         if payload.get("trace_mode") != "full" or not payload.get("trace_payload_files_written"):
             raise ValueError(f"{path}: stress run lacks retained full traces")
-        if set(payload.get("runs", {})) != set(RUNS):
-            raise ValueError(f"{path}: unexpected stress execution variants")
-        by_run = {
-            run: {str(row["task_id"]): row for row in payload["runs"][run]}
-            for run in RUNS
-        }
-        task_ids = set(by_run[RUNS[0]])
-        if any(set(rows) != task_ids for rows in by_run.values()):
-            raise ValueError(f"{path}: stress run schedules differ")
+        by_run = proof_rows_by_task(
+            payload,
+            path=path,
+            count=50,
+            base_seed=STRESS_BASES[opponent],
+            variants={
+                "serial_forward": (1, "forward"),
+                "serial_reverse": (1, "reverse"),
+                "parallel_forward": (4, "forward"),
+                "parallel_reverse": (4, "reverse"),
+            },
+        )
+        task_ids = set(expected_proof_tasks(50, STRESS_BASES[opponent]))
+        if set(payload.get("trace_files", {})) != set(RUNS):
+            raise ValueError(f"{path}: invalid retained trace run inventory")
         for run in RUNS:
             expected_trace_files = payload.get("trace_files", {}).get(run, {})
             if set(expected_trace_files) != task_ids:
                 raise ValueError(f"{path}: incomplete retained trace inventory for {run}")
+            trace_dir = path.parent / "determinism_traces" / run
+            observed_trace_files = {
+                trace_path.stem for trace_path in trace_dir.glob("*.jsonl")
+            }
+            if observed_trace_files != task_ids:
+                raise ValueError(f"{trace_dir}: retained trace directory inventory mismatch")
             for task_id, expected_hash in expected_trace_files.items():
-                trace_path = path.parent / "determinism_traces" / run / f"{task_id}.jsonl"
-                if not trace_path.exists() or sha256_file(trace_path) != expected_hash:
+                trace_path = trace_dir / f"{task_id}.jsonl"
+                if not is_sha256(expected_hash) or sha256_file(trace_path) != expected_hash:
                     raise ValueError(f"{trace_path}: retained trace hash mismatch")
                 if by_run[run][task_id]["public_trace_sha256"] != expected_hash:
                     raise ValueError(f"{trace_path}: row and retained trace digests differ")
@@ -326,9 +624,16 @@ def analyze_stress(stress_root: Path) -> dict[str, Any]:
                 "trace_disagreement": not trace_agree,
                 "outcome_disagreement": len(outcome_values) != 1,
                 "error_disagreement": len(error_values) != 1,
+                "policy_error_present": any(any(value) for value in error_values),
                 "decision_count_disagreement": len(decision_values) != 1,
                 "first_divergence": divergence,
             })
+        validate_proof_mismatches(
+            payload,
+            by_run,
+            path=path,
+            run_order=RUNS,
+        )
         sources.append({
             "opponent": opponent,
             "path": str(path.relative_to(ROOT)) if path.is_relative_to(ROOT) else str(path),
@@ -356,6 +661,7 @@ def analyze_stress(stress_root: Path) -> dict[str, Any]:
                     row["decision_count_disagreement"] for row in subset
                 ),
                 "error_disagreement_count": sum(row["error_disagreement"] for row in subset),
+                "policy_error_present_count": sum(row["policy_error_present"] for row in subset),
             }
 
     mismatch_count = sum(row["trace_disagreement"] for row in clusters)
@@ -366,6 +672,8 @@ def analyze_stress(stress_root: Path) -> dict[str, Any]:
         for actor in row["first_divergence"]["actors"]
     )
     return {
+        "schema_version": 1,
+        "analysis_id": "timed_search_stress",
         "status": "TRACE_DIVERGENCE" if mismatch_count else "TRACE_PARITY",
         "protocol_commit": next(iter(protocol_commits)),
         "clusters": len(clusters),
@@ -379,6 +687,7 @@ def analyze_stress(stress_root: Path) -> dict[str, Any]:
             row["decision_count_disagreement"] for row in clusters
         ),
         "error_disagreement_clusters": sum(row["error_disagreement"] for row in clusters),
+        "policy_error_present_clusters": sum(row["policy_error_present"] for row in clusters),
         "first_divergence_actor_counts": dict(sorted(divergence_actors.items())),
         "strata": strata,
         "timing": timing,
@@ -387,6 +696,10 @@ def analyze_stress(stress_root: Path) -> dict[str, Any]:
         "bootstrap_note": (
             "Each seed/order condition is one resampling cluster containing all four "
             "serial/parallel and forward/reverse executions."
+        ),
+        "pevl_level_6_boundary": (
+            "Trace localization and source inspection identify plausible nondeterminism "
+            "mechanisms in the exercised executions; they do not prove a unique causal source."
         ),
     }
 
@@ -403,6 +716,10 @@ def exact_mcnemar(first_wins: int, second_wins: int) -> float:
 def factorial_bootstrap(
     arrays: dict[str, np.ndarray], *, draws: int = 100_000, seed: int = 2026083117
 ) -> dict[str, Any]:
+    if len(arrays) != 10:
+        raise ValueError(f"factorial bootstrap requires ten frozen strata, got {len(arrays)}")
+    if draws < 1:
+        raise ValueError("factorial bootstrap requires at least one draw")
     rng = np.random.default_rng(seed)
     names = ("primary_c4_minus_c1", "representation_main", "training_main", "interaction")
     samples = {name: np.empty(draws, dtype=np.float64) for name in names}
@@ -414,6 +731,8 @@ def factorial_bootstrap(
             matrix = arrays[key]
             if matrix.shape != (200, 4):
                 raise ValueError(f"{key}: expected a 200 by 4 cell matrix")
+            if not np.all(np.isin(matrix, [0.0, 1.0])):
+                raise ValueError(f"{key}: cell outcomes must be binary win indicators")
             indices = rng.integers(0, 200, size=(batch, 200))
             means = matrix[indices].mean(axis=1)
             c1, c2, c3, c4 = (means[:, index] for index in range(4))
@@ -460,13 +779,18 @@ def analyze_factorial(preflight: dict[str, Any]) -> dict[str, Any]:
         if existing:
             raise ValueError("factorial files exist even though the frozen preflight did not pass")
         return {
+            "schema_version": 1,
+            "analysis_id": "factorial",
             "status": "SUPPRESSED_BY_PREFLIGHT",
             "admission_decision": "suppress",
+            "protocol_commit": preflight.get("protocol_commit"),
             "reason": "the frozen four-arm trace preflight did not pass in full",
         }
     missing = [str(path.relative_to(ROOT)) for path in expected.values() if not path.exists()]
     if missing:
         return {
+            "schema_version": 1,
+            "analysis_id": "factorial",
             "status": "NOT_RUN" if not existing else "INCOMPLETE",
             "admission_decision": "suppress",
             "expected_files": len(expected),
@@ -480,6 +804,9 @@ def analyze_factorial(preflight: dict[str, Any]) -> dict[str, Any]:
     for (cell, opponent), path in expected.items():
         payload = load(path)
         protocol_commits.add(str(payload["protocol_commit"]))
+        seed_conversion = payload.get("seed_conversion", {})
+        execution_plan = payload.get("execution_plan", {})
+        execution_environment = payload.get("execution_environment", {})
         checks = {
             "engine": payload.get("engine_sha256") == EXPECTED_HASHES["engine"],
             "production_before": payload.get("production_engine_sha256_before") == EXPECTED_HASHES["production"],
@@ -488,15 +815,43 @@ def analyze_factorial(preflight: dict[str, Any]) -> dict[str, Any]:
             "candidate": payload.get("candidate_sha256") == EXPECTED_HASHES[cell],
             "control": payload.get("control_sha256") == EXPECTED_HASHES["c1"],
             "opponent": payload.get("opponent_sha256") == EXPECTED_HASHES[opponent],
+            "protocol_id": payload.get("protocol_id") == PROTOCOL_ID,
             "base_seed": payload.get("base_seed") == FACTORIAL_BASES[opponent],
+            "order_seed_offset": payload.get("order_seed_offset") == ORDER_SEED_OFFSET,
             "pairs_per_order": payload.get("pairs_per_order") == 200,
             "orders": payload.get("actual_orders") == ["first", "second"],
             "games": payload.get("games") == 800,
             "workers": payload.get("workers") == 8,
-            "max_decisions": payload.get("max_decisions") == 2_000,
+            "max_decisions": payload.get("max_decisions") == MAX_DECISIONS,
+            "hero_environment": payload.get("hero_env") == {},
             "environment": payload.get("opponent_env") == (
                 {"NO_SEARCH": "1"} if opponent == "alakazam_no_search" else {}
             ),
+            "no_trace_capture": payload.get("capture_trace_digest") is False,
+            "conversion_requested_field": seed_conversion.get("requested_field")
+            == "scheduled_seed",
+            "conversion_engine_field": seed_conversion.get("engine_field")
+            == "engine_seed_uint32",
+            "conversion_rule": seed_conversion.get("rule") == SEED_CONVERSION_RULE,
+            "conversion_modulus": seed_conversion.get("modulus") == UINT32_MODULUS,
+            "collision_check": seed_conversion.get("schedule_wide_distinct_seed_collision_check")
+            == "passed",
+            "execution_plan_workers": execution_plan.get("workers") == 8,
+            "execution_plan_start_method": execution_plan.get("process_start_method")
+            == PROCESS_START_METHOD,
+            "execution_plan_orders": execution_plan.get("actual_orders") == ["first", "second"],
+            "execution_plan_pairs": execution_plan.get("pairs_per_order") == 200,
+            "execution_plan_trace": execution_plan.get("capture_trace_digest") is False,
+            "environment_start_method": execution_environment.get("process_start_method")
+            == PROCESS_START_METHOD,
+            "python_hash_seed": execution_environment.get("python_hash_seed") == "0",
+            "run_uuid": bool(payload.get("run_uuid")),
+            "schedule_fingerprint": is_sha256(payload.get("schedule_fingerprint_sha256")),
+            "run_fingerprint": is_sha256(payload.get("run_fingerprint_sha256")),
+            "overall_pairs": payload.get("overall", {}).get("pairs") == 400,
+            "first_pairs": payload.get("orders", {}).get("first", {}).get("pairs") == 200,
+            "second_pairs": payload.get("orders", {}).get("second", {}).get("pairs") == 200,
+            "row_count": len(payload.get("rows", [])) == 800,
         }
         if not all(checks.values()):
             raise ValueError(f"{path}: frozen acquisition validation failed: {checks}")
@@ -507,6 +862,66 @@ def analyze_factorial(preflight: dict[str, Any]) -> dict[str, Any]:
         expected_keys = {(order, index) for order in ORDERS for index in range(200)}
         if set(candidates[(cell, opponent)]) != expected_keys or set(controls[(cell, opponent)]) != expected_keys:
             raise ValueError(f"{path}: incomplete row schedule")
+        expected_env = {"NO_SEARCH": "1"} if opponent == "alakazam_no_search" else {}
+        for arm, arm_rows in (
+            ("candidate", candidates[(cell, opponent)]),
+            ("control", controls[(cell, opponent)]),
+        ):
+            for (order, index), row in arm_rows.items():
+                expected_seed = (
+                    FACTORIAL_BASES[opponent]
+                    + (ORDER_SEED_OFFSET if order == "second" else 0)
+                    + index
+                )
+                expected_enqueue = (
+                    (0 if order == "first" else 400)
+                    + index * 2
+                    + (0 if arm == "candidate" else 1)
+                )
+                elapsed = float(row.get("elapsed_wall_seconds", -1))
+                decisions = int(row.get("decisions", -1))
+                win = int(row.get("win", -1))
+                draw = int(row.get("draw", -1))
+                row_checks = {
+                    "task_id": row.get("task_id") == f"{order}-{index:05d}-{arm}",
+                    "arm": row.get("arm") == arm,
+                    "legacy_seed": int(row.get("seed", -1)) == expected_seed,
+                    "requested_seed": int(row.get("requested_seed", -1)) == expected_seed,
+                    "scheduled_seed": int(row.get("scheduled_seed", -1)) == expected_seed,
+                    "engine_seed": int(row.get("engine_seed_uint32", -1))
+                    == (expected_seed & 0xFFFFFFFF),
+                    "seed_conversion_rule": row.get("seed_conversion_rule")
+                    == SEED_CONVERSION_RULE,
+                    "physical_seat": int(row.get("physical_seat", -1)) == index % 2,
+                    "max_decisions": int(row.get("max_decisions", -1)) == MAX_DECISIONS,
+                    "worker_count": int(row.get("worker_count", -1)) == 8,
+                    "process_start_method": row.get("process_start_method")
+                    == PROCESS_START_METHOD,
+                    "enqueue_position": int(row.get("enqueue_position", -1))
+                    == expected_enqueue,
+                    "worker_pid": int(row.get("worker_pid", -1)) > 0,
+                    "worker_process_name": bool(row.get("worker_process_name")),
+                    "elapsed_wall_seconds": math.isfinite(elapsed) and elapsed >= 0.0,
+                    "hero_env": row.get("hero_env") == {},
+                    "opponent_env": row.get("opponent_env") == expected_env,
+                    "protocol_id": row.get("protocol_id") == PROTOCOL_ID,
+                    "protocol_commit": row.get("protocol_commit") == payload.get("protocol_commit"),
+                    "run_uuid": row.get("run_uuid") == payload.get("run_uuid"),
+                    "schedule_fingerprint": row.get("schedule_fingerprint_sha256")
+                    == payload.get("schedule_fingerprint_sha256"),
+                    "run_fingerprint": row.get("run_fingerprint_sha256")
+                    == payload.get("run_fingerprint_sha256"),
+                    "trace_mode": row.get("trace_mode") == "none",
+                    "trace_digest": row.get("trace_sha256") is None
+                    and row.get("public_trace_sha256") is None
+                    and int(row.get("trace_bytes", -1)) == 0,
+                    "outcome": win in {0, 1} and draw in {0, 1} and win + draw <= 1,
+                    "decisions": 0 <= decisions <= MAX_DECISIONS,
+                }
+                if not all(row_checks.values()):
+                    raise ValueError(
+                        f"{path}: incompatible paired row {order}/{index}: {row_checks}"
+                    )
         sources.append({
             "cell": cell.upper(),
             "opponent": opponent,
@@ -581,8 +996,11 @@ def analyze_factorial(preflight: dict[str, Any]) -> dict[str, Any]:
 
     if control_mismatches:
         return {
+            "schema_version": 1,
+            "analysis_id": "factorial",
             "status": "SUPPRESSED_CONTROL_PARITY_FAILURE",
             "admission_decision": "suppress_all_factorial_contrasts",
+            "protocol_commit": next(iter(protocol_commits)),
             "control_mismatch_units": len(control_mismatches),
             "first_control_mismatches": control_mismatches[:20],
             "sources": sources,
@@ -614,6 +1032,8 @@ def analyze_factorial(preflight: dict[str, Any]) -> dict[str, Any]:
     c4_only = int(np.sum((c4 == 1) & (c1 == 0)))
     c1_only = int(np.sum((c4 == 0) & (c1 == 1)))
     return {
+        "schema_version": 1,
+        "analysis_id": "factorial",
         "status": "ADMITTED_SEED_MATCHED",
         "admission_decision": "admit_with_bounded_wording",
         "protocol_commit": next(iter(protocol_commits)),
@@ -634,7 +1054,14 @@ def analyze_factorial(preflight: dict[str, Any]) -> dict[str, Any]:
             "role": "secondary",
         },
         "pevl_levels": {
-            "levels_1_to_6": "supported within the frozen artifacts, schedules, audits, and execution contexts",
+            "levels_1_to_5": (
+                "supported only for the frozen artifacts, schedules, and exercised "
+                "serial/parallel execution contexts"
+            ),
+            "level_6": (
+                "stochastic sources were inspected and trace divergence can localize "
+                "plausible mechanisms; the audit does not prove a unique causal source"
+            ),
             "level_7": "not established because the restricted engine exposes no event identifiers or event-keyed streams",
             "level_8": "seed-matched finite-population contrasts admitted; counterfactual and full-CRN wording prohibited",
         },
@@ -672,9 +1099,9 @@ def main() -> int:
     stress = analyze_stress(args.stress_root)
     factorial = analyze_factorial(preflight)
     historical = historical_summary()
-    dump(DATA / "preflight/analysis_summary.json", preflight)
-    dump(DATA / "stress/summary.json", stress)
-    dump(DATA / "factorial/summary.json", factorial)
+    dump(TRACE_PREFLIGHT_OUTPUT, preflight)
+    dump(TIMED_STRESS_OUTPUT, stress)
+    dump(FACTORIAL_OUTPUT, factorial)
     combined = {
         "schema_version": 1,
         "framework": "Paired Evaluation Validity Ladder",
@@ -688,12 +1115,12 @@ def main() -> int:
             "are distinct. Game-engine results cannot establish Level 7."
         ),
     }
-    dump(DATA / "summary.json", combined)
+    dump(COMBINED_OUTPUT, combined)
     print(json.dumps({
         "preflight": preflight["status"],
         "stress": stress["status"],
         "factorial": factorial["status"],
-        "output": str((DATA / "summary.json").relative_to(ROOT)),
+        "output": str(COMBINED_OUTPUT.relative_to(ROOT)),
     }, indent=2, sort_keys=True))
     return 0
 

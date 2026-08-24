@@ -1,0 +1,140 @@
+{
+  "admission_decision": "admit_analysis",
+  "c1_control_mismatch_units": 0,
+  "c1_control_parity_passed": true,
+  "complete": true,
+  "completed_jobs": 15,
+  "execution_commit": "deeefa1af26ee4749aeb56417c3e89a24a6140d2",
+  "expected_jobs": 15,
+  "failures": [],
+  "first_c1_control_mismatches": [],
+  "games": 12000,
+  "paired_units": 6000,
+  "passed": true,
+  "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",
+  "rows": [
+    {
+      "cell": "c2",
+      "job": "c2_b0",
+      "opponent": "b0",
+      "passed": true,
+      "source": "paper/data/pevl/factorial/raw/c2_b0.json",
+      "source_sha256": "c849b67724232f827d9fcca7a336e6182ac94c7807c4b624ed3e7a195bdbf55d"
+    },
+    {
+      "cell": "c2",
+      "job": "c2_d842",
+      "opponent": "d842",
+      "passed": true,
+      "source": "paper/data/pevl/factorial/raw/c2_d842.json",
+      "source_sha256": "13d67523036b175d547bcbcf9a05087c47825250b17222899a443677143e9cd9"
+    },
+    {
+      "cell": "c2",
+      "job": "c2_master",
+      "opponent": "master",
+      "passed": true,
+      "source": "paper/data/pevl/factorial/raw/c2_master.json",
+      "source_sha256": "27ada4a5546673f83017a6605b69b571e52ba44977e3bc566bc6adc4155a346c"
+    },
+    {
+      "cell": "c2",
+      "job": "c2_replay",
+      "opponent": "replay",
+      "passed": true,
+      "source": "paper/data/pevl/factorial/raw/c2_replay.json",
+      "source_sha256": "ef51759755e705025644090dabbbeb98d41159fd0562ad2560bb8264d16d514d"
+    },
+    {
+      "cell": "c2",
+      "job": "c2_alakazam_no_search",
+      "opponent": "alakazam_no_search",
+      "passed": true,
+      "source": "paper/data/pevl/factorial/raw/c2_alakazam_no_search.json",
+      "source_sha256": "36d508dc4419371878b0c12458d340657944b7bbe7e2f56bad1e510772ca42ba"
+    },
+    {
+      "cell": "c3",
+      "job": "c3_b0",
+      "opponent": "b0",
+      "passed": true,
+      "source": "paper/data/pevl/factorial/raw/c3_b0.json",
+      "source_sha256": "2e2e2fd12e970b51621e22af7828b7d9ba2e76391f9451a2043c5c183aa8f1a4"
+    },
+    {
+      "cell": "c3",
+      "job": "c3_d842",
+      "opponent": "d842",
+      "passed": true,
+      "source": "paper/data/pevl/factorial/raw/c3_d842.json",
+      "source_sha256": "c9a9e180ebed69d4466cae5aa7e5f2a0c13c45e4857608fd60d519bf4b233b21"
+    },
+    {
+      "cell": "c3",
+      "job": "c3_master",
+      "opponent": "master",
+      "passed": true,
+      "source": "paper/data/pevl/factorial/raw/c3_master.json",
+      "source_sha256": "218758bec05ab48833c653d2825d3fba14db9f37186f54980c4137ce1eaf4c6e"
+    },
+    {
+      "cell": "c3",
+      "job": "c3_replay",
+      "opponent": "replay",
+      "passed": true,
+      "source": "paper/data/pevl/factorial/raw/c3_replay.json",
+      "source_sha256": "c2ab92fb07a567881d895d6a87df025f52279916b3e92f32198685882d36a998"
+    },
+    {
+      "cell": "c3",
+      "job": "c3_alakazam_no_search",
+      "opponent": "alakazam_no_search",
+      "passed": true,
+      "source": "paper/data/pevl/factorial/raw/c3_alakazam_no_search.json",
+      "source_sha256": "b885d8d9685bf77b3e210d978ac810c78de7509197e75681bac27868df6acaf6"
+    },
+    {
+      "cell": "c4",
+      "job": "c4_b0",
+      "opponent": "b0",
+      "passed": true,
+      "source": "paper/data/pevl/factorial/raw/c4_b0.json",
+      "source_sha256": "64eb94ced8c4704819d2fc29fbf71411d83eac9c0abee94bd5f4fe26bb625110"
+    },
+    {
+      "cell": "c4",
+      "job": "c4_d842",
+      "opponent": "d842",
+      "passed": true,
+      "source": "paper/data/pevl/factorial/raw/c4_d842.json",
+      "source_sha256": "306a91fbb888e2851935964e83d24822c66c38e181450db8b0e750c10dc15327"
+    },
+    {
+      "cell": "c4",
+      "job": "c4_master",
+      "opponent": "master",
+      "passed": true,
+      "source": "paper/data/pevl/factorial/raw/c4_master.json",
+      "source_sha256": "f9db7c96705cbd39fc26ebe6dc255dcd4e7b15f773b88015b8ec2dbbb59eff75"
+    },
+    {
+      "cell": "c4",
+      "job": "c4_replay",
+      "opponent": "replay",
+      "passed": true,
+      "source": "paper/data/pevl/factorial/raw/c4_replay.json",
+      "source_sha256": "3f188e641c7f332f5fa601cacd8dba6237dbab91b19075f04caa8b4f3090780f"
+    },
+    {
+      "cell": "c4",
+      "job": "c4_alakazam_no_search",
+      "opponent": "alakazam_no_search",
+      "passed": true,
+      "source": "paper/data/pevl/factorial/raw/c4_alakazam_no_search.json",
+      "source_sha256": "513cfef6d6ad4e2a7e2bcd0b7138ec038d907ad32e29385f8947482be292ff34"
+    }
+  ],
+  "schema_version": 1,
+  "stage": "factorial",
+  "status": "PASS"
+}

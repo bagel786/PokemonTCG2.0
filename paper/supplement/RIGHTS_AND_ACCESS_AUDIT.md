@@ -28,8 +28,16 @@ uses a no-license review notice rather than inventing a permissive license.
 ## Included under a strict allow list
 
 - processed candidate/control outcomes and aggregate statistics;
+- sanitized terminal PEVL preflight, timed-stress, combined, and factorial
+  summaries, with factorial unit rows only when the prespecified gate admits
+  them;
+- seed-namespace and bounded stochastic-source audits that disclose no
+  restricted source paths, lines, snippets, card material, or deck material;
+- the standalone synthetic PEVL implementation, exact fixtures, schema,
+  detection matrix, and nested manifest;
 - anonymous representation frequencies and held-out counts;
-- frozen protocols, hashes, claim ledger, and provenance documentation;
+- frozen protocols, PEVL framework, hashes, claim ledger, and provenance
+  documentation;
 - generic analysis, table, plotting, and abstract adapter code newly prepared for
   the paper;
 - code-generated figures containing no game art, logo, screenshot, or UI.
@@ -49,5 +57,7 @@ uses a no-license review notice rather than inventing a permissive license.
 6. Confirm whether continued possession and use of the local engine after the
    competition is lawful; follow organizer deletion instructions where required.
 
-Until these steps are complete, `paper/release/` is a private review artifact and not
-an open-science public deposit.
+Until these steps are complete, `paper/release/` is a private review artifact
+and not an open-science public deposit. Its `LICENSE` notice grants no rights,
+and incomplete author and DOI fields in `CITATION.cff` remain explicit release
+blockers.
