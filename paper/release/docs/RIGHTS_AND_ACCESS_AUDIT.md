@@ -49,5 +49,5 @@ uses a no-license review notice rather than inventing a permissive license.
 6. Confirm whether continued possession and use of the local engine after the
    competition is lawful; follow organizer deletion instructions where required.
 
-Until these steps are complete, `release/` is a private review artifact and not
+Until these steps are complete, `paper/release/` is a private review artifact and not
 an open-science public deposit.

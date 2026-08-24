@@ -37,7 +37,7 @@
     "author metadata are incomplete",
     "archival identifier/DOI metadata are absent"
   ],
-  "release_manifest_sha256": "6890d8cae29bcfa1a4719e26144daad16fe35fa3ea571d428a39b10af9020710",
+  "release_manifest_sha256": "ad65e732cb2e7b280a1540f35ff60aec1bd29b78d339f525344abbd508d41c4a",
   "release_readiness": "BLOCKED",
   "status": "PASS",
   "tracked_markdown_overlap": {

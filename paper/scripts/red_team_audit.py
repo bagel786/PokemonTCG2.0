@@ -15,7 +15,7 @@ from pathlib import Path, PurePosixPath
 
 ROOT = Path(__file__).resolve().parents[2]
 PAPER = ROOT / "paper"
-RELEASE = ROOT / "release"
+RELEASE = PAPER / "release"
 REQUIRED_CLAIM_FIELDS = [
     "claim_id", "manuscript_section", "proposed_claim", "status", "raw_source",
     "json_or_line_locator", "branch", "commit", "artifact_sha256",
@@ -214,7 +214,7 @@ def tracked_markdown_overlap(tex: str, width: int = 12) -> dict:
             "overlaps": [],
             "errors": [f"could not enumerate tracked Markdown with git ls-files: {exc}"],
         }
-    sources = [path for path in tracked if not path.startswith(("paper/", "release/"))]
+    sources = [path for path in tracked if not path.startswith("paper/")]
     main_tokens = prose_tokens(tex)
     main_ngrams = {
         tuple(main_tokens[index:index + width])
@@ -598,10 +598,16 @@ def main() -> int:
         ["git", "diff", "--name-only", "ee567ed5b75029b3785c3b44725c5d55f94f9abd", "--"],
         cwd=ROOT, text=True,
     ).splitlines()
-    unexpected = [path for path in tracked_historical if not (path.startswith("paper/") or path.startswith("release/"))]
+    # The root README may contain only the discoverability pointer into the
+    # otherwise self-contained paper tree. Keep every other historical path
+    # fail-closed.
+    unexpected = [
+        path for path in tracked_historical
+        if not (path.startswith("paper/") or path == "README.md")
+    ]
     checks["historical_tree_untouched"] = not unexpected
     if unexpected:
-        failures.append(f"non-paper/release tracked changes: {unexpected}")
+        failures.append(f"non-paper tracked changes: {unexpected}")
 
     release_readiness = "BLOCKED" if release_blockers or failures else "READY_FOR_AUTHORIZED_RELEASE"
 

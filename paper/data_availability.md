@@ -1,6 +1,6 @@
 # Data Availability Statement
 
-The intended sanitized private-review companion package under `release/` is
+The intended sanitized private-review companion package under `paper/release/` is
 designed to contain the processed one-row-per-paired-unit outcome tables,
 statistical summaries, figure inputs, analysis scripts, protocols, hashes, and
 environment specification needed to regenerate reported tables and figures from

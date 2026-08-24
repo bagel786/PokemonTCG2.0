@@ -18,7 +18,7 @@ from pathlib import Path, PurePosixPath
 
 
 ROOT = Path(__file__).resolve().parents[2]
-RELEASE = ROOT / "release"
+RELEASE = ROOT / "paper" / "release"
 
 # These are the only hand-maintained files consumed from the current release
 # scaffold. Everything else is rebuilt in a clean staging directory.
@@ -677,7 +677,7 @@ def main() -> int:
     if RELEASE.is_symlink() or not RELEASE.is_dir():
         raise RuntimeError("release scaffold must be an existing non-symlink directory")
     protocols = protocol_names()
-    stage = Path(tempfile.mkdtemp(prefix=".release-stage-", dir=ROOT))
+    stage = Path(tempfile.mkdtemp(prefix=".release-stage-", dir=RELEASE.parent))
     try:
         scan, manifest_report = build_stage(stage, protocols)
         manifest_sha = sha256(stage / "MANIFEST.sha256")

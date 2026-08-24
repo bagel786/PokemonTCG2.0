@@ -10,6 +10,13 @@ The repository now contains three layers that share one competition runtime:
 2. hidden-information-safe behavior cloning from public elite replays;
 3. self-play collection and PPO-style policy refinement, guarded by head-to-head promotion gates.
 
+## Research paper
+
+The APS Open Science manuscript, verified results, protocols, figures, claim
+ledger, and sanitized reproducibility package are collected in
+[`paper/`](paper/README.md). Start there for the compiled manuscript and the
+artifact map.
+
 **Compute policy:** run all RL game simulation—including self-play, PPO rollout
 collection, co-evolution, and league-training simulations—on Azure. Use local
 hardware only for development and small smoke checks unless explicitly
