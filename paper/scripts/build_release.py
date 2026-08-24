@@ -501,7 +501,8 @@ def scan_release(root: Path) -> dict[str, int]:
             if (
                 str(ROOT).encode() in data
                 or re.search(rb"/(?:Users|home|root|private|tmp|var)/", data)
-                or local_reference_hits(searchable)
+                or RESTRICTED_URI_PATTERN.search(text)
+                or WINDOWS_ABSOLUTE_PATTERN.search(text)
             ):
                 problems.append(f"absolute/restricted local reference in binary figure: {relative}")
         else:
