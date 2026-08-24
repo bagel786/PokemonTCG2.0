@@ -180,6 +180,14 @@ def validate_figure_binary(relative: str, data: bytes) -> str | None:
     return None
 
 
+def printable_binary_text(data: bytes, minimum_run: int = 6) -> str:
+    """Extract printable runs without treating compressed bytes as UTF-8 prose."""
+    pattern = rb"[\x20-\x7e]{" + str(minimum_run).encode("ascii") + rb",}"
+    return "\n".join(
+        match.group(0).decode("ascii") for match in re.finditer(pattern, data)
+    )
+
+
 def prose_tokens(value: str) -> list[str]:
     value = re.sub(
         r"\\(?:cite|ref|eqref|label|input|include|includegraphics|bibliography|bibliographystyle)"
@@ -394,14 +402,13 @@ def audit_release_content() -> list[str]:
             figure_error = validate_figure_binary(relative, data)
             if figure_error:
                 errors.append(f"invalid released figure {relative}: {figure_error}")
-            text = data.decode("utf-8", errors="ignore")
+            text = printable_binary_text(data)
         searchable = relative + "\n" + text
         if is_figure_binary:
             if (
                 str(ROOT).encode() in data
                 or re.search(rb"/(?:Users|home|root|private|tmp|var)/", data)
-                or RESTRICTED_URI_PATTERN.search(text)
-                or WINDOWS_ABSOLUTE_PATTERN.search(text)
+                or local_reference_hits(searchable)
             ):
                 errors.append(f"absolute/restricted local reference in binary figure: {relative}")
         else:
