@@ -6,13 +6,9 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
-import math
 import subprocess
 from collections import defaultdict
 from pathlib import Path
-
-import numpy as np
-
 
 ROOT = Path(__file__).resolve().parents[2]
 FRESH = ROOT / "paper/data/fresh_confirmation/raw"
@@ -44,6 +40,36 @@ EXPECTED_MANIFEST = "8c13a5de5b34c3deec5909948fb8c03117048f0295140c48a0325550a9a
 EXPECTED_A2_MODEL = "b19871a9f1499c2460ae266e58194acab1d8c90b390fa5cf24ed94b9a2b6bda8"
 EXPECTED_TRAINING_SCRIPT = "43284492e59cbe591a20a4213962cc0f155888fe48aea7f46bc9b698195d2709"
 EXPECTED_C3_ORDER_MANIFEST = "42235534c7e2b73be92472d7123bd1cb937bfa262513860270d771607a1aefb7"
+CAUSE_FILES = {
+    "paired_evaluator": (
+        ROOT / "training/evaluate_deterministic_crn.py",
+        "fa60021b0906401aeb2c7c33e0f65f586eff256d83d689d688a86a40480e1341",
+    ),
+    "starmie_search": (
+        ROOT / "artifacts/sprint_870/opponents/starmie_v2_boss_atk/agent/search.py",
+        "658ed0280ed70bad423d39b35a19a79491518fbbf2a82996ac9ac00d90204b6a",
+    ),
+    "starmie_entrypoint": (
+        ROOT / "artifacts/sprint_870/opponents/starmie_v2_boss_atk/main.py",
+        "7ce106340de055db14e283bf692d10d4ebbaff136d2825caa84c377175376537",
+    ),
+    "dipplin_search": (
+        ROOT / "artifacts/sprint_870/opponents/dipplin_d1/ptcg_ai/dipplin/search.py",
+        "14fdb20b672aa16a6f7d02a1b923f4194d44c26f082ddddb288e729f64c2c291",
+    ),
+    "dipplin_entrypoint": (
+        ROOT / "artifacts/sprint_870/opponents/dipplin_d1/main.py",
+        "4f7dd46f778e75bc9d865619f2577129ab4ad4ae643a41e4b4876297760bbb5c",
+    ),
+    "native_search_api": (
+        ROOT / "vendor/cg/api.py",
+        "593f1298e52a635f90f8f505a52113e9af114f444c293404e37906f18ee06ced",
+    ),
+    "external_policy_loader": (
+        ROOT / "ptcg_ai/external.py",
+        "f18294f2e1ee60630fdcc8a63422aa1115365a0b31edeb4ffa6079a270944283",
+    ),
+}
 
 
 def sha256_file(path: Path) -> str:
@@ -145,24 +171,16 @@ def validate_payload(payload: dict, path: Path, opponent_hash: str,
             raise ValueError(f"{path}: policy error at {key}")
 
 
-def exact_mcnemar(left: np.ndarray, right: np.ndarray) -> float:
-    differences = left.astype(int) - right.astype(int)
-    positive = int(sum(differences == 1))
-    negative = int(sum(differences == -1))
-    total = positive + negative
-    if not total:
-        return 1.0
-    lower = min(positive, negative)
-    return min(1.0, 2 * sum(math.comb(total, k) for k in range(lower + 1)) / 2 ** total)
-
-
-def holm(values: list[float]) -> list[float]:
-    adjusted = [0.0] * len(values)
-    running = 0.0
-    for rank, index in enumerate(sorted(range(len(values)), key=values.__getitem__)):
-        running = max(running, (len(values) - rank) * values[index])
-        adjusted[index] = min(1.0, running)
-    return adjusted
+def row_signature(row: dict, *, include_decisions: bool) -> tuple[int, ...]:
+    signature = (
+        int(row["win"]),
+        int(row.get("draw", 0)),
+        int(row.get("hero_policy_errors", 0)),
+        int(row.get("opponent_policy_errors", 0)),
+    )
+    if include_decisions:
+        return signature + (int(row["decisions"]),)
+    return signature
 
 
 def main() -> int:
@@ -197,8 +215,21 @@ def main() -> int:
     if not all(training_checks.values()):
         raise ValueError(f"C3 training/package validation failed: {training_checks}")
     expected = dict(EXPECTED)
-    rows = []
-    sources = [{"path": str(TRAINING_REPORT.relative_to(ROOT)), "sha256": sha256_file(TRAINING_REPORT)}]
+    rows: list[dict] = []
+    sources = [{
+        "role": "C3 training report",
+        "path": str(TRAINING_REPORT.relative_to(ROOT)),
+        "sha256": sha256_file(TRAINING_REPORT),
+    }]
+    for role, (path, expected_hash) in CAUSE_FILES.items():
+        actual_hash = sha256_file(path)
+        if actual_hash != expected_hash:
+            raise ValueError(f"{path}: causal-audit source hash drift")
+        sources.append({
+            "role": role,
+            "path": str(path.relative_to(ROOT)),
+            "sha256": actual_hash,
+        })
     for opponent, (ablation_label, fresh_filename, opponent_hash, base_seed, workers) in OPPONENT_FILES.items():
         paths = {
             "C2": ABLATION / f"c2_identity_a2_{ablation_label}.json",
@@ -213,24 +244,18 @@ def main() -> int:
             if payload["control_sha256"] != expected["C1"]:
                 raise ValueError(f"{paths[cell]}: unexpected C1 package hash")
             sources.append({
-                "cell": cell, "opponent": opponent,
+                "role": "gameplay result", "cell": cell, "opponent": opponent,
                 "path": str(paths[cell].relative_to(ROOT)), "sha256": sha256_file(paths[cell]),
             })
         keys = set(loaded["C4"][1])
         if any(set(loaded[cell][1]) != keys for cell in ("C2", "C3")):
             raise ValueError(f"{opponent}: candidate seed/order/seat schedules do not match")
         for key in sorted(keys):
-            controls = [loaded[cell][2][key] for cell in ("C2", "C3", "C4")]
-            control_tuple = [
-                (int(row["win"]), int(row.get("draw", 0)), int(row.get("hero_policy_errors", 0)))
-                for row in controls
-            ]
-            if len(set(control_tuple)) != 1:
-                raise ValueError(f"{opponent} {key}: deterministic C1 arm differs across runs")
+            controls = {cell: loaded[cell][2][key] for cell in ("C2", "C3", "C4")}
             if any(
                 int(row.get("hero_policy_errors", 0))
                 or int(row.get("opponent_policy_errors", 0))
-                for row in controls
+                for row in controls.values()
             ):
                 raise ValueError(f"{opponent} {key}: C1 policy error")
             candidates = {cell: loaded[cell][1][key] for cell in ("C2", "C3", "C4")}
@@ -239,16 +264,28 @@ def main() -> int:
             if any(int(row.get("opponent_policy_errors", 0)) for row in candidates.values()):
                 raise ValueError(f"{opponent} {key}: opponent policy error")
             order, seed, seat = key
-            rows.append({
+            canonical_row = {
                 "opponent": opponent,
                 "actual_order": order,
                 "seed": seed,
                 "physical_seat": seat,
-                "c1_blind_a2_win": int(controls[0]["win"]),
-                "c2_identity_a2_win": int(candidates["C2"]["win"]),
-                "c3_blind_trained_win": int(candidates["C3"]["win"]),
-                "c4_identity_trained_win": int(candidates["C4"]["win"]),
-            })
+            }
+            for cell in ("C2", "C3", "C4"):
+                canonical_row.update({
+                    f"c1_{cell.lower()}_run_win": int(controls[cell]["win"]),
+                    f"c1_{cell.lower()}_run_draw": int(controls[cell].get("draw", 0)),
+                    f"c1_{cell.lower()}_run_decisions": int(controls[cell]["decisions"]),
+                    f"{cell.lower()}_candidate_win": int(candidates[cell]["win"]),
+                    f"{cell.lower()}_candidate_draw": int(candidates[cell].get("draw", 0)),
+                    f"{cell.lower()}_candidate_decisions": int(candidates[cell]["decisions"]),
+                })
+            canonical_row["c1_outcome_records_identical"] = int(
+                len({row_signature(row, include_decisions=False) for row in controls.values()}) == 1
+            )
+            canonical_row["c1_serialized_records_identical"] = int(
+                len({row_signature(row, include_decisions=True) for row in controls.values()}) == 1
+            )
+            rows.append(canonical_row)
     if len(rows) != 2_800:
         raise ValueError(f"expected 2800 matched seed-condition units, got {len(rows)}")
 
@@ -259,67 +296,109 @@ def main() -> int:
         writer.writeheader()
         writer.writerows(rows)
 
-    cell_keys = [
-        "c1_blind_a2_win", "c2_identity_a2_win",
-        "c3_blind_trained_win", "c4_identity_trained_win",
-    ]
-    grouped = defaultdict(list)
-    for row in rows:
-        grouped[(row["opponent"], row["actual_order"])].append(row)
-    strata = sorted(grouped)
-    if len(strata) != 14 or any(len(grouped[key]) != 200 for key in strata):
-        raise ValueError("ablation is not balanced over 14 200-pair strata")
-    iterations = 100_000
-    rng = np.random.default_rng(20260824)
-    bootstrap = np.empty((len(strata), len(cell_keys), iterations), dtype=np.float32)
-    batch = 1_000
-    for stratum_index, key in enumerate(strata):
-        values = np.asarray([[row[field] for field in cell_keys] for row in grouped[key]], dtype=np.float32)
-        for start in range(0, iterations, batch):
-            stop = min(iterations, start + batch)
-            indices = rng.integers(0, len(values), size=(stop - start, len(values)))
-            bootstrap[stratum_index, :, start:stop] = values[indices].mean(axis=1).T
-    cell_bootstrap = bootstrap.mean(axis=0)
-    observed = np.asarray([[row[field] for field in cell_keys] for row in rows], dtype=np.int8)
-    cell_rates = {f"C{index + 1}": float(observed[:, index].mean()) for index in range(4)}
-    contrasts = [
-        ("C2-C1", 1, 0),
-        ("C3-C1", 2, 0),
-        ("C4-C1", 3, 0),
-        ("C4-C2", 3, 1),
-        ("C4-C3", 3, 2),
-    ]
-    results = []
-    raw_p = []
-    for label, left, right in contrasts:
-        samples = cell_bootstrap[left] - cell_bootstrap[right]
-        differences = observed[:, left].astype(int) - observed[:, right].astype(int)
-        result = {
-            "contrast": label,
-            "effect": float(differences.mean()),
-            "ci_low": float(np.percentile(samples, 2.5)),
-            "ci_high": float(np.percentile(samples, 97.5)),
-            "left_only_wins": int(sum(differences == 1)),
-            "right_only_wins": int(sum(differences == -1)),
-            "mcnemar_exact_two_sided_p": exact_mcnemar(observed[:, left], observed[:, right]),
-            "pairs": len(rows),
+    by_opponent: dict[str, dict] = {}
+    run_pairs = (("C2", "C3"), ("C2", "C4"), ("C3", "C4"))
+    for opponent in OPPONENT_FILES:
+        opponent_rows = [row for row in rows if row["opponent"] == opponent]
+        pairwise_outcome = {}
+        pairwise_decisions = {}
+        for left, right in run_pairs:
+            pairwise_outcome[f"{left}-{right}"] = sum(
+                (
+                    row[f"c1_{left.lower()}_run_win"],
+                    row[f"c1_{left.lower()}_run_draw"],
+                ) != (
+                    row[f"c1_{right.lower()}_run_win"],
+                    row[f"c1_{right.lower()}_run_draw"],
+                )
+                for row in opponent_rows
+            )
+            pairwise_decisions[f"{left}-{right}"] = sum(
+                row[f"c1_{left.lower()}_run_decisions"]
+                != row[f"c1_{right.lower()}_run_decisions"]
+                for row in opponent_rows
+            )
+        by_opponent[opponent] = {
+            "pairs": len(opponent_rows),
+            "c1_wins_by_run": {
+                cell: sum(row[f"c1_{cell.lower()}_run_win"] for row in opponent_rows)
+                for cell in ("C2", "C3", "C4")
+            },
+            "c1_decisions_by_run": {
+                cell: sum(row[f"c1_{cell.lower()}_run_decisions"] for row in opponent_rows)
+                for cell in ("C2", "C3", "C4")
+            },
+            "any_outcome_record_mismatch_units": sum(
+                not row["c1_outcome_records_identical"] for row in opponent_rows
+            ),
+            "any_serialized_record_mismatch_units": sum(
+                not row["c1_serialized_records_identical"] for row in opponent_rows
+            ),
+            "pairwise_outcome_mismatch_units": pairwise_outcome,
+            "pairwise_decision_count_mismatch_units": pairwise_decisions,
         }
-        raw_p.append(result["mcnemar_exact_two_sided_p"])
-        results.append(result)
-    for result, adjusted in zip(results, holm(raw_p), strict=True):
-        result["holm_adjusted_p_5_contrasts"] = adjusted
-    interaction_samples = cell_bootstrap[3] - cell_bootstrap[2] - cell_bootstrap[1] + cell_bootstrap[0]
-    interaction_values = observed[:, 3] - observed[:, 2] - observed[:, 1] + observed[:, 0]
-    interaction = {
+    outcome_mismatches = sum(not row["c1_outcome_records_identical"] for row in rows)
+    serialized_mismatches = sum(not row["c1_serialized_records_identical"] for row in rows)
+    if outcome_mismatches != 210 or serialized_mismatches != 458:
+        raise ValueError(
+            "unexpected C1 parity audit result: "
+            f"outcome={outcome_mismatches}, serialized={serialized_mismatches}"
+        )
+    reproducible_opponents = [
+        opponent for opponent, audit in by_opponent.items()
+        if audit["any_serialized_record_mismatch_units"] == 0
+    ]
+    expected_reproducible = [
+        "B0", "d842_runtime", "master_v1", "replay_refresh", "alakazam_no_search"
+    ]
+    if reproducible_opponents != expected_reproducible:
+        raise ValueError(f"unexpected reproducible-control subset: {reproducible_opponents}")
+
+    def descriptive_contrast(
+        selected: list[dict], label: str, left: str, right: str,
+    ) -> dict:
+        differences = [int(row[left]) - int(row[right]) for row in selected]
+        return {
+            "contrast": label,
+            "effect": sum(differences) / len(differences),
+            "left_only_wins": sum(value == 1 for value in differences),
+            "right_only_wins": sum(value == -1 for value in differences),
+            "pairs": len(selected),
+            "status": "DESCRIPTIVE_ONLY",
+        }
+
+    within_run_descriptive = [
+        descriptive_contrast(rows, "C2-C1 (C2 run)", "c2_candidate_win", "c1_c2_run_win"),
+        descriptive_contrast(rows, "C3-C1 (C3 run)", "c3_candidate_win", "c1_c3_run_win"),
+        descriptive_contrast(rows, "C4-C1 (C4 run)", "c4_candidate_win", "c1_c4_run_win"),
+    ]
+    exploratory_rows = [row for row in rows if row["opponent"] in reproducible_opponents]
+    exploratory_contrasts = [
+        descriptive_contrast(exploratory_rows, "C2-C1", "c2_candidate_win", "c1_c2_run_win"),
+        descriptive_contrast(exploratory_rows, "C3-C1", "c3_candidate_win", "c1_c2_run_win"),
+        descriptive_contrast(exploratory_rows, "C4-C1", "c4_candidate_win", "c1_c2_run_win"),
+        descriptive_contrast(exploratory_rows, "C4-C2", "c4_candidate_win", "c2_candidate_win"),
+        descriptive_contrast(exploratory_rows, "C4-C3", "c4_candidate_win", "c3_candidate_win"),
+    ]
+    interaction_values = [
+        row["c4_candidate_win"] - row["c3_candidate_win"]
+        - row["c2_candidate_win"] + row["c1_c2_run_win"]
+        for row in exploratory_rows
+    ]
+    exploratory_interaction = {
         "contrast": "C4-C3-C2+C1",
-        "effect": float(interaction_values.mean()),
-        "ci_low": float(np.percentile(interaction_samples, 2.5)),
-        "ci_high": float(np.percentile(interaction_samples, 97.5)),
-        "pairs": len(rows),
-        "method": "paired within-cell bootstrap; no McNemar test for interaction",
+        "effect": sum(interaction_values) / len(interaction_values),
+        "pairs": len(exploratory_rows),
+        "status": "DESCRIPTIVE_ONLY",
     }
+    planned_contrasts = [
+        {"contrast": label, "status": "NOT_ESTIMABLE"}
+        for label in ("C2-C1", "C3-C1", "C4-C1", "C4-C2", "C4-C3", "C4-C3-C2+C1")
+    ]
     report = {
-        "schema_version": 1,
+        "schema_version": 2,
+        "status": "INVALIDATED",
+        "invalidating_error": "C1_NOT_REPRODUCIBLE_ACROSS_SEPARATELY_EXECUTED_CELLS",
         "generated_at_commit": subprocess.check_output(
             ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
         ).strip(),
@@ -340,18 +419,74 @@ def main() -> int:
             "e8122eea...415a6, but those first bytes no longer survive; the final package is the only "
             "C3 package evaluated."
         ),
-        "cell_win_rates": cell_rates,
-        "contrasts": results,
-        "interaction": interaction,
-        "bootstrap": {"iterations": iterations, "seed": 20260824, "strata": 14},
-        "mcnemar_scope": (
-            "Each pooled exact McNemar test targets conditional discordant-direction symmetry; "
-            "the paired bootstrap interval is primary for the equal-weight mean contrast."
-        ),
+        "planned_analysis": {
+            "estimand": "equal-weight seven-opponent, fourteen-stratum four-cell contrasts",
+            "pairs": 2_800,
+            "strata": 14,
+            "status": "NOT_ESTIMABLE_UNDER_FROZEN_VALIDATION",
+            "contrasts": planned_contrasts,
+            "reason": (
+                "The protocol treated C1 as the within-pair control and the analyzer required its "
+                "realized record to agree across the separately executed C2, C3, and C4 runs. "
+                "That gate failed for search-enabled Starmie and Dipplin."
+            ),
+        },
+        "control_parity_audit": {
+            "outcome_record_mismatch_units": outcome_mismatches,
+            "serialized_record_mismatch_units": serialized_mismatches,
+            "pairs": len(rows),
+            "trace_capture": False,
+            "c1_wins_by_run": {
+                cell: sum(row[f"c1_{cell.lower()}_run_win"] for row in rows)
+                for cell in ("C2", "C3", "C4")
+            },
+            "by_opponent": by_opponent,
+        },
+        "within_run_descriptive": {
+            "status": "POST_FAILURE_PROCESS_SENSITIVE_DESCRIPTION",
+            "contrasts": within_run_descriptive,
+            "limitations": (
+                "These are realized candidate-versus-own-control differences, not validated "
+                "common-random-number ablation estimates. No interval or p-value is reported."
+            ),
+        },
+        "exploratory_reproducible_control_subset": {
+            "status": "POST_HOC_EXPLORATORY_OMIT_FROM_CONFIRMATORY_CLAIMS",
+            "selection_rule": (
+                "Whole opponent packages with identical available C1 win, draw, error, and "
+                "decision-count records across all three runs"
+            ),
+            "opponents": reproducible_opponents,
+            "pairs": len(exploratory_rows),
+            "contrasts": exploratory_contrasts,
+            "interaction": exploratory_interaction,
+            "limitations": (
+                "The five-opponent subset was defined after the parity failure, changes the target "
+                "population, has no trace capture, and is reported only as a descriptive sensitivity. "
+                "No interval, p-value, or generalization claim is warranted."
+            ),
+        },
+        "cause_audit": {
+            "runner": (
+                "Candidate and control are separate imap_unordered process-pool tasks. The scheduled "
+                "gameplay-engine seed, opponent, order, and seat are shared; opponent-search "
+                "randomness and wall-clock execution are not coupled."
+            ),
+            "starmie": "Search branches and terminates against a 3.0-second time.monotonic deadline.",
+            "dipplin": "Search uses time.monotonic soft and hard deadlines.",
+            "native_search_state": (
+                "The production search API lazily initializes a module-global native agent pointer; "
+                "the external policy loader preserves already loaded cg modules across tasks."
+            ),
+            "inference": (
+                "This is a design incompatibility, not permission to select the 2,590 agreeing-"
+                "outcome units or weaken the validation gate."
+            ),
+        },
         "execution_provenance_caveat": (
-            "Raw rows do not serialize max-decisions or opponent environment; those settings are "
-            "fixed by the committed protocol/runner commands rather than independently recoverable "
-            "from result rows."
+            "Raw rows do not serialize max-decisions or opponent environment, and trace capture is "
+            "disabled. Those settings are fixed by the committed protocol/runner commands rather "
+            "than independently recoverable from result rows."
         ),
         "sources": sources,
     }
@@ -360,26 +495,30 @@ def main() -> int:
     with (ROOT / "paper/data/ablation/contrasts.csv").open(
         "w", encoding="utf-8", newline=""
     ) as handle:
-        fields = list(results[0])
-        for key in interaction:
-            if key not in fields:
-                fields.append(key)
+        fields = [
+            "analysis_set", "status", "contrast", "effect", "pairs",
+            "left_only_wins", "right_only_wins", "limitations",
+        ]
         writer = csv.DictWriter(handle, fieldnames=fields)
         writer.writeheader()
-        writer.writerows(results + [interaction])
-    (ROOT / "paper/ablation_macros.tex").write_text(
-        "% Auto-generated by paper/scripts/analyze_ablation.py; do not edit.\n"
-        + "".join(
-            f"\\newcommand{{\\Ablation{result['contrast'].replace('-', 'to').replace('+', 'plus')}}}"
-            f"{{{100 * result['effect']:.2f}}}\n"
-            for result in results
-        ),
-        encoding="utf-8",
-    )
+        for result in within_run_descriptive:
+            writer.writerow({
+                "analysis_set": "within_run_descriptive",
+                **result,
+                "limitations": report["within_run_descriptive"]["limitations"],
+            })
+        for result in exploratory_contrasts + [exploratory_interaction]:
+            writer.writerow({
+                "analysis_set": "post_hoc_five_opponent_subset",
+                **result,
+                "limitations": report["exploratory_reproducible_control_subset"]["limitations"],
+            })
     print(json.dumps({
-        "cell_win_rates": cell_rates,
-        "contrasts": results,
-        "interaction": interaction,
+        "status": report["status"],
+        "outcome_mismatch_units": outcome_mismatches,
+        "serialized_record_mismatch_units": serialized_mismatches,
+        "within_run_descriptive": within_run_descriptive,
+        "exploratory_reproducible_control_subset": exploratory_contrasts,
     }, indent=2))
     return 0
 

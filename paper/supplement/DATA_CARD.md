@@ -9,8 +9,10 @@ rows are outcome-selected: every row has positive reward and the historical
 `daily_top_episode` source label. They are not a representative sample of play,
 and demonstrator optimality was not independently established. The
 paper's sanitized processed gameplay data intended for release contain one row
-per paired candidate--control unit, recording its seed, actual order, physical
-seat, opponent label, and candidate/control outcome.
+per candidate--control schedule pair, recording its gameplay-engine seed, actual
+order, physical seat, opponent label, and candidate/control outcome.  Separate
+process-pool tasks and wall-clock-bounded search in two opponents mean that these
+fields do not identify a shared realized stochastic trajectory.
 
 ## Collection and transformations
 
@@ -40,8 +42,8 @@ Appropriate uses are reproduction of the disclosed training transform,
 output-module policy diagnostics, and aggregate evaluation. The corpus is not a
 representative sample of all games, players, decks, or agents. It must not be
 used to identify participants, reconstruct private play, infer population-wide
-performance, or train an unrestricted commercial game agent without independent
-rights review.
+performance, treat schedule pairing as full common-random-number coupling, or
+train an unrestricted commercial game agent without independent rights review.
 
 ## Distribution, privacy, and maintenance
 

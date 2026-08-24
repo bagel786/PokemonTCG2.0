@@ -22,5 +22,13 @@ earlier corpus-wide signature grouping was not an action-collision statistic
 and is rejected. The training rows are winner/top-episode selected recorded
 actions, not an independently validated sample of expert-optimal decisions.
 
-All prose and values in the compiled manuscript are generated from or checked
-against the current audited sources above.
+The later coupling audit also invalidated the planned seven-opponent four-cell
+analysis.  Repeated C1 outcomes differed on 210 of 2,800 seed-condition units
+because the seeded engine schedule did not control wall-clock/process-local
+opponent search.  The current manuscript therefore treats the primary result as
+a one-execution schedule comparison and makes no confirmatory four-cell
+mechanistic claim.
+
+All prose and values in the manuscript source are generated from or checked
+against the current audited sources above.  Compilation and rendered-page
+inspection remain required before submission.

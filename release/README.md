@@ -2,7 +2,13 @@
 
 This companion package independently verifies the fresh primary frozen
 seed/order/pair-index/seat schedule, candidate/control/opponent/source digests,
-counts, effect, discordant counts, and exact McNemar calculation. It regenerates
+counts, observed effect, discordant counts, and exact McNemar calculation. The
+paired resampling interval and test are conditional on one realized execution:
+search-enabled Broader 1 and Broader 2 used wall-clock and process-local search
+state that the gameplay-engine seed did not couple. The package also preserves
+the failed control-parity audit that invalidated the planned seven-opponent
+four-cell cross-run analysis; it does not present those planned contrasts as
+estimable. It regenerates
 five table fragments and six figures from sanitized processed rows and recorded
 summary files. It intentionally does **not** contain the competition engine or
 its source, card data or assets, deck files, private replays, credentials,
@@ -46,6 +52,10 @@ Opponents are not a random sample, so
 the package does not support inference to all agents or all card-game settings.
 Approval in the held-out files is conditional on candidate--control disagreement
 and is not a gameplay win rate.
+
+The ablation files include descriptive within-run values and a post hoc
+five-opponent sensitivity. Neither is a substitute for the invalidated planned
+seven-opponent analysis; neither carries a confirmatory interval or test.
 
 Exact engine-level reruns require separately authorized access from the
 competition organizer. See `docs/environment_access.md` and the manuscript Data

@@ -168,7 +168,7 @@ def figure_provenance(representation: dict) -> None:
         (0.01, "A2 / C0\nbaseline", GRAY, None),
         (0.205, "Outcome-selected\nfeature/action rows", BLUE, "//"),
         (0.40, "Repair + output-\nmodule training", ORANGE, ".."),
-        (0.60, "Four-cell\nmatched ablation", PURPLE, "xx"),
+        (0.60, "Four-cell\ncontrol-parity audit", PURPLE, "xx"),
         (0.80, "Fresh paired\nconfirmation", BLUE, "\\\\"),
     ]
     for index, (x, label, color, hatch) in enumerate(stages):
@@ -255,7 +255,7 @@ def figure_negative(negative: dict) -> None:
                     capsize=4, linewidth=1.4)
     ax.axvline(0, color=GRAY, linestyle="--", linewidth=1)
     ax.axvline(3, color=GRAY, linestyle=":", linewidth=1)
-    ax.text(3, 0.95, "sequence-oracle gate", rotation=90, va="top", ha="right",
+    ax.text(3, 0.95, "historically reported gate", rotation=90, va="top", ha="right",
             fontsize=7, color=GRAY)
     ax.set_yticks(y, [result["label"] for result in rows])
     ax.set_xlabel("Candidate − baseline win probability (percentage points)")

@@ -82,6 +82,51 @@ the retained feature corpus, and several opponent/engine trees are ignored
 local artifacts rather than Git objects. Their hashes pin the audited bytes but
 do not provide durable repository provenance.
 
+## Evaluation coupling audit and invalidated four-cell analysis
+
+**RAW/CODE-VERIFIED DESIGN FAILURE.** The paired evaluator builds candidate and
+control games as separate tasks and dispatches them through
+`multiprocessing.Pool.imap_unordered` (`training/evaluate_deterministic_crn.py`,
+digest `fa60021b0906401aeb2c7c33e0f65f586eff256d83d689d688a86a40480e1341`).
+The two arms share the scheduled gameplay-engine seed, opponent package, actual
+order, and physical seat, but distinct tasks are not guaranteed to run in the
+same worker and do not share a realized opponent-search trajectory. Native
+`cg.api` search state and RNG are process-local and can persist within an
+evaluator worker.
+
+Two of the seven opponents contain explicit timing dependence:
+
+- Starmie search sets a 3.0-second `time.monotonic()` deadline and stops
+  determinization, branch, and rollout work against it
+  (`artifacts/sprint_870/opponents/starmie_v2_boss_atk/agent/search.py`, digest
+  `658ed0280ed70bad423d39b35a19a79491518fbbf2a82996ac9ac00d90204b6a`).
+- Dipplin search uses a monotonic clock to set soft and hard search deadlines
+  (`artifacts/sprint_870/opponents/dipplin_d1/ptcg_ai/dipplin/search.py`, digest
+  `14fdb20b672aa16a6f7d02a1b923f4194d44c26f082ddddb288e729f64c2c291`).
+
+The prospectively frozen analyzer gate committed before C2/C3 gameplay at
+`63ea3135709646c41feb892e863a8bc00e758ed3` required the C1 record repeated
+alongside C2, C3, and C4 to agree on every seed-condition unit. Reaggregation
+of all 2,800 units found 210 with a differing C1 win/draw/error outcome record:
+191 against Starmie (82 actual-first and 109 actual-second) and 19 against
+Dipplin (10 first and 9 second). When recorded decision count is included, 458
+units differ (377 Starmie and 81 Dipplin). The other five opponents—B0, d842,
+master v1, replay refresh, and Alakazam—have identical available serialized C1
+summaries across the three executions; trace capture was disabled.
+
+The planned seven-opponent four-cell contrasts, paired intervals, McNemar tests,
+and interaction are therefore **NOT ESTIMABLE UNDER THE FROZEN VALIDATION**.
+Mismatched units are preserved rather than deleted. Within-run C2-versus-own-C1
+and C3-versus-own-C1 values are process-sensitive descriptions without
+intervals or tests. Selecting the five opponents whose available serialized
+control summaries happened to match changes the target population after
+inspection; traces were not captured. Accordingly, that subset is post hoc and
+descriptive only. The C4--C1 primary rows still
+support a prespecified realized schedule comparison, but its interval
+conditions on one execution and omits opponent-search, scheduler, and
+process-local runtime-state variation. It is not a validated
+common-random-number variance-reduction experiment.
+
 ## Representation defect and repair
 
 **HASH/CODE-VERIFIED.** In C0,

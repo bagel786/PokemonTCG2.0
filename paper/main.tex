@@ -35,20 +35,24 @@ option's hand index, but not their relational binding.  We repaired that binding
 and fine-tuned four output-side modules of a frozen baseline on recent,
 winner-only replay-derived decisions.  A KL term used frozen A2 weights evaluated
 under the cell's encoder.  We compared the resulting policy, \EXP, with
-the frozen control, \Ctl, in a common-random-number experiment prospectively
-specified in a locally committed protocol before result access, over seven
-fixed opponent policies and both actual turn orders.  The equal-weight
-paired win-probability difference was \PrimaryEffectPP\ \pp\ (95\% stratified
-paired-bootstrap interval [\PrimaryCILowPP, \PrimaryCIHighPP]; \PrimaryPairs\
-pairs).  \PrimaryInference\ The secondary fixed-group point estimates were
+the frozen control, \Ctl, on an engine-seed-, order-, and seat-matched schedule
+prospectively specified in a locally committed protocol before result access,
+over seven fixed opponent policies and both actual turn orders.  In that one
+execution, the observed equal-weight schedule-paired win-rate difference was
+\PrimaryEffectPP\ \pp\ (95\% conditional empirical interval from stratified
+paired resampling [\PrimaryCILowPP, \PrimaryCIHighPP]; \PrimaryPairs\
+pairs).  The interval is conditional on the realized execution and omits
+run-to-run variation from two opponents' wall-clock-bounded search.  The
+secondary fixed-group point estimates were
 \GrimEffectPP\ \pp\ for the
 defined matched-policy family and \OtherEffectPP\ \pp\ for the other three
 opponents.  In a separate episode-clustered reanalysis of
 retained, outcome-selected replay units, \EXP\ approval among binary candidate--control
 disagreements was \ReplayApproval\ (95\% interval [\ReplayApprovalCILow,
-\ReplayApprovalCIHigh]); \ReplayApprovalInference\ A four-cell analysis that
-embeds this primary contrast and adds two mechanistic cells constrains
-mechanistic attribution; two retained null experiments bound broader claims.
+\ReplayApprovalCIHigh]); \ReplayApprovalInference\ A planned seven-opponent
+four-cell analysis was invalidated because repeated control outcomes differed
+on 210 of 2,800 seed-condition units, so its cross-cell mechanistic contrasts
+are not estimable.  Two retained null experiments further bound broader claims.
 The study separates representation validity, imitation agreement, paired
 gameplay performance, and opponent-group heterogeneity; it does not claim
 universal improvement or superhuman play.
@@ -93,8 +97,9 @@ were identical.
 
 We contribute (i) a corpus-level audit of this identity omission; (ii) an identity-aware
 repair coupled to a restricted, A2-anchored output-module update; (iii) a
-fresh, paired, order-balanced gameplay confirmation; (iv) a matched four-cell
-representation-by-training ablation; and (v) an explicit comparison with
+fresh, engine-seed schedule-paired, order-balanced gameplay execution; (iv) an
+audit showing why the planned four-cell representation-by-training analysis
+failed its repeated-control parity requirement; and (v) an explicit comparison with
 episode-clustered recorded-action agreement and retained null experiments.
 Reporting was informed by recommendations to quantify aggregate uncertainty and
 improve reproducibility through transparent reporting and artifact sharing
@@ -105,9 +110,10 @@ sample.  Public competition rating and rank are not outcomes in this paper.
 
 \begin{figure*}
   \includegraphics[width=\textwidth]{figures/fig01_pipeline.pdf}
-  \caption{Policy and evaluation pipeline.  Candidate and control see the same
-  opponent, actual order, physical seat, and engine seed within each pair.  The
-  restricted engine and opponent implementations are fixed inputs rather than
+  \caption{Policy and evaluation pipeline.  Candidate and control use the same
+  opponent, actual order, physical seat, and engine seed within each pair.  This
+  schedule match does not couple wall-clock-bounded opponent search decisions.
+  The restricted engine and opponent implementations are fixed inputs rather than
   redistributable contributions.  OpenAI Codex assisted with plotting-code
   drafting; source inputs and the rendered figure were checked against the
   cited artifacts.}
@@ -272,8 +278,8 @@ spirit of dataset documentation practice \cite{gebru2021datasheets}.
   \includegraphics[width=\textwidth]{figures/fig03_dataset_provenance.pdf}
   \caption{Retained data split and experimental provenance.  Counts come from
   the frozen manifest.  The missing source replays limit feature-extraction
-  reproducibility but do not alter the retained-row transform used in the
-  four-cell ablation.  OpenAI Codex assisted with plotting-code drafting;
+  reproducibility but do not alter the retained-row transform used to train
+  the C3 diagnostic.  OpenAI Codex assisted with plotting-code drafting;
   source inputs and the rendered figure were checked against the cited
   artifacts.}
   \label{fig:provenance}
@@ -307,10 +313,17 @@ Within a pair, candidate and control records share opponent, engine seed, actual
 order, and physical seat.  The frozen command also specifies the opponent
 environment and maximum-decision limit, but the per-game rows do not serialize
 either field; those two settings therefore cannot be independently verified
-row by row.  Common random numbers can reduce nuisance variation when a valid
-coupling is implemented \cite{glasserman1992crn}; we verify the serialized
-coupling fields in every retained pair rather than inferring them from the
-design label.
+row by row.  The evaluator dispatches candidate and control games as separate
+process-pool tasks, and native opponent-search state is process-local rather
+than explicitly reset or coupled by the schedule.  A post-execution source
+audit found that the Starmie
+opponent stops search at a \texttt{time.monotonic()} wall-clock deadline and
+the Dipplin opponent likewise uses soft and hard monotonic-clock deadlines.
+Thus the schedule couples the seeded gameplay engine but does not couple all
+opponent decisions or scheduler timing.  The design intended the variance
+reduction associated with common random numbers \cite{glasserman1992crn}, but
+the implementation does not establish a full common-random-number coupling and
+we claim no such precision gain.
 
 The complete schedule comprises \PrimaryPairs\ paired units and \PrimaryGames\
 engine games.  The binary primary outcome maps a win to one and loss or draw to
@@ -318,29 +331,42 @@ zero.  The secondary utility maps win, draw, and loss to $1,0,-1$.  An exception
 nonterminal truncation, illegal action, candidate/control/opponent policy error,
 incomplete pair, hash drift, production-sentinel change, or pairing mismatch
 invalidates a cell rather than being deleted or imputed.  All scheduled fresh
-pairs completed with zero policy errors.  The frozen runner did not record
-per-game latency; parallel wall time is not substituted.
+pairs completed with zero recorded policy errors.  The frozen runner did not
+record per-game latency; parallel wall time is not substituted.  The primary
+result is therefore the observed prespecified schedule-paired contrast from one
+execution, not a claim that repeated executions are invariant.
 
 The primary interval uses 100,000 bootstrap replicates.  Each replicate resamples
 complete candidate--control pairs with replacement independently within all 14
 cells, then averages the cell means.  The exact two-sided McNemar test conditions
 on candidate-only plus control-only wins and tests symmetry of the discordant
 direction.  This is sharper than the weak null of an equal mean across 14 fixed
-strata, for which the paired bootstrap interval is the primary summary.  Fourteen individual cell tests are
+strata, for which the paired bootstrap interval is the primary numerical
+summary.  It conditions on the realized execution and does not include
+run-to-run scheduler or opponent-search variation.  Fourteen individual cell
+tests are
 secondary and Holm-adjusted together.  Opponent, order, family, and utility
 summaries remain descriptive.  No meta-weighted estimate is computed because
 the historical frozen weight file is absent.
 
-The four-cell ablation matches the same engine, opponents, seeds, orders, seats,
-and pair counts across cells.  It embeds the already reported C4--C1 primary
-rows and adds newly executed C2 and C3 candidate cells; it is not a second
-independent C4 confirmation.  The analysis reuses the \Ctl\ records for C1.  The other
-cells are separately executed simulations matched by seed-condition identifier,
-not shared realized stochastic worlds or trajectories.  C1 is blind encoder plus A2; C2 is identity-aware
-encoder plus unchanged A2; C3 is blind encoder plus matched output-module
-retraining; C4 is identity-aware encoder plus the matched update (\EXP).  C2 and C3 are
-mechanistic, not deployment candidates.  Five binary contrasts are Holm-adjusted;
-the difference-in-differences interaction is descriptive.  The C3 transform
+The planned four-cell ablation fixed the same engine, opponents, seed schedule,
+orders, seats, and pair counts across separately executed runs.  It embeds the
+already reported C4--C1 primary execution and adds C2 and C3 runs, each with
+its own repeated C1 arm; it is not a second independent C4 confirmation.  C1
+is blind encoder plus A2; C2 is identity-aware encoder plus unchanged A2; C3
+is blind encoder plus matched output-module retraining; and C4 is
+identity-aware encoder plus the matched update (\EXP).  C2 and C3 are
+mechanistic probes, not deployment candidates.  The prospectively frozen
+analyzer gate required the repeated C1 outcomes to agree for every
+seed-condition unit.  That gate failed on 210 of 2,800 units: 191 against
+Starmie and 19 against Dipplin.
+Accordingly, the planned seven-opponent four-cell contrasts and their
+inferential procedures are not estimable under the protocol.  In particular,
+the C4--C2, C4--C3, and difference-in-differences comparisons require
+cross-execution parity that failed.  Realized within-run C2--C1 and C3--C1
+summaries are retained only as process-sensitive descriptions, and any
+five-opponent available-record-parity subset is a post hoc exploratory
+diagnostic.  The C3 transform
 zeroed exactly 37,199 source fields in 47,653 retained rows, completed all three
 epochs, realized zero rehearsal rows, and exported model hash
 \texttt{d22d0b52...8b70}.
@@ -351,7 +377,9 @@ exposed, assisted under human direction with analysis-code drafting, statistical
 checks, visualization code, artifact auditing, and manuscript drafting.  Its
 outputs were not treated as evidence: reported quantities were regenerated from
 retained artifacts and checked by executable validation, source inspection,
-hash comparison, and rendered-output review.  Further details and the limitation
+hash comparison, and figure review.  Compilation, full-page rendering, and
+visual inspection of the final PDF are required before submission.  Further
+details and the limitation
 on unrecoverable earlier AI use appear in the disclosure below.
 
 \section{Primary gameplay results}
@@ -359,21 +387,26 @@ on unrecoverable earlier AI use appear in the disclosure below.
 % Claims GAME-001 and GAME-C01--GAME-C14.
 Across the frozen population, \EXP\ produced \PrimaryCandidateWins\ wins and
 \Ctl\ produced \PrimaryControlWins.  These marginal counts do not replace the
-paired analysis because both policies may win or fail to win in the same pair.
-The primary paired difference was \PrimaryEffectPP\ \pp\ (95\% interval
+schedule-paired analysis because both policies may win or fail to win in the
+same pair.  The observed schedule-paired win-rate difference was
+\PrimaryEffectPP\ \pp\ (95\% interval
 [\PrimaryCILowPP, \PrimaryCIHighPP]).  Discordant outcomes included
 \PrimaryCandidateOnly\ \EXP-only and \PrimaryControlOnly\ \Ctl-only wins; the
-exact two-sided McNemar value was \PrimaryMcNemarP.  \PrimaryInference
-Candidate/control draw totals were \PrimaryCandidateDraws/\PrimaryControlDraws.
+exact two-sided McNemar value was \PrimaryMcNemarP.  That test addresses the
+sharper symmetry null for discordant directions and is secondary to the
+stratified interval.  The interval excludes zero for this realized execution,
+but it does not quantify between-execution timing variation.  Candidate/control
+draw totals were \PrimaryCandidateDraws/\PrimaryControlDraws.
 The secondary win/draw/loss utility effect was \UtilityEffect\ (95\% interval
 [\UtilityCILow, \UtilityCIHigh]).
 
 \begin{figure*}
   \includegraphics[width=0.86\textwidth]{figures/fig04_gameplay_forest.pdf}
-  \caption{Fresh paired effects by opponent, averaged over actual order, and
-  the prospectively specified equal-weight primary effect.  Intervals are paired
-  within-cell bootstrap intervals.  Opponents are a fixed population; individual
-  points are secondary.  OpenAI Codex assisted with plotting-code drafting;
+  \caption{Fresh schedule-paired effects by opponent, averaged over actual
+  order, and the prospectively specified equal-weight primary effect.
+  Intervals resample observed pairs within cells and condition on the single
+  realized execution.  Opponents are a fixed population; individual points are
+  secondary.  OpenAI Codex assisted with plotting-code drafting;
   source inputs and the rendered figure were checked against the cited
   artifacts.}
   \label{fig:gameplay}
@@ -389,29 +422,31 @@ three frozen opponents yielded \OtherEffectPP\ \pp\ ([\OtherCILowPP,
 \OtherCIHighPP]).  These are fixed-group summaries, not estimates for unseen
 opponents or policy families.
 
-\section{Four-cell representation-by-training ablation}
+\section{Invalidated four-cell representation-by-training analysis}
 
-The ablation analyzes contrasts on 2,800 matched seed-condition units across
-separately executed cells rather than comparing four unrelated marginal scores
-(Table~\ref{tab:ablation}).  Matching a seed and condition does not imply that
-the cells traversed the same realized stochastic world.  Identity activation
-with original A2 (C2--C1) changed win probability by
-\AblationEncoderOnlyPP\ \pp\ (95\% interval
-[\AblationEncoderOnlyCILowPP, \AblationEncoderOnlyCIHighPP]).  Matched training
-under blind encoding (C3--C1) changed it by \AblationBlindTrainingPP\ \pp\
-([\AblationBlindTrainingCILowPP, \AblationBlindTrainingCIHighPP]).  Training
-within identity-aware encoding (C4--C2) was \AblationIdentityTrainingPP\ \pp\
-([\AblationIdentityTrainingCILowPP, \AblationIdentityTrainingCIHighPP]), while
-the trained-pipeline identity-versus-blind contrast (C4--C3), whose weights were
-fitted separately under their respective encoders, was
-\AblationPostTrainingEncoderPP\ \pp\
-([\AblationPostTrainingEncoderCILowPP,
-\AblationPostTrainingEncoderCIHighPP]).  The difference-in-differences
-interaction was \AblationInteractionPP\ \pp\
-([\AblationInteractionCILowPP, \AblationInteractionCIHighPP]).  Attribution
-across these four realized packages and one training seed is bounded by these
-intervals; a positive C4--C1 result alone cannot be assigned entirely to the
-encoder repair.
+All scheduled C2 and C3 games completed, but the planned four-cell analysis
+failed its prospectively frozen analyzer gate before contrast estimation
+(Table~\ref{tab:ablation}).  For each seed-condition unit, that analyzer
+required the C1 outcome repeated alongside C2, C3, and C4 to be identical.  At
+least one of the three C1 outcomes differed on 210 of 2,800 units: 191 against
+Starmie and 19 against Dipplin.  The other five opponents had identical available
+win/draw/error/decision-count summaries across their repeated C1 runs; traces
+were not captured.  Source inspection showed wall-clock search limits in the two
+discordant opponent implementations, while the evaluator ran each game in a
+separate process-pool task.  Equal engine seeds therefore did not define equal
+realized opponent behavior.
+
+All planned seven-opponent four-cell contrasts and their inferential procedures
+are consequently invalidated; no confirmatory mechanistic attribution is made.
+The cross-execution C4--C2 and C4--C3 comparisons and
+difference-in-differences interaction are not estimable under the frozen
+protocol.  The C4--C1 number remains the observed primary within-execution
+comparison reported above, but the parity failure limits its uncertainty
+interpretation.  C2 versus its own concurrently executed C1 arm and C3 versus
+its own C1 arm are retained only as all-seven process-sensitive descriptions.
+A post hoc five-opponent subset, restricted to opponents whose available C1
+summaries happened to agree, is labeled exploratory and is not a replacement
+for the invalidated analysis.
 
 \input{tables/ablation.tex}
 
@@ -514,9 +549,11 @@ validity, held-out imitation agreement, paired gameplay value, and opponent-grou
 heterogeneity within the frozen battery.  Binding a legal action to the observed item it
 selects repairs a factual defect.  It does not imply that inherited embeddings
 are calibrated, that every downstream choice improves, or that the recorded
-outcome-selected action is uniquely valuable.  The four-cell results are therefore
-informative for distinguishing encoding, training, and their interaction, while
-one training seed and separately fitted cells leave causal components unresolved.
+outcome-selected action is uniquely valuable.  The failed four-cell parity gate
+also shows that matching engine seeds is not enough to distinguish encoding,
+training, and their interaction when opponent search depends on process timing.
+The observed C4--C1 difference therefore cannot be assigned entirely to the
+encoder repair or to retraining.
 
 The restricted update is a practical audit pattern for a competent baseline.
 Freezing most parameters and retaining a KL term to frozen A2 weights under the
@@ -524,9 +561,11 @@ cell's encoder reduces the dimensions in which learning can move.  It does not p
 improvement guarantee, particularly because the realized stream contained no
 rehearsal rows and because replay and gameplay state distributions differ.
 
-Paired common-random-number evaluation supports a paired comparison of two fixed
-policies and can improve precision when the coupling is valid.  Pairing does not
-make the result universal: opponent packages, actual order, engine build,
+An engine-seed schedule match supports pairing on recorded design variables, but
+the audit demonstrates that it did not couple two opponents' time-bounded search
+paths.  The primary estimate and interval summarize one realized execution;
+they do not establish common-random-number variance reduction or repeated-run
+stability.  Opponent packages, actual order, engine build, process scheduling,
 runtime constraints, and decks remain part of the estimand.  Similarly, a
 clustered replay interval respects episode dependence but cannot turn a
 conditional imitation proxy into long-horizon value.
@@ -542,36 +581,47 @@ included number to retained bytes.
 
 First, the seven opponents are a deliberately frozen convenience population,
 several with related development histories.  They are neither random nor
-exhaustive.  Bootstrap intervals describe seed variation under this battery and
-do not support population-wide generalization.
+exhaustive.  Bootstrap intervals resample observed seed-condition pairs under
+this battery and do not support population-wide generalization.
 
-Second, only one training seed and one outcome-selected retained corpus were
+Second, engine seed, actual order, physical seat, and opponent package were
+matched within each scheduled pair, but candidate and control games ran as
+separate process-pool tasks.  Starmie and Dipplin use wall-clock-bounded search, so
+their decisions can vary with scheduling.  Repeated C1 outcomes disagreed on
+210 of 2,800 units across ablation executions.  The primary interval conditions
+on a single execution and omits this run-to-run component; the planned
+seven-opponent four-cell cross-run analysis was invalidated.
+
+Third, only one training seed and one outcome-selected retained corpus were
 evaluated.  All corpus rows came from winning top-episode units, and the replay
 reanalysis further required a prespecified team and exact target deck.  These
 selection rules limit both imitation and held-out estimands; the replay intervals
 are conditional on the fixed team sets and include no between-team population
-uncertainty.  The C2 identity-only
-cell supplies a previously zero feature to weights not trained for it; C2 and C3
-are mechanistic diagnostics.  Model-only disagreement omits runtime constraints,
-and multi-identity-state associations do not identify a causal subgroup effect.
+uncertainty.  C2 supplies a previously zero feature to weights not trained for
+it, C3 and C4 were separately fitted, and only one training seed was used.
+Within-run C2--C1 and C3--C1 summaries are process-sensitive diagnostics, not
+valid substitutes for the failed cross-run design.  Model-only disagreement
+omits runtime constraints, and multi-identity-state associations do not identify
+a causal subgroup effect.
 
-Third, original replay observations for the retained Aug. 14--15 feature corpus
+Fourth, original replay observations for the retained Aug. 14--15 feature corpus
 and an original environment lock are missing.  The nominal temporal holdout is
 empty.  Training can be repeated from retained feature rows, but feature mining
 cannot be reconstructed from source replays.  The fresh runner did not store
 per-game latency.
 
-Fourth, the third-party engine, source, binaries, card data, decks, private
+Fifth, the third-party engine, source, binaries, card data, decks, private
 replays, and opponent implementations cannot be redistributed under the
-available terms and privacy constraints.  The release recalculates primary
-marginal counts and the equal-weight point estimate from released paired
-outcomes, and regenerates manuscript tables and figures from released processed
-outcomes and machine-readable summaries.  It does not independently recompute
+available terms and privacy constraints.  The intended private-review release
+is designed to recalculate primary marginal counts and the equal-weight point
+estimate from released paired outcomes, and to regenerate manuscript tables and
+figures from released processed outcomes and machine-readable summaries.  It
+does not independently recompute
 every interval or statistic from engine trajectories.  Rights
 review is also required before redistributing policy weights or placing a
 permissive license on the companion package.
 
-Fifth, historical seven-policy and meta-weighted aggregates lack their raw wave
+Sixth, historical seven-policy and meta-weighted aggregates lack their raw wave
 files and frozen weight table.  Historical CERT-B prose calls 529 disagreements
 ``decisive,'' although its reconstructed binary denominator is 398, and its
 episode rows are absent.  These values are recorded as conflicts or unsupported
@@ -587,13 +637,15 @@ They require human confirmation before submission.
 Distinct observed card plays were legal, yet their selected card/template IDs
 were omitted from one historical option-feature coordinate.  We repaired that
 binding, applied a restricted A2-anchored output-module update, and evaluated
-the result with paired simulation and
-episode-clustered replay diagnostics.  \PrimaryInference\ The offline approval
-interval did not establish a corresponding improvement in recorded-action
-agreement.  The broader methodological recommendation is to audit legal-action
-identity explicitly, match representation and training ablations, pair
-stochastic evaluations at their natural unit, and preserve negative results and
-provenance conflicts alongside favorable findings.
+the result with one engine-seed schedule-paired simulation execution and
+episode-clustered replay diagnostics.  The observed gameplay interval excluded
+zero conditional on that execution, while the offline approval interval did not
+establish improved recorded-action agreement.  The invalidated ablation shows
+that seed matching cannot substitute for eliminating or modeling time-dependent
+opponent behavior.  The broader methodological recommendation is to audit
+legal-action identity explicitly, verify every source of stochastic coupling,
+pair evaluations at their natural unit, and preserve failed validation gates,
+negative results, and provenance conflicts alongside favorable findings.
 
 \begin{acknowledgments}
 Acknowledgment of the competition organizer, engine provider, data contributors,
@@ -610,8 +662,9 @@ and review Python, \LaTeX, and release files; implement statistical checks and
 visualizations; verify bibliographic metadata; and draft and edit prose.  Bounded
 Codex worker agents performed evidence and literature audits.  Every admitted
 number was required to trace to retained raw evidence or a frozen new protocol;
-outputs were checked through hashes, executable regeneration, tests, source
-inspection, and rendered-PDF review.  No generative-image model was used.  The
+outputs were checked through hashes, executable regeneration, tests, and source
+inspection.  The final package must also pass compilation, full-page rendering,
+and visual review before submission.  No generative-image model was used.  The
 human authors remain responsible for all content and must add any substantive
 earlier AI use not recoverable from repository history.  AI systems are not
 authors.
@@ -632,11 +685,12 @@ corresponding author may state that none exist only after that review.
 
 \section*{Data Availability Statement}
 
-The current private-review sanitized companion package contains processed one-row-per-paired-unit
-outcomes, statistical summaries, figure inputs, scripts, protocols, and hashes.
-Its verification code recalculates primary marginal counts and the equal-weight
-point estimate from released paired outcomes; its generation scripts recreate
-the manuscript tables and figures from those outcomes and released summaries.
+The intended private-review sanitized companion package is designed to contain
+processed one-row-per-paired-unit outcomes, statistical summaries, figure
+inputs, scripts, protocols, and hashes.  Its verification code is intended to
+recalculate primary marginal counts and the equal-weight point estimate from
+released paired outcomes; its generation scripts are intended to recreate the
+manuscript tables and figures from those outcomes and released summaries.
 It does not independently recompute every interval or statistic from engine
 trajectories.  The
 tournament engine and source, card database, deck files, private replay
@@ -671,7 +725,7 @@ anonymous ranks.  The corpus hash is \texttt{a3d28e9c...dcdc40}; manifest hash
 is \texttt{8c13a5de...1a774}.  This audit verifies retained-row behavior but not
 the provenance of A2's original training corpus.
 
-\section{Training and four-cell provenance}
+\section{Training and planned four-cell provenance}
 
 The missing C3 cell was generated after its protocol was committed.  A first
 invocation failed at import time before reading or writing data; the protocol
@@ -692,6 +746,13 @@ checkpoint under the frozen training function; all frozen parameters were
 unchanged.  Package policy files are byte-identical and the package tree hash is
 \texttt{236afa20...fd54}.  Complete histories and hashes are machine-readable.
 
+The subsequent gameplay runs did not satisfy the frozen repeated-C1 parity
+gate.  The three C1 executions disagreed on 210 of 2,800 seed-condition units,
+all against the Starmie and Dipplin opponents.  This invalidates the planned
+seven-opponent cross-cell analysis without invalidating the byte audit of C3
+training itself.  The protocol text remains unchanged as a record of what was
+planned.
+
 \section{Statistical algorithms}
 
 For each primary bootstrap replicate $b$, let $I^{(b)}_{ci}$ be $n_c$ indices
@@ -703,11 +764,14 @@ sampled with replacement from cell $c$.  We compute
 and take the 2.5 and 97.5 percentiles.  McNemar's exact two-sided value is twice
 the smaller Binomial$(b+c,0.5)$ tail, clipped at one, where $b$ and $c$ are the
 two discordant directions.  Holm adjustment orders the 14 cell values and
-enforces monotone step-down adjusted values.  Ablation bootstrap draws reuse a
-matched seed-condition identifier across all four separately executed cells;
-this is not a shared realized trajectory.  Replay bootstraps sample episode identifiers;
-the sequence-oracle interval samples roots.  Seeds, replicate counts, and draw
-handling are fixed in the protocols and summary JSON.
+enforces monotone step-down adjusted values.  The planned ablation would have
+resampled matched four-cell units, but that procedure was not admitted because
+the repeated-C1 parity gate failed.  Any reported within-run or post hoc
+five-opponent exploratory summaries use their explicitly labeled analysis
+units and cannot be interpreted as the frozen four-cell estimator.  Replay
+bootstraps sample episode identifiers; the sequence-oracle interval samples
+roots.  Seeds, replicate counts, and draw handling are fixed in the protocols
+and summary JSON.
 
 \section{Evidence exclusions and reproducibility boundary}
 
@@ -721,10 +785,10 @@ recorded in the ledger but excluded from evidentiary results.
 
 The branch requested as \texttt{grim-5k-variance-floor} existed locally only as
 \texttt{archive/grim-5k-variance-floor}.  Large packages and engines are ignored
-files fixed by hash rather than Git objects.  The release therefore supports
-regeneration of manuscript presentation artifacts from processed results and a
-bounded primary point-estimate check, not full independent statistical or
-engine replication.  Engine-level trajectory reproduction remains
+files fixed by hash rather than Git objects.  The intended release is designed
+to support regeneration of manuscript presentation artifacts from processed
+results and a bounded primary point-estimate check, not full independent
+statistical or engine replication.  Engine-level trajectory reproduction remains
 conditional on lawful third-party access and cannot be guaranteed by the
 authors' package.
 

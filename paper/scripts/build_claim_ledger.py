@@ -322,15 +322,21 @@ def main() -> int:
     fresh = stats["fresh_confirmation"]
     primary = fresh["primary"]
     fresh_sources = [item for item in stats["source_inventory"] if item["path"].startswith("paper/data/fresh_confirmation")]
-    source_paths, source_hashes = artifact_bundle_from_inventory(fresh_sources)
+    coupling_audit_sources = [
+        item for item in ablation["sources"]
+        if item.get("role") not in {"gameplay result", "C3 training report"}
+    ]
+    source_paths, source_hashes = artifact_bundle_from_inventory(
+        fresh_sources + coupling_audit_sources
+    )
     execution_caveat = fresh["execution_provenance_caveat"]
     mcnemar_scope = primary["mcnemar_scope"]
     add("GAME-001", "Primary results", "EXP23's prospectively specified, locally committed equal-weight fresh paired gameplay effect versus C0.",
-        "VERIFIED", source_paths, "root rows joined by order and pair_index", "paper/aps-open-science-202608",
+        "VERIFIED_WITH_CAVEAT", source_paths, "root rows joined by order and pair_index", "paper/aps-open-science-202608",
         "c17434252deb8fdc3b42b2c12a58f18ca646215e", source_hashes, "paper/scripts/analyze_results.py",
         f"effect {100*primary['effect']:+.2f} pp; 95% CI [{100*primary['paired_bootstrap_95_ci'][0]:+.2f}, {100*primary['paired_bootstrap_95_ci'][1]:+.2f}]; McNemar p={primary['mcnemar_exact_two_sided_p']:.6g}; discordant {primary['candidate_only_wins']}/{primary['control_only_wins']}",
         "percentage points", f"{primary['pairs']:,} pairs", "100,000-draw paired bootstrap stratified over 14 frozen cells; exact two-sided pooled McNemar",
-        f"Inference is limited to seven frozen opponents and this engine build. {mcnemar_scope} {execution_caveat}", "INCLUDE")
+        f"Observed schedule-paired comparison limited to seven frozen opponents, this engine build, and one realized execution. This is not full common-random-number coupling. {mcnemar_scope} {execution_caveat}", "INCLUDE")
     for index, cell in enumerate(fresh["cells"], start=1):
         add(f"GAME-C{index:02d}", "Primary results table", f"Fresh paired effect for {cell['opponent']} / {cell['actual_order']}.",
             "VERIFIED", source_paths, "matching source root rows", "paper/aps-open-science-202608", "c17434252deb8fdc3b42b2c12a58f18ca646215e",
@@ -399,36 +405,87 @@ def main() -> int:
         "approval proportion", f"{replay['disagreements']} disagreements in {replay['episodes']} episodes", "episode-clustered bootstrap interval; no directional null test",
         f"Conditional disagreement estimand from winner-only, exact-deck units for five fixed, prespecified teams; only {heldout['eligibility']['teams_with_eligible_units']} supplied eligible units, and demonstrator expertise was not established. Teams and certification materials were previously inspected, so this is refresh-heldout rather than untouched external evidence. The episode bootstrap does not model between-team uncertainty, and the descriptive team-balanced estimate has no interval.", "INCLUDE")
 
-    expected_ablation_contrasts = ["C2-C1", "C3-C1", "C4-C1", "C4-C2", "C4-C3"]
-    if ablation.get("schema_version") != 1:
-        raise ValueError("ablation summary must use schema version 1")
-    if [item.get("contrast") for item in ablation.get("contrasts", [])] != expected_ablation_contrasts:
-        raise ValueError("ablation summary has an unexpected contrast set or order")
-    if ablation.get("interaction", {}).get("contrast") != "C4-C3-C2+C1":
-        raise ValueError("ablation summary has an unexpected interaction label")
-    if len(ablation.get("sources", [])) != 22:
-        raise ValueError("ablation summary must inventory one training report and 21 gameplay files")
+    if ablation.get("schema_version") != 2 or ablation.get("status") != "INVALIDATED":
+        raise ValueError("ablation summary must preserve the invalidated schema-2 analysis")
+    planned = ablation.get("planned_analysis", {})
+    parity_audit = ablation.get("control_parity_audit", {})
+    if planned.get("status") != "NOT_ESTIMABLE_UNDER_FROZEN_VALIDATION":
+        raise ValueError("planned ablation must remain not estimable")
+    if (
+        parity_audit.get("outcome_record_mismatch_units") != 210
+        or parity_audit.get("serialized_record_mismatch_units") != 458
+        or parity_audit.get("pairs") != 2_800
+        or parity_audit.get("trace_capture") is not False
+    ):
+        raise ValueError("ablation parity audit differs from the verified fail-closed result")
+    if len(ablation.get("sources", [])) != 29:
+        raise ValueError(
+            "ablation summary must inventory training, 21 gameplay, and 7 cause-audit files"
+        )
     ablation_source, ablation_hash = artifact_bundle_from_inventory(ablation["sources"])
+    gameplay_sources = [
+        item for item in ablation["sources"] if item.get("role") == "gameplay result"
+    ]
+    if len(gameplay_sources) != 21:
+        raise ValueError("ablation source inventory must contain 21 gameplay result files")
     raw_ablation_sources = [
-        item for item in ablation["sources"]
+        item for item in gameplay_sources
         if item["path"].startswith("paper/data/ablation/raw/")
     ]
     if len(raw_ablation_sources) != 14:
         raise ValueError("ablation source inventory must contain 14 C2/C3 raw gameplay files")
-    for index, result in enumerate(ablation["contrasts"], start=1):
-        add(f"ABL-{index:02d}", "Four-cell ablation", f"Matched ablation contrast {result['contrast']}.", "VERIFIED",
-            ablation_source, f"$.contrasts[{index-1}]", "paper/aps-open-science-202608", "63ea3135709646c41feb892e863a8bc00e758ed3",
-            ablation_hash, "paper/scripts/analyze_ablation.py",
-            f"{100*result['effect']:+.2f} pp; CI [{100*result['ci_low']:+.2f},{100*result['ci_high']:+.2f}]; Holm p={result['holm_adjusted_p_5_contrasts']:.6g}",
-            "percentage points", str(result["pairs"]), "100,000-draw paired within-cell bootstrap; exact McNemar; Holm over 5",
-            "C2 and C3 are mechanistic cells on a fixed seven-opponent battery. The first pre-gameplay C3 package/report/log was overwritten; only the final manifest-corrected package was evaluated.", "INCLUDE")
-    interaction = ablation["interaction"]
-    add("ABL-INT", "Four-cell ablation", "Representation-by-training difference-in-differences interaction.", "VERIFIED",
-        ablation_source, "$.interaction", "paper/aps-open-science-202608", "63ea3135709646c41feb892e863a8bc00e758ed3",
+    add(
+        "ABL-FAIL", "Four-cell ablation",
+        "The planned seven-opponent four-cell analysis failed the prospectively frozen C1 control-parity gate.",
+        "VERIFIED", ablation_source, "$.status, $.planned_analysis, $.control_parity_audit",
+        "paper/aps-open-science-202608", "63ea3135709646c41feb892e863a8bc00e758ed3",
         ablation_hash, "paper/scripts/analyze_ablation.py",
-        f"{100*interaction['effect']:+.2f} pp; CI [{100*interaction['ci_low']:+.2f},{100*interaction['ci_high']:+.2f}]",
-        "percentage points", str(interaction["pairs"]), "100,000-draw paired within-cell bootstrap",
-        "Descriptive interaction; no McNemar test. The first pre-gameplay C3 package/report/log was overwritten; only the final manifest-corrected package was evaluated.", "INCLUDE")
+        "not estimable; 210/2,800 C1 outcome records and 458/2,800 available serialized records differed across runs (Starmie 191/377; Dipplin 19/81)",
+        "units", "2,800 scheduled seed-condition units",
+        "exact join on opponent, order, engine seed, and physical seat",
+        "Trace capture was disabled. The discrepancies establish failure of available-record parity, not the exact causal contribution of wall time versus process-local native state.",
+        "INCLUDE",
+    )
+    add(
+        "ABL-PLAN", "Four-cell ablation",
+        "The planned seven-opponent C2-C1, C3-C1, C4-C1, C4-C2, C4-C3, and interaction estimands.",
+        "REQUIRES_RERUN", ablation_source, "$.planned_analysis.contrasts",
+        "paper/aps-open-science-202608", "63ea3135709646c41feb892e863a8bc00e758ed3",
+        ablation_hash, "paper/scripts/analyze_ablation.py",
+        "not estimable under frozen validation",
+        "percentage points", "2,800 planned units / 14 strata",
+        "planned paired within-cell bootstrap and secondary McNemar/Holm calculations not performed",
+        "A valid rerun requires deterministic opponent-search seeding or a fixed computational budget and a newly frozen protocol; the current raw runs must remain preserved.",
+        "OMIT",
+    )
+    within = ablation["within_run_descriptive"]["contrasts"]
+    add(
+        "ABL-WITHIN", "Four-cell ablation",
+        "Post-failure candidate-versus-own-control realized-run descriptions for C2, C3, and C4.",
+        "VERIFIED_WITH_CAVEAT", ablation_source, "$.within_run_descriptive",
+        "paper/aps-open-science-202608", "63ea3135709646c41feb892e863a8bc00e758ed3",
+        ablation_hash, "paper/scripts/analyze_ablation.py",
+        "; ".join(f"{item['contrast']} {100*item['effect']:+.3f} pp" for item in within),
+        "percentage points", "2,800 units per realized run",
+        "exact descriptive aggregation; no interval or hypothesis test",
+        "Process-pool scheduling, wall-clock search, and process-local native search state were not serialized or coupled. These values are not validated common-random-number ablation estimates.",
+        "INCLUDE",
+    )
+    exploratory = ablation["exploratory_reproducible_control_subset"]
+    exploratory_values = exploratory["contrasts"] + [exploratory["interaction"]]
+    add(
+        "ABL-EXP-5", "Four-cell ablation",
+        "Post hoc five-opponent whole-package control-parity sensitivity.",
+        "VERIFIED_WITH_CAVEAT", ablation_source,
+        "$.exploratory_reproducible_control_subset",
+        "paper/aps-open-science-202608", "63ea3135709646c41feb892e863a8bc00e758ed3",
+        ablation_hash, "paper/scripts/analyze_ablation.py",
+        "; ".join(f"{item['contrast']} {100*item['effect']:+.2f} pp" for item in exploratory_values),
+        "percentage points", "2,000 units / 10 strata / 5 fixed opponent packages",
+        "exact descriptive aggregation; no interval, p-value, or multiplicity claim",
+        "The subset was defined after the parity failure using identical available serialized C1 win/draw/error/decision summaries; traces were unavailable. It changes the target population and is not confirmatory.",
+        "INCLUDE",
+    )
 
     for index, result in enumerate(negative["results"], start=1):
         if result["experiment"] == "temporal_two_turn_takeover":
