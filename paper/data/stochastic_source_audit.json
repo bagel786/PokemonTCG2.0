@@ -1,0 +1,1238 @@
+{
+  "audit_claim": "Bounded artifact-identity and static source-pattern inventory only; this report neither proves determinism nor treats an empty category as evidence that stochastic behavior is absent.",
+  "audit_levels": [
+    1,
+    6
+  ],
+  "category_definitions": {
+    "clock_or_deadline": "Clock reads, time-module imports, and identifiers explicitly naming deadlines, timeouts, wall clocks, or time budgets.",
+    "explicit_randomness": "Imports and calls for common pseudorandom, entropy, UUID, sampling, shuffle, and process-randomized hash interfaces.",
+    "module_global_state": "Module-scope constructed or mutable bindings, state-like global names, module mutations, and explicit global statements.",
+    "native_pointer_or_state": "ctypes/cffi/native-library references and pointer- or handle-like identifiers that may bridge process-local native state.",
+    "process_or_thread_parallelism": "Multiprocessing, threading, futures, asyncio, joblib, and fork APIs that can introduce scheduling or shared-state sensitivity."
+  },
+  "disclosure_policy": {
+    "card_and_deck_material_included": false,
+    "restricted_package_source": "Aggregate hit counts, generalized pattern counts, and salted-free canonical location fingerprints only.",
+    "source_paths_lines_snippets_included": false
+  },
+  "hash_contract": "SHA-256 for files; for trees, sorted relative file names and file digests with __pycache__ directories and .pyc files excluded, exactly matching training/evaluate_deterministic_crn.py::sha256_path.",
+  "inventory": [
+    {
+      "artifact_id": "seeded_engine",
+      "artifact_kind": "file",
+      "environment": {},
+      "exists": true,
+      "expected_digest_present_in_frozen_protocol": true,
+      "expected_sha256": "867e3f9bb87e0b48889a44b5d4b04f5d2d434b2a0788d1b2bcfe0caebcb5ab78",
+      "hash_match": true,
+      "label": "engine",
+      "local_path": "artifacts/deterministic_engine/bin/libcg_seeded.dylib",
+      "observed_sha256": "867e3f9bb87e0b48889a44b5d4b04f5d2d434b2a0788d1b2bcfe0caebcb5ab78",
+      "population": "all PEVL executions",
+      "role": "seeded engine",
+      "source_audit": {
+        "categories": {
+          "clock_or_deadline": {
+            "distinct_source_files_with_hits": null,
+            "hit_count": null,
+            "interpretation": "No source-level inference is available for this artifact.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": null,
+            "result": "not_assessed"
+          },
+          "explicit_randomness": {
+            "distinct_source_files_with_hits": null,
+            "hit_count": null,
+            "interpretation": "No source-level inference is available for this artifact.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": null,
+            "result": "not_assessed"
+          },
+          "module_global_state": {
+            "distinct_source_files_with_hits": null,
+            "hit_count": null,
+            "interpretation": "No source-level inference is available for this artifact.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": null,
+            "result": "not_assessed"
+          },
+          "native_pointer_or_state": {
+            "distinct_source_files_with_hits": null,
+            "hit_count": null,
+            "interpretation": "No source-level inference is available for this artifact.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": null,
+            "result": "not_assessed"
+          },
+          "process_or_thread_parallelism": {
+            "distinct_source_files_with_hits": null,
+            "hit_count": null,
+            "interpretation": "No source-level inference is available for this artifact.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": null,
+            "result": "not_assessed"
+          }
+        },
+        "reason": "Frozen engine artifact is binary-only in this inventory; source internals were unavailable to the bounded Python scanner.",
+        "status": "not_assessed"
+      }
+    },
+    {
+      "artifact_id": "production_engine",
+      "artifact_kind": "file",
+      "environment": {},
+      "exists": true,
+      "expected_digest_present_in_frozen_protocol": true,
+      "expected_sha256": "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30",
+      "hash_match": true,
+      "label": "production engine",
+      "local_path": "vendor/cg/libcg.dylib",
+      "observed_sha256": "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30",
+      "population": "all PEVL executions",
+      "role": "production sentinel engine",
+      "source_audit": {
+        "categories": {
+          "clock_or_deadline": {
+            "distinct_source_files_with_hits": null,
+            "hit_count": null,
+            "interpretation": "No source-level inference is available for this artifact.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": null,
+            "result": "not_assessed"
+          },
+          "explicit_randomness": {
+            "distinct_source_files_with_hits": null,
+            "hit_count": null,
+            "interpretation": "No source-level inference is available for this artifact.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": null,
+            "result": "not_assessed"
+          },
+          "module_global_state": {
+            "distinct_source_files_with_hits": null,
+            "hit_count": null,
+            "interpretation": "No source-level inference is available for this artifact.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": null,
+            "result": "not_assessed"
+          },
+          "native_pointer_or_state": {
+            "distinct_source_files_with_hits": null,
+            "hit_count": null,
+            "interpretation": "No source-level inference is available for this artifact.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": null,
+            "result": "not_assessed"
+          },
+          "process_or_thread_parallelism": {
+            "distinct_source_files_with_hits": null,
+            "hit_count": null,
+            "interpretation": "No source-level inference is available for this artifact.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": null,
+            "result": "not_assessed"
+          }
+        },
+        "reason": "Frozen engine artifact is binary-only in this inventory; source internals were unavailable to the bounded Python scanner.",
+        "status": "not_assessed"
+      }
+    },
+    {
+      "artifact_id": "c1",
+      "artifact_kind": "tree",
+      "environment": {},
+      "exists": true,
+      "expected_digest_present_in_frozen_protocol": true,
+      "expected_sha256": "13426288358d597ead809e45c364c7f7b9274a6eebf55ddd942142e3326535c3",
+      "hash_match": true,
+      "label": "C1",
+      "local_path": "artifacts/grim_damage_conversion/winner/extracted",
+      "observed_sha256": "13426288358d597ead809e45c364c7f7b9274a6eebf55ddd942142e3326535c3",
+      "population": "trace preflight and factorial",
+      "role": "blind encoder, original weights",
+      "source_audit": {
+        "categories": {
+          "clock_or_deadline": {
+            "distinct_source_files_with_hits": 0,
+            "hit_count": 0,
+            "interpretation": "No explicit bounded scanner pattern was found; this is not evidence that the package or execution is deterministic.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": {},
+            "result": "no_explicit_pattern_hit_found"
+          },
+          "explicit_randomness": {
+            "distinct_source_files_with_hits": 1,
+            "hit_count": 1,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "5a3f9ae13b536783413f4ad9786edfad1bc54d2b5163d97f1375d0a5cebed700",
+            "pattern_counts": {
+              "rng.resolved_api_call": 1
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "module_global_state": {
+            "distinct_source_files_with_hits": 7,
+            "hit_count": 14,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "97691c418b8f0eb046421a3df0ac51350be6629a86bd8edc557c073f1a3b6f4f",
+            "pattern_counts": {
+              "state.global_statement": 1,
+              "state.module_constructed_binding": 8,
+              "state.module_mutable_binding": 3,
+              "state.module_state_named_binding": 2
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "native_pointer_or_state": {
+            "distinct_source_files_with_hits": 3,
+            "hit_count": 83,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "416884fbcb696e0cd11e14fd3a5cdaece82c4f4f3ff72704b098ea903daa7d36",
+            "pattern_counts": {
+              "native.ffi_call": 12,
+              "native.ffi_import": 3,
+              "native.ffi_reference": 45,
+              "native.global_pointer_statement": 1,
+              "native.pointer_identifier": 22
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "process_or_thread_parallelism": {
+            "distinct_source_files_with_hits": 0,
+            "hit_count": 0,
+            "interpretation": "No explicit bounded scanner pattern was found; this is not evidence that the package or execution is deterministic.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": {},
+            "result": "no_explicit_pattern_hit_found"
+          }
+        },
+        "decoded_source_file_count": 21,
+        "evidence_disclosure": "aggregate_counts_and_location_fingerprints_only_restricted_source",
+        "method": "Python AST plus bounded qualified-name and identifier patterns",
+        "parse_error_location_fingerprint_sha256": null,
+        "parsed_source_file_count": 21,
+        "python_source_file_count": 21,
+        "python_source_set_sha256": "9ebecb2fb4f026b4b59deacc5aa53f8fd784a121a785d5ae9fb7b7d5ef0f8f1a",
+        "scanned_extensions": [
+          ".py",
+          ".pyi"
+        ],
+        "scanned_source_bytes": 116018,
+        "scope_limits": [
+          "The scan covers only .py and .pyi files inside the frozen package tree.",
+          "AST and qualified-name patterns can miss aliases, dynamic imports, reflection, generated code, and behavior hidden behind wrappers.",
+          "The scan does not execute code, resolve environment-selected branches, inspect native binary internals, or observe runtime scheduling.",
+          "No explicit hit found is not a proof of deterministic behavior; dynamic repeat/worker trace checks remain necessary."
+        ],
+        "source_line_numbers_disclosed": false,
+        "source_paths_disclosed": false,
+        "source_snippets_disclosed": false,
+        "status": "completed_static_python_ast_scan",
+        "unparsed_source_file_count": 0
+      }
+    },
+    {
+      "artifact_id": "c2",
+      "artifact_kind": "tree",
+      "environment": {},
+      "exists": true,
+      "expected_digest_present_in_frozen_protocol": true,
+      "expected_sha256": "36e804ae6c593db57b595bfca9fd48592da10957f0e5f840a7e390edbeb39b63",
+      "hash_match": true,
+      "label": "C2",
+      "local_path": "artifacts/grim_play_identity/candidates/p0",
+      "observed_sha256": "36e804ae6c593db57b595bfca9fd48592da10957f0e5f840a7e390edbeb39b63",
+      "population": "trace preflight and factorial",
+      "role": "identity encoder, original weights",
+      "source_audit": {
+        "categories": {
+          "clock_or_deadline": {
+            "distinct_source_files_with_hits": 0,
+            "hit_count": 0,
+            "interpretation": "No explicit bounded scanner pattern was found; this is not evidence that the package or execution is deterministic.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": {},
+            "result": "no_explicit_pattern_hit_found"
+          },
+          "explicit_randomness": {
+            "distinct_source_files_with_hits": 1,
+            "hit_count": 1,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "5a3f9ae13b536783413f4ad9786edfad1bc54d2b5163d97f1375d0a5cebed700",
+            "pattern_counts": {
+              "rng.resolved_api_call": 1
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "module_global_state": {
+            "distinct_source_files_with_hits": 7,
+            "hit_count": 14,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "e4727b586131382f6c8f5676ec4c489de610319375d4d5a94fbd22357e7b6415",
+            "pattern_counts": {
+              "state.global_statement": 1,
+              "state.module_constructed_binding": 8,
+              "state.module_mutable_binding": 3,
+              "state.module_state_named_binding": 2
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "native_pointer_or_state": {
+            "distinct_source_files_with_hits": 3,
+            "hit_count": 83,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "416884fbcb696e0cd11e14fd3a5cdaece82c4f4f3ff72704b098ea903daa7d36",
+            "pattern_counts": {
+              "native.ffi_call": 12,
+              "native.ffi_import": 3,
+              "native.ffi_reference": 45,
+              "native.global_pointer_statement": 1,
+              "native.pointer_identifier": 22
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "process_or_thread_parallelism": {
+            "distinct_source_files_with_hits": 0,
+            "hit_count": 0,
+            "interpretation": "No explicit bounded scanner pattern was found; this is not evidence that the package or execution is deterministic.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": {},
+            "result": "no_explicit_pattern_hit_found"
+          }
+        },
+        "decoded_source_file_count": 21,
+        "evidence_disclosure": "aggregate_counts_and_location_fingerprints_only_restricted_source",
+        "method": "Python AST plus bounded qualified-name and identifier patterns",
+        "parse_error_location_fingerprint_sha256": null,
+        "parsed_source_file_count": 21,
+        "python_source_file_count": 21,
+        "python_source_set_sha256": "a9a4d558a21fec000e325e65dc09c53500b28106bb45f712dddb01086628b6b9",
+        "scanned_extensions": [
+          ".py",
+          ".pyi"
+        ],
+        "scanned_source_bytes": 116855,
+        "scope_limits": [
+          "The scan covers only .py and .pyi files inside the frozen package tree.",
+          "AST and qualified-name patterns can miss aliases, dynamic imports, reflection, generated code, and behavior hidden behind wrappers.",
+          "The scan does not execute code, resolve environment-selected branches, inspect native binary internals, or observe runtime scheduling.",
+          "No explicit hit found is not a proof of deterministic behavior; dynamic repeat/worker trace checks remain necessary."
+        ],
+        "source_line_numbers_disclosed": false,
+        "source_paths_disclosed": false,
+        "source_snippets_disclosed": false,
+        "status": "completed_static_python_ast_scan",
+        "unparsed_source_file_count": 0
+      }
+    },
+    {
+      "artifact_id": "c3",
+      "artifact_kind": "tree",
+      "environment": {},
+      "exists": true,
+      "expected_digest_present_in_frozen_protocol": true,
+      "expected_sha256": "236afa20b4ced63169736fea616849fa564281c05e9435e4dd77ecfb4ae5fd54",
+      "hash_match": true,
+      "label": "C3",
+      "local_path": "artifacts/paper_ablation/blind_trained_package",
+      "observed_sha256": "236afa20b4ced63169736fea616849fa564281c05e9435e4dd77ecfb4ae5fd54",
+      "population": "trace preflight and factorial",
+      "role": "blind encoder, trained weights",
+      "source_audit": {
+        "categories": {
+          "clock_or_deadline": {
+            "distinct_source_files_with_hits": 0,
+            "hit_count": 0,
+            "interpretation": "No explicit bounded scanner pattern was found; this is not evidence that the package or execution is deterministic.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": {},
+            "result": "no_explicit_pattern_hit_found"
+          },
+          "explicit_randomness": {
+            "distinct_source_files_with_hits": 1,
+            "hit_count": 1,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "5a3f9ae13b536783413f4ad9786edfad1bc54d2b5163d97f1375d0a5cebed700",
+            "pattern_counts": {
+              "rng.resolved_api_call": 1
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "module_global_state": {
+            "distinct_source_files_with_hits": 7,
+            "hit_count": 14,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "97691c418b8f0eb046421a3df0ac51350be6629a86bd8edc557c073f1a3b6f4f",
+            "pattern_counts": {
+              "state.global_statement": 1,
+              "state.module_constructed_binding": 8,
+              "state.module_mutable_binding": 3,
+              "state.module_state_named_binding": 2
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "native_pointer_or_state": {
+            "distinct_source_files_with_hits": 3,
+            "hit_count": 83,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "416884fbcb696e0cd11e14fd3a5cdaece82c4f4f3ff72704b098ea903daa7d36",
+            "pattern_counts": {
+              "native.ffi_call": 12,
+              "native.ffi_import": 3,
+              "native.ffi_reference": 45,
+              "native.global_pointer_statement": 1,
+              "native.pointer_identifier": 22
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "process_or_thread_parallelism": {
+            "distinct_source_files_with_hits": 0,
+            "hit_count": 0,
+            "interpretation": "No explicit bounded scanner pattern was found; this is not evidence that the package or execution is deterministic.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": {},
+            "result": "no_explicit_pattern_hit_found"
+          }
+        },
+        "decoded_source_file_count": 21,
+        "evidence_disclosure": "aggregate_counts_and_location_fingerprints_only_restricted_source",
+        "method": "Python AST plus bounded qualified-name and identifier patterns",
+        "parse_error_location_fingerprint_sha256": null,
+        "parsed_source_file_count": 21,
+        "python_source_file_count": 21,
+        "python_source_set_sha256": "9ebecb2fb4f026b4b59deacc5aa53f8fd784a121a785d5ae9fb7b7d5ef0f8f1a",
+        "scanned_extensions": [
+          ".py",
+          ".pyi"
+        ],
+        "scanned_source_bytes": 116018,
+        "scope_limits": [
+          "The scan covers only .py and .pyi files inside the frozen package tree.",
+          "AST and qualified-name patterns can miss aliases, dynamic imports, reflection, generated code, and behavior hidden behind wrappers.",
+          "The scan does not execute code, resolve environment-selected branches, inspect native binary internals, or observe runtime scheduling.",
+          "No explicit hit found is not a proof of deterministic behavior; dynamic repeat/worker trace checks remain necessary."
+        ],
+        "source_line_numbers_disclosed": false,
+        "source_paths_disclosed": false,
+        "source_snippets_disclosed": false,
+        "status": "completed_static_python_ast_scan",
+        "unparsed_source_file_count": 0
+      }
+    },
+    {
+      "artifact_id": "c4",
+      "artifact_kind": "tree",
+      "environment": {},
+      "exists": true,
+      "expected_digest_present_in_frozen_protocol": true,
+      "expected_sha256": "83489e0c80c631763c65375d2a7a34d28d6aa9fbb1d11e89d130c83b1e27f1c0",
+      "hash_match": true,
+      "label": "C4",
+      "local_path": "artifacts/final_sprint/exp23_identity_trained",
+      "observed_sha256": "83489e0c80c631763c65375d2a7a34d28d6aa9fbb1d11e89d130c83b1e27f1c0",
+      "population": "trace preflight and factorial",
+      "role": "identity encoder, trained weights",
+      "source_audit": {
+        "categories": {
+          "clock_or_deadline": {
+            "distinct_source_files_with_hits": 0,
+            "hit_count": 0,
+            "interpretation": "No explicit bounded scanner pattern was found; this is not evidence that the package or execution is deterministic.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": {},
+            "result": "no_explicit_pattern_hit_found"
+          },
+          "explicit_randomness": {
+            "distinct_source_files_with_hits": 1,
+            "hit_count": 1,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "5a3f9ae13b536783413f4ad9786edfad1bc54d2b5163d97f1375d0a5cebed700",
+            "pattern_counts": {
+              "rng.resolved_api_call": 1
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "module_global_state": {
+            "distinct_source_files_with_hits": 7,
+            "hit_count": 14,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "4b44a778d6adda7f7df92afb9e2edf84863132b70c4567c68b671e73fe7a258f",
+            "pattern_counts": {
+              "state.global_statement": 1,
+              "state.module_constructed_binding": 8,
+              "state.module_mutable_binding": 3,
+              "state.module_state_named_binding": 2
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "native_pointer_or_state": {
+            "distinct_source_files_with_hits": 3,
+            "hit_count": 83,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "416884fbcb696e0cd11e14fd3a5cdaece82c4f4f3ff72704b098ea903daa7d36",
+            "pattern_counts": {
+              "native.ffi_call": 12,
+              "native.ffi_import": 3,
+              "native.ffi_reference": 45,
+              "native.global_pointer_statement": 1,
+              "native.pointer_identifier": 22
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "process_or_thread_parallelism": {
+            "distinct_source_files_with_hits": 0,
+            "hit_count": 0,
+            "interpretation": "No explicit bounded scanner pattern was found; this is not evidence that the package or execution is deterministic.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": {},
+            "result": "no_explicit_pattern_hit_found"
+          }
+        },
+        "decoded_source_file_count": 21,
+        "evidence_disclosure": "aggregate_counts_and_location_fingerprints_only_restricted_source",
+        "method": "Python AST plus bounded qualified-name and identifier patterns",
+        "parse_error_location_fingerprint_sha256": null,
+        "parsed_source_file_count": 21,
+        "python_source_file_count": 21,
+        "python_source_set_sha256": "334284125bab454a9100fbd7ddc64ba9893b300b8c28de5dce76d726d52aa469",
+        "scanned_extensions": [
+          ".py",
+          ".pyi"
+        ],
+        "scanned_source_bytes": 116459,
+        "scope_limits": [
+          "The scan covers only .py and .pyi files inside the frozen package tree.",
+          "AST and qualified-name patterns can miss aliases, dynamic imports, reflection, generated code, and behavior hidden behind wrappers.",
+          "The scan does not execute code, resolve environment-selected branches, inspect native binary internals, or observe runtime scheduling.",
+          "No explicit hit found is not a proof of deterministic behavior; dynamic repeat/worker trace checks remain necessary."
+        ],
+        "source_line_numbers_disclosed": false,
+        "source_paths_disclosed": false,
+        "source_snippets_disclosed": false,
+        "status": "completed_static_python_ast_scan",
+        "unparsed_source_file_count": 0
+      }
+    },
+    {
+      "artifact_id": "opponent_b0",
+      "artifact_kind": "tree",
+      "environment": {},
+      "exists": true,
+      "expected_digest_present_in_frozen_protocol": true,
+      "expected_sha256": "0c15b56adf3b09c654505a152309fdc9f8401579a495da714347d98ae735003c",
+      "hash_match": true,
+      "label": "B0",
+      "local_path": "artifacts/grim_variance_floor/candidates/B0",
+      "observed_sha256": "0c15b56adf3b09c654505a152309fdc9f8401579a495da714347d98ae735003c",
+      "population": "five determinism-eligible opponents",
+      "role": "opponent package",
+      "source_audit": {
+        "categories": {
+          "clock_or_deadline": {
+            "distinct_source_files_with_hits": 0,
+            "hit_count": 0,
+            "interpretation": "No explicit bounded scanner pattern was found; this is not evidence that the package or execution is deterministic.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": {},
+            "result": "no_explicit_pattern_hit_found"
+          },
+          "explicit_randomness": {
+            "distinct_source_files_with_hits": 1,
+            "hit_count": 1,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "5a3f9ae13b536783413f4ad9786edfad1bc54d2b5163d97f1375d0a5cebed700",
+            "pattern_counts": {
+              "rng.resolved_api_call": 1
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "module_global_state": {
+            "distinct_source_files_with_hits": 7,
+            "hit_count": 14,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "ca021c87421d9d5c22c550d8258769137a8e9216b7d5767de226ba3f42cccba4",
+            "pattern_counts": {
+              "state.global_statement": 1,
+              "state.module_constructed_binding": 8,
+              "state.module_mutable_binding": 3,
+              "state.module_state_named_binding": 2
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "native_pointer_or_state": {
+            "distinct_source_files_with_hits": 3,
+            "hit_count": 83,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "416884fbcb696e0cd11e14fd3a5cdaece82c4f4f3ff72704b098ea903daa7d36",
+            "pattern_counts": {
+              "native.ffi_call": 12,
+              "native.ffi_import": 3,
+              "native.ffi_reference": 45,
+              "native.global_pointer_statement": 1,
+              "native.pointer_identifier": 22
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "process_or_thread_parallelism": {
+            "distinct_source_files_with_hits": 0,
+            "hit_count": 0,
+            "interpretation": "No explicit bounded scanner pattern was found; this is not evidence that the package or execution is deterministic.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": {},
+            "result": "no_explicit_pattern_hit_found"
+          }
+        },
+        "decoded_source_file_count": 18,
+        "evidence_disclosure": "aggregate_counts_and_location_fingerprints_only_restricted_source",
+        "method": "Python AST plus bounded qualified-name and identifier patterns",
+        "parse_error_location_fingerprint_sha256": null,
+        "parsed_source_file_count": 18,
+        "python_source_file_count": 18,
+        "python_source_set_sha256": "c66b60c87c863b772bab8f76c089b5340c98f195e087d891640d787a5bd614b3",
+        "scanned_extensions": [
+          ".py",
+          ".pyi"
+        ],
+        "scanned_source_bytes": 92097,
+        "scope_limits": [
+          "The scan covers only .py and .pyi files inside the frozen package tree.",
+          "AST and qualified-name patterns can miss aliases, dynamic imports, reflection, generated code, and behavior hidden behind wrappers.",
+          "The scan does not execute code, resolve environment-selected branches, inspect native binary internals, or observe runtime scheduling.",
+          "No explicit hit found is not a proof of deterministic behavior; dynamic repeat/worker trace checks remain necessary."
+        ],
+        "source_line_numbers_disclosed": false,
+        "source_paths_disclosed": false,
+        "source_snippets_disclosed": false,
+        "status": "completed_static_python_ast_scan",
+        "unparsed_source_file_count": 0
+      }
+    },
+    {
+      "artifact_id": "opponent_d842_runtime",
+      "artifact_kind": "tree",
+      "environment": {},
+      "exists": true,
+      "expected_digest_present_in_frozen_protocol": true,
+      "expected_sha256": "7db753d6610930d8bd9694b4b9bece5ac48733b825422a3e399c18077b55e64e",
+      "hash_match": true,
+      "label": "d842-runtime",
+      "local_path": "artifacts/overnight_20260816/d842_runtime",
+      "observed_sha256": "7db753d6610930d8bd9694b4b9bece5ac48733b825422a3e399c18077b55e64e",
+      "population": "five determinism-eligible opponents",
+      "role": "opponent package",
+      "source_audit": {
+        "categories": {
+          "clock_or_deadline": {
+            "distinct_source_files_with_hits": 0,
+            "hit_count": 0,
+            "interpretation": "No explicit bounded scanner pattern was found; this is not evidence that the package or execution is deterministic.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": {},
+            "result": "no_explicit_pattern_hit_found"
+          },
+          "explicit_randomness": {
+            "distinct_source_files_with_hits": 1,
+            "hit_count": 1,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "5a3f9ae13b536783413f4ad9786edfad1bc54d2b5163d97f1375d0a5cebed700",
+            "pattern_counts": {
+              "rng.resolved_api_call": 1
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "module_global_state": {
+            "distinct_source_files_with_hits": 7,
+            "hit_count": 14,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "990b8abe891714e35c0c5cc388559e234ac7fa3acb00f85768d6ed139b8958f9",
+            "pattern_counts": {
+              "state.global_statement": 1,
+              "state.module_constructed_binding": 8,
+              "state.module_mutable_binding": 3,
+              "state.module_state_named_binding": 2
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "native_pointer_or_state": {
+            "distinct_source_files_with_hits": 3,
+            "hit_count": 83,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "416884fbcb696e0cd11e14fd3a5cdaece82c4f4f3ff72704b098ea903daa7d36",
+            "pattern_counts": {
+              "native.ffi_call": 12,
+              "native.ffi_import": 3,
+              "native.ffi_reference": 45,
+              "native.global_pointer_statement": 1,
+              "native.pointer_identifier": 22
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "process_or_thread_parallelism": {
+            "distinct_source_files_with_hits": 0,
+            "hit_count": 0,
+            "interpretation": "No explicit bounded scanner pattern was found; this is not evidence that the package or execution is deterministic.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": {},
+            "result": "no_explicit_pattern_hit_found"
+          }
+        },
+        "decoded_source_file_count": 21,
+        "evidence_disclosure": "aggregate_counts_and_location_fingerprints_only_restricted_source",
+        "method": "Python AST plus bounded qualified-name and identifier patterns",
+        "parse_error_location_fingerprint_sha256": null,
+        "parsed_source_file_count": 21,
+        "python_source_file_count": 21,
+        "python_source_set_sha256": "7bdfc12828833f2920cbc914a054480035145f0dae3353ceb4d2754462a0e2e0",
+        "scanned_extensions": [
+          ".py",
+          ".pyi"
+        ],
+        "scanned_source_bytes": 115973,
+        "scope_limits": [
+          "The scan covers only .py and .pyi files inside the frozen package tree.",
+          "AST and qualified-name patterns can miss aliases, dynamic imports, reflection, generated code, and behavior hidden behind wrappers.",
+          "The scan does not execute code, resolve environment-selected branches, inspect native binary internals, or observe runtime scheduling.",
+          "No explicit hit found is not a proof of deterministic behavior; dynamic repeat/worker trace checks remain necessary."
+        ],
+        "source_line_numbers_disclosed": false,
+        "source_paths_disclosed": false,
+        "source_snippets_disclosed": false,
+        "status": "completed_static_python_ast_scan",
+        "unparsed_source_file_count": 0
+      }
+    },
+    {
+      "artifact_id": "opponent_master_v1",
+      "artifact_kind": "tree",
+      "environment": {},
+      "exists": true,
+      "expected_digest_present_in_frozen_protocol": true,
+      "expected_sha256": "8a06ebab47cc60ed981dfada85972eb8a62e732e349f01c2a3085262079f06e8",
+      "hash_match": true,
+      "label": "master-v1",
+      "local_path": "artifacts/grim_damage_conversion/opponents/master_v1",
+      "observed_sha256": "8a06ebab47cc60ed981dfada85972eb8a62e732e349f01c2a3085262079f06e8",
+      "population": "five determinism-eligible opponents",
+      "role": "opponent package",
+      "source_audit": {
+        "categories": {
+          "clock_or_deadline": {
+            "distinct_source_files_with_hits": 0,
+            "hit_count": 0,
+            "interpretation": "No explicit bounded scanner pattern was found; this is not evidence that the package or execution is deterministic.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": {},
+            "result": "no_explicit_pattern_hit_found"
+          },
+          "explicit_randomness": {
+            "distinct_source_files_with_hits": 2,
+            "hit_count": 2,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "0bf9e8a14fc5232e28f2397f5aa2bea22c7b24916503cd896b49c97d2fbecf5f",
+            "pattern_counts": {
+              "rng.resolved_api_call": 2
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "module_global_state": {
+            "distinct_source_files_with_hits": 8,
+            "hit_count": 15,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "bd2249a0e95dd132a25c50ad316672134e79b5349a6e816da8a0cb3b842c6e74",
+            "pattern_counts": {
+              "state.global_statement": 1,
+              "state.module_constructed_binding": 9,
+              "state.module_mutable_binding": 3,
+              "state.module_state_named_binding": 2
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "native_pointer_or_state": {
+            "distinct_source_files_with_hits": 3,
+            "hit_count": 83,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "416884fbcb696e0cd11e14fd3a5cdaece82c4f4f3ff72704b098ea903daa7d36",
+            "pattern_counts": {
+              "native.ffi_call": 12,
+              "native.ffi_import": 3,
+              "native.ffi_reference": 45,
+              "native.global_pointer_statement": 1,
+              "native.pointer_identifier": 22
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "process_or_thread_parallelism": {
+            "distinct_source_files_with_hits": 0,
+            "hit_count": 0,
+            "interpretation": "No explicit bounded scanner pattern was found; this is not evidence that the package or execution is deterministic.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": {},
+            "result": "no_explicit_pattern_hit_found"
+          }
+        },
+        "decoded_source_file_count": 19,
+        "evidence_disclosure": "aggregate_counts_and_location_fingerprints_only_restricted_source",
+        "method": "Python AST plus bounded qualified-name and identifier patterns",
+        "parse_error_location_fingerprint_sha256": null,
+        "parsed_source_file_count": 19,
+        "python_source_file_count": 19,
+        "python_source_set_sha256": "5136c286fca05e9ad1e866bf074e76c25dee2a5be61c349ebeabf08319a7c18f",
+        "scanned_extensions": [
+          ".py",
+          ".pyi"
+        ],
+        "scanned_source_bytes": 98271,
+        "scope_limits": [
+          "The scan covers only .py and .pyi files inside the frozen package tree.",
+          "AST and qualified-name patterns can miss aliases, dynamic imports, reflection, generated code, and behavior hidden behind wrappers.",
+          "The scan does not execute code, resolve environment-selected branches, inspect native binary internals, or observe runtime scheduling.",
+          "No explicit hit found is not a proof of deterministic behavior; dynamic repeat/worker trace checks remain necessary."
+        ],
+        "source_line_numbers_disclosed": false,
+        "source_paths_disclosed": false,
+        "source_snippets_disclosed": false,
+        "status": "completed_static_python_ast_scan",
+        "unparsed_source_file_count": 0
+      }
+    },
+    {
+      "artifact_id": "opponent_replay_refresh",
+      "artifact_kind": "tree",
+      "environment": {},
+      "exists": true,
+      "expected_digest_present_in_frozen_protocol": true,
+      "expected_sha256": "30e45955b67893514c8ee077cac15d46fc207efe781cbce1b94242defda4cbdc",
+      "hash_match": true,
+      "label": "replay-refresh",
+      "local_path": "artifacts/grim_damage_conversion/opponents/replay_refresh",
+      "observed_sha256": "30e45955b67893514c8ee077cac15d46fc207efe781cbce1b94242defda4cbdc",
+      "population": "five determinism-eligible opponents",
+      "role": "opponent package",
+      "source_audit": {
+        "categories": {
+          "clock_or_deadline": {
+            "distinct_source_files_with_hits": 0,
+            "hit_count": 0,
+            "interpretation": "No explicit bounded scanner pattern was found; this is not evidence that the package or execution is deterministic.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": {},
+            "result": "no_explicit_pattern_hit_found"
+          },
+          "explicit_randomness": {
+            "distinct_source_files_with_hits": 1,
+            "hit_count": 1,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "5a3f9ae13b536783413f4ad9786edfad1bc54d2b5163d97f1375d0a5cebed700",
+            "pattern_counts": {
+              "rng.resolved_api_call": 1
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "module_global_state": {
+            "distinct_source_files_with_hits": 8,
+            "hit_count": 15,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "bd2249a0e95dd132a25c50ad316672134e79b5349a6e816da8a0cb3b842c6e74",
+            "pattern_counts": {
+              "state.global_statement": 1,
+              "state.module_constructed_binding": 9,
+              "state.module_mutable_binding": 3,
+              "state.module_state_named_binding": 2
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "native_pointer_or_state": {
+            "distinct_source_files_with_hits": 3,
+            "hit_count": 83,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "416884fbcb696e0cd11e14fd3a5cdaece82c4f4f3ff72704b098ea903daa7d36",
+            "pattern_counts": {
+              "native.ffi_call": 12,
+              "native.ffi_import": 3,
+              "native.ffi_reference": 45,
+              "native.global_pointer_statement": 1,
+              "native.pointer_identifier": 22
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "process_or_thread_parallelism": {
+            "distinct_source_files_with_hits": 0,
+            "hit_count": 0,
+            "interpretation": "No explicit bounded scanner pattern was found; this is not evidence that the package or execution is deterministic.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": {},
+            "result": "no_explicit_pattern_hit_found"
+          }
+        },
+        "decoded_source_file_count": 19,
+        "evidence_disclosure": "aggregate_counts_and_location_fingerprints_only_restricted_source",
+        "method": "Python AST plus bounded qualified-name and identifier patterns",
+        "parse_error_location_fingerprint_sha256": null,
+        "parsed_source_file_count": 19,
+        "python_source_file_count": 19,
+        "python_source_set_sha256": "f7864318ed5825e204a87c8d22c08a981c8dcc2e5837f14cb03c5d5b384e5749",
+        "scanned_extensions": [
+          ".py",
+          ".pyi"
+        ],
+        "scanned_source_bytes": 96166,
+        "scope_limits": [
+          "The scan covers only .py and .pyi files inside the frozen package tree.",
+          "AST and qualified-name patterns can miss aliases, dynamic imports, reflection, generated code, and behavior hidden behind wrappers.",
+          "The scan does not execute code, resolve environment-selected branches, inspect native binary internals, or observe runtime scheduling.",
+          "No explicit hit found is not a proof of deterministic behavior; dynamic repeat/worker trace checks remain necessary."
+        ],
+        "source_line_numbers_disclosed": false,
+        "source_paths_disclosed": false,
+        "source_snippets_disclosed": false,
+        "status": "completed_static_python_ast_scan",
+        "unparsed_source_file_count": 0
+      }
+    },
+    {
+      "artifact_id": "opponent_alakazam_no_search",
+      "artifact_kind": "tree",
+      "environment": {
+        "NO_SEARCH": "1"
+      },
+      "exists": true,
+      "expected_digest_present_in_frozen_protocol": true,
+      "expected_sha256": "5d44338891094988ca15f0c26d5187316549facd64a7bfbac04aa0048424e8c7",
+      "hash_match": true,
+      "label": "Alakazam-no-search",
+      "local_path": "artifacts/sprint_870/opponents/alakazam_2_4a",
+      "observed_sha256": "5d44338891094988ca15f0c26d5187316549facd64a7bfbac04aa0048424e8c7",
+      "population": "five determinism-eligible opponents",
+      "role": "opponent package",
+      "source_audit": {
+        "categories": {
+          "clock_or_deadline": {
+            "distinct_source_files_with_hits": 2,
+            "hit_count": 46,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "1d66654d1c56865061b40f272d3ca949b7f8955ed9dd5a8303772f177eb9f1c1",
+            "pattern_counts": {
+              "clock.deadline_identifier": 28,
+              "clock.module_import": 2,
+              "clock.read_call": 16
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "explicit_randomness": {
+            "distinct_source_files_with_hits": 2,
+            "hit_count": 8,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "a47bc3cd202767a9c0f02d7b8b09d20b10a7ff8e74f6f30579066c7f15e92f55",
+            "pattern_counts": {
+              "rng.module_import": 2,
+              "rng.random_like_method_call": 5,
+              "rng.resolved_api_call": 1
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "module_global_state": {
+            "distinct_source_files_with_hits": 11,
+            "hit_count": 86,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "30d16f62edb90d46b6fda1c3ab49975f01fa88c35dd0668c754482054540575d",
+            "pattern_counts": {
+              "state.global_statement": 15,
+              "state.module_constructed_binding": 28,
+              "state.module_mutable_binding": 29,
+              "state.module_state_named_binding": 14
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "native_pointer_or_state": {
+            "distinct_source_files_with_hits": 3,
+            "hit_count": 89,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "af79560bdfd022249c3736b8f41ba0969211bed5ef6db8e2e2a641f482c15f77",
+            "pattern_counts": {
+              "native.ffi_call": 13,
+              "native.ffi_import": 3,
+              "native.ffi_reference": 48,
+              "native.global_pointer_statement": 1,
+              "native.pointer_identifier": 24
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "process_or_thread_parallelism": {
+            "distinct_source_files_with_hits": 0,
+            "hit_count": 0,
+            "interpretation": "No explicit bounded scanner pattern was found; this is not evidence that the package or execution is deterministic.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": {},
+            "result": "no_explicit_pattern_hit_found"
+          }
+        },
+        "decoded_source_file_count": 15,
+        "evidence_disclosure": "aggregate_counts_and_location_fingerprints_only_restricted_source",
+        "method": "Python AST plus bounded qualified-name and identifier patterns",
+        "parse_error_location_fingerprint_sha256": null,
+        "parsed_source_file_count": 15,
+        "python_source_file_count": 15,
+        "python_source_set_sha256": "23ada2917279c6e168322681e9b509fa40721b06fbab6013508822283b9448dc",
+        "scanned_extensions": [
+          ".py",
+          ".pyi"
+        ],
+        "scanned_source_bytes": 222317,
+        "scope_limits": [
+          "The scan covers only .py and .pyi files inside the frozen package tree.",
+          "AST and qualified-name patterns can miss aliases, dynamic imports, reflection, generated code, and behavior hidden behind wrappers.",
+          "The scan does not execute code, resolve environment-selected branches, inspect native binary internals, or observe runtime scheduling.",
+          "No explicit hit found is not a proof of deterministic behavior; dynamic repeat/worker trace checks remain necessary."
+        ],
+        "source_line_numbers_disclosed": false,
+        "source_paths_disclosed": false,
+        "source_snippets_disclosed": false,
+        "status": "completed_static_python_ast_scan",
+        "unparsed_source_file_count": 0
+      }
+    },
+    {
+      "artifact_id": "opponent_starmie",
+      "artifact_kind": "tree",
+      "environment": {},
+      "exists": true,
+      "expected_digest_present_in_frozen_protocol": true,
+      "expected_sha256": "1b73779da7dcc93c8f121090bb0f1ae2d9b10b798ca4c70447b0ce1d6d01c0db",
+      "hash_match": true,
+      "label": "Starmie",
+      "local_path": "artifacts/sprint_870/opponents/starmie_v2_boss_atk",
+      "observed_sha256": "1b73779da7dcc93c8f121090bb0f1ae2d9b10b798ca4c70447b0ce1d6d01c0db",
+      "population": "timed-search diagnostic opponents",
+      "role": "opponent package",
+      "source_audit": {
+        "categories": {
+          "clock_or_deadline": {
+            "distinct_source_files_with_hits": 1,
+            "hit_count": 17,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "8dfa73b708357a17952c1310098560fc20c7ce33d435391caa89525f6f5e31d8",
+            "pattern_counts": {
+              "clock.deadline_identifier": 11,
+              "clock.module_import": 1,
+              "clock.read_call": 5
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "explicit_randomness": {
+            "distinct_source_files_with_hits": 2,
+            "hit_count": 6,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "89c9be18117174e2d6cf17e143dd3546918fabf08741d5221b62ff7307c2fc1e",
+            "pattern_counts": {
+              "rng.module_import": 2,
+              "rng.random_like_method_call": 3,
+              "rng.resolved_api_call": 1
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "module_global_state": {
+            "distinct_source_files_with_hits": 6,
+            "hit_count": 19,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "54e4bab768fc190d5f1907f20cadf7e19f2503bd6377612b612847f1cf82d133",
+            "pattern_counts": {
+              "state.global_statement": 3,
+              "state.module_constructed_binding": 9,
+              "state.module_mutable_binding": 4,
+              "state.module_state_named_binding": 3
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "native_pointer_or_state": {
+            "distinct_source_files_with_hits": 3,
+            "hit_count": 83,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "a1e6a2c802165fbb0c385d16179a80159241740c663c57a4b9e4f86438ba91ee",
+            "pattern_counts": {
+              "native.ffi_call": 12,
+              "native.ffi_import": 3,
+              "native.ffi_reference": 45,
+              "native.global_pointer_statement": 1,
+              "native.pointer_identifier": 22
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "process_or_thread_parallelism": {
+            "distinct_source_files_with_hits": 0,
+            "hit_count": 0,
+            "interpretation": "No explicit bounded scanner pattern was found; this is not evidence that the package or execution is deterministic.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": {},
+            "result": "no_explicit_pattern_hit_found"
+          }
+        },
+        "decoded_source_file_count": 10,
+        "evidence_disclosure": "aggregate_counts_and_location_fingerprints_only_restricted_source",
+        "method": "Python AST plus bounded qualified-name and identifier patterns",
+        "parse_error_location_fingerprint_sha256": null,
+        "parsed_source_file_count": 10,
+        "python_source_file_count": 10,
+        "python_source_set_sha256": "93d029da99e19db587d1a0db42be60b2d6eafb427b24464d48555bc71f98d033",
+        "scanned_extensions": [
+          ".py",
+          ".pyi"
+        ],
+        "scanned_source_bytes": 73654,
+        "scope_limits": [
+          "The scan covers only .py and .pyi files inside the frozen package tree.",
+          "AST and qualified-name patterns can miss aliases, dynamic imports, reflection, generated code, and behavior hidden behind wrappers.",
+          "The scan does not execute code, resolve environment-selected branches, inspect native binary internals, or observe runtime scheduling.",
+          "No explicit hit found is not a proof of deterministic behavior; dynamic repeat/worker trace checks remain necessary."
+        ],
+        "source_line_numbers_disclosed": false,
+        "source_paths_disclosed": false,
+        "source_snippets_disclosed": false,
+        "status": "completed_static_python_ast_scan",
+        "unparsed_source_file_count": 0
+      }
+    },
+    {
+      "artifact_id": "opponent_dipplin",
+      "artifact_kind": "tree",
+      "environment": {},
+      "exists": true,
+      "expected_digest_present_in_frozen_protocol": true,
+      "expected_sha256": "076ae8de12d2d6c4a170b47b2d2f9cf538c1d318a05bb2e81f13da9be2cd2026",
+      "hash_match": true,
+      "label": "Dipplin",
+      "local_path": "artifacts/sprint_870/opponents/dipplin_d1",
+      "observed_sha256": "076ae8de12d2d6c4a170b47b2d2f9cf538c1d318a05bb2e81f13da9be2cd2026",
+      "population": "timed-search diagnostic opponents",
+      "role": "opponent package",
+      "source_audit": {
+        "categories": {
+          "clock_or_deadline": {
+            "distinct_source_files_with_hits": 2,
+            "hit_count": 19,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "5c08e37d89ef8eb0577d5e16a7146824649d9583a83f61c0106114b69d049754",
+            "pattern_counts": {
+              "clock.deadline_identifier": 15,
+              "clock.module_import": 2,
+              "clock.read_call": 2
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "explicit_randomness": {
+            "distinct_source_files_with_hits": 1,
+            "hit_count": 3,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "128c791a28ea37033b37388426abb0e54fb3a29bdfaa832d51e476c295a621c9",
+            "pattern_counts": {
+              "rng.module_import": 1,
+              "rng.random_like_method_call": 1,
+              "rng.resolved_api_call": 1
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "module_global_state": {
+            "distinct_source_files_with_hits": 11,
+            "hit_count": 39,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "95b5541a9b213eb1afa944fbaa4a4034ca0c3bf01cfc1158910df4e4accdd437",
+            "pattern_counts": {
+              "state.global_statement": 1,
+              "state.module_constructed_binding": 31,
+              "state.module_mutable_binding": 6,
+              "state.module_state_named_binding": 1
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "native_pointer_or_state": {
+            "distinct_source_files_with_hits": 4,
+            "hit_count": 84,
+            "interpretation": "Candidate source patterns were found; they require dynamic validation and do not by themselves establish run-to-run variation.",
+            "location_fingerprint_sha256": "fd99bcd88573d4431496af3565806e9fe818fb96f75e36ec5f60cc63a4647fcf",
+            "pattern_counts": {
+              "native.ffi_call": 12,
+              "native.ffi_import": 3,
+              "native.ffi_reference": 45,
+              "native.global_pointer_statement": 1,
+              "native.pointer_identifier": 23
+            },
+            "result": "explicit_pattern_hits_found"
+          },
+          "process_or_thread_parallelism": {
+            "distinct_source_files_with_hits": 0,
+            "hit_count": 0,
+            "interpretation": "No explicit bounded scanner pattern was found; this is not evidence that the package or execution is deterministic.",
+            "location_fingerprint_sha256": null,
+            "pattern_counts": {},
+            "result": "no_explicit_pattern_hit_found"
+          }
+        },
+        "decoded_source_file_count": 18,
+        "evidence_disclosure": "aggregate_counts_and_location_fingerprints_only_restricted_source",
+        "method": "Python AST plus bounded qualified-name and identifier patterns",
+        "parse_error_location_fingerprint_sha256": null,
+        "parsed_source_file_count": 18,
+        "python_source_file_count": 18,
+        "python_source_set_sha256": "414d16e15e75f46acf95212b6e0eed07f0e131e34001405c1076b5b53f35d5d0",
+        "scanned_extensions": [
+          ".py",
+          ".pyi"
+        ],
+        "scanned_source_bytes": 293704,
+        "scope_limits": [
+          "The scan covers only .py and .pyi files inside the frozen package tree.",
+          "AST and qualified-name patterns can miss aliases, dynamic imports, reflection, generated code, and behavior hidden behind wrappers.",
+          "The scan does not execute code, resolve environment-selected branches, inspect native binary internals, or observe runtime scheduling.",
+          "No explicit hit found is not a proof of deterministic behavior; dynamic repeat/worker trace checks remain necessary."
+        ],
+        "source_line_numbers_disclosed": false,
+        "source_paths_disclosed": false,
+        "source_snippets_disclosed": false,
+        "status": "completed_static_python_ast_scan",
+        "unparsed_source_file_count": 0
+      }
+    }
+  ],
+  "level_results": {
+    "level_1_artifact_identity": {
+      "all_expected_digests_present_in_frozen_protocol": true,
+      "all_frozen_hashes_match": true,
+      "artifact_count": 13,
+      "status": "pass",
+      "verified_artifact_count": 13
+    },
+    "level_6_stochastic_source_audit": {
+      "admission_interpretation": "Source hits identify mechanisms for dynamic testing. A clean static category does not admit a paired contrast or establish determinism.",
+      "aggregate_hits_by_category": {
+        "clock_or_deadline": 82,
+        "explicit_randomness": 26,
+        "module_global_state": 258,
+        "native_pointer_or_state": 920,
+        "process_or_thread_parallelism": 0
+      },
+      "artifacts_with_hits_by_category": {
+        "clock_or_deadline": 3,
+        "explicit_randomness": 11,
+        "module_global_state": 11,
+        "native_pointer_or_state": 11,
+        "process_or_thread_parallelism": 0
+      },
+      "status": "bounded_audit_recorded",
+      "verified_package_tree_count": 11
+    }
+  },
+  "provenance": {
+    "frozen_protocol": "paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md",
+    "frozen_protocol_sha256": "8b9329b948a054fc7252b9c2662490890e0a8439ad852393c6e25f537c8b887e",
+    "git_commit": "51d7ff166dab41e3433375f2c77875d7c26f201e",
+    "script": "paper/scripts/audit_stochastic_sources.py",
+    "script_sha256": "f1702602b6fdf8410c8427cd8064c7ae5d70282b8e0eb7d65cfd65609a213a82"
+  },
+  "schema_version": "pevl-stochastic-source-audit-v1",
+  "scope_limits": [
+    "The two engine artifacts are verified byte-for-byte but not source-audited; their native internals are unavailable here.",
+    "Only frozen package .py and .pyi files are statically scanned; models, data files, native libraries, interpreter state, and operating-system behavior are outside scope.",
+    "A static hit may be unreachable under the recorded environment (including NO_SEARCH=1), and a static no-hit may conceal indirect or dynamic behavior.",
+    "The scanner does not establish event-level coupling, repeat parity, worker parity, or statistical admission; those require the separate prospective runtime gates."
+  ]
+}

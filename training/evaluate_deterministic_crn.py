@@ -10,9 +10,12 @@ import json
 import math
 import multiprocessing as mp
 import os
+import platform
 import random
+import subprocess
 import sys
 import time
+import uuid
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -39,6 +42,55 @@ DEFAULT_CANDIDATE = (
     / "extracted"
 )
 DEFAULT_CONTROL = ROOT / "artifacts" / "recovery_probes" / "extracted" / "a2"
+
+UINT32_MODULUS = 1 << 32
+SEED_CONVERSION_RULE = "engine_seed_uint32 = scheduled_seed & 0xffffffff"
+PROCESS_START_METHOD = "spawn"
+ORDER_SEED_OFFSET = 1_000_000
+PROOF_EXECUTION_VARIANTS = (
+    "serial-forward",
+    "serial-reverse",
+    "parallel-forward",
+    "parallel-reverse",
+)
+
+_SCHEDULE_FINGERPRINT_FIELDS = (
+    "task_id",
+    "pair_index",
+    "arm",
+    "engine",
+    "hero",
+    "opponent",
+    "scheduled_seed",
+    "engine_seed_uint32",
+    "actual_order",
+    "physical_seat",
+    "trace_mode",
+    "max_decisions",
+    "hero_env",
+    "opponent_env",
+    "enqueue_position",
+)
+
+_DETERMINISM_SIGNATURE_FIELDS = (
+    "task_id",
+    "pair_index",
+    "arm",
+    "seed",
+    "requested_seed",
+    "scheduled_seed",
+    "engine_seed_uint32",
+    "actual_order",
+    "physical_seat",
+    "win",
+    "draw",
+    "decisions",
+    "hero_policy_errors",
+    "opponent_policy_errors",
+    "trace_sha256",
+    "public_trace_sha256",
+    "trace_bytes",
+)
 
 
 class StartData(ctypes.Structure):
@@ -97,6 +149,170 @@ def sha256_path(path: Path) -> str:
         digest.update(relative)
         digest.update(bytes.fromhex(sha256_file(child)))
     return digest.hexdigest()
+
+
+def seed_to_uint32(seed: int) -> int:
+    """Return the exact unsigned 32-bit value passed to BattleStartSeeded."""
+    return int(seed) & 0xFFFFFFFF
+
+
+def _scheduled_seed(task: dict[str, Any]) -> int:
+    values = [
+        int(task[key])
+        for key in ("seed", "requested_seed", "scheduled_seed")
+        if key in task
+    ]
+    if not values:
+        raise ValueError("task requires seed, requested_seed, or scheduled_seed")
+    if len(set(values)) != 1:
+        raise ValueError("seed, requested_seed, and scheduled_seed must agree")
+    return values[0]
+
+
+def assert_converted_seed_uniqueness(tasks: Iterable[dict[str, Any]]) -> None:
+    """Reject distinct scheduled seeds that narrow to the same uint32 value.
+
+    A paired schedule intentionally repeats one scheduled seed across its two arms.
+    Exact repeats within that pair are allowed; reuse across distinct units and
+    collisions between distinct Python integers are not.
+    """
+    assignment_by_engine_seed: dict[int, tuple[int, tuple[Any, ...]]] = {}
+    collisions: list[tuple[int, int, int]] = []
+    for task in tasks:
+        scheduled = _scheduled_seed(task)
+        converted = seed_to_uint32(scheduled)
+        if "pair_index" in task:
+            schedule_unit = (str(task.get("actual_order")), int(task["pair_index"]))
+        else:
+            schedule_unit = (str(task.get("task_id")),)
+        prior = assignment_by_engine_seed.setdefault(converted, (scheduled, schedule_unit))
+        if prior[0] != scheduled:
+            collisions.append((converted, prior[0], scheduled))
+        elif prior[1] != schedule_unit:
+            raise ValueError(
+                "schedule reuses engine seed "
+                f"{converted} for distinct units {prior[1]} and {schedule_unit}"
+            )
+    if collisions:
+        converted, first, second = collisions[0]
+        raise ValueError(
+            "schedule contains a uint32 engine-seed collision: "
+            f"{first} and {second} both convert to {converted}"
+        )
+
+
+def _trace_mode(task: dict[str, Any]) -> str:
+    mode = task.get("trace_mode")
+    if mode is None:
+        mode = "full" if task.get("capture_trace", False) else "none"
+    mode = str(mode)
+    if mode not in {"none", "digest", "full"}:
+        raise ValueError("trace_mode must be one of: none, digest, full")
+    return mode
+
+
+def _prepare_tasks(tasks: list[dict[str, Any]], workers: int) -> list[dict[str, Any]]:
+    prepared: list[dict[str, Any]] = []
+    for enqueue_position, source in enumerate(tasks):
+        task = dict(source)
+        scheduled = _scheduled_seed(task)
+        converted = seed_to_uint32(scheduled)
+        supplied_converted = task.get("engine_seed_uint32")
+        if supplied_converted is not None and int(supplied_converted) != converted:
+            raise ValueError(
+                f"task {task.get('task_id')} engine_seed_uint32 does not match {SEED_CONVERSION_RULE}"
+            )
+        task.update(
+            {
+                # `seed` remains as a compatibility alias for historical readers.
+                "seed": scheduled,
+                "requested_seed": scheduled,
+                "scheduled_seed": scheduled,
+                "engine_seed_uint32": converted,
+                "seed_conversion_rule": SEED_CONVERSION_RULE,
+                "trace_mode": _trace_mode(task),
+                "enqueue_position": int(task.get("enqueue_position", enqueue_position)),
+                "worker_count": workers,
+                "process_start_method": PROCESS_START_METHOD,
+            }
+        )
+        prepared.append(task)
+    assert_converted_seed_uniqueness(prepared)
+    return prepared
+
+
+def schedule_fingerprint(tasks: list[dict[str, Any]]) -> str:
+    """Hash static schedule inputs, excluding timing and process identifiers."""
+    prepared = _prepare_tasks(tasks, int(tasks[0].get("worker_count", 1)) if tasks else 1)
+    schedule = [
+        {key: task.get(key) for key in _SCHEDULE_FINGERPRINT_FIELDS}
+        for task in prepared
+    ]
+    return hashlib.sha256(_canonical_json(schedule)).hexdigest()
+
+
+def _canonical_json(value: Any) -> bytes:
+    return json.dumps(value, ensure_ascii=False, separators=(",", ":"), sort_keys=True).encode("utf-8")
+
+
+def _git_commit() -> str:
+    try:
+        return subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True, stderr=subprocess.DEVNULL
+        ).strip()
+    except (OSError, subprocess.CalledProcessError):
+        return "unknown"
+
+
+def _run_identity(
+    *,
+    mode: str,
+    tasks: list[dict[str, Any]],
+    protocol_id: str,
+    protocol_commit: str | None,
+    run_uuid: str | None,
+    artifacts: dict[str, str],
+    execution_plan: dict[str, Any],
+) -> dict[str, Any]:
+    resolved_uuid = str(uuid.UUID(run_uuid)) if run_uuid else str(uuid.uuid4())
+    resolved_commit = protocol_commit or _git_commit()
+    fingerprint = schedule_fingerprint(tasks)
+    manifest = {
+        "mode": mode,
+        "protocol_id": protocol_id,
+        "protocol_commit": resolved_commit,
+        "schedule_fingerprint_sha256": fingerprint,
+        "artifacts": artifacts,
+        "execution_plan": execution_plan,
+    }
+    return {
+        "protocol_id": protocol_id,
+        "protocol_commit": resolved_commit,
+        "run_uuid": resolved_uuid,
+        "schedule_fingerprint_sha256": fingerprint,
+        "run_fingerprint_sha256": hashlib.sha256(_canonical_json(manifest)).hexdigest(),
+        "run_fingerprint_scope": (
+            "protocol, artifact hashes, static schedule, and execution plan; "
+            "excludes run UUID, wall-clock timing, and process identifiers"
+        ),
+    }
+
+
+def _attach_run_identity(
+    tasks: list[dict[str, Any]], identity: dict[str, Any]
+) -> list[dict[str, Any]]:
+    return [{**task, **identity} for task in tasks]
+
+
+def _execution_environment() -> dict[str, Any]:
+    return {
+        "python_version": platform.python_version(),
+        "python_implementation": platform.python_implementation(),
+        "platform": platform.platform(),
+        "machine": platform.machine(),
+        "process_start_method": PROCESS_START_METHOD,
+        "python_hash_seed": "0",
+    }
 
 
 class SeededEngine:
@@ -192,27 +408,47 @@ def _public_observation_sha256(raw: dict[str, Any]) -> str:
 
 
 def _run_game(task: dict[str, Any]) -> dict[str, Any]:
-    seed = int(task["seed"])
-    random.seed(seed)
-    np.random.seed(seed & 0xFFFFFFFF)
+    game_started = time.perf_counter()
+    scheduled_seed = _scheduled_seed(task)
+    engine_seed = seed_to_uint32(scheduled_seed)
+    supplied_engine_seed = int(task.get("engine_seed_uint32", engine_seed))
+    if supplied_engine_seed != engine_seed:
+        raise ValueError(f"engine seed does not satisfy {SEED_CONVERSION_RULE}")
+    random.seed(scheduled_seed)
+    np.random.seed(engine_seed)
     engine = get_engine(task["engine"])
     hero_path = Path(task["hero"])
     opponent_path = Path(task["opponent"])
     hero_seat = int(task["physical_seat"])
     order = str(task["actual_order"])
-    capture_trace = bool(task.get("capture_trace", False))
+    trace_mode = _trace_mode(task)
+    capture_trace = trace_mode != "none"
     max_decisions = int(task.get("max_decisions", 2_000))
 
-    hero = ExternalSubmissionAgent(hero_path, dict(task.get("hero_env") or {}))
-    opponent = ExternalSubmissionAgent(opponent_path, dict(task.get("opponent_env") or {}))
+    hero_env = dict(task.get("hero_env") or {})
+    opponent_env = dict(task.get("opponent_env") or {})
+    hero = ExternalSubmissionAgent(hero_path, hero_env)
+    opponent = ExternalSubmissionAgent(opponent_path, opponent_env)
     agents = {hero_seat: hero, 1 - hero_seat: opponent}
     decks = [hero.deck, opponent.deck] if hero_seat == 0 else [opponent.deck, hero.deck]
     battle_ptr = 0
-    trace = bytearray()
+    trace_digest = hashlib.sha256()
+    trace_payload = bytearray() if trace_mode == "full" else None
+    trace_bytes = 0
     first_player = None
     decisions = 0
+    completed: dict[str, Any] | None = None
+
+    def append_trace(event: dict[str, Any]) -> None:
+        nonlocal trace_bytes
+        line = _canonical_line(event)
+        trace_digest.update(line)
+        trace_bytes += len(line)
+        if trace_payload is not None:
+            trace_payload.extend(line)
+
     try:
-        battle_ptr, raw = engine.start(decks[0], decks[1], seed)
+        battle_ptr, raw = engine.start(decks[0], decks[1], engine_seed)
         while True:
             obs = to_observation_class(raw)
             if obs.current is not None and int(obs.current.firstPlayer) in (0, 1):
@@ -237,12 +473,18 @@ def _run_game(task: dict[str, Any]) -> dict[str, Any]:
                 }
                 if capture_trace:
                     terminal["public_observation_sha256"] = _public_observation_sha256(raw)
-                    trace.extend(_canonical_line(terminal))
-                return {
+                    append_trace(terminal)
+                trace_sha256 = trace_digest.hexdigest() if capture_trace else None
+                completed = {
                     "task_id": task["task_id"],
                     "pair_index": int(task.get("pair_index", -1)),
                     "arm": task.get("arm"),
-                    "seed": seed,
+                    # `seed` is retained as a compatibility alias.
+                    "seed": scheduled_seed,
+                    "requested_seed": scheduled_seed,
+                    "scheduled_seed": scheduled_seed,
+                    "engine_seed_uint32": engine_seed,
+                    "seed_conversion_rule": SEED_CONVERSION_RULE,
                     "actual_order": observed_order,
                     "physical_seat": hero_seat,
                     "win": int(result == hero_seat),
@@ -250,10 +492,31 @@ def _run_game(task: dict[str, Any]) -> dict[str, Any]:
                     "decisions": decisions,
                     "hero_policy_errors": _policy_errors(hero),
                     "opponent_policy_errors": _policy_errors(opponent),
-                    "trace_sha256": hashlib.sha256(trace).hexdigest() if capture_trace else None,
-                    "trace_bytes": len(trace) if capture_trace else 0,
-                    "trace": bytes(trace) if capture_trace else None,
+                    "trace_mode": trace_mode,
+                    "trace_sha256": trace_sha256,
+                    "public_trace_sha256": trace_sha256,
+                    "trace_bytes": trace_bytes if capture_trace else 0,
+                    "trace": bytes(trace_payload) if trace_payload is not None else None,
+                    "hero_env": hero_env,
+                    "opponent_env": opponent_env,
+                    "max_decisions": max_decisions,
+                    "process_start_method": (
+                        mp.get_start_method(allow_none=True)
+                        or str(task.get("process_start_method", PROCESS_START_METHOD))
+                    ),
+                    "enqueue_position": int(task.get("enqueue_position", -1)),
+                    "worker_count": int(task.get("worker_count", 1)),
+                    "worker_pid": os.getpid(),
+                    "worker_process_name": mp.current_process().name,
+                    "execution_variant": task.get("execution_variant"),
+                    "schedule_direction": task.get("schedule_direction"),
+                    "protocol_id": task.get("protocol_id"),
+                    "protocol_commit": task.get("protocol_commit"),
+                    "run_uuid": task.get("run_uuid"),
+                    "schedule_fingerprint_sha256": task.get("schedule_fingerprint_sha256"),
+                    "run_fingerprint_sha256": task.get("run_fingerprint_sha256"),
                 }
+                break
 
             if obs.select.context == SelectContext.IS_FIRST:
                 action = _forced_order(obs.select, hero_seat, order)
@@ -263,16 +526,14 @@ def _run_game(task: dict[str, Any]) -> dict[str, Any]:
                 action = agents[acting_seat](raw)
                 actor = "hero" if acting_seat == hero_seat else "opponent"
             if capture_trace:
-                trace.extend(
-                    _canonical_line(
-                        {
-                            "event": "action",
-                            "decision": decisions,
-                            "actor": actor,
-                            "action": action,
-                            "public_observation_sha256": _public_observation_sha256(raw),
-                        }
-                    )
+                append_trace(
+                    {
+                        "event": "action",
+                        "decision": decisions,
+                        "actor": actor,
+                        "action": action,
+                        "public_observation_sha256": _public_observation_sha256(raw),
+                    }
                 )
             raw = engine.select(battle_ptr, action)
             decisions += 1
@@ -283,14 +544,19 @@ def _run_game(task: dict[str, Any]) -> dict[str, Any]:
             engine.finish(battle_ptr)
         hero.close()
         opponent.close()
+    if completed is None:
+        raise RuntimeError("seeded evaluation ended without a terminal record")
+    completed["elapsed_wall_seconds"] = time.perf_counter() - game_started
+    return completed
 
 
 def run_tasks(tasks: list[dict[str, Any]], workers: int) -> list[dict[str, Any]]:
     os.environ["PYTHONHASHSEED"] = "0"
-    context = mp.get_context("spawn")
+    prepared = _prepare_tasks(tasks, workers)
+    context = mp.get_context(PROCESS_START_METHOD)
     rows: list[dict[str, Any]] = []
     with context.Pool(workers) as pool:
-        for row in pool.imap_unordered(_run_game, tasks, chunksize=1):
+        for row in pool.imap_unordered(_run_game, prepared, chunksize=1):
             rows.append(row)
     return sorted(rows, key=lambda row: str(row["task_id"]))
 
@@ -300,7 +566,68 @@ def _without_trace(row: dict[str, Any]) -> dict[str, Any]:
 
 
 def _proof_signature(rows: Iterable[dict[str, Any]]) -> dict[str, dict[str, Any]]:
-    return {str(row["task_id"]): _without_trace(row) for row in rows}
+    # Execution provenance is deliberately absent: worker assignment, process ID,
+    # enqueue timing, and elapsed wall time are audit data, not gameplay behavior.
+    return {
+        str(row["task_id"]): {
+            key: row.get(key) for key in _DETERMINISM_SIGNATURE_FIELDS
+        }
+        for row in rows
+    }
+
+
+def _proof_execution_plan(
+    execution_variants: tuple[str, ...] | None,
+    parallel_workers: int,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    if parallel_workers < 1:
+        raise ValueError("parallel_workers must be positive")
+    if execution_variants is None:
+        variants = [
+            {"name": "single_a", "workers": 1, "schedule_direction": "forward"},
+            {"name": "single_b", "workers": 1, "schedule_direction": "forward"},
+            {
+                "name": f"workers_{parallel_workers}",
+                "workers": parallel_workers,
+                "schedule_direction": "forward",
+            },
+        ]
+        serialized = {
+            "profile": "legacy_three_run",
+            "single_a_workers": 1,
+            "single_b_workers": 1,
+            f"workers_{parallel_workers}": parallel_workers,
+            "variants": variants,
+            "process_start_method": PROCESS_START_METHOD,
+        }
+        return variants, serialized
+
+    requested = tuple(execution_variants)
+    if len(requested) < 2:
+        raise ValueError("determinism proof requires at least two execution variants")
+    if len(set(requested)) != len(requested):
+        raise ValueError("execution variants must be unique")
+    invalid = [name for name in requested if name not in PROOF_EXECUTION_VARIANTS]
+    if invalid:
+        raise ValueError(f"unknown execution variants: {invalid}")
+    if any(name.startswith("parallel-") for name in requested) and parallel_workers < 2:
+        raise ValueError("parallel execution variants require at least two workers")
+
+    variants = []
+    for requested_name in requested:
+        concurrency, direction = requested_name.split("-", 1)
+        variants.append(
+            {
+                "name": requested_name.replace("-", "_"),
+                "workers": 1 if concurrency == "serial" else parallel_workers,
+                "schedule_direction": direction,
+            }
+        )
+    return variants, {
+        "profile": "explicit_variants",
+        "variants": variants,
+        "process_start_method": PROCESS_START_METHOD,
+    }
 
 
 def determinism_proof(
@@ -313,7 +640,21 @@ def determinism_proof(
     seeds_per_order: int,
     parallel_workers: int,
     max_decisions: int,
+    protocol_id: str = "evaluate_deterministic_crn.prove.v2",
+    protocol_commit: str | None = None,
+    run_uuid: str | None = None,
+    audit: bool = False,
+    hero_env: dict[str, str] | None = None,
+    opponent_env: dict[str, str] | None = None,
+    trace_mode: str = "full",
+    execution_variants: tuple[str, ...] | None = None,
 ) -> dict[str, Any]:
+    hero_env = dict(hero_env or {})
+    opponent_env = dict(opponent_env or {})
+    trace_mode = _trace_mode({"trace_mode": trace_mode})
+    if trace_mode == "none":
+        raise ValueError("determinism proof trace_mode must be digest or full")
+    variants, execution_plan = _proof_execution_plan(execution_variants, parallel_workers)
     tasks = []
     for order_index, order in enumerate(("first", "second")):
         for index in range(seeds_per_order):
@@ -323,18 +664,48 @@ def determinism_proof(
                     "engine": str(engine.resolve()),
                     "hero": str(hero.resolve()),
                     "opponent": str(opponent.resolve()),
-                    "seed": base_seed + order_index * 100_000 + index,
+                    "scheduled_seed": base_seed + order_index * ORDER_SEED_OFFSET + index,
                     "actual_order": order,
                     "physical_seat": index % 2,
-                    "capture_trace": True,
+                    "trace_mode": trace_mode,
                     "max_decisions": max_decisions,
+                    "hero_env": hero_env,
+                    "opponent_env": opponent_env,
                 }
             )
-    runs = {
-        "single_a": run_tasks(tasks, 1),
-        "single_b": run_tasks(tasks, 1),
-        f"workers_{parallel_workers}": run_tasks(tasks, parallel_workers),
+    artifacts = {
+        "engine_sha256": sha256_file(engine),
+        "hero_sha256": sha256_path(hero),
+        "opponent_sha256": sha256_path(opponent),
     }
+    identity = _run_identity(
+        mode="prove",
+        tasks=tasks,
+        protocol_id=protocol_id,
+        protocol_commit=protocol_commit,
+        run_uuid=run_uuid,
+        artifacts=artifacts,
+        execution_plan=execution_plan,
+    )
+    tasks = _attach_run_identity(tasks, identity)
+    runs: dict[str, list[dict[str, Any]]] = {}
+    for variant in variants:
+        ordered_tasks = (
+            tasks
+            if variant["schedule_direction"] == "forward"
+            else list(reversed(tasks))
+        )
+        scheduled_tasks = [
+            {
+                **task,
+                "execution_variant": variant["name"],
+                "schedule_direction": variant["schedule_direction"],
+            }
+            for task in ordered_tasks
+        ]
+        runs[str(variant["name"])] = run_tasks(
+            scheduled_tasks, int(variant["workers"])
+        )
     names = list(runs)
     signatures = {name: _proof_signature(rows) for name, rows in runs.items()}
     reference = signatures[names[0]]
@@ -342,16 +713,17 @@ def determinism_proof(
         name: sorted(task_id for task_id in reference if signatures[name].get(task_id) != reference[task_id])
         for name in names[1:]
     }
-    trace_root = output.parent / "determinism_traces"
     trace_files: dict[str, dict[str, str]] = {}
-    for name, rows in runs.items():
-        run_dir = trace_root / name
-        run_dir.mkdir(parents=True, exist_ok=True)
-        trace_files[name] = {}
-        for row in rows:
-            trace_path = run_dir / f"{row['task_id']}.jsonl"
-            trace_path.write_bytes(row["trace"])
-            trace_files[name][str(row["task_id"])] = sha256_file(trace_path)
+    if trace_mode == "full":
+        trace_root = output.parent / "determinism_traces"
+        for name, rows in runs.items():
+            run_dir = trace_root / name
+            run_dir.mkdir(parents=True, exist_ok=True)
+            trace_files[name] = {}
+            for row in rows:
+                trace_path = run_dir / f"{row['task_id']}.jsonl"
+                trace_path.write_bytes(row["trace"])
+                trace_files[name][str(row["task_id"])] = sha256_file(trace_path)
 
     passed = all(not values for values in mismatches.values())
     result = {
@@ -360,19 +732,36 @@ def determinism_proof(
         "excluded_from_trace": [
             "search_begin_input (opaque raw-struct search snapshot is not byte-stable across process starts; downstream public observations, selected actions, and outcomes remain covered)"
         ],
+        **identity,
+        "audit_mode": audit,
+        "admission_decision": "admit" if passed else "suppress",
         "engine": str(engine.resolve()),
-        "engine_sha256": sha256_file(engine),
-        "hero_sha256": sha256_path(hero),
-        "opponent_sha256": sha256_path(opponent),
+        **artifacts,
         "tasks": len(tasks),
         "seeds_per_order": seeds_per_order,
+        "base_seed": base_seed,
+        "order_seed_offset": ORDER_SEED_OFFSET,
+        "seed_conversion": {
+            "requested_field": "scheduled_seed",
+            "engine_field": "engine_seed_uint32",
+            "rule": SEED_CONVERSION_RULE,
+            "modulus": UINT32_MODULUS,
+            "schedule_wide_distinct_seed_collision_check": "passed",
+        },
+        "max_decisions": max_decisions,
+        "trace_mode": trace_mode,
+        "trace_payload_files_written": trace_mode == "full",
+        "hero_env": hero_env,
+        "opponent_env": opponent_env,
+        "execution_plan": execution_plan,
+        "execution_environment": _execution_environment(),
         "runs": {name: [_without_trace(row) for row in rows] for name, rows in runs.items()},
         "mismatches": mismatches,
         "trace_files": trace_files,
     }
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    if not passed:
+    if not passed and not audit:
         raise RuntimeError(f"determinism proof failed: {mismatches}")
     return result
 
@@ -391,8 +780,17 @@ def paired_summary(candidate: list[dict[str, Any]], control: list[dict[str, Any]
     for pair_key in sorted(candidate_by_pair):
         candidate_row = candidate_by_pair[pair_key]
         control_row = control_by_pair[pair_key]
+        candidate_seed = int(candidate_row.get("scheduled_seed", candidate_row["seed"]))
+        control_seed = int(control_row.get("scheduled_seed", control_row["seed"]))
+        candidate_engine_seed = int(
+            candidate_row.get("engine_seed_uint32", seed_to_uint32(candidate_seed))
+        )
+        control_engine_seed = int(
+            control_row.get("engine_seed_uint32", seed_to_uint32(control_seed))
+        )
         if (
-            int(candidate_row["seed"]) != int(control_row["seed"])
+            candidate_seed != control_seed
+            or candidate_engine_seed != control_engine_seed
             or candidate_row["actual_order"] != control_row["actual_order"]
             or int(candidate_row["physical_seat"]) != int(control_row["physical_seat"])
         ):
@@ -447,6 +845,10 @@ def paired_evaluation(
     actual_orders: tuple[str, ...] = ("first", "second"),
     hero_env: dict[str, str] | None = None,
     opponent_env: dict[str, str] | None = None,
+    capture_trace_digest: bool = False,
+    protocol_id: str = "evaluate_deterministic_crn.paired.v2",
+    protocol_commit: str | None = None,
+    run_uuid: str | None = None,
 ) -> dict[str, Any]:
     hero_env = dict(hero_env or {})
     opponent_env = dict(opponent_env or {})
@@ -457,13 +859,20 @@ def paired_evaluation(
     ):
         raise ValueError("actual_orders must be a unique subset of ('first', 'second')")
     production_before = sha256_file(production_engine)
+    artifacts = {
+        "engine_sha256": sha256_file(engine),
+        "production_engine_sha256": production_before,
+        "candidate_sha256": sha256_path(candidate),
+        "control_sha256": sha256_path(control),
+        "opponent_sha256": sha256_path(opponent),
+    }
     tasks = []
     for order in actual_orders:
         # Keep each order on its canonical seed stratum even when evaluating only
         # one order, so --actual-order second remains comparable to a two-order run.
         order_index = 0 if order == "first" else 1
         for pair_index in range(pairs_per_order):
-            seed = base_seed + order_index * 1_000_000 + pair_index
+            seed = base_seed + order_index * ORDER_SEED_OFFSET + pair_index
             physical_seat = pair_index % 2
             for arm, hero in (("candidate", candidate), ("control", control)):
                 tasks.append(
@@ -474,15 +883,32 @@ def paired_evaluation(
                         "engine": str(engine.resolve()),
                         "hero": str(hero.resolve()),
                         "opponent": str(opponent.resolve()),
-                        "seed": seed,
+                        "scheduled_seed": seed,
                         "actual_order": order,
                         "physical_seat": physical_seat,
-                        "capture_trace": False,
+                        "trace_mode": "digest" if capture_trace_digest else "none",
                         "max_decisions": max_decisions,
                         "hero_env": hero_env,
                         "opponent_env": opponent_env,
                     }
                 )
+    execution_plan = {
+        "workers": workers,
+        "process_start_method": PROCESS_START_METHOD,
+        "actual_orders": list(actual_orders),
+        "pairs_per_order": pairs_per_order,
+        "capture_trace_digest": capture_trace_digest,
+    }
+    identity = _run_identity(
+        mode="paired",
+        tasks=tasks,
+        protocol_id=protocol_id,
+        protocol_commit=protocol_commit,
+        run_uuid=run_uuid,
+        artifacts=artifacts,
+        execution_plan=execution_plan,
+    )
+    tasks = _attach_run_identity(tasks, identity)
     started = time.time()
     rows = run_tasks(tasks, workers)
     orders: dict[str, Any] = {}
@@ -494,23 +920,38 @@ def paired_evaluation(
     all_control = [row for row in rows if row["arm"] == "control"]
     production_after = sha256_file(production_engine)
     result = {
+        **identity,
         "engine": str(engine.resolve()),
-        "engine_sha256": sha256_file(engine),
+        "engine_sha256": artifacts["engine_sha256"],
         "production_engine": str(production_engine.resolve()),
         "production_engine_sha256_before": production_before,
         "production_engine_sha256_after": production_after,
         "production_engine_preserved": production_before == production_after,
         "candidate": str(candidate.resolve()),
-        "candidate_sha256": sha256_path(candidate),
+        "candidate_sha256": artifacts["candidate_sha256"],
         "control": str(control.resolve()),
-        "control_sha256": sha256_path(control),
+        "control_sha256": artifacts["control_sha256"],
         "opponent": str(opponent.resolve()),
-        "opponent_sha256": sha256_path(opponent),
+        "opponent_sha256": artifacts["opponent_sha256"],
         "pairs_per_order": pairs_per_order,
         "actual_orders": list(actual_orders),
         "games": len(rows),
         "workers": workers,
         "base_seed": base_seed,
+        "order_seed_offset": ORDER_SEED_OFFSET,
+        "seed_conversion": {
+            "requested_field": "scheduled_seed",
+            "engine_field": "engine_seed_uint32",
+            "rule": SEED_CONVERSION_RULE,
+            "modulus": UINT32_MODULUS,
+            "schedule_wide_distinct_seed_collision_check": "passed",
+        },
+        "max_decisions": max_decisions,
+        "capture_trace_digest": capture_trace_digest,
+        "execution_plan": execution_plan,
+        "execution_environment": _execution_environment(),
+        "hero_env": hero_env,
+        "opponent_env": opponent_env,
         "elapsed_seconds": time.time() - started,
         "rng_provenance": {
             "engine": "local_seeded_mt19937",
@@ -543,6 +984,28 @@ def main() -> int:
     proof.add_argument("--seeds-per-order", type=int, default=2)
     proof.add_argument("--parallel-workers", type=int, default=4)
     proof.add_argument("--max-decisions", type=int, default=2_000)
+    proof.add_argument("--hero-env", type=json.loads, default={})
+    proof.add_argument("--opponent-env", type=json.loads, default={})
+    proof.add_argument("--trace-mode", choices=("digest", "full"), default="full")
+    proof.add_argument(
+        "--execution-variant",
+        action="append",
+        choices=PROOF_EXECUTION_VARIANTS,
+        help="repeat to select explicit serial/parallel and forward/reverse runs",
+    )
+    proof.add_argument(
+        "--stress-matrix",
+        action="store_true",
+        help="run all four serial/parallel by forward/reverse execution variants",
+    )
+    proof.add_argument("--protocol-id", default="evaluate_deterministic_crn.prove.v2")
+    proof.add_argument("--protocol-commit")
+    proof.add_argument("--run-uuid")
+    proof.add_argument(
+        "--audit",
+        action="store_true",
+        help="write and return failed reproducibility audits instead of raising",
+    )
 
     paired = subparsers.add_parser("paired", help="paired temporal/control arms on common engine seeds")
     paired.add_argument("--engine", type=Path, default=DEFAULT_ENGINE)
@@ -558,9 +1021,24 @@ def main() -> int:
     paired.add_argument("--max-decisions", type=int, default=2_000)
     paired.add_argument("--hero-env", type=json.loads, default={})
     paired.add_argument("--opponent-env", type=json.loads, default={})
+    paired.add_argument(
+        "--capture-trace-digest",
+        action="store_true",
+        help="hash public-state/action traces without retaining trace payloads",
+    )
+    paired.add_argument("--protocol-id", default="evaluate_deterministic_crn.paired.v2")
+    paired.add_argument("--protocol-commit")
+    paired.add_argument("--run-uuid")
     args = parser.parse_args()
 
     if args.mode == "prove":
+        if args.stress_matrix and args.execution_variant:
+            parser.error("--stress-matrix cannot be combined with --execution-variant")
+        execution_variants = (
+            PROOF_EXECUTION_VARIANTS
+            if args.stress_matrix
+            else tuple(args.execution_variant) if args.execution_variant else None
+        )
         result = determinism_proof(
             engine=args.engine,
             hero=args.hero,
@@ -570,6 +1048,14 @@ def main() -> int:
             seeds_per_order=args.seeds_per_order,
             parallel_workers=args.parallel_workers,
             max_decisions=args.max_decisions,
+            protocol_id=args.protocol_id,
+            protocol_commit=args.protocol_commit,
+            run_uuid=args.run_uuid,
+            audit=args.audit,
+            hero_env=args.hero_env,
+            opponent_env=args.opponent_env,
+            trace_mode=args.trace_mode,
+            execution_variants=execution_variants,
         )
     else:
         result = paired_evaluation(
@@ -586,6 +1072,10 @@ def main() -> int:
             actual_orders=("first", "second") if args.actual_order == "both" else (args.actual_order,),
             hero_env=args.hero_env,
             opponent_env=args.opponent_env,
+            capture_trace_digest=args.capture_trace_digest,
+            protocol_id=args.protocol_id,
+            protocol_commit=args.protocol_commit,
+            run_uuid=args.run_uuid,
         )
     printable = {key: value for key, value in result.items() if key not in {"rows", "runs", "trace_files"}}
     print(json.dumps(printable, indent=2, sort_keys=True))
