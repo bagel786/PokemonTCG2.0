@@ -3,7 +3,11 @@
 The sanitized companion package under `release/` contains the processed
 one-row-per-paired-unit outcome table, statistical summaries, figure inputs,
 analysis scripts, protocols, hashes, and environment specification needed to
-reproduce the reported tables and figures from processed data.
+regenerate the reported tables and figures from processed outcomes and recorded
+summary files. The package independently verifies the primary row schedule,
+marginal counts, discordant counts, exact McNemar calculation, and equal-weight
+point estimate, but it does not independently recompute every interval or
+statistic from engine trajectories.
 
 The underlying tournament engine, engine source and binaries, card database,
 deck files, private replay observations, and third-party opponent packages are
@@ -23,4 +27,7 @@ feature extraction cannot be reconstructed from those raw replays.
 
 Repository DOI, archival location, maintainer contact, and any controlled-access
 request procedure: **to be supplied by the corresponding author before
-submission**.
+submission**. Once supplied, the authors must add a formal reference-list
+citation for the released data/software package (creators, title, year, version,
+repository, and persistent identifier) and cite it in the manuscript Data
+Availability Statement.

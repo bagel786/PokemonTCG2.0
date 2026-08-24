@@ -18,5 +18,7 @@ of the human authors. No generative-image model was used: figures are
 deterministic plots and schematics produced by the disclosed analysis code.
 
 The corresponding author must verify the tool name/version against the final
-submission platform and add any substantive AI assistance used earlier in the
-project that is not recoverable from the repository history.
+submission platform, add any substantive AI assistance used earlier in the
+project that is not recoverable from the repository history, and confirm that
+all AI use complied with applicable terms, privacy duties, and intellectual-
+property and data-access rights.

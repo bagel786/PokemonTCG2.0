@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the canonical paired-game table and preregistered statistics.
+"""Build the canonical paired-game table and prospectively specified statistics.
 
 The fresh-confirmation estimand is the equal-weight mean of candidate-minus-
 control win indicators across the seven opponent by two actual-order strata.
@@ -26,14 +26,21 @@ EXPECTED_CANDIDATE = "83489e0c80c631763c65375d2a7a34d28d6aa9fbb1d11e89d130c83b1e
 EXPECTED_CONTROL = "13426288358d597ead809e45c364c7f7b9274a6eebf55ddd942142e3326535c3"
 EXPECTED_ENGINE = "867e3f9bb87e0b48889a44b5d4b04f5d2d434b2a0788d1b2bcfe0caebcb5ab78"
 EXPECTED_PRODUCTION_ENGINE = "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30"
+EXPECTED_RUNNER = "fa60021b0906401aeb2c7c33e0f65f586eff256d83d689d688a86a40480e1341"
 EXPECTED_FRESH = {
-    "grim_b0.json": ("B0", "Grim", "baseline", "0c15b56a"),
-    "grim_d842_runtime.json": ("d842_runtime", "Grim", "internal_learned", "7db753d6"),
-    "grim_master_v1.json": ("master_v1", "Grim", "internal_learned", "8a06ebab"),
-    "grim_replay_refresh.json": ("replay_refresh", "Grim", "internal_learned", "30e45955"),
-    "starmie_v2_boss_atk.json": ("starmie", "Other", "external", "1b73779d"),
-    "dipplin_d1.json": ("dipplin", "Other", "external", "076ae8de"),
-    "alakazam_2_4a_no_search.json": ("alakazam_no_search", "Other", "external", "5d443388"),
+    "grim_b0.json": ("B0", "Grim", "baseline", "0c15b56adf3b09c654505a152309fdc9f8401579a495da714347d98ae735003c", 202608230000, 8),
+    "grim_d842_runtime.json": ("d842_runtime", "Grim", "internal_learned", "7db753d6610930d8bd9694b4b9bece5ac48733b825422a3e399c18077b55e64e", 202608231000, 8),
+    "grim_master_v1.json": ("master_v1", "Grim", "internal_learned", "8a06ebab47cc60ed981dfada85972eb8a62e732e349f01c2a3085262079f06e8", 202608232000, 8),
+    "grim_replay_refresh.json": ("replay_refresh", "Grim", "internal_learned", "30e45955b67893514c8ee077cac15d46fc207efe781cbce1b94242defda4cbdc", 202608233000, 8),
+    "starmie_v2_boss_atk.json": ("starmie", "Other", "external", "1b73779da7dcc93c8f121090bb0f1ae2d9b10b798ca4c70447b0ce1d6d01c0db", 202608234000, 4),
+    "dipplin_d1.json": ("dipplin", "Other", "external", "076ae8de12d2d6c4a170b47b2d2f9cf538c1d318a05bb2e81f13da9be2cd2026", 202608235000, 4),
+    "alakazam_2_4a_no_search.json": ("alakazam_no_search", "Other", "external", "5d44338891094988ca15f0c26d5187316549facd64a7bfbac04aa0048424e8c7", 202608236000, 8),
+}
+DISPLAY_LABELS = {
+    "B0": "Matched 1", "d842_runtime": "Matched 2",
+    "master_v1": "Matched 3", "replay_refresh": "Matched 4",
+    "starmie": "Broader 1", "dipplin": "Broader 2",
+    "alakazam_no_search": "Broader 3",
 }
 
 
@@ -58,11 +65,20 @@ def outcome(row: dict) -> str:
 
 
 def pair_rows(payload: dict, source: Path, experiment: str, opponent: str,
-              family: str, role: str) -> list[dict]:
+              family: str, role: str, expected_base_seed: int | None = None,
+              require_zero_errors: bool = False) -> list[dict]:
     grouped: dict[tuple[str, int], dict[str, dict]] = defaultdict(dict)
     for row in payload["rows"]:
-        grouped[(str(row["actual_order"]), int(row["pair_index"]))][str(row["arm"])] = row
+        key = (str(row["actual_order"]), int(row["pair_index"]))
+        arm = str(row["arm"])
+        if arm not in {"candidate", "control"}:
+            raise ValueError(f"{source}: invalid arm {arm!r}")
+        if arm in grouped[key]:
+            raise ValueError(f"{source}: duplicate arm {arm} at {key}")
+        grouped[key][arm] = row
     expected = int(payload["overall"]["pairs"])
+    if len(payload["rows"]) != 2 * expected:
+        raise ValueError(f"{source}: expected {2 * expected} rows, got {len(payload['rows'])}")
     if len(grouped) != expected:
         raise ValueError(f"{source}: {len(grouped)} paired keys, expected {expected}")
     source_rel = str(source.relative_to(ROOT))
@@ -75,6 +91,24 @@ def pair_rows(payload: dict, source: Path, experiment: str, opponent: str,
         for field in ("seed", "actual_order", "pair_index", "physical_seat"):
             if candidate.get(field) != control.get(field):
                 raise ValueError(f"{source}: CRN mismatch in {field} at {(actual_order, pair_index)}")
+        if expected_base_seed is not None:
+            if actual_order not in {"first", "second"} or not 0 <= pair_index < 200:
+                raise ValueError(f"{source}: out-of-schedule pair {(actual_order, pair_index)}")
+            expected_seed = expected_base_seed + (1_000_000 if actual_order == "second" else 0) + pair_index
+            if int(candidate["seed"]) != expected_seed:
+                raise ValueError(f"{source}: seed mismatch at {(actual_order, pair_index)}")
+            if int(candidate["physical_seat"]) != pair_index % 2:
+                raise ValueError(f"{source}: physical-seat mismatch at {(actual_order, pair_index)}")
+        for arm_name, row in (("candidate", candidate), ("control", control)):
+            win = int(row.get("win", 0))
+            draw = int(row.get("draw", 0))
+            if win not in {0, 1} or draw not in {0, 1} or win + draw > 1:
+                raise ValueError(f"{source}: invalid outcome for {arm_name} at {(actual_order, pair_index)}")
+            if require_zero_errors and (
+                int(row.get("hero_policy_errors", 0)) != 0
+                or int(row.get("opponent_policy_errors", 0)) != 0
+            ):
+                raise ValueError(f"{source}: policy error for {arm_name} at {(actual_order, pair_index)}")
         records.append({
             "experiment": experiment,
             "candidate_hash": payload["candidate_sha256"],
@@ -202,10 +236,13 @@ def main() -> int:
     canonical: list[dict] = []
     fresh: list[dict] = []
     source_inventory = []
-    for filename, (opponent, family, role, opponent_prefix) in EXPECTED_FRESH.items():
+    runner_path = ROOT / "training/evaluate_deterministic_crn.py"
+    if sha256_file(runner_path) != EXPECTED_RUNNER:
+        raise ValueError("paired runner has drifted from the frozen protocol")
+    for filename, (opponent, family, role, opponent_hash, base_seed, workers) in EXPECTED_FRESH.items():
         path = args.fresh_dir / filename
         if not path.is_file():
-            raise FileNotFoundError(f"missing preregistered cell: {path}")
+            raise FileNotFoundError(f"missing prospectively specified cell: {path}")
         payload = json.loads(path.read_text(encoding="utf-8"))
         checks = {
             "candidate": payload.get("candidate_sha256") == EXPECTED_CANDIDATE,
@@ -214,16 +251,33 @@ def main() -> int:
             "production_before": payload.get("production_engine_sha256_before") == EXPECTED_PRODUCTION_ENGINE,
             "production_after": payload.get("production_engine_sha256_after") == EXPECTED_PRODUCTION_ENGINE,
             "production_preserved": payload.get("production_engine_preserved") is True,
-            "opponent": str(payload.get("opponent_sha256", "")).startswith(opponent_prefix),
+            "opponent": payload.get("opponent_sha256") == opponent_hash,
             "orders": payload.get("actual_orders") == ["first", "second"],
             "pairs": payload.get("pairs_per_order") == 200 and payload.get("overall", {}).get("pairs") == 400,
+            "base_seed": payload.get("base_seed") == base_seed,
+            "workers": payload.get("workers") == workers,
+            "rng": payload.get("rng_provenance") == {
+                "deviceRand": False,
+                "engine": "local_seeded_mt19937",
+                "entrypoint": "BattleStartSeeded",
+                "native_gameplay_random_device": False,
+                "same_actual_order_and_physical_seat_within_pair": True,
+                "same_seed_within_candidate_control_pair": True,
+            },
         }
         if not all(checks.values()):
             raise ValueError(f"{path}: frozen-protocol check failed: {checks}")
-        rows = pair_rows(payload, path, "fresh_confirmation", opponent, family, role)
+        rows = pair_rows(
+            payload, path, "fresh_confirmation", opponent, family, role,
+            expected_base_seed=base_seed, require_zero_errors=True,
+        )
         canonical.extend(rows)
         fresh.extend(rows)
         source_inventory.append({"path": str(path.relative_to(ROOT)), "sha256": sha256_file(path)})
+    source_inventory.append({
+        "path": str(runner_path.relative_to(ROOT)), "sha256": sha256_file(runner_path),
+        "role": "frozen paired runner",
+    })
 
     historical_dir = ROOT / "artifacts/final_sprint"
     for path in sorted(historical_dir.glob("exp23_vs_*.json")):
@@ -290,7 +344,10 @@ def main() -> int:
         "strata": 14,
         "bootstrap_iterations": args.iterations,
         "bootstrap_seed": args.seed,
-        "mcnemar_scope": "pooled discordant pairs; exact two-sided binomial",
+        "mcnemar_scope": (
+            "pooled discordant pairs; exact two-sided binomial test of conditional "
+            "discordant-direction symmetry, sharper than the weak equal-mean-across-strata null"
+        ),
     })
     utility_sensitivity = {
         "coding": "win=1, draw=0, loss=-1",
@@ -346,6 +403,12 @@ def main() -> int:
             "cells": cell_summaries,
             "multiplicity": "Holm family-wise adjustment across 14 prespecified cell tests",
             "win_draw_loss_utility_sensitivity": utility_sensitivity,
+            "execution_provenance_caveat": (
+                "The raw evaluator serializes hashes, workers, seeds, orders, seats, outcomes, "
+                "and errors, but not max-decisions or opponent environment. The committed "
+                "protocol and frozen runner command specify max-decisions=2000 and NO_SEARCH=1 "
+                "for Broader 3; those two settings are not independently recoverable from rows."
+            ),
         },
         "historical_exploratory": {
             "warning": "Schedules overlap and some historical files duplicate pairs; do not pool.",
@@ -426,7 +489,7 @@ def main() -> int:
     result_lines = [
         "% Auto-generated by paper/scripts/analyze_results.py; do not edit.",
         r"\begin{table*}",
-        r"\caption{Fresh preregistered paired confirmation by opponent and actual order. Effects and percentile intervals are percentage-point differences in win probability (EXP23 minus C0).}",
+        r"\caption{Fresh, prospectively specified paired confirmation by fixed opponent and actual order. Effects and percentile intervals are percentage-point differences in win probability (EXP23 minus C0).}",
         r"\label{tab:fresh-cells}",
         r"\begin{ruledtabular}",
         r"\begin{tabular}{llrrrr}",
@@ -436,7 +499,7 @@ def main() -> int:
     for result in cell_summaries:
         low, high = result["paired_bootstrap_95_ci"]
         result_lines.append(
-            f"{escape_tex(result['opponent'])} & {result['actual_order']} & {result['pairs']} & "
+            f"{escape_tex(DISPLAY_LABELS[result['opponent']])} & {result['actual_order']} & {result['pairs']} & "
             f"{100 * result['effect']:+.1f} & [{100 * low:+.1f}, {100 * high:+.1f}] & "
             f"{result['holm_adjusted_p_14_cells']:.3f} \\\\"
         )

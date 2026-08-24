@@ -16,7 +16,7 @@
 - [ ] Author names, affiliations, emails, ORCIDs, and CRediT roles confirmed.
 - [ ] Conflicts, funding, acknowledgments, and prior/public report overlap confirmed.
 - [ ] Complete historical AI-tool use confirmed by the authors.
-- [ ] Archive DOI and maintainer/contact information supplied.
+- [ ] Archive DOI, maintainer/contact information, and formal repository citation supplied and cited in the Data Availability Statement.
 - [ ] Release rights and a valid open-source/data license approved by rights holders.
 - [ ] End-to-end reproduction independently performed from an authorized engine copy.
 

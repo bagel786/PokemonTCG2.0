@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit PLAY identity aliasing and head-only policy disagreement.
+"""Audit PLAY source-identity omission and output-module policy disagreement.
 
 This script uses the frozen, identity-aware feature rows.  It reconstructs the
 historical blind v2 option input by zeroing ``source_card`` for ordinary PLAY
@@ -73,6 +73,20 @@ def multi_play_state(row: dict) -> bool:
     }
     cards.discard(0)
     return len(cards) >= 2
+
+
+def cross_identity_collision_state(row: dict) -> bool:
+    """Whether a row contains an exact blind-input collision across identities."""
+    groups = defaultdict(list)
+    for index in ordinary_play_indices(row):
+        option = row["features"]["options"][index]
+        groups[blind_option_signature(option)].append(
+            int(option.get("source_card", 0) or 0)
+        )
+    return any(
+        len(values) >= 2 and len({card for card in values if card > 0}) >= 2
+        for values in groups.values()
+    )
 
 
 def blind_option_signature(option: dict) -> tuple:
@@ -201,35 +215,74 @@ def main() -> int:
     rows = load_rows(args.corpus)
     source_counts = Counter()
     context_counts = Counter()
-    blind_groups = defaultdict(Counter)
+    corpus_wide_blind_patterns = defaultdict(Counter)
     play_options = unresolved = bound = 0
     play_states = multi_states = 0
+    multi_option_states = multi_option_states_unique_indices = 0
+    numeric_indices_matching_raw = 0
+    within_state_signature_groups = 0
+    within_state_duplicate_groups = 0
+    within_state_cross_identity_collisions = 0
+    states_with_cross_identity_collision = 0
+    collision_instances = 0
     for row in rows:
         indices = ordinary_play_indices(row)
         if indices:
             play_states += 1
         cards = set()
+        hand_indices = []
+        row_blind_groups = defaultdict(list)
         for index in indices:
             option = row["features"]["options"][index]
             legal = row.get("legal_options") or []
             raw = legal[index] if index < len(legal) else {}
             card = int(option.get("source_card", 0) or 0)
-            fallback = int(raw.get("cardId", 0) or 0)
+            hand_index = int(raw.get("index", 0) or 0)
+            hand_indices.append(hand_index)
+            numeric_indices_matching_raw += int(
+                len(option.get("numeric", [])) > 9
+                and abs(float(option["numeric"][9]) - hand_index / 60.0) < 1e-12
+            )
             play_options += 1
-            unresolved += int(fallback == 0)
+            # The historical v2 reconstruction explicitly zeroes this field.
+            # Count the omitted coordinate directly rather than treating a raw
+            # engine field as a substitute for the policy input.
+            unresolved += 1
             bound += int(card > 0)
             cards.add(card)
             source_counts[card] += 1
             context_counts[int(option["context"])] += 1
-            blind_groups[blind_option_signature(option)][card] += 1
+            signature = blind_option_signature(option)
+            row_blind_groups[signature].append(card)
+            corpus_wide_blind_patterns[signature][card] += 1
         cards.discard(0)
         multi_states += int(len(cards) >= 2)
+        if len(indices) >= 2:
+            multi_option_states += 1
+            multi_option_states_unique_indices += int(
+                len(set(hand_indices)) == len(hand_indices)
+            )
+        within_state_signature_groups += len(row_blind_groups)
+        duplicate_groups = [values for values in row_blind_groups.values() if len(values) >= 2]
+        within_state_duplicate_groups += len(duplicate_groups)
+        cross_identity = [
+            values for values in duplicate_groups
+            if len({card for card in values if card > 0}) >= 2
+        ]
+        within_state_cross_identity_collisions += len(cross_identity)
+        states_with_cross_identity_collision += int(bool(cross_identity))
+        collision_instances += sum(len(values) for values in cross_identity)
 
-    collision_groups = {
-        signature: counts for signature, counts in blind_groups.items()
+    # These corpus-wide patterns are not action collisions: their observations
+    # (and therefore the shared state vector supplied to the head) differ.  They
+    # are retained only as a transparent measure of repeated option patterns.
+    corpus_wide_multi_identity_patterns = {
+        signature: counts for signature, counts in corpus_wide_blind_patterns.items()
         if len({card for card in counts if card > 0}) >= 2
     }
-    collision_instances = sum(sum(counts.values()) for counts in collision_groups.values())
+    corpus_wide_multi_identity_instances = sum(
+        sum(counts.values()) for counts in corpus_wide_multi_identity_patterns.values()
+    )
 
     control = PolicyNet(2)
     candidate = PolicyNet(2)
@@ -272,28 +325,43 @@ def main() -> int:
                     if row["features"]["options"] else -1,
                     "action_family": "+".join(OPTION_NAMES.get(value, str(value)) for value in selected_types),
                     "multi_play_identity_state": multi_play_state(row),
+                    "cross_identity_collision_state": cross_identity_collision_state(row),
                     "disagree": candidate_action != control_action,
                     "cls": cls,
                 })
 
     def disagreement(group: list[dict]) -> dict:
+        disagreements = sum(row["disagree"] for row in group)
         return {
             "decisions": len(group),
-            "disagreements": sum(row["disagree"] for row in group),
-            "rate": sum(row["disagree"] for row in group) / max(1, len(group)),
+            "disagreements": disagreements,
+            "rate": disagreements / len(group) if group else None,
         }
 
     holdout = [row for row in comparison_rows if row["split"] == "team_holdout"]
+    split_counts = Counter(row["split"] for row in comparison_rows)
     holdout_disagreements = [row for row in holdout if row["cls"] != "agreement"]
-    per_team = grouped_approval(
+    per_team_named = grouped_approval(
         holdout_disagreements, lambda row: row["team"],
         args.bootstrap_iterations, 2026081601,
     )
-    team_ratios = [value["approval"] for value in per_team.values() if value["approval"] is not None]
+    team_ratios = [
+        value["approval"] for value in per_team_named.values()
+        if value["approval"] is not None
+    ]
+    # Preserve the team-balanced calculation without releasing private labels.
+    per_team = {
+        f"team_{index:02d}": value
+        for index, (_, value) in enumerate(sorted(per_team_named.items()), start=1)
+    }
 
     report = {
-        "schema_version": 1,
-        "method": "feature-row neural-head diagnostic; index-exact actions; no runtime shields",
+        "schema_version": 2,
+        "method": "feature-row neural output-module diagnostic; index-exact actions; no runtime shields",
+        "collision_definition": (
+            "two simultaneously legal ordinary PLAY options in the same decision row "
+            "have identical blind option-head inputs and different repaired source identities"
+        ),
         "provenance": {
             "branch_commit": git_commit(),
             "corpus": str(args.corpus.relative_to(ROOT)),
@@ -307,18 +375,29 @@ def main() -> int:
         },
         "corpus": {
             "decisions": len(rows),
+            "split_decisions": {
+                key: int(value) for key, value in sorted(split_counts.items())
+            },
             "ordinary_play_options": play_options,
             "baseline_unresolved_play_options": unresolved,
             "baseline_unresolved_proportion": unresolved / max(1, play_options),
             "identity_bound_play_options": bound,
             "identity_bound_proportion": bound / max(1, play_options),
             "states_with_play": play_states,
+            "states_with_two_or_more_play_options": multi_option_states,
+            "multi_play_option_states_with_unique_hand_indices": multi_option_states_unique_indices,
+            "play_options_with_numeric_index_matching_raw": numeric_indices_matching_raw,
             "states_with_two_or_more_play_identities": multi_states,
             "multi_identity_proportion_of_play_states": multi_states / max(1, play_states),
-            "blind_option_signature_groups": len(blind_groups),
-            "blind_signature_collision_groups": len(collision_groups),
-            "play_option_instances_in_collision_groups": collision_instances,
-            "collision_instance_proportion": collision_instances / max(1, play_options),
+            "within_state_blind_signature_groups": within_state_signature_groups,
+            "within_state_duplicate_blind_signature_groups": within_state_duplicate_groups,
+            "within_state_cross_identity_collision_groups": within_state_cross_identity_collisions,
+            "states_with_within_state_cross_identity_collision": states_with_cross_identity_collision,
+            "play_option_instances_in_within_state_cross_identity_collisions": collision_instances,
+            "within_state_cross_identity_collision_instance_proportion": collision_instances / max(1, play_options),
+            "corpus_wide_blind_signature_patterns": len(corpus_wide_blind_patterns),
+            "corpus_wide_patterns_with_multiple_source_identities": len(corpus_wide_multi_identity_patterns),
+            "play_option_instances_in_corpus_wide_multi_identity_patterns": corpus_wide_multi_identity_instances,
             "by_context": {str(key): value for key, value in sorted(context_counts.items())},
         },
         "head_disagreement": {
@@ -329,17 +408,33 @@ def main() -> int:
             "other": disagreement([
                 row for row in comparison_rows if not row["multi_play_identity_state"]
             ]),
+            "exact_collision_state": disagreement([
+                row for row in comparison_rows if row["cross_identity_collision_state"]
+            ]),
+            "non_collision_state": disagreement([
+                row for row in comparison_rows if not row["cross_identity_collision_state"]
+            ]),
             "team_holdout": disagreement(holdout),
         },
-        "team_holdout_expert_agreement": {
+        "refresh_holdout_recorded_action_agreement": {
             "overall": bootstrap_approval(
                 holdout_disagreements, args.bootstrap_iterations, 2026081602
             ),
-            "by_collision_state": grouped_approval(
+            "by_multi_identity_state": grouped_approval(
                 holdout_disagreements,
                 lambda row: "multi_play_identity" if row["multi_play_identity_state"] else "other",
                 args.bootstrap_iterations, 2026081603,
             ),
+            "by_exact_collision_state": {
+                "exact_collision": bootstrap_approval(
+                    [row for row in holdout_disagreements if row["cross_identity_collision_state"]],
+                    args.bootstrap_iterations, 2026081613,
+                ),
+                "non_collision": bootstrap_approval(
+                    [row for row in holdout_disagreements if not row["cross_identity_collision_state"]],
+                    args.bootstrap_iterations, 2026081602,
+                ),
+            },
             "by_team": per_team,
             "team_balanced_approval": float(np.mean(team_ratios)) if team_ratios else None,
             "by_actual_order": grouped_approval(
@@ -376,7 +471,7 @@ def main() -> int:
         "decisions": len(rows),
         "play_options": play_options,
         "multi_play_states": multi_states,
-        "collision_groups": len(collision_groups),
+        "within_state_cross_identity_collision_groups": within_state_cross_identity_collisions,
     }, indent=2))
     return 0
 
