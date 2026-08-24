@@ -503,6 +503,17 @@ state distributions; the two estimates cannot be directly tested against or
 subtracted from one another.  It does not establish that outcome-selected
 recorded-action data are poor or that simulated gameplay is unbiased.
 
+\begin{figure*}[t]
+  \includegraphics[width=0.80\textwidth]{figures/fig06_negative_forest.pdf}
+  \caption{Retained null results with surviving raw evidence.  The temporal
+  interval resamples paired units within opponent; the oracle interval resamples
+  root clusters.  PPO, expected-Q, and the older Turn Director are absent because
+  their underlying result rows do not survive.  OpenAI Codex assisted with
+  plotting-code drafting; source inputs and the rendered figure were checked
+  against the cited artifacts.}
+  \label{fig:negative}
+\end{figure*}
+
 \section{Negative and null experiments}
 
 Two bounded experiments retain raw artifacts sufficient for independent
@@ -521,17 +532,6 @@ root-cluster interval [\SequenceCILowPP, \SequenceCIHighPP], below a historicall
 reported +3-point gate whose advance specification cannot be independently
 established from reachable Git history.  This constrains one proposal-and-confirmation
 procedure; it is not a test of planning as a class.
-
-\begin{figure*}
-  \includegraphics[width=0.80\textwidth]{figures/fig06_negative_forest.pdf}
-  \caption{Retained null results with surviving raw evidence.  The temporal
-  interval resamples paired units within opponent; the oracle interval resamples
-  root clusters.  PPO, expected-Q, and the older Turn Director are absent because
-  their underlying result rows do not survive.  OpenAI Codex assisted with
-  plotting-code drafting; source inputs and the rendered figure were checked
-  against the cited artifacts.}
-  \label{fig:negative}
-\end{figure*}
 
 \input{tables/negative.tex}
 
