@@ -96,13 +96,13 @@ def figure_pipeline() -> None:
         if index:
             arrow(ax, (x - 0.035, 0.69), (x, 0.69))
     box(ax, 0.06, 0.18, 0.20, 0.17, "C0 and candidate\nsame seed/order/seat", PURPLE, "//")
-    box(ax, 0.40, 0.18, 0.20, 0.17, "Deterministic\nthird-party engine", GRAY, "..")
+    box(ax, 0.40, 0.18, 0.20, 0.17, "Seeded third-party\ngameplay engine", GRAY, "..")
     box(ax, 0.74, 0.18, 0.20, 0.17, "Paired outcome\nand uncertainty", ORANGE, "xx")
     arrow(ax, (0.89, 0.60), (0.84, 0.35))
     arrow(ax, (0.26, 0.265), (0.40, 0.265))
     arrow(ax, (0.60, 0.265), (0.74, 0.265))
     ax.text(0.03, 0.93, "Policy and matched evaluation pipeline", fontsize=12, weight="bold")
-    ax.text(0.03, 0.04, "Common random numbers define paired units; the engine and opponent population remain frozen.",
+    ax.text(0.03, 0.04, "Engine seed, opponent, order, and seat define schedule pairs; opponent search may vary with runtime.",
             color=GRAY)
     save(fig, "fig01_pipeline")
 
@@ -198,8 +198,8 @@ def figure_gameplay_forest(stats: dict) -> None:
                     capsize=3, linewidth=1.3)
     ax.axvline(0, color=GRAY, linewidth=1, linestyle="--")
     ax.set_yticks(y, [DISPLAY_LABELS.get(label, label.replace("_", " ")) for label, _ in rows])
-    ax.set_xlabel("EXP23 − C0 win probability (percentage points)")
-    ax.set_title("Fresh paired gameplay effects", loc="left", fontsize=12, weight="bold")
+    ax.set_xlabel("EXP23 − C0 observed win-rate difference (percentage points)")
+    ax.set_title("Fresh schedule-paired gameplay differences", loc="left", fontsize=12, weight="bold")
     ax.grid(axis="x", color=LIGHT, linewidth=0.8)
     ax.text(0.99, -0.16, "Squares: defined matched-policy family; circles: broader fixed policies; diamond: equal-weight primary",
             transform=ax.transAxes, ha="right", fontsize=7.5, color=GRAY)
@@ -258,7 +258,7 @@ def figure_negative(negative: dict) -> None:
     ax.text(3, 0.95, "historically reported gate", rotation=90, va="top", ha="right",
             fontsize=7, color=GRAY)
     ax.set_yticks(y, [result["label"] for result in rows])
-    ax.set_xlabel("Candidate − baseline win probability (percentage points)")
+    ax.set_xlabel("Candidate − baseline observed win-rate difference (percentage points)")
     ax.set_title("Retained null results with raw evidence", loc="left", fontsize=12, weight="bold")
     ax.grid(axis="x", color=LIGHT)
     ax.text(0.99, -0.22, "Intervals: opponent-stratified paired bootstrap (temporal) and root-cluster bootstrap (oracle)",
