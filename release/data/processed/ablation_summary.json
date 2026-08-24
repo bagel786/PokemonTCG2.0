@@ -1,0 +1,552 @@
+{
+  "canonical_sha256": "eca841487814c50acccb7f885207e679b906179bb77e6818dfaa430af47e6fcc",
+  "cause_audit": {
+    "Broader1": "Search branches and terminates against a 3.0-second time.monotonic deadline.",
+    "Broader2": "Search uses time.monotonic soft and hard deadlines.",
+    "inference": "This is a design incompatibility, not permission to select the 2,590 agreeing-outcome units or weaken the validation gate.",
+    "native_search_state": "The production search API lazily initializes a module-global native agent pointer; the external policy loader preserves already loaded cg modules across tasks.",
+    "runner": "Candidate and control are separate imap_unordered process-pool tasks. The scheduled gameplay-engine seed, opponent, order, and seat are shared; opponent-search randomness and wall-clock execution are not coupled."
+  },
+  "control_parity_audit": {
+    "by_opponent": {
+      "Broader1": {
+        "any_outcome_record_mismatch_units": 191,
+        "any_serialized_record_mismatch_units": 377,
+        "c1_decisions_by_run": {
+          "C2": 50675,
+          "C3": 49903,
+          "C4": 49996
+        },
+        "c1_wins_by_run": {
+          "C2": 256,
+          "C3": 255,
+          "C4": 261
+        },
+        "pairs": 400,
+        "pairwise_decision_count_mismatch_units": {
+          "C2-C3": 361,
+          "C2-C4": 352,
+          "C3-C4": 356
+        },
+        "pairwise_outcome_mismatch_units": {
+          "C2-C3": 133,
+          "C2-C4": 129,
+          "C3-C4": 120
+        }
+      },
+      "Broader2": {
+        "any_outcome_record_mismatch_units": 19,
+        "any_serialized_record_mismatch_units": 81,
+        "c1_decisions_by_run": {
+          "C2": 43236,
+          "C3": 43157,
+          "C4": 43260
+        },
+        "c1_wins_by_run": {
+          "C2": 208,
+          "C3": 210,
+          "C4": 207
+        },
+        "pairs": 400,
+        "pairwise_decision_count_mismatch_units": {
+          "C2-C3": 73,
+          "C2-C4": 49,
+          "C3-C4": 45
+        },
+        "pairwise_outcome_mismatch_units": {
+          "C2-C3": 18,
+          "C2-C4": 11,
+          "C3-C4": 9
+        }
+      },
+      "Broader3": {
+        "any_outcome_record_mismatch_units": 0,
+        "any_serialized_record_mismatch_units": 0,
+        "c1_decisions_by_run": {
+          "C2": 61992,
+          "C3": 61992,
+          "C4": 61992
+        },
+        "c1_wins_by_run": {
+          "C2": 344,
+          "C3": 344,
+          "C4": 344
+        },
+        "pairs": 400,
+        "pairwise_decision_count_mismatch_units": {
+          "C2-C3": 0,
+          "C2-C4": 0,
+          "C3-C4": 0
+        },
+        "pairwise_outcome_mismatch_units": {
+          "C2-C3": 0,
+          "C2-C4": 0,
+          "C3-C4": 0
+        }
+      },
+      "Matched1": {
+        "any_outcome_record_mismatch_units": 0,
+        "any_serialized_record_mismatch_units": 0,
+        "c1_decisions_by_run": {
+          "C2": 77776,
+          "C3": 77776,
+          "C4": 77776
+        },
+        "c1_wins_by_run": {
+          "C2": 212,
+          "C3": 212,
+          "C4": 212
+        },
+        "pairs": 400,
+        "pairwise_decision_count_mismatch_units": {
+          "C2-C3": 0,
+          "C2-C4": 0,
+          "C3-C4": 0
+        },
+        "pairwise_outcome_mismatch_units": {
+          "C2-C3": 0,
+          "C2-C4": 0,
+          "C3-C4": 0
+        }
+      },
+      "Matched2": {
+        "any_outcome_record_mismatch_units": 0,
+        "any_serialized_record_mismatch_units": 0,
+        "c1_decisions_by_run": {
+          "C2": 78225,
+          "C3": 78225,
+          "C4": 78225
+        },
+        "c1_wins_by_run": {
+          "C2": 227,
+          "C3": 227,
+          "C4": 227
+        },
+        "pairs": 400,
+        "pairwise_decision_count_mismatch_units": {
+          "C2-C3": 0,
+          "C2-C4": 0,
+          "C3-C4": 0
+        },
+        "pairwise_outcome_mismatch_units": {
+          "C2-C3": 0,
+          "C2-C4": 0,
+          "C3-C4": 0
+        }
+      },
+      "Matched3": {
+        "any_outcome_record_mismatch_units": 0,
+        "any_serialized_record_mismatch_units": 0,
+        "c1_decisions_by_run": {
+          "C2": 76157,
+          "C3": 76157,
+          "C4": 76157
+        },
+        "c1_wins_by_run": {
+          "C2": 227,
+          "C3": 227,
+          "C4": 227
+        },
+        "pairs": 400,
+        "pairwise_decision_count_mismatch_units": {
+          "C2-C3": 0,
+          "C2-C4": 0,
+          "C3-C4": 0
+        },
+        "pairwise_outcome_mismatch_units": {
+          "C2-C3": 0,
+          "C2-C4": 0,
+          "C3-C4": 0
+        }
+      },
+      "Matched4": {
+        "any_outcome_record_mismatch_units": 0,
+        "any_serialized_record_mismatch_units": 0,
+        "c1_decisions_by_run": {
+          "C2": 77412,
+          "C3": 77412,
+          "C4": 77412
+        },
+        "c1_wins_by_run": {
+          "C2": 207,
+          "C3": 207,
+          "C4": 207
+        },
+        "pairs": 400,
+        "pairwise_decision_count_mismatch_units": {
+          "C2-C3": 0,
+          "C2-C4": 0,
+          "C3-C4": 0
+        },
+        "pairwise_outcome_mismatch_units": {
+          "C2-C3": 0,
+          "C2-C4": 0,
+          "C3-C4": 0
+        }
+      }
+    },
+    "c1_wins_by_run": {
+      "C2": 1681,
+      "C3": 1682,
+      "C4": 1685
+    },
+    "outcome_record_mismatch_units": 210,
+    "pairs": 2800,
+    "serialized_record_mismatch_units": 458,
+    "trace_capture": false
+  },
+  "execution_provenance_caveat": "Raw rows do not serialize max-decisions or opponent environment, and trace capture is disabled. Those settings are fixed by the committed protocol/runner commands rather than independently recoverable from result rows.",
+  "exploratory_reproducible_control_subset": {
+    "contrasts": [
+      {
+        "contrast": "C2-C1",
+        "effect": -0.014,
+        "left_only_wins": 326,
+        "pairs": 2000,
+        "right_only_wins": 354,
+        "status": "DESCRIPTIVE_ONLY"
+      },
+      {
+        "contrast": "C3-C1",
+        "effect": -0.007,
+        "left_only_wins": 193,
+        "pairs": 2000,
+        "right_only_wins": 207,
+        "status": "DESCRIPTIVE_ONLY"
+      },
+      {
+        "contrast": "C4-C1",
+        "effect": 0.037,
+        "left_only_wins": 370,
+        "pairs": 2000,
+        "right_only_wins": 296,
+        "status": "DESCRIPTIVE_ONLY"
+      },
+      {
+        "contrast": "C4-C2",
+        "effect": 0.051,
+        "left_only_wins": 383,
+        "pairs": 2000,
+        "right_only_wins": 281,
+        "status": "DESCRIPTIVE_ONLY"
+      },
+      {
+        "contrast": "C4-C3",
+        "effect": 0.044,
+        "left_only_wins": 365,
+        "pairs": 2000,
+        "right_only_wins": 277,
+        "status": "DESCRIPTIVE_ONLY"
+      }
+    ],
+    "interaction": {
+      "contrast": "C4-C3-C2+C1",
+      "effect": 0.058,
+      "pairs": 2000,
+      "status": "DESCRIPTIVE_ONLY"
+    },
+    "limitations": "The five-opponent subset was defined after the parity failure, changes the target population, has no trace capture, and is reported only as a descriptive sensitivity. No interval, p-value, or generalization claim is warranted.",
+    "opponents": [
+      "Matched1",
+      "Matched2",
+      "Matched3",
+      "Matched4",
+      "Broader3"
+    ],
+    "pairs": 2000,
+    "selection_rule": "Whole opponent packages with identical available C1 win, draw, error, and decision-count records across all three runs",
+    "status": "POST_HOC_EXPLORATORY_OMIT_FROM_CONFIRMATORY_CLAIMS"
+  },
+  "generated_at_commit": "52df476feff2511945170cf21f135e710f002df3",
+  "invalidating_error": "C1_NOT_REPRODUCIBLE_ACROSS_SEPARATELY_EXECUTED_CELLS",
+  "overwritten_pre_gameplay_c3_caveat": "The first C3 package/report/log were overwritten by the deterministic manifest-correction rerun before C3 gameplay. Session evidence recorded model d22d0b52...8b70 and tree e8122eea...415a6, but those first bytes no longer survive; the final package is the only C3 package evaluated.",
+  "package_hashes": {
+    "C1": "13426288358d597ead809e45c364c7f7b9274a6eebf55ddd942142e3326535c3",
+    "C2": "36e804ae6c593db57b595bfca9fd48592da10957f0e5f840a7e390edbeb39b63",
+    "C3": "236afa20b4ced63169736fea616849fa564281c05e9435e4dd77ecfb4ae5fd54",
+    "C4": "83489e0c80c631763c65375d2a7a34d28d6aa9fbb1d11e89d130c83b1e27f1c0"
+  },
+  "planned_analysis": {
+    "contrasts": [
+      {
+        "contrast": "C2-C1",
+        "status": "NOT_ESTIMABLE"
+      },
+      {
+        "contrast": "C3-C1",
+        "status": "NOT_ESTIMABLE"
+      },
+      {
+        "contrast": "C4-C1",
+        "status": "NOT_ESTIMABLE"
+      },
+      {
+        "contrast": "C4-C2",
+        "status": "NOT_ESTIMABLE"
+      },
+      {
+        "contrast": "C4-C3",
+        "status": "NOT_ESTIMABLE"
+      },
+      {
+        "contrast": "C4-C3-C2+C1",
+        "status": "NOT_ESTIMABLE"
+      }
+    ],
+    "estimand": "equal-weight seven-opponent, fourteen-stratum four-cell contrasts",
+    "pairs": 2800,
+    "reason": "The protocol treated C1 as the within-pair control and the analyzer required its realized record to agree across the separately executed C2, C3, and C4 runs. That gate failed for search-enabled Broader1 and Broader2.",
+    "status": "NOT_ESTIMABLE_UNDER_FROZEN_VALIDATION",
+    "strata": 14
+  },
+  "protocol_commits": {
+    "contrast_clarification": "63ea3135709646c41feb892e863a8bc00e758ed3",
+    "final_training_execution_commit": "e60a2b6cc19f3b17bc119c3405de6bcc15196bd5",
+    "initial_freeze": "a976a2b",
+    "manifest_correction_before_c3_gameplay": "1780417cde50d161f076a8b5fb88a11347586edc"
+  },
+  "schema_version": 2,
+  "script": "paper/scripts/analyze_ablation.py",
+  "script_sha256": "681e1826012557d59376426199aa8e6a7c806a42d8f780fa347d76b54d6ffa81",
+  "sources": [
+    {
+      "path": "paper/data/ablation/training_report.json",
+      "role": "C3 training report",
+      "sha256": "41dbf7bbd3da62cd307f21bc4a60e9b4596ae5c41f64396751134daa29832220"
+    },
+    {
+      "path": "training/evaluate_deterministic_crn.py",
+      "role": "paired_evaluator",
+      "sha256": "fa60021b0906401aeb2c7c33e0f65f586eff256d83d689d688a86a40480e1341"
+    },
+    {
+      "path": "artifacts/sprint_870/opponents/Broader1/agent/search.py",
+      "role": "Broader1_search",
+      "sha256": "658ed0280ed70bad423d39b35a19a79491518fbbf2a82996ac9ac00d90204b6a"
+    },
+    {
+      "path": "artifacts/sprint_870/opponents/Broader1/main.py",
+      "role": "Broader1_entrypoint",
+      "sha256": "7ce106340de055db14e283bf692d10d4ebbaff136d2825caa84c377175376537"
+    },
+    {
+      "path": "artifacts/sprint_870/opponents/Broader2/ptcg_ai/Broader2/search.py",
+      "role": "Broader2_search",
+      "sha256": "14fdb20b672aa16a6f7d02a1b923f4194d44c26f082ddddb288e729f64c2c291"
+    },
+    {
+      "path": "artifacts/sprint_870/opponents/Broader2/main.py",
+      "role": "Broader2_entrypoint",
+      "sha256": "4f7dd46f778e75bc9d865619f2577129ab4ad4ae643a41e4b4876297760bbb5c"
+    },
+    {
+      "path": "vendor/cg/api.py",
+      "role": "native_search_api",
+      "sha256": "593f1298e52a635f90f8f505a52113e9af114f444c293404e37906f18ee06ced"
+    },
+    {
+      "path": "ptcg_ai/external.py",
+      "role": "external_policy_loader",
+      "sha256": "f18294f2e1ee60630fdcc8a63422aa1115365a0b31edeb4ffa6079a270944283"
+    },
+    {
+      "cell": "C2",
+      "opponent": "Matched1",
+      "path": "paper/data/ablation/raw/c2_identity_a2_Matched1.json",
+      "role": "gameplay result",
+      "sha256": "9027d8e1f8e223a9c1302f387eccf1e3f973398fd73614ae30046400930f9233"
+    },
+    {
+      "cell": "C3",
+      "opponent": "Matched1",
+      "path": "paper/data/ablation/raw/c3_blind_trained_Matched1.json",
+      "role": "gameplay result",
+      "sha256": "b8cea10f24913d9b2c1853c847e60d3d10e748f5d891948c8071a29444d53b96"
+    },
+    {
+      "cell": "C4",
+      "opponent": "Matched1",
+      "path": "paper/data/fresh_confirmation/raw/Matched1.json",
+      "role": "gameplay result",
+      "sha256": "3c161a3d52c0e2ee383cb6b7493ad5ded03ab320097bb6b184a7a71d086407fb"
+    },
+    {
+      "cell": "C2",
+      "opponent": "Matched2",
+      "path": "paper/data/ablation/raw/c2_identity_a2_Matched2.json",
+      "role": "gameplay result",
+      "sha256": "600501d6b78552e9a410e586763e9b7673b66233520b6f46aaa8221839e45592"
+    },
+    {
+      "cell": "C3",
+      "opponent": "Matched2",
+      "path": "paper/data/ablation/raw/c3_blind_trained_Matched2.json",
+      "role": "gameplay result",
+      "sha256": "0070df3c12cd02c848fee621a849efe5a626c8aa8b0af00e220819f0ce0f5883"
+    },
+    {
+      "cell": "C4",
+      "opponent": "Matched2",
+      "path": "paper/data/fresh_confirmation/raw/Matched2.json",
+      "role": "gameplay result",
+      "sha256": "b2d325adbfa752ea2ef05cc0e6c001ca5b2624e70aa5b3230fe61f16f2032370"
+    },
+    {
+      "cell": "C2",
+      "opponent": "Matched3",
+      "path": "paper/data/ablation/raw/c2_identity_a2_Matched3.json",
+      "role": "gameplay result",
+      "sha256": "bcaf8401c04a180567fa38e92931e1cffb9fda0447bb2e72132379216327d005"
+    },
+    {
+      "cell": "C3",
+      "opponent": "Matched3",
+      "path": "paper/data/ablation/raw/c3_blind_trained_Matched3.json",
+      "role": "gameplay result",
+      "sha256": "a53390700ebff70f0514731ecde68435061254211ab125d691da3ab71c0ee246"
+    },
+    {
+      "cell": "C4",
+      "opponent": "Matched3",
+      "path": "paper/data/fresh_confirmation/raw/Matched3.json",
+      "role": "gameplay result",
+      "sha256": "c52c072d1df4dd6d8dfbbf668d2aeeee553a50b6cb12b0157a523b1d9b2b9734"
+    },
+    {
+      "cell": "C2",
+      "opponent": "Matched4",
+      "path": "paper/data/ablation/raw/c2_identity_a2_Matched4.json",
+      "role": "gameplay result",
+      "sha256": "7ef754cbb07ff21899990af9f7ea1d32a6fe74da45a6c732f5d3de4cddf73926"
+    },
+    {
+      "cell": "C3",
+      "opponent": "Matched4",
+      "path": "paper/data/ablation/raw/c3_blind_trained_Matched4.json",
+      "role": "gameplay result",
+      "sha256": "f1d2006c08a3fda6f847998185590132a7909273bf36fcb44ac5fe16166914a1"
+    },
+    {
+      "cell": "C4",
+      "opponent": "Matched4",
+      "path": "paper/data/fresh_confirmation/raw/Matched4.json",
+      "role": "gameplay result",
+      "sha256": "1c31c89df874ba793112922026db322a2c24c30341b7d71b9562e87982e081ef"
+    },
+    {
+      "cell": "C2",
+      "opponent": "Broader1",
+      "path": "paper/data/ablation/raw/c2_identity_a2_Broader1.json",
+      "role": "gameplay result",
+      "sha256": "26c08c7ad3bd20742b44ebb80d662eb9d85c67876ade83e5a0fbb15510656b3f"
+    },
+    {
+      "cell": "C3",
+      "opponent": "Broader1",
+      "path": "paper/data/ablation/raw/c3_blind_trained_Broader1.json",
+      "role": "gameplay result",
+      "sha256": "9d2b0c987afd49c25e5c54814263c0eace8c8cc5eabe918548e5c2664ea3bf51"
+    },
+    {
+      "cell": "C4",
+      "opponent": "Broader1",
+      "path": "paper/data/fresh_confirmation/raw/Broader1.json",
+      "role": "gameplay result",
+      "sha256": "a25e535548268f23ec364de322a5b42566da35a4b0ada4eb6b6f3bf375457ab7"
+    },
+    {
+      "cell": "C2",
+      "opponent": "Broader2",
+      "path": "paper/data/ablation/raw/c2_identity_a2_Broader2.json",
+      "role": "gameplay result",
+      "sha256": "27155ea8810d0d466b100fe10bbe9788e2bf73d3154908fbd0cc351461ba2ffa"
+    },
+    {
+      "cell": "C3",
+      "opponent": "Broader2",
+      "path": "paper/data/ablation/raw/c3_blind_trained_Broader2.json",
+      "role": "gameplay result",
+      "sha256": "fc19c0062ecd04441ca93ba5bfe5d119fde0b0e5b8c89ff79011255053d1a891"
+    },
+    {
+      "cell": "C4",
+      "opponent": "Broader2",
+      "path": "paper/data/fresh_confirmation/raw/Broader2.json",
+      "role": "gameplay result",
+      "sha256": "3892c62c01a04a8b8c24a2d824827096c72ba7b543a97407e763d53b0dd0bac1"
+    },
+    {
+      "cell": "C2",
+      "opponent": "Broader3",
+      "path": "paper/data/ablation/raw/c2_identity_a2_Broader3.json",
+      "role": "gameplay result",
+      "sha256": "db010f55881867bee9a9954c4de764fa86e76e500ef5ea4ac5ce2f047b7b8416"
+    },
+    {
+      "cell": "C3",
+      "opponent": "Broader3",
+      "path": "paper/data/ablation/raw/c3_blind_trained_Broader3.json",
+      "role": "gameplay result",
+      "sha256": "eb611718099704492fc2b4192cd87f9dcad67fbbbc75bbbe13aec4a74848fdd0"
+    },
+    {
+      "cell": "C4",
+      "opponent": "Broader3",
+      "path": "paper/data/fresh_confirmation/raw/Broader3.json",
+      "role": "gameplay result",
+      "sha256": "e414b58f370c6457e36dcd145c6dbbad80a2fad178ce3112a01fc533ca25bb65"
+    }
+  ],
+  "status": "INVALIDATED",
+  "training_validation": {
+    "already_zero": true,
+    "blind": true,
+    "control_model": true,
+    "epochs": true,
+    "frozen": true,
+    "manifest": true,
+    "model": true,
+    "nonpolicy_package_parity": true,
+    "order_manifest": true,
+    "ordinary_play": true,
+    "package_model_bytes": true,
+    "package_models": true,
+    "package_tree": true,
+    "package_tree_bytes": true,
+    "rehearsal": true,
+    "rows": true,
+    "source": true,
+    "training_script": true,
+    "zeroed": true
+  },
+  "within_run_descriptive": {
+    "contrasts": [
+      {
+        "contrast": "C2-C1 (C2 run)",
+        "effect": -0.0010714285714285715,
+        "left_only_wins": 475,
+        "pairs": 2800,
+        "right_only_wins": 478,
+        "status": "DESCRIPTIVE_ONLY"
+      },
+      {
+        "contrast": "C3-C1 (C3 run)",
+        "effect": -0.0067857142857142855,
+        "left_only_wins": 286,
+        "pairs": 2800,
+        "right_only_wins": 305,
+        "status": "DESCRIPTIVE_ONLY"
+      },
+      {
+        "contrast": "C4-C1 (C4 run)",
+        "effect": 0.027857142857142858,
+        "left_only_wins": 496,
+        "pairs": 2800,
+        "right_only_wins": 418,
+        "status": "DESCRIPTIVE_ONLY"
+      }
+    ],
+    "limitations": "These are realized candidate-versus-own-control differences, not validated common-random-number ablation estimates. No interval or p-value is reported.",
+    "status": "POST_FAILURE_PROCESS_SENSITIVE_DESCRIPTION"
+  }
+}

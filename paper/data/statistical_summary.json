@@ -1,0 +1,911 @@
+{
+  "analysis_script": "paper/scripts/analyze_results.py",
+  "analysis_script_sha256": "fbeecf8a3dbc408bc3b21d7b1d6c10aa3adfae06d88207cd67552b75ad833827",
+  "canonical_sha256": "afb23c073ee6bdb7a2a12ca3677533f2b11cfa799eab817337ed18bd8c69998c",
+  "fresh_confirmation": {
+    "by_actual_order": {
+      "first": {
+        "candidate_draws": 1,
+        "candidate_errors": 0,
+        "candidate_only_wins": 239,
+        "candidate_wins": 930,
+        "control_draws": 1,
+        "control_errors": 0,
+        "control_only_wins": 195,
+        "control_wins": 886,
+        "effect": 0.03142857142857143,
+        "mcnemar_exact_two_sided_p": 0.03888876471095909,
+        "opponent_errors": 0,
+        "paired_bootstrap_95_ci": [
+          0.00214285752736032,
+          0.06071428209543228
+        ],
+        "pairs": 1400
+      },
+      "second": {
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 257,
+        "candidate_wins": 833,
+        "control_draws": 1,
+        "control_errors": 0,
+        "control_only_wins": 223,
+        "control_wins": 799,
+        "effect": 0.024285714285714285,
+        "mcnemar_exact_two_sided_p": 0.13192123275820128,
+        "opponent_errors": 0,
+        "paired_bootstrap_95_ci": [
+          -0.006428570952266455,
+          0.054999999701976776
+        ],
+        "pairs": 1400
+      }
+    },
+    "by_opponent": {
+      "B0": {
+        "candidate_draws": 1,
+        "candidate_errors": 0,
+        "candidate_only_wins": 91,
+        "candidate_wins": 242,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 61,
+        "control_wins": 212,
+        "effect": 0.075,
+        "mcnemar_exact_two_sided_p": 0.018367392110610604,
+        "opponent_errors": 0,
+        "paired_bootstrap_95_ci": [
+          0.014999999664723873,
+          0.13499999046325684
+        ],
+        "pairs": 400
+      },
+      "alakazam_no_search": {
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 39,
+        "candidate_wins": 356,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 27,
+        "control_wins": 344,
+        "effect": 0.03,
+        "mcnemar_exact_two_sided_p": 0.1752857944430353,
+        "opponent_errors": 0,
+        "paired_bootstrap_95_ci": [
+          -0.009999999776482582,
+          0.07000000029802322
+        ],
+        "pairs": 400
+      },
+      "d842_runtime": {
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 82,
+        "candidate_wins": 234,
+        "control_draws": 1,
+        "control_errors": 0,
+        "control_only_wins": 75,
+        "control_wins": 227,
+        "effect": 0.0175,
+        "mcnemar_exact_two_sided_p": 0.6321848782933385,
+        "opponent_errors": 0,
+        "paired_bootstrap_95_ci": [
+          -0.042500004172325134,
+          0.07999999821186066
+        ],
+        "pairs": 400
+      },
+      "dipplin": {
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 51,
+        "candidate_wins": 196,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 62,
+        "control_wins": 207,
+        "effect": -0.0275,
+        "mcnemar_exact_two_sided_p": 0.3468931050953346,
+        "opponent_errors": 0,
+        "paired_bootstrap_95_ci": [
+          -0.07999999821186066,
+          0.02499999850988388
+        ],
+        "pairs": 400
+      },
+      "master_v1": {
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 73,
+        "candidate_wins": 231,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 69,
+        "control_wins": 227,
+        "effect": 0.01,
+        "mcnemar_exact_two_sided_p": 0.8013390218104024,
+        "opponent_errors": 0,
+        "paired_bootstrap_95_ci": [
+          -0.04749999940395355,
+          0.06750000268220901
+        ],
+        "pairs": 400
+      },
+      "replay_refresh": {
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 85,
+        "candidate_wins": 228,
+        "control_draws": 1,
+        "control_errors": 0,
+        "control_only_wins": 64,
+        "control_wins": 207,
+        "effect": 0.0525,
+        "mcnemar_exact_two_sided_p": 0.10100293201282838,
+        "opponent_errors": 0,
+        "paired_bootstrap_95_ci": [
+          -0.007499999832361937,
+          0.11249999701976776
+        ],
+        "pairs": 400
+      },
+      "starmie": {
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 75,
+        "candidate_wins": 276,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 60,
+        "control_wins": 261,
+        "effect": 0.0375,
+        "mcnemar_exact_two_sided_p": 0.22810347806601292,
+        "opponent_errors": 0,
+        "paired_bootstrap_95_ci": [
+          -0.019999999552965164,
+          0.0949999988079071
+        ],
+        "pairs": 400
+      }
+    },
+    "by_opponent_family": {
+      "Grim": {
+        "candidate_draws": 1,
+        "candidate_errors": 0,
+        "candidate_only_wins": 331,
+        "candidate_wins": 935,
+        "control_draws": 2,
+        "control_errors": 0,
+        "control_only_wins": 269,
+        "control_wins": 873,
+        "effect": 0.03875,
+        "mcnemar_exact_two_sided_p": 0.012698311769689271,
+        "opponent_errors": 0,
+        "paired_bootstrap_95_ci": [
+          0.008750000037252903,
+          0.06875000149011612
+        ],
+        "pairs": 1600
+      },
+      "Other": {
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 165,
+        "candidate_wins": 828,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 149,
+        "control_wins": 812,
+        "effect": 0.013333333333333334,
+        "mcnemar_exact_two_sided_p": 0.39731051771579057,
+        "opponent_errors": 0,
+        "paired_bootstrap_95_ci": [
+          -0.015833333134651184,
+          0.0416666679084301
+        ],
+        "pairs": 1200
+      }
+    },
+    "cells": [
+      {
+        "actual_order": "first",
+        "candidate_draws": 1,
+        "candidate_errors": 0,
+        "candidate_only_wins": 43,
+        "candidate_wins": 128,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 29,
+        "control_wins": 114,
+        "effect": 0.07,
+        "family": "Grim",
+        "holm_adjusted_p_14_cells": 1.0,
+        "mcnemar_exact_two_sided_p": 0.12491820036864003,
+        "opponent": "B0",
+        "opponent_errors": 0,
+        "paired_bootstrap_95_ci": [
+          -0.014999999664723873,
+          0.15000000596046448
+        ],
+        "pairs": 200
+      },
+      {
+        "actual_order": "second",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 48,
+        "candidate_wins": 114,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 32,
+        "control_wins": 98,
+        "effect": 0.08,
+        "family": "Grim",
+        "holm_adjusted_p_14_cells": 1.0,
+        "mcnemar_exact_two_sided_p": 0.09291188222054621,
+        "opponent": "B0",
+        "opponent_errors": 0,
+        "paired_bootstrap_95_ci": [
+          -0.004999999888241291,
+          0.16500000655651093
+        ],
+        "pairs": 200
+      },
+      {
+        "actual_order": "first",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 18,
+        "candidate_wins": 184,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 9,
+        "control_wins": 175,
+        "effect": 0.045,
+        "family": "Other",
+        "holm_adjusted_p_14_cells": 1.0,
+        "mcnemar_exact_two_sided_p": 0.12207812070846558,
+        "opponent": "alakazam_no_search",
+        "opponent_errors": 0,
+        "paired_bootstrap_95_ci": [
+          -0.004999999888241291,
+          0.0949999988079071
+        ],
+        "pairs": 200
+      },
+      {
+        "actual_order": "second",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 21,
+        "candidate_wins": 172,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 18,
+        "control_wins": 169,
+        "effect": 0.015,
+        "family": "Other",
+        "holm_adjusted_p_14_cells": 1.0,
+        "mcnemar_exact_two_sided_p": 0.7492586247608415,
+        "opponent": "alakazam_no_search",
+        "opponent_errors": 0,
+        "paired_bootstrap_95_ci": [
+          -0.04500000178813934,
+          0.07500000298023224
+        ],
+        "pairs": 200
+      },
+      {
+        "actual_order": "first",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 47,
+        "candidate_wins": 123,
+        "control_draws": 1,
+        "control_errors": 0,
+        "control_only_wins": 33,
+        "control_wins": 109,
+        "effect": 0.07,
+        "family": "Grim",
+        "holm_adjusted_p_14_cells": 1.0,
+        "mcnemar_exact_two_sided_p": 0.1456354544029827,
+        "opponent": "d842_runtime",
+        "opponent_errors": 0,
+        "paired_bootstrap_95_ci": [
+          -0.014999999664723873,
+          0.1550000011920929
+        ],
+        "pairs": 200
+      },
+      {
+        "actual_order": "second",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 35,
+        "candidate_wins": 111,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 42,
+        "control_wins": 118,
+        "effect": -0.035,
+        "family": "Grim",
+        "holm_adjusted_p_14_cells": 1.0,
+        "mcnemar_exact_two_sided_p": 0.49438227369550003,
+        "opponent": "d842_runtime",
+        "opponent_errors": 0,
+        "paired_bootstrap_95_ci": [
+          -0.11999999731779099,
+          0.05000000074505806
+        ],
+        "pairs": 200
+      },
+      {
+        "actual_order": "first",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 25,
+        "candidate_wins": 105,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 33,
+        "control_wins": 113,
+        "effect": -0.04,
+        "family": "Other",
+        "holm_adjusted_p_14_cells": 1.0,
+        "mcnemar_exact_two_sided_p": 0.3581433018061379,
+        "opponent": "dipplin",
+        "opponent_errors": 0,
+        "paired_bootstrap_95_ci": [
+          -0.11500000208616257,
+          0.03500000014901161
+        ],
+        "pairs": 200
+      },
+      {
+        "actual_order": "second",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 26,
+        "candidate_wins": 91,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 29,
+        "control_wins": 94,
+        "effect": -0.015,
+        "family": "Other",
+        "holm_adjusted_p_14_cells": 1.0,
+        "mcnemar_exact_two_sided_p": 0.7877061896700435,
+        "opponent": "dipplin",
+        "opponent_errors": 0,
+        "paired_bootstrap_95_ci": [
+          -0.09000000357627869,
+          0.054999999701976776
+        ],
+        "pairs": 200
+      },
+      {
+        "actual_order": "first",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 31,
+        "candidate_wins": 118,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 41,
+        "control_wins": 128,
+        "effect": -0.05,
+        "family": "Grim",
+        "holm_adjusted_p_14_cells": 1.0,
+        "mcnemar_exact_two_sided_p": 0.28878428041410487,
+        "opponent": "master_v1",
+        "opponent_errors": 0,
+        "paired_bootstrap_95_ci": [
+          -0.13500000536441803,
+          0.03500000014901161
+        ],
+        "pairs": 200
+      },
+      {
+        "actual_order": "second",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 42,
+        "candidate_wins": 113,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 28,
+        "control_wins": 99,
+        "effect": 0.07,
+        "family": "Grim",
+        "holm_adjusted_p_14_cells": 1.0,
+        "mcnemar_exact_two_sided_p": 0.11960933562988493,
+        "opponent": "master_v1",
+        "opponent_errors": 0,
+        "paired_bootstrap_95_ci": [
+          -0.009999999776482582,
+          0.15000000596046448
+        ],
+        "pairs": 200
+      },
+      {
+        "actual_order": "first",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 45,
+        "candidate_wins": 123,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 31,
+        "control_wins": 109,
+        "effect": 0.07,
+        "family": "Grim",
+        "holm_adjusted_p_14_cells": 1.0,
+        "mcnemar_exact_two_sided_p": 0.1353851052994308,
+        "opponent": "replay_refresh",
+        "opponent_errors": 0,
+        "paired_bootstrap_95_ci": [
+          -0.014999999664723873,
+          0.1550000011920929
+        ],
+        "pairs": 200
+      },
+      {
+        "actual_order": "second",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 40,
+        "candidate_wins": 105,
+        "control_draws": 1,
+        "control_errors": 0,
+        "control_only_wins": 33,
+        "control_wins": 98,
+        "effect": 0.035,
+        "family": "Grim",
+        "holm_adjusted_p_14_cells": 1.0,
+        "mcnemar_exact_two_sided_p": 0.4827885568440213,
+        "opponent": "replay_refresh",
+        "opponent_errors": 0,
+        "paired_bootstrap_95_ci": [
+          -0.05000000074505806,
+          0.11999999731779099
+        ],
+        "pairs": 200
+      },
+      {
+        "actual_order": "first",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 30,
+        "candidate_wins": 149,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 19,
+        "control_wins": 138,
+        "effect": 0.055,
+        "family": "Other",
+        "holm_adjusted_p_14_cells": 1.0,
+        "mcnemar_exact_two_sided_p": 0.15240777196147803,
+        "opponent": "starmie",
+        "opponent_errors": 0,
+        "paired_bootstrap_95_ci": [
+          -0.014999999664723873,
+          0.125
+        ],
+        "pairs": 200
+      },
+      {
+        "actual_order": "second",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 45,
+        "candidate_wins": 127,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 41,
+        "control_wins": 123,
+        "effect": 0.02,
+        "family": "Other",
+        "holm_adjusted_p_14_cells": 1.0,
+        "mcnemar_exact_two_sided_p": 0.7465343822890573,
+        "opponent": "starmie",
+        "opponent_errors": 0,
+        "paired_bootstrap_95_ci": [
+          -0.07000000029802322,
+          0.10999999940395355
+        ],
+        "pairs": 200
+      }
+    ],
+    "execution_provenance_caveat": "The raw evaluator serializes hashes, workers, seeds, orders, seats, outcomes, and errors, but not max-decisions or opponent environment. The committed protocol and frozen runner command specify max-decisions=2000 and NO_SEARCH=1 for Broader 3; those two settings are not independently recoverable from rows. Candidate and control share the scheduled gameplay-engine seed, opponent, actual order, and physical seat, but execute as separate process-pool tasks. Search-enabled Starmie and Dipplin use wall-clock deadlines and process-local native search state, so opponent-search randomness and runtime were not coupled. The paired-resampling interval and McNemar calculation are conditional on this one realized execution and do not capture run-to-run timing/native-state variation or cross-game worker dependence.",
+    "multiplicity": "Holm family-wise adjustment across 14 prespecified cell tests",
+    "primary": {
+      "bootstrap_iterations": 100000,
+      "bootstrap_seed": 20260823,
+      "candidate_draws": 1,
+      "candidate_errors": 0,
+      "candidate_only_wins": 496,
+      "candidate_wins": 1763,
+      "control_draws": 2,
+      "control_errors": 0,
+      "control_only_wins": 418,
+      "control_wins": 1685,
+      "effect": 0.027857142857142858,
+      "estimand": "equal-weight mean across 14 opponent-by-actual-order strata",
+      "mcnemar_exact_two_sided_p": 0.010827700446994683,
+      "mcnemar_scope": "pooled discordant pairs; exact two-sided binomial test of conditional discordant-direction symmetry, sharper than the weak equal-mean-across-strata null",
+      "opponent_errors": 0,
+      "paired_bootstrap_95_ci": [
+        0.006785713601857424,
+        0.049285709857940674
+      ],
+      "pairs": 2800,
+      "strata": 14
+    },
+    "win_draw_loss_utility_sensitivity": {
+      "bootstrap_iterations": 100000,
+      "bootstrap_seed": 20260823,
+      "coding": "win=1, draw=0, loss=-1",
+      "effect": 0.055357142857142855,
+      "paired_bootstrap_95_ci": [
+        0.012857144698500633,
+        0.09785714000463486
+      ],
+      "pairs": 2800
+    }
+  },
+  "generated_at_commit": "52df476feff2511945170cf21f135e710f002df3",
+  "historical_exploratory": {
+    "cells": [
+      {
+        "actual_order": "first",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 8,
+        "candidate_wins": 75,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 10,
+        "control_wins": 77,
+        "effect": -0.02,
+        "mcnemar_exact_two_sided_p": 0.8145294189453125,
+        "opponent_errors": 0,
+        "pairs": 100,
+        "source_artifact": "artifacts/final_sprint/exp23_vs_az24_auth_p200.json"
+      },
+      {
+        "actual_order": "first",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 9,
+        "candidate_wins": 172,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 20,
+        "control_wins": 183,
+        "effect": -0.055,
+        "mcnemar_exact_two_sided_p": 0.06142834573984146,
+        "opponent_errors": 0,
+        "pairs": 200,
+        "source_artifact": "artifacts/final_sprint/exp23_vs_az24_p400.json"
+      },
+      {
+        "actual_order": "second",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 22,
+        "candidate_wins": 175,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 14,
+        "control_wins": 167,
+        "effect": 0.04,
+        "mcnemar_exact_two_sided_p": 0.2429849540349096,
+        "opponent_errors": 0,
+        "pairs": 200,
+        "source_artifact": "artifacts/final_sprint/exp23_vs_az24_p400.json"
+      },
+      {
+        "actual_order": "first",
+        "candidate_draws": 1,
+        "candidate_errors": 0,
+        "candidate_only_wins": 121,
+        "candidate_wins": 355,
+        "control_draws": 2,
+        "control_errors": 0,
+        "control_only_wins": 103,
+        "control_wins": 337,
+        "effect": 0.03,
+        "mcnemar_exact_two_sided_p": 0.25596461781212143,
+        "opponent_errors": 0,
+        "pairs": 600,
+        "source_artifact": "artifacts/final_sprint/exp23_vs_ctl_B0_p1200b.json"
+      },
+      {
+        "actual_order": "second",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 125,
+        "candidate_wins": 343,
+        "control_draws": 4,
+        "control_errors": 0,
+        "control_only_wins": 93,
+        "control_wins": 311,
+        "effect": 0.05333333333333334,
+        "mcnemar_exact_two_sided_p": 0.03552375662846776,
+        "opponent_errors": 0,
+        "pairs": 600,
+        "source_artifact": "artifacts/final_sprint/exp23_vs_ctl_B0_p1200b.json"
+      },
+      {
+        "actual_order": "first",
+        "candidate_draws": 1,
+        "candidate_errors": 0,
+        "candidate_only_wins": 83,
+        "candidate_wins": 245,
+        "control_draws": 3,
+        "control_errors": 0,
+        "control_only_wins": 64,
+        "control_wins": 226,
+        "effect": 0.0475,
+        "mcnemar_exact_two_sided_p": 0.13737776624912407,
+        "opponent_errors": 0,
+        "pairs": 400,
+        "source_artifact": "artifacts/final_sprint/exp23_vs_ctl_B0_p800.json"
+      },
+      {
+        "actual_order": "second",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 72,
+        "candidate_wins": 232,
+        "control_draws": 2,
+        "control_errors": 0,
+        "control_only_wins": 64,
+        "control_wins": 224,
+        "effect": 0.02,
+        "mcnemar_exact_two_sided_p": 0.5485023614867376,
+        "opponent_errors": 0,
+        "pairs": 400,
+        "source_artifact": "artifacts/final_sprint/exp23_vs_ctl_B0_p800.json"
+      },
+      {
+        "actual_order": "first",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 83,
+        "candidate_wins": 229,
+        "control_draws": 1,
+        "control_errors": 0,
+        "control_only_wins": 66,
+        "control_wins": 212,
+        "effect": 0.0425,
+        "mcnemar_exact_two_sided_p": 0.18975855790673743,
+        "opponent_errors": 0,
+        "pairs": 400,
+        "source_artifact": "artifacts/final_sprint/exp23_vs_ctl_m1_p800.json"
+      },
+      {
+        "actual_order": "second",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 93,
+        "candidate_wins": 232,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 59,
+        "control_wins": 198,
+        "effect": 0.085,
+        "mcnemar_exact_two_sided_p": 0.007234542621729949,
+        "opponent_errors": 0,
+        "pairs": 400,
+        "source_artifact": "artifacts/final_sprint/exp23_vs_ctl_m1_p800.json"
+      },
+      {
+        "actual_order": "first",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 82,
+        "candidate_wins": 218,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 72,
+        "control_wins": 208,
+        "effect": 0.025,
+        "mcnemar_exact_two_sided_p": 0.46842077785276937,
+        "opponent_errors": 0,
+        "pairs": 400,
+        "source_artifact": "artifacts/final_sprint/exp23_vs_ctl_m1_p800_fresh.json"
+      },
+      {
+        "actual_order": "second",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 105,
+        "candidate_wins": 230,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 69,
+        "control_wins": 194,
+        "effect": 0.09,
+        "mcnemar_exact_two_sided_p": 0.0077879297776790824,
+        "opponent_errors": 0,
+        "pairs": 400,
+        "source_artifact": "artifacts/final_sprint/exp23_vs_ctl_m1_p800_fresh.json"
+      },
+      {
+        "actual_order": "first",
+        "candidate_draws": 1,
+        "candidate_errors": 0,
+        "candidate_only_wins": 93,
+        "candidate_wins": 234,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 66,
+        "control_wins": 207,
+        "effect": 0.0675,
+        "mcnemar_exact_two_sided_p": 0.038877995222780744,
+        "opponent_errors": 0,
+        "pairs": 400,
+        "source_artifact": "artifacts/final_sprint/exp23_vs_ctl_rr_p800.json"
+      },
+      {
+        "actual_order": "second",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 89,
+        "candidate_wins": 217,
+        "control_draws": 1,
+        "control_errors": 0,
+        "control_only_wins": 66,
+        "control_wins": 194,
+        "effect": 0.0575,
+        "mcnemar_exact_two_sided_p": 0.07687597125332386,
+        "opponent_errors": 0,
+        "pairs": 400,
+        "source_artifact": "artifacts/final_sprint/exp23_vs_ctl_rr_p800.json"
+      },
+      {
+        "actual_order": "first",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 13,
+        "candidate_wins": 68,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 9,
+        "control_wins": 64,
+        "effect": 0.04,
+        "mcnemar_exact_two_sided_p": 0.5234670639038086,
+        "opponent_errors": 0,
+        "pairs": 100,
+        "source_artifact": "artifacts/final_sprint/exp23_vs_dipplin_p200.json"
+      },
+      {
+        "actual_order": "second",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 15,
+        "candidate_wins": 43,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 18,
+        "control_wins": 46,
+        "effect": -0.03,
+        "mcnemar_exact_two_sided_p": 0.7283324808813632,
+        "opponent_errors": 0,
+        "pairs": 100,
+        "source_artifact": "artifacts/final_sprint/exp23_vs_dipplin_p200.json"
+      },
+      {
+        "actual_order": "first",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 24,
+        "candidate_wins": 129,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 32,
+        "control_wins": 137,
+        "effect": -0.04,
+        "mcnemar_exact_two_sided_p": 0.3496819529836849,
+        "opponent_errors": 0,
+        "pairs": 200,
+        "source_artifact": "artifacts/final_sprint/exp23_vs_starmie_p400.json"
+      },
+      {
+        "actual_order": "second",
+        "candidate_draws": 0,
+        "candidate_errors": 0,
+        "candidate_only_wins": 43,
+        "candidate_wins": 138,
+        "control_draws": 0,
+        "control_errors": 0,
+        "control_only_wins": 27,
+        "control_wins": 122,
+        "effect": 0.08,
+        "mcnemar_exact_two_sided_p": 0.07223792719176259,
+        "opponent_errors": 0,
+        "pairs": 200,
+        "source_artifact": "artifacts/final_sprint/exp23_vs_starmie_p400.json"
+      }
+    ],
+    "warning": "Schedules overlap and some historical files duplicate pairs; do not pool."
+  },
+  "latency": {
+    "available": false,
+    "reason": "The frozen paired runner did not record per-game latency."
+  },
+  "schema_version": 1,
+  "source_inventory": [
+    {
+      "path": "paper/data/fresh_confirmation/raw/grim_b0.json",
+      "sha256": "3c161a3d52c0e2ee383cb6b7493ad5ded03ab320097bb6b184a7a71d086407fb"
+    },
+    {
+      "path": "paper/data/fresh_confirmation/raw/grim_d842_runtime.json",
+      "sha256": "b2d325adbfa752ea2ef05cc0e6c001ca5b2624e70aa5b3230fe61f16f2032370"
+    },
+    {
+      "path": "paper/data/fresh_confirmation/raw/grim_master_v1.json",
+      "sha256": "c52c072d1df4dd6d8dfbbf668d2aeeee553a50b6cb12b0157a523b1d9b2b9734"
+    },
+    {
+      "path": "paper/data/fresh_confirmation/raw/grim_replay_refresh.json",
+      "sha256": "1c31c89df874ba793112922026db322a2c24c30341b7d71b9562e87982e081ef"
+    },
+    {
+      "path": "paper/data/fresh_confirmation/raw/starmie_v2_boss_atk.json",
+      "sha256": "a25e535548268f23ec364de322a5b42566da35a4b0ada4eb6b6f3bf375457ab7"
+    },
+    {
+      "path": "paper/data/fresh_confirmation/raw/dipplin_d1.json",
+      "sha256": "3892c62c01a04a8b8c24a2d824827096c72ba7b543a97407e763d53b0dd0bac1"
+    },
+    {
+      "path": "paper/data/fresh_confirmation/raw/alakazam_2_4a_no_search.json",
+      "sha256": "e414b58f370c6457e36dcd145c6dbbad80a2fad178ce3112a01fc533ca25bb65"
+    },
+    {
+      "path": "training/evaluate_deterministic_crn.py",
+      "role": "frozen paired runner",
+      "sha256": "fa60021b0906401aeb2c7c33e0f65f586eff256d83d689d688a86a40480e1341"
+    },
+    {
+      "path": "artifacts/final_sprint/exp23_vs_az24_auth_p200.json",
+      "sha256": "ba48fad0b42fd0db2ed5347f63d3cc02b00ad6f0de6ec0bba375896abfc3858a"
+    },
+    {
+      "path": "artifacts/final_sprint/exp23_vs_az24_p400.json",
+      "sha256": "1a56dda97b5f1e593e516fe0432981769398ca763c596d7ac1f6d343153bf49c"
+    },
+    {
+      "path": "artifacts/final_sprint/exp23_vs_ctl_B0_p1200b.json",
+      "sha256": "7fd48c4f0d81ad48baecb98860e578637479943d790cf9ed2e4110ee3a45a551"
+    },
+    {
+      "path": "artifacts/final_sprint/exp23_vs_ctl_B0_p800.json",
+      "sha256": "9288164069128b33c5173d8e61f24871712243193ea0f35a04936b7e9cfe0ce9"
+    },
+    {
+      "path": "artifacts/final_sprint/exp23_vs_ctl_m1_p800.json",
+      "sha256": "fc7870569ec45bc33d2c0ca0c9888339af45febc8f9b9fa1e1577b2358769b79"
+    },
+    {
+      "path": "artifacts/final_sprint/exp23_vs_ctl_m1_p800_fresh.json",
+      "sha256": "653eb29775a101228c4fa2a55ca15168dc7fa41430f33f86ddfab5cf468270a4"
+    },
+    {
+      "path": "artifacts/final_sprint/exp23_vs_ctl_rr_p800.json",
+      "sha256": "ee1f09a26acc58b4ea1cd78f0f04663f60cb523f8d39a5fafb9e39a4b787c160"
+    },
+    {
+      "path": "artifacts/final_sprint/exp23_vs_dipplin_p200.json",
+      "sha256": "281f0d061a2eb600ac9275e241c98b5417584c8c908e7dbc5632b4e77e53bc6f"
+    },
+    {
+      "path": "artifacts/final_sprint/exp23_vs_starmie_p400.json",
+      "sha256": "0f0a5cb946db02e349c9b28b5ba41362447adbeb58f137f2871235db7cf41886"
+    }
+  ]
+}

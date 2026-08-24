@@ -1,0 +1,49 @@
+{
+  "checks": {
+    "all_bibliography_entries_used": true,
+    "citations_resolve": true,
+    "claim_gate": true,
+    "claim_ids_unique": true,
+    "claim_schema": true,
+    "claim_statuses": true,
+    "generated_macros_resolve": true,
+    "historical_tree_untouched": true,
+    "no_exact_12_word_overlap_with_tracked_markdown": true,
+    "release_authorship_blocker_preserved": true,
+    "release_authorship_doi_blocker_preserved": true,
+    "release_doi_blocker_preserved": true,
+    "release_exact_allowlist_and_manifest": true,
+    "release_processed_verifier": true,
+    "release_rights_blocker_preserved": true,
+    "release_sanitization_and_binary_gate": true,
+    "release_verifier_execution_gate": true,
+    "required_paper_files": true,
+    "six_figures_two_formats": true,
+    "statistical_sources_unchanged": true,
+    "unsupported_values_absent": true
+  },
+  "claim_count": 51,
+  "claim_status_counts": {
+    "CONFLICT": 3,
+    "REQUIRES_RERUN": 4,
+    "UNSUPPORTED": 2,
+    "VERIFIED": 31,
+    "VERIFIED_WITH_CAVEAT": 11
+  },
+  "failures": [],
+  "paper_pdf_sha256": "b892b7f737fce27f1ac8457dc6adf804ef53912283c6a7677f69d76698fe20c6",
+  "release_blockers": [
+    "approved release license is absent",
+    "author metadata are incomplete",
+    "archival identifier/DOI metadata are absent"
+  ],
+  "release_manifest_sha256": "6890d8cae29bcfa1a4719e26144daad16fe35fa3ea571d428a39b10af9020710",
+  "release_readiness": "BLOCKED",
+  "status": "PASS",
+  "tracked_markdown_overlap": {
+    "errors": [],
+    "overlaps": [],
+    "sources_scanned": 80,
+    "width_words": 12
+  }
+}

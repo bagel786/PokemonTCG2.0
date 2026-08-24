@@ -1,0 +1,8 @@
+{
+  "abstract_plus_main_words": 4990,
+  "abstract_words": 273,
+  "appendix_words": 665,
+  "main_article_words": 4717,
+  "method": "paper/scripts/count_words.py regex count of alphabetic prose tokens; excludes preamble, display math, table bodies, citations, references, and bibliography",
+  "total_including_appendices": 5655
+}

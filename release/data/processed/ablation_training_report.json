@@ -1,0 +1,118 @@
+{
+  "cell": "blind_encoder_same_training",
+  "control_model_sha256": "b19871a9f1499c2460ae266e58194acab1d8c90b390fa5cf24ed94b9a2b6bda8",
+  "derivation": {
+    "already_zero": 0,
+    "blind_sha256": "b0167f91ec2a8cfb8fe53b04a8e22b95f65bb1db30d0d2569f981382f34b111e",
+    "changed_nonzero_to_zero": 37199,
+    "ordinary_play_options": 37199,
+    "rows": 47653,
+    "source_sha256": "a3d28e9c3ab650a1ec3c1cf708fc7684dc5258a86469d622871e7efe25dcdc40"
+  },
+  "frozen_protocol_commit": "e60a2b6cc19f3b17bc119c3405de6bcc15196bd5",
+  "package": "artifacts/paper_ablation/blind_trained_package",
+  "package_order_manifest_sha256": "42235534c7e2b73be92472d7123bd1cb937bfa262513860270d771607a1aefb7",
+  "package_policy_hashes": {
+    "policy_first.npz": "d22d0b52dd4fac875e93fa1b510733ac14be20acd1152974e147c6742480ab70",
+    "policy_second.npz": "d22d0b52dd4fac875e93fa1b510733ac14be20acd1152974e147c6742480ab70",
+    "policy_weights.npz": "d22d0b52dd4fac875e93fa1b510733ac14be20acd1152974e147c6742480ab70"
+  },
+  "package_tree_sha256": "236afa20b4ced63169736fea616849fa564281c05e9435e4dd77ecfb4ae5fd54",
+  "realized_rehearsal_records": 0,
+  "schema_version": 1,
+  "script": "paper/scripts/train_blind_ablation.py",
+  "script_sha256": "43284492e59cbe591a20a4213962cc0f155888fe48aea7f46bc9b698195d2709",
+  "source_manifest": "artifacts/final_sprint/identity_train/train_manifest.json",
+  "source_manifest_sha256": "8c13a5de5b34c3deec5909948fb8c03117048f0295140c48a0325550a9a1a774",
+  "training": {
+    "best_validation_loss": 0.7428341967050109,
+    "epochs_completed": 3,
+    "frozen_parameters_verified": true,
+    "history": [
+      {
+        "action_kl": 0.00311648839168892,
+        "count_kl": 0.00017162855893175242,
+        "count_loss": 0.03569304907880753,
+        "device": "cpu",
+        "elapsed_seconds": 51.24146294593811,
+        "epoch": 1,
+        "fresh_fraction": 1.0,
+        "fresh_records": 38254,
+        "hard_records": 0,
+        "loss": 0.7268045787006786,
+        "option_loss": 0.7162857351521488,
+        "records": 38254,
+        "rehearsal_records": 0,
+        "single_top1": 0.745361361580837,
+        "validation": {
+          "loss": 0.7464698550425197,
+          "records": 3361,
+          "single_top1": 0.733625822626136
+        },
+        "value_loss": 0.0001588466271856972
+      },
+      {
+        "action_kl": 0.004865170636140743,
+        "count_kl": 0.0005480604311602746,
+        "count_loss": 0.03458290488858489,
+        "device": "cpu",
+        "elapsed_seconds": 153.74138522148132,
+        "epoch": 2,
+        "fresh_fraction": 1.0,
+        "fresh_records": 38254,
+        "hard_records": 0,
+        "loss": 0.7199169385387699,
+        "option_loss": 0.7087595236153712,
+        "records": 38254,
+        "rehearsal_records": 0,
+        "single_top1": 0.7485405760955957,
+        "validation": {
+          "loss": 0.7428341967050109,
+          "records": 3361,
+          "single_top1": 0.7345659667815732
+        },
+        "value_loss": 0.0001059233361442233
+      },
+      {
+        "action_kl": 0.006084423540607535,
+        "count_kl": 0.000831938105204279,
+        "count_loss": 0.03401350225888474,
+        "device": "cpu",
+        "elapsed_seconds": 260.46496391296387,
+        "epoch": 3,
+        "fresh_fraction": 1.0,
+        "fresh_records": 38254,
+        "hard_records": 0,
+        "loss": 0.7150673537195249,
+        "option_loss": 0.7034100765696308,
+        "records": 38254,
+        "rehearsal_records": 0,
+        "single_top1": 0.75078795187327,
+        "validation": {
+          "loss": 0.7433720426487093,
+          "records": 3361,
+          "single_top1": 0.7320589157004074
+        },
+        "value_loss": 7.693455251037029e-05
+      }
+    ],
+    "initial_model": "artifacts/Matched_damage_conversion/winner/extracted/policy_weights.npz",
+    "learning_rate": 0.0001,
+    "module_learning_rates": {},
+    "output": "artifacts/paper_ablation/blind_heads_1e4.npz",
+    "seed": 20260816,
+    "sha256": "d22d0b52dd4fac875e93fa1b510733ac14be20acd1152974e147c6742480ab70",
+    "trainable_parameters": [
+      "option_linear.weight",
+      "option_linear.bias",
+      "score.weight",
+      "score.bias",
+      "count.weight",
+      "count.bias",
+      "value.weight",
+      "value.bias"
+    ]
+  },
+  "training_log": "artifacts/paper_ablation/train_blind.log",
+  "training_log_sha256": "d84d3eac2a1371e55d9953091aa9722c2687eae989e98f9aa5013651ecf3c3a3"
+}

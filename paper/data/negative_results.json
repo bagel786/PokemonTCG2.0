@@ -1,0 +1,86 @@
+{
+  "exclusions": [
+    "PPO, expected-Q, and Turn Director exact estimates are excluded because surviving raw rows are absent."
+  ],
+  "generated_at_commit": "52df476feff2511945170cf21f135e710f002df3",
+  "results": [
+    {
+      "candidate_only": 81,
+      "candidate_wins": 597,
+      "ci_high": 0.021666666492819786,
+      "ci_low": -0.019999999552965164,
+      "control_only": 80,
+      "control_wins": 596,
+      "effect": 0.0008333333535119891,
+      "errors": 0,
+      "experiment": "temporal_two_turn_takeover",
+      "label": "Two-turn temporal takeover",
+      "mcnemar_exact_two_sided_p": 1.0,
+      "method": "paired bootstrap stratified over three opponents; 100000 draws",
+      "n": 1200,
+      "scope": "actual-second; three fixed internal opponents",
+      "unit": "paired games"
+    },
+    {
+      "candidate_only": 56,
+      "candidate_plan_invalidated_worlds": 148,
+      "candidate_wins": 513,
+      "ci_high": 0.01979166641831398,
+      "ci_low": -0.014583333395421505,
+      "clusters": 60,
+      "control_only": 53,
+      "control_wins": 510,
+      "effect": 0.0031250000465661287,
+      "errors": 0,
+      "experiment": "bounded_sequence_oracle",
+      "gate_provenance_commit": "def0c62a6cb804d8991df5c91a541037afc50cde",
+      "gate_provenance_git_blob": "6a9e8e145e9e99dabde5bfa1bcd1a1794b926b40",
+      "gate_provenance_path": "docs/GRIM_SEQUENCE_ORACLE_V0.md",
+      "gate_provenance_sha256": "780c754f351e966037cfb7fa2384b6568c1bf91e27ee37ddf8d598d0ca6303c2",
+      "gate_provenance_status": "The report and gate-bearing implementation first entered reachable Git history with the result artifacts; advance specification is not independently verified.",
+      "historically_reported_gate": 0.03,
+      "label": "Bounded sequence oracle",
+      "mcnemar_exact_two_sided_p": null,
+      "mcnemar_omission_reason": "Worlds are clustered within 60 roots; a world-level exact McNemar test would incorrectly treat the 960 worlds as independent.",
+      "method": "root-cluster bootstrap; 100000 draws",
+      "n": 960,
+      "scope": "second-own-turn roots; three fixed opponents; at most two deviations",
+      "unit": "confirmation worlds (60 root clusters)"
+    }
+  ],
+  "schema_version": 1,
+  "script": "paper/scripts/build_negative_results.py",
+  "script_sha256": "7383390951f166221fc50992a5d8b4ffbb055213e94408f1fcf663c160b298a5",
+  "sources": [
+    {
+      "effect": -0.0125,
+      "pairs": 400,
+      "path": "artifacts/grim_b_final_confirmation_vs_d842_second_400pairs.json",
+      "sha256": "e6e223e1f0651098eb8e72b40a2b5ffb1a8a3b075baa49e5bfd417c8eb9fc8a5"
+    },
+    {
+      "effect": -0.01,
+      "pairs": 400,
+      "path": "artifacts/grim_b_final_confirmation_vs_master_v1_second_400pairs.json",
+      "sha256": "ca7aedc06d2d9e96d3e351d07975c2917fecc739dd5dbe0877ad725a6843ce3d"
+    },
+    {
+      "effect": 0.025,
+      "pairs": 400,
+      "path": "artifacts/grim_b_final_confirmation_vs_replay_refresh_second_400pairs.json",
+      "sha256": "b099ca4b94c77375256408b1b4c3987cd1130d7ee114a9b24939b0ee67534550"
+    },
+    {
+      "path": "artifacts/grim_sequence_oracle_v0/manifest.json",
+      "sha256": "d5e66f88878591d7f2a6d0270c9949aa9f4e591bb44b2855f8e072c57bed6846"
+    },
+    {
+      "path": "artifacts/grim_sequence_oracle_v0/stage1_roots.jsonl.gz",
+      "sha256": "fd98f2792f349e75a77917fb94c380b26409c604cdfb04de2622d3a418765032"
+    },
+    {
+      "path": "artifacts/grim_sequence_oracle_v0/stage1_raw_results.jsonl.gz",
+      "sha256": "4fed0067e8a2c04533428459379d0b25abc07f4e9fadd08ff03ca3a5f389d953"
+    }
+  ]
+}

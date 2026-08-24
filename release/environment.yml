@@ -1,0 +1,7 @@
+name: representation-repair-processed
+channels:
+  - conda-forge
+dependencies:
+  - python=3.13.2
+  - numpy=2.2.5
+  - matplotlib=3.10.5

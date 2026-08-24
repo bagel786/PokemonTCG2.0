@@ -1,0 +1,454 @@
+{
+  "by_action_family": {
+    "ability": {
+      "abstain": 3,
+      "approval": 0.11764705882352941,
+      "binary_decisive": 17,
+      "candidate_approved": 2,
+      "control_approved": 15,
+      "disagreements": 20,
+      "episode_bootstrap_95_ci": [
+        0.0,
+        0.3333333333333333
+      ],
+      "episodes": 9
+    },
+    "attach": {
+      "abstain": 6,
+      "approval": 0.2727272727272727,
+      "binary_decisive": 11,
+      "candidate_approved": 3,
+      "control_approved": 8,
+      "disagreements": 17,
+      "episode_bootstrap_95_ci": [
+        0.0,
+        0.6
+      ],
+      "episodes": 10
+    },
+    "attack": {
+      "abstain": 3,
+      "approval": 0.0,
+      "binary_decisive": 5,
+      "candidate_approved": 0,
+      "control_approved": 5,
+      "disagreements": 8,
+      "episode_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "episodes": 5
+    },
+    "card": {
+      "abstain": 4,
+      "approval": 0.5652173913043478,
+      "binary_decisive": 23,
+      "candidate_approved": 13,
+      "control_approved": 10,
+      "disagreements": 27,
+      "episode_bootstrap_95_ci": [
+        0.43243243243243246,
+        0.8181818181818182
+      ],
+      "episodes": 11
+    },
+    "end": {
+      "abstain": 1,
+      "approval": null,
+      "binary_decisive": 0,
+      "candidate_approved": 0,
+      "control_approved": 0,
+      "disagreements": 1,
+      "episode_bootstrap_95_ci": [
+        null,
+        null
+      ],
+      "episodes": 1
+    },
+    "evolve": {
+      "abstain": 0,
+      "approval": 0.0,
+      "binary_decisive": 5,
+      "candidate_approved": 0,
+      "control_approved": 5,
+      "disagreements": 5,
+      "episode_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "episodes": 4
+    },
+    "play": {
+      "abstain": 19,
+      "approval": 0.6086956521739131,
+      "binary_decisive": 69,
+      "candidate_approved": 42,
+      "control_approved": 27,
+      "disagreements": 88,
+      "episode_bootstrap_95_ci": [
+        0.45569620253164556,
+        0.75
+      ],
+      "episodes": 16
+    },
+    "retreat": {
+      "abstain": 1,
+      "approval": 0.0,
+      "binary_decisive": 2,
+      "candidate_approved": 0,
+      "control_approved": 2,
+      "disagreements": 3,
+      "episode_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "episodes": 3
+    }
+  },
+  "by_actual_order": {
+    "first": {
+      "abstain": 15,
+      "approval": 0.45454545454545453,
+      "binary_decisive": 55,
+      "candidate_approved": 25,
+      "control_approved": 30,
+      "disagreements": 70,
+      "episode_bootstrap_95_ci": [
+        0.2549019607843137,
+        0.6739130434782609
+      ],
+      "episodes": 7
+    },
+    "second": {
+      "abstain": 22,
+      "approval": 0.45454545454545453,
+      "binary_decisive": 77,
+      "candidate_approved": 35,
+      "control_approved": 42,
+      "disagreements": 99,
+      "episode_bootstrap_95_ci": [
+        0.36486486486486486,
+        0.5753424657534246
+      ],
+      "episodes": 9
+    }
+  },
+  "by_context": {
+    "0": {
+      "abstain": 33,
+      "approval": 0.43119266055045874,
+      "binary_decisive": 109,
+      "candidate_approved": 47,
+      "control_approved": 62,
+      "disagreements": 142,
+      "episode_bootstrap_95_ci": [
+        0.3103448275862069,
+        0.5681818181818182
+      ],
+      "episodes": 16
+    },
+    "13": {
+      "abstain": 0,
+      "approval": 0.3333333333333333,
+      "binary_decisive": 3,
+      "candidate_approved": 1,
+      "control_approved": 2,
+      "disagreements": 3,
+      "episode_bootstrap_95_ci": [
+        0.0,
+        1.0
+      ],
+      "episodes": 3
+    },
+    "15": {
+      "abstain": 1,
+      "approval": 1.0,
+      "binary_decisive": 2,
+      "candidate_approved": 2,
+      "control_approved": 0,
+      "disagreements": 3,
+      "episode_bootstrap_95_ci": [
+        1.0,
+        1.0
+      ],
+      "episodes": 3
+    },
+    "16": {
+      "abstain": 0,
+      "approval": 0.75,
+      "binary_decisive": 4,
+      "candidate_approved": 3,
+      "control_approved": 1,
+      "disagreements": 4,
+      "episode_bootstrap_95_ci": [
+        0.0,
+        1.0
+      ],
+      "episodes": 3
+    },
+    "2": {
+      "abstain": 0,
+      "approval": 0.0,
+      "binary_decisive": 1,
+      "candidate_approved": 0,
+      "control_approved": 1,
+      "disagreements": 1,
+      "episode_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "episodes": 1
+    },
+    "22": {
+      "abstain": 0,
+      "approval": 0.5,
+      "binary_decisive": 2,
+      "candidate_approved": 1,
+      "control_approved": 1,
+      "disagreements": 2,
+      "episode_bootstrap_95_ci": [
+        0.0,
+        1.0
+      ],
+      "episodes": 2
+    },
+    "5": {
+      "abstain": 1,
+      "approval": null,
+      "binary_decisive": 0,
+      "candidate_approved": 0,
+      "control_approved": 0,
+      "disagreements": 1,
+      "episode_bootstrap_95_ci": [
+        null,
+        null
+      ],
+      "episodes": 1
+    },
+    "7": {
+      "abstain": 2,
+      "approval": 0.5,
+      "binary_decisive": 10,
+      "candidate_approved": 5,
+      "control_approved": 5,
+      "disagreements": 12,
+      "episode_bootstrap_95_ci": [
+        0.2727272727272727,
+        0.8
+      ],
+      "episodes": 8
+    },
+    "8": {
+      "abstain": 0,
+      "approval": 1.0,
+      "binary_decisive": 1,
+      "candidate_approved": 1,
+      "control_approved": 0,
+      "disagreements": 1,
+      "episode_bootstrap_95_ci": [
+        1.0,
+        1.0
+      ],
+      "episodes": 1
+    }
+  },
+  "by_identity_state": {
+    "multi_play_identity": {
+      "abstain": 32,
+      "approval": 0.4578313253012048,
+      "binary_decisive": 83,
+      "candidate_approved": 38,
+      "control_approved": 45,
+      "disagreements": 115,
+      "episode_bootstrap_95_ci": [
+        0.3469387755102041,
+        0.5857142857142857
+      ],
+      "episodes": 16
+    },
+    "other": {
+      "abstain": 5,
+      "approval": 0.4489795918367347,
+      "binary_decisive": 49,
+      "candidate_approved": 22,
+      "control_approved": 27,
+      "disagreements": 54,
+      "episode_bootstrap_95_ci": [
+        0.325,
+        0.5957446808510638
+      ],
+      "episodes": 15
+    }
+  },
+  "by_team": {
+    "heldout_team_1": {
+      "abstain": 0,
+      "approval": null,
+      "binary_decisive": 0,
+      "candidate_approved": 0,
+      "control_approved": 0,
+      "disagreements": 0,
+      "episode_bootstrap_95_ci": [
+        null,
+        null
+      ],
+      "episodes": 0
+    },
+    "heldout_team_2": {
+      "abstain": 30,
+      "approval": 0.40425531914893614,
+      "binary_decisive": 94,
+      "candidate_approved": 38,
+      "control_approved": 56,
+      "disagreements": 124,
+      "episode_bootstrap_95_ci": [
+        0.3,
+        0.5053763440860215
+      ],
+      "episodes": 11
+    },
+    "heldout_team_3": {
+      "abstain": 0,
+      "approval": null,
+      "binary_decisive": 0,
+      "candidate_approved": 0,
+      "control_approved": 0,
+      "disagreements": 0,
+      "episode_bootstrap_95_ci": [
+        null,
+        null
+      ],
+      "episodes": 0
+    },
+    "heldout_team_4": {
+      "abstain": 7,
+      "approval": 0.5789473684210527,
+      "binary_decisive": 38,
+      "candidate_approved": 22,
+      "control_approved": 16,
+      "disagreements": 45,
+      "episode_bootstrap_95_ci": [
+        0.35135135135135137,
+        0.8387096774193549
+      ],
+      "episodes": 5
+    },
+    "heldout_team_5": {
+      "abstain": 0,
+      "approval": null,
+      "binary_decisive": 0,
+      "candidate_approved": 0,
+      "control_approved": 0,
+      "disagreements": 0,
+      "episode_bootstrap_95_ci": [
+        null,
+        null
+      ],
+      "episodes": 0
+    }
+  },
+  "by_turn_band": {
+    "early": {
+      "abstain": 5,
+      "approval": 0.5384615384615384,
+      "binary_decisive": 26,
+      "candidate_approved": 14,
+      "control_approved": 12,
+      "disagreements": 31,
+      "episode_bootstrap_95_ci": [
+        0.3448275862068966,
+        0.7391304347826086
+      ],
+      "episodes": 12
+    },
+    "late": {
+      "abstain": 18,
+      "approval": 0.30357142857142855,
+      "binary_decisive": 56,
+      "candidate_approved": 17,
+      "control_approved": 39,
+      "disagreements": 74,
+      "episode_bootstrap_95_ci": [
+        0.16176470588235295,
+        0.4807692307692308
+      ],
+      "episodes": 14
+    },
+    "mid": {
+      "abstain": 14,
+      "approval": 0.58,
+      "binary_decisive": 50,
+      "candidate_approved": 29,
+      "control_approved": 21,
+      "disagreements": 64,
+      "episode_bootstrap_95_ci": [
+        0.4883720930232558,
+        0.6730769230769231
+      ],
+      "episodes": 15
+    }
+  },
+  "coverage": {
+    "decision_classes": {
+      "abstain": 37,
+      "c0_approved": 72,
+      "cand_approved": 60,
+      "ignored": 1180
+    },
+    "eligible_episodes": 16,
+    "excluded": {
+      "agreement": 1180,
+      "forced": 154
+    },
+    "prespecified_team_count": 5,
+    "retained_disagreements": 169,
+    "runtime_accounting_limitation": "The historical summary serializes excluded policy-error decisions but not per-package fatal-unit counts; absent fatal-unit counts must not be interpreted as zero.",
+    "teams_with_eligible_units": 2,
+    "total_scored_decisions": 1349,
+    "units": 16,
+    "units_rederived": 16
+  },
+  "eligibility": {
+    "demonstrator_note": "Recorded actions come only from winning units for five prespecified teams using the exact target deck. The retained daily/top-episode source and outcome selection are not a random sample, and independent demonstrator expertise was not established.",
+    "effective_team_note": "Only 2 of the five prespecified teams supplied a winning exact-deck unit in the retained raw episodes; zero-unit teams remain in by_team with null estimates.",
+    "eligibility_rederived_from_raw_episodes": true,
+    "exact_target_deck_only": true,
+    "inspection_note": "The teams and historical certification materials had already been inspected. This fresh reanalysis is secondary refresh-heldout evidence, not an untouched external test.",
+    "prespecified_team_count": 5,
+    "teams_with_eligible_units": 2,
+    "winner_only_units": true
+  },
+  "important_estimand_note": "Approval is conditional on candidate-control semantic disagreement and excludes abstentions; it is not a gameplay win rate or an estimate over all replay decisions.",
+  "label": "fresh_reanalysis_of_retained_2026_08_13_heldout_replays",
+  "method": "historical semantic-action classifier; episode-clustered bootstrap",
+  "overall": {
+    "abstain": 37,
+    "approval": 0.45454545454545453,
+    "binary_decisive": 132,
+    "candidate_approved": 60,
+    "control_approved": 72,
+    "disagreements": 169,
+    "episode_bootstrap_95_ci": [
+      0.35294117647058826,
+      0.5671641791044776
+    ],
+    "episodes": 16
+  },
+  "schema_version": 2,
+  "source": {
+    "historical_evaluator": "scripts/overnight_20260816/replay_disagreement.py",
+    "historical_evaluator_last_change_commit": "9d974bb9ae7c57dad08d4742c8ad4503e1a681c0",
+    "historical_evaluator_sha256": "6b9c1ec38773f5b4ef17e52189e97c482193884f84684941c071684d3c6c72d4",
+    "null_observation_note": "The merged training-corpus rows carry observation=null and cannot support this analysis. This reanalysis instead uses non-null raw-episode observations rejoined to hash-only rows.",
+    "observation_rejoin": "raw episode keyed by (episode, seat, step), hash verified",
+    "portable_rows_observation_storage": "omitted; obs_sha256 retained",
+    "raw_episode_file_count": 104,
+    "raw_episode_ids_sha256": "c2059542df00d31d81eafb84ead74c4e3860f7685ee365e949c7b8cf3fed595e",
+    "raw_rows_sha256": "0456225205a0f3a7a028fedeec268270486c32b82060e7d6c33957e43a45240a",
+    "raw_summary_sha256": "e0367d3f7f16edd919ce671c187004a57fee6854e400f23e496d35d8a45f9db0",
+    "sanitizer": "paper/scripts/summarize_heldout.py",
+    "sanitizer_sha256": "4f463e4066d4c2132ac616db7d2ef5c47ebaa5009e71c78386fbda279f7b745e"
+  },
+  "team_balanced_approval": 0.4916013437849944,
+  "team_balanced_nonnull_team_count": 2
+}

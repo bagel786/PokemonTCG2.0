@@ -3,7 +3,7 @@
 - [x] Fresh hypothesis, endpoint, sample size, seeds, stop rule, and error handling frozen before result access.
 - [x] Candidate, control, opponents, runner, seeded engine, and production sentinel identified by SHA-256.
 - [x] Candidate/control schedule pairing validated on gameplay-engine seed, order, and physical seat.
-- [x] Separate process-pool tasks and time-bounded Starmie/Dipplin search disclosed; no full common-random-number claim made.
+- [x] Separate process-pool tasks and time-bounded Broader1/Broader2 search disclosed; no full common-random-number claim made.
 - [x] One row per paired unit emitted with source-artifact digest.
 - [x] Primary interval uses 100,000 paired within-cell bootstrap draws.
 - [x] Exact McNemar test and 14-cell Holm adjustment reported.

@@ -1,0 +1,528 @@
+{
+  "collision_definition": "two simultaneously legal ordinary PLAY options in the same decision row have identical blind option-head inputs and different repaired source identities",
+  "corpus": {
+    "baseline_unresolved_play_options": 37199,
+    "baseline_unresolved_proportion": 1.0,
+    "by_context": {
+      "0": 37199
+    },
+    "corpus_wide_blind_signature_patterns": 22,
+    "corpus_wide_patterns_with_multiple_source_identities": 17,
+    "decisions": 47653,
+    "identity_bound_play_options": 37199,
+    "identity_bound_proportion": 1.0,
+    "multi_identity_proportion_of_play_states": 0.6215666327568667,
+    "multi_play_option_states_with_unique_hand_indices": 10522,
+    "ordinary_play_options": 37199,
+    "play_option_instances_in_corpus_wide_multi_identity_patterns": 37087,
+    "play_option_instances_in_within_state_cross_identity_collisions": 0,
+    "play_options_with_numeric_index_matching_raw": 37199,
+    "split_decisions": {
+      "internal_validation": 3361,
+      "team_holdout": 6038,
+      "train": 38254
+    },
+    "states_with_play": 15728,
+    "states_with_two_or_more_play_identities": 9776,
+    "states_with_two_or_more_play_options": 10522,
+    "states_with_within_state_cross_identity_collision": 0,
+    "within_state_blind_signature_groups": 37199,
+    "within_state_cross_identity_collision_groups": 0,
+    "within_state_cross_identity_collision_instance_proportion": 0.0,
+    "within_state_duplicate_blind_signature_groups": 0
+  },
+  "head_disagreement": {
+    "all": {
+      "decisions": 47653,
+      "disagreements": 6526,
+      "rate": 0.1369483558222987
+    },
+    "exact_collision_state": {
+      "decisions": 0,
+      "disagreements": 0,
+      "rate": null
+    },
+    "multi_play_identity": {
+      "decisions": 9776,
+      "disagreements": 4339,
+      "rate": 0.443842062193126
+    },
+    "non_collision_state": {
+      "decisions": 47653,
+      "disagreements": 6526,
+      "rate": 0.1369483558222987
+    },
+    "other": {
+      "decisions": 37877,
+      "disagreements": 2187,
+      "rate": 0.057739525305594425
+    },
+    "team_holdout": {
+      "decisions": 6038,
+      "disagreements": 821,
+      "rate": 0.1359721762172905
+    }
+  },
+  "method": "feature-row neural output-module diagnostic; index-exact actions; no runtime shields",
+  "provenance": {
+    "branch_commit": "52df476feff2511945170cf21f135e710f002df3",
+    "candidate_model_sha256": "cefe61189bc6f4e316212b19c99450e4b91ff1e5493f4467a95041c30fd96984",
+    "control_model_sha256": "b19871a9f1499c2460ae266e58194acab1d8c90b390fa5cf24ed94b9a2b6bda8",
+    "corpus": "artifacts/final_sprint/identity_train/merged_decisions.jsonl.gz",
+    "corpus_sha256": "a3d28e9c3ab650a1ec3c1cf708fc7684dc5258a86469d622871e7efe25dcdc40",
+    "manifest": "artifacts/final_sprint/identity_train/train_manifest.json",
+    "manifest_sha256": "8c13a5de5b34c3deec5909948fb8c03117048f0295140c48a0325550a9a1a774",
+    "script": "paper/scripts/audit_representation.py",
+    "script_sha256": "f304645bb75156d64ba33858d0ff78689417a1bbbf9d51835f7ae45037ebb87b"
+  },
+  "refresh_holdout_recorded_action_agreement": {
+    "by_action_family": {
+      "": {
+        "abstain": 0,
+        "approval": 0.5,
+        "candidate_approved": 1,
+        "control_approved": 1,
+        "decisive": 2,
+        "episode_bootstrap_95_ci": [
+          0.0,
+          1.0
+        ],
+        "episodes": 2
+      },
+      "ability": {
+        "abstain": 34,
+        "approval": 0.03787878787878788,
+        "candidate_approved": 5,
+        "control_approved": 127,
+        "decisive": 132,
+        "episode_bootstrap_95_ci": [
+          0.008,
+          0.072
+        ],
+        "episodes": 50
+      },
+      "attach": {
+        "abstain": 18,
+        "approval": 0.14814814814814814,
+        "candidate_approved": 4,
+        "control_approved": 23,
+        "decisive": 27,
+        "episode_bootstrap_95_ci": [
+          0.034482758620689655,
+          0.2962962962962963
+        ],
+        "episodes": 22
+      },
+      "attack": {
+        "abstain": 26,
+        "approval": 0.1111111111111111,
+        "candidate_approved": 3,
+        "control_approved": 24,
+        "decisive": 27,
+        "episode_bootstrap_95_ci": [
+          0.0,
+          0.25
+        ],
+        "episodes": 17
+      },
+      "card": {
+        "abstain": 20,
+        "approval": 0.5494505494505495,
+        "candidate_approved": 50,
+        "control_approved": 41,
+        "decisive": 91,
+        "episode_bootstrap_95_ci": [
+          0.4533333333333333,
+          0.6404494382022472
+        ],
+        "episodes": 45
+      },
+      "end": {
+        "abstain": 3,
+        "approval": 0.6666666666666666,
+        "candidate_approved": 2,
+        "control_approved": 1,
+        "decisive": 3,
+        "episode_bootstrap_95_ci": [
+          0.0,
+          1.0
+        ],
+        "episodes": 3
+      },
+      "evolve": {
+        "abstain": 13,
+        "approval": 0.041666666666666664,
+        "candidate_approved": 1,
+        "control_approved": 23,
+        "decisive": 24,
+        "episode_bootstrap_95_ci": [
+          0.0,
+          0.13043478260869565
+        ],
+        "episodes": 23
+      },
+      "play": {
+        "abstain": 122,
+        "approval": 0.7689393939393939,
+        "candidate_approved": 203,
+        "control_approved": 61,
+        "decisive": 264,
+        "episode_bootstrap_95_ci": [
+          0.7126436781609196,
+          0.8214285714285714
+        ],
+        "episodes": 61
+      },
+      "retreat": {
+        "abstain": 6,
+        "approval": 0.2222222222222222,
+        "candidate_approved": 2,
+        "control_approved": 7,
+        "decisive": 9,
+        "episode_bootstrap_95_ci": [
+          0.0,
+          0.5555555555555556
+        ],
+        "episodes": 9
+      }
+    },
+    "by_actual_order": {
+      "first": {
+        "abstain": 108,
+        "approval": 0.44876325088339225,
+        "candidate_approved": 127,
+        "control_approved": 156,
+        "decisive": 283,
+        "episode_bootstrap_95_ci": [
+          0.37809187279151946,
+          0.5189003436426117
+        ],
+        "episodes": 27
+      },
+      "second": {
+        "abstain": 134,
+        "approval": 0.4864864864864865,
+        "candidate_approved": 144,
+        "control_approved": 152,
+        "decisive": 296,
+        "episode_bootstrap_95_ci": [
+          0.43097643097643096,
+          0.5447478076543351
+        ],
+        "episodes": 34
+      }
+    },
+    "by_context": {
+      "0": {
+        "abstain": 222,
+        "approval": 0.45267489711934156,
+        "candidate_approved": 220,
+        "control_approved": 266,
+        "decisive": 486,
+        "episode_bootstrap_95_ci": [
+          0.4021047149122807,
+          0.5049509871464283
+        ],
+        "episodes": 61
+      },
+      "13": {
+        "abstain": 2,
+        "approval": 0.5294117647058824,
+        "candidate_approved": 9,
+        "control_approved": 8,
+        "decisive": 17,
+        "episode_bootstrap_95_ci": [
+          0.26666666666666666,
+          0.7894736842105263
+        ],
+        "episodes": 15
+      },
+      "15": {
+        "abstain": 3,
+        "approval": 0.625,
+        "candidate_approved": 5,
+        "control_approved": 3,
+        "decisive": 8,
+        "episode_bootstrap_95_ci": [
+          0.25,
+          0.9
+        ],
+        "episodes": 7
+      },
+      "16": {
+        "abstain": 0,
+        "approval": 0.6666666666666666,
+        "candidate_approved": 2,
+        "control_approved": 1,
+        "decisive": 3,
+        "episode_bootstrap_95_ci": [
+          0.0,
+          1.0
+        ],
+        "episodes": 3
+      },
+      "2": {
+        "abstain": 1,
+        "approval": 0.9,
+        "candidate_approved": 9,
+        "control_approved": 1,
+        "decisive": 10,
+        "episode_bootstrap_95_ci": [
+          0.7,
+          1.0
+        ],
+        "episodes": 10
+      },
+      "21": {
+        "abstain": 0,
+        "approval": 0.42857142857142855,
+        "candidate_approved": 3,
+        "control_approved": 4,
+        "decisive": 7,
+        "episode_bootstrap_95_ci": [
+          0.14285714285714285,
+          0.7142857142857143
+        ],
+        "episodes": 6
+      },
+      "22": {
+        "abstain": 5,
+        "approval": 0.5,
+        "candidate_approved": 5,
+        "control_approved": 5,
+        "decisive": 10,
+        "episode_bootstrap_95_ci": [
+          0.2,
+          0.8
+        ],
+        "episodes": 10
+      },
+      "3": {
+        "abstain": 1,
+        "approval": 0.0,
+        "candidate_approved": 0,
+        "control_approved": 1,
+        "decisive": 1,
+        "episode_bootstrap_95_ci": [
+          0.0,
+          0.0
+        ],
+        "episodes": 1
+      },
+      "5": {
+        "abstain": 1,
+        "approval": 0.625,
+        "candidate_approved": 5,
+        "control_approved": 3,
+        "decisive": 8,
+        "episode_bootstrap_95_ci": [
+          0.25,
+          0.875
+        ],
+        "episodes": 8
+      },
+      "7": {
+        "abstain": 6,
+        "approval": 0.4482758620689655,
+        "candidate_approved": 13,
+        "control_approved": 16,
+        "decisive": 29,
+        "episode_bootstrap_95_ci": [
+          0.27586206896551724,
+          0.6206896551724138
+        ],
+        "episodes": 24
+      },
+      "8": {
+        "abstain": 1,
+        "approval": null,
+        "candidate_approved": 0,
+        "control_approved": 0,
+        "decisive": 0,
+        "episode_bootstrap_95_ci": [
+          null,
+          null
+        ],
+        "episodes": 0
+      }
+    },
+    "by_exact_collision_state": {
+      "exact_collision": {
+        "abstain": 0,
+        "approval": null,
+        "candidate_approved": 0,
+        "control_approved": 0,
+        "decisive": 0,
+        "episode_bootstrap_95_ci": [
+          null,
+          null
+        ],
+        "episodes": 0
+      },
+      "non_collision": {
+        "abstain": 242,
+        "approval": 0.4680483592400691,
+        "candidate_approved": 271,
+        "control_approved": 308,
+        "decisive": 579,
+        "episode_bootstrap_95_ci": [
+          0.4234527687296417,
+          0.5133689839572193
+        ],
+        "episodes": 61
+      }
+    },
+    "by_multi_identity_state": {
+      "multi_play_identity": {
+        "abstain": 202,
+        "approval": 0.46938775510204084,
+        "candidate_approved": 184,
+        "control_approved": 208,
+        "decisive": 392,
+        "episode_bootstrap_95_ci": [
+          0.40789473684210525,
+          0.532967032967033
+        ],
+        "episodes": 60
+      },
+      "other": {
+        "abstain": 40,
+        "approval": 0.46524064171123,
+        "candidate_approved": 87,
+        "control_approved": 100,
+        "decisive": 187,
+        "episode_bootstrap_95_ci": [
+          0.4039408866995074,
+          0.5235602094240838
+        ],
+        "episodes": 60
+      }
+    },
+    "by_team": {
+      "team_01": {
+        "abstain": 8,
+        "approval": 0.2857142857142857,
+        "candidate_approved": 2,
+        "control_approved": 5,
+        "decisive": 7,
+        "episode_bootstrap_95_ci": [
+          0.2857142857142857,
+          0.2857142857142857
+        ],
+        "episodes": 1
+      },
+      "team_02": {
+        "abstain": 47,
+        "approval": 0.4716981132075472,
+        "candidate_approved": 50,
+        "control_approved": 56,
+        "decisive": 106,
+        "episode_bootstrap_95_ci": [
+          0.39473684210526316,
+          0.5384615384615384
+        ],
+        "episodes": 10
+      },
+      "team_03": {
+        "abstain": 42,
+        "approval": 0.4175824175824176,
+        "candidate_approved": 38,
+        "control_approved": 53,
+        "decisive": 91,
+        "episode_bootstrap_95_ci": [
+          0.29357798165137616,
+          0.5652173913043478
+        ],
+        "episodes": 11
+      },
+      "team_04": {
+        "abstain": 4,
+        "approval": 0.36363636363636365,
+        "candidate_approved": 4,
+        "control_approved": 7,
+        "decisive": 11,
+        "episode_bootstrap_95_ci": [
+          0.36363636363636365,
+          0.36363636363636365
+        ],
+        "episodes": 1
+      },
+      "team_05": {
+        "abstain": 65,
+        "approval": 0.4567901234567901,
+        "candidate_approved": 74,
+        "control_approved": 88,
+        "decisive": 162,
+        "episode_bootstrap_95_ci": [
+          0.3869047619047619,
+          0.5246913580246914
+        ],
+        "episodes": 17
+      },
+      "team_06": {
+        "abstain": 76,
+        "approval": 0.5099009900990099,
+        "candidate_approved": 103,
+        "control_approved": 99,
+        "decisive": 202,
+        "episode_bootstrap_95_ci": [
+          0.4256410256410256,
+          0.593607305936073
+        ],
+        "episodes": 21
+      }
+    },
+    "by_turn_band": {
+      "early": {
+        "abstain": 31,
+        "approval": 0.5849056603773585,
+        "candidate_approved": 62,
+        "control_approved": 44,
+        "decisive": 106,
+        "episode_bootstrap_95_ci": [
+          0.4954954954954955,
+          0.6759259259259259
+        ],
+        "episodes": 48
+      },
+      "late": {
+        "abstain": 124,
+        "approval": 0.35537190082644626,
+        "candidate_approved": 86,
+        "control_approved": 156,
+        "decisive": 242,
+        "episode_bootstrap_95_ci": [
+          0.2862595419847328,
+          0.428
+        ],
+        "episodes": 55
+      },
+      "mid": {
+        "abstain": 87,
+        "approval": 0.5324675324675324,
+        "candidate_approved": 123,
+        "control_approved": 108,
+        "decisive": 231,
+        "episode_bootstrap_95_ci": [
+          0.47717842323651455,
+          0.5882352941176471
+        ],
+        "episodes": 59
+      }
+    },
+    "overall": {
+      "abstain": 242,
+      "approval": 0.4680483592400691,
+      "candidate_approved": 271,
+      "control_approved": 308,
+      "decisive": 579,
+      "episode_bootstrap_95_ci": [
+        0.4234527687296417,
+        0.5133689839572193
+      ],
+      "episodes": 61
+    },
+    "team_balanced_approval": 0.4175537156160691
+  },
+  "schema_version": 2
+}
