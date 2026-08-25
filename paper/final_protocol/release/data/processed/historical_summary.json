@@ -1,0 +1,19 @@
+{
+  "analysis_unit": "recorded seed/context/order repeated-control unit",
+  "available_record_fields": [
+    "win",
+    "draw",
+    "decision_count"
+  ],
+  "available_record_mismatches": 458,
+  "contexts": 7,
+  "orders": 2,
+  "outcome_record_fields": [
+    "win",
+    "draw"
+  ],
+  "outcome_record_mismatches": 210,
+  "source_sha256": "eca841487814c50acccb7f885207e679b906179bb77e6818dfaa430af47e6fcc",
+  "units": 2800,
+  "warning": "These are available-record projections, not retained complete traces."
+}

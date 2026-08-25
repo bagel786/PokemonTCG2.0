@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-import subprocess
 from pathlib import Path
 from typing import Iterable
 
@@ -14,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[2]
 FRESH = ROOT / "paper/data/fresh_confirmation/raw"
 OUTPUT = ROOT / "paper/data/seed_namespace_audit.json"
 UINT32_MAX = 2**32 - 1
+PEVL_PROTOCOL_COMMIT = "803257f102232763fc88d28c14b668f9b62eb277"
 
 HISTORICAL_FILES = (
     "grim_b0.json",
@@ -148,9 +148,11 @@ def main() -> int:
         "provenance": {
             "script": str(Path(__file__).resolve().relative_to(ROOT)),
             "script_sha256": sha256_file(Path(__file__).resolve()),
-            "git_commit": subprocess.check_output(
-                ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
-            ).strip(),
+            # This audit is evidence for the prospectively frozen design.  Bind
+            # it to that design commit, rather than to whichever later commit
+            # happens to regenerate the deterministic derived file.
+            "git_commit": PEVL_PROTOCOL_COMMIT,
+            "provenance_role": "protocol_commit",
         },
     }
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)

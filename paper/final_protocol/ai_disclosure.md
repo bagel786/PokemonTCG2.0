@@ -1,0 +1,40 @@
+# Artificial-intelligence assistance disclosure
+
+OpenAI Codex, operating with a GPT-5-family model whose exact deployed snapshot
+identifier was not exposed, provided substantive assistance during the August
+2026 research and finalization workflow. Under human direction, that assistance
+included scientific and protocol reasoning; literature search and synthesis;
+code generation and debugging; orchestration of prospectively frozen validation
+workflows; statistical-analysis code and independent reaggregation;
+deterministic visualization; manuscript drafting and editing; release-package
+assembly; reproducibility checks; and adversarial review. Bounded worker agents
+performed evidence, reference, manuscript, implementation, and consistency
+audits. No AI system is an author and no AI system independently authorized an
+experiment, scientific claim, public release, or journal submission.
+
+The human author defined the scientific question and scope, prohibited new
+outcome-driven policy experiments during finalization, froze the acquisition
+and admission protocol, retained authority over experiments and claims, and
+must approve the final manuscript and package. AI-produced suggestions were not
+treated as evidence. Depending on the task, verification used SHA-256 artifact
+identity, strict schemas, protocol-commit and sample-size checks, row-level
+reaggregation, independent equation examples, targeted software tests,
+comparison with primary literature, contradiction and release-manifest checks,
+compilation, and rendered-page inspection. Claims for which those checks could
+not establish the required evidence were removed, downgraded, suppressed, or
+left as explicit blockers.
+
+Research-conduct assistance is described in the Methods section of the
+manuscript. Other substantive drafting, editing, packaging, bibliographic, and
+review assistance is disclosed in the manuscript’s artificial-intelligence
+assistance statement. The task-level record is
+`supplement/AI_USE_LOG.csv`; it gives the available tool/version description,
+human direction, outputs, verification, and disposition.
+
+No generative-image system was used for the manuscript. All figures are
+deterministic schematics or statistical plots produced by checked-in code. The
+corresponding author must still confirm that the log includes any substantive
+earlier AI use not recoverable from repository history and must verify
+compliance with applicable tool terms, confidentiality, privacy, data-access,
+and intellectual-property obligations. Until that confirmation is recorded,
+AI-disclosure completeness remains a submission blocker.

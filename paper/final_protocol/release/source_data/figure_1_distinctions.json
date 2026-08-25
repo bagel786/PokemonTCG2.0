@@ -1,0 +1,20 @@
+[
+  {
+    "evidence": "Boundary seed, context,\norder, seat, and limits",
+    "permits": "Matched-schedule\nattempt",
+    "question": "Were declared\nrows matched?",
+    "stage": "Schedule matching"
+  },
+  {
+    "evidence": "A/A trace-projection digest\nand byte count across profiles",
+    "permits": "Bounded within-arm\nrepeatability",
+    "question": "Does each arm\nrepeat?",
+    "stage": "Execution repeatability"
+  },
+  {
+    "evidence": "Stable event IDs plus\nlogged event/value pairs",
+    "permits": "Event-aligned coupling\nwithin the ontology",
+    "question": "Did shared events receive\nequal random values?",
+    "stage": "Semantic event alignment"
+  }
+]

@@ -1,0 +1,287 @@
+{
+  "article_type": "APS Open Science Protocol Article",
+  "commands": [
+    {
+      "command": "git merge-base --is-ancestor 803257f102232763fc88d28c14b668f9b62eb277 HEAD",
+      "duration_seconds": 0.022,
+      "output_tail": "",
+      "purpose": "verify frozen protocol ancestry",
+      "returncode": 0
+    },
+    {
+      "command": "/opt/miniconda3/bin/python paper/scripts/audit_seed_namespace.py",
+      "duration_seconds": 0.044,
+      "output_tail": "{\n  \"historical\": {\n    \"collision_groups\": {},\n    \"conversion_changed\": 2800,\n    \"engine_seed_max\": 745773287,\n    \"engine_seed_min\": 744767088,\n    \"engine_seed_unique\": 2800,\n    \"passed_no_collision\": true,\n    \"recorded_field_semantics\": \"Historical JSON stores the requested Python integer under `seed`; the adapter passed ctypes.c_uint32(seed).value to BattleStartSeeded.\",\n    \"scheduled_count\": 2800,\n    \"scheduled_max\": 202609236199,\n    \"scheduled_min\": 202608230000,\n    \"scheduled_outside_uint32\": 2800,\n    \"scheduled_unique\": 2800\n  },\n  \"historical_prospective_overlap\": 0,\n  \"output\": \"<repo>/paper/data/seed_namespace_audit.json\",\n  \"prospective\": {\n    \"collision_groups\": {},\n    \"conversion_changed\": 0,\n    \"engine_seed_max\": 2027093749,\n    \"engine_seed_min\": 2026072700,\n    \"engine_seed_unique\": 2450,\n    \"passed_no_collision\": true,\n    \"scheduled_count\": 2450,\n    \"scheduled_max\": 2027093749,\n    \"scheduled_min\": 2026072700,\n    \"scheduled_outside_uint32\": 0,\n    \"scheduled_unique\": 2450\n  }\n}",
+      "purpose": "rebuild observable boundary-seed namespace audit",
+      "returncode": 0
+    },
+    {
+      "command": "/opt/miniconda3/bin/python paper/scripts/audit_stochastic_sources.py",
+      "duration_seconds": 0.798,
+      "output_tail": "{\n  \"level_1\": {\n    \"all_expected_digests_present_in_frozen_protocol\": true,\n    \"all_frozen_hashes_match\": true,\n    \"artifact_count\": 13,\n    \"status\": \"pass\",\n    \"verified_artifact_count\": 13\n  },\n  \"level_6\": {\n    \"admission_interpretation\": \"Source hits identify mechanisms for dynamic testing. A clean static category does not admit a paired contrast or establish determinism.\",\n    \"aggregate_hits_by_category\": {\n      \"clock_or_deadline\": 82,\n      \"explicit_randomness\": 26,\n      \"module_global_state\": 258,\n      \"native_pointer_or_state\": 920,\n      \"process_or_thread_parallelism\": 0\n    },\n    \"artifacts_with_hits_by_category\": {\n      \"clock_or_deadline\": 3,\n      \"explicit_randomness\": 11,\n      \"module_global_state\": 11,\n      \"native_pointer_or_state\": 11,\n      \"process_or_thread_parallelism\": 0\n    },\n    \"status\": \"bounded_audit_recorded\",\n    \"verified_package_tree_count\": 11\n  },\n  \"output\": \"<repo>/paper/data/stochastic_source_audit.json\"\n}",
+      "purpose": "rebuild bounded stochastic-source pattern audit",
+      "returncode": 0
+    },
+    {
+      "command": "/opt/miniconda3/bin/python paper/scripts/analyze_pevl.py",
+      "duration_seconds": 4.931,
+      "output_tail": "{\n  \"factorial\": \"ADMITTED_SEED_MATCHED\",\n  \"output\": \"paper/data/pevl/summary.json\",\n  \"preflight\": \"PASS\",\n  \"stress\": \"TRACE_DIVERGENCE\"\n}",
+      "purpose": "rebuild canonical PEVL summaries and factorial units from retained acquisition artifacts",
+      "returncode": 0
+    },
+    {
+      "command": "/opt/miniconda3/bin/python paper/final_protocol/scripts/verify_statistics.py",
+      "duration_seconds": 4.487,
+      "output_tail": "{\"output\": \"<repo>/paper/final_protocol/source_data/statistics_verification.json\", \"status\": \"PASS\"}",
+      "purpose": "independently verify raw-source hashes, schedules, audits, reaggregation, and statistics",
+      "returncode": 0
+    },
+    {
+      "command": "/opt/miniconda3/bin/python paper/final_protocol/scripts/build_final_artifacts.py",
+      "duration_seconds": 1.284,
+      "output_tail": "{\"files\": 22, \"status\": \"PASS\"}",
+      "purpose": "rebuild generated macros, tables, figures, and source data",
+      "returncode": 0
+    },
+    {
+      "command": "/opt/miniconda3/bin/python paper/final_protocol/scripts/recalculate_equation_examples.py",
+      "duration_seconds": 0.021,
+      "output_tail": "{\"bootstrap_replicate\": 0.6666666666666666, \"factorial\": {\"interaction\": 0.010000000000000009, \"representation\": 0.025000000000000022, \"total\": 0.040000000000000036, \"training\": 0.015000000000000013}, \"paired_difference\": 1, \"status\": \"PASS\", \"trace_disagreement\": 0.4}",
+      "purpose": "recalculate independent equation examples",
+      "returncode": 0
+    },
+    {
+      "command": "/opt/miniconda3/bin/python -m pytest -q tests/test_analyze_pevl.py tests/test_build_pevl_artifacts.py tests/test_build_pevl_result_macros.py tests/test_build_release_pevl.py tests/test_pevl_synthetic.py tests/test_seed_namespace_audit.py tests/test_stochastic_source_audit.py tests/test_verify_pevl_release.py paper/final_protocol/tests/test_equations.py",
+      "duration_seconds": 1.661,
+      "output_tail": "...........................................................              [100%]\n59 passed in 1.21s",
+      "purpose": "run targeted analyzer, audit, synthetic, release, and equation tests",
+      "returncode": 0
+    },
+    {
+      "command": "/opt/miniconda3/bin/python paper/final_protocol/scripts/build_final_release.py",
+      "duration_seconds": 20.026,
+      "output_tail": "  \"scope\": \"engine-independent processed review package\",\n  \"status\": \"PASS\",\n  \"stress\": {\n    \"clusters\": 200,\n    \"decision_count_disagreement_clusters\": 93,\n    \"error_disagreement_clusters\": 0,\n    \"outcome_disagreement_clusters\": 47,\n    \"policy_error_present_clusters\": 0,\n    \"trace_disagreement\": {\n      \"bootstrap_95_ci\": [\n        0.425,\n        0.565\n      ],\n      \"bootstrap_draws\": 100000,\n      \"bootstrap_seed\": 2026083118,\n      \"clusters\": 200,\n      \"estimate\": 0.495\n    },\n    \"trace_disagreement_clusters\": 99\n  },\n  \"synthetic\": {\n    \"levels\": 8,\n    \"modes\": 5,\n    \"status\": \"verified\"\n  }\n}\n{\n  \"manifest\": {\n    \"entries\": 50,\n    \"files_including_manifest\": 51\n  },\n  \"manifest_sha256\": \"ac497430a7d1d72f0428ec4ca668a8712df03455c3f7286ef608f27a51f41e66\",\n  \"publication\": \"staged validation followed by directory replacement\",\n  \"release\": \"paper/final_protocol/release\",\n  \"scan\": {\n    \"files_scanned\": 50,\n    \"problems\": 0\n  },\n  \"status\": \"PASS\"\n}",
+      "purpose": "build sanitized engine-free review package",
+      "returncode": 0
+    },
+    {
+      "command": "/opt/miniconda3/bin/python -m pevl_bench generate",
+      "duration_seconds": 0.045,
+      "output_tail": "generated and verified <repo>/paper/final_protocol/release/pevl_bench/results",
+      "purpose": "regenerate synthetic conformance outputs through the review-package interface",
+      "returncode": 0
+    },
+    {
+      "command": "/opt/miniconda3/bin/python -m pevl_bench verify",
+      "duration_seconds": 0.04,
+      "output_tail": "verified <repo>/paper/final_protocol/release/pevl_bench/results",
+      "purpose": "verify synthetic conformance outputs through the review-package interface",
+      "returncode": 0
+    },
+    {
+      "command": "/opt/miniconda3/bin/python -m pevl_bench report --json",
+      "duration_seconds": 0.042,
+      "output_tail": "          -0.02025000000000001,\n          0.012499999999999994\n        ],\n        \"bootstrap_draws\": 100000,\n        \"bootstrap_seed\": 2026083117,\n        \"estimate\": -0.004,\n        \"resampling\": \"paired units within each of ten opponent-by-order strata\"\n      }\n    },\n    \"games\": 12000,\n    \"status\": \"ADMITTED_SEED_MATCHED\",\n    \"units\": 2000\n  },\n  \"historical_repeated_control\": {\n    \"available_record_mismatches\": 458,\n    \"outcome_record_mismatches\": 210,\n    \"units\": 2800\n  },\n  \"package_scope\": \"processed diagnostics and a synthetic conformance suite; no restricted engine\",\n  \"protocol_commit\": \"803257f102232763fc88d28c14b668f9b62eb277\",\n  \"synthetic\": {\n    \"modes\": 5,\n    \"status\": \"verified\"\n  },\n  \"timed_search_stress\": {\n    \"clusters\": 200,\n    \"status\": \"TRACE_DIVERGENCE\",\n    \"trace_disagreement\": {\n      \"bootstrap_95_ci\": [\n        0.425,\n        0.565\n      ],\n      \"bootstrap_draws\": 100000,\n      \"bootstrap_seed\": 2026083118,\n      \"clusters\": 200,\n      \"estimate\": 0.495\n    },\n    \"trace_disagreement_clusters\": 99\n  }\n}",
+      "purpose": "summarize processed evidence through the review-package interface",
+      "returncode": 0
+    },
+    {
+      "command": "/opt/miniconda3/bin/python -m pytest -q tests/test_release.py",
+      "duration_seconds": 0.204,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.02s",
+      "purpose": "run engine-independent release tests",
+      "returncode": 0
+    },
+    {
+      "command": "/opt/miniconda3/bin/python scripts/verify_release.py",
+      "duration_seconds": 4.533,
+      "output_tail": "    \"runtime_cache_files_ignored\": 0\n  },\n  \"preflight\": {\n    \"decision_count_identical_failures\": 0,\n    \"error_identical_failures\": 0,\n    \"executions\": 3000,\n    \"jobs\": 20,\n    \"outcome_identical_failures\": 0,\n    \"trace_bytes_identical_failures\": 0,\n    \"trace_digest_identical_failures\": 0,\n    \"trajectory_units\": 1000,\n    \"unit_identical_failures\": 0\n  },\n  \"protocol_commit\": \"803257f102232763fc88d28c14b668f9b62eb277\",\n  \"scope\": \"engine-independent processed review package\",\n  \"status\": \"PASS\",\n  \"stress\": {\n    \"clusters\": 200,\n    \"decision_count_disagreement_clusters\": 93,\n    \"error_disagreement_clusters\": 0,\n    \"outcome_disagreement_clusters\": 47,\n    \"policy_error_present_clusters\": 0,\n    \"trace_disagreement\": {\n      \"bootstrap_95_ci\": [\n        0.425,\n        0.565\n      ],\n      \"bootstrap_draws\": 100000,\n      \"bootstrap_seed\": 2026083118,\n      \"clusters\": 200,\n      \"estimate\": 0.495\n    },\n    \"trace_disagreement_clusters\": 99\n  },\n  \"synthetic\": {\n    \"levels\": 8,\n    \"modes\": 5,\n    \"status\": \"verified\"\n  }\n}",
+      "purpose": "verify release manifest and reaggregate processed rows",
+      "returncode": 0
+    },
+    {
+      "command": "/opt/miniconda3/bin/python paper/final_protocol/scripts/build_claim_ledger.py",
+      "duration_seconds": 0.035,
+      "output_tail": "wrote 30 claims to <repo>/paper/final_protocol/claim_ledger.csv",
+      "purpose": "rebuild sentence-level claim ledger",
+      "returncode": 0
+    },
+    {
+      "command": "/opt/miniconda3/bin/python paper/final_protocol/scripts/build_final_release.py",
+      "duration_seconds": 19.729,
+      "output_tail": "  \"scope\": \"engine-independent processed review package\",\n  \"status\": \"PASS\",\n  \"stress\": {\n    \"clusters\": 200,\n    \"decision_count_disagreement_clusters\": 93,\n    \"error_disagreement_clusters\": 0,\n    \"outcome_disagreement_clusters\": 47,\n    \"policy_error_present_clusters\": 0,\n    \"trace_disagreement\": {\n      \"bootstrap_95_ci\": [\n        0.425,\n        0.565\n      ],\n      \"bootstrap_draws\": 100000,\n      \"bootstrap_seed\": 2026083118,\n      \"clusters\": 200,\n      \"estimate\": 0.495\n    },\n    \"trace_disagreement_clusters\": 99\n  },\n  \"synthetic\": {\n    \"levels\": 8,\n    \"modes\": 5,\n    \"status\": \"verified\"\n  }\n}\n{\n  \"manifest\": {\n    \"entries\": 50,\n    \"files_including_manifest\": 51\n  },\n  \"manifest_sha256\": \"ac497430a7d1d72f0428ec4ca668a8712df03455c3f7286ef608f27a51f41e66\",\n  \"publication\": \"staged validation followed by directory replacement\",\n  \"release\": \"paper/final_protocol/release\",\n  \"scan\": {\n    \"files_scanned\": 50,\n    \"problems\": 0\n  },\n  \"status\": \"PASS\"\n}",
+      "purpose": "refresh release manifest after claim-ledger generation",
+      "returncode": 0
+    },
+    {
+      "command": "tectonic --keep-logs main.tex",
+      "duration_seconds": 3.709,
+      "output_tail": "warning: main.tex:396: Underfull \\hbox (badness 2111) in paragraph at lines 390--396\nwarning: tables/table_3_prospective_results.tex:13: Overfull \\hbox (1.30089pt too wide) in paragraph at lines 13--13\nwarning: main.tex:482: Underfull \\hbox (badness 1661) in paragraph at lines 482--482\nwarning: main.tex:515: Underfull \\hbox (badness 2698) in paragraph at lines 507--515\nwarning: main.tex:515: Underfull \\hbox (badness 1107) in paragraph at lines 507--515\nwarning: main.tex:515: Underfull \\hbox (badness 1189) in paragraph at lines 507--515\nwarning: main.tex:515: Underfull \\hbox (badness 2753) in paragraph at lines 507--515\nwarning: tables/table_4_factorial.tex:2: Underfull \\hbox (badness 1939) in paragraph at lines 2--2\nwarning: tables/table_4_factorial.tex:2: Underfull \\hbox (badness 3861) in paragraph at lines 2--2\nwarning: main.tex:536: Underfull \\hbox (badness 1502) in paragraph at lines 536--536\nwarning: main.tex:551: Underfull \\hbox (badness 2012) in paragraph at lines 542--551\nwarning: main.tex:558: Underfull \\hbox (badness 4543) in paragraph at lines 552--558\nwarning: main.tex:573: Underfull \\hbox (badness 1189) in paragraph at lines 567--573\nwarning: main.tex:580: Underfull \\hbox (badness 1019) in paragraph at lines 574--580\nwarning: main.tex:593: Underfull \\hbox (badness 6625) in paragraph at lines 589--593\nnote: Rerunning TeX because \"main.aux\" changed ...\nwarning: main.tex:396: Underfull \\hbox (badness 2556) in paragraph at lines 390--396\nwarning: main.tex:396: Underfull \\hbox (badness 2181) in paragraph at lines 390--396\nwarning: main.tex:396: Underfull \\hbox (badness 2111) in paragraph at lines 390--396\nwarning: tables/table_3_prospective_results.tex:13: Overfull \\hbox (1.30089pt too wide) in paragraph at lines 13--13\nwarning: main.tex:482: Underfull \\hbox (badness 1661) in paragraph at lines 482--482\nwarning: main.tex:515: Underfull \\hbox (badness 2698) in paragraph at lines 507--515\nwarning: main.tex:515: Underfull \\hbox (badness 1107) in paragraph at lines 507--515\nwarning: main.tex:515: Underfull \\hbox (badness 1189) in paragraph at lines 507--515\nwarning: main.tex:515: Underfull \\hbox (badness 2753) in paragraph at lines 507--515\nwarning: tables/table_4_factorial.tex:2: Underfull \\hbox (badness 1939) in paragraph at lines 2--2\nwarning: tables/table_4_factorial.tex:2: Underfull \\hbox (badness 3861) in paragraph at lines 2--2\nwarning: main.tex:536: Underfull \\hbox (badness 1502) in paragraph at lines 536--536\nwarning: main.tex:551: Underfull \\hbox (badness 2012) in paragraph at lines 542--551\nwarning: main.tex:558: Underfull \\hbox (badness 4543) in paragraph at lines 552--558\nwarning: main.tex:573: Underfull \\hbox (badness 1189) in paragraph at lines 567--573\nwarning: main.tex:580: Underfull \\hbox (badness 1019) in paragraph at lines 574--580\nwarning: main.tex:593: Underfull \\hbox (badness 6625) in paragraph at lines 589--593\nwarning: main.bbl:156: Underfull \\hbox (badness 1092) in paragraph at lines 150--156\nwarning: warnings were issued by the TeX engine; use --print and/or --keep-logs for details.\nnote: Running xdvipdfmx ...\nnote: Writing `main.pdf` (216.03515625 KiB)\nnote: Writing `main.log` (19.9697265625 KiB)\nnote: Writing `main.blg` (940 B)\nnote: Skipped writing 4 intermediate files (use --keep-intermediates to keep them)",
+      "purpose": "compile current REVTeX manuscript",
+      "returncode": 0
+    },
+    {
+      "command": "pdftotext main.pdf -",
+      "duration_seconds": 0.059,
+      "output_tail": "Protocol Article title matched compiled PDF text.",
+      "purpose": "extract compiled PDF text for identity check",
+      "returncode": 0
+    },
+    {
+      "command": "/opt/miniconda3/bin/python paper/final_protocol/scripts/audit_contradictions.py",
+      "duration_seconds": 0.29,
+      "output_tail": "contradiction audit: PASS_WITH_HUMAN_OR_LEGAL_BLOCKERS (0 contradictions, 0 machine blockers, 17 human/legal blockers)",
+      "purpose": "run cross-file contradiction audit",
+      "returncode": 0
+    },
+    {
+      "command": "/opt/miniconda3/bin/python paper/final_protocol/scripts/red_team_audit.py",
+      "duration_seconds": 0.239,
+      "output_tail": "red-team audit: NOT_READY_DO_NOT_SUBMIT (6 open criticisms, 17 human/legal blockers)",
+      "purpose": "run three-pass adversarial review",
+      "returncode": 0
+    }
+  ],
+  "environment": {
+    "matplotlib": "3.10.5",
+    "numpy": "2.2.5",
+    "platform": "macOS-26.1-arm64-arm-64bit-Mach-O",
+    "python": "3.13.2",
+    "tectonic_available": true
+  },
+  "generated_at_utc": "2026-08-25T00:54:16.747766+00:00",
+  "limitations": [
+    "The restricted game engine and private acquisition materials are not rerun.",
+    "The command verifies retained canonical artifacts and reproduces synthetic and processed analyses.",
+    "Rights, licensing, DOI, human metadata, and author comprehension remain human blockers."
+  ],
+  "outputs": {
+    "artifact_build": {
+      "exists": true,
+      "path": "paper/final_protocol/source_data/build_report.json",
+      "sha256": "366d9e54c7e5427e53934fc395a139f3f6ca0645029a2b45411005bbd1b18f93"
+    },
+    "claim_ledger": {
+      "exists": true,
+      "path": "paper/final_protocol/claim_ledger.csv",
+      "sha256": "625f8e31ba259ad475c24f928b505183c05821d125cd77df390974c9197fa820"
+    },
+    "contradiction_audit": {
+      "exists": true,
+      "path": "paper/final_protocol/CONTRADICTION_AUDIT.json",
+      "sha256": "1bb15f66e3f0e15b6b00fedcdbd023232157c6137f8091325d5dae7463bb6e26"
+    },
+    "manuscript_pdf": {
+      "exists": true,
+      "path": "paper/final_protocol/main.pdf",
+      "sha256": "3f6f92649258a9d90b29d115b6fab69c0ea1b25fd95cdfce16fb401bc40909fc"
+    },
+    "pdf_visual_audit": {
+      "exists": true,
+      "path": "paper/final_protocol/supplement/PDF_VISUAL_AUDIT.json",
+      "sha256": "d44c92765f49dcdaa71a8341c94cb99a10cba259b3bff357a05d6bdd75fbe5d3"
+    },
+    "red_team": {
+      "exists": true,
+      "path": "paper/final_protocol/FINAL_RED_TEAM.json",
+      "sha256": "bc525246ab80b2b4a3077c8ac2012b21e2b3ad4b10bbecaa9111823bcc88e797"
+    },
+    "release_manifest": {
+      "exists": true,
+      "path": "paper/final_protocol/release/MANIFEST.sha256",
+      "sha256": "ac497430a7d1d72f0428ec4ca668a8712df03455c3f7286ef608f27a51f41e66"
+    },
+    "results_macros": {
+      "exists": true,
+      "path": "paper/final_protocol/results_macros.tex",
+      "sha256": "a7e0d92bc2371c44091d5e0b2464beaf788185f0dbada8863b0b81ef54daab96"
+    },
+    "statistics_verification": {
+      "exists": true,
+      "path": "paper/final_protocol/source_data/statistics_verification.json",
+      "sha256": "9b66090b467b5e7892b0aa31d8a70a3e0c9f459175fe23e314919b184cf282d7"
+    }
+  },
+  "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",
+  "readiness_decision": "NOT_READY_DO_NOT_SUBMIT",
+  "schema_version": 1,
+  "scope": "Derived-artifact reproduction only; no restricted-engine execution and no new policy experiment.",
+  "status": "PASS",
+  "title": "A Trace-Based Validation Protocol for Seed-Matched Evaluations of Black-Box Game-Playing Agents",
+  "visual_audit": {
+    "attestation": "paper/final_protocol/supplement/PDF_VISUAL_AUDIT.json",
+    "attestation_sha256": "d44c92765f49dcdaa71a8341c94cb99a10cba259b3bff357a05d6bdd75fbe5d3",
+    "manuscript_pdf_sha256": "3f6f92649258a9d90b29d115b6fab69c0ea1b25fd95cdfce16fb401bc40909fc",
+    "manuscript_source_sha256": "2f961dcba1109a735449cf7e2d0861ce0186710874d340650b74a6be572e6cdb",
+    "method": "Every page rendered at 150 dpi; PNG structure and dimensions checked; PDF-bound checklist records page-by-page visual inspection.",
+    "page_count": 10,
+    "rendered_pages": [
+      {
+        "height_pixels": 1650,
+        "page": 1,
+        "sha256": "e9953e4d494e37d8c4c7b6619413f8ec45f0ce13f5908548cb1e1203b53af487",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 2,
+        "sha256": "df628b200dbefa572e374d363cdb90601ed404d31bed88411fd5ca6049892e7b",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 3,
+        "sha256": "ae74cefdc9bc0a8e3438f0da1607bbceb8aea2500869f6e080f90cc1b4320312",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 4,
+        "sha256": "3e8b794126b86caf38bbaf56aab96b95510ccf2236e25ce5f9fffb8f190d15fe",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 5,
+        "sha256": "387039850b420877840f0aec3d6c7b17619a7d90d24d23c59da4b7aee6e9091b",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 6,
+        "sha256": "8e040130db39e740d8d110a262e0fe7809e39ba5efa0e3287de4dc71e116293a",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 7,
+        "sha256": "babebafa3674c7f68a76d752e9c37b3f53e14fe458866761771cdc0f41d1f168",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 8,
+        "sha256": "d7ba4379f1c30a2b4fa9dd5975aca8afa55f59763a2cb477422044391aeb818a",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 9,
+        "sha256": "9f170de6b746a2bf107ee011fafbdc19e5e4ebd8a0e96f0499e48c9bc625aa36",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 10,
+        "sha256": "77b565dbf727bb1141cdf250e1c3f098218432c98bbb2ad6c13dcdf1253a1ecd",
+        "width_pixels": 1275
+      }
+    ],
+    "status": "PASS"
+  },
+  "word_count": {
+    "abstract_source_words_approximate": 225,
+    "compiled_pdf_text_including_references": 5924,
+    "method": "whitespace words from pdftotext; approximate regex words from the unexpanded TeX abstract"
+  }
+}

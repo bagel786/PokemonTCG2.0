@@ -1,0 +1,79 @@
+{
+  "admission_decision": "admit_with_bounded_wording",
+  "analysis_id": "factorial",
+  "cell_win_rates": {
+    "C1": 0.618,
+    "C2": 0.621,
+    "C3": 0.6075,
+    "C4": 0.6235
+  },
+  "contrasts": {
+    "interaction": {
+      "bootstrap_95_ci": [
+        -0.018500000000000027,
+        0.044499999999999984
+      ],
+      "bootstrap_draws": 100000,
+      "bootstrap_seed": 2026083117,
+      "estimate": 0.013,
+      "resampling": "paired units within each of ten opponent-by-order strata"
+    },
+    "primary_c4_minus_c1": {
+      "bootstrap_95_ci": [
+        -0.02049999999999999,
+        0.03149999999999999
+      ],
+      "bootstrap_draws": 100000,
+      "bootstrap_seed": 2026083117,
+      "estimate": 0.0055,
+      "resampling": "paired units within each of ten opponent-by-order strata"
+    },
+    "representation_main": {
+      "bootstrap_95_ci": [
+        -0.01075000000000002,
+        0.02999999999999998
+      ],
+      "bootstrap_draws": 100000,
+      "bootstrap_seed": 2026083117,
+      "estimate": 0.0095,
+      "resampling": "paired units within each of ten opponent-by-order strata"
+    },
+    "training_main": {
+      "bootstrap_95_ci": [
+        -0.02025000000000001,
+        0.012499999999999994
+      ],
+      "bootstrap_draws": 100000,
+      "bootstrap_seed": 2026083117,
+      "estimate": -0.004,
+      "resampling": "paired units within each of ten opponent-by-order strata"
+    }
+  },
+  "control_mismatch_units": 0,
+  "games": 12000,
+  "pevl_levels": {
+    "level_6": "stochastic sources were inspected and trace divergence can localize plausible mechanisms; the audit does not prove a unique causal source",
+    "level_7": "not established because the restricted engine exposes no event identifiers or event-keyed streams",
+    "level_8": "seed-matched finite-population contrasts admitted; counterfactual and full-CRN wording prohibited",
+    "levels_1_to_5": "supported only for the frozen artifacts, schedules, and exercised serial/parallel execution contexts"
+  },
+  "primary_mcnemar": {
+    "c1_only_wins": 347,
+    "c4_only_wins": 358,
+    "exact_two_sided_p": 0.7064831563628252,
+    "role": "secondary"
+  },
+  "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",
+  "raw_traces_included": false,
+  "schema_version": 1,
+  "simple_effects_descriptive": {
+    "c2_minus_c1": 0.003,
+    "c3_minus_c1": -0.0105,
+    "c4_minus_c1": 0.0055,
+    "c4_minus_c2": 0.0025,
+    "c4_minus_c3": 0.016
+  },
+  "status": "ADMITTED_SEED_MATCHED",
+  "target_population": "five prospectively frozen determinism-eligible contexts by two actual orders",
+  "units": 2000
+}

@@ -1,0 +1,19 @@
+\begin{table*}[t]
+\caption{Protocol stages, required evidence, strongest permitted statement, and failure action. Every pass is local to the tested artifacts, schedule, trace schema, and execution contexts.}
+\label{tab:protocol}
+\footnotesize
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.16\linewidth}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}X}
+\toprule
+Stage & Evidence & Permitted statement & Failure action \\
+\midrule
+1 Artifact identity & Hashes for engine, policies, opponents, protocol, code, and configuration & The evaluated bytes are identified. & Quarantine missing or drifting artifacts. \\
+2 Seed namespace & Scheduled seed, exact boundary value, conversion rule, and collision audit & The claimed boundary seed was supplied and units remain distinct. & Correct the adapter or schedule and rerun. \\
+3 Schedule parity & Row equality for opponent, order, seat, seed, environment, and limits & A complete matched schedule was attempted. & Reject unequal or incomplete pairs. \\
+4 Identical-arm parity & Separate A/A executions compared through the digest and byte count of the recorded trace projection & The compared fields repeat on exercised A/A trajectories. & Suppress the affected paired comparison. \\
+5 Repeat/worker parity & Fresh repeats, worker counts, enqueue orders, and process lifecycles & Within-arm traces repeat in tested contexts. & Freeze a passing context or model run variation. \\
+6 Source audit & Bounded Python source-pattern scan; binary internals remain unassessed & Candidate mechanisms and the uninspected boundary are recorded. & Control, dynamically test, or narrow the estimand and wording. \\
+7 Event alignment & Stable event identifiers and equal values for shared exogenous events & Event-aligned coupling for the logged ontology. & Retain at most bounded seed-matched wording. \\
+8 Statistical admission & Frozen map from gates to estimand, unit, uncertainty, population, and wording & Only the prespecified supported claim class. & Admit, downgrade, or suppress automatically. \\
+\bottomrule
+\end{tabularx}
+\end{table*}

@@ -1,0 +1,56 @@
+{
+  "audit_claim": "Bounded artifact-identity and static source-pattern inventory only; this report neither proves determinism nor treats an empty category as evidence that stochastic behavior is absent.",
+  "audit_levels": [
+    1,
+    6
+  ],
+  "category_definitions": {
+    "clock_or_deadline": "Clock reads, time-module imports, and identifiers explicitly naming deadlines, timeouts, wall clocks, or time budgets.",
+    "explicit_randomness": "Imports and calls for common pseudorandom, entropy, UUID, sampling, shuffle, and process-randomized hash interfaces.",
+    "module_global_state": "Module-scope constructed or mutable bindings, state-like global names, module mutations, and explicit global statements.",
+    "native_pointer_or_state": "ctypes/cffi/native-library references and pointer- or handle-like identifiers that may bridge process-local native state.",
+    "process_or_thread_parallelism": "Multiprocessing, threading, futures, asyncio, joblib, and fork APIs that can introduce scheduling or shared-state sensitivity."
+  },
+  "inventory_summary": {
+    "all_frozen_hashes_match": true,
+    "artifacts": 13,
+    "binary_source_assessments": 0,
+    "source_assessed_package_trees": 11
+  },
+  "level_results": {
+    "level_1_artifact_identity": {
+      "all_expected_digests_present_in_frozen_protocol": true,
+      "all_frozen_hashes_match": true,
+      "artifact_count": 13,
+      "status": "pass",
+      "verified_artifact_count": 13
+    },
+    "level_6_stochastic_source_audit": {
+      "admission_interpretation": "Source hits identify mechanisms for dynamic testing. A clean static category does not admit a paired contrast or establish determinism.",
+      "aggregate_hits_by_category": {
+        "clock_or_deadline": 82,
+        "explicit_randomness": 26,
+        "module_global_state": 258,
+        "native_pointer_or_state": 920,
+        "process_or_thread_parallelism": 0
+      },
+      "artifacts_with_hits_by_category": {
+        "clock_or_deadline": 3,
+        "explicit_randomness": 11,
+        "module_global_state": 11,
+        "native_pointer_or_state": 11,
+        "process_or_thread_parallelism": 0
+      },
+      "status": "bounded_audit_recorded",
+      "verified_package_tree_count": 11
+    }
+  },
+  "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",
+  "schema_version": "pevl-stochastic-source-audit-v1",
+  "scope_limits": [
+    "The two engine artifacts are verified byte-for-byte but not source-audited; their native internals are unavailable here.",
+    "Only frozen package .py and .pyi files are statically scanned; models, data files, native libraries, interpreter state, and operating-system behavior are outside scope.",
+    "A static hit may be unreachable under the recorded environment (including NO_SEARCH=1), and a static no-hit may conceal indirect or dynamic behavior.",
+    "The scanner does not establish event-level coupling, repeat parity, worker parity, or statistical admission; those require the separate prospective runtime gates."
+  ]
+}

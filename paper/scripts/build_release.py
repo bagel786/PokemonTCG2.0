@@ -671,19 +671,32 @@ def scan_release(root: Path) -> dict[str, int]:
             if binary_problem:
                 problems.append(f"{binary_problem}: {relative}")
             text = printable_binary_text(data)
+            # Figure payloads contain compressed streams.  Treating incidental
+            # printable runs in those streams as prose produced false path and
+            # short-identifier hits (for example, random bytes resembling
+            # ``a:/7`` or ``B0``).  Text inputs and the sanitized generators are
+            # scanned separately; binary figures are checked here for explicit
+            # local-root byte patterns and structural validity.
+            searchable = relative
         else:
             try:
                 text = data.decode("utf-8")
             except UnicodeDecodeError:
                 problems.append(f"non-UTF-8 payload outside figure allow-list: {relative}")
                 text = ""
-        searchable = relative + "\n" + text
+            searchable = relative + "\n" + text
         if suffix in ALLOWED_BINARY_SUFFIXES:
             if (
                 str(ROOT).encode() in data
                 or re.search(rb"/(?:Users|home|root|private|tmp|var)/", data)
-                or RESTRICTED_URI_PATTERN.search(text)
-                or WINDOWS_ABSOLUTE_PATTERN.search(text)
+                or re.search(
+                    rb"(?i)(?:file|vscode|ssh|sftp)://|https?://(?:localhost|127\.|\[::1\])",
+                    data,
+                )
+                or re.search(
+                    rb"(?i)[A-Z]:[\\/](?:Users|home|root|private|tmp|var)[\\/]",
+                    data,
+                )
             ):
                 problems.append(f"absolute/restricted local reference in binary figure: {relative}")
         else:

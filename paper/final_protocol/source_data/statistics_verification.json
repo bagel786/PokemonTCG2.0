@@ -1,0 +1,116 @@
+{
+  "factorial": {
+    "cell_win_rates": {
+      "C1": 0.618,
+      "C2": 0.621,
+      "C3": 0.6075,
+      "C4": 0.6235
+    },
+    "contrasts": {
+      "interaction": 0.013,
+      "primary_c4_minus_c1": 0.0055,
+      "representation_main": 0.0095,
+      "training_main": -0.004
+    },
+    "declared_sources_verified": 15,
+    "games": 12000,
+    "mcnemar": {
+      "c1_only_wins": 347,
+      "c4_only_wins": 358,
+      "exact_two_sided_p": 0.7064831563628252,
+      "role": "secondary"
+    },
+    "strata": 10,
+    "units": 2000
+  },
+  "historical": {
+    "available_record_mismatch": 458,
+    "contexts": 7,
+    "derived_flags_verified": 5600,
+    "outcome_error_mismatch": 210,
+    "strata": 14,
+    "units": 2800
+  },
+  "inputs": {
+    "factorial": {
+      "role": "factorial",
+      "sha256": "c7df75c7ae0f76a007d866947ad5262242d86c0c90cb0c8631d201dedd023e59"
+    },
+    "factorial_units": {
+      "role": "factorial_units",
+      "sha256": "62fe1fc3657ccd783e4f068042f201ceae0d7fc02d694a8ee5943d3f5c52e3eb"
+    },
+    "historical_units": {
+      "role": "historical_units",
+      "sha256": "eca841487814c50acccb7f885207e679b906179bb77e6818dfaa430af47e6fcc"
+    },
+    "preflight": {
+      "role": "preflight",
+      "sha256": "c6295f9f3981d346d0cbcb38327e575b560aaf0950bd52f52594cfb8f9cc56b3"
+    },
+    "seed_audit": {
+      "role": "seed_audit",
+      "sha256": "50344ba5a8b3ab21d037c0d37115562ea0c2c1da8fabdfe0b717d292a52f7a5e"
+    },
+    "stochastic_audit": {
+      "role": "stochastic_audit",
+      "sha256": "995ab30d0f2166963b5bc7dd73d2784ed95cde2f93315e1e06bece935a875c60"
+    },
+    "stress": {
+      "role": "stress",
+      "sha256": "40b9f5e17a424742ad8a05739646fe56843b8f3a432b124bfc33f9aed1ab5a4b"
+    }
+  },
+  "preflight": {
+    "decision_count_mismatch_units": 0,
+    "error_mismatch_units": 0,
+    "executions": 3000,
+    "mismatch_units": 0,
+    "outcome_mismatch_units": 0,
+    "trace_mismatch_units": 0,
+    "trajectory_units": 1000
+  },
+  "profile": "canonical",
+  "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",
+  "seed_namespace_audit": {
+    "declared_sources_verified": 7,
+    "historical_prospective_overlap": 0,
+    "historical_scheduled_values": 2800,
+    "prospective_contexts": 12,
+    "prospective_scheduled_values": 2450
+  },
+  "status": "PASS",
+  "stochastic_source_audit": {
+    "aggregate_hits_by_category": {
+      "clock_or_deadline": 82,
+      "explicit_randomness": 26,
+      "module_global_state": 258,
+      "native_pointer_or_state": 920,
+      "process_or_thread_parallelism": 0
+    },
+    "artifacts_verified": 13,
+    "binary_source_assessments": 0,
+    "source_assessed_package_trees": 11
+  },
+  "stress": {
+    "bootstrap": {
+      "bootstrap_95_ci": [
+        0.425,
+        0.565
+      ],
+      "bootstrap_draws": 100000,
+      "bootstrap_seed": 2026083118,
+      "clusters": 200,
+      "estimate": 0.495
+    },
+    "decision_count_disagreement_clusters": 93,
+    "declared_sources_verified": 2,
+    "error_disagreement_clusters": 0,
+    "first_divergence_actor_counts": {
+      "opponent": 99
+    },
+    "outcome_disagreement_clusters": 47,
+    "policy_error_present_clusters": 0,
+    "trace_disagreement_clusters": 99
+  }
+}

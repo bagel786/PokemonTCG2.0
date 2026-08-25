@@ -150,13 +150,11 @@ EXPECTED_STRESS_STRATA = {
     "dipplin/first",
     "dipplin/second",
 }
-EXPECTED_PREFLIGHT_OPPONENTS = {
-    "b0",
-    "d842",
-    "master",
-    "replay",
-    "alakazam_no_search",
-}
+EXPECTED_PREFLIGHT_OPPONENTS = (
+    {"Matched1", "Matched2", "Matched3", "Matched4", "Broader3"}
+    if RELEASE_LAYOUT
+    else {"b0", "d842", "master", "replay", "alakazam_no_search"}
+)
 
 OPPONENT_ORDER = (
     "B0",

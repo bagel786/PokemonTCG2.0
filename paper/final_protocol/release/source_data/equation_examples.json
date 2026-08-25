@@ -1,0 +1,12 @@
+{
+  "bootstrap_replicate": 0.6666666666666666,
+  "factorial": {
+    "interaction": 0.010000000000000009,
+    "representation": 0.025000000000000022,
+    "total": 0.040000000000000036,
+    "training": 0.015000000000000013
+  },
+  "paired_difference": 1,
+  "status": "PASS",
+  "trace_disagreement": 0.4
+}

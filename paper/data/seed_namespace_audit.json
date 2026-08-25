@@ -195,8 +195,9 @@
   "prospective_passed": true,
   "provenance": {
     "git_commit": "803257f102232763fc88d28c14b668f9b62eb277",
+    "provenance_role": "protocol_commit",
     "script": "paper/scripts/audit_seed_namespace.py",
-    "script_sha256": "7f92e9c73b0f909ba97562c18ad4ba2545a7a1fe69416fd909eac0b186fd9e7f"
+    "script_sha256": "571589fc2f2637979c7f4fd3d807f6f574485fce31a7789cfc17d39f94ff9b27"
   },
   "sources": [
     {

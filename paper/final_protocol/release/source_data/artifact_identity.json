@@ -1,0 +1,45 @@
+{
+  "generator": {
+    "path": "paper/final_protocol/scripts/build_final_artifacts.py",
+    "sha256": "da18ac1714afa04188bfe81bf22485bdcb920e4dc5d45f899047177dd76c783d"
+  },
+  "inputs": {
+    "combined": {
+      "role": "combined",
+      "sha256": "d8e74d83a7c6bd3ad4690d91321ae4508f7b6f10a76cb6b4efaeab0e2b4014cd"
+    },
+    "factorial": {
+      "role": "factorial",
+      "sha256": "c7df75c7ae0f76a007d866947ad5262242d86c0c90cb0c8631d201dedd023e59"
+    },
+    "historical": {
+      "role": "historical",
+      "sha256": "fadc6111654423dab62486e27d05636439b0647192fabe3786a69cd60a49e239"
+    },
+    "preflight": {
+      "role": "preflight",
+      "sha256": "c6295f9f3981d346d0cbcb38327e575b560aaf0950bd52f52594cfb8f9cc56b3"
+    },
+    "protocol": {
+      "role": "protocol",
+      "sha256": "8b9329b948a054fc7252b9c2662490890e0a8439ad852393c6e25f537c8b887e"
+    },
+    "seed_audit": {
+      "role": "seed_audit",
+      "sha256": "50344ba5a8b3ab21d037c0d37115562ea0c2c1da8fabdfe0b717d292a52f7a5e"
+    },
+    "stochastic_audit": {
+      "role": "stochastic_audit",
+      "sha256": "995ab30d0f2166963b5bc7dd73d2784ed95cde2f93315e1e06bece935a875c60"
+    },
+    "stress": {
+      "role": "stress",
+      "sha256": "40b9f5e17a424742ad8a05739646fe56843b8f3a432b124bfc33f9aed1ab5a4b"
+    },
+    "synthetic": {
+      "role": "synthetic",
+      "sha256": "d34a2ea1546a0a88e90a5ca58b49f1085edfcaf753f70ed49e0f04202e9ba6f9"
+    }
+  },
+  "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277"
+}

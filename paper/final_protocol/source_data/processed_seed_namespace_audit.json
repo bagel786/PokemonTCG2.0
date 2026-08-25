@@ -1,0 +1,51 @@
+{
+  "conversion_rule": "scheduled_seed & 0xffffffff",
+  "historical_fresh_confirmation": {
+    "collision_groups": {},
+    "conversion_changed": 2800,
+    "engine_seed_max": 745773287,
+    "engine_seed_min": 744767088,
+    "engine_seed_unique": 2800,
+    "passed_no_collision": true,
+    "recorded_field_semantics": "Historical JSON stores the requested Python integer under `seed`; the adapter passed ctypes.c_uint32(seed).value to BattleStartSeeded.",
+    "scheduled_count": 2800,
+    "scheduled_max": 202609236199,
+    "scheduled_min": 202608230000,
+    "scheduled_outside_uint32": 2800,
+    "scheduled_unique": 2800
+  },
+  "historical_prospective_engine_seed_overlap": [],
+  "prospective_all": {
+    "collision_groups": {},
+    "conversion_changed": 0,
+    "engine_seed_max": 2027093749,
+    "engine_seed_min": 2026072700,
+    "engine_seed_unique": 2450,
+    "passed_no_collision": true,
+    "scheduled_count": 2450,
+    "scheduled_max": 2027093749,
+    "scheduled_min": 2026072700,
+    "scheduled_outside_uint32": 0,
+    "scheduled_unique": 2450
+  },
+  "prospective_passed": true,
+  "prospective_study_summary": {
+    "factorial": {
+      "all_collision_free": true,
+      "contexts": 5,
+      "scheduled_count": 2000
+    },
+    "timed_search_stress": {
+      "all_collision_free": true,
+      "contexts": 2,
+      "scheduled_count": 200
+    },
+    "trace_preflight": {
+      "all_collision_free": true,
+      "contexts": 5,
+      "scheduled_count": 250
+    }
+  },
+  "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",
+  "uint32_max": 4294967295
+}

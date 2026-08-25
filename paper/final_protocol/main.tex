@@ -1,0 +1,698 @@
+\documentclass[aps,reprint,superscriptaddress,longbibliography,floatfix]{revtex4-2}
+
+\usepackage{amsmath,amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\input{results_macros.tex}
+
+\newcommand{\Protocol}{\textsc{trace-admit}}
+\newcommand{\pp}{percentage points}
+\newcommand{\COne}{\textsc{c1}}
+\newcommand{\CTwo}{\textsc{c2}}
+\newcommand{\CThree}{\textsc{c3}}
+\newcommand{\CFour}{\textsc{c4}}
+
+\begin{document}
+
+\preprint{APS Open Science Protocol Article}
+\title{A Trace-Based Validation Protocol for Seed-Matched Evaluations of Black-Box Game-Playing Agents}
+
+\author{[Author name requires human confirmation]}
+\email{[Corresponding-author email requires human confirmation]}
+\affiliation{[Affiliation and postal address require human confirmation]}
+\date{August 24, 2026}
+
+\begin{abstract}
+Recording the same seed for two game-playing agents establishes a matched
+schedule, but it does not show that either execution repeats or that the agents
+receive equal random quantities for the same semantic events after their paths
+diverge.  We present an executable, fail-closed protocol that binds artifact
+identity to the value passed at the observable engine boundary, checks
+row-level schedule parity, compares identical-arm trace projections across
+repeat and worker contexts, audits stochastic sources, and applies a frozen
+rule that admits, downgrades, or suppresses statistical claims.  A self-contained
+synthetic suite exercises five controlled modes and shows that an event-keyed
+construction restores alignment for all five logged shared events after a
+stateful draw shift aligned only one.  In the restricted-engine case study, the
+historical repeated-control audit disagreed on
+\HistoricalOutcomeMismatch{}/\HistoricalUnits{} available win/draw
+records and \HistoricalAvailableRecordMismatch{}/\HistoricalUnits{} records after
+decision count was added, so the planned historical comparison was
+suppressed.  A prospectively frozen deterministic preflight then found zero
+disagreements across \PreflightUnits{} arm--seed-condition units and
+\PreflightExecutions{} executions.  A separate timed-search stress test found
+\StressTraceMismatch{}/\StressClusters{} trace-projection disagreements
+(\StressTracePct\%; empirical 95\% cluster-resampling interval
+[\StressTraceLowPct\%, \StressTraceHighPct\%]).  The admitted factorial covered
+\FactorialUnits{} fixed-schedule units; its total contrast was
+\PrimaryEstimatePP{} percentage points (empirical 95\% paired-resampling
+interval [\PrimaryLowPP{}, \PrimaryHighPP{}]), which is compatible with effects
+in either direction and does not establish equivalence.  The principal
+limitation is that the restricted engine exposes neither semantic event
+identifiers nor event-keyed streams, so its case-study results cannot establish
+cross-arm event alignment.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Reusing random inputs can sharpen a comparison when two stochastic systems
+respond similarly to the same sources of variation.  Common-random-number
+(CRN) theory makes that gain conditional on the construction and on properties
+such as system structure and event timing, rather than on the reuse of an
+integer alone \cite{glasserman1992crn}.  Streams and substreams are established
+ways to organize synchronized simulation and independent replications
+\cite{lecuyer2002streams}.  A recent paired-seed preprint likewise studies the
+conditional precision gain when seed-level outcomes are favorably correlated
+\cite{sharma2025pairedseeds}.  These results motivate careful pairing; they do
+not turn a seed column into evidence of a particular coupling.
+
+The gap matters for black-box game-agent evaluations.  A researcher may be
+able to hash a restricted simulator, call a seeded entry point, freeze an
+opponent schedule, and record public actions, yet remain unable to inspect the
+simulator's generator or assign stable identifiers to random events.  Separate
+executions can also encounter clock-bounded search, process-local state, or
+different queue histories.  Under those conditions, the same recorded seed can
+name a matched design without establishing repeatable execution or semantic
+alignment across arms.
+
+This article addresses one question: when two agents are evaluated under the
+same recorded seed, what evidence is required before the result can
+legitimately be analyzed as a paired comparison?  We integrate four distinct
+evidence layers---schedule matching, within-arm execution repeatability,
+cross-arm event alignment, and statistical claim admission---into an
+executable validation protocol for restricted black-box settings.  The
+protocol records artifact and seed-boundary identity, audits every scheduled
+row, compares a declared trace projection in A/A and repeat/worker tests,
+inventories stochastic sources, and enforces a prospectively frozen claim map.
+It fails closed: a later point estimate or test cannot repair a missing gate.
+
+The contribution is the operational integration of a declared recorded-trace
+projection, a self-contained conformance suite, and an executable admission map.  We do not
+claim that same seeds can fail, CRN requires synchronization, A/A controls are
+new, fixed-work search is new, event-keyed randomness is new, or
+reproducibility checklists are new.  The restricted game environment is a case
+study, not the title-level contribution, and no competitive-strength claim is
+made.
+
+\section{Related work and contribution boundary}
+
+CRN conditions, stream design, paired-seed evaluation, and event-keyed
+randomness already cover the central stochastic-computation ingredients
+\cite{glasserman1992crn,lecuyer2002streams,sharma2025pairedseeds,buffalo2026eventkeyed}.
+The Sharma and Buffalo papers are arXiv preprints, not verified peer-reviewed
+publications.  The latter directly motivates stable event keys as a white-box
+repair for stateful draw shifts, but it does not validate the event ontology or
+the black-box engine used here.
+
+The broader empirical literature distinguishes reproducible code from
+reproducible findings, emphasizes explicit units and sources of variation, and
+recommends uncertainty-aware reporting across heterogeneous tasks
+\cite{bouthillier2019reproducible,patterson2024empirical,agarwal2021statistical,pineau2021reproducibility}.
+Simulation verification and validation distinguish implementation checks from
+operational validity \cite{sargent2013verification}.  Metamorphic testing has
+been applied both to scientific software without a convenient single-run
+oracle and to simulation verification and validation
+\cite{lin2020exploratorymt,raunak2021metamorphic}.  A/A experiments are also an
+established diagnostic in randomized online experimentation
+\cite{kohavi2010aa}; the identical-artifact trace repetition used here adapts
+that diagnostic idea, rather than importing its sampled-user inference.
+Wall-clock allocation is already an algorithmic design concern for Monte Carlo
+tree search \cite{baier2016timemanagement}.  That literature supports auditing
+time-bounded search but does not identify the cause of a particular observed
+divergence.
+
+\input{tables/table_1_prior_work.tex}
+
+The boundary in Table~\ref{tab:prior-work} is therefore deliberate.  The
+protocol does not replace simulator validation, prove favorable seed-level
+covariance, or guarantee external generalization.  It supplies a black-box
+workflow that turns prior component methods into an explicit decision about
+which paired claim, if any, the recorded evidence permits.
+
+\section{Definitions}
+
+\subsection{Schedule matching}
+
+A schedule is the prospectively declared set of evaluation rows.  Two arm rows
+are schedule matched when all pairing variables required by the protocol agree:
+the value passed at the observable engine boundary, opponent, actual order,
+physical seat, environment, decision limit, and other fixed configuration.
+This is a property of design records.  It says that a matched comparison was
+attempted; it does not say that either execution is repeatable.
+
+\subsection{Execution repeatability}
+
+Execution repeatability is a within-arm property.  For the same artifact,
+seed condition, and declared execution context, the compared execution record
+must agree across fresh runs.  Here the strongest trace-bearing record is a
+canonical sequence of public-observation hashes, acting side, selected action,
+and terminal record.  The implementation compares the SHA-256 digest and byte
+count of that complete recorded projection.  It does not retain raw public
+observations, opaque search snapshots, hidden simulator state, or semantic
+random-event identifiers.  Thus ``complete recorded trace projection'' always means complete only
+within this declared projection.
+
+Trace agreement is stronger than outcome agreement because different action
+sequences can end with the same winner.  Conversely, a digest is not a proof
+that omitted state agreed.  A single required mismatch rejects exact
+repeatability on the exercised schedule; a pass remains scoped to the tested
+artifacts, projection, and contexts.
+
+For a stress test with $N$ seed-condition clusters, let $H_{ir}$ be the
+unitless trace digest for cluster $i$ under execution profile $r$.  The
+trace-disagreement proportion is
+\begin{equation}
+ \widehat q = \frac{1}{N}\sum_{i=1}^{N}
+ \mathbb{I}\!\left(\left|\{H_{ir}:r\in\mathcal{R}\}\right|>1\right).
+ \label{eq:trace-disagreement}
+\end{equation}
+Here $\mathcal{R}$ is the prescribed set of profiles, the indicator is one when
+at least two profile digests differ, and $\widehat q$ is a unitless proportion
+of seed conditions.  In plain language, the equation counts seed conditions
+whose repeated traces disagree.  If two of five clusters disagree,
+$\widehat q=2/5=0.40$.  The independent executable example is recorded in
+\texttt{tests/test\_equations.py}.
+
+\subsection{Semantic event alignment}
+
+Semantic event alignment is a cross-arm property.  After two policies branch,
+every shared modeled exogenous event in the declared ontology must retain a
+stable identifier and receive the same random quantity.  Logged event/value
+pairs, event-keyed counter-based randomness, or a validated assignment of
+event-specific streams can provide this evidence
+\cite{lecuyer2002streams,buffalo2026eventkeyed}.  Exact within-arm repetition
+cannot establish it: identical policies ordinarily follow the same path and
+consume the same stateful sequence, while different policies can shift later
+draws.
+
+An event-alignment pass is conditional on the ontology, marginal random
+distributions, dependence structure, and logged event classes.  The restricted
+engine lacks these event identifiers, so its evaluations cannot establish this
+property.
+
+\subsection{Statistical admission}
+
+Statistical admission is a decision fixed before outcome inspection.  It maps
+the evidence achieved to an estimand, analysis unit, uncertainty procedure,
+target population, and exact wording.  Schedule evidence can authorize only a
+matched-schedule description.  Repeatability plus a bounded source audit can,
+under the frozen rule, authorize an implementation-conditional seed-matched
+estimate.  Event-aligned wording additionally requires semantic event evidence.
+A failed required gate suppresses or downgrades the affected comparison even if
+its interval excludes zero.
+
+Figure~\ref{fig:distinctions} summarizes the non-implications among these
+definitions.
+
+\begin{figure*}[t]
+ \includegraphics[width=\textwidth]{figures/figure_1_distinctions.pdf}
+ \caption{Schedule matching, within-arm execution repeatability, and cross-arm
+ semantic event alignment answer different questions and require different
+ evidence.  Each claim is limited to the declared schedule, trace projection,
+ execution contexts, and event ontology.  Source data are in
+ \texttt{source\_data/figure\_1\_distinctions.json}.}
+ \label{fig:distinctions}
+\end{figure*}
+
+\section{Trace-based validation protocol}
+
+The protocol solves an admission problem, not a policy-selection problem.  Its
+analysis unit is defined at each stage: artifacts at identity, arm-paired rows
+at schedule parity, arm--seed conditions at preflight, seed-condition clusters
+containing all execution profiles at stress testing, and paired game units
+within frozen opponent-by-order strata at factorial estimation.  Opponent and
+worker profiles are fixed execution contexts, not random samples from a larger
+population.
+
+\input{tables/table_2_protocol_stages.tex}
+
+\subsection{Stages 1--3: identity, boundary seed, and schedule}
+
+Stage 1 hashes the simulator, policies, opponents, protocol, evaluator, and
+configuration.  The problem it solves is artifact ambiguity: a result without
+identified bytes cannot be attributed to the declared system.  A hash match
+does not validate behavior.  Missing or drifting artifacts invalidate the
+affected run.
+
+Stage 2 records the scheduled host-language seed and the exact integer passed
+at the observable engine boundary.  This is needed because an adapter may
+narrow, reduce, or otherwise convert a value.  The full schedule is converted
+before execution and checked for unintended collisions and overlaps.  The
+engine's internal handling remains unobserved; the protocol never calls the
+boundary value an internally consumed seed.
+
+Stage 3 checks equality and completeness for every required schedule field.
+The output is a row-level parity report and schedule fingerprint.  A missing
+cell, unequal field, error, or silent deletion invalidates the comparison.  A
+historical data set that lacks fields required by the current protocol can
+support agreement only for its recorded projection, not a retrospective pass
+of the full stage.
+
+\subsection{Stages 4--6: trace repetition and source audit}
+
+Stage 4 launches byte-identical arms separately and compares their records in
+increasing strength: outcome, errors, decision count, and the digest plus byte
+count of the recorded trace projection.  This A/A adaptation detects
+implementation or execution differences that an outcome check can miss.  Its
+assumptions are that the serialization is canonical, the digest comparison is
+implemented correctly, and all fields relevant to the claim are declared.
+It does not establish cross-arm coupling.
+
+Stage 5 prespecifies fresh serial repeats, worker counts, enqueue orders, and
+pool lifecycles.  Repeats within one seed condition share the same planned
+inputs and are not independent observations.  Worker profiles test execution
+contexts; they are not sampled hardware replicates.  The output is a
+cluster-level trace-parity report.  Any required mismatch rejects exact parity
+for at least that exercised seed condition.
+
+The implemented Stage 6 is a bounded Python AST and source-pattern scan of
+package trees.  It inventories explicit random interfaces, clock or deadline
+patterns, concurrency APIs, module-level state, and native pointer or handle
+patterns.  A static hit identifies a mechanism for dynamic testing but does not
+show that the branch executed or caused a mismatch; a zero-hit scan does not
+prove determinism.  The scanner does not inspect binary-engine internals or
+classify hardware and external state.  The stage is invalid if the inventory or
+its scope is missing, and it cannot identify a unique cause.
+
+\subsection{Stages 7--8: alignment and claim map}
+
+Stage 7 compares stable identifiers and random values for shared events after
+policy branching.  The output names the covered event classes and any
+misalignment.  Because the case-study engine exposes neither event keys nor
+independent event streams, the stage is unavailable there.  This blocks
+event-aligned, counterfactual, and full-CRN wording but does not erase the
+lower-level evidence.
+
+Stage 8 executes the frozen admission map shown in
+Fig.~\ref{fig:admission-flow}.  The map may admit a bounded seed-matched
+estimate, downgrade its interpretation, or suppress it.  It cannot use a
+favorable result to waive an earlier requirement.  The analyzer also rejects
+nonfinite results, schema or commit changes, sample-size drift, missing strata,
+and requests for suppressed output.
+
+\begin{figure*}[t]
+ \includegraphics[width=\textwidth]{figures/figure_2_admission_flow.pdf}
+ \caption{Validation and admission flow.  Levels 1--7 accumulate scoped
+ evidence.  Any required failure invokes the prospectively frozen failure
+ action; Level 8 cannot repair it.  Source data are in
+ \texttt{source\_data/figure\_2\_admission\_flow.json}.}
+ \label{fig:admission-flow}
+\end{figure*}
+
+\subsection{Paired estimand and resampling}
+
+For binary outcome $Y$ (win $=1$, nonwin $=0$), the paired difference for
+unit $i$ is
+\begin{equation}
+ d_i=Y_i^{(I)}-Y_i^{(C)}.
+ \label{eq:paired-difference}
+\end{equation}
+The superscripts denote intervention and control; each $Y$ and $d_i$ is
+unitless, with $d_i\in\{-1,0,1\}$.  The mean is reported as a percentage-point
+win-rate difference.  In ordinary language, $d_i$ records which arm won for a
+matched unit.  If intervention wins and control does not, $d_i=1-0=1$.  This
+identity is independently tested in \texttt{tests/test\_equations.py}.  It does
+not by itself show that the paired outcomes are event aligned.
+
+For $K$ frozen strata with $n_k$ paired units, bootstrap replicate $b$ is
+\begin{equation}
+ \begin{aligned}
+ \bar d^{*(b)}&=\frac{1}{K}\sum_{k=1}^{K}\frac{1}{n_k}
+ \sum_{j=1}^{n_k}d_{k,I_{bkj}},\\
+ I_{bkj}&\sim\mathrm{Uniform}\{1,\ldots,n_k\}.
+ \end{aligned}
+ \label{eq:cluster-bootstrap}
+\end{equation}
+The index $I_{bkj}$ resamples whole paired-unit identifiers within stratum
+$k$; arms are never resampled separately.  The result is a unitless mean,
+reported in percentage points.  With one stratum, differences
+$[1,0,-1]$, and sampled indices $[1,1,2]$, the replicate is
+$(1+1+0)/3=2/3$.  The equation assumes the frozen within-stratum empirical
+distribution is the object being resampled.  Its percentile interval is an
+algorithmic stability summary for the realized battery, not a population
+confidence interval over new opponents, training runs, or execution contexts
+\cite{field2007clustered}.
+
+\subsection{AI-assisted research methods}
+
+OpenAI Codex, using a GPT-5-family model for which the exact deployed snapshot
+was not exposed, provided substantive research assistance under human
+direction.  Recorded tasks included protocol reasoning, literature synthesis,
+code generation and debugging, simulation orchestration, statistical-analysis
+code, deterministic visualization, and adversarial auditing.  The human author
+set the scientific question, froze the acquisition protocol, retained
+authority over experiments and claims, and must approve the final paper.
+Verification included artifact hashes, strict schemas, row-level
+reaggregation, independent equation tests, targeted software tests, comparison
+against primary literature, a one-command reproduction run, compilation, and
+page-image inspection.  The machine-readable activity record is
+\texttt{supplement/AI\_USE\_LOG.csv}.  No generative-image system was used;
+all figures are deterministic plots produced by the checked-in artifact
+builder.
+
+\section{Self-contained synthetic conformance suite}
+
+The standalone standard-library suite supplies an inspectable review-package
+test oracle without
+the restricted game engine.  Five fixed modes exercise distinct
+non-implications: a clean deterministic mode, a stateful draw shift, an
+injected clock-budget mode, an injected process-state mode, and a seed
+conversion mode.  Injected profiles make the fixtures reproducible; they are
+demonstrations of mechanisms, not claims that every external simulator contains
+them.
+
+The seed-conversion fixture repeats within arm while failing namespace
+integrity.  The clock and process fixtures fail trace repetition and execution-
+context checks.  The stateful draw-shift fixture repeats exactly within each
+arm but aligns only one of five shared events after one arm consumes an extra
+draw.  Deriving random quantities from the base seed and semantic event key
+aligns all five logged shared events.  This repair is established only for the
+fixture's declared event ontology and source distribution.
+
+\begin{figure*}[t]
+ \includegraphics[width=\textwidth]{figures/figure_3_synthetic_matrix.pdf}
+ \caption{Synthetic failure-detection and admission matrix.  P denotes pass,
+ F fail, A admit, D downgrade, and a dash a blocked gate.  The suite demonstrates
+ known logical relations; it does not estimate failure prevalence in external
+ systems.  Source data are in
+ \texttt{source\_data/figure\_3\_synthetic\_matrix.csv}.}
+ \label{fig:synthetic}
+\end{figure*}
+
+The suite writes complete JSON evidence, a level-by-mode CSV, a JSON Schema,
+and a SHA-256 manifest.  Within the companion review package, generation and
+verification are exposed as
+\texttt{python -m pevl\_bench generate} and
+\texttt{python -m pevl\_bench verify}.  Checked tests validate the five fixed
+mode decisions, event-keyed repair, schema rules, and manifest-tamper rejection.
+
+\section{Restricted game-agent case study}
+
+The case study uses a seeded tournament-engine binary, four fixed policy
+packages, and third-party opponent packages that cannot be redistributed under
+the currently established rights.  Policies are described only as control,
+representation intervention, training intervention, and combined intervention.
+Opponents are grouped as deterministic or timed-search execution contexts.  The
+scientific target is the validation protocol; policy quality and game strategy
+are outside scope.
+
+The bounded source audit verified frozen digests for all 13 inventoried
+artifacts and applied the Python source-pattern scan to
+\SourceAssessedPackageTrees{} package trees.  The
+\SourceUnassessedBinaries{} engine binaries were hash checked but not source
+assessed.  These records identify candidate mechanisms and an explicit
+uninspected boundary; they do not prove determinism or a causal mechanism.
+
+The historical study scheduled seven opponents, two actual orders, and 200
+seed conditions per opponent--order cell.  Candidate and control rows recorded
+the same requested seed, opponent, order, and seat, but ran as separate
+process-pool tasks.  The historical files do not contain the complete field set
+required for a current Stage-3 pass and did not capture the later trace
+projection.  The strongest retrospective check is therefore equality of an
+available-record projection across three separately executed control arms.
+
+That projection disagreed on
+\HistoricalOutcomeMismatch{}/\HistoricalUnits{} units when it included win and
+draw fields and on
+\HistoricalAvailableRecordMismatch{}/\HistoricalUnits{} units after decision count
+was added.  Both mismatch sets were confined to two timed-search opponent
+packages.  Under the frozen rule, the historical factorial contrasts were not
+estimable and were suppressed.  The mismatches are evidence of failed
+repeatability for those records, not proof that wall-clock timing alone caused
+every divergence.  Removing the two opponents after inspecting the failure
+would have changed the target population and was not used as a rescue analysis.
+
+\section{Prospective validation results}
+
+The protocol content first appears at commit \ProtocolCommitShort, and the
+retained result artifacts appear in descendant commits.  Repository history
+establishes that artifact ordering; it cannot independently prove when a human
+inspected uncommitted files.
+Artifact hashes, the boundary seed conversion, schedule rows, trace schema,
+execution profiles, sample sizes, bootstrap seeds, and admission actions were
+fixed at protocol commit \ProtocolCommitShort.  The prospective boundary-seed
+audit found all scheduled values in range and distinct, with no overlap with
+the converted historical namespace.
+
+\input{tables/table_3_prospective_results.tex}
+
+\subsection{Deterministic preflight}
+
+The preflight covered four arms and five prospectively frozen deterministic
+opponents.  Each arm--opponent job contained both actual orders, 25 seeds per
+order, two fresh serial profiles, and one eight-worker profile.  Across
+\PreflightUnits{} arm--seed-condition units and
+\PreflightExecutions{} execution trajectories, the digest and byte count of
+the complete recorded public-observation-hash/action stream, terminal outcome,
+errors, and decision count had \PreflightMismatches{} mismatches.  This passed
+the frozen repeatability gate and admitted factorial acquisition.  It did not
+establish behavior on untested hardware or loads, and it did not establish
+cross-arm event alignment.
+
+\subsection{Timed-search stress test}
+
+The separate diagnostic retained the two timed-search opponents rather than
+silently excluding them.  Each seed-condition cluster contained four profiles:
+serial forward, serial reverse, parallel forward, and parallel reverse.  Of
+\StressClusters{} clusters and \StressExecutions{} executions,
+\StressTraceMismatch{} clusters had a trace-projection disagreement
+(\StressTracePct\%; empirical 95\% whole-cluster-resampling interval
+[\StressTraceLowPct\%, \StressTraceHighPct\%]).  Outcomes disagreed in
+\StressOutcomeMismatch{} clusters, decision counts in
+\StressDecisionMismatch{}, and error records in \StressErrorMismatch{}.
+All \StressTraceMismatch{} localized earliest differences occurred on recorded
+opponent-action events.  This rejects
+exact repeatability for at least one exercised seed condition and identifies
+plausible clock or process mechanisms; it does not prove a unique cause.
+
+\begin{figure}[t]
+ \includegraphics[width=\columnwidth]{figures/figure_4_timed_search.pdf}
+ \caption{Trace-projection disagreement in the timed-search stress test.
+ Intervals resample whole seed-condition clusters, preserving all four
+ execution profiles.  Any mismatch rejects exact parity on the exercised
+ schedule.  Neutral labels replace package names.  Source data are in
+ \texttt{source\_data/figure\_4\_timed\_search.csv}.}
+ \label{fig:stress}
+\end{figure}
+
+\section{Gated factorial demonstration}
+
+The factorial crossed a representation flag and a separately trained policy
+update, producing four fixed packages: \COne{} (neither), \CTwo{}
+(representation only), \CThree{} (training only), and \CFour{} (both).  Each
+cell used the same five-opponent, two-order schedule with 200 paired units per
+stratum.  Factorial acquisitions recorded schedule, boundary-seed, outcome,
+error, and decision-count fields; they did \emph{not} record trace digests.
+Their admission gate was therefore the prespecified repeated-\COne{}
+available-record audit, not a claim of factorial trace parity.
+
+Let $\mu_{00},\mu_{10},\mu_{01},\mu_{11}$ be the unitless win rates for
+\COne{}, \CTwo{}, \CThree{}, and \CFour{}, respectively, where the first
+subscript marks representation and the second training.  The four reported
+percentage-point contrasts are
+\begin{align}
+ T &= \mu_{11}-\mu_{00}, \notag\\
+ R &= \tfrac12[(\mu_{10}-\mu_{00})+(\mu_{11}-\mu_{01})], \notag\\
+ G &= \tfrac12[(\mu_{01}-\mu_{00})+(\mu_{11}-\mu_{10})], \notag\\
+ J &= \mu_{11}-\mu_{10}-\mu_{01}+\mu_{00}.
+ \label{eq:factorial}
+\end{align}
+$T$ is the total fixed-package intervention contrast, $R$ the average
+representation contrast, $G$ the average training contrast, and $J$ the
+interaction.  All are unitless before multiplication by 100.  With cell rates
+$(0.50,0.52,0.51,0.54)$, the four contrasts are $(0.04,0.025,0.015,0.01)$.
+The signs and cell directions are tested in
+\texttt{tests/test\_equations.py}.  These algebraic contrasts do not isolate a
+mechanism unless the design and execution assumptions hold.
+
+The repeated-control audit had \FactorialControlMismatch{} mismatches, so the
+frozen rule admitted the finite-schedule seed-matched analysis of
+\FactorialUnits{} common units per cell (\FactorialGames{} engine games across
+the four cells and separately executed controls).  The total contrast was
+\PrimaryEstimatePP{} \pp{} with paired-resampling interval
+[\PrimaryLowPP{}, \PrimaryHighPP{}].  The representation, training, and
+interaction contrasts were \RepresentationEstimatePP{},
+\TrainingEstimatePP{}, and \InteractionEstimatePP{} \pp{}, respectively; all
+four intervals span zero.  These estimates are compatible with effects in
+either direction on the frozen schedule.  They do not prove equality,
+equivalence, policy superiority, or event-aligned counterfactual effects.
+
+\input{tables/table_4_factorial.tex}
+
+\begin{figure}[t]
+ \includegraphics[width=\columnwidth]{figures/figure_5_factorial.pdf}
+ \caption{Prespecified factorial contrasts and empirical 95\%
+ paired-resampling intervals for \FactorialUnits{} fixed-schedule units.
+ Intervals describe stability under the frozen resampling procedure; they are
+ not equivalence tests or intervals over new opponents or training runs.
+ Source data are in \texttt{source\_data/figure\_5\_factorial.csv}.}
+ \label{fig:factorial}
+\end{figure}
+
+\section{Interpretation and permitted claims}
+
+The evidence supports four bounded conclusions.  First, matching recorded
+seeds does not by itself establish within-arm repeatability or cross-arm event
+alignment.  Second, the historical available-record mismatch invalidated the
+planned historical paired decomposition under its frozen rule.  Third, the
+prospective deterministic preflight established repeatability for its exact
+artifacts, trace projection, schedule, and execution contexts, while the
+timed-search stress test rejected exact parity on exercised seeds.  Fourth,
+the admitted factorial produced null-compatible finite-schedule estimates
+without establishing equivalence or superiority.
+
+The synthetic suite supports a stronger event-alignment statement only inside
+its logged ontology.  The restricted engine cannot establish that level.  Its
+factorial is therefore described as seed matched and implementation
+conditional, not as a fully coupled counterfactual comparison.  The observed
+timed-search association does not authorize a universal claim about search
+agents or a unique causal attribution to wall-clock timing.
+
+Fail-closed admission preserves useful negative results.  Suppression does not
+delete mismatches, schedules, or diagnostics; it prevents an unsupported
+contrast from being promoted because it is favorable.  Conversely, a passing
+preflight does not certify every future execution.  The protocol records the
+scope in both directions.
+
+\section{Limitations}
+
+The conformance suite contains designed counterexamples and cannot estimate
+how often these failure modes occur.  The restricted case study uses one
+engine build, fixed engineering opponent populations, one policy-training
+realization, and a declared public-observation trace projection.  Opponents and execution
+profiles are not probability samples, so the resampling intervals do not
+generalize to a competition field, hardware population, or new training run.
+
+The trace projection stores hashes of public observations rather than raw
+observations and omits opaque search input, private simulator state, and
+semantic random-event identifiers.  Hash and byte-count agreement is exact for
+the recorded projection but cannot validate omitted state.  Factorial rows
+contain no trace digest; their repeated-control gate compares only the frozen
+available record.
+
+The engine, third-party opponents, game assets and metadata, private replay
+observations, policy packages, and restricted raw traces cannot be
+redistributed under the authority presently established.  Independent readers
+can regenerate the synthetic suite and reaggregate the included processed
+diagnostics, but cannot replay the restricted trajectories end to end.  Legal
+ownership, a redistribution license, and an archival DOI remain unresolved and
+therefore block any claim that the companion package is publicly available.
+
+Finally, author identities, affiliations, ORCIDs, CRediT roles, funding,
+conflicts, acknowledgments, complete historical AI-use confirmation, and
+permissions to identify organizations or individuals require human approval.
+These are submission blockers, not fields to infer from repository history.
+
+\section{Conclusion}
+
+A seed schedule, a repeatable execution, and an event-aligned stochastic
+coupling are different scientific objects.  The protocol connects each object
+to observable evidence and to a frozen reporting consequence.  Its synthetic
+suite demonstrates the logical failure modes and an event-keyed repair; its
+restricted case study shows both a failed historical gate and a passing
+prospective scope, followed by a bounded null-compatible factorial.  The
+practical recommendation is to identify exact artifacts and boundary seeds,
+audit row parity, repeat identical arms at trace-projection level across the
+contexts that matter, inspect stochastic sources, and suppress any claim whose
+required evidence is absent.
+
+\section*{Artificial-intelligence assistance}
+
+In addition to the research-conduct uses described in Methods, OpenAI Codex
+assisted with bibliographic verification, manuscript drafting and editing,
+release-package assembly, reproducibility checklists, and adversarial review.
+The exact deployed GPT-5-family snapshot was not exposed.  Human direction and
+verification procedures are recorded in
+\texttt{supplement/AI\_USE\_LOG.csv}; AI suggestions were accepted only after
+comparison with primary sources, code, raw or processed evidence, tests, and
+rendered output.  No AI system is an author.  The corresponding author must
+confirm the completeness of this disclosure and compliance with applicable
+tool terms, confidentiality, privacy, and intellectual-property obligations.
+
+\section*{Author contributions}
+
+Author identities and CRediT roles for conceptualization, methodology,
+software, validation, formal analysis, investigation, data curation,
+visualization, writing, supervision, project administration, and funding
+acquisition require human confirmation.  No role is inferred from Git history,
+and OpenAI Codex is not an author.
+
+\section*{Competing interests}
+
+No reliable competing-interest statement is established in the repository.
+Every author must disclose relevant financial and nonfinancial interests,
+competition affiliations, employment, sponsorship, platform access, and
+relationships with engine or game rights holders before submission.
+
+\section*{Data Availability Statement}
+
+The companion review package included with this repository contains the
+synthetic protocol implementation and fixtures, expected outputs, processed
+historical and prospective diagnostics, processed factorial units, analysis
+and artifact code, protocols, generated figures and source data, manifests,
+tests, and reproduction commands.  It is computationally self-contained for
+the synthetic and processed analyses and does not require the game engine.
+Public archival availability is not established: the author has not confirmed
+ownership, an open-source/software-data license, archive creators, maintainer
+contact, or a DOI.  The present no-license placeholder therefore does not grant
+redistribution rights, and this manuscript does not promise a later release or
+describe the package as public.
+
+The tournament engine and source, engine binaries, third-party opponent
+packages, game assets and metadata, private replay observations, policy
+packages, and restricted raw traces are unavailable because of organizer
+terms, third-party rights, privacy constraints, and unresolved release
+authority.  They are not offered on request because the repository does not
+establish legal authority or a practical controlled-access mechanism.  Their
+identities are represented only by approved digests and bounded processed
+summaries.  Exact restricted gameplay regeneration consequently requires
+separately authorized access that this article cannot provide.
+
+\appendix
+
+\section{Trace record and study-specific fields}
+
+Preflight and stress executions record schedule identity, artifact digests,
+the value passed at the engine boundary, outcome, errors, decision count, and a
+canonical trace-projection digest with byte count.  The projection orders each
+decision's public-observation hash, acting side, and chosen action, followed by
+the terminal record.  Full restricted traces used for local divergence
+inspection are not redistributed.  Factorial records intentionally use
+\texttt{trace\_mode=none}; they contain schedule, outcome, error, and decision
+fields only.  This distinction prevents the factorial control gate from being
+described as trace parity.
+
+\section{Resampling and multiplicity details}
+
+The timed-search interval resamples seed-condition clusters, retaining all
+four execution profiles together.  The factorial intervals resample paired
+unit identifiers independently within each of ten opponent-by-order strata and
+recompute the four cell means and contrasts.  Every interval uses
+\BootstrapDraws{} draws and a frozen analysis seed.  The exact two-sided
+McNemar comparison for the total factorial contrast has
+\FactorialInterventionOnlyWins{} intervention-only wins,
+\FactorialControlOnlyWins{} control-only wins, and $p=\McNemarP$; it is secondary and cannot
+override admission.  No equivalence margin was specified, so an interval
+containing zero cannot support equivalence.
+
+\section{Artifact and rights boundary}
+
+The synthetic conformance logic, processed summaries, source-data files, protocols,
+and generators are separated from restricted engine and game materials.  The
+release manifest rejects engine binaries, model weights, archives, credentials,
+absolute local paths, and non-allow-listed files.  Dataset and artifact records
+state composition, intended verification use, and access restrictions rather
+than treating processed aggregates as replacements for restricted raw material
+\cite{gebru2021datasheets}.
+
+\bibliography{references}
+
+\end{document}

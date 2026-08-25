@@ -1,0 +1,41 @@
+mode,level,status
+Clean deterministic,1,pass
+Clean deterministic,2,pass
+Clean deterministic,3,pass
+Clean deterministic,4,pass
+Clean deterministic,5,pass
+Clean deterministic,6,pass
+Clean deterministic,7,pass
+Clean deterministic,8,admit
+Stateful draw shift,1,pass
+Stateful draw shift,2,pass
+Stateful draw shift,3,pass
+Stateful draw shift,4,pass
+Stateful draw shift,5,pass
+Stateful draw shift,6,pass
+Stateful draw shift,7,fail
+Stateful draw shift,8,downgrade
+Injected clock budget,1,pass
+Injected clock budget,2,pass
+Injected clock budget,3,pass
+Injected clock budget,4,fail
+Injected clock budget,5,fail
+Injected clock budget,6,fail
+Injected clock budget,7,blocked
+Injected clock budget,8,suppress
+Injected process state,1,pass
+Injected process state,2,pass
+Injected process state,3,pass
+Injected process state,4,fail
+Injected process state,5,fail
+Injected process state,6,fail
+Injected process state,7,blocked
+Injected process state,8,suppress
+Seed conversion,1,pass
+Seed conversion,2,fail
+Seed conversion,3,pass
+Seed conversion,4,pass
+Seed conversion,5,pass
+Seed conversion,6,pass
+Seed conversion,7,pass
+Seed conversion,8,suppress

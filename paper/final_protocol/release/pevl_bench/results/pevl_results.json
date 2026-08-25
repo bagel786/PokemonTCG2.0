@@ -1,0 +1,1959 @@
+{
+  "framework": "Paired Evaluation Validity Ladder",
+  "levels": [
+    {
+      "kind": "evidence_gate",
+      "level": 1,
+      "level_name": "artifact_identity",
+      "valid_statuses": [
+        "blocked",
+        "fail",
+        "pass"
+      ]
+    },
+    {
+      "kind": "evidence_gate",
+      "level": 2,
+      "level_name": "seed_namespace_integrity",
+      "valid_statuses": [
+        "blocked",
+        "fail",
+        "pass"
+      ]
+    },
+    {
+      "kind": "evidence_gate",
+      "level": 3,
+      "level_name": "schedule_parity",
+      "valid_statuses": [
+        "blocked",
+        "fail",
+        "pass"
+      ]
+    },
+    {
+      "kind": "evidence_gate",
+      "level": 4,
+      "level_name": "identical_arm_record_parity",
+      "valid_statuses": [
+        "blocked",
+        "fail",
+        "pass"
+      ]
+    },
+    {
+      "kind": "evidence_gate",
+      "level": 5,
+      "level_name": "repeat_and_worker_parity",
+      "valid_statuses": [
+        "blocked",
+        "fail",
+        "pass"
+      ]
+    },
+    {
+      "kind": "evidence_gate",
+      "level": 6,
+      "level_name": "stochastic_source_audit",
+      "valid_statuses": [
+        "blocked",
+        "fail",
+        "pass"
+      ]
+    },
+    {
+      "kind": "evidence_gate",
+      "level": 7,
+      "level_name": "cross_arm_event_alignment",
+      "valid_statuses": [
+        "blocked",
+        "fail",
+        "pass"
+      ]
+    },
+    {
+      "kind": "admission_decision",
+      "level": 8,
+      "level_name": "statistical_admission",
+      "valid_statuses": [
+        "admit",
+        "downgrade",
+        "suppress"
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "audit": [
+        {
+          "catches_failure": false,
+          "evidence": {
+            "artifact_hashes": {
+              "candidate_policy_sha256": "0988875a8e5393ec61c2350b1318f70abe8ea972ebe2ccb3da49a6191f7514e3",
+              "control_policy_sha256": "0988875a8e5393ec61c2350b1318f70abe8ea972ebe2ccb3da49a6191f7514e3",
+              "engine_sha256": "59f05f644090d480a087fa65a0a5a29845fade84bb51f6ab0fc5461e08d35a2d",
+              "implementation_sha256": "887905b59ae309ecdf689c6d47194d140053bb781cb4690d807cf53515f92ba7",
+              "mode_configuration_sha256": "f44dd3607e66c71df4e304fc8425850fafed2e9d52a8d3c4ed8ad87c1b523083",
+              "opponent_sha256": "4e93fbfb1ea54938d479bc9658b61388c20d0ed34e3da602eb8450d004eb0e52",
+              "protocol_sha256": "e33352ca4911b9c000ce964bb572e0824002d58dd16292031e83984272e9e8bb"
+            },
+            "configuration": {
+              "decision_budget": 8,
+              "environment": {},
+              "process_start_method": "spawn",
+              "worker_count": 1
+            },
+            "fixture_identity_note": "Synthetic identifiers illustrate the required record; they do not identify an external engine or agent.",
+            "implementation_version": "1.1.0",
+            "protocol_id": "pevl-synthetic-protocol-v1.1.0",
+            "repository_commit": null,
+            "standalone_identity_basis": "implementation_sha256"
+          },
+          "evidence_sha256": "d7b615e74dadf1cebb06fd14bf551df3fb9f12117ba8255012a99d8f9c117ed9",
+          "level": 1,
+          "level_name": "artifact_identity",
+          "status": "pass",
+          "summary": "Synthetic artifact and configuration identities are complete."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "conversion_rule": "requested_seed modulo 2**32",
+            "rng_stream_id": "pevl-synthetic-stream-v1",
+            "schedule_rows": [
+              {
+                "engine_seed_uint32": 730241,
+                "requested_seed": 730241,
+                "rng_stream_id": "pevl-synthetic-stream-v1"
+              }
+            ],
+            "unintended_collisions": [],
+            "unique_engine_seeds": true
+          },
+          "evidence_sha256": "26725b5eccea982d09dae14b52f4b014abe8cb30f60037c25619abcad4581db1",
+          "level": 2,
+          "level_name": "seed_namespace_integrity",
+          "status": "pass",
+          "summary": "Requested and consumed seeds are recorded and unique."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "all_prespecified_fields_equal": true,
+            "candidate": {
+              "actual_order": "first",
+              "engine_seed_uint32": 730241,
+              "enqueue_position": 0,
+              "environment": {},
+              "initial_state_controls": {
+                "scenario": "root_v1"
+              },
+              "maximum_decisions": 8,
+              "opponent": "synthetic_opponent_v1",
+              "physical_seat": 0,
+              "process_start_method": "spawn",
+              "requested_seed": 730241,
+              "schedule_fingerprint_sha256": "cbe8223b371307c1f0c9b3a7b056cf5f775e30463ff73d951f5f6e905106ad97",
+              "search_configuration": {
+                "mode": "fixed"
+              },
+              "worker_count": 1
+            },
+            "complete_expected_cells": true,
+            "control": {
+              "actual_order": "first",
+              "engine_seed_uint32": 730241,
+              "enqueue_position": 0,
+              "environment": {},
+              "initial_state_controls": {
+                "scenario": "root_v1"
+              },
+              "maximum_decisions": 8,
+              "opponent": "synthetic_opponent_v1",
+              "physical_seat": 0,
+              "process_start_method": "spawn",
+              "requested_seed": 730241,
+              "schedule_fingerprint_sha256": "cbe8223b371307c1f0c9b3a7b056cf5f775e30463ff73d951f5f6e905106ad97",
+              "search_configuration": {
+                "mode": "fixed"
+              },
+              "worker_count": 1
+            },
+            "expected_arm_records": 2,
+            "observed_arm_records": 2,
+            "pair_schedule_fingerprint_sha256": "44aaa182f80bfe8990f3afd4f307745751aeb1e2e2083a22d92e9221978723a6"
+          },
+          "evidence_sha256": "eae1a0e56adb985047665a7913547c1d8ce5482b4c069962c1cc67ea56293945",
+          "level": 3,
+          "level_name": "schedule_parity",
+          "status": "pass",
+          "summary": "Both arms use the same complete, fingerprinted schedule."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "all_compared_fields_equal": true,
+            "compared_fields_in_strength_order": [
+              "outcome",
+              "errors",
+              "decision_count",
+              "action_sequence",
+              "public_state_sequence",
+              "trace_sha256"
+            ],
+            "field_equality": {
+              "action_sequence": true,
+              "decision_count": true,
+              "errors": true,
+              "outcome": true,
+              "public_state_sequence": true,
+              "trace_sha256": true
+            },
+            "first_trace_divergence": null,
+            "left_trace_sha256": "bdbf676e2b4cd60d707b0f60d55bd5ab033a3d383d32956c73688ae16d45c0f0",
+            "right_trace_sha256": "bdbf676e2b4cd60d707b0f60d55bd5ab033a3d383d32956c73688ae16d45c0f0"
+          },
+          "evidence_sha256": "e6b44382ee843717f99553aabcaee038f95731fbfa913882b4352e5a8cf72389",
+          "level": 4,
+          "level_name": "identical_arm_record_parity",
+          "status": "pass",
+          "summary": "Byte-identical arms match through the complete public trace."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "arms_tested": [
+              "control",
+              "candidate"
+            ],
+            "execution_profiles": [
+              "serial_fresh_process_1",
+              "serial_fresh_process_2",
+              "workers_4_fresh_pool"
+            ],
+            "trace_sha256_by_profile": {
+              "serial_fresh_process_1": "bdbf676e2b4cd60d707b0f60d55bd5ab033a3d383d32956c73688ae16d45c0f0",
+              "serial_fresh_process_2": "bdbf676e2b4cd60d707b0f60d55bd5ab033a3d383d32956c73688ae16d45c0f0",
+              "workers_4_fresh_pool": "bdbf676e2b4cd60d707b0f60d55bd5ab033a3d383d32956c73688ae16d45c0f0"
+            }
+          },
+          "evidence_sha256": "c67939193370e890d8c11a717651feb75d824d8bb5e01d7ce9e491c0904a8de3",
+          "level": 5,
+          "level_name": "repeat_and_worker_parity",
+          "status": "pass",
+          "summary": "Serial repeats and the scripted worker profile preserve each arm trace."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "controlled_sources": [
+              "sha256_event_keyed_randomness"
+            ],
+            "residual_risks": [],
+            "uncontrolled_sources": []
+          },
+          "evidence_sha256": "259923b6699462d06112e8f7caf89e4f7b62674dce29007208203c1f32ebd667",
+          "level": 6,
+          "level_name": "stochastic_source_audit",
+          "status": "pass",
+          "summary": "The only stochastic source is event-keyed and explicitly seeded."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "aligned": true,
+            "covered_event_keys": [
+              "setup:weather",
+              "turn:0:accuracy",
+              "turn:0:damage",
+              "turn:1:accuracy",
+              "turn:1:damage"
+            ],
+            "shared_event_values_sha256": "49982e276c589da0a55b3f9f0c1fba71fe0ea418484e1fcf3ad1d6732be73c9a"
+          },
+          "evidence_sha256": "e0b0cb1edc14731ef04f23f2819486b2da8d0919ee23ac9979a07eacd034ad86",
+          "level": 7,
+          "level_name": "cross_arm_event_alignment",
+          "status": "pass",
+          "summary": "All logged shared event keys map to the same random quantities."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "analysis_unit": "scheduled_seed_condition",
+            "claim_class": "event_aligned_crn_demonstration",
+            "decision": "admit_event_aligned",
+            "estimand": "arm difference over the exact synthetic fixture population",
+            "forbidden_wording": "Universal alignment outside the logged event set.",
+            "interval_or_test": "not_applicable_deterministic_counterexample",
+            "optional_stopping": "forbidden",
+            "permitted_wording": "Shared logged exogenous events are event-aligned in this fixture.",
+            "redesign_rule": "No redesign required for this fixture claim.",
+            "target_population": "the prespecified synthetic seeds and execution profiles"
+          },
+          "evidence_sha256": "6545139f6171fe7260b14102e8993adcdd69be983bb3cf51bfd32b31bab6b2d2",
+          "level": 8,
+          "level_name": "statistical_admission",
+          "status": "admit",
+          "summary": "The fixture admits an event-aligned CRN demonstration."
+        }
+      ],
+      "caught_by_levels": [],
+      "description": "A deterministic, event-keyed paired evaluation.",
+      "evidence": {
+        "run_a": {
+          "event_log_sha256": "9a121737951cc07b97df2e1266cb079079e4babc7f4e484c5e94ef4bdeba9087",
+          "events": [
+            {
+              "event_key": "setup:weather",
+              "position": 0,
+              "random_value": "1aba986f905b6019",
+              "shared_exogenous_event": true
+            },
+            {
+              "event_key": "turn:0:accuracy",
+              "position": 1,
+              "random_value": "5e5ce74cb38aa8a7",
+              "shared_exogenous_event": true
+            },
+            {
+              "event_key": "turn:0:damage",
+              "position": 2,
+              "random_value": "1bf9a3916630decb",
+              "shared_exogenous_event": true
+            },
+            {
+              "event_key": "turn:1:accuracy",
+              "position": 3,
+              "random_value": "8995806c297bbd38",
+              "shared_exogenous_event": true
+            },
+            {
+              "event_key": "turn:1:damage",
+              "position": 4,
+              "random_value": "335b92124238723b",
+              "shared_exogenous_event": true
+            }
+          ],
+          "record": {
+            "action_sequence": [
+              "move_0",
+              "move_3"
+            ],
+            "decision_count": 2,
+            "errors": {
+              "opponent_policy": 0,
+              "subject_policy": 0
+            },
+            "outcome": "win",
+            "public_state_sequence": [
+              "weather_0:turn_0",
+              "weather_0:turn_1"
+            ],
+            "trace": [
+              {
+                "action": "move_0",
+                "public_state": "weather_0:turn_0",
+                "step": 0
+              },
+              {
+                "action": "move_3",
+                "public_state": "weather_0:turn_1",
+                "step": 1
+              }
+            ],
+            "trace_sha256": "bdbf676e2b4cd60d707b0f60d55bd5ab033a3d383d32956c73688ae16d45c0f0"
+          },
+          "shared_event_values": {
+            "setup:weather": "1aba986f905b6019",
+            "turn:0:accuracy": "5e5ce74cb38aa8a7",
+            "turn:0:damage": "1bf9a3916630decb",
+            "turn:1:accuracy": "8995806c297bbd38",
+            "turn:1:damage": "335b92124238723b"
+          },
+          "trace": [
+            {
+              "action": "move_0",
+              "public_state": "weather_0:turn_0",
+              "step": 0
+            },
+            {
+              "action": "move_3",
+              "public_state": "weather_0:turn_1",
+              "step": 1
+            }
+          ],
+          "trace_sha256": "bdbf676e2b4cd60d707b0f60d55bd5ab033a3d383d32956c73688ae16d45c0f0"
+        },
+        "run_b": {
+          "event_log_sha256": "9a121737951cc07b97df2e1266cb079079e4babc7f4e484c5e94ef4bdeba9087",
+          "events": [
+            {
+              "event_key": "setup:weather",
+              "position": 0,
+              "random_value": "1aba986f905b6019",
+              "shared_exogenous_event": true
+            },
+            {
+              "event_key": "turn:0:accuracy",
+              "position": 1,
+              "random_value": "5e5ce74cb38aa8a7",
+              "shared_exogenous_event": true
+            },
+            {
+              "event_key": "turn:0:damage",
+              "position": 2,
+              "random_value": "1bf9a3916630decb",
+              "shared_exogenous_event": true
+            },
+            {
+              "event_key": "turn:1:accuracy",
+              "position": 3,
+              "random_value": "8995806c297bbd38",
+              "shared_exogenous_event": true
+            },
+            {
+              "event_key": "turn:1:damage",
+              "position": 4,
+              "random_value": "335b92124238723b",
+              "shared_exogenous_event": true
+            }
+          ],
+          "record": {
+            "action_sequence": [
+              "move_0",
+              "move_3"
+            ],
+            "decision_count": 2,
+            "errors": {
+              "opponent_policy": 0,
+              "subject_policy": 0
+            },
+            "outcome": "win",
+            "public_state_sequence": [
+              "weather_0:turn_0",
+              "weather_0:turn_1"
+            ],
+            "trace": [
+              {
+                "action": "move_0",
+                "public_state": "weather_0:turn_0",
+                "step": 0
+              },
+              {
+                "action": "move_3",
+                "public_state": "weather_0:turn_1",
+                "step": 1
+              }
+            ],
+            "trace_sha256": "bdbf676e2b4cd60d707b0f60d55bd5ab033a3d383d32956c73688ae16d45c0f0"
+          },
+          "shared_event_values": {
+            "setup:weather": "1aba986f905b6019",
+            "turn:0:accuracy": "5e5ce74cb38aa8a7",
+            "turn:0:damage": "1bf9a3916630decb",
+            "turn:1:accuracy": "8995806c297bbd38",
+            "turn:1:damage": "335b92124238723b"
+          },
+          "trace": [
+            {
+              "action": "move_0",
+              "public_state": "weather_0:turn_0",
+              "step": 0
+            },
+            {
+              "action": "move_3",
+              "public_state": "weather_0:turn_1",
+              "step": 1
+            }
+          ],
+          "trace_sha256": "bdbf676e2b4cd60d707b0f60d55bd5ab033a3d383d32956c73688ae16d45c0f0"
+        }
+      },
+      "first_catching_level": null,
+      "mode": "clean_deterministic"
+    },
+    {
+      "audit": [
+        {
+          "catches_failure": false,
+          "evidence": {
+            "artifact_hashes": {
+              "candidate_policy_sha256": "8bc95cc63ea6b5cf2acca93d81accd42f00790df713954a03b3e0b317726a9b4",
+              "control_policy_sha256": "0988875a8e5393ec61c2350b1318f70abe8ea972ebe2ccb3da49a6191f7514e3",
+              "engine_sha256": "59f05f644090d480a087fa65a0a5a29845fade84bb51f6ab0fc5461e08d35a2d",
+              "implementation_sha256": "887905b59ae309ecdf689c6d47194d140053bb781cb4690d807cf53515f92ba7",
+              "mode_configuration_sha256": "07d2d64579046a52c1e1aa12104cd0e31ab45b30d303be374b9b1661ee717f96",
+              "opponent_sha256": "4e93fbfb1ea54938d479bc9658b61388c20d0ed34e3da602eb8450d004eb0e52",
+              "protocol_sha256": "e33352ca4911b9c000ce964bb572e0824002d58dd16292031e83984272e9e8bb"
+            },
+            "configuration": {
+              "decision_budget": 8,
+              "environment": {},
+              "process_start_method": "spawn",
+              "worker_count": 1
+            },
+            "fixture_identity_note": "Synthetic identifiers illustrate the required record; they do not identify an external engine or agent.",
+            "implementation_version": "1.1.0",
+            "protocol_id": "pevl-synthetic-protocol-v1.1.0",
+            "repository_commit": null,
+            "standalone_identity_basis": "implementation_sha256"
+          },
+          "evidence_sha256": "e18b13cbf0bb9dfad1062deef22cf7dba3311850410496c51f59995e8c480c29",
+          "level": 1,
+          "level_name": "artifact_identity",
+          "status": "pass",
+          "summary": "Treatment, control, engine, opponent, and protocol identities are recorded."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "conversion_rule": "requested_seed modulo 2**32",
+            "rng_stream_id": "pevl-synthetic-stream-v1",
+            "schedule_rows": [
+              {
+                "engine_seed_uint32": 730241,
+                "requested_seed": 730241,
+                "rng_stream_id": "pevl-synthetic-stream-v1"
+              }
+            ],
+            "unintended_collisions": [],
+            "unique_engine_seeds": true
+          },
+          "evidence_sha256": "26725b5eccea982d09dae14b52f4b014abe8cb30f60037c25619abcad4581db1",
+          "level": 2,
+          "level_name": "seed_namespace_integrity",
+          "status": "pass",
+          "summary": "The exact consumed seed and stream identifier are unique and recorded."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "all_prespecified_fields_equal": true,
+            "candidate": {
+              "actual_order": "first",
+              "engine_seed_uint32": 730241,
+              "enqueue_position": 0,
+              "environment": {},
+              "initial_state_controls": {
+                "scenario": "root_v1"
+              },
+              "maximum_decisions": 8,
+              "opponent": "synthetic_opponent_v1",
+              "physical_seat": 0,
+              "process_start_method": "spawn",
+              "requested_seed": 730241,
+              "schedule_fingerprint_sha256": "cbe8223b371307c1f0c9b3a7b056cf5f775e30463ff73d951f5f6e905106ad97",
+              "search_configuration": {
+                "mode": "fixed"
+              },
+              "worker_count": 1
+            },
+            "complete_expected_cells": true,
+            "control": {
+              "actual_order": "first",
+              "engine_seed_uint32": 730241,
+              "enqueue_position": 0,
+              "environment": {},
+              "initial_state_controls": {
+                "scenario": "root_v1"
+              },
+              "maximum_decisions": 8,
+              "opponent": "synthetic_opponent_v1",
+              "physical_seat": 0,
+              "process_start_method": "spawn",
+              "requested_seed": 730241,
+              "schedule_fingerprint_sha256": "cbe8223b371307c1f0c9b3a7b056cf5f775e30463ff73d951f5f6e905106ad97",
+              "search_configuration": {
+                "mode": "fixed"
+              },
+              "worker_count": 1
+            },
+            "expected_arm_records": 2,
+            "observed_arm_records": 2,
+            "pair_schedule_fingerprint_sha256": "44aaa182f80bfe8990f3afd4f307745751aeb1e2e2083a22d92e9221978723a6"
+          },
+          "evidence_sha256": "eae1a0e56adb985047665a7913547c1d8ce5482b4c069962c1cc67ea56293945",
+          "level": 3,
+          "level_name": "schedule_parity",
+          "status": "pass",
+          "summary": "Treatment and control begin from the same fingerprinted schedule."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "arms_tested": [
+              "control",
+              "treatment"
+            ],
+            "control_repeat_parity": {
+              "all_compared_fields_equal": true,
+              "compared_fields_in_strength_order": [
+                "outcome",
+                "errors",
+                "decision_count",
+                "action_sequence",
+                "public_state_sequence",
+                "trace_sha256"
+              ],
+              "field_equality": {
+                "action_sequence": true,
+                "decision_count": true,
+                "errors": true,
+                "outcome": true,
+                "public_state_sequence": true,
+                "trace_sha256": true
+              },
+              "first_trace_divergence": null,
+              "left_trace_sha256": "691277d21c95414418b752423893b988a2934a9fe7334016007aa00a07fe7de7",
+              "right_trace_sha256": "691277d21c95414418b752423893b988a2934a9fe7334016007aa00a07fe7de7"
+            },
+            "treatment_repeat_parity": {
+              "all_compared_fields_equal": true,
+              "compared_fields_in_strength_order": [
+                "outcome",
+                "errors",
+                "decision_count",
+                "action_sequence",
+                "public_state_sequence",
+                "trace_sha256"
+              ],
+              "field_equality": {
+                "action_sequence": true,
+                "decision_count": true,
+                "errors": true,
+                "outcome": true,
+                "public_state_sequence": true,
+                "trace_sha256": true
+              },
+              "first_trace_divergence": null,
+              "left_trace_sha256": "37460a244e8115e4d9304f4dc546657493f438e261dd0674f2e68eda7dc19fa0",
+              "right_trace_sha256": "37460a244e8115e4d9304f4dc546657493f438e261dd0674f2e68eda7dc19fa0"
+            }
+          },
+          "evidence_sha256": "9fe2a05d543e673fbd08948c5fdf6f47ccd78c65748d2c680dc846495ca0c41e",
+          "level": 4,
+          "level_name": "identical_arm_record_parity",
+          "status": "pass",
+          "summary": "Each arm exactly reproduces all compared record fields."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "arms_tested": [
+              "control",
+              "treatment"
+            ],
+            "execution_profiles": [
+              "serial_repeat",
+              "workers_4_fresh_pool"
+            ],
+            "profile_trace_sha256": {
+              "control": "691277d21c95414418b752423893b988a2934a9fe7334016007aa00a07fe7de7",
+              "treatment": "37460a244e8115e4d9304f4dc546657493f438e261dd0674f2e68eda7dc19fa0"
+            }
+          },
+          "evidence_sha256": "c375ced978552628399a3fe82d3b87f1fb80e15cea4e021009d1ab252c513577",
+          "level": 5,
+          "level_name": "repeat_and_worker_parity",
+          "status": "pass",
+          "summary": "Both arms reproduce across the scripted execution profiles."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "controlled_sources": [
+              "sha256_counter_indexed_stateful_stream"
+            ],
+            "residual_risks": [
+              "cross_arm_draw_position_shift"
+            ],
+            "uncontrolled_sources": []
+          },
+          "evidence_sha256": "184da23ee1e9e0fdcd599886c7cf270e655e6d9f36e1d3100c0190fde1173cf6",
+          "level": 6,
+          "level_name": "stochastic_source_audit",
+          "status": "pass",
+          "summary": "The mutable stream is inventoried and reproducible; that does not prove event alignment."
+        },
+        {
+          "catches_failure": true,
+          "evidence": {
+            "mismatched_common_events": [
+              {
+                "control_value": "7dc046106f7750ef",
+                "event_key": "turn:0:accuracy",
+                "treatment_value": "758ce749b9421f05"
+              },
+              {
+                "control_value": "758ce749b9421f05",
+                "event_key": "turn:0:damage",
+                "treatment_value": "9f01498451a555fc"
+              },
+              {
+                "control_value": "9f01498451a555fc",
+                "event_key": "turn:1:accuracy",
+                "treatment_value": "ee48124d4f412964"
+              },
+              {
+                "control_value": "ee48124d4f412964",
+                "event_key": "turn:1:damage",
+                "treatment_value": "f18dac2d389ee385"
+              }
+            ],
+            "mismatched_count": 4,
+            "shared_event_count": 5
+          },
+          "evidence_sha256": "a4ca7e9f55714098a9432121c9fd95cc59ed536c16c9a56797dacf9569762bfa",
+          "level": 7,
+          "level_name": "cross_arm_event_alignment",
+          "status": "fail",
+          "summary": "One treatment-only draw shifts later shared event quantities."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "analysis_unit": "scheduled_seed_condition",
+            "claim_class": "seed_matched_non_counterfactual_demonstration",
+            "decision": "downgrade_to_seed_matched_only",
+            "estimand": "arm difference over the exact synthetic fixture population",
+            "forbidden_wording": "Event-aligned CRN or counterfactual comparison.",
+            "interval_or_test": "not_applicable_deterministic_counterexample",
+            "optional_stopping": "forbidden",
+            "permitted_wording": "The arms used the same scheduled seed, but shared events were not held fixed.",
+            "redesign_rule": "Use event-keyed randomness or repeated independent evaluation before making a stronger claim.",
+            "target_population": "the prespecified synthetic seeds and execution profiles"
+          },
+          "evidence_sha256": "3756fc7a20eb111ad033cb00366020d900b21c3949a151d547754e12573f56f4",
+          "level": 8,
+          "level_name": "statistical_admission",
+          "status": "downgrade",
+          "summary": "Only bounded seed-matched wording is admitted; CRN wording is suppressed."
+        }
+      ],
+      "caught_by_levels": [
+        7
+      ],
+      "description": "A deterministic intervention adds one draw and shifts later event meanings.",
+      "evidence": {
+        "control": {
+          "event_log_sha256": "2a098ab2e4545308e5b0c54dd2adb8beead1492b2db7e5f432b2b0c138e0edce",
+          "events": [
+            {
+              "event_key": "setup:weather",
+              "position": 0,
+              "random_value": "b427b40c5f11c76a",
+              "shared_exogenous_event": true
+            },
+            {
+              "event_key": "turn:0:accuracy",
+              "position": 1,
+              "random_value": "7dc046106f7750ef",
+              "shared_exogenous_event": true
+            },
+            {
+              "event_key": "turn:0:damage",
+              "position": 2,
+              "random_value": "758ce749b9421f05",
+              "shared_exogenous_event": true
+            },
+            {
+              "event_key": "turn:1:accuracy",
+              "position": 3,
+              "random_value": "9f01498451a555fc",
+              "shared_exogenous_event": true
+            },
+            {
+              "event_key": "turn:1:damage",
+              "position": 4,
+              "random_value": "ee48124d4f412964",
+              "shared_exogenous_event": true
+            }
+          ],
+          "record": {
+            "action_sequence": [
+              "move_2",
+              "move_0"
+            ],
+            "decision_count": 2,
+            "errors": {
+              "opponent_policy": 0,
+              "subject_policy": 0
+            },
+            "outcome": "loss",
+            "public_state_sequence": [
+              "weather_0:turn_0",
+              "weather_0:turn_1"
+            ],
+            "trace": [
+              {
+                "action": "move_2",
+                "public_state": "weather_0:turn_0",
+                "step": 0
+              },
+              {
+                "action": "move_0",
+                "public_state": "weather_0:turn_1",
+                "step": 1
+              }
+            ],
+            "trace_sha256": "691277d21c95414418b752423893b988a2934a9fe7334016007aa00a07fe7de7"
+          },
+          "shared_event_values": {
+            "setup:weather": "b427b40c5f11c76a",
+            "turn:0:accuracy": "7dc046106f7750ef",
+            "turn:0:damage": "758ce749b9421f05",
+            "turn:1:accuracy": "9f01498451a555fc",
+            "turn:1:damage": "ee48124d4f412964"
+          },
+          "trace": [
+            {
+              "action": "move_2",
+              "public_state": "weather_0:turn_0",
+              "step": 0
+            },
+            {
+              "action": "move_0",
+              "public_state": "weather_0:turn_1",
+              "step": 1
+            }
+          ],
+          "trace_sha256": "691277d21c95414418b752423893b988a2934a9fe7334016007aa00a07fe7de7"
+        },
+        "event_keyed_remediation": {
+          "aligned_common_events": true,
+          "covered_event_keys": [
+            "setup:weather",
+            "turn:0:accuracy",
+            "turn:0:damage",
+            "turn:1:accuracy",
+            "turn:1:damage"
+          ],
+          "level_7_status_after_remediation": "pass",
+          "method": "sha256(seed_uint32, semantic_event_key)",
+          "mismatched_common_event_keys": [],
+          "remediated_control_event_values_sha256": "49982e276c589da0a55b3f9f0c1fba71fe0ea418484e1fcf3ad1d6732be73c9a",
+          "remediated_treatment_event_values_sha256": "49982e276c589da0a55b3f9f0c1fba71fe0ea418484e1fcf3ad1d6732be73c9a"
+        },
+        "treatment": {
+          "event_log_sha256": "6f71bb1451468290da04fb7512a99f556eff48573d17d44a90cd4f3d785c95ca",
+          "events": [
+            {
+              "event_key": "setup:weather",
+              "position": 0,
+              "random_value": "b427b40c5f11c76a",
+              "shared_exogenous_event": true
+            },
+            {
+              "event_key": "intervention:diagnostic_probe",
+              "position": 1,
+              "random_value": "7dc046106f7750ef",
+              "shared_exogenous_event": false
+            },
+            {
+              "event_key": "turn:0:accuracy",
+              "position": 2,
+              "random_value": "758ce749b9421f05",
+              "shared_exogenous_event": true
+            },
+            {
+              "event_key": "turn:0:damage",
+              "position": 3,
+              "random_value": "9f01498451a555fc",
+              "shared_exogenous_event": true
+            },
+            {
+              "event_key": "turn:1:accuracy",
+              "position": 4,
+              "random_value": "ee48124d4f412964",
+              "shared_exogenous_event": true
+            },
+            {
+              "event_key": "turn:1:damage",
+              "position": 5,
+              "random_value": "f18dac2d389ee385",
+              "shared_exogenous_event": true
+            }
+          ],
+          "record": {
+            "action_sequence": [
+              "move_1",
+              "move_1"
+            ],
+            "decision_count": 2,
+            "errors": {
+              "opponent_policy": 0,
+              "subject_policy": 0
+            },
+            "outcome": "loss",
+            "public_state_sequence": [
+              "weather_0:turn_0",
+              "weather_0:turn_1"
+            ],
+            "trace": [
+              {
+                "action": "move_1",
+                "public_state": "weather_0:turn_0",
+                "step": 0
+              },
+              {
+                "action": "move_1",
+                "public_state": "weather_0:turn_1",
+                "step": 1
+              }
+            ],
+            "trace_sha256": "37460a244e8115e4d9304f4dc546657493f438e261dd0674f2e68eda7dc19fa0"
+          },
+          "shared_event_values": {
+            "setup:weather": "b427b40c5f11c76a",
+            "turn:0:accuracy": "758ce749b9421f05",
+            "turn:0:damage": "9f01498451a555fc",
+            "turn:1:accuracy": "ee48124d4f412964",
+            "turn:1:damage": "f18dac2d389ee385"
+          },
+          "trace": [
+            {
+              "action": "move_1",
+              "public_state": "weather_0:turn_0",
+              "step": 0
+            },
+            {
+              "action": "move_1",
+              "public_state": "weather_0:turn_1",
+              "step": 1
+            }
+          ],
+          "trace_sha256": "37460a244e8115e4d9304f4dc546657493f438e261dd0674f2e68eda7dc19fa0"
+        }
+      },
+      "first_catching_level": 7,
+      "mode": "stateful_draw_shift"
+    },
+    {
+      "audit": [
+        {
+          "catches_failure": false,
+          "evidence": {
+            "artifact_hashes": {
+              "candidate_policy_sha256": "0988875a8e5393ec61c2350b1318f70abe8ea972ebe2ccb3da49a6191f7514e3",
+              "control_policy_sha256": "0988875a8e5393ec61c2350b1318f70abe8ea972ebe2ccb3da49a6191f7514e3",
+              "engine_sha256": "59f05f644090d480a087fa65a0a5a29845fade84bb51f6ab0fc5461e08d35a2d",
+              "implementation_sha256": "887905b59ae309ecdf689c6d47194d140053bb781cb4690d807cf53515f92ba7",
+              "mode_configuration_sha256": "12a6e3879ea979a007719d90fc46323a1671c5dbec2ea80c308fd76ab00af015",
+              "opponent_sha256": "4e93fbfb1ea54938d479bc9658b61388c20d0ed34e3da602eb8450d004eb0e52",
+              "protocol_sha256": "e33352ca4911b9c000ce964bb572e0824002d58dd16292031e83984272e9e8bb"
+            },
+            "configuration": {
+              "decision_budget": 8,
+              "environment": {},
+              "process_start_method": "spawn",
+              "worker_count": 1
+            },
+            "fixture_identity_note": "Synthetic identifiers illustrate the required record; they do not identify an external engine or agent.",
+            "implementation_version": "1.1.0",
+            "protocol_id": "pevl-synthetic-protocol-v1.1.0",
+            "repository_commit": null,
+            "standalone_identity_basis": "implementation_sha256"
+          },
+          "evidence_sha256": "5669bb7fa673fb9252c8e3b8ce87319ae1669bd902f6a6c8bd3a333b3efe3587",
+          "level": 1,
+          "level_name": "artifact_identity",
+          "status": "pass",
+          "summary": "The byte-identical A/A artifacts are recorded."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "conversion_rule": "requested_seed modulo 2**32",
+            "rng_stream_id": "pevl-synthetic-stream-v1",
+            "schedule_rows": [
+              {
+                "engine_seed_uint32": 730241,
+                "requested_seed": 730241,
+                "rng_stream_id": "pevl-synthetic-stream-v1"
+              }
+            ],
+            "unintended_collisions": [],
+            "unique_engine_seeds": true
+          },
+          "evidence_sha256": "26725b5eccea982d09dae14b52f4b014abe8cb30f60037c25619abcad4581db1",
+          "level": 2,
+          "level_name": "seed_namespace_integrity",
+          "status": "pass",
+          "summary": "The exact consumed seed and stream are recorded."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "all_prespecified_fields_equal": true,
+            "candidate": {
+              "actual_order": "first",
+              "engine_seed_uint32": 730241,
+              "enqueue_position": 0,
+              "environment": {},
+              "initial_state_controls": {
+                "scenario": "root_v1"
+              },
+              "maximum_decisions": 8,
+              "opponent": "synthetic_opponent_v1",
+              "physical_seat": 0,
+              "process_start_method": "spawn",
+              "requested_seed": 730241,
+              "schedule_fingerprint_sha256": "96415d39adc8e62e196f1ac016bae397d96ab0c4478161abbaaf3721a067b8a8",
+              "search_configuration": {
+                "deadline_type": "monotonic_clock",
+                "declared_budget_ticks": 5
+              },
+              "worker_count": 1
+            },
+            "complete_expected_cells": true,
+            "control": {
+              "actual_order": "first",
+              "engine_seed_uint32": 730241,
+              "enqueue_position": 0,
+              "environment": {},
+              "initial_state_controls": {
+                "scenario": "root_v1"
+              },
+              "maximum_decisions": 8,
+              "opponent": "synthetic_opponent_v1",
+              "physical_seat": 0,
+              "process_start_method": "spawn",
+              "requested_seed": 730241,
+              "schedule_fingerprint_sha256": "96415d39adc8e62e196f1ac016bae397d96ab0c4478161abbaaf3721a067b8a8",
+              "search_configuration": {
+                "deadline_type": "monotonic_clock",
+                "declared_budget_ticks": 5
+              },
+              "worker_count": 1
+            },
+            "expected_arm_records": 2,
+            "observed_arm_records": 2,
+            "pair_schedule_fingerprint_sha256": "0de70453dc2eb2caced960cb1a2441e2830379fc15a148b9bac4c4d3dc05d784"
+          },
+          "evidence_sha256": "08b5bbc45af767aa63b5b469b8e055578d24b17dea54ed5fc258d8bfbb8a99f9",
+          "level": 3,
+          "level_name": "schedule_parity",
+          "status": "pass",
+          "summary": "Declared schedule fields and fingerprints match."
+        },
+        {
+          "catches_failure": true,
+          "evidence": {
+            "all_compared_fields_equal": false,
+            "compared_fields_in_strength_order": [
+              "outcome",
+              "errors",
+              "decision_count",
+              "action_sequence",
+              "public_state_sequence",
+              "trace_sha256"
+            ],
+            "field_equality": {
+              "action_sequence": false,
+              "decision_count": true,
+              "errors": true,
+              "outcome": false,
+              "public_state_sequence": true,
+              "trace_sha256": false
+            },
+            "first_trace_divergence": {
+              "index": 0,
+              "left": {
+                "action": "move_3",
+                "public_state": "root",
+                "step": 0
+              },
+              "right": {
+                "action": "move_2",
+                "public_state": "root",
+                "step": 0
+              }
+            },
+            "left_trace_sha256": "ae30cbc03315913d155bdf928ff50f32edc38e689241125bbb3a0d21fb2129a0",
+            "right_trace_sha256": "4a643dd2d63029df03aeb63ffdd0d679f583dd41b30e7b5799514ea4c8652d57"
+          },
+          "evidence_sha256": "90686364e0d044162bad79a5f21c63cb1899d7c8744d3c5a64a21298678a2ff9",
+          "level": 4,
+          "level_name": "identical_arm_record_parity",
+          "status": "fail",
+          "summary": "Identical arms diverge in the public-state/action record under hidden timing variation."
+        },
+        {
+          "catches_failure": true,
+          "evidence": {
+            "arms_tested": [
+              "byte_identical_a",
+              "byte_identical_b"
+            ],
+            "execution_profiles": {
+              "serial_fresh_process_1": {
+                "clock_ticks": 5,
+                "trace_sha256": "ae30cbc03315913d155bdf928ff50f32edc38e689241125bbb3a0d21fb2129a0"
+              },
+              "serial_fresh_process_2": {
+                "clock_ticks": 4,
+                "trace_sha256": "4a643dd2d63029df03aeb63ffdd0d679f583dd41b30e7b5799514ea4c8652d57"
+              },
+              "workers_4_contended_pool": {
+                "clock_ticks": 2,
+                "trace_sha256": "474d8058fd15d564fb2854ba286a5888183dca65f62d2372ca8399951b321138"
+              }
+            },
+            "serial_repeat_equal": false,
+            "serial_vs_contended_equal": false
+          },
+          "evidence_sha256": "36e950f36e27caf557bd2dd5bccfa0daa5cbfbebf7ad1809a1107d423f1794ef",
+          "level": 5,
+          "level_name": "repeat_and_worker_parity",
+          "status": "fail",
+          "summary": "Repeated serial and contended worker profiles both expose timing-sensitive traces."
+        },
+        {
+          "catches_failure": true,
+          "evidence": {
+            "controlled_intervention": "injected_available_clock_ticks",
+            "controlled_sources": [
+              "sha256_counter_stream"
+            ],
+            "residual_risks": [],
+            "uncontrolled_sources": [
+              "available_search_time_in_live_systems"
+            ]
+          },
+          "evidence_sha256": "154df927a43b8e742ae078708e049dc60faf5019934fdfecec04a4ee3b9b139c",
+          "level": 6,
+          "level_name": "stochastic_source_audit",
+          "status": "fail",
+          "summary": "Source audit identifies a monotonic-clock deadline as a controlled divergence mechanism."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "reason": "level_4_failure"
+          },
+          "evidence_sha256": "2e6d4599ac5f506076c9bd1f052d2806016de93e028bf2af569d58f18e6c3682",
+          "level": 7,
+          "level_name": "cross_arm_event_alignment",
+          "status": "blocked",
+          "summary": "Event alignment is not assessed after trace parity fails."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "analysis_unit": "scheduled_seed_condition",
+            "claim_class": "parity_failure_only",
+            "decision": "suppress_paired_contrast",
+            "estimand": "arm difference over the exact synthetic fixture population",
+            "forbidden_wording": "A valid paired mechanistic treatment contrast.",
+            "interval_or_test": "not_applicable_deterministic_counterexample",
+            "optional_stopping": "forbidden",
+            "permitted_wording": "Trace divergence is associated with the injected timing profile.",
+            "redesign_rule": "Freeze a validated context or model execution variability using repeated independent runs.",
+            "target_population": "the prespecified synthetic seeds and execution profiles"
+          },
+          "evidence_sha256": "a9306ff8073eca5c3f6634714b0e0726e719f44094d3fe07a633ba415b3f3396",
+          "level": 8,
+          "level_name": "statistical_admission",
+          "status": "suppress",
+          "summary": "The affected paired contrast is not admitted."
+        }
+      ],
+      "caught_by_levels": [
+        4,
+        5,
+        6
+      ],
+      "description": "An injected clock profile changes deadline-limited search depth and action.",
+      "evidence": {
+        "contended_worker_profile": {
+          "action": "move_0",
+          "clock_ticks": 2,
+          "record": {
+            "action_sequence": [
+              "move_0"
+            ],
+            "decision_count": 1,
+            "errors": {
+              "opponent_policy": 0,
+              "subject_policy": 0
+            },
+            "outcome": "loss",
+            "public_state_sequence": [
+              "root"
+            ],
+            "trace": [
+              {
+                "action": "move_0",
+                "public_state": "root",
+                "step": 0
+              }
+            ],
+            "trace_sha256": "474d8058fd15d564fb2854ba286a5888183dca65f62d2372ca8399951b321138"
+          },
+          "search_depth": 2,
+          "trace": [
+            {
+              "action": "move_0",
+              "public_state": "root",
+              "step": 0
+            }
+          ],
+          "trace_sha256": "474d8058fd15d564fb2854ba286a5888183dca65f62d2372ca8399951b321138"
+        },
+        "reference_serial": {
+          "action": "move_3",
+          "clock_ticks": 5,
+          "record": {
+            "action_sequence": [
+              "move_3"
+            ],
+            "decision_count": 1,
+            "errors": {
+              "opponent_policy": 0,
+              "subject_policy": 0
+            },
+            "outcome": "win",
+            "public_state_sequence": [
+              "root"
+            ],
+            "trace": [
+              {
+                "action": "move_3",
+                "public_state": "root",
+                "step": 0
+              }
+            ],
+            "trace_sha256": "ae30cbc03315913d155bdf928ff50f32edc38e689241125bbb3a0d21fb2129a0"
+          },
+          "search_depth": 5,
+          "trace": [
+            {
+              "action": "move_3",
+              "public_state": "root",
+              "step": 0
+            }
+          ],
+          "trace_sha256": "ae30cbc03315913d155bdf928ff50f32edc38e689241125bbb3a0d21fb2129a0"
+        },
+        "repeated_serial": {
+          "action": "move_2",
+          "clock_ticks": 4,
+          "record": {
+            "action_sequence": [
+              "move_2"
+            ],
+            "decision_count": 1,
+            "errors": {
+              "opponent_policy": 0,
+              "subject_policy": 0
+            },
+            "outcome": "loss",
+            "public_state_sequence": [
+              "root"
+            ],
+            "trace": [
+              {
+                "action": "move_2",
+                "public_state": "root",
+                "step": 0
+              }
+            ],
+            "trace_sha256": "4a643dd2d63029df03aeb63ffdd0d679f583dd41b30e7b5799514ea4c8652d57"
+          },
+          "search_depth": 4,
+          "trace": [
+            {
+              "action": "move_2",
+              "public_state": "root",
+              "step": 0
+            }
+          ],
+          "trace_sha256": "4a643dd2d63029df03aeb63ffdd0d679f583dd41b30e7b5799514ea4c8652d57"
+        },
+        "scripted_clock_note": "Clock ticks are injected to make the failure fixture deterministic."
+      },
+      "first_catching_level": 4,
+      "mode": "wall_clock_search"
+    },
+    {
+      "audit": [
+        {
+          "catches_failure": false,
+          "evidence": {
+            "artifact_hashes": {
+              "candidate_policy_sha256": "0988875a8e5393ec61c2350b1318f70abe8ea972ebe2ccb3da49a6191f7514e3",
+              "control_policy_sha256": "0988875a8e5393ec61c2350b1318f70abe8ea972ebe2ccb3da49a6191f7514e3",
+              "engine_sha256": "59f05f644090d480a087fa65a0a5a29845fade84bb51f6ab0fc5461e08d35a2d",
+              "implementation_sha256": "887905b59ae309ecdf689c6d47194d140053bb781cb4690d807cf53515f92ba7",
+              "mode_configuration_sha256": "a6e2c2f7313d255cd25c3bb803e4c80ac8ad48693156db5be9921985e111df8f",
+              "opponent_sha256": "4e93fbfb1ea54938d479bc9658b61388c20d0ed34e3da602eb8450d004eb0e52",
+              "protocol_sha256": "e33352ca4911b9c000ce964bb572e0824002d58dd16292031e83984272e9e8bb"
+            },
+            "configuration": {
+              "decision_budget": 8,
+              "environment": {},
+              "process_start_method": "spawn",
+              "worker_count": 1
+            },
+            "fixture_identity_note": "Synthetic identifiers illustrate the required record; they do not identify an external engine or agent.",
+            "implementation_version": "1.1.0",
+            "protocol_id": "pevl-synthetic-protocol-v1.1.0",
+            "repository_commit": null,
+            "standalone_identity_basis": "implementation_sha256"
+          },
+          "evidence_sha256": "3cf17fb07af1df032b3e004074ca389e29e3424da34189f12f2a306f70726e96",
+          "level": 1,
+          "level_name": "artifact_identity",
+          "status": "pass",
+          "summary": "The byte-identical A/A artifacts are recorded."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "conversion_rule": "requested_seed modulo 2**32",
+            "rng_stream_id": "pevl-synthetic-stream-v1",
+            "schedule_rows": [
+              {
+                "engine_seed_uint32": 730241,
+                "requested_seed": 730241,
+                "rng_stream_id": "pevl-synthetic-stream-v1"
+              }
+            ],
+            "unintended_collisions": [],
+            "unique_engine_seeds": true
+          },
+          "evidence_sha256": "26725b5eccea982d09dae14b52f4b014abe8cb30f60037c25619abcad4581db1",
+          "level": 2,
+          "level_name": "seed_namespace_integrity",
+          "status": "pass",
+          "summary": "The exact consumed seed and stream are recorded."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "all_prespecified_fields_equal": true,
+            "candidate": {
+              "actual_order": "first",
+              "engine_seed_uint32": 730241,
+              "enqueue_position": 0,
+              "environment": {},
+              "initial_state_controls": {
+                "scenario": "root_v1"
+              },
+              "maximum_decisions": 8,
+              "opponent": "synthetic_opponent_v1",
+              "physical_seat": 0,
+              "process_start_method": "spawn",
+              "requested_seed": 730241,
+              "schedule_fingerprint_sha256": "cbe8223b371307c1f0c9b3a7b056cf5f775e30463ff73d951f5f6e905106ad97",
+              "search_configuration": {
+                "mode": "fixed"
+              },
+              "worker_count": 1
+            },
+            "complete_expected_cells": true,
+            "control": {
+              "actual_order": "first",
+              "engine_seed_uint32": 730241,
+              "enqueue_position": 0,
+              "environment": {},
+              "initial_state_controls": {
+                "scenario": "root_v1"
+              },
+              "maximum_decisions": 8,
+              "opponent": "synthetic_opponent_v1",
+              "physical_seat": 0,
+              "process_start_method": "spawn",
+              "requested_seed": 730241,
+              "schedule_fingerprint_sha256": "cbe8223b371307c1f0c9b3a7b056cf5f775e30463ff73d951f5f6e905106ad97",
+              "search_configuration": {
+                "mode": "fixed"
+              },
+              "worker_count": 1
+            },
+            "expected_arm_records": 2,
+            "observed_arm_records": 2,
+            "pair_schedule_fingerprint_sha256": "44aaa182f80bfe8990f3afd4f307745751aeb1e2e2083a22d92e9221978723a6"
+          },
+          "evidence_sha256": "eae1a0e56adb985047665a7913547c1d8ce5482b4c069962c1cc67ea56293945",
+          "level": 3,
+          "level_name": "schedule_parity",
+          "status": "pass",
+          "summary": "Declared schedule fields and fingerprints match."
+        },
+        {
+          "catches_failure": true,
+          "evidence": {
+            "all_compared_fields_equal": false,
+            "compared_fields_in_strength_order": [
+              "outcome",
+              "errors",
+              "decision_count",
+              "action_sequence",
+              "public_state_sequence",
+              "trace_sha256"
+            ],
+            "field_equality": {
+              "action_sequence": false,
+              "decision_count": true,
+              "errors": true,
+              "outcome": false,
+              "public_state_sequence": true,
+              "trace_sha256": false
+            },
+            "first_trace_divergence": {
+              "index": 0,
+              "left": {
+                "action": "move_2",
+                "public_state": "root",
+                "step": 0
+              },
+              "right": {
+                "action": "move_3",
+                "public_state": "root",
+                "step": 0
+              }
+            },
+            "left_trace_sha256": "4a643dd2d63029df03aeb63ffdd0d679f583dd41b30e7b5799514ea4c8652d57",
+            "right_trace_sha256": "ae30cbc03315913d155bdf928ff50f32edc38e689241125bbb3a0d21fb2129a0"
+          },
+          "evidence_sha256": "0055d6d2a1ff3899bc0e650f48d989f95f24bb243f5187922e3a4fc461456ca6",
+          "level": 4,
+          "level_name": "identical_arm_record_parity",
+          "status": "fail",
+          "summary": "Identical arms diverge when a worker inherits process-local state."
+        },
+        {
+          "catches_failure": true,
+          "evidence": {
+            "arms_tested": [
+              "byte_identical_a",
+              "byte_identical_b"
+            ],
+            "execution_profiles": {
+              "fresh_process_1": {
+                "starting_counter": 0,
+                "trace_sha256": "4a643dd2d63029df03aeb63ffdd0d679f583dd41b30e7b5799514ea4c8652d57"
+              },
+              "fresh_process_2": {
+                "starting_counter": 0,
+                "trace_sha256": "4a643dd2d63029df03aeb63ffdd0d679f583dd41b30e7b5799514ea4c8652d57"
+              },
+              "reused_worker": {
+                "starting_counter": 1,
+                "trace_sha256": "ae30cbc03315913d155bdf928ff50f32edc38e689241125bbb3a0d21fb2129a0"
+              }
+            },
+            "fresh_process_repeat_equal": true,
+            "fresh_vs_reused_equal": false
+          },
+          "evidence_sha256": "3af9985d035d750a519da2ffb675c1aee14bdc68cc8dd0a9c6c48a69a57778c1",
+          "level": 5,
+          "level_name": "repeat_and_worker_parity",
+          "status": "fail",
+          "summary": "Fresh-process repeats agree, but reused-worker execution diverges."
+        },
+        {
+          "catches_failure": true,
+          "evidence": {
+            "controlled_intervention": "injected_worker_starting_counter",
+            "controlled_sources": [
+              "sha256_counter_stream"
+            ],
+            "residual_risks": [],
+            "uncontrolled_sources": [
+              "worker_reuse_history_in_live_systems"
+            ]
+          },
+          "evidence_sha256": "52272ecaccb489b6ec3f5f5f8bff8df013d2afe977f0d0f711714523faf9f617",
+          "level": 6,
+          "level_name": "stochastic_source_audit",
+          "status": "fail",
+          "summary": "Source audit identifies mutable process-global state as the controlled mechanism."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "reason": "level_4_failure"
+          },
+          "evidence_sha256": "2e6d4599ac5f506076c9bd1f052d2806016de93e028bf2af569d58f18e6c3682",
+          "level": 7,
+          "level_name": "cross_arm_event_alignment",
+          "status": "blocked",
+          "summary": "Event alignment is not assessed after trace parity fails."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "analysis_unit": "scheduled_seed_condition",
+            "claim_class": "parity_failure_only",
+            "decision": "suppress_paired_contrast",
+            "estimand": "arm difference over the exact synthetic fixture population",
+            "forbidden_wording": "A valid paired mechanistic treatment contrast.",
+            "interval_or_test": "not_applicable_deterministic_counterexample",
+            "optional_stopping": "forbidden",
+            "permitted_wording": "Trace divergence is associated with injected process history.",
+            "redesign_rule": "Use fresh processes or model process-history variability with repeated independent runs.",
+            "target_population": "the prespecified synthetic seeds and execution profiles"
+          },
+          "evidence_sha256": "d79084480e0f278edfacf077e08408aeab8a5660eba4818e98fc57e70c42095d",
+          "level": 8,
+          "level_name": "statistical_admission",
+          "status": "suppress",
+          "summary": "The affected paired contrast is not admitted."
+        }
+      ],
+      "caught_by_levels": [
+        4,
+        5,
+        6
+      ],
+      "description": "A reused worker carries a mutable package-level counter into a run.",
+      "evidence": {
+        "fresh_a": {
+          "action": "move_2",
+          "ending_counter": 1,
+          "record": {
+            "action_sequence": [
+              "move_2"
+            ],
+            "decision_count": 1,
+            "errors": {
+              "opponent_policy": 0,
+              "subject_policy": 0
+            },
+            "outcome": "loss",
+            "public_state_sequence": [
+              "root"
+            ],
+            "trace": [
+              {
+                "action": "move_2",
+                "public_state": "root",
+                "step": 0
+              }
+            ],
+            "trace_sha256": "4a643dd2d63029df03aeb63ffdd0d679f583dd41b30e7b5799514ea4c8652d57"
+          },
+          "starting_counter": 0,
+          "trace": [
+            {
+              "action": "move_2",
+              "public_state": "root",
+              "step": 0
+            }
+          ],
+          "trace_sha256": "4a643dd2d63029df03aeb63ffdd0d679f583dd41b30e7b5799514ea4c8652d57"
+        },
+        "fresh_b": {
+          "action": "move_2",
+          "ending_counter": 1,
+          "record": {
+            "action_sequence": [
+              "move_2"
+            ],
+            "decision_count": 1,
+            "errors": {
+              "opponent_policy": 0,
+              "subject_policy": 0
+            },
+            "outcome": "loss",
+            "public_state_sequence": [
+              "root"
+            ],
+            "trace": [
+              {
+                "action": "move_2",
+                "public_state": "root",
+                "step": 0
+              }
+            ],
+            "trace_sha256": "4a643dd2d63029df03aeb63ffdd0d679f583dd41b30e7b5799514ea4c8652d57"
+          },
+          "starting_counter": 0,
+          "trace": [
+            {
+              "action": "move_2",
+              "public_state": "root",
+              "step": 0
+            }
+          ],
+          "trace_sha256": "4a643dd2d63029df03aeb63ffdd0d679f583dd41b30e7b5799514ea4c8652d57"
+        },
+        "reused_worker": {
+          "action": "move_3",
+          "ending_counter": 2,
+          "record": {
+            "action_sequence": [
+              "move_3"
+            ],
+            "decision_count": 1,
+            "errors": {
+              "opponent_policy": 0,
+              "subject_policy": 0
+            },
+            "outcome": "win",
+            "public_state_sequence": [
+              "root"
+            ],
+            "trace": [
+              {
+                "action": "move_3",
+                "public_state": "root",
+                "step": 0
+              }
+            ],
+            "trace_sha256": "ae30cbc03315913d155bdf928ff50f32edc38e689241125bbb3a0d21fb2129a0"
+          },
+          "starting_counter": 1,
+          "trace": [
+            {
+              "action": "move_3",
+              "public_state": "root",
+              "step": 0
+            }
+          ],
+          "trace_sha256": "ae30cbc03315913d155bdf928ff50f32edc38e689241125bbb3a0d21fb2129a0"
+        }
+      },
+      "first_catching_level": 4,
+      "mode": "process_global_state"
+    },
+    {
+      "audit": [
+        {
+          "catches_failure": false,
+          "evidence": {
+            "artifact_hashes": {
+              "candidate_policy_sha256": "0988875a8e5393ec61c2350b1318f70abe8ea972ebe2ccb3da49a6191f7514e3",
+              "control_policy_sha256": "0988875a8e5393ec61c2350b1318f70abe8ea972ebe2ccb3da49a6191f7514e3",
+              "engine_sha256": "59f05f644090d480a087fa65a0a5a29845fade84bb51f6ab0fc5461e08d35a2d",
+              "implementation_sha256": "887905b59ae309ecdf689c6d47194d140053bb781cb4690d807cf53515f92ba7",
+              "mode_configuration_sha256": "b1f7109802722e6a7316262bc4627d87de53422161a5babc0142fb7108809221",
+              "opponent_sha256": "4e93fbfb1ea54938d479bc9658b61388c20d0ed34e3da602eb8450d004eb0e52",
+              "protocol_sha256": "e33352ca4911b9c000ce964bb572e0824002d58dd16292031e83984272e9e8bb"
+            },
+            "configuration": {
+              "decision_budget": 8,
+              "environment": {},
+              "process_start_method": "spawn",
+              "worker_count": 1
+            },
+            "fixture_identity_note": "Synthetic identifiers illustrate the required record; they do not identify an external engine or agent.",
+            "implementation_version": "1.1.0",
+            "protocol_id": "pevl-synthetic-protocol-v1.1.0",
+            "repository_commit": null,
+            "standalone_identity_basis": "implementation_sha256"
+          },
+          "evidence_sha256": "deb0ce9aa6910fd7cf7fd121d3210a65f0b263f9c7c8b85a30fae0a7f6e62415",
+          "level": 1,
+          "level_name": "artifact_identity",
+          "status": "pass",
+          "summary": "Engine adapter and seed-schedule identities are recorded."
+        },
+        {
+          "catches_failure": true,
+          "evidence": {
+            "conversion_rule": "requested_seed modulo 2**32",
+            "rng_stream_id": "pevl-synthetic-stream-v1",
+            "schedule_rows": [
+              {
+                "engine_seed_uint32": 17,
+                "requested_seed": 17,
+                "rng_stream_id": "pevl-synthetic-stream-v1"
+              },
+              {
+                "engine_seed_uint32": 17,
+                "requested_seed": 4294967313,
+                "rng_stream_id": "pevl-synthetic-stream-v1"
+              }
+            ],
+            "unintended_collisions": [
+              {
+                "engine_seed_uint32": 17,
+                "requested_seeds": [
+                  17,
+                  4294967313
+                ]
+              }
+            ],
+            "unique_engine_seeds": false
+          },
+          "evidence_sha256": "92b4c77e83c30dc265a116db25a153d13b65c2749c39fa6dc047b75b2188a583",
+          "level": 2,
+          "level_name": "seed_namespace_integrity",
+          "status": "fail",
+          "summary": "Distinct requested seeds collide after uint32 conversion."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "all_within_pair_schedules_equal": true,
+            "complete_expected_cells": true,
+            "scheduled_units": [
+              {
+                "all_prespecified_fields_equal": true,
+                "candidate": {
+                  "actual_order": "first",
+                  "engine_seed_uint32": 17,
+                  "enqueue_position": 0,
+                  "environment": {},
+                  "initial_state_controls": {
+                    "scenario": "root_v1"
+                  },
+                  "maximum_decisions": 8,
+                  "opponent": "synthetic_opponent_v1",
+                  "physical_seat": 0,
+                  "process_start_method": "spawn",
+                  "requested_seed": 17,
+                  "schedule_fingerprint_sha256": "fac84a2407a4bd52288d50c7235ee953be008282f85d00a6ef4ca5f12f525171",
+                  "search_configuration": {
+                    "mode": "fixed"
+                  },
+                  "worker_count": 1
+                },
+                "complete_expected_cells": true,
+                "control": {
+                  "actual_order": "first",
+                  "engine_seed_uint32": 17,
+                  "enqueue_position": 0,
+                  "environment": {},
+                  "initial_state_controls": {
+                    "scenario": "root_v1"
+                  },
+                  "maximum_decisions": 8,
+                  "opponent": "synthetic_opponent_v1",
+                  "physical_seat": 0,
+                  "process_start_method": "spawn",
+                  "requested_seed": 17,
+                  "schedule_fingerprint_sha256": "fac84a2407a4bd52288d50c7235ee953be008282f85d00a6ef4ca5f12f525171",
+                  "search_configuration": {
+                    "mode": "fixed"
+                  },
+                  "worker_count": 1
+                },
+                "expected_arm_records": 2,
+                "observed_arm_records": 2,
+                "pair_schedule_fingerprint_sha256": "70f04cf10a08116494d4df68388f4e59ca947ab285a8032eec4819d6eede28b7"
+              },
+              {
+                "all_prespecified_fields_equal": true,
+                "candidate": {
+                  "actual_order": "first",
+                  "engine_seed_uint32": 17,
+                  "enqueue_position": 0,
+                  "environment": {},
+                  "initial_state_controls": {
+                    "scenario": "root_v1"
+                  },
+                  "maximum_decisions": 8,
+                  "opponent": "synthetic_opponent_v1",
+                  "physical_seat": 0,
+                  "process_start_method": "spawn",
+                  "requested_seed": 4294967313,
+                  "schedule_fingerprint_sha256": "34b692eb6c1941469f454e40fc05f8c41d90f5d2b49465452db64d9abd300e1e",
+                  "search_configuration": {
+                    "mode": "fixed"
+                  },
+                  "worker_count": 1
+                },
+                "complete_expected_cells": true,
+                "control": {
+                  "actual_order": "first",
+                  "engine_seed_uint32": 17,
+                  "enqueue_position": 0,
+                  "environment": {},
+                  "initial_state_controls": {
+                    "scenario": "root_v1"
+                  },
+                  "maximum_decisions": 8,
+                  "opponent": "synthetic_opponent_v1",
+                  "physical_seat": 0,
+                  "process_start_method": "spawn",
+                  "requested_seed": 4294967313,
+                  "schedule_fingerprint_sha256": "34b692eb6c1941469f454e40fc05f8c41d90f5d2b49465452db64d9abd300e1e",
+                  "search_configuration": {
+                    "mode": "fixed"
+                  },
+                  "worker_count": 1
+                },
+                "expected_arm_records": 2,
+                "observed_arm_records": 2,
+                "pair_schedule_fingerprint_sha256": "ca5c47d354a861f98003d361b68a4f65a3fecef232742ce7ffbb620203dbd60d"
+              }
+            ]
+          },
+          "evidence_sha256": "d9f0254807cc87633dca44fc60a2cee2052f103777205422e6d34c3d2672d20a",
+          "level": 3,
+          "level_name": "schedule_parity",
+          "status": "pass",
+          "summary": "Each within-seed arm still receives an equal fingerprinted schedule."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "colliding_cross_unit_trace_sha256": "49427c9fd4fb2c5439da57e909de07f749827086a9e84e6e3e38ec76854773c4",
+            "scheduled_unit_parity": [
+              {
+                "record_parity": {
+                  "all_compared_fields_equal": true,
+                  "compared_fields_in_strength_order": [
+                    "outcome",
+                    "errors",
+                    "decision_count",
+                    "action_sequence",
+                    "public_state_sequence",
+                    "trace_sha256"
+                  ],
+                  "field_equality": {
+                    "action_sequence": true,
+                    "decision_count": true,
+                    "errors": true,
+                    "outcome": true,
+                    "public_state_sequence": true,
+                    "trace_sha256": true
+                  },
+                  "first_trace_divergence": null,
+                  "left_trace_sha256": "49427c9fd4fb2c5439da57e909de07f749827086a9e84e6e3e38ec76854773c4",
+                  "right_trace_sha256": "49427c9fd4fb2c5439da57e909de07f749827086a9e84e6e3e38ec76854773c4"
+                },
+                "requested_seed": 17
+              },
+              {
+                "record_parity": {
+                  "all_compared_fields_equal": true,
+                  "compared_fields_in_strength_order": [
+                    "outcome",
+                    "errors",
+                    "decision_count",
+                    "action_sequence",
+                    "public_state_sequence",
+                    "trace_sha256"
+                  ],
+                  "field_equality": {
+                    "action_sequence": true,
+                    "decision_count": true,
+                    "errors": true,
+                    "outcome": true,
+                    "public_state_sequence": true,
+                    "trace_sha256": true
+                  },
+                  "first_trace_divergence": null,
+                  "left_trace_sha256": "49427c9fd4fb2c5439da57e909de07f749827086a9e84e6e3e38ec76854773c4",
+                  "right_trace_sha256": "49427c9fd4fb2c5439da57e909de07f749827086a9e84e6e3e38ec76854773c4"
+                },
+                "requested_seed": 4294967313
+              }
+            ]
+          },
+          "evidence_sha256": "ce7d6ce37e804d2fe3753d93f01325b90911e08eb94b54aa66719a84a10b6e3c",
+          "level": 4,
+          "level_name": "identical_arm_record_parity",
+          "status": "pass",
+          "summary": "Each scheduled unit passes A/A record parity, which cannot reveal a cross-unit seed collision."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "arms_tested": [
+              "control",
+              "candidate"
+            ],
+            "worker_profile_parity": true
+          },
+          "evidence_sha256": "a09371e734d73bd6dce30a2656739ee0583faab3d67acd6be68f45a5f5e1a71f",
+          "level": 5,
+          "level_name": "repeat_and_worker_parity",
+          "status": "pass",
+          "summary": "Scripted worker profiles do not alter this conversion fixture."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "controlled_sources": [
+              "uint32_seed_conversion",
+              "sha256_event_keyed_randomness"
+            ],
+            "residual_risks": [
+              "namespace_collision"
+            ],
+            "uncontrolled_sources": []
+          },
+          "evidence_sha256": "e91658d8152e5cb7be7b9739bb51d1c730aabdaad03ef69708cdef093cc8acec",
+          "level": 6,
+          "level_name": "stochastic_source_audit",
+          "status": "pass",
+          "summary": "The deterministic conversion boundary and random source are inventoried."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "namespace_uniqueness_restored": false,
+            "within_pair_event_alignment": true
+          },
+          "evidence_sha256": "c7de6385769e7dca3cf8186c82f078758da70f8addfd7c4177bf98de085fdd7f",
+          "level": 7,
+          "level_name": "cross_arm_event_alignment",
+          "status": "pass",
+          "summary": "Within each pair, logged semantic events remain aligned despite cross-unit collision."
+        },
+        {
+          "catches_failure": false,
+          "evidence": {
+            "analysis_unit": "scheduled_seed_condition",
+            "claim_class": "seed_namespace_failure_only",
+            "decision": "reject_seed_schedule",
+            "estimand": "arm difference over the exact synthetic fixture population",
+            "forbidden_wording": "Independent or distinct engine-seed units.",
+            "interval_or_test": "not_applicable_deterministic_counterexample",
+            "optional_stopping": "forbidden",
+            "permitted_wording": "Distinct requested seeds collided after conversion.",
+            "redesign_rule": "Construct a collision-free engine-seed schedule and rerun.",
+            "target_population": "the prespecified synthetic seeds and execution profiles"
+          },
+          "evidence_sha256": "a6e6ab46aece0ae83e8d2343887ca65ded645f21ad882b4057f26d6b7be0d991",
+          "level": 8,
+          "level_name": "statistical_admission",
+          "status": "suppress",
+          "summary": "The collided schedule is rejected before statistical analysis."
+        }
+      ],
+      "caught_by_levels": [
+        2
+      ],
+      "description": "Two requested seeds narrow to the same uint32 engine seed.",
+      "evidence": {
+        "collision": true,
+        "conversion_rows": [
+          {
+            "engine_seed_uint32": 17,
+            "requested_seed": 17,
+            "trace_sha256": "49427c9fd4fb2c5439da57e909de07f749827086a9e84e6e3e38ec76854773c4"
+          },
+          {
+            "engine_seed_uint32": 17,
+            "requested_seed": 4294967313,
+            "trace_sha256": "49427c9fd4fb2c5439da57e909de07f749827086a9e84e6e3e38ec76854773c4"
+          }
+        ]
+      },
+      "first_catching_level": 2,
+      "mode": "uint32_seed_conversion"
+    }
+  ],
+  "schema_version": "1.1.0",
+  "status_semantics": {
+    "level_8": {
+      "admit": "the strongest prespecified fixture claim is admitted",
+      "downgrade": "only a weaker prespecified claim is admitted",
+      "suppress": "the affected paired claim is not admitted"
+    },
+    "levels_1_to_7": {
+      "blocked": "not assessed because a prerequisite gate failed",
+      "fail": "required evidence failed",
+      "pass": "required evidence passed within the fixture boundary"
+    }
+  },
+  "testbed": "pevl_synthetic_coupling_validation"
+}

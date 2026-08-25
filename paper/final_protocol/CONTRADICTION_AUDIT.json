@@ -1,0 +1,1780 @@
+{
+  "checks": [
+    {
+      "category": "artifact inventory",
+      "check_id": "FILES-REQUIRED",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md",
+        "paper/final_protocol/EQUATION_AUDIT.md",
+        "paper/final_protocol/METHOD_ASSUMPTION_AUDIT.md",
+        "paper/final_protocol/REFERENCE_AUDIT.csv",
+        "paper/final_protocol/SUBMISSION_CHECKLIST.md",
+        "paper/final_protocol/ai_disclosure.md",
+        "paper/final_protocol/author_contributions.md",
+        "paper/final_protocol/claim_ledger.csv",
+        "paper/final_protocol/conflict_of_interest.md",
+        "paper/final_protocol/cover_letter.md",
+        "paper/final_protocol/data_availability.md",
+        "paper/final_protocol/main.pdf",
+        "paper/final_protocol/main.tex",
+        "paper/final_protocol/results_macros.tex",
+        "paper/final_protocol/supplement/AI_USE_LOG.csv"
+      ],
+      "expected": 15,
+      "message": "All base artifacts required for this cross-file audit are present.",
+      "observed": 15,
+      "status": "PASS"
+    },
+    {
+      "category": "release inventory",
+      "check_id": "FILES-RELEASE",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/release/CITATION.cff",
+        "paper/final_protocol/release/LICENSE",
+        "paper/final_protocol/release/MANIFEST.sha256",
+        "paper/final_protocol/release/README.md",
+        "paper/final_protocol/release/RELEASE_STATUS.json"
+      ],
+      "expected": [
+        "README.md",
+        "RELEASE_STATUS.json",
+        "LICENSE",
+        "CITATION.cff",
+        "MANIFEST.sha256"
+      ],
+      "message": "Release identity and status documents are present.",
+      "observed": [
+        "README.md",
+        "RELEASE_STATUS.json",
+        "LICENSE",
+        "CITATION.cff",
+        "MANIFEST.sha256"
+      ],
+      "status": "PASS"
+    },
+    {
+      "category": "title",
+      "check_id": "IDENTITY-TITLE",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/cover_letter.md",
+        "paper/final_protocol/main.tex",
+        "paper/final_protocol/release/CITATION.cff",
+        "paper/final_protocol/release/README.md",
+        "paper/final_protocol/release/RELEASE_STATUS.json"
+      ],
+      "expected": "A Trace-Based Validation Protocol for Seed-Matched Evaluations of Black-Box Game-Playing Agents",
+      "message": "Every file that declares the article title must use the frozen exact title.",
+      "observed": {
+        "paper/final_protocol/cover_letter.md": "A Trace-Based Validation Protocol for Seed-Matched Evaluations of Black-Box Game-Playing Agents",
+        "paper/final_protocol/main.tex": "A Trace-Based Validation Protocol for Seed-Matched Evaluations of Black-Box Game-Playing Agents",
+        "paper/final_protocol/release/CITATION.cff": "A Trace-Based Validation Protocol for Seed-Matched Evaluations of Black-Box Game-Playing Agents",
+        "paper/final_protocol/release/README.md": "A Trace-Based Validation Protocol for Seed-Matched Evaluations of Black-Box Game-Playing Agents",
+        "paper/final_protocol/release/RELEASE_STATUS.json": "A Trace-Based Validation Protocol for Seed-Matched Evaluations of Black-Box Game-Playing Agents"
+      },
+      "status": "PASS"
+    },
+    {
+      "category": "article type",
+      "check_id": "IDENTITY-ARTICLE-TYPE",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/cover_letter.md",
+        "paper/final_protocol/main.tex",
+        "paper/final_protocol/release/RELEASE_STATUS.json"
+      ],
+      "expected": "APS Open Science Protocol Article",
+      "message": "The Protocol Article identity is fixed and may not drift across submission or release files.",
+      "observed": {
+        "paper/final_protocol/cover_letter.md": "APS Open Science Protocol Article",
+        "paper/final_protocol/main.tex": "APS Open Science Protocol Article",
+        "paper/final_protocol/release/RELEASE_STATUS.json": "APS Open Science Protocol Article"
+      },
+      "status": "PASS"
+    },
+    {
+      "category": "author names",
+      "check_id": "IDENTITY-AUTHORS",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/cover_letter.md",
+        "paper/final_protocol/main.tex",
+        "paper/final_protocol/release/CITATION.cff"
+      ],
+      "expected": "no inferred author identity while human metadata is unresolved",
+      "message": "Author names are deferred to the human-metadata blocker and no concrete conflicting identity is asserted.",
+      "observed": {
+        "citation_authors": "OMITTED",
+        "cover_signature": "PLACEHOLDER",
+        "manuscript": "PLACEHOLDER"
+      },
+      "status": "PASS"
+    },
+    {
+      "category": "article identity",
+      "check_id": "IDENTITY-BRANCH",
+      "classification": "factual_consistency",
+      "evidence": [
+        "git:branch --show-current"
+      ],
+      "expected": "paper/apsos-trace-protocol-final-202608",
+      "message": "The working branch is the frozen finalization branch.",
+      "observed": "paper/apsos-trace-protocol-final-202608",
+      "status": "PASS"
+    },
+    {
+      "category": "protocol identity",
+      "check_id": "IDENTITY-PROTOCOL-COMMIT",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/release/RELEASE_STATUS.json",
+        "paper/final_protocol/results_macros.tex#short",
+        "paper/final_protocol/source_data/artifact_identity.json",
+        "paper/final_protocol/source_data/build_report.json",
+        "paper/final_protocol/source_data/processed_factorial.json",
+        "paper/final_protocol/source_data/processed_preflight.json",
+        "paper/final_protocol/source_data/processed_seed_namespace_audit.json",
+        "paper/final_protocol/source_data/processed_stochastic_source_audit.json",
+        "paper/final_protocol/source_data/processed_stress.json",
+        "paper/final_protocol/source_data/statistics_verification.json"
+      ],
+      "expected": "803257f102232763fc88d28c14b668f9b62eb277",
+      "message": "All protocol-linked artifacts use the full commit or its declared eight-character display prefix.",
+      "observed": {
+        "paper/final_protocol/release/RELEASE_STATUS.json": "803257f102232763fc88d28c14b668f9b62eb277",
+        "paper/final_protocol/results_macros.tex#short": "803257f1",
+        "paper/final_protocol/source_data/artifact_identity.json": "803257f102232763fc88d28c14b668f9b62eb277",
+        "paper/final_protocol/source_data/build_report.json": "803257f102232763fc88d28c14b668f9b62eb277",
+        "paper/final_protocol/source_data/processed_factorial.json": "803257f102232763fc88d28c14b668f9b62eb277",
+        "paper/final_protocol/source_data/processed_preflight.json": "803257f102232763fc88d28c14b668f9b62eb277",
+        "paper/final_protocol/source_data/processed_seed_namespace_audit.json": "803257f102232763fc88d28c14b668f9b62eb277",
+        "paper/final_protocol/source_data/processed_stochastic_source_audit.json": "803257f102232763fc88d28c14b668f9b62eb277",
+        "paper/final_protocol/source_data/processed_stress.json": "803257f102232763fc88d28c14b668f9b62eb277",
+        "paper/final_protocol/source_data/statistics_verification.json": "803257f102232763fc88d28c14b668f9b62eb277"
+      },
+      "status": "PASS"
+    },
+    {
+      "category": "protocol identity",
+      "check_id": "IDENTITY-PROTOCOL-GIT-ORDER",
+      "classification": "factual_consistency",
+      "evidence": [
+        "git:log --reverse",
+        "paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md"
+      ],
+      "expected": "803257f102232763fc88d28c14b668f9b62eb277",
+      "message": "Git history confirms the first commit containing the frozen protocol.",
+      "observed": "803257f102232763fc88d28c14b668f9b62eb277",
+      "status": "PASS"
+    },
+    {
+      "category": "sample and execution counts",
+      "check_id": "NUM-PREFLIGHT",
+      "classification": "factual_consistency",
+      "evidence": [
+        "processed_preflight",
+        "release_preflight",
+        "statistics_verification"
+      ],
+      "expected": [
+        1000,
+        3000,
+        0
+      ],
+      "message": "Preflight units, executions, and mismatch count must agree.",
+      "observed": {
+        "processed_preflight": [
+          1000,
+          3000,
+          0
+        ],
+        "release_preflight": [
+          1000,
+          3000,
+          0
+        ],
+        "statistics_verification": [
+          1000,
+          3000,
+          0
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "category": "mismatch counts",
+      "check_id": "NUM-STRESS-COUNTS",
+      "classification": "factual_consistency",
+      "evidence": [
+        "processed_stress",
+        "release_stress",
+        "statistics_verification"
+      ],
+      "expected": [
+        200,
+        800,
+        99,
+        47,
+        93,
+        0
+      ],
+      "message": "Timed-search cluster, execution, trace, outcome, decision, and error counts must agree.",
+      "observed": {
+        "processed_stress": [
+          200,
+          800,
+          99,
+          47,
+          93,
+          0
+        ],
+        "release_stress": [
+          200,
+          800,
+          99,
+          47,
+          93,
+          0
+        ],
+        "statistics_verification": [
+          200,
+          800,
+          99,
+          47,
+          93,
+          0
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "category": "bootstrap specification",
+      "check_id": "NUM-STRESS-BOOTSTRAP",
+      "classification": "factual_consistency",
+      "evidence": [
+        "processed_stress",
+        "release_stress",
+        "statistics_verification"
+      ],
+      "expected": [
+        49.5,
+        42.5,
+        56.49999999999999,
+        100000,
+        2026083118
+      ],
+      "message": "Stress estimate, interval, draw count, and analysis seed agree.",
+      "observed": {
+        "processed_stress": [
+          49.5,
+          42.5,
+          56.49999999999999,
+          100000,
+          2026083118
+        ],
+        "release_stress": [
+          49.5,
+          42.5,
+          56.49999999999999,
+          100000,
+          2026083118
+        ],
+        "statistics_verification": [
+          49.5,
+          42.5,
+          56.49999999999999,
+          100000,
+          2026083118
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "category": "historical mismatch counts",
+      "check_id": "NUM-HISTORICAL",
+      "classification": "factual_consistency",
+      "evidence": [
+        "release_historical",
+        "statistics_verification"
+      ],
+      "expected": [
+        2800,
+        210,
+        458
+      ],
+      "message": "Historical analysis-unit and available-record mismatch counts must agree.",
+      "observed": {
+        "release_historical": [
+          2800,
+          210,
+          458
+        ],
+        "statistics_verification": [
+          2800,
+          210,
+          458
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "category": "sample and execution counts",
+      "check_id": "NUM-FACTORIAL-SIZE",
+      "classification": "factual_consistency",
+      "evidence": [
+        "processed_factorial",
+        "release_factorial",
+        "statistics_verification"
+      ],
+      "expected": [
+        2000,
+        12000,
+        0
+      ],
+      "message": "Factorial units, engine games, and repeated-control mismatch count must agree.",
+      "observed": {
+        "processed_factorial": [
+          2000,
+          12000,
+          0
+        ],
+        "release_factorial": [
+          2000,
+          12000,
+          0
+        ],
+        "statistics_verification": [
+          2000,
+          12000,
+          0
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "category": "factorial values",
+      "check_id": "NUM-FACTORIAL-RATES",
+      "classification": "factual_consistency",
+      "evidence": [
+        "processed_factorial",
+        "release_factorial",
+        "statistics_verification"
+      ],
+      "expected": {
+        "C1": 0.618,
+        "C2": 0.621,
+        "C3": 0.6075,
+        "C4": 0.6235
+      },
+      "message": "All four factorial cell rates must agree across independent outputs.",
+      "observed": {
+        "processed_factorial": {
+          "C1": 0.618,
+          "C2": 0.621,
+          "C3": 0.6075,
+          "C4": 0.6235
+        },
+        "release_factorial": {
+          "C1": 0.618,
+          "C2": 0.621,
+          "C3": 0.6075,
+          "C4": 0.6235
+        },
+        "statistics_verification": {
+          "C1": 0.618,
+          "C2": 0.621,
+          "C3": 0.6075,
+          "C4": 0.6235
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "category": "factorial values",
+      "check_id": "NUM-FACTORIAL-CONTRASTS",
+      "classification": "factual_consistency",
+      "evidence": [
+        "processed_factorial",
+        "release_factorial"
+      ],
+      "expected": {
+        "interaction": {
+          "draws": 100000,
+          "estimate": 0.013,
+          "interval": [
+            -0.018500000000000027,
+            0.044499999999999984
+          ],
+          "seed": 2026083117
+        },
+        "primary_c4_minus_c1": {
+          "draws": 100000,
+          "estimate": 0.0055,
+          "interval": [
+            -0.02049999999999999,
+            0.03149999999999999
+          ],
+          "seed": 2026083117
+        },
+        "representation_main": {
+          "draws": 100000,
+          "estimate": 0.0095,
+          "interval": [
+            -0.01075000000000002,
+            0.02999999999999998
+          ],
+          "seed": 2026083117
+        },
+        "training_main": {
+          "draws": 100000,
+          "estimate": -0.004,
+          "interval": [
+            -0.02025000000000001,
+            0.012499999999999994
+          ],
+          "seed": 2026083117
+        }
+      },
+      "message": "Factorial estimates, intervals, bootstrap draws, and seeds must match the checked evidence.",
+      "observed": {
+        "processed_factorial": {
+          "interaction": {
+            "draws": 100000,
+            "estimate": 0.013,
+            "interval": [
+              -0.018500000000000027,
+              0.044499999999999984
+            ],
+            "seed": 2026083117
+          },
+          "primary_c4_minus_c1": {
+            "draws": 100000,
+            "estimate": 0.0055,
+            "interval": [
+              -0.02049999999999999,
+              0.03149999999999999
+            ],
+            "seed": 2026083117
+          },
+          "representation_main": {
+            "draws": 100000,
+            "estimate": 0.0095,
+            "interval": [
+              -0.01075000000000002,
+              0.02999999999999998
+            ],
+            "seed": 2026083117
+          },
+          "training_main": {
+            "draws": 100000,
+            "estimate": -0.004,
+            "interval": [
+              -0.02025000000000001,
+              0.012499999999999994
+            ],
+            "seed": 2026083117
+          }
+        },
+        "release_factorial": {
+          "interaction": {
+            "draws": 100000,
+            "estimate": 0.013,
+            "interval": [
+              -0.018500000000000027,
+              0.044499999999999984
+            ],
+            "seed": 2026083117
+          },
+          "primary_c4_minus_c1": {
+            "draws": 100000,
+            "estimate": 0.0055,
+            "interval": [
+              -0.02049999999999999,
+              0.03149999999999999
+            ],
+            "seed": 2026083117
+          },
+          "representation_main": {
+            "draws": 100000,
+            "estimate": 0.0095,
+            "interval": [
+              -0.01075000000000002,
+              0.02999999999999998
+            ],
+            "seed": 2026083117
+          },
+          "training_main": {
+            "draws": 100000,
+            "estimate": -0.004,
+            "interval": [
+              -0.02025000000000001,
+              0.012499999999999994
+            ],
+            "seed": 2026083117
+          }
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "category": "factorial values",
+      "check_id": "NUM-MCNEMAR",
+      "classification": "factual_consistency",
+      "evidence": [
+        "processed_factorial",
+        "release_factorial",
+        "statistics_verification"
+      ],
+      "expected": {
+        "c1_only_wins": 347,
+        "c4_only_wins": 358,
+        "exact_two_sided_p": 0.7064831563628252
+      },
+      "message": "The secondary McNemar result agrees.",
+      "observed": {
+        "processed_factorial": {
+          "c1_only_wins": 347,
+          "c4_only_wins": 358,
+          "exact_two_sided_p": 0.7064831563628252
+        },
+        "release_factorial": {
+          "c1_only_wins": 347,
+          "c4_only_wins": 358,
+          "exact_two_sided_p": 0.7064831563628252
+        },
+        "statistics_verification": {
+          "c1_only_wins": 347,
+          "c4_only_wins": 358,
+          "exact_two_sided_p": 0.7064831563628252
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "category": "generated numerical prose",
+      "check_id": "NUM-GENERATED-MACROS",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/results_macros.tex"
+      ],
+      "expected": {
+        "BootstrapDraws": 100000,
+        "FactorialControlMismatch": 0,
+        "FactorialControlOnlyWins": 347,
+        "FactorialGames": 12000,
+        "FactorialInterventionOnlyWins": 358,
+        "FactorialUnits": 2000,
+        "HistoricalAvailableRecordMismatch": 458,
+        "HistoricalOutcomeMismatch": 210,
+        "HistoricalUnits": 2800,
+        "PreflightExecutions": 3000,
+        "PreflightMismatches": 0,
+        "PreflightUnits": 1000,
+        "StressClusters": 200,
+        "StressDecisionMismatch": 93,
+        "StressErrorMismatch": 0,
+        "StressExecutions": 800,
+        "StressOutcomeMismatch": 47,
+        "StressTraceHighPct": 56.49999999999999,
+        "StressTraceLowPct": 42.5,
+        "StressTraceMismatch": 99,
+        "StressTracePct": 49.5
+      },
+      "message": "Generated count and disagreement macros agree with the checked evidence.",
+      "observed": {
+        "BootstrapDraws": 100000,
+        "FactorialControlMismatch": 0,
+        "FactorialControlOnlyWins": 347,
+        "FactorialGames": 12000,
+        "FactorialInterventionOnlyWins": 358,
+        "FactorialUnits": 2000,
+        "HistoricalAvailableRecordMismatch": 458,
+        "HistoricalOutcomeMismatch": 210,
+        "HistoricalUnits": 2800,
+        "PreflightExecutions": 3000,
+        "PreflightMismatches": 0,
+        "PreflightUnits": 1000,
+        "StressClusters": 200,
+        "StressDecisionMismatch": 93,
+        "StressErrorMismatch": 0,
+        "StressExecutions": 800,
+        "StressOutcomeMismatch": 47,
+        "StressTraceHighPct": 56.49999999999999,
+        "StressTraceLowPct": 42.5,
+        "StressTraceMismatch": 99,
+        "StressTracePct": 49.5
+      },
+      "status": "PASS"
+    },
+    {
+      "category": "generated numerical prose",
+      "check_id": "NUM-FACTORIAL-MACROS",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/results_macros.tex"
+      ],
+      "expected": "rounded checked contrasts",
+      "message": "All factorial estimate and interval macros agree after two-decimal rounding.",
+      "observed": "all four agree",
+      "status": "PASS"
+    },
+    {
+      "category": "numerical prose",
+      "check_id": "PROSE-HISTORICAL",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md",
+        "paper/final_protocol/METHOD_ASSUMPTION_AUDIT.md",
+        "paper/final_protocol/SUBMISSION_CHECKLIST.md",
+        "paper/final_protocol/cover_letter.md",
+        "paper/final_protocol/main.tex"
+      ],
+      "expected": [
+        210,
+        2800,
+        458,
+        2800
+      ],
+      "message": "Every detected prose declaration of historical agrees.",
+      "observed": {
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md": [
+          [
+            210,
+            2800,
+            458,
+            2800
+          ]
+        ],
+        "paper/final_protocol/METHOD_ASSUMPTION_AUDIT.md": [
+          [
+            210,
+            2800,
+            458,
+            2800
+          ],
+          [
+            210,
+            2800,
+            458,
+            2800
+          ]
+        ],
+        "paper/final_protocol/SUBMISSION_CHECKLIST.md": [
+          [
+            210,
+            2800,
+            458,
+            2800
+          ]
+        ],
+        "paper/final_protocol/cover_letter.md": [
+          [
+            210,
+            2800,
+            458,
+            2800
+          ],
+          [
+            210,
+            2800,
+            458,
+            2800
+          ]
+        ],
+        "paper/final_protocol/main.tex": [
+          [
+            210,
+            2800,
+            458,
+            2800
+          ]
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "category": "numerical prose",
+      "check_id": "PROSE-PREFLIGHT",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md",
+        "paper/final_protocol/SUBMISSION_CHECKLIST.md",
+        "paper/final_protocol/cover_letter.md",
+        "paper/final_protocol/main.tex",
+        "paper/final_protocol/release/README.md",
+        "paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md"
+      ],
+      "expected": [
+        1000,
+        3000
+      ],
+      "message": "Every detected prose declaration of preflight agrees.",
+      "observed": {
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md": [
+          [
+            1000,
+            3000
+          ]
+        ],
+        "paper/final_protocol/SUBMISSION_CHECKLIST.md": [
+          [
+            1000,
+            3000
+          ]
+        ],
+        "paper/final_protocol/cover_letter.md": [
+          [
+            1000,
+            3000
+          ]
+        ],
+        "paper/final_protocol/main.tex": [
+          [
+            1000,
+            3000
+          ],
+          [
+            1000,
+            3000
+          ]
+        ],
+        "paper/final_protocol/release/README.md": [
+          [
+            1000,
+            3000
+          ]
+        ],
+        "paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md": [
+          [
+            1000,
+            3000
+          ]
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "category": "numerical prose",
+      "check_id": "PROSE-STRESS-DIRECT",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md",
+        "paper/final_protocol/METHOD_ASSUMPTION_AUDIT.md",
+        "paper/final_protocol/cover_letter.md",
+        "paper/final_protocol/main.tex"
+      ],
+      "expected": [
+        99,
+        200
+      ],
+      "message": "Every detected prose declaration of stress direct agrees.",
+      "observed": {
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md": [
+          [
+            99,
+            200
+          ]
+        ],
+        "paper/final_protocol/METHOD_ASSUMPTION_AUDIT.md": [
+          [
+            99,
+            200
+          ]
+        ],
+        "paper/final_protocol/cover_letter.md": [
+          [
+            99,
+            200
+          ]
+        ],
+        "paper/final_protocol/main.tex": [
+          [
+            99,
+            200
+          ]
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "category": "numerical prose",
+      "check_id": "PROSE-STRESS-OF",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/main.tex"
+      ],
+      "expected": [
+        200,
+        800,
+        99
+      ],
+      "message": "Every detected prose declaration of stress of agrees.",
+      "observed": {
+        "paper/final_protocol/main.tex": [
+          [
+            200,
+            800,
+            99
+          ]
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "category": "numerical prose",
+      "check_id": "PROSE-FACTORIAL",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md",
+        "paper/final_protocol/SUBMISSION_CHECKLIST.md",
+        "paper/final_protocol/main.tex"
+      ],
+      "expected": [
+        2000,
+        12000
+      ],
+      "message": "Every detected prose declaration of factorial agrees.",
+      "observed": {
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md": [
+          [
+            2000,
+            12000
+          ]
+        ],
+        "paper/final_protocol/SUBMISSION_CHECKLIST.md": [
+          [
+            2000,
+            12000
+          ]
+        ],
+        "paper/final_protocol/main.tex": [
+          [
+            2000,
+            12000
+          ]
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "category": "numerical prose",
+      "check_id": "PROSE-STRESS-INTERVAL",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md",
+        "paper/final_protocol/METHOD_ASSUMPTION_AUDIT.md",
+        "paper/final_protocol/SUBMISSION_CHECKLIST.md",
+        "paper/final_protocol/cover_letter.md",
+        "paper/final_protocol/main.tex",
+        "paper/final_protocol/release/README.md",
+        "paper/final_protocol/tables/table_3_prospective_results.tex",
+        "paper/final_protocol/tables/table_4_factorial.tex",
+        "paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md"
+      ],
+      "expected": [
+        49.5,
+        42.5,
+        56.49999999999999
+      ],
+      "message": "Detected stress percentage/interval tuples use the checked values.",
+      "observed": [
+        [
+          "49.5",
+          "42.5",
+          "56.5"
+        ],
+        [
+          "49.5",
+          "42.5",
+          "56.5"
+        ],
+        [
+          "49.5",
+          "42.5",
+          "56.5"
+        ],
+        [
+          "49.5",
+          "42.5",
+          "56.5"
+        ]
+      ],
+      "status": "PASS"
+    },
+    {
+      "category": "bootstrap specification",
+      "check_id": "SEED-FACTORIAL-DRAWS",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md"
+      ],
+      "expected": 100000,
+      "message": "The frozen protocol agrees with the result artifact.",
+      "observed": 100000,
+      "status": "PASS"
+    },
+    {
+      "category": "bootstrap specification",
+      "check_id": "SEED-FACTORIAL-SEED",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md"
+      ],
+      "expected": 2026083117,
+      "message": "The frozen protocol agrees with the result artifact.",
+      "observed": 2026083117,
+      "status": "PASS"
+    },
+    {
+      "category": "bootstrap specification",
+      "check_id": "SEED-STRESS-DRAWS",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md"
+      ],
+      "expected": 100000,
+      "message": "The frozen protocol agrees with the result artifact.",
+      "observed": 100000,
+      "status": "PASS"
+    },
+    {
+      "category": "bootstrap specification",
+      "check_id": "SEED-STRESS-SEED",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md"
+      ],
+      "expected": 2026083118,
+      "message": "The frozen protocol agrees with the result artifact.",
+      "observed": 2026083118,
+      "status": "PASS"
+    },
+    {
+      "category": "seed ranges",
+      "check_id": "SEED-SCHEDULE-COUNTS",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/source_data/processed_seed_namespace_audit.json"
+      ],
+      "expected": {
+        "factorial": 2000,
+        "timed_search_stress": 200,
+        "total": 2450,
+        "trace_preflight": 250
+      },
+      "message": "Prospective seed-namespace counts agree with the three schedules.",
+      "observed": {
+        "factorial": 2000,
+        "timed_search_stress": 200,
+        "total": 2450,
+        "trace_preflight": 250
+      },
+      "status": "PASS"
+    },
+    {
+      "category": "seed ranges",
+      "check_id": "SEED-PROSPECTIVE-RANGE",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/source_data/processed_seed_namespace_audit.json",
+        "paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md"
+      ],
+      "expected": {
+        "collision_state": [
+          true,
+          2450,
+          2450
+        ],
+        "range": [
+          2026072700,
+          2027093749
+        ]
+      },
+      "message": "The prospective scheduled and converted seed namespace is collision free over the frozen range.",
+      "observed": {
+        "collision_state": [
+          true,
+          2450,
+          2450
+        ],
+        "range": [
+          2026072700,
+          2027093749
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "category": "result hashes",
+      "check_id": "HASH-CANONICAL-INPUTS",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/data/ablation/summary.json",
+        "paper/data/pevl/factorial_summary.json",
+        "paper/data/pevl/summary.json",
+        "paper/data/pevl/timed_search_stress_summary.json",
+        "paper/data/pevl/trace_preflight_summary.json",
+        "paper/data/seed_namespace_audit.json",
+        "paper/data/stochastic_source_audit.json",
+        "paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md",
+        "paper/synthetic/results/pevl_results.json"
+      ],
+      "expected": {
+        "combined": "d8e74d83a7c6bd3ad4690d91321ae4508f7b6f10a76cb6b4efaeab0e2b4014cd",
+        "factorial": "c7df75c7ae0f76a007d866947ad5262242d86c0c90cb0c8631d201dedd023e59",
+        "historical": "fadc6111654423dab62486e27d05636439b0647192fabe3786a69cd60a49e239",
+        "preflight": "c6295f9f3981d346d0cbcb38327e575b560aaf0950bd52f52594cfb8f9cc56b3",
+        "protocol": "8b9329b948a054fc7252b9c2662490890e0a8439ad852393c6e25f537c8b887e",
+        "seed_audit": "50344ba5a8b3ab21d037c0d37115562ea0c2c1da8fabdfe0b717d292a52f7a5e",
+        "stochastic_audit": "995ab30d0f2166963b5bc7dd73d2784ed95cde2f93315e1e06bece935a875c60",
+        "stress": "40b9f5e17a424742ad8a05739646fe56843b8f3a432b124bfc33f9aed1ab5a4b",
+        "synthetic": "d34a2ea1546a0a88e90a5ca58b49f1085edfcaf753f70ed49e0f04202e9ba6f9"
+      },
+      "message": "Canonical protocol/result/source-audit bytes match their declared hashes.",
+      "observed": {
+        "combined": "d8e74d83a7c6bd3ad4690d91321ae4508f7b6f10a76cb6b4efaeab0e2b4014cd",
+        "factorial": "c7df75c7ae0f76a007d866947ad5262242d86c0c90cb0c8631d201dedd023e59",
+        "historical": "fadc6111654423dab62486e27d05636439b0647192fabe3786a69cd60a49e239",
+        "preflight": "c6295f9f3981d346d0cbcb38327e575b560aaf0950bd52f52594cfb8f9cc56b3",
+        "protocol": "8b9329b948a054fc7252b9c2662490890e0a8439ad852393c6e25f537c8b887e",
+        "seed_audit": "50344ba5a8b3ab21d037c0d37115562ea0c2c1da8fabdfe0b717d292a52f7a5e",
+        "stochastic_audit": "995ab30d0f2166963b5bc7dd73d2784ed95cde2f93315e1e06bece935a875c60",
+        "stress": "40b9f5e17a424742ad8a05739646fe56843b8f3a432b124bfc33f9aed1ab5a4b",
+        "synthetic": "d34a2ea1546a0a88e90a5ca58b49f1085edfcaf753f70ed49e0f04202e9ba6f9"
+      },
+      "status": "PASS"
+    },
+    {
+      "category": "result hashes",
+      "check_id": "HASH-MACRO-HEADER",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/results_macros.tex"
+      ],
+      "expected": {
+        "combined": "d8e74d83a7c6bd3ad4690d91321ae4508f7b6f10a76cb6b4efaeab0e2b4014cd",
+        "factorial": "c7df75c7ae0f76a007d866947ad5262242d86c0c90cb0c8631d201dedd023e59",
+        "preflight": "c6295f9f3981d346d0cbcb38327e575b560aaf0950bd52f52594cfb8f9cc56b3",
+        "stress": "40b9f5e17a424742ad8a05739646fe56843b8f3a432b124bfc33f9aed1ab5a4b"
+      },
+      "message": "Generated macros identify the same central inputs.",
+      "observed": {
+        "combined": "d8e74d83a7c6bd3ad4690d91321ae4508f7b6f10a76cb6b4efaeab0e2b4014cd",
+        "factorial": "c7df75c7ae0f76a007d866947ad5262242d86c0c90cb0c8631d201dedd023e59",
+        "preflight": "c6295f9f3981d346d0cbcb38327e575b560aaf0950bd52f52594cfb8f9cc56b3",
+        "stress": "40b9f5e17a424742ad8a05739646fe56843b8f3a432b124bfc33f9aed1ab5a4b"
+      },
+      "status": "PASS"
+    },
+    {
+      "category": "figure/table/result hashes",
+      "check_id": "HASH-GENERATED-ARTIFACTS",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/figures/figure_1_distinctions.pdf",
+        "paper/final_protocol/figures/figure_1_distinctions.png",
+        "paper/final_protocol/figures/figure_2_admission_flow.pdf",
+        "paper/final_protocol/figures/figure_2_admission_flow.png",
+        "paper/final_protocol/figures/figure_3_synthetic_matrix.pdf",
+        "paper/final_protocol/figures/figure_3_synthetic_matrix.png",
+        "paper/final_protocol/figures/figure_4_timed_search.pdf",
+        "paper/final_protocol/figures/figure_4_timed_search.png",
+        "paper/final_protocol/figures/figure_5_factorial.pdf",
+        "paper/final_protocol/figures/figure_5_factorial.png",
+        "paper/final_protocol/results_macros.tex",
+        "paper/final_protocol/source_data/artifact_identity.json",
+        "paper/final_protocol/source_data/processed_factorial.json",
+        "paper/final_protocol/source_data/processed_preflight.json",
+        "paper/final_protocol/source_data/processed_seed_namespace_audit.json",
+        "paper/final_protocol/source_data/processed_stochastic_source_audit.json",
+        "paper/final_protocol/source_data/processed_stress.json",
+        "paper/final_protocol/source_data/processed_synthetic.json",
+        "paper/final_protocol/tables/table_1_prior_work.tex",
+        "paper/final_protocol/tables/table_2_protocol_stages.tex",
+        "paper/final_protocol/tables/table_3_prospective_results.tex",
+        "paper/final_protocol/tables/table_4_factorial.tex"
+      ],
+      "expected": 22,
+      "message": "Generated artifacts match the build report.",
+      "observed": 22,
+      "status": "PASS"
+    },
+    {
+      "category": "release manifest",
+      "check_id": "HASH-RELEASE-MANIFEST",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/release/MANIFEST.sha256"
+      ],
+      "expected": 50,
+      "message": "The release manifest covers every payload except itself and all hashes match.",
+      "observed": 50,
+      "status": "PASS"
+    },
+    {
+      "category": "open/release status",
+      "check_id": "STATUS-PUBLIC-AVAILABILITY",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/ai_disclosure.md",
+        "paper/final_protocol/cover_letter.md",
+        "paper/final_protocol/data_availability.md",
+        "paper/final_protocol/main.tex",
+        "paper/final_protocol/release/LICENSE",
+        "paper/final_protocol/release/README.md",
+        "paper/final_protocol/release/RELEASE_STATUS.json"
+      ],
+      "expected": "not publicly archived or distribution-authorized",
+      "message": "Submission and release documents consistently distinguish a review package from an authorized public archive.",
+      "observed": 5,
+      "status": "PASS"
+    },
+    {
+      "category": "DOI status",
+      "check_id": "STATUS-DOI",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/ai_disclosure.md",
+        "paper/final_protocol/cover_letter.md",
+        "paper/final_protocol/data_availability.md",
+        "paper/final_protocol/main.tex",
+        "paper/final_protocol/release/LICENSE",
+        "paper/final_protocol/release/README.md",
+        "paper/final_protocol/release/RELEASE_STATUS.json"
+      ],
+      "expected": "no DOI assigned",
+      "message": "No software/data DOI is invented in the audited status documents.",
+      "observed": "no DOI syntax detected",
+      "status": "PASS"
+    },
+    {
+      "category": "license status",
+      "check_id": "STATUS-LICENSE",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/data_availability.md",
+        "paper/final_protocol/main.tex",
+        "paper/final_protocol/release/LICENSE"
+      ],
+      "expected": "NO LICENSE GRANTED",
+      "message": "The license notice and availability statements agree that no redistribution permission is established.",
+      "observed": "NO LICENSE GRANTED",
+      "status": "PASS"
+    },
+    {
+      "category": "release status",
+      "check_id": "STATUS-NO-FUTURE-PROMISE",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/ai_disclosure.md",
+        "paper/final_protocol/cover_letter.md",
+        "paper/final_protocol/data_availability.md",
+        "paper/final_protocol/main.tex",
+        "paper/final_protocol/release/LICENSE",
+        "paper/final_protocol/release/README.md",
+        "paper/final_protocol/release/RELEASE_STATUS.json"
+      ],
+      "expected": "no future-release promise",
+      "message": "No audited file promises a future public release.",
+      "observed": "none detected",
+      "status": "PASS"
+    },
+    {
+      "category": "restricted-material status",
+      "check_id": "STATUS-RESTRICTED-LIST",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/cover_letter.md",
+        "paper/final_protocol/data_availability.md",
+        "paper/final_protocol/main.tex",
+        "paper/final_protocol/release/README.md"
+      ],
+      "expected": [
+        "engine",
+        "game_assets",
+        "opponents",
+        "policy_packages",
+        "private_observations",
+        "raw_traces"
+      ],
+      "message": "The canonical restricted-material categories agree across final documents.",
+      "observed": {
+        "paper/final_protocol/cover_letter.md": {
+          "engine": true,
+          "game_assets": true,
+          "opponents": true,
+          "policy_packages": true,
+          "private_observations": true,
+          "raw_traces": true
+        },
+        "paper/final_protocol/data_availability.md": {
+          "engine": true,
+          "game_assets": true,
+          "opponents": true,
+          "policy_packages": true,
+          "private_observations": true,
+          "raw_traces": true
+        },
+        "paper/final_protocol/main.tex": {
+          "engine": true,
+          "game_assets": true,
+          "opponents": true,
+          "policy_packages": true,
+          "private_observations": true,
+          "raw_traces": true
+        },
+        "paper/final_protocol/release/README.md": {
+          "engine": true,
+          "game_assets": true,
+          "opponents": true,
+          "policy_packages": true,
+          "private_observations": true,
+          "raw_traces": true
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "category": "restricted-material status",
+      "check_id": "STATUS-ON-REQUEST",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/cover_letter.md",
+        "paper/final_protocol/data_availability.md",
+        "paper/final_protocol/main.tex",
+        "paper/final_protocol/release/README.md"
+      ],
+      "expected": "no unsupported available-on-request claim",
+      "message": "Restricted materials are not offered on request.",
+      "observed": "none detected",
+      "status": "PASS"
+    },
+    {
+      "category": "AI-use description",
+      "check_id": "DISCLOSURE-AI-CONSISTENCY",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/ai_disclosure.md",
+        "paper/final_protocol/cover_letter.md",
+        "paper/final_protocol/main.tex",
+        "paper/final_protocol/supplement/AI_USE_LOG.csv"
+      ],
+      "expected": [
+        "model_precision",
+        "no_generated_image",
+        "not_author",
+        "snapshot_unexposed",
+        "tool"
+      ],
+      "message": "AI tool, exposed model precision, human authority, authorship, and figure statements agree.",
+      "observed": "consistent",
+      "status": "PASS"
+    },
+    {
+      "category": "agent/opponent labels",
+      "check_id": "LABELS-NEUTRAL",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/cover_letter.md",
+        "paper/final_protocol/main.tex",
+        "paper/final_protocol/release/CITATION.cff",
+        "paper/final_protocol/release/README.md",
+        "paper/final_protocol/release/RELEASE_STATUS.json",
+        "paper/final_protocol/release/THIRD_PARTY_NOTICES.md",
+        "paper/final_protocol/release/data/processed/factorial_summary.json",
+        "paper/final_protocol/release/data/processed/factorial_units.csv",
+        "paper/final_protocol/release/data/processed/historical_control_repetition.csv",
+        "paper/final_protocol/release/data/processed/historical_summary.json",
+        "paper/final_protocol/release/data/processed/preflight_summary.json",
+        "paper/final_protocol/release/data/processed/preflight_units.csv",
+        "paper/final_protocol/release/data/processed/timed_search_stress.json",
+        "paper/final_protocol/release/docs/protocols/FRESH_CONFIRMATION_PROTOCOL.md",
+        "paper/final_protocol/release/docs/protocols/PEVL_PROSPECTIVE_PROTOCOL.md",
+        "paper/final_protocol/release/docs/protocols/REPRESENTATION_ABLATION_PROTOCOL.md",
+        "paper/final_protocol/release/environment.yml",
+        "paper/final_protocol/release/generated/results_macros.tex",
+        "paper/final_protocol/release/pevl_bench/results/pevl_matrix.csv",
+        "paper/final_protocol/release/pevl_bench/results/pevl_results.json",
+        "paper/final_protocol/release/pevl_bench/results/pevl_results.schema.json",
+        "paper/final_protocol/release/requirements-lock.txt",
+        "paper/final_protocol/release/source_data/artifact_identity.json",
+        "paper/final_protocol/release/source_data/equation_examples.json",
+        "paper/final_protocol/release/source_data/figure_1_distinctions.json",
+        "paper/final_protocol/release/source_data/figure_2_admission_flow.json",
+        "paper/final_protocol/release/source_data/figure_3_synthetic_matrix.csv",
+        "paper/final_protocol/release/source_data/figure_4_timed_search.csv",
+        "paper/final_protocol/release/source_data/figure_5_factorial.csv",
+        "paper/final_protocol/release/tables/table_1_prior_work.tex",
+        "paper/final_protocol/release/tables/table_2_protocol_stages.tex",
+        "paper/final_protocol/release/tables/table_3_prospective_results.tex",
+        "paper/final_protocol/release/tables/table_4_factorial.tex"
+      ],
+      "expected": "neutral labels",
+      "message": "Manuscript, cover letter, and release use neutral context labels.",
+      "observed": "no private labels detected",
+      "status": "PASS"
+    },
+    {
+      "category": "figures and tables",
+      "check_id": "INVENTORY-FIGURES-TABLES",
+      "classification": "factual_consistency",
+      "evidence": [
+        "figures/figure_1_distinctions.pdf",
+        "figures/figure_2_admission_flow.pdf",
+        "figures/figure_3_synthetic_matrix.pdf",
+        "figures/figure_4_timed_search.pdf",
+        "figures/figure_5_factorial.pdf",
+        "paper/final_protocol/main.tex",
+        "tables/table_1_prior_work.tex",
+        "tables/table_2_protocol_stages.tex",
+        "tables/table_3_prospective_results.tex",
+        "tables/table_4_factorial.tex"
+      ],
+      "expected": {
+        "figure_files": [
+          "figures/figure_1_distinctions.pdf",
+          "figures/figure_2_admission_flow.pdf",
+          "figures/figure_3_synthetic_matrix.pdf",
+          "figures/figure_4_timed_search.pdf",
+          "figures/figure_5_factorial.pdf"
+        ],
+        "manuscript_caption_count": 9,
+        "manuscript_figure_refs": [
+          "figures/figure_1_distinctions.pdf",
+          "figures/figure_2_admission_flow.pdf",
+          "figures/figure_3_synthetic_matrix.pdf",
+          "figures/figure_4_timed_search.pdf",
+          "figures/figure_5_factorial.pdf"
+        ],
+        "manuscript_table_refs": [
+          "tables/table_1_prior_work.tex",
+          "tables/table_2_protocol_stages.tex",
+          "tables/table_3_prospective_results.tex",
+          "tables/table_4_factorial.tex"
+        ],
+        "table_files": [
+          "tables/table_1_prior_work.tex",
+          "tables/table_2_protocol_stages.tex",
+          "tables/table_3_prospective_results.tex",
+          "tables/table_4_factorial.tex"
+        ]
+      },
+      "message": "The manuscript contains five generated figures and four generated tables.",
+      "observed": {
+        "figure_files": [
+          "figures/figure_1_distinctions.pdf",
+          "figures/figure_2_admission_flow.pdf",
+          "figures/figure_3_synthetic_matrix.pdf",
+          "figures/figure_4_timed_search.pdf",
+          "figures/figure_5_factorial.pdf"
+        ],
+        "manuscript_caption_count": 9,
+        "manuscript_figure_refs": [
+          "figures/figure_1_distinctions.pdf",
+          "figures/figure_2_admission_flow.pdf",
+          "figures/figure_3_synthetic_matrix.pdf",
+          "figures/figure_4_timed_search.pdf",
+          "figures/figure_5_factorial.pdf"
+        ],
+        "manuscript_table_refs": [
+          "tables/table_1_prior_work.tex",
+          "tables/table_2_protocol_stages.tex",
+          "tables/table_3_prospective_results.tex",
+          "tables/table_4_factorial.tex"
+        ],
+        "table_files": [
+          "tables/table_1_prior_work.tex",
+          "tables/table_2_protocol_stages.tex",
+          "tables/table_3_prospective_results.tex",
+          "tables/table_4_factorial.tex"
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "category": "figures and tables",
+      "check_id": "INVENTORY-FIGURE-SOURCE-DATA",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/source_data/figure_1_distinctions.json",
+        "paper/final_protocol/source_data/figure_2_admission_flow.json",
+        "paper/final_protocol/source_data/figure_3_synthetic_matrix.csv",
+        "paper/final_protocol/source_data/figure_4_timed_search.csv",
+        "paper/final_protocol/source_data/figure_5_factorial.csv"
+      ],
+      "expected": 5,
+      "message": "Every figure caption points to an existing source-data file.",
+      "observed": 5,
+      "status": "PASS"
+    },
+    {
+      "category": "figures and tables",
+      "check_id": "INVENTORY-BUILD-REPORT",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/source_data/build_report.json"
+      ],
+      "expected": 9,
+      "message": "The build report accounts for every main figure and table.",
+      "observed": 9,
+      "status": "PASS"
+    },
+    {
+      "category": "figures and tables",
+      "check_id": "INVENTORY-RELEASE-FIGURES-TABLES",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/release/README.md"
+      ],
+      "expected": {
+        "figures": 5,
+        "tables": 4
+      },
+      "message": "Release and manuscript figure/table inventories agree.",
+      "observed": {
+        "figures": 5,
+        "tables": 4
+      },
+      "status": "PASS"
+    },
+    {
+      "category": "article claims",
+      "check_id": "LEDGER-STATUS",
+      "classification": "factual_consistency",
+      "evidence": [
+        "paper/final_protocol/claim_ledger.csv"
+      ],
+      "expected": [
+        "DERIVED_BY_CHECKED_SCRIPT",
+        "VERIFIED",
+        "VERIFIED_WITH_CAVEAT"
+      ],
+      "message": "Every final claim-ledger row has an allowed evidentiary status.",
+      "observed": {
+        "rows": 30,
+        "statuses": [
+          "DERIVED_BY_CHECKED_SCRIPT",
+          "VERIFIED",
+          "VERIFIED_WITH_CAVEAT"
+        ]
+      },
+      "status": "PASS"
+    }
+  ],
+  "contradictions": [],
+  "human_or_legal_blockers": [
+    {
+      "blocker_id": "HUMAN-CLAIM-LEDGER-SIGNOFF",
+      "category": "human claim verification",
+      "classification": "human_or_legal_blocker",
+      "evidence": [
+        "paper/final_protocol/claim_ledger.csv"
+      ],
+      "required_resolution": "The corresponding author must verify all 30 claim-ledger rows; no machine status substitutes for that sign-off.",
+      "status": "OPEN"
+    },
+    {
+      "blocker_id": "HUMAN-AUTHORS",
+      "category": "human metadata",
+      "classification": "human_or_legal_blocker",
+      "evidence": [
+        "paper/final_protocol/cover_letter.md:74",
+        "paper/final_protocol/main.tex:26"
+      ],
+      "required_resolution": "Supply and approve every author name, order, and eligibility.",
+      "status": "OPEN"
+    },
+    {
+      "blocker_id": "HUMAN-AFFILIATIONS",
+      "category": "human metadata",
+      "classification": "human_or_legal_blocker",
+      "evidence": [
+        "paper/final_protocol/cover_letter.md:76",
+        "paper/final_protocol/main.tex:28"
+      ],
+      "required_resolution": "Supply and approve affiliations and complete postal addresses.",
+      "status": "OPEN"
+    },
+    {
+      "blocker_id": "HUMAN-CORRESPONDENCE",
+      "category": "human metadata",
+      "classification": "human_or_legal_blocker",
+      "evidence": [
+        "paper/final_protocol/cover_letter.md:78",
+        "paper/final_protocol/main.tex:27"
+      ],
+      "required_resolution": "Supply and verify the corresponding-author name and email.",
+      "status": "OPEN"
+    },
+    {
+      "blocker_id": "HUMAN-ORCID",
+      "category": "human metadata",
+      "classification": "human_or_legal_blocker",
+      "evidence": [
+        "paper/final_protocol/SUBMISSION_CHECKLIST.md:158",
+        "paper/final_protocol/cover_letter.md:80"
+      ],
+      "required_resolution": "Supply ORCIDs or an explicit permitted none/decline decision.",
+      "status": "OPEN"
+    },
+    {
+      "blocker_id": "HUMAN-CREDIT",
+      "category": "human metadata",
+      "classification": "human_or_legal_blocker",
+      "evidence": [
+        "paper/final_protocol/author_contributions.md:11",
+        "paper/final_protocol/author_contributions.md:12",
+        "paper/final_protocol/author_contributions.md:13",
+        "paper/final_protocol/author_contributions.md:14",
+        "paper/final_protocol/author_contributions.md:15",
+        "paper/final_protocol/author_contributions.md:16",
+        "paper/final_protocol/author_contributions.md:17",
+        "paper/final_protocol/author_contributions.md:18",
+        "paper/final_protocol/author_contributions.md:19",
+        "paper/final_protocol/author_contributions.md:20",
+        "paper/final_protocol/author_contributions.md:21",
+        "paper/final_protocol/author_contributions.md:22",
+        "paper/final_protocol/author_contributions.md:24",
+        "paper/final_protocol/author_contributions.md:3"
+      ],
+      "required_resolution": "Confirm CRediT roles for every eligible author.",
+      "status": "OPEN"
+    },
+    {
+      "blocker_id": "HUMAN-FUNDING",
+      "category": "human metadata",
+      "classification": "human_or_legal_blocker",
+      "evidence": [
+        "paper/final_protocol/SUBMISSION_CHECKLIST.md:161",
+        "paper/final_protocol/author_contributions.md:24"
+      ],
+      "required_resolution": "Confirm funding and grant identifiers or approve a no-funding statement.",
+      "status": "OPEN"
+    },
+    {
+      "blocker_id": "HUMAN-CONFLICTS",
+      "category": "human metadata",
+      "classification": "human_or_legal_blocker",
+      "evidence": [
+        "paper/final_protocol/conflict_of_interest.md:17",
+        "paper/final_protocol/conflict_of_interest.md:3",
+        "paper/final_protocol/main.tex:630"
+      ],
+      "required_resolution": "Collect and approve every author's financial and nonfinancial disclosure.",
+      "status": "OPEN"
+    },
+    {
+      "blocker_id": "HUMAN-ACKNOWLEDGMENTS",
+      "category": "human metadata",
+      "classification": "human_or_legal_blocker",
+      "evidence": [
+        "paper/final_protocol/SUBMISSION_CHECKLIST.md:165"
+      ],
+      "required_resolution": "Approve acknowledgments and naming permissions or confirm none.",
+      "status": "OPEN"
+    },
+    {
+      "blocker_id": "HUMAN-AUTHOR-APPROVAL",
+      "category": "human approval",
+      "classification": "human_or_legal_blocker",
+      "evidence": [
+        "paper/final_protocol/SUBMISSION_CHECKLIST.md:167",
+        "paper/final_protocol/SUBMISSION_CHECKLIST.md:170",
+        "paper/final_protocol/SUBMISSION_CHECKLIST.md:175"
+      ],
+      "required_resolution": "Every author must approve the final manuscript, disclosures, package, authorship, and overlap statements.",
+      "status": "OPEN"
+    },
+    {
+      "blocker_id": "HUMAN-METHOD-EQUATION-SIGNOFF",
+      "category": "human comprehension",
+      "classification": "human_or_legal_blocker",
+      "evidence": [
+        "paper/final_protocol/EQUATION_AUDIT.md:122",
+        "paper/final_protocol/EQUATION_AUDIT.md:35",
+        "paper/final_protocol/EQUATION_AUDIT.md:60",
+        "paper/final_protocol/EQUATION_AUDIT.md:90"
+      ],
+      "required_resolution": "A human author must verify method assumptions, equations, signs, units, and interpretations.",
+      "status": "OPEN"
+    },
+    {
+      "blocker_id": "HUMAN-DEFENSE-COMPREHENSION",
+      "category": "human comprehension",
+      "classification": "human_or_legal_blocker",
+      "evidence": [
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md:116",
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md:134",
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md:151",
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md:168",
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md:186",
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md:205",
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md:226",
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md:244",
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md:25",
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md:261",
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md:277",
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md:296",
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md:318",
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md:339",
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md:359",
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md:380",
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md:382",
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md:42",
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md:6",
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md:62",
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md:81",
+        "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md:98"
+      ],
+      "required_resolution": "The corresponding author must demonstrate comprehension of and sign off all 20 defense-guide items.",
+      "status": "OPEN"
+    },
+    {
+      "blocker_id": "HUMAN-AI-COMPLETENESS",
+      "category": "AI disclosure",
+      "classification": "human_or_legal_blocker",
+      "evidence": [
+        "paper/final_protocol/SUBMISSION_CHECKLIST.md:139",
+        "paper/final_protocol/ai_disclosure.md:36",
+        "paper/final_protocol/ai_disclosure.md:40"
+      ],
+      "required_resolution": "The human author must confirm the complete AI-use history and applicable privacy, access, IP, and tool-term compliance.",
+      "status": "OPEN"
+    },
+    {
+      "blocker_id": "LEGAL-OWNERSHIP-REDISTRIBUTION",
+      "category": "rights and license",
+      "classification": "human_or_legal_blocker",
+      "evidence": [
+        "paper/final_protocol/SUBMISSION_CHECKLIST.md:114",
+        "paper/final_protocol/SUBMISSION_CHECKLIST.md:116",
+        "paper/final_protocol/SUBMISSION_CHECKLIST.md:118",
+        "paper/final_protocol/data_availability.md:15",
+        "paper/final_protocol/data_availability.md:16",
+        "paper/final_protocol/data_availability.md:17",
+        "paper/final_protocol/data_availability.md:40",
+        "paper/final_protocol/data_availability.md:42"
+      ],
+      "required_resolution": "Identify rights holders and document redistribution authority for every proposed release component.",
+      "status": "OPEN"
+    },
+    {
+      "blocker_id": "LEGAL-LICENSE",
+      "category": "rights and license",
+      "classification": "human_or_legal_blocker",
+      "evidence": [
+        "paper/final_protocol/data_availability.md:16",
+        "paper/final_protocol/data_availability.md:17",
+        "paper/final_protocol/data_availability.md:40",
+        "paper/final_protocol/data_availability.md:42",
+        "paper/final_protocol/release/RELEASE_STATUS.json:5"
+      ],
+      "required_resolution": "Rights holders must approve a specific license and its scope before public distribution.",
+      "status": "OPEN"
+    },
+    {
+      "blocker_id": "LEGAL-ARCHIVE-DOI",
+      "category": "archive and DOI",
+      "classification": "human_or_legal_blocker",
+      "evidence": [
+        "paper/final_protocol/SUBMISSION_CHECKLIST.md:122",
+        "paper/final_protocol/SUBMISSION_CHECKLIST.md:124",
+        "paper/final_protocol/data_availability.md:16",
+        "paper/final_protocol/data_availability.md:17",
+        "paper/final_protocol/data_availability.md:20",
+        "paper/final_protocol/data_availability.md:39",
+        "paper/final_protocol/data_availability.md:40",
+        "paper/final_protocol/data_availability.md:41"
+      ],
+      "required_resolution": "Approve archive creators/version/maintainer/location and add a DOI only after a persistent record actually exists.",
+      "status": "OPEN"
+    },
+    {
+      "blocker_id": "LEGAL-RESTRICTED-LIST-NAMING",
+      "category": "restricted materials",
+      "classification": "human_or_legal_blocker",
+      "evidence": [
+        "paper/final_protocol/SUBMISSION_CHECKLIST.md:127",
+        "paper/final_protocol/SUBMISSION_CHECKLIST.md:134"
+      ],
+      "required_resolution": "Confirm the exclusion list and permissions to identify organizations, packages, opponents, or people.",
+      "status": "OPEN"
+    }
+  ],
+  "machine_verification_blockers": [],
+  "overall_status": "PASS_WITH_HUMAN_OR_LEGAL_BLOCKERS",
+  "schema_version": "final-protocol-contradiction-audit-v1",
+  "scope": {
+    "article_type": "APS Open Science Protocol Article",
+    "branch": "paper/apsos-trace-protocol-final-202608",
+    "files_scanned": [
+      "paper/final_protocol/AUTHOR_DEFENSE_GUIDE.md",
+      "paper/final_protocol/EQUATION_AUDIT.md",
+      "paper/final_protocol/METHOD_ASSUMPTION_AUDIT.md",
+      "paper/final_protocol/REFERENCE_AUDIT.csv",
+      "paper/final_protocol/SUBMISSION_CHECKLIST.md",
+      "paper/final_protocol/ai_disclosure.md",
+      "paper/final_protocol/author_contributions.md",
+      "paper/final_protocol/claim_ledger.csv",
+      "paper/final_protocol/conflict_of_interest.md",
+      "paper/final_protocol/cover_letter.md",
+      "paper/final_protocol/data_availability.md",
+      "paper/final_protocol/main.pdf",
+      "paper/final_protocol/main.tex",
+      "paper/final_protocol/release/CITATION.cff",
+      "paper/final_protocol/release/README.md",
+      "paper/final_protocol/release/RELEASE_STATUS.json",
+      "paper/final_protocol/release/THIRD_PARTY_NOTICES.md",
+      "paper/final_protocol/release/data/processed/factorial_summary.json",
+      "paper/final_protocol/release/data/processed/factorial_units.csv",
+      "paper/final_protocol/release/data/processed/historical_control_repetition.csv",
+      "paper/final_protocol/release/data/processed/historical_summary.json",
+      "paper/final_protocol/release/data/processed/preflight_summary.json",
+      "paper/final_protocol/release/data/processed/preflight_units.csv",
+      "paper/final_protocol/release/data/processed/timed_search_stress.json",
+      "paper/final_protocol/release/docs/protocols/FRESH_CONFIRMATION_PROTOCOL.md",
+      "paper/final_protocol/release/docs/protocols/PEVL_PROSPECTIVE_PROTOCOL.md",
+      "paper/final_protocol/release/docs/protocols/REPRESENTATION_ABLATION_PROTOCOL.md",
+      "paper/final_protocol/release/environment.yml",
+      "paper/final_protocol/release/generated/results_macros.tex",
+      "paper/final_protocol/release/pevl_bench/results/pevl_matrix.csv",
+      "paper/final_protocol/release/pevl_bench/results/pevl_results.json",
+      "paper/final_protocol/release/pevl_bench/results/pevl_results.schema.json",
+      "paper/final_protocol/release/requirements-lock.txt",
+      "paper/final_protocol/release/source_data/artifact_identity.json",
+      "paper/final_protocol/release/source_data/equation_examples.json",
+      "paper/final_protocol/release/source_data/figure_1_distinctions.json",
+      "paper/final_protocol/release/source_data/figure_2_admission_flow.json",
+      "paper/final_protocol/release/source_data/figure_3_synthetic_matrix.csv",
+      "paper/final_protocol/release/source_data/figure_4_timed_search.csv",
+      "paper/final_protocol/release/source_data/figure_5_factorial.csv",
+      "paper/final_protocol/release/tables/table_1_prior_work.tex",
+      "paper/final_protocol/release/tables/table_2_protocol_stages.tex",
+      "paper/final_protocol/release/tables/table_3_prospective_results.tex",
+      "paper/final_protocol/release/tables/table_4_factorial.tex",
+      "paper/final_protocol/results_macros.tex",
+      "paper/final_protocol/supplement/AI_USE_LOG.csv",
+      "paper/final_protocol/supplement/PDF_VISUAL_AUDIT.json",
+      "paper/final_protocol/supplement/PROVENANCE_AUDIT.md",
+      "paper/final_protocol/supplement/RIGHTS_AND_ACCESS_AUDIT.md",
+      "paper/protocol/FRESH_CONFIRMATION_PROTOCOL.md",
+      "paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md",
+      "paper/protocol/REPRESENTATION_ABLATION_PROTOCOL.md"
+    ],
+    "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",
+    "source_of_truth": "checked processed evidence and independent statistics verification; prose is never authoritative",
+    "title": "A Trace-Based Validation Protocol for Seed-Matched Evaluations of Black-Box Game-Playing Agents"
+  },
+  "summary": {
+    "checks_passed": 47,
+    "checks_total": 47,
+    "contradictions": 0,
+    "factual_consistency_status": "PASS",
+    "human_or_legal_blockers": 17,
+    "machine_verification_blockers": 0,
+    "machine_verification_status": "PASS",
+    "submission_ready": false
+  }
+}

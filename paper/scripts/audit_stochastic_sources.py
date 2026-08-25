@@ -19,7 +19,6 @@ import hashlib
 import io
 import json
 import re
-import subprocess
 import tokenize
 from collections import Counter
 from dataclasses import dataclass
@@ -32,6 +31,7 @@ OUTPUT = ROOT / "paper/data/stochastic_source_audit.json"
 PROTOCOL = ROOT / "paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md"
 PYTHON_SUFFIXES = frozenset({".py", ".pyi"})
 MAX_PUBLIC_EVIDENCE_PER_CATEGORY = 100
+PEVL_PROTOCOL_COMMIT = "803257f102232763fc88d28c14b668f9b62eb277"
 
 
 @dataclass(frozen=True)
@@ -804,15 +804,6 @@ def audit_artifact(
     }
 
 
-def _git_commit(root: Path) -> str | None:
-    try:
-        return subprocess.check_output(
-            ["git", "rev-parse", "HEAD"], cwd=root, text=True
-        ).strip()
-    except (OSError, subprocess.CalledProcessError):
-        return None
-
-
 def build_audit(root: Path = ROOT) -> dict[str, Any]:
     protocol = root / PROTOCOL.relative_to(ROOT)
     protocol_text = protocol.read_text(encoding="utf-8")
@@ -900,7 +891,11 @@ def build_audit(root: Path = ROOT) -> dict[str, Any]:
             "script_sha256": sha256_file(Path(__file__).resolve()),
             "frozen_protocol": protocol.relative_to(root).as_posix(),
             "frozen_protocol_sha256": sha256_file(protocol),
-            "git_commit": _git_commit(root),
+            # The derived audit is deterministic evidence for this frozen
+            # protocol.  Using HEAD here made regeneration fail as soon as the
+            # manuscript advanced beyond the acquisition commit.
+            "git_commit": PEVL_PROTOCOL_COMMIT,
+            "provenance_role": "protocol_commit",
         },
     }
 

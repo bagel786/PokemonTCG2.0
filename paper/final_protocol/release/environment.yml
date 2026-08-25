@@ -1,0 +1,8 @@
+name: trace-validation-review
+channels:
+  - conda-forge
+dependencies:
+  - python=3.13.2
+  - numpy=2.2.5
+  - matplotlib=3.10.5
+  - pytest=8.4.2

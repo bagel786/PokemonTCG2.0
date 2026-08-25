@@ -1225,8 +1225,9 @@
     "frozen_protocol": "paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md",
     "frozen_protocol_sha256": "8b9329b948a054fc7252b9c2662490890e0a8439ad852393c6e25f537c8b887e",
     "git_commit": "803257f102232763fc88d28c14b668f9b62eb277",
+    "provenance_role": "protocol_commit",
     "script": "paper/scripts/audit_stochastic_sources.py",
-    "script_sha256": "f1702602b6fdf8410c8427cd8064c7ae5d70282b8e0eb7d65cfd65609a213a82"
+    "script_sha256": "545b33aaa3c446d9651a4f252f6ed1700084e774e14123c75eea10c7d126af12"
   },
   "schema_version": "pevl-stochastic-source-audit-v1",
   "scope_limits": [

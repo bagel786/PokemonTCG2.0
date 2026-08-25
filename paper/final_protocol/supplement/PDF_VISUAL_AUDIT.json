@@ -1,0 +1,38 @@
+{
+  "schema_version": "final-protocol-pdf-visual-audit-v1",
+  "status": "PASS",
+  "inspected_at_utc": "2026-08-25T00:46:15Z",
+  "inspection_method": "OpenAI Codex rendered every page at 150 dpi, inspected the contact sheet, and inspected each full-page PNG under human-directed reproducibility review.",
+  "manuscript_source_sha256": "2f961dcba1109a735449cf7e2d0861ce0186710874d340650b74a6be572e6cdb",
+  "manuscript_pdf_sha256": "3f6f92649258a9d90b29d115b6fab69c0ea1b25fd95cdfce16fb401bc40909fc",
+  "page_count": 10,
+  "page_size": "612 x 792 pt (US letter)",
+  "render_dpi": 150,
+  "inspected_pages": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+  "checklist": {
+    "title_readable_and_exact": true,
+    "author_placeholders_visible_and_explicit": true,
+    "abstract_readable": true,
+    "equations_readable": true,
+    "minus_signs_and_interval_endpoints_readable": true,
+    "tables_readable": true,
+    "captions_readable": true,
+    "figure_labels_readable": true,
+    "page_breaks_acceptable": true,
+    "references_resolved_and_readable": true,
+    "hyperlink_rendering_acceptable": true,
+    "no_blank_pages": true,
+    "no_clipped_text_or_graphics": true,
+    "no_unacceptably_tiny_fonts": true,
+    "no_unresolved_macros_or_citation_markers": true,
+    "figures_match_current_generated_source_data": true,
+    "pdf_hash_matches_current_manuscript_source_build": true
+  },
+  "findings": [
+    "All ten rendered pages are populated, legible, and free of visible clipping or unresolved citation markers.",
+    "Five figures and four tables are readable at full-page resolution; missing factorial trace evidence is displayed as an em dash rather than zero.",
+    "Author, affiliation, and corresponding-email placeholders remain deliberately visible because human metadata has not been supplied."
+  ],
+  "human_submission_signoff": "PENDING",
+  "limitation": "This visual-layout audit does not provide author metadata, legal approval, scientific-author comprehension, or corresponding-author submission approval."
+}

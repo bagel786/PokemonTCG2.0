@@ -1,0 +1,6 @@
+stratum,clusters,estimate,ci_low,ci_high
+Overall,200,0.495,0.425,0.565
+Timed-search A / order 1,50,0.88,0.78,0.96
+Timed-search A / order 2,50,0.96,0.9,1.0
+Timed-search B / order 1,50,0.08,0.02,0.16
+Timed-search B / order 2,50,0.06,0.0,0.14
