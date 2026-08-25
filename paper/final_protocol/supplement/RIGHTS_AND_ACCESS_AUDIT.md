@@ -10,6 +10,10 @@ related materials. No repository-level record establishes that the paper
 authors may redistribute all newly authored code, processed engine-derived
 records, policy packages, or third-party materials. The companion directory is
 therefore a review package with a no-license notice, not a public deposit.
+The component-by-component disposition is recorded in
+`../RELEASE_COMPONENT_INVENTORY.csv`; every creator, owner, redistribution
+authority, and proposed license remains explicitly unresolved unless an
+upstream dependency license applies.
 
 ## Excluded material
 

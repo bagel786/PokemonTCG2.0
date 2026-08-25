@@ -1,0 +1,181 @@
+{
+  "admission_rules": [
+    {
+      "claim_class": "event_aligned",
+      "id": "all_levels_pass",
+      "max_pass_prefix": 7,
+      "min_pass_prefix": 7,
+      "priority": 600
+    },
+    {
+      "claim_class": "seed_matched_bounded",
+      "id": "levels_1_through_6_pass",
+      "max_pass_prefix": 6,
+      "min_pass_prefix": 6,
+      "priority": 500
+    },
+    {
+      "claim_class": "execution_repeatable",
+      "id": "levels_1_through_5_pass",
+      "max_pass_prefix": 5,
+      "min_pass_prefix": 5,
+      "priority": 400
+    },
+    {
+      "claim_class": "schedule_matched",
+      "id": "levels_1_through_3_or_4_pass",
+      "max_pass_prefix": 4,
+      "min_pass_prefix": 3,
+      "priority": 300
+    },
+    {
+      "claim_class": "descriptive_unmatched",
+      "id": "artifact_only_or_artifact_and_seed_pass",
+      "max_pass_prefix": 2,
+      "min_pass_prefix": 1,
+      "priority": 200
+    },
+    {
+      "claim_class": "suppress",
+      "id": "artifact_identity_not_passed",
+      "max_pass_prefix": 0,
+      "min_pass_prefix": 0,
+      "priority": 100
+    }
+  ],
+  "evidence_states": [
+    "pass",
+    "fail",
+    "unavailable",
+    "malformed",
+    "contradictory",
+    "not_applicable"
+  ],
+  "fail_closed": {
+    "blocking_evidence_states": [
+      "fail",
+      "unavailable",
+      "not_applicable"
+    ],
+    "fatal_evidence_states": [
+      "malformed",
+      "contradictory"
+    ],
+    "invalid_input_claim_class": "suppress",
+    "missing_input_claim_class": "suppress",
+    "structural_contradiction": "pass_after_non_pass",
+    "unrecognized_input_claim_class": "suppress"
+  },
+  "formalization_provenance": {
+    "authority": "frozen_experiment_specific_rules_remain_authoritative",
+    "created_after_acquisition": true,
+    "frozen_protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",
+    "frozen_source_protocol": "docs/protocols/PEVL_PROSPECTIVE_PROTOCOL.md",
+    "mapping_assumptions": [
+    "The seven evidence gates preserve Levels 1 through 7 of the frozen ladder; Level 8 is represented by the decision returned by this engine, which admits only fixed-battery descriptive wording absent a separate inferential design.",
+      "The named intermediate claim classes are a post-acquisition taxonomy. They do not retroactively replace the frozen experiment-specific binary suppression rules.",
+      "A claim is limited by the longest contiguous prefix of passed gates. A later pass cannot repair an earlier fail, unavailable, or not-applicable prerequisite.",
+      "Level 5 is the minimum evidence for execution-repeatability wording because the frozen protocol separates identical-arm record parity at Level 4 from repeat-and-worker parity at Level 5.",
+    "Level 6 permits only a fixed-battery descriptive seed-indexed contrast and empirical reweighting sensitivity. It does not establish inferential pairing, a confidence interval, a hypothesis test, a population effect, Level 7 semantic event alignment, a fully coupled counterfactual, or a general common-random-number guarantee.",
+    "Level 7 establishes scoped semantic event alignment but does not by itself create a sampling or randomization basis for inferential pairing; absent a separately justified design its contrast remains fixed-battery descriptive.",
+      "Any frozen experiment-specific invalidator must be encoded as a failed or contradictory prerequisite and continues to suppress the planned paired contrast even if this generic map permits a weaker descriptive statement.",
+      "Not-applicable is never treated as pass; ambiguity about whether a prerequisite applies therefore cannot strengthen a claim.",
+      "The pure classifier accepts only explicitly trusted, prevalidated gate states. The public admit command separately verifies declared bundle-relative files and derives states from standardized records; roles, profile provenance, and trace semantics remain caller assertions, and neither interface reads result_data."
+    ],
+    "status": "post_acquisition_executable_formalization"
+  },
+  "gate_order": [
+    "artifact_identity",
+    "seed_namespace_integrity",
+    "schedule_parity",
+    "identical_arm_record_parity",
+    "repeat_and_worker_parity",
+    "stochastic_source_audit",
+    "cross_arm_event_alignment"
+  ],
+  "gates": [
+    {
+      "blocked_action": "Stop and recover immutable artifact and configuration identities before interpreting any comparison.",
+      "evidence_required": "Verified immutable identities for both agent artifacts, engine, configuration, runner, and protocol source.",
+      "id": "artifact_identity",
+      "level": 1,
+      "question": "Are every compared artifact and execution configuration unambiguously identified?",
+      "title": "artifact identity"
+    },
+    {
+      "blocked_action": "Treat arms as unmatched and repair boundary-seed instrumentation or namespace collisions.",
+      "evidence_required": "Recorded requested seeds, conversion rule, exact values passed at the engine boundary, and a collision check.",
+      "id": "seed_namespace_integrity",
+      "level": 2,
+      "question": "Are requested and engine-boundary seeds recorded and collision-free under the declared conversion?",
+      "title": "seed-namespace integrity"
+    },
+    {
+      "blocked_action": "Do not use schedule-matched or paired wording; rebuild and revalidate the schedule.",
+      "evidence_required": "Row-level equality of declared seed, condition, order, seat, initial-state controls, and other frozen schedule fields across arms.",
+      "id": "schedule_parity",
+      "level": 3,
+      "question": "Do all declared schedule fields match row by row across arms?",
+      "title": "schedule parity"
+    },
+    {
+      "blocked_action": "Suppress planned paired contrasts and resolve identical-arm record disagreement before reacquisition.",
+      "evidence_required": "Complete identical-arm record comparisons for all required controls and fields under the frozen acquisition rule.",
+      "id": "identical_arm_record_parity",
+      "level": 4,
+      "question": "Do required identical-arm control records agree on every prespecified field?",
+      "title": "identical-arm record parity"
+    },
+    {
+      "blocked_action": "Restrict reporting to schedule matching and redesign execution until within-arm repeat and worker-profile evidence passes.",
+      "evidence_required": "Within-arm equality across every required fresh-process, repeat, worker-count, and enqueue-order profile for the declared trace projection.",
+      "id": "repeat_and_worker_parity",
+      "level": 5,
+      "question": "Is each arm repeatable across every prespecified execution profile for the declared trace projection?",
+      "title": "repeat-and-worker parity"
+    },
+    {
+      "blocked_action": "Do not admit even a fixed-battery descriptive seed-indexed contrast; bound or eliminate unresolved stochastic and execution-dependent sources.",
+      "evidence_required": "A bounded audit of random streams, clocks, process state, concurrency, external services, and other prespecified stochastic or execution-dependent sources.",
+      "id": "stochastic_source_audit",
+      "level": 6,
+      "question": "Has the prespecified stochastic-source audit been completed without an unresolved invalidator?",
+      "title": "stochastic-source audit"
+    },
+    {
+      "blocked_action": "Retain fixed-battery descriptive seed-indexed wording and prohibit event-aligned, fully coupled, counterfactual, general CRN, and inferential-pairing wording.",
+      "evidence_required": "Cross-arm alignment of shared exogenous events under a declared semantic event ontology and alignment procedure.",
+      "id": "cross_arm_event_alignment",
+      "level": 7,
+      "question": "Are shared exogenous events aligned across arms within a declared event ontology?",
+      "title": "cross-arm event alignment"
+    }
+  ],
+  "input_schema_version": "admission-evidence-1.0.0",
+  "projection_scope": {
+    "required_minimum_claim_strength": 3,
+    "unscoped_repeatability_action": "suppress",
+    "wording_must_name_projection": true
+  },
+  "protocol_id": "pevl-admission-formalization-2026-08",
+  "result_independence": {
+    "ignored_envelope_members": [
+      "result_data"
+    ],
+    "prohibited_rule_inputs": [
+      "outcome",
+      "observed_outcome",
+      "observed_treatment_effect",
+      "effect_estimate",
+      "p_value",
+      "confidence_interval",
+      "confidence_interval_direction",
+      "result_favorability"
+    ],
+    "rule_inputs": [
+      "evidence",
+      "trace_projection"
+    ]
+  },
+  "schema_version": "admission-rules-1.0.0"
+}

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independently reaggregate released PEVL rows and recompute statistics."""
+"""Independently reaggregate PEVL rows with bounded descriptive semantics."""
 
 from __future__ import annotations
 
@@ -20,6 +20,10 @@ ROOT = SCRIPT.parents[3]
 PAPER = ROOT / "paper"
 FINAL = SCRIPT.parents[1]
 PROTOCOL_COMMIT = "803257f102232763fc88d28c14b668f9b62eb277"
+FIXED_BATTERY_INFERENTIAL_STATUS = (
+    "fixed-battery descriptive empirical reweighting sensitivity; not a "
+    "confidence interval, hypothesis test, p-value, or population effect"
+)
 CANONICAL_HASHES = {
     "preflight": "c6295f9f3981d346d0cbcb38327e575b560aaf0950bd52f52594cfb8f9cc56b3",
     "stress": "40b9f5e17a424742ad8a05739646fe56843b8f3a432b124bfc33f9aed1ab5a4b",
@@ -103,7 +107,7 @@ def percentile(values: np.ndarray) -> list[float]:
     return [float(value) for value in np.quantile(values, [0.025, 0.975])]
 
 
-def binary_bootstrap(values: Iterable[int], seed: int) -> dict[str, Any]:
+def binary_reweighting(values: Iterable[int], seed: int) -> dict[str, Any]:
     vector = np.asarray(list(values), dtype=np.float64)
     if not len(vector) or not np.all(np.isin(vector, [0.0, 1.0])):
         raise VerificationError("binary cluster vector is empty or nonbinary")
@@ -118,9 +122,42 @@ def binary_bootstrap(values: Iterable[int], seed: int) -> dict[str, Any]:
     return {
         "clusters": int(len(vector)),
         "estimate": float(vector.mean()),
-        "bootstrap_95_ci": percentile(samples),
-        "bootstrap_draws": 100_000,
-        "bootstrap_seed": seed,
+        "quantiles_2_5_97_5": percentile(samples),
+        "reweighting_draws": 100_000,
+        "reweighting_seed": seed,
+    }
+
+
+def fixed_composition_reweighting(
+    strata: dict[str, list[int]], seed: int
+) -> dict[str, Any]:
+    if not strata:
+        raise VerificationError("fixed-composition reweighting requires strata")
+    vectors = {
+        key: np.asarray(strata[key], dtype=np.float64) for key in sorted(strata)
+    }
+    if any(
+        not len(vector) or not np.all(np.isin(vector, [0.0, 1.0]))
+        for vector in vectors.values()
+    ):
+        raise VerificationError(
+            "fixed-composition reweighting requires nonempty binary strata"
+        )
+    rng = np.random.default_rng(seed)
+    samples = np.zeros(100_000, dtype=np.float64)
+    for key in sorted(vectors):
+        vector = vectors[key]
+        indices = rng.integers(0, len(vector), size=(100_000, len(vector)))
+        samples += vector[indices].mean(axis=1) / len(vectors)
+    return {
+        "estimate": float(np.mean([vector.mean() for vector in vectors.values()])),
+        "quantiles_2_5_97_5": percentile(samples),
+        "reweighting_draws": 100_000,
+        "reweighting_seed": seed,
+        "stratum_disagreement_counts": {
+            key: int(vectors[key].sum()) for key in sorted(vectors)
+        },
+        "stratum_weighting": "equal with fixed within-stratum sample sizes",
     }
 
 
@@ -133,7 +170,7 @@ def exact_mcnemar(first_only: int, second_only: int) -> float:
     return min(1.0, 2 * tail)
 
 
-def factorial_bootstrap(arrays: dict[str, np.ndarray]) -> dict[str, Any]:
+def factorial_reweighting(arrays: dict[str, np.ndarray]) -> dict[str, Any]:
     if len(arrays) != 10 or any(value.shape != (200, 4) for value in arrays.values()):
         raise VerificationError("factorial requires ten 200-by-4 strata")
     names = ("primary_c4_minus_c1", "representation_main", "training_main", "interaction")
@@ -157,12 +194,54 @@ def factorial_bootstrap(arrays: dict[str, np.ndarray]) -> dict[str, Any]:
         cursor += batch
     return {
         name: {
-            "bootstrap_95_ci": percentile(samples[name]),
-            "bootstrap_draws": 100_000,
-            "bootstrap_seed": 2026083117,
-            "resampling": "paired units within each of ten opponent-by-order strata",
+            "quantiles_2_5_97_5": percentile(samples[name]),
+            "reweighting_draws": 100_000,
+            "reweighting_seed": 2026083117,
         }
         for name in names
+    }
+
+
+def normalized_reweighting_record(record: dict[str, Any]) -> dict[str, Any]:
+    """Normalize frozen legacy keys without carrying their CI interpretation."""
+
+    quantiles = record.get("quantiles_2_5_97_5", record.get("bootstrap_95_ci"))
+    draws = record.get("reweighting_draws", record.get("bootstrap_draws"))
+    seed = record.get("reweighting_seed", record.get("bootstrap_seed"))
+    if not isinstance(quantiles, list) or len(quantiles) != 2:
+        raise VerificationError("reweighting record requires two quantiles")
+    normalized_quantiles = [float(value) for value in quantiles]
+    if not all(math.isfinite(value) for value in normalized_quantiles):
+        raise VerificationError("reweighting quantiles must be finite")
+    if normalized_quantiles[0] > normalized_quantiles[1]:
+        raise VerificationError("reweighting quantiles are reversed")
+    if draws is None or seed is None:
+        raise VerificationError("reweighting draw count and seed are required")
+    normalized: dict[str, Any] = {
+        "quantiles_2_5_97_5": normalized_quantiles,
+        "reweighting_draws": int(draws),
+        "reweighting_seed": int(seed),
+    }
+    if "estimate" in record:
+        estimate = float(record["estimate"])
+        if not math.isfinite(estimate):
+            raise VerificationError("reweighting estimate must be finite")
+        normalized["estimate"] = estimate
+    if "clusters" in record:
+        normalized["clusters"] = int(record["clusters"])
+    return normalized
+
+
+def descriptive_reweighting_record(
+    record: dict[str, Any], *, role: str, reweighting_unit: str
+) -> dict[str, Any]:
+    """Attach the bounded interpretation admitted for a fixed engineering battery."""
+
+    return {
+        **record,
+        "role": role,
+        "reweighting_unit": reweighting_unit,
+        "inferential_status": FIXED_BATTERY_INFERENTIAL_STATUS,
     }
 
 
@@ -408,11 +487,15 @@ def verify_stress(summary: dict[str, Any], source_root: Path | None) -> dict[str
     }
     for key, value in recomputed.items():
         require_equal(value, summary[key], f"stress {key}")
-    actor_counts = summary.get("first_divergence_actor_counts")
-    require_equal(actor_counts, {"opponent": 99}, "stress earliest-divergence actor counts")
-    require_equal(sum(int(value) for value in actor_counts.values()), recomputed["trace_disagreement_clusters"], "stress localized divergence total")
     source_count = verify_declared_sources(summary, source_root, "stress") if source_root is not None else 0
-    require_equal(binary_bootstrap((int(row["trace_disagreement"]) for row in rows), 2026083118), summary["trace_disagreement"], "stress overall bootstrap")
+    overall = binary_reweighting(
+        (int(row["trace_disagreement"]) for row in rows), 2026083118
+    )
+    require_equal(
+        overall,
+        normalized_reweighting_record(summary["trace_disagreement"]),
+        "stress overall empirical reweighting",
+    )
     grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in rows:
         context = row.get("opponent", row.get("context"))
@@ -423,7 +506,13 @@ def verify_stress(summary: dict[str, Any], source_root: Path | None) -> dict[str
     for key, subset in grouped.items():
         require_equal(len(subset), 50, f"stress {key} clusters")
         expected = summary["strata"][key]
-        require_equal(binary_bootstrap((int(row["trace_disagreement"]) for row in subset), 2026083118), expected["trace_disagreement"], f"stress {key} bootstrap")
+        require_equal(
+            binary_reweighting(
+                (int(row["trace_disagreement"]) for row in subset), 2026083118
+            ),
+            normalized_reweighting_record(expected["trace_disagreement"]),
+            f"stress {key} empirical reweighting",
+        )
         for field, source in (
             ("outcome_disagreement_count", "outcome_disagreement"),
             ("decision_count_disagreement_count", "decision_count_disagreement"),
@@ -431,9 +520,47 @@ def verify_stress(summary: dict[str, Any], source_root: Path | None) -> dict[str
             ("policy_error_present_count", "policy_error_present"),
         ):
             require_equal(sum(bool(row[source]) for row in subset), expected[field], f"stress {key} {field}")
+    fixed_composition = fixed_composition_reweighting(
+        {
+            key: [int(row["trace_disagreement"]) for row in subset]
+            for key, subset in grouped.items()
+        },
+        2026083118,
+    )
     return recomputed | {
-        "bootstrap": summary["trace_disagreement"],
-        "first_divergence_actor_counts": actor_counts,
+        "empirical_reweighting": descriptive_reweighting_record(
+            overall,
+            role=(
+                "prespecified pooled whole-cluster empirical reweighting; "
+                "realized context composition may vary"
+            ),
+            reweighting_unit=(
+                "whole seed-condition cluster retaining all four execution profiles"
+            ),
+        ),
+        "fixed_battery_scope": (
+            "200 exercised seed-condition clusters in four fixed "
+            "opponent-by-order strata"
+        ),
+        "fixed_composition_reweighting_sensitivity": {
+            **descriptive_reweighting_record(
+                fixed_composition,
+                role=(
+                    "post-acquisition, source-driven fixed-composition "
+                    "reweighting sensitivity"
+                ),
+                reweighting_unit=(
+                    "whole seed-condition cluster retained within its fixed "
+                    "opponent-by-order stratum"
+                ),
+            ),
+            "design_status": "post-acquisition source-driven sensitivity",
+        },
+        "earliest_divergence_localization_included": False,
+        "earliest_divergence_localization_reason": (
+            "The retained verification rows do not contain raw trace lines needed "
+            "to establish an earliest event or actor."
+        ),
         "declared_sources_verified": source_count,
     }
 
@@ -504,23 +631,64 @@ def verify_factorial(summary: dict[str, Any], units_path: Path, source_root: Pat
         "training_main": float(np.mean(0.5 * ((c3 - c1) + (c4 - c2)))),
         "interaction": float(np.mean(c4 - c3 - c2 + c1)),
     }
-    bootstrap = factorial_bootstrap(arrays)
+    reweighting = factorial_reweighting(arrays)
+    contrast_output: dict[str, dict[str, Any]] = {}
     for name, estimate in estimates.items():
         require_equal(estimate, summary["contrasts"][name]["estimate"], f"factorial {name} estimate")
-        require_equal(bootstrap[name], {key: summary["contrasts"][name][key] for key in bootstrap[name]}, f"factorial {name} bootstrap")
+        independent = {"estimate": estimate, **reweighting[name]}
+        require_equal(
+            independent,
+            normalized_reweighting_record(summary["contrasts"][name]),
+            f"factorial {name} empirical reweighting",
+        )
+        contrast_output[name] = descriptive_reweighting_record(
+            independent,
+            role=(
+                "fixed-battery descriptive contrast with stratified paired-unit "
+                "empirical reweighting sensitivity"
+            ),
+            reweighting_unit=(
+                "whole seed-indexed unit retaining all four cells within each of "
+                "ten fixed opponent-by-order strata"
+            ),
+        )
     c4_only = int(np.sum((c4 == 1) & (c1 == 0)))
     c1_only = int(np.sum((c4 == 0) & (c1 == 1)))
-    require_equal(c4_only, summary["primary_mcnemar"]["c4_only_wins"], "factorial C4-only wins")
-    require_equal(c1_only, summary["primary_mcnemar"]["c1_only_wins"], "factorial C1-only wins")
-    require_equal(exact_mcnemar(c4_only, c1_only), summary["primary_mcnemar"]["exact_two_sided_p"], "factorial McNemar")
+    exact_two_sided = exact_mcnemar(c4_only, c1_only)
+    source_mcnemar = summary.get("primary_mcnemar")
+    if source_mcnemar is not None:
+        require_equal(c4_only, source_mcnemar["c4_only_wins"], "factorial C4-only wins")
+        require_equal(c1_only, source_mcnemar["c1_only_wins"], "factorial C1-only wins")
+        require_equal(
+            exact_two_sided,
+            source_mcnemar["exact_two_sided_p"],
+            "factorial McNemar numerical audit",
+        )
+    elif source_root is not None:
+        raise VerificationError("canonical factorial source lacks frozen McNemar arithmetic")
     return {
         "units": len(rows),
         "games": summary["games"],
         "strata": len(grouped),
         "declared_sources_verified": source_count,
         "cell_win_rates": cell_rates,
-        "contrasts": estimates,
-        "mcnemar": summary["primary_mcnemar"],
+        "contrasts": contrast_output,
+        "fixed_battery_scope": (
+            "2,000 seed-indexed units per cell in ten fixed opponent-by-order strata"
+        ),
+        "mcnemar_numerical_audit_not_admitted": {
+            "status": "NUMERICAL_AUDIT_ONLY_NOT_ADMITTED",
+            "c1_only_wins": c1_only,
+            "c4_only_wins": c4_only,
+            "discordant_units": c1_only + c4_only,
+            "exact_two_sided_p": exact_two_sided,
+            "displayed_in_manuscript": False,
+            "admitted_for_inference": False,
+            "inferential_status": (
+                "not admitted because the required reference-distribution "
+                "assumptions are not established"
+            ),
+        },
     }
 
 
@@ -562,9 +730,15 @@ def main() -> int:
     stress = load_json(args.stress)
     factorial = load_json(args.factorial)
     report = {
+        "schema_version": "pevl-statistics-verification-v2",
         "status": "PASS",
         "protocol_commit": PROTOCOL_COMMIT,
         "profile": args.profile,
+        "interpretation_boundary": (
+            "Fixed-battery contrasts and empirical reweighting quantiles are "
+            "descriptive only; no confidence interval, hypothesis test, p-value, "
+            "population effect, or earliest-divergence localization is admitted."
+        ),
         "inputs": {label: {"role": label, "sha256": sha256(path)} for label, path in paths.items()},
         "historical": verify_historical(args.historical_units),
         "preflight": verify_preflight(preflight, source_root),

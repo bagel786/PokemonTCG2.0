@@ -1,0 +1,3 @@
+0|candidate|state-a|action-1
+1|candidate|state-b|action-2
+terminal|win|errors-0|decisions-12

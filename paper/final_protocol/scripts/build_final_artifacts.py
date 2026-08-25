@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Any
 
 import matplotlib
+import numpy as np
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -138,6 +139,60 @@ def exact(value: Any, expected: Any, label: str) -> None:
         raise EvidenceError(f"{label}: expected {expected!r}, found {value!r}")
 
 
+def stress_fixed_composition_reweighting(stress: dict[str, Any]) -> dict[str, Any]:
+    """Reweight whole stress clusters while preserving the four fixed strata."""
+    expected_strata = {
+        "starmie/first", "starmie/second", "dipplin/first", "dipplin/second"
+    }
+    vectors: dict[str, list[int]] = {}
+    rows = stress.get("cluster_rows")
+    if not isinstance(rows, list):
+        raise EvidenceError("stress cluster rows are missing")
+    for row in rows:
+        if not isinstance(row, dict):
+            raise EvidenceError("stress cluster row is malformed")
+        key = f"{row.get('opponent')}/{row.get('actual_order')}"
+        value = row.get("trace_disagreement")
+        if value not in {0, 1, False, True}:
+            raise EvidenceError(f"stress trace flag is not binary: {key}")
+        vectors.setdefault(key, []).append(int(value))
+    if set(vectors) != expected_strata or any(len(values) != 50 for values in vectors.values()):
+        raise EvidenceError("stress fixed-composition strata drift")
+
+    draws = 100_000
+    seed = 2026083118
+    rng = np.random.default_rng(seed)
+    estimates = np.zeros(draws, dtype=np.float64)
+    counts: dict[str, int] = {}
+    for key in sorted(vectors):
+        vector = np.asarray(vectors[key], dtype=np.float64)
+        counts[key] = int(vector.sum())
+        indices = rng.integers(0, len(vector), size=(draws, len(vector)))
+        estimates += vector[indices].mean(axis=1) / len(vectors)
+    low, high = np.quantile(estimates, [0.025, 0.975]).tolist()
+    point = float(np.mean([np.mean(values) for values in vectors.values()]))
+    if not math.isclose(point, 0.495, rel_tol=0.0, abs_tol=1e-15):
+        raise EvidenceError("stress fixed-composition point estimate drift")
+    if not np.allclose([low, high], [0.46, 0.53], rtol=0.0, atol=1e-15):
+        raise EvidenceError("stress fixed-composition reweighting quantiles drift")
+    exact(counts, {
+        "dipplin/first": 4,
+        "dipplin/second": 3,
+        "starmie/first": 44,
+        "starmie/second": 48,
+    }, "stress fixed-composition counts")
+    return {
+        "estimate": point,
+        "quantiles_2_5_97_5": [low, high],
+        "draws": draws,
+        "seed": seed,
+        "stratum_weighting": "equal with fixed 50-cluster composition",
+        "reweighting_unit": "whole seed-condition cluster retaining all four profiles",
+        "role": "post-acquisition fixed-composition sensitivity to the frozen pooled reweighting",
+        "stratum_disagreement_counts": counts,
+    }
+
+
 def validate_inputs() -> dict[str, dict[str, Any]]:
     payloads: dict[str, dict[str, Any]] = {}
     for label, (path, expected_hash) in INPUTS.items():
@@ -241,8 +296,8 @@ def validate_inputs() -> dict[str, dict[str, Any]]:
     if not isinstance(trace, dict):
         raise EvidenceError("stress trace-disagreement summary is missing")
     exact(finite_number(trace.get("estimate"), "stress estimate"), 0.495, "stress estimate")
-    exact(trace.get("bootstrap_95_ci"), [0.425, 0.565], "stress interval")
-    exact_int(trace.get("bootstrap_draws"), 100000, "stress bootstrap draws")
+    exact(trace.get("bootstrap_95_ci"), [0.425, 0.565], "stress pooled reweighting quantiles")
+    exact_int(trace.get("bootstrap_draws"), 100000, "stress reweighting draws")
     strata = stress.get("strata")
     if not isinstance(strata, dict) or set(strata) != {
         "starmie/first", "starmie/second", "dipplin/first", "dipplin/second"
@@ -253,6 +308,7 @@ def validate_inputs() -> dict[str, dict[str, Any]]:
             raise EvidenceError(f"stress stratum is malformed: {name}")
         exact_int(row["trace_disagreement"].get("clusters"), 50, f"{name} clusters")
         exact_int(row["trace_disagreement"].get("bootstrap_draws"), 100000, f"{name} draws")
+    stress_fixed_composition_reweighting(stress)
 
     exact(factorial.get("status"), "ADMITTED_SEED_MATCHED", "factorial status")
     exact(factorial.get("admission_decision"), "admit_with_bounded_wording", "factorial admission")
@@ -271,8 +327,8 @@ def validate_inputs() -> dict[str, dict[str, Any]]:
     for name, (estimate, interval) in expected_contrasts.items():
         row = contrasts[name]
         exact(finite_number(row.get("estimate"), f"{name} estimate"), estimate, f"{name} estimate")
-        exact(row.get("bootstrap_95_ci"), interval, f"{name} interval")
-        exact_int(row.get("bootstrap_draws"), 100000, f"{name} bootstrap draws")
+        exact(row.get("bootstrap_95_ci"), interval, f"{name} reweighting quantiles")
+        exact_int(row.get("bootstrap_draws"), 100000, f"{name} reweighting draws")
         if "ten opponent-by-order strata" not in str(row.get("resampling")):
             raise EvidenceError(f"{name} analysis unit drift")
 
@@ -323,6 +379,8 @@ def write_macros(payloads: dict[str, dict[str, Any]]) -> Path:
     training = factorial["contrasts"]["training_main"]
     interaction = factorial["contrasts"]["interaction"]
     trace = stress["trace_disagreement"]
+    stress_fixed = stress_fixed_composition_reweighting(stress)
+    stress_counts = stress_fixed["stratum_disagreement_counts"]
     stochastic_audit = payloads["stochastic_audit"]
     source_assessed = stochastic_audit["level_results"]["level_6_stochastic_source_audit"]["verified_package_tree_count"]
     binary_unassessed = sum(
@@ -362,10 +420,17 @@ def write_macros(payloads: dict[str, dict[str, Any]]) -> Path:
 \\newcommand{{\\StressTracePct}}{{{100 * trace['estimate']:.1f}}}
 \\newcommand{{\\StressTraceLowPct}}{{{100 * trace['bootstrap_95_ci'][0]:.1f}}}
 \\newcommand{{\\StressTraceHighPct}}{{{100 * trace['bootstrap_95_ci'][1]:.1f}}}
+\\newcommand{{\\StressFixedCompositionLowPct}}{{{100 * stress_fixed['quantiles_2_5_97_5'][0]:.1f}}}
+\\newcommand{{\\StressFixedCompositionHighPct}}{{{100 * stress_fixed['quantiles_2_5_97_5'][1]:.1f}}}
+\\newcommand{{\\StressStratumClusters}}{{50}}
+\\newcommand{{\\StressAFirstMismatch}}{{{stress_counts['starmie/first']}}}
+\\newcommand{{\\StressASecondMismatch}}{{{stress_counts['starmie/second']}}}
+\\newcommand{{\\StressBFirstMismatch}}{{{stress_counts['dipplin/first']}}}
+\\newcommand{{\\StressBSecondMismatch}}{{{stress_counts['dipplin/second']}}}
 \\newcommand{{\\StressOutcomeMismatch}}{{{stress['outcome_disagreement_clusters']}}}
 \\newcommand{{\\StressDecisionMismatch}}{{{stress['decision_count_disagreement_clusters']}}}
 \\newcommand{{\\StressErrorMismatch}}{{{stress['error_disagreement_clusters']}}}
-\\newcommand{{\\BootstrapDraws}}{{100,000}}
+\\newcommand{{\\ReweightingDraws}}{{100,000}}
 \\newcommand{{\\FactorialUnits}}{{{factorial['units']:,}}}
 \\newcommand{{\\FactorialGames}}{{{factorial['games']:,}}}
 \\newcommand{{\\FactorialControlMismatch}}{{{factorial['control_mismatch_units']}}}
@@ -383,9 +448,6 @@ def write_macros(payloads: dict[str, dict[str, Any]]) -> Path:
 \\newcommand{{\\InteractionEstimatePP}}{{{i_est}}}
 \\newcommand{{\\InteractionLowPP}}{{{i_low}}}
 \\newcommand{{\\InteractionHighPP}}{{{i_high}}}
-\\newcommand{{\\FactorialInterventionOnlyWins}}{{{factorial['primary_mcnemar']['c4_only_wins']}}}
-\\newcommand{{\\FactorialControlOnlyWins}}{{{factorial['primary_mcnemar']['c1_only_wins']}}}
-\\newcommand{{\\McNemarP}}{{{factorial['primary_mcnemar']['exact_two_sided_p']:.6f}}}
 """
     output = FINAL / "results_macros.tex"
     output.write_text(content, encoding="utf-8")
@@ -456,21 +518,21 @@ def figure_distinctions() -> list[Path]:
     for index, (row, color) in enumerate(zip(rows, colors, strict=True)):
         x = 0.25 + index * 4.0
         box = FancyBboxPatch(
-            (x, 0.75), 3.45, 3.15,
+            (x, 0.75), 3.25, 3.15,
             boxstyle="round,pad=0.06,rounding_size=0.08",
             linewidth=2.0, edgecolor=color, facecolor="white",
         )
         ax.add_patch(box)
-        ax.text(x + 0.18, 3.58, row["stage"], fontsize=11.8, fontweight="bold", color=INK, va="top")
+        ax.text(x + 0.18, 3.58, row["stage"], fontsize=11.2, fontweight="bold", color=INK, va="top")
         ax.text(x + 0.18, 3.04, row["question"], fontsize=10.8, color=INK, va="top", linespacing=1.25)
         ax.text(x + 0.18, 2.27, "Evidence", fontsize=9.8, fontweight="bold", color=color, va="top")
         ax.text(x + 0.18, 1.98, row["evidence"], fontsize=9.2, color=MUTED, va="top", linespacing=1.25)
         ax.text(x + 0.18, 1.40, "Permits", fontsize=9.8, fontweight="bold", color=color, va="top")
         ax.text(x + 0.18, 1.11, row["permits"], fontsize=9.2, color=MUTED, va="top", linespacing=1.25)
         if index < 2:
-            arrow_x = x + 3.52
-            ax.add_patch(FancyArrowPatch((arrow_x, 2.35), (arrow_x + 0.38, 2.35), arrowstyle="-|>", mutation_scale=14, color=RED, linewidth=1.8))
-            ax.text(arrow_x + 0.19, 2.72, "does not\nimply", ha="center", va="center", color=RED, fontsize=8.2, fontweight="bold")
+            arrow_x = x + 3.31
+            ax.add_patch(FancyArrowPatch((arrow_x, 2.35), (arrow_x + 0.58, 2.35), arrowstyle="-|>", mutation_scale=14, color=RED, linewidth=1.8))
+            ax.text(arrow_x + 0.29, 2.72, "does not\nimply", ha="center", va="center", color=RED, fontsize=7.7, fontweight="bold")
     ax.text(0.25, 4.35, "Three distinct validation questions", fontsize=22, fontweight="bold", color=INK)
     ax.text(0.25, 0.28, "Evidence accumulates left to right; later claims require additional observations rather than stronger wording.", fontsize=10.5, color=MUTED)
     return save_figure(fig, "figure_1_distinctions")
@@ -491,13 +553,14 @@ def figure_admission_flow() -> list[Path]:
         "failure_action": "suppress or downgrade the affected claim",
         "success_action": "apply the frozen admission map",
         "restricted_engine_boundary": "Level 7 unavailable",
+        "level_6_boundary": "fixed-battery descriptive contrast and empirical reweighting only",
     }
     write_json(FINAL / "source_data/figure_2_admission_flow.json", source)
     fig, ax = plt.subplots(figsize=(12, 5.4))
     ax.set_xlim(0, 12)
     ax.set_ylim(0, 6)
     ax.axis("off")
-    ax.text(0.3, 5.65, "Trace-based protocol and claim admission", fontsize=22, fontweight="bold", color=INK)
+    ax.text(0.3, 5.65, "Pairing-assumption protocol and claim admission", fontsize=22, fontweight="bold", color=INK)
     for index, (level, label) in enumerate(levels):
         x = 0.35 + index * 1.55
         color = BLUE if index < 3 else PURPLE if index < 6 else GREEN
@@ -520,7 +583,7 @@ def figure_admission_flow() -> list[Path]:
     ax.add_patch(FancyArrowPatch((10.275, 3.43), (10.05, 2.52), arrowstyle="-|>", mutation_scale=12, color=GREEN, linewidth=2))
     ax.add_patch(FancyArrowPatch((9.78, 3.46), (8.08, 2.48), arrowstyle="-|>", mutation_scale=10, color=RED, linewidth=1.2))
     ax.text(10.25, 5.22, "Restricted engine:\nL7 unavailable", color=ORANGE, fontweight="bold", fontsize=9.8, ha="center", va="top", linespacing=1.15)
-    ax.text(0.35, 0.55, "Passes are scoped to the tested artifacts, trace schema, seed schedule, and execution contexts.", fontsize=10.5, color=MUTED)
+    ax.text(0.35, 0.55, "Passes are scoped to tested artifacts and contexts; inferential pairing needs a separate sampling or randomization basis.", fontsize=10.5, color=MUTED)
     return save_figure(fig, "figure_2_admission_flow")
 
 
@@ -589,24 +652,24 @@ def figure_stress(stress: dict[str, Any]) -> list[Path]:
     order = ["overall", "starmie/first", "starmie/second", "dipplin/first", "dipplin/second"]
     rows: list[dict[str, Any]] = []
     overall = stress["trace_disagreement"]
-    rows.append({"stratum": "Overall", "clusters": 200, "estimate": overall["estimate"], "ci_low": overall["bootstrap_95_ci"][0], "ci_high": overall["bootstrap_95_ci"][1]})
+    rows.append({"stratum": "Overall", "clusters": 200, "estimate": overall["estimate"], "quantile_2_5": overall["bootstrap_95_ci"][0], "quantile_97_5": overall["bootstrap_95_ci"][1]})
     for name in order[1:]:
         summary = stress["strata"][name]["trace_disagreement"]
-        rows.append({"stratum": aliases[name], "clusters": summary["clusters"], "estimate": summary["estimate"], "ci_low": summary["bootstrap_95_ci"][0], "ci_high": summary["bootstrap_95_ci"][1]})
-    write_csv(FINAL / "source_data/figure_4_timed_search.csv", ["stratum", "clusters", "estimate", "ci_low", "ci_high"], rows)
+        rows.append({"stratum": aliases[name], "clusters": summary["clusters"], "estimate": summary["estimate"], "quantile_2_5": summary["bootstrap_95_ci"][0], "quantile_97_5": summary["bootstrap_95_ci"][1]})
+    write_csv(FINAL / "source_data/figure_4_timed_search.csv", ["stratum", "clusters", "estimate", "quantile_2_5", "quantile_97_5"], rows)
     fig, ax = plt.subplots(figsize=(10.2, 5.4))
     y = list(range(len(rows)))[::-1]
     for index, (position, row) in enumerate(zip(y, rows, strict=True)):
         color = PURPLE if index == 0 else BLUE
-        ax.errorbar(100 * row["estimate"], position, xerr=[[100 * (row["estimate"] - row["ci_low"])], [100 * (row["ci_high"] - row["estimate"])]], fmt="D" if index == 0 else "o", mfc="white", mec=color, mew=2, ms=9, ecolor=color, capsize=5, lw=2)
+        ax.errorbar(100 * row["estimate"], position, xerr=[[100 * (row["estimate"] - row["quantile_2_5"])], [100 * (row["quantile_97_5"] - row["estimate"])]], fmt="D" if index == 0 else "o", mfc="white", mec=color, mew=2, ms=9, ecolor=color, capsize=5, lw=2)
     ax.set_yticks(y, [row["stratum"] for row in rows])
     ax.set_xlim(0, 104)
-    ax.set_xlabel("Seed-condition clusters with trace-digest disagreement (%)", fontsize=11.5)
+    ax.set_xlabel("Seed-condition clusters with trace-projection disagreement (%)", fontsize=11.5)
     ax.set_title("Timed-search repeat/worker stress test", loc="left", fontsize=19, fontweight="bold", color=INK, pad=14)
     ax.grid(axis="x", color=GRID, linewidth=1)
     ax.set_axisbelow(True)
     ax.spines[["top", "right"]].set_visible(False)
-    ax.text(0, -0.22, "99/200 trace-disagreement clusters; interval resampling keeps all four execution profiles together.", transform=ax.transAxes, color=MUTED, fontsize=10.2)
+    ax.text(0, -0.22, "Bars show frozen pooled or stratum-specific empirical reweighting quantiles; all four profiles stay together.", transform=ax.transAxes, color=MUTED, fontsize=10.2)
     return save_figure(fig, "figure_4_timed_search")
 
 
@@ -621,21 +684,21 @@ def figure_factorial(factorial: dict[str, Any]) -> list[Path]:
     rows = []
     for name in order:
         item = factorial["contrasts"][name]
-        rows.append({"contrast": labels[name], "estimate_pp": 100 * item["estimate"], "ci_low_pp": 100 * item["bootstrap_95_ci"][0], "ci_high_pp": 100 * item["bootstrap_95_ci"][1], "units": factorial["units"], "bootstrap_draws": item["bootstrap_draws"]})
-    write_csv(FINAL / "source_data/figure_5_factorial.csv", ["contrast", "estimate_pp", "ci_low_pp", "ci_high_pp", "units", "bootstrap_draws"], rows)
+        rows.append({"contrast": labels[name], "estimate_pp": 100 * item["estimate"], "quantile_2_5_pp": 100 * item["bootstrap_95_ci"][0], "quantile_97_5_pp": 100 * item["bootstrap_95_ci"][1], "units": factorial["units"], "reweighting_draws": item["bootstrap_draws"]})
+    write_csv(FINAL / "source_data/figure_5_factorial.csv", ["contrast", "estimate_pp", "quantile_2_5_pp", "quantile_97_5_pp", "units", "reweighting_draws"], rows)
     fig, ax = plt.subplots(figsize=(10.4, 5.2))
     y = list(range(len(rows)))[::-1]
     for index, (position, row) in enumerate(zip(y, rows, strict=True)):
         color = PURPLE if index == 0 else BLUE
-        ax.errorbar(row["estimate_pp"], position, xerr=[[row["estimate_pp"] - row["ci_low_pp"]], [row["ci_high_pp"] - row["estimate_pp"]]], fmt="D" if index == 0 else "o", mfc="white", mec=color, mew=2, ms=9, ecolor=color, capsize=5, lw=2)
+        ax.errorbar(row["estimate_pp"], position, xerr=[[row["estimate_pp"] - row["quantile_2_5_pp"]], [row["quantile_97_5_pp"] - row["estimate_pp"]]], fmt="D" if index == 0 else "o", mfc="white", mec=color, mew=2, ms=9, ecolor=color, capsize=5, lw=2)
     ax.axvline(0, color=MUTED, linestyle="--", linewidth=1.5)
     ax.set_yticks(y, [row["contrast"] for row in rows])
     ax.set_xlabel("Win-rate contrast (percentage points)", fontsize=11.5)
-    ax.set_title("Admitted fixed-schedule factorial", loc="left", fontsize=19, fontweight="bold", color=INK, pad=14)
+    ax.set_title("Admitted fixed-battery factorial description", loc="left", fontsize=19, fontweight="bold", color=INK, pad=14)
     ax.grid(axis="x", color=GRID, linewidth=1)
     ax.set_axisbelow(True)
     ax.spines[["top", "right"]].set_visible(False)
-    ax.text(0, -0.22, "2,000 seed-condition units; intervals describe paired resampling on the frozen schedule, not equivalence.", transform=ax.transAxes, color=MUTED, fontsize=10.2)
+    ax.text(0, -0.22, "2,000 seed-condition units; bars are stratified paired-unit reweighting quantiles, not confidence intervals.", transform=ax.transAxes, color=MUTED, fontsize=10.2)
     return save_figure(fig, "figure_5_factorial")
 
 
@@ -654,7 +717,9 @@ Prior area & Established contribution & Role here \\
 Common random numbers & Conditions for covariance and variance reduction; synchronization depends on model structure and event timing \cite{glasserman1992crn} & Motivates separating a matched integer from an evidenced coupling. \\
 Streams and substreams & Organized independent replications and synchronized streams \cite{lecuyer2002streams} & White-box design option; stream labels alone do not prove semantic assignment. \\
 Paired-seed evaluation & Precision can improve when seed-level outcomes are favorably correlated \cite{sharma2025pairedseeds} & Supports pairing when its implemented relationship is validated. \\
-Event-keyed randomness & Stable event keys prevent draw shifts within a declared event ontology \cite{buffalo2026eventkeyed} & Implemented in the synthetic repair; unavailable inside the restricted engine. \\
+Event-keyed and counter-based randomness & Stable event keys prevent draw shifts within a declared event ontology; counter-based generators provide random access \cite{buffalo2026eventkeyed,salmon2011parallel} & Implemented only in the synthetic repair; unavailable inside the restricted engine. \\
+Agent evidence records and deterministic workflow tests & Rollout records preserve views, reporting rules, and drops; evaluation contracts turn workflow changes into auditable tests \cite{masters2026rolloutcards,anand2026aeval} & Complementary evidence preservation and testing; neither validates paired stochastic coupling or admits a statistical claim class. \\
+Trace-contract assurance & Message--Action Traces support contracts, replay, perturbation, localization, and governance \cite{paduraru2026traceassurance} & Closest trace framework; it does not distinguish identical-arm repeatability from cross-arm event alignment or suppress paired inference. \\
 Reproducibility and RL evaluation & Variation, units, estimation, and transparent reporting are essential \cite{bouthillier2019reproducible,patterson2024empirical,agarwal2021statistical,pineau2021reproducibility} & Supplies the broader empirical-design boundary. \\
 Software and simulation testing & A/A, metamorphic relations, and verification/validation test implementations and models \cite{kohavi2010aa,lin2020exploratorymt,raunak2021metamorphic,sargent2013verification} & Informs trace invariants and fail-closed conformance checks. \\
 Work versus time budgets & Search time allocation is established prior art \cite{baier2016timemanagement} & Justifies auditing clock-bounded search without claiming its invention. \\
@@ -676,34 +741,34 @@ Stage & Evidence & Permitted statement & Failure action \\
 4 Identical-arm parity & Separate A/A executions compared through the digest and byte count of the recorded trace projection & The compared fields repeat on exercised A/A trajectories. & Suppress the affected paired comparison. \\
 5 Repeat/worker parity & Fresh repeats, worker counts, enqueue orders, and process lifecycles & Within-arm traces repeat in tested contexts. & Freeze a passing context or model run variation. \\
 6 Source audit & Bounded Python source-pattern scan; binary internals remain unassessed & Candidate mechanisms and the uninspected boundary are recorded. & Control, dynamically test, or narrow the estimand and wording. \\
-7 Event alignment & Stable event identifiers and equal values for shared exogenous events & Event-aligned coupling for the logged ontology. & Retain at most bounded seed-matched wording. \\
-8 Statistical admission & Frozen map from gates to estimand, unit, uncertainty, population, and wording & Only the prespecified supported claim class. & Admit, downgrade, or suppress automatically. \\
+7 Event alignment & Stable event identifiers and equal values for shared exogenous events & Event-aligned coupling for the logged ontology. & Retain at most bounded descriptive seed-indexed wording. \\
+8 Statistical admission & Frozen map from gates to estimand, unit, descriptive summary or justified uncertainty procedure, target, and wording & Level 6 permits a fixed-battery descriptive schedule-indexed contrast and empirical reweighting only; inferential pairing requires an additional sampling or randomization basis. & Admit, downgrade, or suppress automatically. \\
 \bottomrule
 \end{tabularx}
 \end{table*}
 """,
         "table_3_prospective_results.tex": f"""\\begin{{table*}}[t]
-\\caption{{Prospective validation results. Trace-digest fields were captured for preflight and stress executions but not for factorial outcome rows.}}
+\\caption{{Prospective validation results. Trace-projection digest and byte-count fields were captured for preflight and stress executions but not for factorial outcome rows.}}
 \\label{{tab:prospective-results}}
 \\footnotesize
 \\begin{{tabularx}}{{\\linewidth}}{{>{{\\raggedright\\arraybackslash}}p{{0.18\\linewidth}}>{{\\centering\\arraybackslash}}p{{0.10\\linewidth}}>{{\\centering\\arraybackslash}}p{{0.09\\linewidth}}>{{\\centering\\arraybackslash}}p{{0.15\\linewidth}}>{{\\centering\\arraybackslash}}p{{0.12\\linewidth}}>{{\\raggedright\\arraybackslash}}X}}
 \\toprule
-Stage & Units/clusters & Executions & Trace-digest disagreement & Outcome disagreement & Admission \\\\
+Stage & Units/clusters & Executions & Trace-record disagreement & Outcome disagreement & Admission \\\\
 \\midrule
-Deterministic preflight & {payloads['preflight']['trajectory_units']:,} & {payloads['preflight']['executions']:,} & 0 & 0 & Admit factorial acquisition for the frozen five-opponent scope. \\\\
+Deterministic preflight & {payloads['preflight']['trajectory_units']:,} & {payloads['preflight']['executions']:,} & 0 & 0 & Qualify acquisition for the newly frozen five-context scope; later-seed transfer remains an assumption. \\\\
 Timed-search stress & {stress['clusters']} & {stress['executions']} & {stress['trace_disagreement_clusters']} & {stress['outcome_disagreement_clusters']} & Reject exact repeatability for at least one exercised seed condition. \\\\
-Factorial repeated control & {factorial['units']:,} per cell & {factorial['games']:,} games & --- & {factorial['control_mismatch_units']} & Admit bounded seed-matched contrasts from the captured record; Level 7 remains unavailable. \\\\
+Factorial repeated control & {factorial['units']:,} per cell & {factorial['games']:,} games & --- & {factorial['control_mismatch_units']} & Admit a fixed-battery descriptive schedule-indexed contrast plus reweighting sensitivity; no inferential or Level-7 claim. \\\\
 \\bottomrule
 \\end{{tabularx}}
 \\end{{table*}}
 """,
         "table_4_factorial.tex": r"""\begin{table}[t]
-\caption{Admitted factorial contrasts. Values are percentage-point win-rate differences with 95\% paired-resampling intervals.}
+\caption{Admitted fixed-battery factorial contrasts. Values are percentage-point win-rate differences with the 2.5th and 97.5th percentiles of the frozen stratified paired-unit reweighting distribution; these are not confidence intervals.}
 \label{tab:factorial}
 \small
 \begin{tabularx}{\columnwidth}{>{\raggedright\arraybackslash}Xrrr}
 \toprule
-Contrast & Estimate & Low & High \\
+Contrast & Estimate & 2.5th & 97.5th \\
 \midrule
 Total intervention & \PrimaryEstimatePP & \PrimaryLowPP & \PrimaryHighPP \\
 Representation & \RepresentationEstimatePP & \RepresentationLowPP & \RepresentationHighPP \\
@@ -720,6 +785,93 @@ Interaction & \InteractionEstimatePP & \InteractionLowPP & \InteractionHighPP \\
         path.write_text(content, encoding="utf-8")
         outputs.append(path)
     return outputs
+
+
+def write_cover_letter(payloads: dict[str, dict[str, Any]]) -> Path:
+    """Generate central cover-letter counts from the validated evidence objects."""
+    preflight = payloads["preflight"]
+    stress = payloads["stress"]
+    factorial = payloads["factorial"]
+    content = f"""# Draft cover letter — do not submit
+
+**Blocked pending the human actions in `HUMAN_ACTIONS.md`, especially release
+ownership, redistribution authority, licensing, author approval, and archive
+metadata.**
+
+Dear Editors,
+
+We seek consideration of “A Protocol for Validating Pairing Assumptions in
+Seed-Matched Evaluations of Black-Box Game-Playing Agents” as an **APS Open
+Science Protocol Article**.
+
+Recording the same seed in two agent evaluations establishes a matched
+schedule; it does not establish repeatable execution or semantic alignment of
+random events after the agents' paths diverge. The article presents an
+executable, fail-closed protocol that verifies artifacts and boundary seeds,
+checks schedule parity, compares an identical-arm trace projection across
+execution contexts, audits bounded stochastic sources, and maps gate evidence
+to the statistical claim that may be admitted, downgraded, or suppressed.
+
+The technical contribution is the operational integration of established
+common-random-number theory, structured random streams, trace preservation,
+deterministic testing, and event-keyed randomness into a black-box pairing
+validation workflow. A self-contained conformance suite exercises clean,
+draw-shift, clock-budget, process-state, and seed-conversion modes, rejects
+schema or manifest tampering, and supplies a machine-readable admission map
+with exhaustive tests for result independence, prerequisite monotonicity,
+failure dominance, projection scoping, determinism, unknown-state
+fail-closedness, and claim-class ordering. This generic executable taxonomy is a
+post-acquisition formalization; the prospectively frozen experiment-specific
+rules remain authoritative for the completed case study.
+
+The case study found zero required mismatches across
+{preflight['executions']:,} deterministic executions, while
+{stress['trace_disagreement_clusters']} of {stress['clusters']} fixed
+timed-search seed-condition clusters disagreed on the complete recorded trace
+projection, with pronounced context heterogeneity.
+The frozen rule suppressed an apparently favorable historical comparison after
+its repeated-control gate failed. For a later {factorial['units']:,}-unit-per-cell
+comparison, Git history places the rule and acquisition-gate commit before the
+retained result artifacts; changing the outcome payload while holding gate
+evidence fixed leaves admission unchanged. Its five deterministic contexts were
+a newly frozen, audit-informed target. The qualification preflight used a
+different seed range, and candidate factorial rows contain no trace digests.
+The admitted output is therefore a fixed-battery descriptive contrast with
+empirical reweighting sensitivity, not a confidence interval, p-value, or
+population-effect claim.
+
+This contribution is narrower than Rollout Cards, trace-assurance frameworks,
+AEVAL, and event-keyed randomness individually: those works provide evidence
+records, trace contracts, deterministic workflow tests, or white-box stochastic
+repair, whereas this article connects within-arm repeatability and cross-arm
+alignment evidence to automatic admission or suppression of paired statistical
+wording in a restricted black-box setting.
+
+The engine-independent computational package contains the synthetic implementation,
+machine-readable admission rules, worked example, tests, processed diagnostics,
+analysis code, protocols, source data for generated figures, and integrity
+manifests. It excludes the tournament engine and source, engine binaries,
+third-party opponent packages, game assets and metadata, policy packages and
+weights, private replay observations, and raw restricted traces.
+Ownership, redistribution authority, an approved license, archival release,
+and DOI are not established; the package therefore must not be described or
+distributed as public software.
+
+OpenAI Codex, using a GPT-5-family model whose exact deployed snapshot was not
+exposed, assisted under human direction with literature synthesis, protocol
+reasoning, code and test generation, statistical checking, figure generation,
+drafting, and adversarial review. The manuscript and machine-readable log state
+the verification boundary; no AI system is an author, and no generative-image
+system was used.
+
+Sincerely,
+
+**[Corresponding-author metadata requires human completion; see
+`HUMAN_ACTIONS.md`.]**
+"""
+    output = FINAL / "cover_letter.md"
+    output.write_text(content, encoding="utf-8")
+    return output
 
 
 def copy_source_summaries(payloads: dict[str, dict[str, Any]]) -> list[Path]:
@@ -792,13 +944,39 @@ def copy_source_summaries(payloads: dict[str, dict[str, Any]]) -> list[Path]:
         for key in (
             "schema_version", "analysis_id", "status", "protocol_commit",
             "clusters", "executions", "trace_disagreement_clusters",
-            "trace_disagreement", "outcome_disagreement_clusters",
+            "outcome_disagreement_clusters",
             "decision_count_disagreement_clusters", "error_disagreement_clusters",
-            "policy_error_present_clusters", "first_divergence_actor_counts",
-            "bootstrap_note",
-            "pevl_level_6_boundary",
+            "policy_error_present_clusters",
         )
     }
+    processed_stress["pevl_level_6_boundary"] = (
+        "recorded trace mismatches and bounded source inspection identify "
+        "plausible mechanisms in the exercised executions; no retained evidence "
+        "supports an earliest-divergence localization or a unique causal source"
+    )
+    def reweighting_view(summary: dict[str, Any], role: str) -> dict[str, Any]:
+        view = {
+            "estimate": summary["estimate"],
+            "quantiles_2_5_97_5": summary["bootstrap_95_ci"],
+            "reweighting_draws": summary["bootstrap_draws"],
+            "reweighting_seed": summary["bootstrap_seed"],
+            "role": role,
+            "inferential_status": (
+                "descriptive empirical reweighting of a fixed battery; "
+                "not a confidence interval or population inference"
+            ),
+        }
+        if "clusters" in summary:
+            view["clusters"] = summary["clusters"]
+        return view
+
+    processed_stress["fixed_battery_scope"] = (
+        "four fixed timed-search opponent-by-order strata; 50 clusters per stratum"
+    )
+    processed_stress["trace_disagreement"] = reweighting_view(
+        stress["trace_disagreement"],
+        "prespecified pooled whole-cluster reweighting; context composition may vary",
+    )
     processed_stress["cluster_rows"] = [
         {
             "context": stress_contexts[str(row["opponent"])],
@@ -812,9 +990,40 @@ def copy_source_summaries(payloads: dict[str, dict[str, Any]]) -> list[Path]:
         for row in stress["cluster_rows"]
     ]
     processed_stress["strata"] = {
-        f"{stress_contexts[name]}/{order}": value
+        f"{stress_contexts[name]}/{order}": {
+            **{
+                field: field_value
+                for field, field_value in value.items()
+                if field != "trace_disagreement"
+            },
+            "trace_disagreement": reweighting_view(
+                value["trace_disagreement"],
+                "stratum-specific whole-cluster empirical reweighting",
+            ),
+        }
         for key, value in stress["strata"].items()
         for name, order in [key.split("/", 1)]
+    }
+    fixed_composition = stress_fixed_composition_reweighting(stress)
+    processed_stress["fixed_composition_reweighting_sensitivity"] = {
+        "estimate": fixed_composition["estimate"],
+        "quantiles_2_5_97_5": fixed_composition["quantiles_2_5_97_5"],
+        "reweighting_draws": fixed_composition["draws"],
+        "reweighting_seed": fixed_composition["seed"],
+        "stratum_weighting": fixed_composition["stratum_weighting"],
+        "reweighting_unit": fixed_composition["reweighting_unit"],
+        "role": fixed_composition["role"],
+        "inferential_status": (
+            "post-acquisition descriptive sensitivity; not a confidence "
+            "interval or population inference"
+        ),
+        "stratum_disagreement_counts": {
+            f"{stress_contexts[name]}/{order}": count
+            for key, count in fixed_composition[
+                "stratum_disagreement_counts"
+            ].items()
+            for name, order in [key.split("/", 1)]
+        },
     }
     stress_path = FINAL / "source_data/processed_stress.json"
     write_json(stress_path, processed_stress)
@@ -825,10 +1034,50 @@ def copy_source_summaries(payloads: dict[str, dict[str, Any]]) -> list[Path]:
         key: factorial[key]
         for key in (
             "schema_version", "analysis_id", "status", "protocol_commit",
-            "admission_decision", "target_population", "units", "games",
-            "control_mismatch_units", "cell_win_rates", "contrasts",
-            "simple_effects_descriptive", "primary_mcnemar", "pevl_levels",
+            "admission_decision", "units", "games",
+            "control_mismatch_units", "cell_win_rates",
+            "simple_effects_descriptive",
         )
+    }
+    processed_factorial["fixed_battery_target"] = factorial["target_population"]
+    processed_factorial["contrasts"] = {
+        name: {
+            "estimate": value["estimate"],
+            "quantiles_2_5_97_5": value["bootstrap_95_ci"],
+            "reweighting_draws": value["bootstrap_draws"],
+            "reweighting_seed": value["bootstrap_seed"],
+            "reweighting": (
+                "stratified paired-unit empirical reweighting within each of "
+                "ten fixed opponent-by-order strata"
+            ),
+            "inferential_status": (
+                "fixed-battery descriptive sensitivity; not a confidence "
+                "interval, hypothesis test, or population effect"
+            ),
+        }
+        for name, value in factorial["contrasts"].items()
+    }
+    processed_factorial["qualification_transfer"] = (
+        "preflight and factorial used different seed ranges; candidate factorial "
+        "rows contain no trace digests, so transfer is a bounded assumption"
+    )
+    processed_factorial["pevl_levels"] = {
+        "levels_1_to_5": (
+            "qualification supported only for frozen artifacts, schedules, "
+            "trace projection, and exercised preflight contexts"
+        ),
+        "level_6": (
+            "admits only a fixed-battery descriptive seed-indexed contrast and "
+            "empirical reweighting sensitivity"
+        ),
+        "level_7": (
+            "not established because the restricted engine exposes no semantic "
+            "event identifiers or event-keyed streams"
+        ),
+        "level_8": (
+            "no confidence interval, hypothesis test, population effect, "
+            "counterfactual, or full-CRN wording admitted"
+        ),
     }
     factorial_path = FINAL / "source_data/processed_factorial.json"
     write_json(factorial_path, processed_factorial)
@@ -905,6 +1154,7 @@ def main() -> int:
     generated.extend(copy_source_summaries(payloads))
     generated.append(write_macros(payloads))
     generated.extend(write_tables(payloads))
+    generated.append(write_cover_letter(payloads))
     generated.extend(figure_distinctions())
     generated.extend(figure_admission_flow())
     generated.extend(figure_synthetic(payloads["synthetic"]))

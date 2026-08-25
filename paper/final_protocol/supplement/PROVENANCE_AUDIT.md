@@ -9,7 +9,7 @@ conversation summaries.
 
 - Source branch: `paper/aps-open-science-202608`.
 - Audited source commit: `23b91060cb38d2ece0f6569f5d5d0b8ee361d3b6`.
-- Final working branch: `paper/apsos-trace-protocol-final-202608`.
+- Final working branch: `paper/apsos-final-desk-gate-202608`.
 - Frozen protocol commit:
   `803257f102232763fc88d28c14b668f9b62eb277`.
 - Frozen protocol SHA-256:

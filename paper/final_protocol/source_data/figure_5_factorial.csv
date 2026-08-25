@@ -1,4 +1,4 @@
-contrast,estimate_pp,ci_low_pp,ci_high_pp,units,bootstrap_draws
+contrast,estimate_pp,quantile_2_5_pp,quantile_97_5_pp,units,reweighting_draws
 Total intervention,0.5499999999999999,-2.049999999999999,3.1499999999999995,2000,100000
 Representation contrast,0.95,-1.075000000000002,2.9999999999999982,2000,100000
 Training contrast,-0.4,-2.0250000000000012,1.2499999999999993,2000,100000

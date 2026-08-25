@@ -1,6 +1,5 @@
 {
   "analysis_id": "timed_search_stress",
-  "bootstrap_note": "Each seed/order condition is one resampling cluster containing all four serial/parallel and forward/reverse executions.",
   "cluster_rows": [
     {
       "actual_order": "first",
@@ -2005,14 +2004,32 @@
   ],
   "clusters": 200,
   "decision_count_disagreement_clusters": 93,
-  "earliest_divergence_boundary": "All localized earliest differences occurred on recorded opponent-action events; this does not establish a unique cause.",
+  "earliest_divergence_localization_included": false,
+  "earliest_divergence_localization_reason": "The review package contains no raw trace lines from which to verify an earliest event or actor.",
   "error_disagreement_clusters": 0,
   "executions": 800,
-  "first_divergence_actor_counts": {
-    "opponent": 99
+  "fixed_battery_scope": "four fixed timed-search opponent-by-order strata; 50 clusters per stratum",
+  "fixed_composition_reweighting_sensitivity": {
+    "estimate": 0.495,
+    "inferential_status": "post-acquisition descriptive sensitivity; not a confidence interval or population inference",
+    "quantiles_2_5_97_5": [
+      0.45999999999999996,
+      0.53
+    ],
+    "reweighting_draws": 100000,
+    "reweighting_seed": 2026083118,
+    "reweighting_unit": "whole seed-condition cluster retaining all four profiles",
+    "role": "post-acquisition fixed-composition sensitivity to the frozen pooled reweighting",
+    "stratum_disagreement_counts": {
+      "timed-search-A/first": 44,
+      "timed-search-A/second": 48,
+      "timed-search-B/first": 4,
+      "timed-search-B/second": 3
+    },
+    "stratum_weighting": "equal with fixed 50-cluster composition"
   },
   "outcome_disagreement_clusters": 47,
-  "pevl_level_6_boundary": "Trace localization and source inspection identify plausible nondeterminism mechanisms in the exercised executions; they do not prove a unique causal source.",
+  "pevl_level_6_boundary": "recorded trace mismatches and bounded source inspection identify plausible mechanisms in the exercised executions; no retained evidence supports an earliest-divergence localization or a unique causal source",
   "policy_error_present_clusters": 0,
   "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",
   "schema_version": 1,
@@ -2024,14 +2041,16 @@
       "outcome_disagreement_count": 19,
       "policy_error_present_count": 0,
       "trace_disagreement": {
-        "bootstrap_95_ci": [
+        "clusters": 50,
+        "estimate": 0.88,
+        "inferential_status": "descriptive empirical reweighting of a fixed battery; not a confidence interval or population inference",
+        "quantiles_2_5_97_5": [
           0.78,
           0.96
         ],
-        "bootstrap_draws": 100000,
-        "bootstrap_seed": 2026083118,
-        "clusters": 50,
-        "estimate": 0.88
+        "reweighting_draws": 100000,
+        "reweighting_seed": 2026083118,
+        "role": "stratum-specific whole-cluster empirical reweighting"
       }
     },
     "timed-search-A/second": {
@@ -2040,14 +2059,16 @@
       "outcome_disagreement_count": 28,
       "policy_error_present_count": 0,
       "trace_disagreement": {
-        "bootstrap_95_ci": [
+        "clusters": 50,
+        "estimate": 0.96,
+        "inferential_status": "descriptive empirical reweighting of a fixed battery; not a confidence interval or population inference",
+        "quantiles_2_5_97_5": [
           0.9,
           1.0
         ],
-        "bootstrap_draws": 100000,
-        "bootstrap_seed": 2026083118,
-        "clusters": 50,
-        "estimate": 0.96
+        "reweighting_draws": 100000,
+        "reweighting_seed": 2026083118,
+        "role": "stratum-specific whole-cluster empirical reweighting"
       }
     },
     "timed-search-B/first": {
@@ -2056,14 +2077,16 @@
       "outcome_disagreement_count": 0,
       "policy_error_present_count": 0,
       "trace_disagreement": {
-        "bootstrap_95_ci": [
+        "clusters": 50,
+        "estimate": 0.08,
+        "inferential_status": "descriptive empirical reweighting of a fixed battery; not a confidence interval or population inference",
+        "quantiles_2_5_97_5": [
           0.02,
           0.16
         ],
-        "bootstrap_draws": 100000,
-        "bootstrap_seed": 2026083118,
-        "clusters": 50,
-        "estimate": 0.08
+        "reweighting_draws": 100000,
+        "reweighting_seed": 2026083118,
+        "role": "stratum-specific whole-cluster empirical reweighting"
       }
     },
     "timed-search-B/second": {
@@ -2072,26 +2095,30 @@
       "outcome_disagreement_count": 0,
       "policy_error_present_count": 0,
       "trace_disagreement": {
-        "bootstrap_95_ci": [
+        "clusters": 50,
+        "estimate": 0.06,
+        "inferential_status": "descriptive empirical reweighting of a fixed battery; not a confidence interval or population inference",
+        "quantiles_2_5_97_5": [
           0.0,
           0.14
         ],
-        "bootstrap_draws": 100000,
-        "bootstrap_seed": 2026083118,
-        "clusters": 50,
-        "estimate": 0.06
+        "reweighting_draws": 100000,
+        "reweighting_seed": 2026083118,
+        "role": "stratum-specific whole-cluster empirical reweighting"
       }
     }
   },
   "trace_disagreement": {
-    "bootstrap_95_ci": [
+    "clusters": 200,
+    "estimate": 0.495,
+    "inferential_status": "descriptive empirical reweighting of a fixed battery; not a confidence interval or population inference",
+    "quantiles_2_5_97_5": [
       0.425,
       0.565
     ],
-    "bootstrap_draws": 100000,
-    "bootstrap_seed": 2026083118,
-    "clusters": 200,
-    "estimate": 0.495
+    "reweighting_draws": 100000,
+    "reweighting_seed": 2026083118,
+    "role": "prespecified pooled whole-cluster reweighting; context composition may vary"
   },
   "trace_disagreement_clusters": 99,
   "trace_payloads_included": false

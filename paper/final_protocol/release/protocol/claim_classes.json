@@ -1,0 +1,122 @@
+{
+  "claim_classes": {
+    "descriptive_unmatched": {
+      "analysis_unit": "Separate arm-specific observation; no cross-arm pair is asserted.",
+      "decision_status": "downgrade",
+      "estimand": "Arm-specific empirical summaries with no seed-matched or paired interpretation.",
+      "failure_action": "Report arms separately or redesign the seed boundary and schedule; suppress every paired contrast.",
+      "forbidden_wording": [
+        "paired comparison",
+        "schedule matched",
+        "execution repeatable",
+        "seed-matched effect",
+        "event aligned"
+      ],
+      "label": "descriptive unmatched",
+      "required_wording": "The arms may be described separately; this evidence does not admit a schedule-matched or paired comparison.",
+      "strength": 1,
+      "uncertainty_procedure": "Arm-wise uncertainty that preserves the acquisition structure; no paired procedure."
+    },
+    "event_aligned": {
+      "analysis_unit": "Event-aligned trajectory pair within the declared semantic ontology and schedule stratum.",
+      "decision_status": "admit",
+      "estimand": "A fixed-battery descriptive event-aligned contrast within the declared schedule and semantic event ontology.",
+      "failure_action": "Preserve the ontology, event keys, projection, and frozen analysis unit; any drift requires a new admission decision, and inferential pairing requires a separate justified design.",
+      "forbidden_wording": [
+        "alignment outside the declared event ontology",
+        "general common-random-number guarantee",
+        "population generalization beyond the frozen design",
+        "causal effect without the design assumptions",
+        "confidence interval without a separately justified inferential design",
+        "hypothesis test without a separately justified inferential design"
+      ],
+      "label": "event aligned",
+      "required_wording": "Within the declared event ontology, shared exogenous events were aligned and a fixed-battery descriptive contrast is admitted; this does not by itself establish inferential pairing, a confidence interval, a hypothesis test, or a population effect. Repeatability is asserted only for recorded trace projection {projection_id}@{projection_version} with fields [{projection_fields}].",
+      "strength": 5,
+      "uncertainty_procedure": "Empirical reweighting of the declared fixed battery may be reported as descriptive sensitivity; it is not a confidence interval, hypothesis test, or population uncertainty statement."
+    },
+    "execution_repeatable": {
+      "analysis_unit": "Seed-condition cluster containing all prespecified within-arm execution profiles.",
+      "decision_status": "downgrade",
+      "estimand": "Exact-repeatability diagnostics for the declared recorded trace projection on the exercised schedule.",
+      "failure_action": "Do not use paired outcome inference; complete and pass the stochastic-source audit before seeking bounded seed-matched admission.",
+      "forbidden_wording": [
+        "cross-arm event alignment",
+        "paired treatment effect",
+        "fully coupled counterfactual",
+        "general common-random-number guarantee",
+        "repeatability of unrecorded state"
+      ],
+      "label": "execution repeatable",
+      "required_wording": "Execution was repeatable across the declared within-arm profiles only for recorded trace projection {projection_id}@{projection_version} with fields [{projection_fields}]; this does not establish cross-arm event alignment or admit a paired outcome contrast.",
+      "strength": 3,
+      "uncertainty_procedure": "Report exact mismatch indicators or cluster-level disagreement summaries for the exercised schedule; no paired outcome procedure."
+    },
+    "schedule_matched": {
+      "analysis_unit": "Recorded schedule row within each arm; no execution-level pair is asserted.",
+      "decision_status": "downgrade",
+      "estimand": "A descriptive contrast indexed by common recorded schedule fields, without execution-pair interpretation.",
+      "failure_action": "Suppress planned paired contrasts; repair the first blocked parity or repeatability gate and reacquire if required by the frozen protocol.",
+      "forbidden_wording": [
+        "execution repeatable",
+        "paired treatment effect",
+        "shared random events",
+        "event aligned",
+        "common-random-number guarantee"
+      ],
+      "label": "schedule matched",
+      "required_wording": "The declared schedule fields matched across arms; schedule matching alone does not establish repeatable execution, paired randomness, or event alignment.",
+      "strength": 2,
+      "uncertainty_procedure": "Use an unpaired or purely descriptive procedure justified independently of shared execution; do not use a paired procedure."
+    },
+    "seed_matched_bounded": {
+      "analysis_unit": "Seed-indexed unit within each fixed schedule stratum, with repeated profiles retained as one cluster where applicable.",
+      "decision_status": "admit",
+      "estimand": "The fixed-battery descriptive seed-indexed contrast specified by the authoritative frozen analysis plan.",
+      "failure_action": "Use only fixed-battery descriptive wording and empirical reweighting sensitivity; suppress the contrast if any experiment-specific invalidator or required gate fails.",
+      "forbidden_wording": [
+        "cross-arm event alignment",
+        "fully coupled counterfactual",
+        "causally coupled random events",
+        "general common-random-number guarantee",
+        "repeatability of unrecorded state",
+        "population effect",
+        "inferential paired effect",
+        "confidence interval",
+        "hypothesis test"
+      ],
+      "label": "seed matched, bounded",
+      "required_wording": "Within the frozen schedule and validated execution contexts, a fixed-battery descriptive seed-indexed contrast is admitted with empirical reweighting sensitivity only; inferential pairing, confidence intervals, hypothesis tests, population effects, and semantic event alignment are not established. Repeatability is asserted only for recorded trace projection {projection_id}@{projection_version} with fields [{projection_fields}].",
+      "strength": 4,
+      "uncertainty_procedure": "Empirical whole-unit reweighting of the declared fixed battery as descriptive sensitivity only; not a confidence interval, hypothesis test, or population uncertainty statement."
+    },
+    "suppress": {
+      "analysis_unit": "None admitted.",
+      "decision_status": "suppress",
+      "estimand": "None admitted from this evidence record.",
+      "failure_action": "Stop comparative interpretation, preserve the invalid record, repair the evidence chain, and rerun admission without inspecting result favorability.",
+      "forbidden_wording": [
+        "comparative effect",
+        "paired comparison",
+        "schedule matched",
+        "execution repeatable",
+        "seed matched",
+        "event aligned"
+      ],
+      "label": "suppress",
+      "required_wording": "No comparative or repeatability claim is admitted from this evidence record.",
+      "strength": 0,
+      "uncertainty_procedure": "None; do not compute or report a comparative inferential procedure as admitted."
+    }
+  },
+  "ordering": [
+    "suppress",
+    "descriptive_unmatched",
+    "schedule_matched",
+    "execution_repeatable",
+    "seed_matched_bounded",
+    "event_aligned"
+  ],
+  "protocol_id": "pevl-admission-formalization-2026-08",
+  "schema_version": "claim-classes-1.0.0"
+}

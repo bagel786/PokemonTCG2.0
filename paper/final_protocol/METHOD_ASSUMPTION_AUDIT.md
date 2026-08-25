@@ -1,8 +1,8 @@
 # Method and assumption audit
 
 Audit scope: the methods described in `main.tex` for the Protocol Article
-“A Trace-Based Validation Protocol for Seed-Matched Evaluations of Black-Box
-Game-Playing Agents.” This is an explanation and scope audit, not an additional
+“A Protocol for Validating Pairing Assumptions in Seed-Matched Evaluations of
+Black-Box Game-Playing Agents.” This is an explanation and scope audit, not an additional
 analysis. The source-of-truth order is raw rows, frozen protocol, validated
 analyzer output, executable code, hashes, generated macros, manuscript prose,
 historical reports, and conversation summaries.
@@ -28,6 +28,9 @@ historical reports, and conversation summaries.
 - **Does not support:** A hash match does not establish behavioral validity,
   repeatability, event alignment, correctness, ownership, or redistribution
   permission.
+- **human_verified:** PENDING — a human author must confirm that the inventory
+  and hashing rule cover the exact bytes executed; this remains a submission
+  blocker until signed.
 
 ## M02 — Boundary-seed and namespace verification
 
@@ -49,6 +52,9 @@ historical reports, and conversation summaries.
   boundary value.
 - **Does not support:** The recorded boundary value is not evidence of how the
   black-box engine internally consumes, splits, or ignores randomness.
+- **human_verified:** PENDING — a human author must confirm the boundary is the
+  last observable conversion point and the collision/overlap rules match the
+  frozen schedule; this remains a submission blocker until signed.
 
 ## M03 — Row-level schedule parity
 
@@ -67,6 +73,9 @@ historical reports, and conversation summaries.
   field, policy error, or silent row deletion.
 - **Does not support:** Schedule parity establishes an attempted match, not
   repeatable execution or semantic alignment of random events.
+- **human_verified:** PENDING — a human author must confirm the required pairing
+  fields and complete row inventory; this remains a submission blocker until
+  signed.
 
 ## M04 — Identical-arm recorded-trace test (A/A adaptation)
 
@@ -83,14 +92,17 @@ historical reports, and conversation summaries.
 - **Implementation:** Stage 4 compares, in increasing strength, terminal outcome,
   errors, decision count, and the SHA-256 digest plus byte count of the ordered
   public-observation-hash, acting-side, selected-action, and terminal stream.
-- **Output:** Field-level parity, trace-projection parity, and any localized
-  earliest recorded difference.
+- **Output:** Field-level parity, trace-projection parity, and profile-specific
+  mismatch diagnostics supported by the retained evidence.
 - **Invalidating result:** One required mismatch on the exercised schedule, a
   noncanonical serializer, or an omitted field that is material to the claim.
 - **Does not support:** A pass does not establish equality of raw observations,
   hidden state, opaque search state, semantic random events, or cross-arm
   counterfactual coupling. “Complete” means complete only within the declared
   recorded projection.
+- **human_verified:** PENDING — a human author must be able to name every
+  included and excluded projection field and defend the serializer; this
+  remains a submission blocker until signed.
 
 ## M05 — Repeat, worker, and enqueue-context testing
 
@@ -112,6 +124,9 @@ historical reports, and conversation summaries.
 - **Does not support:** Profiles are fixed execution contexts, not random samples
   of machines or loads. Repeats inside one seed cluster are dependent diagnostic
   measurements, not independent observations.
+- **human_verified:** PENDING — a human author must confirm profile launch
+  semantics, cluster membership, and the dependence interpretation; this
+  remains a submission blocker until signed.
 
 ## M06 — Stochastic-source audit
 
@@ -145,6 +160,9 @@ historical reports, and conversation summaries.
   internals, observe runtime scheduling, prove that a pattern executed or caused
   a mismatch, or prove determinism from an empty category. It does not cover
   hardware-sensitive numerics or external state.
+- **human_verified:** PENDING — a human author must confirm the scanned source
+  scope and explain why hits are candidates rather than causes; this remains a
+  submission blocker until signed.
 
 ## M07 — Semantic event-alignment check
 
@@ -168,8 +186,12 @@ historical reports, and conversation summaries.
 - **Does not support:** The restricted engine exposes neither semantic event
   identifiers nor event-keyed streams, so it cannot establish this level. A
   synthetic pass is confined to the fixture’s ontology and distribution.
+- **human_verified:** PENDING — a human author must confirm the ontology and
+  dependence assumptions for any event-alignment claim and acknowledge that the
+  restricted case does not pass this method; this remains a submission blocker
+  until signed.
 
-## M08 — Prospectively frozen claim-admission map
+## M08 — Frozen claim map and executable admission formalization
 
 - **Problem solved:** Prevents favorable outcomes from being used to waive
   missing validation evidence.
@@ -177,20 +199,42 @@ historical reports, and conversation summaries.
   followed by selective exclusions or stronger post hoc wording.
 - **Analysis unit:** One proposed statistical claim and the complete set of gates
   required for its prespecified estimand.
-- **Assumptions:** The map, protocol identifier, sample sizes, required strata,
-  estimand, and failure actions were fixed before result inspection; the
-  analyzer implements that map exactly.
+- **Assumptions:** The experiment-specific map, protocol identifier, sample
+  sizes, required strata, descriptive contrast, and failure actions are recorded
+  in a Git commit that precedes the retained result artifacts. Git history does
+  not prove when a human inspected uncommitted files. The generic JSON rule
+  bundle is a post-acquisition executable formalization and must remain
+  subordinate to those frozen rules. Its evidence-bound `admit` path derives
+  gate states from validated evidence; a separate explicitly trusted-state
+  classifier accepts caller-supplied states for formal conformance checks. Rule
+  evaluation may receive only gate states and the declared trace projection,
+  never outcomes, estimates, reweighting quantiles, p-values, or result
+  favorability.
 - **Implementation:** Stage 8 admits bounded wording, downgrades interpretation,
   or suppresses the comparison; schema, commit, sample-size, stratum, and
-  nonfinite-value checks fail closed.
-- **Output:** An admission status, permitted wording, forbidden wording, and the
-  estimand that remains supportable.
+  nonfinite-value checks fail closed. The executable property suite replaces all
+  result values, weakens each prerequisite, inserts favorable results after
+  failures, removes projection scope, repeats identical evaluations, supplies
+  unknown/malformed/contradictory states, exhaustively enumerates all six states
+  across seven gates, and rejects rule/schema/class tampering.
+- **Output:** A deterministic admission status, ordered permitted claim class,
+  permitted and forbidden wording, contrast, analysis unit, descriptive
+  reweighting rule,
+  first blocking gate, and repair action. The substantive ordering is no
+  stronger than `schedule_matched < execution_repeatable < event_aligned`;
+  weaker descriptive and suppression classes sit below that sequence.
 - **Invalidating result:** Protocol drift, an unsatisfied required gate, an
-  outcome-dependent change, a missing stratum, or analyzer behavior inconsistent
-  with the frozen rule.
+  outcome-dependent change, a missing stratum, property-test or tamper-test
+  failure, or any executable decision inconsistent with the frozen rule.
 - **Does not support:** Admission is not proof that assumptions are universally
   true or that future executions will pass. It cannot turn a schedule-matched
-  estimate into a fully event-aligned counterfactual effect.
+  estimate into inferential pairing, a population effect, or a fully
+  event-aligned counterfactual effect. The later executable bundle is not
+  evidence that its generic taxonomy was prospectively frozen.
+- **human_verified:** PENDING — a human author must confirm the prospective
+  experiment-specific authority, post-acquisition formalization provenance,
+  result-independent input projection, and all seven claimed safety properties;
+  this remains a submission blocker until signed.
 
 ## M09 — Trace-disagreement proportion
 
@@ -201,16 +245,21 @@ historical reports, and conversation summaries.
   mismatch rule.
 - **Analysis unit:** One seed-condition cluster containing all prescribed
   profiles.
-- **Assumptions:** Cluster membership and profile set are frozen; digest equality
-  is computed on the same canonical projection; missing profiles fail rather
-  than disappear.
+- **Assumptions:** Cluster membership and profile set are frozen; equality is
+  computed on the same canonical `(digest, byte_count)` projection record;
+  missing profiles fail rather than disappear.
 - **Implementation:** Equation (1) assigns an indicator of one when more than one
-  profile digest occurs in a cluster and averages over clusters.
+  required profile `(digest, byte_count)` tuple occurs in a cluster and averages
+  over complete clusters. A byte-count-only difference is a disagreement.
 - **Output:** A unitless disagreement proportion plus exact counts.
-- **Invalidating result:** A changed denominator, omitted profile, digest from a
-  different schema, or a cluster split into pseudo-independent pairwise rows.
+- **Invalidating result:** A changed denominator, omitted profile, digest or byte
+  count from a different schema, or a cluster split into pseudo-independent
+  pairwise rows.
 - **Does not support:** The proportion is not prevalence in a population of
   agents, hardware, or workloads and does not identify the cause of disagreement.
+- **human_verified:** PENDING — a human author must confirm the cluster
+  denominator and complete profile set; this remains a submission blocker until
+  signed.
 
 ## M10 — Historical available-record repeated-control audit
 
@@ -234,6 +283,9 @@ historical reports, and conversation summaries.
 - **Does not support:** The audit does not isolate wall-clock timing as the unique
   cause, and a post hoc subset of agreeing contexts does not rescue the frozen
   historical estimand.
+- **human_verified:** PENDING — a human author must confirm the available-record
+  projection, all retained historical units, and the suppression consequence;
+  this remains a submission blocker until signed.
 
 ## M11 — Prospective deterministic trace preflight
 
@@ -244,50 +296,72 @@ historical reports, and conversation summaries.
   trace-bearing gate necessary before collecting the bounded demonstration.
 - **Analysis unit:** One arm–seed-condition unit containing three execution
   trajectories.
-- **Assumptions:** Four arms, five frozen deterministic contexts, both actual
-  orders, 25 seeds per order, two fresh serial profiles, and one eight-worker
-  profile are complete and correctly labeled.
+- **Assumptions:** Four arms, five newly frozen audit-informed deterministic
+  contexts, both actual orders, 25 seeds per order, two fresh serial profiles,
+  and one eight-worker profile are complete and correctly labeled. The five
+  contexts are a new protocol target, not a rescue subset of the historical
+  seven-opponent target.
 - **Implementation:** The analyzer compares digest and byte count of the public-
   observation-hash/action/terminal projection, outcome, errors, and decision
   count across 1,000 units and 3,000 executions.
-- **Output:** Zero mismatches and admission of factorial acquisition for the
-  exact tested scope.
+- **Output:** Zero mismatches and qualification of factorial acquisition for the
+  exact preflight scope.
 - **Invalidating result:** One mismatch, missing job/profile, artifact or protocol
   drift, or an altered schedule.
-- **Does not support:** The pass does not generalize to untested hardware, loads,
+- **Does not support:** The preflight and factorial use different frozen seed
+  ranges, and candidate factorial rows contain no trace digests. Applying the
+  qualification result to those later rows is a bounded transfer assumption
+  about the same identified artifacts and contexts, not direct factorial-row
+  trace evidence. The pass also does not generalize to untested hardware, loads,
   timed-search contexts, hidden state, or cross-arm semantic event alignment.
+- **human_verified:** PENDING — a human author must confirm the frozen preflight
+  inventory and bounded meaning of zero mismatches; this remains a submission
+  blocker until signed.
 
-## M12 — Timed-search stress test and whole-cluster resampling
+## M12 — Timed-search stress test and whole-cluster empirical reweighting
 
 - **Problem solved:** Exercises fixed timed-search contexts under serial/parallel
-  and forward/reverse enqueue profiles and quantifies realized trace-
-  disagreement stability.
+  and forward/reverse enqueue profiles and describes realized trace-disagreement
+  sensitivity under empirical reweighting.
 - **Why needed here:** Timed-search contexts were retained as diagnostics instead
   of being silently removed after historical mismatches.
 - **Analysis unit:** One opponent–order–seed-condition cluster containing four
   execution profiles; 200 clusters and 800 executions total.
 - **Assumptions:** Each cluster contains all four profiles; the 200 realized
-  clusters and their fixed strata are the resampling target; profiles are never
-  resampled independently.
+  clusters are a fixed engineering battery; profiles are never reweighted
+  independently. The frozen pooled procedure treats all 200 clusters as one
+  empirical distribution and can vary the context composition. The
+  fixed-composition calculation is an explicitly post-acquisition,
+  source-driven sensitivity that reweights within each of four fixed strata.
 - **Implementation:** The diagnostic records cluster indicators and uses 100,000
-  whole-cluster resamples under the frozen analysis seed.
-- **Output:** 99/200 trace-projection disagreement clusters (49.5%; empirical 95%
-  interval 42.5%–56.5%), 47 outcome disagreements, 93 decision-count
+  whole-cluster reweighting draws under the frozen pooled analysis seed. The
+  fixed-composition sensitivity preserves 50 clusters per stratum, reweights
+  within stratum, and averages the four stratum means equally.
+- **Output:** 99/200 trace-projection disagreement clusters (49.5%); frozen
+  pooled 2.5th and 97.5th reweighting percentiles 42.5%–56.5%; exact stratum
+  counts 44/50 and 48/50 for Timed-search A/orders 1 and 2 and 4/50 and 3/50
+  for Timed-search B/orders 1 and 2; post-acquisition fixed-composition
+  sensitivity percentiles 46%–53%; 47 outcome disagreements, 93 decision-count
   disagreements, and zero error-record disagreements.
-- **Invalidating result:** Missing profile rows, changed clustering or bootstrap
-  seed, noncanonical traces, or treating profiles within a cluster as
-  independent.
-- **Does not support:** The interval is not a population confidence interval and
-  the association does not prove wall-clock timing, process state, or any other
-  mechanism uniquely caused every difference.
+- **Invalidating result:** Missing profile rows, changed clustering or frozen
+  reweighting seed, noncanonical traces, or treating profiles within a cluster
+  as independent.
+- **Does not support:** Neither percentile range is a population confidence
+  interval. The context-heterogeneous association does not prove wall-clock
+  timing, process state, or any other mechanism uniquely caused every
+  difference.
+- **human_verified:** PENDING — a human author must confirm the frozen pooled
+  procedure, the post-acquisition label on the fixed-composition sensitivity,
+  the fixed-battery interpretation, and noncausal wording; this remains a
+  submission blocker until signed.
 
-## M13 — Binary paired difference
+## M13 — Binary schedule-indexed descriptive difference
 
-- **Problem solved:** Gives a directionally explicit unit-level contrast between
-  intervention and control outcomes.
+- **Problem solved:** Gives a directionally explicit descriptive unit-level
+  contrast between intervention and control outcomes.
 - **Why needed here:** The factorial uses the same frozen schedule unit across
   four cells; arm-level means alone would discard the paired row identity.
-- **Analysis unit:** One matched schedule unit within an opponent-by-order
+- **Analysis unit:** One schedule-indexed unit within an opponent-by-order
   stratum.
 - **Assumptions:** Binary win is coded 1 and nonwin 0; intervention minus control
   is the frozen direction; both outcomes belong to the same unit.
@@ -298,55 +372,71 @@ historical reports, and conversation summaries.
 - **Invalidating result:** Reversed arm labels, unmatched rows, inconsistent
   outcome coding, or missing outcomes.
 - **Does not support:** A paired difference does not itself establish
-  repeatability, event alignment, a causal mechanism, or external
+  inferential exchangeability or independence, a sampling distribution,
+  repeatability, semantic event alignment, a causal mechanism, or external
   generalizability.
+- **human_verified:** PENDING — a human author must confirm the arm labels,
+  matched-unit identity, and intervention-minus-control direction; this remains
+  a submission blocker until signed.
 
-## M14 — Stratified paired-unit bootstrap
+## M14 — Stratified paired-unit empirical reweighting
 
-- **Problem solved:** Summarizes the stability of fixed-schedule factorial
-  contrasts while retaining paired four-cell outcomes and equal weighting of the
-  ten frozen opponent-by-order strata.
-- **Why needed here:** Resampling arms separately would break pairing, and pooling
+- **Problem solved:** Describes sensitivity of fixed-battery factorial contrasts
+  to reweighting schedule-indexed paired units while retaining four-cell outcomes
+  and equal weighting of the ten frozen opponent-by-order strata.
+- **Why needed here:** Reweighting arms separately would break row identity, and pooling
   without the frozen stratum rule would change the estimand.
 - **Analysis unit:** One paired unit identifier within one of ten fixed strata.
 - **Assumptions:** The realized within-stratum empirical distributions are the
-  resampling objects; all cells for an identifier remain together; 100,000 draws,
-  the analysis seed, and percentile rule are frozen.
+  only reweighting objects; all cells for an identifier remain together; 100,000
+  draws, the analysis seed, and percentile rule are frozen. No probability
+  sample, randomized assignment, or defended stochastic population model
+  supplies an inferential reference distribution.
 - **Implementation:** Equation (3) samples whole unit identifiers with
   replacement within each stratum, computes each stratum mean, weights the ten
   strata equally, and recomputes contrasts.
-- **Output:** Empirical percentile intervals in unitless scale, displayed in
-  percentage points.
-- **Invalidating result:** Separate arm resampling, cross-stratum movement,
+- **Output:** The 2.5th and 97.5th percentiles of empirical reweighting
+  distributions in unitless scale, displayed in percentage points.
+- **Invalidating result:** Separate arm reweighting, cross-stratum movement,
   changed draw count/seed, missing cells, or a different weighting rule.
-- **Does not support:** These intervals do not cover a superpopulation of new
-  opponents, hardware, training runs, or execution contexts; they are not
-  equivalence tests.
+- **Does not support:** These quantiles are not confidence intervals or
+  hypothesis tests, do not cover a superpopulation of new seeds, opponents,
+  hardware, training runs, or execution contexts, and are not equivalence
+  tests.
+- **human_verified:** PENDING — a human author must confirm the reweighting unit,
+  equal stratum weights, and fixed-battery interpretation; this remains a
+  submission blocker until signed.
 
-## M15 — Two-by-two factorial contrasts and secondary McNemar test
+## M15 — Fixed-battery two-by-two factorial contrasts
 
-- **Problem solved:** Separates the frozen four-cell comparison into total,
-  average representation, average training, and interaction contrasts, while
-  providing a secondary paired binary check for the total contrast.
+- **Problem solved:** Separates the frozen four-cell comparison into descriptive
+  total, average representation, average training, and interaction contrasts.
 - **Why needed here:** Four independently named cell rates do not encode the
   intended intervention directions or interaction algebra.
 - **Analysis unit:** One common fixed-schedule unit per cell, stratified by five
   deterministic contexts and two actual orders; 2,000 units per cell.
 - **Assumptions:** Cell mapping `(00,10,01,11)` is correct; signs were frozen;
   schedules and outcomes are complete; the repeated-control available-record
-  gate is satisfied; no trace-digest claim is made for factorial rows.
-- **Implementation:** Equation (4) computes four prespecified linear contrasts.
-  The secondary exact two-sided McNemar test uses discordant C4/C1 win pairs.
-- **Output:** Total +0.55 percentage points [−2.05,+3.15], representation +0.95
-  [−1.08,+3.00], training −0.40 [−2.03,+1.25], interaction +1.30
-  [−1.85,+4.45]; McNemar discordances 358 C4-only and 347 C1-only,
-  `p=0.706483`.
+  gate is satisfied; the preflight used a different seed range; candidate
+  factorial rows have no trace digests; the preflight-to-factorial transfer is
+  a bounded qualification assumption rather than trace evidence on these rows.
+- **Implementation:** Equation (4) computes four prespecified linear contrasts
+  on the fixed battery. The stratified paired-unit procedure supplies only an
+  empirical reweighting sensitivity; no manuscript hypothesis test is admitted.
+- **Output:** Descriptive total +0.55 percentage points with reweighting
+  percentiles [−2.05,+3.15], representation +0.95 [−1.08,+3.00], training
+  −0.40 [−2.03,+1.25], and interaction +1.30 [−1.85,+4.45].
 - **Invalidating result:** Wrong cell mapping/sign, missing unit, failed
   repeated-control gate, schedule drift, or treating absent factorial trace
   digests as zero mismatches.
-- **Does not support:** Intervals spanning zero do not prove equality or
-  equivalence; the design does not prove policy superiority, a mechanism, full
-  CRN coupling, or population-wide effects.
+- **Does not support:** Reweighting quantiles spanning zero do not constitute a
+  null-hypothesis result and do not prove equality or equivalence. The fixed
+  battery does not support population inference, policy superiority, a
+  mechanism, inferential pairing, or full CRN coupling.
+- **human_verified:** PENDING — a human author must confirm cell labels, signs,
+  fixed-battery interpretation, bounded transfer assumption, and descriptive
+  rather than inferential wording; this remains a submission blocker until
+  signed.
 
 ## M16 — Synthetic conformance suite
 
@@ -369,6 +459,9 @@ historical reports, and conversation summaries.
 - **Does not support:** Designed fixtures do not estimate failure prevalence in
   real systems and do not establish the completeness of an external engine’s
   event ontology.
+- **human_verified:** PENDING — a human author must confirm the fixture oracle,
+  expected failure direction, ontology scope, and tamper checks; this remains a
+  submission blocker until signed.
 
 ## M17 — AI-assisted research workflow
 
@@ -390,6 +483,10 @@ historical reports, and conversation summaries.
   system as an author.
 - **Does not support:** AI assistance transfers no authorship, ownership,
   submission authority, or responsibility away from the human authors.
+- **human_verified:** PENDING — a human author must confirm the activity log is
+  complete, every accepted scientific output was independently checked, and no
+  unexposed model metadata was inferred; this remains a submission blocker until
+  signed.
 
 ## Audit disposition
 

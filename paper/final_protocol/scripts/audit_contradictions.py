@@ -29,14 +29,15 @@ ROOT = SCRIPT.parents[3]
 DEFAULT_OUTPUT = FINAL / "CONTRADICTION_AUDIT.json"
 
 EXPECTED_TITLE = (
-    "A Trace-Based Validation Protocol for Seed-Matched Evaluations of "
+    "A Protocol for Validating Pairing Assumptions in Seed-Matched Evaluations of "
     "Black-Box Game-Playing Agents"
 )
 EXPECTED_ARTICLE_TYPE = "APS Open Science Protocol Article"
 EXPECTED_PROTOCOL_COMMIT = "803257f102232763fc88d28c14b668f9b62eb277"
-EXPECTED_BRANCH = "paper/apsos-trace-protocol-final-202608"
+EXPECTED_BRANCH = "paper/apsos-final-desk-gate-202608"
 
 REQUIRED_BASE_FILES = (
+    "STARTING_STATE.json",
     "main.tex",
     "main.pdf",
     "results_macros.tex",
@@ -46,10 +47,21 @@ REQUIRED_BASE_FILES = (
     "author_contributions.md",
     "conflict_of_interest.md",
     "claim_ledger.csv",
+    "source_data/claim_scope_audit.json",
+    "NOVELTY_AUDIT.md",
+    "NOVELTY_MATRIX.csv",
+    "NOVELTY_SEARCH_LOG.json",
+    "APS_DESK_FIT.md",
     "REFERENCE_AUDIT.csv",
     "EQUATION_AUDIT.md",
     "METHOD_ASSUMPTION_AUDIT.md",
     "AUTHOR_DEFENSE_GUIDE.md",
+    "HUMAN_ACTIONS.md",
+    "RELEASE_COMPONENT_INVENTORY.csv",
+    "READABILITY_AUDIT.json",
+    "REPRODUCTION_REPORT.json",
+    "REPRODUCTION_REPORT.sha256",
+    "scripts/verify_reproduction_report.py",
     "SUBMISSION_CHECKLIST.md",
     "supplement/AI_USE_LOG.csv",
 )
@@ -64,6 +76,7 @@ REQUIRED_JSON = {
     "seed_audit": FINAL / "source_data/processed_seed_namespace_audit.json",
     "stochastic_audit": FINAL / "source_data/processed_stochastic_source_audit.json",
     "synthetic": FINAL / "source_data/processed_synthetic.json",
+    "claim_scope": FINAL / "source_data/claim_scope_audit.json",
 }
 
 CANONICAL_INPUT_PATHS = {
@@ -158,6 +171,16 @@ def normalize_title(value: str) -> str:
     return normalize_space(value).rstrip(".")
 
 
+def count_markdown_headings(path: Path, pattern: str) -> int:
+    """Count a declared audit inventory from its stable Markdown headings."""
+    if not path.is_file():
+        return 0
+    return sum(
+        bool(re.match(pattern, line))
+        for line in path.read_text(encoding="utf-8").splitlines()
+    )
+
+
 def parse_int(value: Any) -> int:
     if isinstance(value, bool):
         raise ValueError("boolean is not an integer count")
@@ -171,6 +194,28 @@ def parse_float(value: Any) -> float:
     if not math.isfinite(result):
         raise ValueError(f"non-finite number: {value!r}")
     return result
+
+
+def resampling_record(record: dict[str, Any]) -> dict[str, Any]:
+    """Normalize legacy bootstrap keys and current descriptive-reweighting keys.
+
+    The retained computation is the same deterministic resampling calculation;
+    final prose correctly treats its quantiles as descriptive sensitivities,
+    not confidence intervals.  Frozen upstream inputs retain legacy field names,
+    so the audit compares values without carrying that historical interpretation
+    into current outputs.
+    """
+    interval = record.get("quantiles_2_5_97_5", record.get("bootstrap_95_ci"))
+    draws = record.get("reweighting_draws", record.get("bootstrap_draws"))
+    seed = record.get("reweighting_seed", record.get("bootstrap_seed"))
+    if not isinstance(interval, list) or len(interval) != 2 or draws is None or seed is None:
+        raise ValueError("resampling record lacks a two-quantile interval, draw count, or seed")
+    return {
+        "estimate": parse_float(record["estimate"]),
+        "interval": [parse_float(value) for value in interval],
+        "draws": parse_int(draws),
+        "seed": parse_int(seed),
+    }
 
 
 def close(observed: Any, expected: Any, tolerance: float = 1e-12) -> bool:
@@ -205,7 +250,7 @@ def line_locations(path: Path, pattern: str, flags: int = re.IGNORECASE) -> list
 
 def text_files_under(root: Path) -> list[Path]:
     allowed = {".md", ".tex", ".txt", ".csv", ".json", ".cff", ".yml", ".yaml"}
-    excluded = {DEFAULT_OUTPUT.name, "FINAL_RED_TEAM.json", "REPRODUCTION_REPORT.json"}
+    excluded = {DEFAULT_OUTPUT.name, "REPRODUCTION_REPORT.json"}
     if not root.is_dir():
         return []
     return sorted(
@@ -341,6 +386,8 @@ def expected_truth(payloads: dict[str, Any]) -> dict[str, Any] | None:
     stress = payloads["stress"]
     factorial = payloads["factorial"]
     preflight = payloads["preflight"]
+    stress_resampling = resampling_record(stress["trace_disagreement"])
+    factorial_resampling = resampling_record(factorial["contrasts"]["primary_c4_minus_c1"])
     return {
         "protocol_commit": EXPECTED_PROTOCOL_COMMIT,
         "historical_units": parse_int(verification["historical"]["units"]),
@@ -352,22 +399,24 @@ def expected_truth(payloads: dict[str, Any]) -> dict[str, Any] | None:
         "stress_clusters": parse_int(stress["clusters"]),
         "stress_executions": parse_int(stress["executions"]),
         "stress_trace_mismatch": parse_int(stress["trace_disagreement_clusters"]),
-        "stress_trace_pct": 100.0 * parse_float(stress["trace_disagreement"]["estimate"]),
-        "stress_low_pct": 100.0 * parse_float(stress["trace_disagreement"]["bootstrap_95_ci"][0]),
-        "stress_high_pct": 100.0 * parse_float(stress["trace_disagreement"]["bootstrap_95_ci"][1]),
+        "stress_trace_pct": 100.0 * stress_resampling["estimate"],
+        "stress_low_pct": 100.0 * stress_resampling["interval"][0],
+        "stress_high_pct": 100.0 * stress_resampling["interval"][1],
         "stress_outcome_mismatch": parse_int(stress["outcome_disagreement_clusters"]),
         "stress_decision_mismatch": parse_int(stress["decision_count_disagreement_clusters"]),
         "stress_error_mismatch": parse_int(stress["error_disagreement_clusters"]),
-        "stress_bootstrap_draws": parse_int(stress["trace_disagreement"]["bootstrap_draws"]),
-        "stress_bootstrap_seed": parse_int(stress["trace_disagreement"]["bootstrap_seed"]),
+        "stress_reweighting_draws": stress_resampling["draws"],
+        "stress_reweighting_seed": stress_resampling["seed"],
         "factorial_units": parse_int(factorial["units"]),
         "factorial_games": parse_int(factorial["games"]),
         "factorial_control_mismatch": parse_int(factorial["control_mismatch_units"]),
-        "factorial_bootstrap_draws": parse_int(factorial["contrasts"]["primary_c4_minus_c1"]["bootstrap_draws"]),
-        "factorial_bootstrap_seed": parse_int(factorial["contrasts"]["primary_c4_minus_c1"]["bootstrap_seed"]),
+        "factorial_reweighting_draws": factorial_resampling["draws"],
+        "factorial_reweighting_seed": factorial_resampling["seed"],
         "factorial_rates": factorial["cell_win_rates"],
         "factorial_contrasts": factorial["contrasts"],
-        "factorial_mcnemar": factorial["primary_mcnemar"],
+        "factorial_mcnemar_numerical_audit": verification["factorial"][
+            "mcnemar_numerical_audit_not_admitted"
+        ],
         "identity_hashes": {key: value["sha256"] for key, value in payloads["identity"]["inputs"].items()},
         "seed_audit": payloads["seed_audit"],
     }
@@ -669,7 +718,7 @@ def check_authoritative_numbers(audit: Audit, payloads: dict[str, Any], truth: d
             parse_int(stress["decision_count_disagreement_clusters"]), parse_int(stress["error_disagreement_clusters"]),
         ),
         "statistics_verification": (
-            parse_int(verification["stress"]["bootstrap"]["clusters"]),
+            parse_int(verification["stress"]["empirical_reweighting"]["clusters"]),
             truth["stress_executions"],
             parse_int(verification["stress"]["trace_disagreement_clusters"]),
             parse_int(verification["stress"]["outcome_disagreement_clusters"]),
@@ -689,48 +738,53 @@ def check_authoritative_numbers(audit: Audit, payloads: dict[str, Any], truth: d
         "Timed-search cluster, execution, trace, outcome, decision, and error counts must agree."
     )
 
-    expected_stress_bootstrap = (
+    expected_stress_reweighting = (
         truth["stress_trace_pct"], truth["stress_low_pct"], truth["stress_high_pct"],
-        truth["stress_bootstrap_draws"], truth["stress_bootstrap_seed"],
+        truth["stress_reweighting_draws"], truth["stress_reweighting_seed"],
     )
-    stress_bootstrap_observed = {
+    processed_stress_resampling = resampling_record(stress["trace_disagreement"])
+    verified_stress_resampling = resampling_record(
+        verification["stress"]["empirical_reweighting"]
+    )
+    stress_reweighting_observed = {
         "processed_stress": (
-            100.0 * parse_float(stress["trace_disagreement"]["estimate"]),
-            100.0 * parse_float(stress["trace_disagreement"]["bootstrap_95_ci"][0]),
-            100.0 * parse_float(stress["trace_disagreement"]["bootstrap_95_ci"][1]),
-            parse_int(stress["trace_disagreement"]["bootstrap_draws"]),
-            parse_int(stress["trace_disagreement"]["bootstrap_seed"]),
+            100.0 * processed_stress_resampling["estimate"],
+            100.0 * processed_stress_resampling["interval"][0],
+            100.0 * processed_stress_resampling["interval"][1],
+            processed_stress_resampling["draws"],
+            processed_stress_resampling["seed"],
         ),
         "statistics_verification": (
-            100.0 * parse_float(verification["stress"]["bootstrap"]["estimate"]),
-            100.0 * parse_float(verification["stress"]["bootstrap"]["bootstrap_95_ci"][0]),
-            100.0 * parse_float(verification["stress"]["bootstrap"]["bootstrap_95_ci"][1]),
-            parse_int(verification["stress"]["bootstrap"]["bootstrap_draws"]),
-            parse_int(verification["stress"]["bootstrap"]["bootstrap_seed"]),
+            100.0 * verified_stress_resampling["estimate"],
+            100.0 * verified_stress_resampling["interval"][0],
+            100.0 * verified_stress_resampling["interval"][1],
+            verified_stress_resampling["draws"],
+            verified_stress_resampling["seed"],
         ),
     }
     if "stress" in release_payloads:
         item = release_payloads["stress"]["trace_disagreement"]
-        stress_bootstrap_observed["release_stress"] = (
-            100.0 * parse_float(item["estimate"]),
-            100.0 * parse_float(item["bootstrap_95_ci"][0]),
-            100.0 * parse_float(item["bootstrap_95_ci"][1]),
-            parse_int(item["bootstrap_draws"]), parse_int(item["bootstrap_seed"]),
+        released_stress_resampling = resampling_record(item)
+        stress_reweighting_observed["release_stress"] = (
+            100.0 * released_stress_resampling["estimate"],
+            100.0 * released_stress_resampling["interval"][0],
+            100.0 * released_stress_resampling["interval"][1],
+            released_stress_resampling["draws"], released_stress_resampling["seed"],
         )
     bad_stress = {
         source: observed
-        for source, observed in stress_bootstrap_observed.items()
-        if not all(close(a, b, 1e-9) for a, b in zip(observed, expected_stress_bootstrap, strict=True))
+        for source, observed in stress_reweighting_observed.items()
+        if not all(close(a, b, 1e-9) for a, b in zip(observed, expected_stress_reweighting, strict=True))
     }
     if bad_stress:
         audit.conflict(
-            "NUM-STRESS-BOOTSTRAP", "bootstrap specification", expected_stress_bootstrap,
-            bad_stress, stress_bootstrap_observed, "Stress estimate, interval, draw count, or analysis seed drifted."
+            "NUM-STRESS-RESAMPLING", "descriptive reweighting specification", expected_stress_reweighting,
+            bad_stress, stress_reweighting_observed, "Stress estimate, quantiles, draw count, or analysis seed drifted."
         )
     else:
         audit.pass_check(
-            "NUM-STRESS-BOOTSTRAP", "bootstrap specification", expected_stress_bootstrap,
-            stress_bootstrap_observed, stress_bootstrap_observed, "Stress estimate, interval, draw count, and analysis seed agree."
+            "NUM-STRESS-RESAMPLING", "descriptive reweighting specification", expected_stress_reweighting,
+            stress_reweighting_observed, stress_reweighting_observed, "Stress estimate, quantiles, draw count, and analysis seed agree."
         )
 
     historical_expected = (
@@ -795,53 +849,65 @@ def check_authoritative_numbers(audit: Audit, payloads: dict[str, Any], truth: d
     release_contrast_observed: dict[str, Any] = {}
     contrast_expected: dict[str, Any] = {}
     for name, record in truth["factorial_contrasts"].items():
-        contrast_expected[name] = {
-            "estimate": parse_float(record["estimate"]),
-            "interval": [parse_float(value) for value in record["bootstrap_95_ci"]],
-            "draws": parse_int(record["bootstrap_draws"]),
-            "seed": parse_int(record["bootstrap_seed"]),
-        }
-        contrast_observed[name] = {
-            "estimate": parse_float(factorial["contrasts"][name]["estimate"]),
-            "interval": [parse_float(value) for value in factorial["contrasts"][name]["bootstrap_95_ci"]],
-            "draws": parse_int(factorial["contrasts"][name]["bootstrap_draws"]),
-            "seed": parse_int(factorial["contrasts"][name]["bootstrap_seed"]),
-        }
+        contrast_expected[name] = resampling_record(record)
+        contrast_observed[name] = resampling_record(factorial["contrasts"][name])
         if "factorial" in release_payloads:
             release_record = release_payloads["factorial"]["contrasts"][name]
-            release_contrast_observed[name] = {
-                "estimate": parse_float(release_record["estimate"]),
-                "interval": [parse_float(value) for value in release_record["bootstrap_95_ci"]],
-                "draws": parse_int(release_record["bootstrap_draws"]),
-                "seed": parse_int(release_record["bootstrap_seed"]),
-            }
-    contrast_sources = {"processed_factorial": contrast_observed}
+            release_contrast_observed[name] = resampling_record(release_record)
+    verified_contrast_observed = {
+        name: resampling_record(verification["factorial"]["contrasts"][name])
+        for name in truth["factorial_contrasts"]
+    }
+    contrast_sources = {
+        "processed_factorial": contrast_observed,
+        "statistics_verification": verified_contrast_observed,
+    }
     if release_contrast_observed:
         contrast_sources["release_factorial"] = release_contrast_observed
     compare_exact(
         audit, "NUM-FACTORIAL-CONTRASTS", "factorial values", contrast_expected,
         contrast_sources,
-        "Factorial estimates, intervals, bootstrap draws, and seeds must match the checked evidence."
+        "Factorial estimates, descriptive quantiles, reweighting draws, and seeds must match the checked evidence."
     )
 
     mcnemar_expected = {
-        "c1_only_wins": parse_int(truth["factorial_mcnemar"]["c1_only_wins"]),
-        "c4_only_wins": parse_int(truth["factorial_mcnemar"]["c4_only_wins"]),
-        "exact_two_sided_p": parse_float(truth["factorial_mcnemar"]["exact_two_sided_p"]),
+        "c1_only_wins": parse_int(
+            truth["factorial_mcnemar_numerical_audit"]["c1_only_wins"]
+        ),
+        "c4_only_wins": parse_int(
+            truth["factorial_mcnemar_numerical_audit"]["c4_only_wins"]
+        ),
+        "exact_two_sided_p": parse_float(
+            truth["factorial_mcnemar_numerical_audit"]["exact_two_sided_p"]
+        ),
     }
     mcnemar_observed = {
-        "processed_factorial": {
-            "c1_only_wins": parse_int(factorial["primary_mcnemar"]["c1_only_wins"]),
-            "c4_only_wins": parse_int(factorial["primary_mcnemar"]["c4_only_wins"]),
-            "exact_two_sided_p": parse_float(factorial["primary_mcnemar"]["exact_two_sided_p"]),
-        },
         "statistics_verification": {
-            "c1_only_wins": parse_int(verification["factorial"]["mcnemar"]["c1_only_wins"]),
-            "c4_only_wins": parse_int(verification["factorial"]["mcnemar"]["c4_only_wins"]),
-            "exact_two_sided_p": parse_float(verification["factorial"]["mcnemar"]["exact_two_sided_p"]),
+            "c1_only_wins": parse_int(
+                verification["factorial"]["mcnemar_numerical_audit_not_admitted"][
+                    "c1_only_wins"
+                ]
+            ),
+            "c4_only_wins": parse_int(
+                verification["factorial"]["mcnemar_numerical_audit_not_admitted"][
+                    "c4_only_wins"
+                ]
+            ),
+            "exact_two_sided_p": parse_float(
+                verification["factorial"]["mcnemar_numerical_audit_not_admitted"][
+                    "exact_two_sided_p"
+                ]
+            ),
         },
     }
-    if "factorial" in release_payloads:
+    if "primary_mcnemar" in factorial:
+        item = factorial["primary_mcnemar"]
+        mcnemar_observed["processed_factorial"] = {
+            "c1_only_wins": parse_int(item["c1_only_wins"]),
+            "c4_only_wins": parse_int(item["c4_only_wins"]),
+            "exact_two_sided_p": parse_float(item["exact_two_sided_p"]),
+        }
+    if "factorial" in release_payloads and "primary_mcnemar" in release_payloads["factorial"]:
         item = release_payloads["factorial"]["primary_mcnemar"]
         mcnemar_observed["release_factorial"] = {
             "c1_only_wins": parse_int(item["c1_only_wins"]),
@@ -857,13 +923,15 @@ def check_authoritative_numbers(audit: Audit, payloads: dict[str, Any], truth: d
     }
     if bad_mcnemar:
         audit.conflict(
-            "NUM-MCNEMAR", "factorial values", mcnemar_expected, bad_mcnemar,
-            mcnemar_observed, "The secondary McNemar discordances or p value disagree."
+            "NUM-MCNEMAR", "numerical audit only; not admitted", mcnemar_expected,
+            bad_mcnemar, mcnemar_observed,
+            "The nonadmitted McNemar arithmetic check disagrees."
         )
     else:
         audit.pass_check(
-            "NUM-MCNEMAR", "factorial values", mcnemar_expected, mcnemar_observed,
-            mcnemar_observed, "The secondary McNemar result agrees."
+            "NUM-MCNEMAR", "numerical audit only; not admitted", mcnemar_expected,
+            mcnemar_observed, mcnemar_observed,
+            "The nonadmitted McNemar arithmetic check agrees; no inferential claim is authorized."
         )
 
     expected_macros: dict[str, Any] = {
@@ -882,12 +950,10 @@ def check_authoritative_numbers(audit: Audit, payloads: dict[str, Any], truth: d
         "StressOutcomeMismatch": truth["stress_outcome_mismatch"],
         "StressDecisionMismatch": truth["stress_decision_mismatch"],
         "StressErrorMismatch": truth["stress_error_mismatch"],
-        "BootstrapDraws": truth["factorial_bootstrap_draws"],
+        "ReweightingDraws": truth["factorial_reweighting_draws"],
         "FactorialUnits": truth["factorial_units"],
         "FactorialGames": truth["factorial_games"],
         "FactorialControlMismatch": truth["factorial_control_mismatch"],
-        "FactorialInterventionOnlyWins": mcnemar_expected["c4_only_wins"],
-        "FactorialControlOnlyWins": mcnemar_expected["c1_only_wins"],
     }
     macro_bad: dict[str, Any] = {}
     for name, expected in expected_macros.items():
@@ -924,10 +990,11 @@ def check_authoritative_numbers(audit: Audit, payloads: dict[str, Any], truth: d
     contrast_macro_bad: dict[str, Any] = {}
     for name, macro_names in contrast_macro_names.items():
         record = truth["factorial_contrasts"][name]
+        normalized_record = resampling_record(record)
         expected_pp = (
-            100.0 * parse_float(record["estimate"]),
-            100.0 * parse_float(record["bootstrap_95_ci"][0]),
-            100.0 * parse_float(record["bootstrap_95_ci"][1]),
+            100.0 * normalized_record["estimate"],
+            100.0 * normalized_record["interval"][0],
+            100.0 * normalized_record["interval"][1],
         )
         observed = tuple(macros.get(macro, "MISSING") for macro in macro_names)
         try:
@@ -939,7 +1006,7 @@ def check_authoritative_numbers(audit: Audit, payloads: dict[str, Any], truth: d
         audit.conflict(
             "NUM-FACTORIAL-MACROS", "generated numerical prose", "rounded checked contrasts",
             contrast_macro_bad, [relative(FINAL / "results_macros.tex")],
-            "Generated factorial contrast macros disagree after declared two-decimal rounding."
+            "Generated factorial contrast/quantile macros disagree after declared two-decimal rounding."
         )
     else:
         audit.pass_check(
@@ -1048,16 +1115,17 @@ def check_textual_numbers(audit: Audit, truth: dict[str, Any], macros: dict[str,
         for path in paths
         if path.is_file()
     ).replace("−", "-").replace("–", "-")
+    primary_resampling = resampling_record(truth["factorial_contrasts"]["primary_c4_minus_c1"])
     expected_fragments = {
         "stress_percent": [truth["stress_trace_pct"], truth["stress_low_pct"], truth["stress_high_pct"]],
         "primary_factorial_pp": [
-            100 * parse_float(truth["factorial_contrasts"]["primary_c4_minus_c1"]["estimate"]),
-            100 * parse_float(truth["factorial_contrasts"]["primary_c4_minus_c1"]["bootstrap_95_ci"][0]),
-            100 * parse_float(truth["factorial_contrasts"]["primary_c4_minus_c1"]["bootstrap_95_ci"][1]),
+            100 * primary_resampling["estimate"],
+            100 * primary_resampling["interval"][0],
+            100 * primary_resampling["interval"][1],
         ],
     }
     stress_patterns = re.findall(
-        r"(\d+(?:\.\d+)?)\s*%.{0,100}?(\d+(?:\.\d+)?)\s*%\s*[-,]\s*(\d+(?:\.\d+)?)\s*%",
+        r"(\d+(?:\.\d+)?)\s*%[^.;\n]{0,100}?(\d+(?:\.\d+)?)\s*%\s*[-,]\s*(\d+(?:\.\d+)?)\s*%",
         normalize_space(central), re.I,
     )
     wrong_stress = [row for row in stress_patterns if not all(close(a, b, 0.051) for a, b in zip(row, expected_fragments["stress_percent"], strict=True))]
@@ -1080,22 +1148,22 @@ def check_seeds(audit: Audit, payloads: dict[str, Any], truth: dict[str, Any]) -
     protocol_path = PAPER / "protocol/PEVL_PROSPECTIVE_PROTOCOL.md"
     protocol = protocol_path.read_text(encoding="utf-8") if protocol_path.is_file() else ""
     seed_checks = {
-        "factorial_draws": (truth["factorial_bootstrap_draws"], r"95% intervals use\s+([\d,]+)\s+paired resamples"),
-        "factorial_seed": (truth["factorial_bootstrap_seed"], r"paired resamples.{0,120}?seed\s+`?(\d+)`?"),
-        "stress_draws": (truth["stress_bootstrap_draws"], r"timed-search disagreement proportions use\s+([\d,]+)\s+cluster bootstrap"),
-        "stress_seed": (truth["stress_bootstrap_seed"], r"cluster bootstrap draws.{0,80}?seed\s+`?(\d+)`?"),
+        "factorial_draws": (truth["factorial_reweighting_draws"], r"95% intervals use\s+([\d,]+)\s+paired resamples"),
+        "factorial_seed": (truth["factorial_reweighting_seed"], r"paired resamples.{0,120}?seed\s+`?(\d+)`?"),
+        "stress_draws": (truth["stress_reweighting_draws"], r"timed-search disagreement proportions use\s+([\d,]+)\s+cluster bootstrap"),
+        "stress_seed": (truth["stress_reweighting_seed"], r"cluster bootstrap draws.{0,80}?seed\s+`?(\d+)`?"),
     }
     for name, (expected, pattern) in seed_checks.items():
         match = re.search(pattern, normalize_space(protocol), re.I | re.S)
         observed = parse_int(match.group(1)) if match else "MISSING"
         if observed == expected:
             audit.pass_check(
-                f"SEED-{name.upper().replace('_', '-')}", "bootstrap specification", expected,
+                f"SEED-{name.upper().replace('_', '-')}", "frozen resampling specification (legacy source wording)", expected,
                 observed, [relative(protocol_path)], "The frozen protocol agrees with the result artifact."
             )
         else:
             audit.conflict(
-                f"SEED-{name.upper().replace('_', '-')}", "bootstrap specification", expected,
+                f"SEED-{name.upper().replace('_', '-')}", "frozen resampling specification (legacy source wording)", expected,
                 observed, [relative(protocol_path)], "The frozen protocol and result artifact disagree."
             )
 
@@ -1627,6 +1695,97 @@ def check_claim_ledger(audit: Audit) -> None:
             {"rows": len(rows), "statuses": sorted({row["status"] for row in rows})},
             [relative(path)], "Every final claim-ledger row has an allowed evidentiary status."
         )
+
+    scope_path = FINAL / "source_data/claim_scope_audit.json"
+    scope_failures: list[str] = []
+    try:
+        scope = load_json_strict(scope_path)
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as exc:
+        scope = None
+        scope_failures.append(f"claim-scope audit is not strict JSON: {exc}")
+    if not isinstance(scope, dict):
+        scope_failures.append("claim-scope audit root is not an object")
+    else:
+        ledger_ids = {row.get("claim_id", "") for row in rows}
+        ledger_by_id = {row.get("claim_id", ""): row for row in rows}
+        records = scope.get("records")
+        counts = scope.get("counts")
+        if scope.get("status") != "PASS":
+            scope_failures.append("claim-scope status is not PASS")
+        if scope.get("manuscript_sha256") != sha256(FINAL / "main.tex"):
+            scope_failures.append("claim-scope manuscript hash is stale")
+        if scope.get("builder_sha256") != sha256(FINAL / "scripts/build_claim_ledger.py"):
+            scope_failures.append("claim-scope builder hash is stale")
+        if scope.get("ledger_sha256") != sha256(path):
+            scope_failures.append("claim-scope ledger hash is stale")
+        if scope.get("all_in_scope_bound") is not True:
+            scope_failures.append("all_in_scope_bound is not true")
+        if scope.get("all_outside_scope_explained") is not True:
+            scope_failures.append("all_outside_scope_explained is not true")
+        if not isinstance(records, list) or not records:
+            scope_failures.append("claim-scope records are missing or empty")
+            records = []
+        for index, record in enumerate(records):
+            if not isinstance(record, dict):
+                scope_failures.append(f"scope record {index} is not an object")
+                continue
+            if record.get("scope") == "IN_SCOPE":
+                claim_id = record.get("claim_id")
+                if claim_id not in ledger_ids:
+                    scope_failures.append(f"scope record {index} has no bound ledger claim")
+                elif normalize_space(str(record.get("exact_sentence", ""))) != normalize_space(
+                    ledger_by_id[str(claim_id)].get("exact_sentence", "")
+                ):
+                    scope_failures.append(f"scope record {index} sentence differs from its ledger row")
+                claim_types = record.get("matched_claim_types")
+                if not isinstance(claim_types, list) or not claim_types:
+                    scope_failures.append(f"scope record {index} has no claim classification")
+            elif record.get("scope") == "OUTSIDE_SCOPE":
+                if not record.get("outside_scope_reason"):
+                    scope_failures.append(f"scope record {index} has no outside-scope reason")
+            else:
+                scope_failures.append(f"scope record {index} has invalid scope")
+        if not isinstance(counts, dict):
+            scope_failures.append("claim-scope counts are missing")
+        else:
+            if counts.get("unique_ledger_rows") != len(rows):
+                scope_failures.append("dynamic claim count differs from the ledger")
+            if counts.get("prose_sentence_occurrences") != len(records):
+                scope_failures.append("prose-sentence occurrence count differs from records")
+            if counts.get("human_verified_yes") != 0:
+                scope_failures.append("claim-scope audit prematurely reports human verification")
+    prematurely_signed = [
+        row.get("claim_id", "")
+        for row in rows
+        if not row.get("human_verified", "").strip().upper().startswith("NO")
+    ]
+    if prematurely_signed:
+        scope_failures.append("ledger contains non-NO human verification: " + ", ".join(prematurely_signed))
+    if scope_failures:
+        audit.conflict(
+            "LEDGER-SCOPE-COVERAGE", "article claims",
+            {
+                "every_in_scope_prose_sentence_bound": True,
+                "every_exclusion_explained": True,
+                "claim_count_dynamic": True,
+                "human_verified_yes": 0,
+            },
+            {"failures": scope_failures},
+            [relative(path), relative(scope_path), relative(FINAL / "main.tex")],
+            "The generated ledger does not exhaustively and currently bind the manuscript prose scope.",
+        )
+    else:
+        audit.pass_check(
+            "LEDGER-SCOPE-COVERAGE", "article claims",
+            "all narrative and caption sentences classified and bound",
+            {
+                "rows": len(rows),
+                "prose_sentence_occurrences": len(scope["records"]),
+                "human_verified_yes": 0,
+            },
+            [relative(path), relative(scope_path), relative(FINAL / "main.tex")],
+            "The fail-closed scope pass binds every narrative and caption sentence; structured exclusions are enumerated.",
+        )
     unsigned = [
         row.get("claim_id", "")
         for row in rows
@@ -1637,6 +1796,60 @@ def check_claim_ledger(audit: Audit) -> None:
             "HUMAN-CLAIM-LEDGER-SIGNOFF", "human claim verification",
             [relative(path)],
             f"The corresponding author must verify all {len(unsigned)} claim-ledger rows; no machine status substitutes for that sign-off.",
+        )
+
+
+def check_reproduction_binding(audit: Audit) -> None:
+    report_path = FINAL / "REPRODUCTION_REPORT.json"
+    sidecar_path = FINAL / "REPRODUCTION_REPORT.sha256"
+    verifier_path = FINAL / "scripts/verify_reproduction_report.py"
+    if not report_path.is_file() or not sidecar_path.is_file() or not verifier_path.is_file():
+        return
+    failures: list[str] = []
+    try:
+        report = load_json_strict(report_path)
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as exc:
+        report = None
+        failures.append(f"report is not strict JSON: {exc}")
+    try:
+        sidecar = sidecar_path.read_text(encoding="ascii")
+    except (OSError, UnicodeError) as exc:
+        sidecar = ""
+        failures.append(f"sidecar is unreadable: {exc}")
+    match = re.fullmatch(r"([0-9a-f]{64})  REPRODUCTION_REPORT\.json\n", sidecar)
+    if not match:
+        failures.append("sidecar format or filename is invalid")
+    elif match.group(1) != sha256(report_path):
+        failures.append("sidecar hash does not match the report bytes")
+    if not isinstance(report, dict):
+        failures.append("report root is not an object")
+    else:
+        if report.get("schema_version") != 2 or report.get("status") != "PASS":
+            failures.append("report is not a schema-v2 PASS")
+        if report.get("readiness_decision") != "NOT_READY_DO_NOT_SUBMIT":
+            failures.append("report does not preserve NOT_READY_DO_NOT_SUBMIT")
+        if report.get("submission_ready") is not False:
+            failures.append("report does not explicitly preserve submission_ready=false")
+        gate = report.get("rights_and_human_gate")
+        if not isinstance(gate, dict) or gate.get("rights_and_license_resolved") is not False:
+            failures.append("report does not preserve the unresolved-rights gate")
+        if not isinstance(gate, dict) or gate.get("human_signoffs_complete") is not False:
+            failures.append("report does not preserve the incomplete-human-signoff gate")
+    if failures:
+        audit.machine(
+            "REPRODUCTION-REPORT-BINDING", "reproduction provenance",
+            "strict schema-v2 PASS report, exact lowercase SHA-256 sidecar, and fail-closed readiness gate",
+            failures,
+            [relative(report_path), relative(sidecar_path), relative(verifier_path)],
+            "The reproduction report cannot be accepted until its report/sidecar binding and fail-closed gate are current.",
+        )
+    else:
+        audit.pass_check(
+            "REPRODUCTION-REPORT-BINDING", "reproduction provenance",
+            "exact sidecar and NOT_READY gate",
+            {"sidecar_matches_report": True, "readiness_decision": "NOT_READY_DO_NOT_SUBMIT"},
+            [relative(report_path), relative(sidecar_path), relative(verifier_path)],
+            "The provisional or final schema-v2 technical PASS is byte-bound and remains non-submittable.",
         )
 
 
@@ -1652,6 +1865,36 @@ def check_human_and_legal_blockers(audit: Audit) -> None:
     availability = FINAL / "data_availability.md"
     ai = FINAL / "ai_disclosure.md"
     release_status = FINAL / "release/RELEASE_STATUS.json"
+
+    signoff_expected = {
+        "defense_questions": 29,
+        "method_entries": 17,
+        "equation_entries": 4,
+    }
+    signoff_observed = {
+        "defense_questions": count_markdown_headings(defense, r"^##\s+\d+\.\s+"),
+        "method_entries": count_markdown_headings(methods, r"^##\s+M\d+\s+—\s+"),
+        "equation_entries": count_markdown_headings(equation, r"^##\s+EQ\d+\s+—\s+"),
+    }
+    signoff_evidence = [relative(defense), relative(methods), relative(equation)]
+    if signoff_observed != signoff_expected:
+        audit.conflict(
+            "HUMAN-SIGNOFF-INVENTORY",
+            "human comprehension",
+            signoff_expected,
+            signoff_observed,
+            signoff_evidence,
+            "The method, equation, or author-defense signoff inventory has drifted.",
+        )
+    else:
+        audit.pass_check(
+            "HUMAN-SIGNOFF-INVENTORY",
+            "human comprehension",
+            signoff_expected,
+            signoff_observed,
+            signoff_evidence,
+            "All signoff inventories have the mandated current counts.",
+        )
 
     author_hits = line_locations(main, r"\\author\{\[|author name requires human") + line_locations(cover, r"Corresponding author name|names.*require human")
     if author_hits:
@@ -1686,12 +1929,12 @@ def check_human_and_legal_blockers(audit: Audit) -> None:
     audit.human(
         "HUMAN-METHOD-EQUATION-SIGNOFF", "human comprehension",
         line_locations(equation, r"human_verified.*PENDING") + line_locations(methods, r"human verification.*PENDING|human_verified.*PENDING"),
-        "A human author must verify method assumptions, equations, signs, units, and interpretations."
+        f"A human author must verify all {signoff_observed['method_entries']} method entries and all {signoff_observed['equation_entries']} equation entries, including assumptions, signs, units, and interpretations."
     )
     audit.human(
         "HUMAN-DEFENSE-COMPREHENSION", "human comprehension",
         line_locations(defense, r"human_verified.*PENDING|sign-off"),
-        "The corresponding author must demonstrate comprehension of and sign off all 20 defense-guide items."
+        f"The corresponding author must demonstrate comprehension of and sign off all {signoff_observed['defense_questions']} defense-guide questions."
     )
     audit.human(
         "HUMAN-AI-COMPLETENESS", "AI disclosure",
@@ -1744,6 +1987,7 @@ def build_report() -> dict[str, Any]:
     check_release_and_disclosures(audit)
     check_figures_tables(audit, payloads)
     check_claim_ledger(audit)
+    check_reproduction_binding(audit)
     check_human_and_legal_blockers(audit)
 
     corpus = [

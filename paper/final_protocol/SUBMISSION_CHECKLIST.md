@@ -9,10 +9,10 @@ completion cannot satisfy a human-confirmation item.
 ## Fixed article identity
 
 - [x] Article type is **APS Open Science Protocol Article**.
-- [x] Title is **“A Trace-Based Validation Protocol for Seed-Matched
+- [x] Title is **“A Protocol for Validating Pairing Assumptions in Seed-Matched
   Evaluations of Black-Box Game-Playing Agents.”**
 - [x] Work is isolated on branch
-  `paper/apsos-trace-protocol-final-202608`.
+  `paper/apsos-final-desk-gate-202608`.
 - [x] Historical branches and immutable raw result rows were not rewritten by
   the finalization workflow.
 - [x] No new outcome-driven policy experiment was authorized for this
@@ -23,9 +23,11 @@ completion cannot satisfy a human-confirmation item.
 
 ## Scientific and statistical gates
 
-- [ ] Final claim ledger contains every quantitative, comparative, procedural,
-  and contribution-boundary claim, with no `PENDING`, `CONFLICT`, or
-  `UNSUPPORTED` claim remaining in evidentiary prose.
+- [ ] Final claim ledger contains every quantitative, comparative, novelty,
+  procedural, rights, and contribution-boundary sentence identified by the
+  deterministic claim-scope audit; every excluded prose sentence has a recorded
+  mechanical outside-scope reason, and no `PENDING`, `CONFLICT`, or
+  `UNSUPPORTED` claim remains in evidentiary prose.
 - [ ] Final source hashes, protocol commit, schemas, row counts, strata,
   analysis units, and admission statuses pass the one-command reproduction run.
 - [ ] Historical mismatch counts independently reaggregate to 210/2,800 for the
@@ -45,17 +47,17 @@ completion cannot satisfy a human-confirmation item.
 - [ ] Manuscript avoids equivalence, superiority, universal reliability,
   unique-cause, full-CRN, counterfactual-coupling, state-of-the-art, and external-
   generalization claims.
-- [ ] Human author has confirmed every method assumption in
+- [ ] Human author has confirmed all 17 method entries in
   `METHOD_ASSUMPTION_AUDIT.md`.
-- [ ] Human author has confirmed every equation, symbol, unit, sign, index, and
-  interpretation in `EQUATION_AUDIT.md`.
+- [ ] Human author has confirmed all 4 equations, including every symbol, unit,
+  sign, index, and interpretation, in `EQUATION_AUDIT.md`.
 
 ## References and contribution boundary
 
-- [x] `REFERENCE_AUDIT.csv` contains 25 audited records: 24 verified and one
-  unresolved record.
-- [x] The unresolved “Silent Unpairing” item is not cited or used to support
-  manuscript wording because no authoritative public record was found.
+- [x] `REFERENCE_AUDIT.csv` contains 21 audited and verified records, matching
+  all 21 retained bibliography entries and cited keys.
+- [x] The unresolved “Silent Unpairing” record was removed rather than cited or
+  used to support manuscript wording.
 - [ ] Every final bibliography entry and sentence-level use is rechecked against
   a primary publisher, proceedings, arXiv, or OpenReview record after the final
   manuscript edit.
@@ -71,10 +73,26 @@ completion cannot satisfy a human-confirmation item.
 - [ ] `python -m pevl_bench generate` passes from the final release.
 - [ ] `python -m pevl_bench verify` passes from the final release.
 - [ ] `python -m pevl_bench report` passes from the final release.
+- [ ] `python -m pevl_bench admit examples/example_evidence.json` and
+  `python -m pevl_bench explain examples/example_evidence.json` pass from the
+  final release and enforce the generated decision table.
 - [ ] `python paper/final_protocol/scripts/reproduce_all.py` verifies hashes and
   schemas, validates protocol IDs, rebuilds statistics/macros/tables/figures,
   runs tests and contradiction checks, compiles the paper, and writes
   `REPRODUCTION_REPORT.json` with `PASS`.
+- [ ] `REPRODUCTION_REPORT.sha256` verifies the exact report bytes, and
+  `python paper/final_protocol/scripts/verify_reproduction_report.py` performs a
+  read-only check of the report, bound inputs, canonical subject digest, output
+  hashes, and preserved `NOT_READY_DO_NOT_SUBMIT` decision.
+- [ ] The report records exact observed Python, direct declared package,
+  Tectonic, Poppler, operating-system, and architecture versions and states that
+  `requirements-lock.txt` is a direct dependency declaration, not a transitive
+  lock or proof of a fresh environment.
+- [ ] The report binds the current Git `HEAD` and tree while separately binding
+  relevant dirty and untracked package bytes through the canonical subject
+  digest; it does not describe a dirty workspace as a clean checkout.
+- [ ] The reproduction run records and rejects unexpected tracked-file drift
+  outside its explicit generated-output allowlist.
 - [ ] Release works without the restricted game engine.
 - [ ] Manifest covers every released file and verifies from a clean copy.
 - [ ] Release contains the synthetic suite and expected outputs, processed
@@ -88,8 +106,9 @@ completion cannot satisfy a human-confirmation item.
 - [ ] Final contradiction audit reports no unresolved contradiction in title,
   type, sample sizes, counts, hashes, estimates, intervals, claims, availability,
   disclosures, and artifact inventory.
-- [ ] Final adversarial review is regenerated for this Protocol Article and all
-  required fixes are resolved or explicitly blocking.
+- [ ] Five independent desk-review simulations are bound to the final artifact
+  hashes and their fail-closed aggregate is recorded in
+  `DESK_REVIEW_SIMULATION.json`.
 
 ## Manuscript and visual audit
 
@@ -174,7 +193,7 @@ completion cannot satisfy a human-confirmation item.
 - [ ] Excluded reviewers and reasons, or explicit confirmation of none.
 - [ ] Every author confirms responsibility for the final content and that no
   contribution was inferred from Git history.
-- [ ] Human author demonstrates comprehension of all 20 items in
+- [ ] Human author demonstrates comprehension of all 29 questions in
   `AUTHOR_DEFENSE_GUIDE.md` and completes its sign-off table.
 
 ## Submission controls

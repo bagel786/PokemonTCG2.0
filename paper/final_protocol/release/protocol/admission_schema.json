@@ -1,0 +1,128 @@
+{
+  "$defs": {
+    "evidenceState": {
+      "enum": [
+        "pass",
+        "fail",
+        "unavailable",
+        "malformed",
+        "contradictory",
+        "not_applicable"
+      ],
+      "type": "string"
+    },
+    "traceProjection": {
+      "additionalProperties": false,
+      "properties": {
+        "fields": {
+          "items": {
+            "not": {
+              "enum": [
+                "outcome",
+                "observed_outcome",
+                "observed_treatment_effect",
+                "effect_estimate",
+                "p_value",
+                "confidence_interval",
+                "confidence_interval_direction",
+                "result_favorability"
+              ]
+            },
+            "pattern": "^[a-z0-9][a-z0-9_.:-]{0,127}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "id": {
+          "pattern": "^[a-z0-9][a-z0-9_.:-]{0,127}$",
+          "type": "string"
+        },
+        "version": {
+          "pattern": "^[a-z0-9][a-z0-9_.:-]{0,127}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "fields"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://example.invalid/pevl/admission-evidence-1.0.0.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Explicitly trusted, prevalidated gate-state input for the post-acquisition classifier. This schema does not claim to verify supporting scientific records. Public admit uses the separate closed file-bound record schema; result_data remains outside the classifier projection.",
+  "properties": {
+    "evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_identity": {
+          "$ref": "#/$defs/evidenceState"
+        },
+        "cross_arm_event_alignment": {
+          "$ref": "#/$defs/evidenceState"
+        },
+        "identical_arm_record_parity": {
+          "$ref": "#/$defs/evidenceState"
+        },
+        "repeat_and_worker_parity": {
+          "$ref": "#/$defs/evidenceState"
+        },
+        "schedule_parity": {
+          "$ref": "#/$defs/evidenceState"
+        },
+        "seed_namespace_integrity": {
+          "$ref": "#/$defs/evidenceState"
+        },
+        "stochastic_source_audit": {
+          "$ref": "#/$defs/evidenceState"
+        }
+      },
+      "required": [
+        "artifact_identity",
+        "seed_namespace_integrity",
+        "schedule_parity",
+        "identical_arm_record_parity",
+        "repeat_and_worker_parity",
+        "stochastic_source_audit",
+        "cross_arm_event_alignment"
+      ],
+      "type": "object"
+    },
+    "input_kind": {
+      "const": "trusted_prevalidated_gate_states"
+    },
+    "protocol_id": {
+      "const": "pevl-admission-formalization-2026-08"
+    },
+    "result_data": {
+      "description": "Optional result material retained in the envelope for independence checks. Its value is outside the admission-rule projection and is never dereferenced by the evaluator."
+    },
+    "schema_version": {
+      "const": "admission-evidence-1.0.0"
+    },
+    "trace_projection": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/traceProjection"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_id",
+    "input_kind",
+    "evidence",
+    "trace_projection"
+  ],
+  "title": "PEVL admission evidence",
+  "type": "object"
+}

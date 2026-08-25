@@ -1,12 +1,14 @@
 {
-  "bootstrap_replicate": 0.6666666666666666,
+  "byte_count_only_disagreement": true,
   "factorial": {
     "interaction": 0.010000000000000009,
     "representation": 0.025000000000000022,
     "total": 0.040000000000000036,
     "training": 0.015000000000000013
   },
+  "missing_profile_fail_closed": true,
   "paired_difference": 1,
+  "reweighting_replicate": 0.6666666666666666,
   "status": "PASS",
   "trace_disagreement": 0.4
 }

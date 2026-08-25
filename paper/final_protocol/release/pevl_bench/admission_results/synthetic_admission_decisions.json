@@ -1,0 +1,862 @@
+{
+  "adapter_id": "pevl-synthetic-audit-adapter-1.0.0",
+  "formalization_status": "post_acquisition_executable_formalization",
+  "frozen_fixture_authority": "The frozen synthetic Level-8 disposition remains authoritative; the adapter does not retroactively replace fixture-specific suppression.",
+  "modes": [
+    {
+      "admission_decision": {
+        "additional_evidence_required": "No additional gate is required for this claim class.",
+        "admission_input_sha256": "44866d9b43ffec6c99c6822caffbfdcac006143c1b8139c8f9e5829d89196f1a",
+        "analysis_unit": "Event-aligned trajectory pair within the declared semantic ontology and schedule stratum.",
+        "blocking_gates": [],
+        "claim_strength": 5,
+        "classification_reason": "rule_match",
+        "classifier_scope": "classification_after_in_memory_synthetic_adapter_checks",
+        "decision_sha256": "5d33f2c9addfc8a8d3b5fa77c8c3374f049e7833056d762ddc27780478258e29",
+        "decision_status": "admit",
+        "estimand": "A fixed-battery descriptive event-aligned contrast within the declared schedule and semantic event ontology.",
+        "evidence_binding_sha256": "6f2732e629be5a9c6d136bcb57585b5553ec2e9f49c6d0202998dca435a877e7",
+        "evidence_coherent": true,
+        "evidence_trust_anchor": "self_asserted_synthetic_fixture_consistency",
+        "evidence_verified": true,
+        "evidence_verifier": "pevl-synthetic-audit-adapter-1.0.0",
+        "evidence_verifier_sha256": "9794d10658cc7455051eed9ba1ecf19c7214b8de684cb644a9bc127546f3d86f",
+        "excluded_input_members": [
+          "result_data"
+        ],
+        "external_scientific_provenance_verified": false,
+        "failure_action": "Preserve the ontology, event keys, projection, and frozen analysis unit; any drift requires a new admission decision, and inferential pairing requires a separate justified design.",
+        "first_blocking_gate": null,
+        "forbidden_wording": [
+          "alignment outside the declared event ontology",
+          "general common-random-number guarantee",
+          "population generalization beyond the frozen design",
+          "causal effect without the design assumptions",
+          "confidence interval without a separately justified inferential design",
+          "hypothesis test without a separately justified inferential design"
+        ],
+        "formalization_status": "post_acquisition_executable_formalization",
+        "gate_certificates": [
+          {
+            "evidence_sha256": "d7b615e74dadf1cebb06fd14bf551df3fb9f12117ba8255012a99d8f9c117ed9",
+            "gate": "artifact_identity",
+            "reason": "Synthetic artifact and configuration identities are complete.",
+            "state": "pass",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "26725b5eccea982d09dae14b52f4b014abe8cb30f60037c25619abcad4581db1",
+            "gate": "seed_namespace_integrity",
+            "reason": "Requested and consumed seeds are recorded and unique.",
+            "state": "pass",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "eae1a0e56adb985047665a7913547c1d8ce5482b4c069962c1cc67ea56293945",
+            "gate": "schedule_parity",
+            "reason": "Both arms use the same complete, fingerprinted schedule.",
+            "state": "pass",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "e6b44382ee843717f99553aabcaee038f95731fbfa913882b4352e5a8cf72389",
+            "gate": "identical_arm_record_parity",
+            "reason": "Byte-identical arms match through the complete public trace.",
+            "state": "pass",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "c67939193370e890d8c11a717651feb75d824d8bb5e01d7ce9e491c0904a8de3",
+            "gate": "repeat_and_worker_parity",
+            "reason": "Serial repeats and the scripted worker profile preserve each arm trace.",
+            "state": "pass",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "259923b6699462d06112e8f7caf89e4f7b62674dce29007208203c1f32ebd667",
+            "gate": "stochastic_source_audit",
+            "reason": "The only stochastic source is event-keyed and explicitly seeded.",
+            "state": "pass",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "e0b0cb1edc14731ef04f23f2819486b2da8d0919ee23ac9979a07eacd034ad86",
+            "gate": "cross_arm_event_alignment",
+            "reason": "All logged shared event keys map to the same random quantities.",
+            "state": "pass",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          }
+        ],
+        "gate_report": [
+          {
+            "effect": "satisfied prerequisite",
+            "gate": "artifact_identity",
+            "level": 1,
+            "state": "pass"
+          },
+          {
+            "effect": "satisfied prerequisite",
+            "gate": "seed_namespace_integrity",
+            "level": 2,
+            "state": "pass"
+          },
+          {
+            "effect": "satisfied prerequisite",
+            "gate": "schedule_parity",
+            "level": 3,
+            "state": "pass"
+          },
+          {
+            "effect": "satisfied prerequisite",
+            "gate": "identical_arm_record_parity",
+            "level": 4,
+            "state": "pass"
+          },
+          {
+            "effect": "satisfied prerequisite",
+            "gate": "repeat_and_worker_parity",
+            "level": 5,
+            "state": "pass"
+          },
+          {
+            "effect": "satisfied prerequisite",
+            "gate": "stochastic_source_audit",
+            "level": 6,
+            "state": "pass"
+          },
+          {
+            "effect": "satisfied prerequisite",
+            "gate": "cross_arm_event_alignment",
+            "level": 7,
+            "state": "pass"
+          }
+        ],
+        "input_assurance": "synthetic_fixture_adapter_checks_evaluated",
+        "input_schema_version": "admission-evidence-1.0.0",
+        "input_valid": true,
+        "matched_rule": "all_levels_pass",
+        "permitted_claim_class": "event_aligned",
+        "protocol_bundle_sha256": "736f180967d34f17a942b895a3e4d4cd99da0a819ae0d0a50d1f0897cc0698a4",
+        "protocol_id": "pevl-admission-formalization-2026-08",
+        "required_wording": "Within the declared event ontology, shared exogenous events were aligned and a fixed-battery descriptive contrast is admitted; this does not by itself establish inferential pairing, a confidence interval, a hypothesis test, or a population effect. Repeatability is asserted only for recorded trace projection synthetic-public-trace@1.1.0 with fields [action, public_state, step].",
+        "rules_schema_version": "admission-rules-1.0.0",
+        "trace_projection_scope": {
+          "fields": [
+            "action",
+            "public_state",
+            "step"
+          ],
+          "id": "synthetic-public-trace",
+          "version": "1.1.0"
+        },
+        "uncertainty_procedure": "Empirical reweighting of the declared fixed battery may be reported as descriptive sensitivity; it is not a confidence interval, hypothesis test, or population uncertainty statement.",
+        "verification_scope": "The adapter checked in-memory synthetic fixture evidence digests and mapped the declared synthetic mode states. It did not verify external acquisition files, execution-profile provenance, or scientific authenticity.",
+        "why_stronger_prohibited": "No stronger claim class exists in this admission specification."
+      },
+      "derived_fixture_disposition": "admit",
+      "fixture_disposition_mapping": "event_aligned=admit; seed_matched_bounded=downgrade; every weaker generic class=suppress under the frozen fixture-specific rules",
+      "frozen_level_8_disposition": "admit",
+      "gate_vector": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "mode": "clean_deterministic"
+    },
+    {
+      "admission_decision": {
+        "additional_evidence_required": "Cross-arm alignment of shared exogenous events under a declared semantic event ontology and alignment procedure.",
+        "admission_input_sha256": "82197476c4c77c9f03499725b0bfb1fcc69590e388f19fc8be37b9a0b21942c5",
+        "analysis_unit": "Seed-indexed unit within each fixed schedule stratum, with repeated profiles retained as one cluster where applicable.",
+        "blocking_gates": [
+          {
+            "gate": "cross_arm_event_alignment",
+            "state": "fail"
+          }
+        ],
+        "claim_strength": 4,
+        "classification_reason": "rule_match",
+        "classifier_scope": "classification_after_in_memory_synthetic_adapter_checks",
+        "decision_sha256": "570f00b53f72e8ecbd2e78d2f37fb71ad575c16dbe67bb277d57c8b04387ce44",
+        "decision_status": "admit",
+        "estimand": "The fixed-battery descriptive seed-indexed contrast specified by the authoritative frozen analysis plan.",
+        "evidence_binding_sha256": "5979ae52fda5ef5d2e8a6e16a8ab10a4b06a1d1cb7bd6cfbe844cdf5a98050ba",
+        "evidence_coherent": true,
+        "evidence_trust_anchor": "self_asserted_synthetic_fixture_consistency",
+        "evidence_verified": true,
+        "evidence_verifier": "pevl-synthetic-audit-adapter-1.0.0",
+        "evidence_verifier_sha256": "9794d10658cc7455051eed9ba1ecf19c7214b8de684cb644a9bc127546f3d86f",
+        "excluded_input_members": [
+          "result_data"
+        ],
+        "external_scientific_provenance_verified": false,
+        "failure_action": "Use only fixed-battery descriptive wording and empirical reweighting sensitivity; suppress the contrast if any experiment-specific invalidator or required gate fails.",
+        "first_blocking_gate": {
+          "gate": "cross_arm_event_alignment",
+          "state": "fail"
+        },
+        "forbidden_wording": [
+          "cross-arm event alignment",
+          "fully coupled counterfactual",
+          "causally coupled random events",
+          "general common-random-number guarantee",
+          "repeatability of unrecorded state",
+          "population effect",
+          "inferential paired effect",
+          "confidence interval",
+          "hypothesis test"
+        ],
+        "formalization_status": "post_acquisition_executable_formalization",
+        "gate_certificates": [
+          {
+            "evidence_sha256": "e18b13cbf0bb9dfad1062deef22cf7dba3311850410496c51f59995e8c480c29",
+            "gate": "artifact_identity",
+            "reason": "Treatment, control, engine, opponent, and protocol identities are recorded.",
+            "state": "pass",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "26725b5eccea982d09dae14b52f4b014abe8cb30f60037c25619abcad4581db1",
+            "gate": "seed_namespace_integrity",
+            "reason": "The exact consumed seed and stream identifier are unique and recorded.",
+            "state": "pass",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "eae1a0e56adb985047665a7913547c1d8ce5482b4c069962c1cc67ea56293945",
+            "gate": "schedule_parity",
+            "reason": "Treatment and control begin from the same fingerprinted schedule.",
+            "state": "pass",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "9fe2a05d543e673fbd08948c5fdf6f47ccd78c65748d2c680dc846495ca0c41e",
+            "gate": "identical_arm_record_parity",
+            "reason": "Each arm exactly reproduces all compared record fields.",
+            "state": "pass",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "c375ced978552628399a3fe82d3b87f1fb80e15cea4e021009d1ab252c513577",
+            "gate": "repeat_and_worker_parity",
+            "reason": "Both arms reproduce across the scripted execution profiles.",
+            "state": "pass",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "184da23ee1e9e0fdcd599886c7cf270e655e6d9f36e1d3100c0190fde1173cf6",
+            "gate": "stochastic_source_audit",
+            "reason": "The mutable stream is inventoried and reproducible; that does not prove event alignment.",
+            "state": "pass",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "a4ca7e9f55714098a9432121c9fd95cc59ed536c16c9a56797dacf9569762bfa",
+            "gate": "cross_arm_event_alignment",
+            "reason": "One treatment-only draw shifts later shared event quantities.",
+            "state": "fail",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          }
+        ],
+        "gate_report": [
+          {
+            "effect": "satisfied prerequisite",
+            "gate": "artifact_identity",
+            "level": 1,
+            "state": "pass"
+          },
+          {
+            "effect": "satisfied prerequisite",
+            "gate": "seed_namespace_integrity",
+            "level": 2,
+            "state": "pass"
+          },
+          {
+            "effect": "satisfied prerequisite",
+            "gate": "schedule_parity",
+            "level": 3,
+            "state": "pass"
+          },
+          {
+            "effect": "satisfied prerequisite",
+            "gate": "identical_arm_record_parity",
+            "level": 4,
+            "state": "pass"
+          },
+          {
+            "effect": "satisfied prerequisite",
+            "gate": "repeat_and_worker_parity",
+            "level": 5,
+            "state": "pass"
+          },
+          {
+            "effect": "satisfied prerequisite",
+            "gate": "stochastic_source_audit",
+            "level": 6,
+            "state": "pass"
+          },
+          {
+            "effect": "first gate blocking stronger wording",
+            "gate": "cross_arm_event_alignment",
+            "level": 7,
+            "state": "fail"
+          }
+        ],
+        "input_assurance": "synthetic_fixture_adapter_checks_evaluated",
+        "input_schema_version": "admission-evidence-1.0.0",
+        "input_valid": true,
+        "matched_rule": "levels_1_through_6_pass",
+        "permitted_claim_class": "seed_matched_bounded",
+        "protocol_bundle_sha256": "736f180967d34f17a942b895a3e4d4cd99da0a819ae0d0a50d1f0897cc0698a4",
+        "protocol_id": "pevl-admission-formalization-2026-08",
+        "required_wording": "Within the frozen schedule and validated execution contexts, a fixed-battery descriptive seed-indexed contrast is admitted with empirical reweighting sensitivity only; inferential pairing, confidence intervals, hypothesis tests, population effects, and semantic event alignment are not established. Repeatability is asserted only for recorded trace projection synthetic-public-trace@1.1.0 with fields [action, public_state, step].",
+        "rules_schema_version": "admission-rules-1.0.0",
+        "trace_projection_scope": {
+          "fields": [
+            "action",
+            "public_state",
+            "step"
+          ],
+          "id": "synthetic-public-trace",
+          "version": "1.1.0"
+        },
+        "uncertainty_procedure": "Empirical whole-unit reweighting of the declared fixed battery as descriptive sensitivity only; not a confidence interval, hypothesis test, or population uncertainty statement.",
+        "verification_scope": "The adapter checked in-memory synthetic fixture evidence digests and mapped the declared synthetic mode states. It did not verify external acquisition files, execution-profile provenance, or scientific authenticity.",
+        "why_stronger_prohibited": "Stronger wording is prohibited because Level 7 (cross-arm event alignment) is fail."
+      },
+      "derived_fixture_disposition": "downgrade",
+      "fixture_disposition_mapping": "event_aligned=admit; seed_matched_bounded=downgrade; every weaker generic class=suppress under the frozen fixture-specific rules",
+      "frozen_level_8_disposition": "downgrade",
+      "gate_vector": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "fail"
+      ],
+      "mode": "stateful_draw_shift"
+    },
+    {
+      "admission_decision": {
+        "additional_evidence_required": "Complete identical-arm record comparisons for all required controls and fields under the frozen acquisition rule.",
+        "admission_input_sha256": "268f15241979e52796c50097abee4876d51d34a77555ad9258f5891f1b7b6594",
+        "analysis_unit": "Recorded schedule row within each arm; no execution-level pair is asserted.",
+        "blocking_gates": [
+          {
+            "gate": "identical_arm_record_parity",
+            "state": "fail"
+          },
+          {
+            "gate": "repeat_and_worker_parity",
+            "state": "fail"
+          },
+          {
+            "gate": "stochastic_source_audit",
+            "state": "fail"
+          },
+          {
+            "gate": "cross_arm_event_alignment",
+            "state": "unavailable"
+          }
+        ],
+        "claim_strength": 2,
+        "classification_reason": "rule_match",
+        "classifier_scope": "classification_after_in_memory_synthetic_adapter_checks",
+        "decision_sha256": "2cf47b08498b8d519c4e38da8abf4cc77875ee072fe39fbc3bef79ec228fa404",
+        "decision_status": "downgrade",
+        "estimand": "A descriptive contrast indexed by common recorded schedule fields, without execution-pair interpretation.",
+        "evidence_binding_sha256": "f42d57bcbf12d54e01b67259841245cc48830bccd8801f2b6ab1857f4eb4044c",
+        "evidence_coherent": true,
+        "evidence_trust_anchor": "self_asserted_synthetic_fixture_consistency",
+        "evidence_verified": true,
+        "evidence_verifier": "pevl-synthetic-audit-adapter-1.0.0",
+        "evidence_verifier_sha256": "9794d10658cc7455051eed9ba1ecf19c7214b8de684cb644a9bc127546f3d86f",
+        "excluded_input_members": [
+          "result_data"
+        ],
+        "external_scientific_provenance_verified": false,
+        "failure_action": "Suppress planned paired contrasts; repair the first blocked parity or repeatability gate and reacquire if required by the frozen protocol.",
+        "first_blocking_gate": {
+          "gate": "identical_arm_record_parity",
+          "state": "fail"
+        },
+        "forbidden_wording": [
+          "execution repeatable",
+          "paired treatment effect",
+          "shared random events",
+          "event aligned",
+          "common-random-number guarantee"
+        ],
+        "formalization_status": "post_acquisition_executable_formalization",
+        "gate_certificates": [
+          {
+            "evidence_sha256": "5669bb7fa673fb9252c8e3b8ce87319ae1669bd902f6a6c8bd3a333b3efe3587",
+            "gate": "artifact_identity",
+            "reason": "The byte-identical A/A artifacts are recorded.",
+            "state": "pass",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "26725b5eccea982d09dae14b52f4b014abe8cb30f60037c25619abcad4581db1",
+            "gate": "seed_namespace_integrity",
+            "reason": "The exact consumed seed and stream are recorded.",
+            "state": "pass",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "08b5bbc45af767aa63b5b469b8e055578d24b17dea54ed5fc258d8bfbb8a99f9",
+            "gate": "schedule_parity",
+            "reason": "Declared schedule fields and fingerprints match.",
+            "state": "pass",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "90686364e0d044162bad79a5f21c63cb1899d7c8744d3c5a64a21298678a2ff9",
+            "gate": "identical_arm_record_parity",
+            "reason": "Identical arms diverge in the public-state/action record under hidden timing variation.",
+            "state": "fail",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "36e950f36e27caf557bd2dd5bccfa0daa5cbfbebf7ad1809a1107d423f1794ef",
+            "gate": "repeat_and_worker_parity",
+            "reason": "Repeated serial and contended worker profiles both expose timing-sensitive traces.",
+            "state": "fail",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "154df927a43b8e742ae078708e049dc60faf5019934fdfecec04a4ee3b9b139c",
+            "gate": "stochastic_source_audit",
+            "reason": "Source audit identifies a monotonic-clock deadline as a controlled divergence mechanism.",
+            "state": "fail",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "2e6d4599ac5f506076c9bd1f052d2806016de93e028bf2af569d58f18e6c3682",
+            "gate": "cross_arm_event_alignment",
+            "reason": "Event alignment is not assessed after trace parity fails.",
+            "state": "unavailable",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          }
+        ],
+        "gate_report": [
+          {
+            "effect": "satisfied prerequisite",
+            "gate": "artifact_identity",
+            "level": 1,
+            "state": "pass"
+          },
+          {
+            "effect": "satisfied prerequisite",
+            "gate": "seed_namespace_integrity",
+            "level": 2,
+            "state": "pass"
+          },
+          {
+            "effect": "satisfied prerequisite",
+            "gate": "schedule_parity",
+            "level": 3,
+            "state": "pass"
+          },
+          {
+            "effect": "first gate blocking stronger wording",
+            "gate": "identical_arm_record_parity",
+            "level": 4,
+            "state": "fail"
+          },
+          {
+            "effect": "downstream gate does not repair an earlier blocker",
+            "gate": "repeat_and_worker_parity",
+            "level": 5,
+            "state": "fail"
+          },
+          {
+            "effect": "downstream gate does not repair an earlier blocker",
+            "gate": "stochastic_source_audit",
+            "level": 6,
+            "state": "fail"
+          },
+          {
+            "effect": "downstream gate does not repair an earlier blocker",
+            "gate": "cross_arm_event_alignment",
+            "level": 7,
+            "state": "unavailable"
+          }
+        ],
+        "input_assurance": "synthetic_fixture_adapter_checks_evaluated",
+        "input_schema_version": "admission-evidence-1.0.0",
+        "input_valid": true,
+        "matched_rule": "levels_1_through_3_or_4_pass",
+        "permitted_claim_class": "schedule_matched",
+        "protocol_bundle_sha256": "736f180967d34f17a942b895a3e4d4cd99da0a819ae0d0a50d1f0897cc0698a4",
+        "protocol_id": "pevl-admission-formalization-2026-08",
+        "required_wording": "The declared schedule fields matched across arms; schedule matching alone does not establish repeatable execution, paired randomness, or event alignment.",
+        "rules_schema_version": "admission-rules-1.0.0",
+        "trace_projection_scope": null,
+        "uncertainty_procedure": "Use an unpaired or purely descriptive procedure justified independently of shared execution; do not use a paired procedure.",
+        "verification_scope": "The adapter checked in-memory synthetic fixture evidence digests and mapped the declared synthetic mode states. It did not verify external acquisition files, execution-profile provenance, or scientific authenticity.",
+        "why_stronger_prohibited": "Stronger wording is prohibited because Level 4 (identical-arm record parity) is fail."
+      },
+      "derived_fixture_disposition": "suppress",
+      "fixture_disposition_mapping": "event_aligned=admit; seed_matched_bounded=downgrade; every weaker generic class=suppress under the frozen fixture-specific rules",
+      "frozen_level_8_disposition": "suppress",
+      "gate_vector": [
+        "pass",
+        "pass",
+        "pass",
+        "fail",
+        "fail",
+        "fail",
+        "unavailable"
+      ],
+      "mode": "wall_clock_search"
+    },
+    {
+      "admission_decision": {
+        "additional_evidence_required": "Complete identical-arm record comparisons for all required controls and fields under the frozen acquisition rule.",
+        "admission_input_sha256": "268f15241979e52796c50097abee4876d51d34a77555ad9258f5891f1b7b6594",
+        "analysis_unit": "Recorded schedule row within each arm; no execution-level pair is asserted.",
+        "blocking_gates": [
+          {
+            "gate": "identical_arm_record_parity",
+            "state": "fail"
+          },
+          {
+            "gate": "repeat_and_worker_parity",
+            "state": "fail"
+          },
+          {
+            "gate": "stochastic_source_audit",
+            "state": "fail"
+          },
+          {
+            "gate": "cross_arm_event_alignment",
+            "state": "unavailable"
+          }
+        ],
+        "claim_strength": 2,
+        "classification_reason": "rule_match",
+        "classifier_scope": "classification_after_in_memory_synthetic_adapter_checks",
+        "decision_sha256": "062c97c2e27b684a0c5c8665014c77ff6fc1728a75ba510523e60fdd04434d4b",
+        "decision_status": "downgrade",
+        "estimand": "A descriptive contrast indexed by common recorded schedule fields, without execution-pair interpretation.",
+        "evidence_binding_sha256": "ffdaf0cdf466a9d6ae29cf36a53d5c2cd0d8f370dbb825cbc5b022f9be02d863",
+        "evidence_coherent": true,
+        "evidence_trust_anchor": "self_asserted_synthetic_fixture_consistency",
+        "evidence_verified": true,
+        "evidence_verifier": "pevl-synthetic-audit-adapter-1.0.0",
+        "evidence_verifier_sha256": "9794d10658cc7455051eed9ba1ecf19c7214b8de684cb644a9bc127546f3d86f",
+        "excluded_input_members": [
+          "result_data"
+        ],
+        "external_scientific_provenance_verified": false,
+        "failure_action": "Suppress planned paired contrasts; repair the first blocked parity or repeatability gate and reacquire if required by the frozen protocol.",
+        "first_blocking_gate": {
+          "gate": "identical_arm_record_parity",
+          "state": "fail"
+        },
+        "forbidden_wording": [
+          "execution repeatable",
+          "paired treatment effect",
+          "shared random events",
+          "event aligned",
+          "common-random-number guarantee"
+        ],
+        "formalization_status": "post_acquisition_executable_formalization",
+        "gate_certificates": [
+          {
+            "evidence_sha256": "3cf17fb07af1df032b3e004074ca389e29e3424da34189f12f2a306f70726e96",
+            "gate": "artifact_identity",
+            "reason": "The byte-identical A/A artifacts are recorded.",
+            "state": "pass",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "26725b5eccea982d09dae14b52f4b014abe8cb30f60037c25619abcad4581db1",
+            "gate": "seed_namespace_integrity",
+            "reason": "The exact consumed seed and stream are recorded.",
+            "state": "pass",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "eae1a0e56adb985047665a7913547c1d8ce5482b4c069962c1cc67ea56293945",
+            "gate": "schedule_parity",
+            "reason": "Declared schedule fields and fingerprints match.",
+            "state": "pass",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "0055d6d2a1ff3899bc0e650f48d989f95f24bb243f5187922e3a4fc461456ca6",
+            "gate": "identical_arm_record_parity",
+            "reason": "Identical arms diverge when a worker inherits process-local state.",
+            "state": "fail",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "3af9985d035d750a519da2ffb675c1aee14bdc68cc8dd0a9c6c48a69a57778c1",
+            "gate": "repeat_and_worker_parity",
+            "reason": "Fresh-process repeats agree, but reused-worker execution diverges.",
+            "state": "fail",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "52272ecaccb489b6ec3f5f5f8bff8df013d2afe977f0d0f711714523faf9f617",
+            "gate": "stochastic_source_audit",
+            "reason": "Source audit identifies mutable process-global state as the controlled mechanism.",
+            "state": "fail",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "2e6d4599ac5f506076c9bd1f052d2806016de93e028bf2af569d58f18e6c3682",
+            "gate": "cross_arm_event_alignment",
+            "reason": "Event alignment is not assessed after trace parity fails.",
+            "state": "unavailable",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          }
+        ],
+        "gate_report": [
+          {
+            "effect": "satisfied prerequisite",
+            "gate": "artifact_identity",
+            "level": 1,
+            "state": "pass"
+          },
+          {
+            "effect": "satisfied prerequisite",
+            "gate": "seed_namespace_integrity",
+            "level": 2,
+            "state": "pass"
+          },
+          {
+            "effect": "satisfied prerequisite",
+            "gate": "schedule_parity",
+            "level": 3,
+            "state": "pass"
+          },
+          {
+            "effect": "first gate blocking stronger wording",
+            "gate": "identical_arm_record_parity",
+            "level": 4,
+            "state": "fail"
+          },
+          {
+            "effect": "downstream gate does not repair an earlier blocker",
+            "gate": "repeat_and_worker_parity",
+            "level": 5,
+            "state": "fail"
+          },
+          {
+            "effect": "downstream gate does not repair an earlier blocker",
+            "gate": "stochastic_source_audit",
+            "level": 6,
+            "state": "fail"
+          },
+          {
+            "effect": "downstream gate does not repair an earlier blocker",
+            "gate": "cross_arm_event_alignment",
+            "level": 7,
+            "state": "unavailable"
+          }
+        ],
+        "input_assurance": "synthetic_fixture_adapter_checks_evaluated",
+        "input_schema_version": "admission-evidence-1.0.0",
+        "input_valid": true,
+        "matched_rule": "levels_1_through_3_or_4_pass",
+        "permitted_claim_class": "schedule_matched",
+        "protocol_bundle_sha256": "736f180967d34f17a942b895a3e4d4cd99da0a819ae0d0a50d1f0897cc0698a4",
+        "protocol_id": "pevl-admission-formalization-2026-08",
+        "required_wording": "The declared schedule fields matched across arms; schedule matching alone does not establish repeatable execution, paired randomness, or event alignment.",
+        "rules_schema_version": "admission-rules-1.0.0",
+        "trace_projection_scope": null,
+        "uncertainty_procedure": "Use an unpaired or purely descriptive procedure justified independently of shared execution; do not use a paired procedure.",
+        "verification_scope": "The adapter checked in-memory synthetic fixture evidence digests and mapped the declared synthetic mode states. It did not verify external acquisition files, execution-profile provenance, or scientific authenticity.",
+        "why_stronger_prohibited": "Stronger wording is prohibited because Level 4 (identical-arm record parity) is fail."
+      },
+      "derived_fixture_disposition": "suppress",
+      "fixture_disposition_mapping": "event_aligned=admit; seed_matched_bounded=downgrade; every weaker generic class=suppress under the frozen fixture-specific rules",
+      "frozen_level_8_disposition": "suppress",
+      "gate_vector": [
+        "pass",
+        "pass",
+        "pass",
+        "fail",
+        "fail",
+        "fail",
+        "unavailable"
+      ],
+      "mode": "process_global_state"
+    },
+    {
+      "admission_decision": {
+        "additional_evidence_required": "Repair the malformed or contradictory gate record and rerun admission from the original evidence.",
+        "admission_input_sha256": "70c3fd3519c0bb74e7b8f5334fdaa2cb079b33f36a785974eb209350e33084a4",
+        "analysis_unit": "None admitted.",
+        "blocking_gates": [
+          {
+            "gate": "seed_namespace_integrity",
+            "state": "fail"
+          }
+        ],
+        "claim_strength": 0,
+        "classification_reason": "pass_after_non_pass",
+        "classifier_scope": "classification_after_in_memory_synthetic_adapter_checks",
+        "decision_sha256": "a7f8641c76ffa8db961bb990a5f406672a2da83957849afa4028348bb589fb4f",
+        "decision_status": "suppress",
+        "estimand": "None admitted from this evidence record.",
+        "evidence_binding_sha256": "c141053579dc695546b77e9c292ba10b1191e800fc1953d9925293d5a35da308",
+        "evidence_coherent": false,
+        "evidence_trust_anchor": "self_asserted_synthetic_fixture_consistency",
+        "evidence_verified": true,
+        "evidence_verifier": "pevl-synthetic-audit-adapter-1.0.0",
+        "evidence_verifier_sha256": "9794d10658cc7455051eed9ba1ecf19c7214b8de684cb644a9bc127546f3d86f",
+        "excluded_input_members": [
+          "result_data"
+        ],
+        "external_scientific_provenance_verified": false,
+        "failure_action": "Stop comparative interpretation, preserve the invalid record, repair the evidence chain, and rerun admission without inspecting result favorability.",
+        "first_blocking_gate": {
+          "gate": "seed_namespace_integrity",
+          "state": "fail"
+        },
+        "forbidden_wording": [
+          "comparative effect",
+          "paired comparison",
+          "schedule matched",
+          "execution repeatable",
+          "seed matched",
+          "event aligned"
+        ],
+        "formalization_status": "post_acquisition_executable_formalization",
+        "gate_certificates": [
+          {
+            "evidence_sha256": "deb0ce9aa6910fd7cf7fd121d3210a65f0b263f9c7c8b85a30fae0a7f6e62415",
+            "gate": "artifact_identity",
+            "reason": "Engine adapter and seed-schedule identities are recorded.",
+            "state": "pass",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "92b4c77e83c30dc265a116db25a153d13b65c2749c39fa6dc047b75b2188a583",
+            "gate": "seed_namespace_integrity",
+            "reason": "Distinct requested seeds collide after uint32 conversion.",
+            "state": "fail",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "d9f0254807cc87633dca44fc60a2cee2052f103777205422e6d34c3d2672d20a",
+            "gate": "schedule_parity",
+            "reason": "Each within-seed arm still receives an equal fingerprinted schedule.",
+            "state": "pass",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "ce7d6ce37e804d2fe3753d93f01325b90911e08eb94b54aa66719a84a10b6e3c",
+            "gate": "identical_arm_record_parity",
+            "reason": "Each scheduled unit passes A/A record parity, which cannot reveal a cross-unit seed collision.",
+            "state": "pass",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "a09371e734d73bd6dce30a2656739ee0583faab3d67acd6be68f45a5f5e1a71f",
+            "gate": "repeat_and_worker_parity",
+            "reason": "Scripted worker profiles do not alter this conversion fixture.",
+            "state": "pass",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "e91658d8152e5cb7be7b9739bb51d1c730aabdaad03ef69708cdef093cc8acec",
+            "gate": "stochastic_source_audit",
+            "reason": "The deterministic conversion boundary and random source are inventoried.",
+            "state": "pass",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          },
+          {
+            "evidence_sha256": "c7de6385769e7dca3cf8186c82f078758da70f8addfd7c4177bf98de085fdd7f",
+            "gate": "cross_arm_event_alignment",
+            "reason": "Within each pair, logged semantic events remain aligned despite cross-unit collision.",
+            "state": "pass",
+            "verifier_id": "pevl-synthetic-audit-adapter-1.0.0"
+          }
+        ],
+        "gate_report": [
+          {
+            "effect": "satisfied prerequisite",
+            "gate": "artifact_identity",
+            "level": 1,
+            "state": "pass"
+          },
+          {
+            "effect": "first gate blocking stronger wording",
+            "gate": "seed_namespace_integrity",
+            "level": 2,
+            "state": "fail"
+          },
+          {
+            "effect": "contradicts an unsatisfied prerequisite",
+            "gate": "schedule_parity",
+            "level": 3,
+            "state": "pass"
+          },
+          {
+            "effect": "contradicts an unsatisfied prerequisite",
+            "gate": "identical_arm_record_parity",
+            "level": 4,
+            "state": "pass"
+          },
+          {
+            "effect": "contradicts an unsatisfied prerequisite",
+            "gate": "repeat_and_worker_parity",
+            "level": 5,
+            "state": "pass"
+          },
+          {
+            "effect": "contradicts an unsatisfied prerequisite",
+            "gate": "stochastic_source_audit",
+            "level": 6,
+            "state": "pass"
+          },
+          {
+            "effect": "contradicts an unsatisfied prerequisite",
+            "gate": "cross_arm_event_alignment",
+            "level": 7,
+            "state": "pass"
+          }
+        ],
+        "input_assurance": "synthetic_fixture_adapter_checks_evaluated",
+        "input_schema_version": "admission-evidence-1.0.0",
+        "input_valid": true,
+        "matched_rule": null,
+        "permitted_claim_class": "suppress",
+        "protocol_bundle_sha256": "736f180967d34f17a942b895a3e4d4cd99da0a819ae0d0a50d1f0897cc0698a4",
+        "protocol_id": "pevl-admission-formalization-2026-08",
+        "required_wording": "No comparative or repeatability claim is admitted from this evidence record.",
+        "rules_schema_version": "admission-rules-1.0.0",
+        "trace_projection_scope": null,
+        "uncertainty_procedure": "None; do not compute or report a comparative inferential procedure as admitted.",
+        "verification_scope": "The adapter checked in-memory synthetic fixture evidence digests and mapped the declared synthetic mode states. It did not verify external acquisition files, execution-profile provenance, or scientific authenticity.",
+        "why_stronger_prohibited": "Stronger wording is prohibited because the evidence is malformed or structurally contradictory."
+      },
+      "derived_fixture_disposition": "suppress",
+      "fixture_disposition_mapping": "event_aligned=admit; seed_matched_bounded=downgrade; every weaker generic class=suppress under the frozen fixture-specific rules",
+      "frozen_level_8_disposition": "suppress",
+      "gate_vector": [
+        "pass",
+        "fail",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "mode": "uint32_seed_conversion"
+    }
+  ],
+  "protocol_bundle_sha256": "736f180967d34f17a942b895a3e4d4cd99da0a819ae0d0a50d1f0897cc0698a4",
+  "schema_version": "synthetic-admission-decisions-1.0.0"
+}

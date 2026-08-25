@@ -1,0 +1,376 @@
+{
+  "$defs": {
+    "artifact": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "role": {
+          "enum": [
+            "candidate_agent",
+            "control_agent",
+            "engine",
+            "protocol",
+            "runner"
+          ],
+          "type": "string"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "required": [
+        "path",
+        "role",
+        "sha256"
+      ],
+      "type": "object"
+    },
+    "executionRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "arm": {
+          "enum": [
+            "candidate",
+            "control"
+          ],
+          "type": "string"
+        },
+        "decision_count": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "error_count": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "outcome": {
+          "enum": [
+            "draw",
+            "loss",
+            "win"
+          ],
+          "type": "string"
+        },
+        "pair_id": {
+          "pattern": "^[a-z0-9][a-z0-9_.:-]{0,127}$",
+          "type": "string"
+        },
+        "profile": {
+          "enum": [
+            "fresh-process-1",
+            "fresh-process-2",
+            "workers-8-reverse"
+          ],
+          "type": "string"
+        },
+        "trace_bytes": {
+          "maximum": 67108864,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "trace_path": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "trace_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "required": [
+        "arm",
+        "decision_count",
+        "error_count",
+        "outcome",
+        "pair_id",
+        "profile",
+        "trace_bytes",
+        "trace_path",
+        "trace_sha256"
+      ],
+      "type": "object"
+    },
+    "scheduleRow": {
+      "additionalProperties": false,
+      "properties": {
+        "actual_order": {
+          "enum": [
+            "first",
+            "second"
+          ],
+          "type": "string"
+        },
+        "arm": {
+          "enum": [
+            "candidate",
+            "control"
+          ],
+          "type": "string"
+        },
+        "condition_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "condition_path": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "engine_seed_uint32": {
+          "maximum": 4294967295,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "pair_id": {
+          "pattern": "^[a-z0-9][a-z0-9_.:-]{0,127}$",
+          "type": "string"
+        },
+        "physical_seat": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "initial_state_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "initial_state_path": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "requested_seed": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "actual_order",
+        "arm",
+        "condition_sha256",
+        "condition_path",
+        "engine_seed_uint32",
+        "initial_state_sha256",
+        "initial_state_path",
+        "pair_id",
+        "physical_seat",
+        "requested_seed"
+      ],
+      "type": "object"
+    },
+    "sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "relativePath": {
+      "pattern": "^evidence/[a-z0-9_-][a-z0-9_.-]*(?:/[a-z0-9_-][a-z0-9_.-]*)*$",
+      "type": "string"
+    },
+    "traceProjection": {
+      "additionalProperties": false,
+      "properties": {
+        "fields": {
+          "items": {
+            "not": {
+              "enum": [
+                "confidence_interval",
+                "confidence_interval_direction",
+                "effect_estimate",
+                "observed_outcome",
+                "observed_treatment_effect",
+                "outcome",
+                "p_value",
+                "result_favorability"
+              ]
+            },
+            "pattern": "^[a-z0-9][a-z0-9_.:-]{0,127}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "id": {
+          "pattern": "^[a-z0-9][a-z0-9_.:-]{0,127}$",
+          "type": "string"
+        },
+        "version": {
+          "pattern": "^[a-z0-9][a-z0-9_.:-]{0,127}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "fields"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://example.invalid/pevl/admission-evidence-bundle-2.0.0.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "A post-acquisition, engine-independent file-bound record bundle whose gate states are derived from declared support files and cross-profile record checks. Artifact paths should identify small immutable identity manifests rather than large model binaries. Result data are outside the hashed admission-evidence projection and are never read by the verifier or classifier.",
+  "properties": {
+    "admission_evidence_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "gate_evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_identity": {
+          "additionalProperties": false,
+          "properties": {
+            "artifacts": {
+              "items": {
+                "$ref": "#/$defs/artifact"
+              },
+              "maxItems": 5,
+              "minItems": 5,
+              "type": "array",
+              "uniqueItems": true
+            },
+            "configuration_sha256": {
+              "$ref": "#/$defs/sha256"
+            },
+            "configuration_path": {
+              "$ref": "#/$defs/relativePath"
+            }
+          },
+          "required": [
+            "artifacts",
+            "configuration_path",
+            "configuration_sha256"
+          ],
+          "type": "object"
+        },
+        "cross_arm_event_alignment": {
+          "additionalProperties": false,
+          "properties": {
+            "reason": {
+              "type": "string"
+            },
+            "status": {
+              "const": "not_applicable"
+            }
+          },
+          "required": [
+            "reason",
+            "status"
+          ],
+          "type": "object"
+        },
+        "execution_profiles": {
+          "additionalProperties": false,
+          "properties": {
+            "identical_arm_profiles": {
+              "const": [
+                "fresh-process-1",
+                "fresh-process-2"
+              ]
+            },
+            "records": {
+              "items": {
+                "$ref": "#/$defs/executionRecord"
+              },
+              "maxItems": 60000,
+              "minItems": 6,
+              "type": "array",
+              "uniqueItems": true
+            },
+            "repeat_worker_profiles": {
+              "const": [
+                "fresh-process-1",
+                "fresh-process-2",
+                "workers-8-reverse"
+              ]
+            }
+          },
+          "required": [
+            "identical_arm_profiles",
+            "records",
+            "repeat_worker_profiles"
+          ],
+          "type": "object"
+        },
+        "schedule": {
+          "additionalProperties": false,
+          "properties": {
+            "conversion_rule": {
+              "const": "engine_seed_uint32 = requested_seed modulo 2**32"
+            },
+            "paired_fields": {
+              "const": [
+                "pair_id",
+                "requested_seed",
+                "engine_seed_uint32",
+                "condition_sha256",
+                "actual_order",
+                "physical_seat",
+                "initial_state_sha256"
+              ]
+            },
+            "rows": {
+              "items": {
+                "$ref": "#/$defs/scheduleRow"
+              },
+              "maxItems": 20000,
+              "minItems": 2,
+              "type": "array",
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "conversion_rule",
+            "paired_fields",
+            "rows"
+          ],
+          "type": "object"
+        },
+        "stochastic_source_audit": {
+          "additionalProperties": false,
+          "properties": {
+            "reason": {
+              "type": "string"
+            },
+            "status": {
+              "const": "unavailable"
+            }
+          },
+          "required": [
+            "reason",
+            "status"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "artifact_identity",
+        "cross_arm_event_alignment",
+        "execution_profiles",
+        "schedule",
+        "stochastic_source_audit"
+      ],
+      "type": "object"
+    },
+    "input_kind": {
+      "const": "file_bound_record_evidence_bundle"
+    },
+    "protocol_id": {
+      "const": "pevl-admission-formalization-2026-08"
+    },
+    "result_data": {
+      "description": "Optional result material excluded from the hashed admission-evidence projection and never dereferenced."
+    },
+    "schema_version": {
+      "const": "admission-evidence-bundle-2.0.0"
+    },
+    "trace_projection": {
+      "$ref": "#/$defs/traceProjection"
+    }
+  },
+  "required": [
+    "admission_evidence_sha256",
+    "gate_evidence",
+    "input_kind",
+    "protocol_id",
+    "schema_version",
+    "trace_projection"
+  ],
+  "title": "PEVL file-bound admission record bundle",
+  "type": "object"
+}

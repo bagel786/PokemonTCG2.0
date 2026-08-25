@@ -7,18 +7,67 @@
       "C4": 0.6235
     },
     "contrasts": {
-      "interaction": 0.013,
-      "primary_c4_minus_c1": 0.0055,
-      "representation_main": 0.0095,
-      "training_main": -0.004
+      "interaction": {
+        "estimate": 0.013,
+        "inferential_status": "fixed-battery descriptive empirical reweighting sensitivity; not a confidence interval, hypothesis test, p-value, or population effect",
+        "quantiles_2_5_97_5": [
+          -0.018500000000000027,
+          0.044499999999999984
+        ],
+        "reweighting_draws": 100000,
+        "reweighting_seed": 2026083117,
+        "reweighting_unit": "whole seed-indexed unit retaining all four cells within each of ten fixed opponent-by-order strata",
+        "role": "fixed-battery descriptive contrast with stratified paired-unit empirical reweighting sensitivity"
+      },
+      "primary_c4_minus_c1": {
+        "estimate": 0.0055,
+        "inferential_status": "fixed-battery descriptive empirical reweighting sensitivity; not a confidence interval, hypothesis test, p-value, or population effect",
+        "quantiles_2_5_97_5": [
+          -0.02049999999999999,
+          0.03149999999999999
+        ],
+        "reweighting_draws": 100000,
+        "reweighting_seed": 2026083117,
+        "reweighting_unit": "whole seed-indexed unit retaining all four cells within each of ten fixed opponent-by-order strata",
+        "role": "fixed-battery descriptive contrast with stratified paired-unit empirical reweighting sensitivity"
+      },
+      "representation_main": {
+        "estimate": 0.0095,
+        "inferential_status": "fixed-battery descriptive empirical reweighting sensitivity; not a confidence interval, hypothesis test, p-value, or population effect",
+        "quantiles_2_5_97_5": [
+          -0.01075000000000002,
+          0.02999999999999998
+        ],
+        "reweighting_draws": 100000,
+        "reweighting_seed": 2026083117,
+        "reweighting_unit": "whole seed-indexed unit retaining all four cells within each of ten fixed opponent-by-order strata",
+        "role": "fixed-battery descriptive contrast with stratified paired-unit empirical reweighting sensitivity"
+      },
+      "training_main": {
+        "estimate": -0.004,
+        "inferential_status": "fixed-battery descriptive empirical reweighting sensitivity; not a confidence interval, hypothesis test, p-value, or population effect",
+        "quantiles_2_5_97_5": [
+          -0.02025000000000001,
+          0.012499999999999994
+        ],
+        "reweighting_draws": 100000,
+        "reweighting_seed": 2026083117,
+        "reweighting_unit": "whole seed-indexed unit retaining all four cells within each of ten fixed opponent-by-order strata",
+        "role": "fixed-battery descriptive contrast with stratified paired-unit empirical reweighting sensitivity"
+      }
     },
     "declared_sources_verified": 15,
+    "fixed_battery_scope": "2,000 seed-indexed units per cell in ten fixed opponent-by-order strata",
     "games": 12000,
-    "mcnemar": {
+    "mcnemar_numerical_audit_not_admitted": {
+      "admitted_for_inference": false,
       "c1_only_wins": 347,
       "c4_only_wins": 358,
+      "discordant_units": 705,
+      "displayed_in_manuscript": false,
       "exact_two_sided_p": 0.7064831563628252,
-      "role": "secondary"
+      "inferential_status": "not admitted because the required reference-distribution assumptions are not established",
+      "status": "NUMERICAL_AUDIT_ONLY_NOT_ADMITTED"
     },
     "strata": 10,
     "units": 2000
@@ -61,6 +110,7 @@
       "sha256": "40b9f5e17a424742ad8a05739646fe56843b8f3a432b124bfc33f9aed1ab5a4b"
     }
   },
+  "interpretation_boundary": "Fixed-battery contrasts and empirical reweighting quantiles are descriptive only; no confidence interval, hypothesis test, p-value, population effect, or earliest-divergence localization is admitted.",
   "preflight": {
     "decision_count_mismatch_units": 0,
     "error_mismatch_units": 0,
@@ -72,6 +122,7 @@
   },
   "profile": "canonical",
   "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",
+  "schema_version": "pevl-statistics-verification-v2",
   "seed_namespace_audit": {
     "declared_sources_verified": 7,
     "historical_prospective_overlap": 0,
@@ -93,21 +144,44 @@
     "source_assessed_package_trees": 11
   },
   "stress": {
-    "bootstrap": {
-      "bootstrap_95_ci": [
+    "decision_count_disagreement_clusters": 93,
+    "declared_sources_verified": 2,
+    "earliest_divergence_localization_included": false,
+    "earliest_divergence_localization_reason": "The retained verification rows do not contain raw trace lines needed to establish an earliest event or actor.",
+    "empirical_reweighting": {
+      "clusters": 200,
+      "estimate": 0.495,
+      "inferential_status": "fixed-battery descriptive empirical reweighting sensitivity; not a confidence interval, hypothesis test, p-value, or population effect",
+      "quantiles_2_5_97_5": [
         0.425,
         0.565
       ],
-      "bootstrap_draws": 100000,
-      "bootstrap_seed": 2026083118,
-      "clusters": 200,
-      "estimate": 0.495
+      "reweighting_draws": 100000,
+      "reweighting_seed": 2026083118,
+      "reweighting_unit": "whole seed-condition cluster retaining all four execution profiles",
+      "role": "prespecified pooled whole-cluster empirical reweighting; realized context composition may vary"
     },
-    "decision_count_disagreement_clusters": 93,
-    "declared_sources_verified": 2,
     "error_disagreement_clusters": 0,
-    "first_divergence_actor_counts": {
-      "opponent": 99
+    "fixed_battery_scope": "200 exercised seed-condition clusters in four fixed opponent-by-order strata",
+    "fixed_composition_reweighting_sensitivity": {
+      "design_status": "post-acquisition source-driven sensitivity",
+      "estimate": 0.495,
+      "inferential_status": "fixed-battery descriptive empirical reweighting sensitivity; not a confidence interval, hypothesis test, p-value, or population effect",
+      "quantiles_2_5_97_5": [
+        0.45999999999999996,
+        0.53
+      ],
+      "reweighting_draws": 100000,
+      "reweighting_seed": 2026083118,
+      "reweighting_unit": "whole seed-condition cluster retained within its fixed opponent-by-order stratum",
+      "role": "post-acquisition, source-driven fixed-composition reweighting sensitivity",
+      "stratum_disagreement_counts": {
+        "dipplin/first": 4,
+        "dipplin/second": 3,
+        "starmie/first": 44,
+        "starmie/second": 48
+      },
+      "stratum_weighting": "equal with fixed within-stratum sample sizes"
     },
     "outcome_disagreement_clusters": 47,
     "policy_error_present_clusters": 0,

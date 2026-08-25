@@ -1,4 +1,4 @@
-> **Review-package transcription.** Restricted labels and local paths are neutralized. The statistical plan and identifiers are preserved, but these bytes are not the frozen source artifact. Statements about noninspection are protocol conditions; Git proves commit ordering, not when a human inspected uncommitted files.
+> **Review-package transcription.** Restricted labels and local paths are neutralized. The statistical plan and identifiers are preserved, but these bytes are not the frozen source artifact. Original interval, p-value, finite-population, and inferential terminology records the frozen plan; the current article admits only fixed-battery descriptive contrasts and empirical reweighting sensitivities. Statements about noninspection are protocol conditions; Git proves commit ordering, not when a human inspected uncommitted files. Historical statements below about package contents are not current availability claims: the package actually distributed is defined by the release manifest, README, and processed metadata, which omit unverifiable first-divergence positions and actors.
 
 # Frozen representation-by-training ablation protocol
 

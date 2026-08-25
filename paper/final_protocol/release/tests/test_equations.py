@@ -2,18 +2,57 @@
 
 from __future__ import annotations
 
+import pytest
+
+
+REQUIRED_PROFILES = ("serial_forward", "serial_reverse", "parallel_forward")
+
+
+def cluster_disagrees(
+    projections: dict[str, tuple[str, int]],
+    required_profiles: tuple[str, ...] = REQUIRED_PROFILES,
+) -> bool:
+    """Implement Eq. 1 on complete (digest, byte-count) profile records."""
+    if set(projections) != set(required_profiles):
+        raise ValueError("required trace-projection profile is missing or unexpected")
+    return len({projections[profile] for profile in required_profiles}) > 1
+
 
 def test_trace_disagreement_toy_example() -> None:
     profiles = [
-        ("a", "a", "a"),
-        ("b", "b", "c"),
-        ("d", "d", "d"),
-        ("e", "f", "e"),
-        ("g", "g", "g"),
+        dict.fromkeys(REQUIRED_PROFILES, ("a", 10)),
+        {
+            "serial_forward": ("b", 20),
+            "serial_reverse": ("b", 20),
+            "parallel_forward": ("c", 20),
+        },
+        dict.fromkeys(REQUIRED_PROFILES, ("d", 30)),
+        {
+            "serial_forward": ("e", 40),
+            "serial_reverse": ("e", 41),
+            "parallel_forward": ("e", 40),
+        },
+        dict.fromkeys(REQUIRED_PROFILES, ("g", 50)),
     ]
-    disagreements = sum(len(set(row)) > 1 for row in profiles)
+    disagreements = sum(cluster_disagrees(row) for row in profiles)
     assert disagreements == 2
     assert disagreements / len(profiles) == 0.40
+
+
+def test_trace_disagreement_detects_byte_count_only_change() -> None:
+    profiles = dict.fromkeys(REQUIRED_PROFILES, ("same-digest", 100))
+    profiles["parallel_forward"] = ("same-digest", 101)
+    assert cluster_disagrees(profiles)
+
+
+def test_trace_disagreement_missing_profile_fails_closed() -> None:
+    with pytest.raises(ValueError, match="required trace-projection profile"):
+        cluster_disagrees(
+            {
+                "serial_forward": ("same-digest", 100),
+                "serial_reverse": ("same-digest", 100),
+            }
+        )
 
 
 def test_paired_difference_directions() -> None:
@@ -23,7 +62,7 @@ def test_paired_difference_directions() -> None:
     assert 0 - 0 == 0
 
 
-def test_stratified_resampling_toy_example() -> None:
+def test_stratified_paired_unit_reweighting_toy_example() -> None:
     differences = [1, 0, -1]
     sampled_one_based_indices = [1, 1, 2]
     replicate = sum(differences[index - 1] for index in sampled_one_based_indices) / 3

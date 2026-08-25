@@ -3,6 +3,7 @@
   "citation_metadata": "INCOMPLETE_HUMAN_AUTHOR_METADATA",
   "doi": null,
   "license": "NO_LICENSE_GRANTED_PENDING_HUMAN_CONFIRMATION",
+  "machine_verification_scope": "technical internal consistency only; not human, legal, licensing, archival, or publication readiness",
   "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",
   "release_status": "BUILT_FOR_REVIEW_NOT_AUTHORIZED_FOR_PUBLICATION",
   "restricted_material_included": false,
@@ -60,5 +61,5 @@
       "sha256": "d173b3255a19b985bf5d0c102b67bfebcddcec6911b38d18a77048b74f63aafb"
     }
   },
-  "title": "A Trace-Based Validation Protocol for Seed-Matched Evaluations of Black-Box Game-Playing Agents"
+  "title": "A Protocol for Validating Pairing Assumptions in Seed-Matched Evaluations of Black-Box Game-Playing Agents"
 }

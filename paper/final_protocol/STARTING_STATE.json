@@ -1,0 +1,172 @@
+{
+  "schema_version": "apsos-starting-state-v1",
+  "timestamp_utc": "2026-08-25T04:06:25Z",
+  "source_branch": "paper/apsos-trace-protocol-final-202608",
+  "source_commit": "584eb83f2c053fe19ed69d3dde1272f847a766fe",
+  "source_remote": "origin/paper/apsos-trace-protocol-final-202608",
+  "source_remote_divergence": {
+    "ahead": 0,
+    "behind": 0
+  },
+  "target_branch": "paper/apsos-final-desk-gate-202608",
+  "initial_worktree_status": {
+    "porcelain_v2": "# branch.oid 584eb83f2c053fe19ed69d3dde1272f847a766fe\n# branch.head paper/apsos-trace-protocol-final-202608\n# branch.upstream origin/paper/apsos-trace-protocol-final-202608\n# branch.ab +0 -0",
+    "clean": true,
+    "separation_required": false
+  },
+  "operating_system": {
+    "product": "macOS",
+    "version": "26.1",
+    "build": "25B78",
+    "kernel": "Darwin 25.1.0 arm64"
+  },
+  "cpu": "Apple M1",
+  "python": {
+    "system_executable": "/opt/homebrew/bin/python3",
+    "system_version": "3.14.6",
+    "active_reproduction_executable": "/opt/miniconda3/bin/python",
+    "active_reproduction_version": "3.13.2",
+    "repository_venv_executable": ".venv/bin/python",
+    "repository_venv_version": "3.11.5"
+  },
+  "tex_compiler": {
+    "selected": "Tectonic 0.16.9",
+    "executable": "/opt/homebrew/bin/tectonic",
+    "latexmk_available": false,
+    "pdflatex_available": false
+  },
+  "pdf_renderer": {
+    "selected": "pdftoppm 26.08.0",
+    "executable": "/opt/homebrew/bin/pdftoppm"
+  },
+  "dependencies": {
+    "declared_lock": {
+      "path": "paper/final_protocol/release/requirements-lock.txt",
+      "sha256": "353fdd63aa927ad4053938a135be0acfd5f849b8e61de0c4cc244b7dcc899f19",
+      "packages": {
+        "numpy": "2.2.5",
+        "matplotlib": "3.10.5",
+        "pytest": "8.4.2"
+      }
+    },
+    "declared_conda_environment": {
+      "path": "paper/final_protocol/release/environment.yml",
+      "sha256": "37694fa3906bc2c5c49091e6d3d93feef6102383c2db71bae48ce3c0ca205b9a",
+      "python": "3.13.2"
+    },
+    "repository_venv_observed": {
+      "numpy": "2.4.6",
+      "matplotlib": "3.10.5",
+      "pytest": "9.1.1",
+      "jsonschema": null,
+      "pypdf": null,
+      "pdfplumber": null
+    },
+    "active_reproduction_environment_observed": {
+      "numpy": "2.2.5",
+      "matplotlib": "3.10.5",
+      "pytest": "8.4.2"
+    },
+    "note": "The observed development environment differs from the declared release lock; reproduction must test the declared environment boundary explicitly."
+  },
+  "relevant_source_hashes": {
+    "paper/synthetic/results/pevl_results.json": "d34a2ea1546a0a88e90a5ca58b49f1085edfcaf753f70ed49e0f04202e9ba6f9",
+    "paper/data/pevl/summary.json": "d8e74d83a7c6bd3ad4690d91321ae4508f7b6f10a76cb6b4efaeab0e2b4014cd",
+    "paper/data/pevl/trace_preflight_summary.json": "c6295f9f3981d346d0cbcb38327e575b560aaf0950bd52f52594cfb8f9cc56b3",
+    "paper/data/pevl/timed_search_stress_summary.json": "40b9f5e17a424742ad8a05739646fe56843b8f3a432b124bfc33f9aed1ab5a4b",
+    "paper/data/pevl/factorial_summary.json": "c7df75c7ae0f76a007d866947ad5262242d86c0c90cb0c8631d201dedd023e59",
+    "paper/data/pevl/factorial/units.csv": "62fe1fc3657ccd783e4f068042f201ceae0d7fc02d694a8ee5943d3f5c52e3eb",
+    "paper/data/ablation/summary.json": "fadc6111654423dab62486e27d05636439b0647192fabe3786a69cd60a49e239",
+    "paper/data/ablation/canonical_ablation.csv": "eca841487814c50acccb7f885207e679b906179bb77e6818dfaa430af47e6fcc",
+    "paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md": "8b9329b948a054fc7252b9c2662490890e0a8439ad852393c6e25f537c8b887e",
+    "paper/data/seed_namespace_audit.json": "50344ba5a8b3ab21d037c0d37115562ea0c2c1da8fabdfe0b717d292a52f7a5e",
+    "paper/data/stochastic_source_audit.json": "995ab30d0f2166963b5bc7dd73d2784ed95cde2f93315e1e06bece935a875c60"
+  },
+  "raw_acquisition_tree_hashes": {
+    "method": "SHA-256 of the byte stream produced by sorting file paths in the directory, computing SHA-256 for each file, and hashing the resulting shasum lines",
+    "paper/data/pevl/preflight/raw": {
+      "files": 20,
+      "sha256": "a6eee34e2c8bc09f03b6614e073135a423cac6a4d833f7d35c430133e5728da9"
+    },
+    "paper/data/pevl/stress/raw": {
+      "files": 2,
+      "sha256": "b09f2cdba478a52d93fb461a4ddb700b45e9495e78f634263a38e4904b9289c2"
+    },
+    "paper/data/pevl/factorial/raw": {
+      "files": 15,
+      "sha256": "620928eaa2d73cbd16b94332c5b7f34b901e0fe8e63ddd5344be5da19d62c950"
+    },
+    "paper/data/ablation/raw": {
+      "files": 14,
+      "sha256": "1fd60290d734a359444ba63a3b604625c461b2e217a69e81b797103deea165aa"
+    }
+  },
+  "frozen_artifact_hashes": {
+    "seeded_engine": {
+      "kind": "file",
+      "path": "artifacts/deterministic_engine/bin/libcg_seeded.dylib",
+      "sha256": "867e3f9bb87e0b48889a44b5d4b04f5d2d434b2a0788d1b2bcfe0caebcb5ab78"
+    },
+    "production_engine": {
+      "kind": "file",
+      "path": "vendor/cg/libcg.dylib",
+      "sha256": "7a157f045d333f99d1996d49c12bdbdd148072a619af246385c7295518776e30"
+    },
+    "c1": {
+      "kind": "tree",
+      "path": "artifacts/grim_damage_conversion/winner/extracted",
+      "sha256": "13426288358d597ead809e45c364c7f7b9274a6eebf55ddd942142e3326535c3"
+    },
+    "c2": {
+      "kind": "tree",
+      "path": "artifacts/grim_play_identity/candidates/p0",
+      "sha256": "36e804ae6c593db57b595bfca9fd48592da10957f0e5f840a7e390edbeb39b63"
+    },
+    "c3": {
+      "kind": "tree",
+      "path": "artifacts/paper_ablation/blind_trained_package",
+      "sha256": "236afa20b4ced63169736fea616849fa564281c05e9435e4dd77ecfb4ae5fd54"
+    },
+    "c4": {
+      "kind": "tree",
+      "path": "artifacts/final_sprint/exp23_identity_trained",
+      "sha256": "83489e0c80c631763c65375d2a7a34d28d6aa9fbb1d11e89d130c83b1e27f1c0"
+    },
+    "opponent_b0": {
+      "kind": "tree",
+      "path": "artifacts/grim_variance_floor/candidates/B0",
+      "sha256": "0c15b56adf3b09c654505a152309fdc9f8401579a495da714347d98ae735003c"
+    },
+    "opponent_d842_runtime": {
+      "kind": "tree",
+      "path": "artifacts/overnight_20260816/d842_runtime",
+      "sha256": "7db753d6610930d8bd9694b4b9bece5ac48733b825422a3e399c18077b55e64e"
+    },
+    "opponent_master_v1": {
+      "kind": "tree",
+      "path": "artifacts/grim_damage_conversion/opponents/master_v1",
+      "sha256": "8a06ebab47cc60ed981dfada85972eb8a62e732e349f01c2a3085262079f06e8"
+    },
+    "opponent_replay_refresh": {
+      "kind": "tree",
+      "path": "artifacts/grim_damage_conversion/opponents/replay_refresh",
+      "sha256": "30e45955b67893514c8ee077cac15d46fc207efe781cbce1b94242defda4cbdc"
+    },
+    "opponent_alakazam_no_search": {
+      "kind": "tree",
+      "path": "artifacts/sprint_870/opponents/alakazam_2_4a",
+      "sha256": "5d44338891094988ca15f0c26d5187316549facd64a7bfbac04aa0048424e8c7"
+    },
+    "opponent_starmie": {
+      "kind": "tree",
+      "path": "artifacts/sprint_870/opponents/starmie_v2_boss_atk",
+      "sha256": "1b73779da7dcc93c8f121090bb0f1ae2d9b10b798ca4c70447b0ce1d6d01c0db"
+    },
+    "opponent_dipplin": {
+      "kind": "tree",
+      "path": "artifacts/sprint_870/opponents/dipplin_d1",
+      "sha256": "076ae8de12d2d6c4a170b47b2d2f9cf538c1d318a05bb2e81f13da9be2cd2026"
+    }
+  },
+  "tree_hash_method": "Canonical tree digests are the observed hashes recorded by the frozen stochastic-source audit; the final reproduction must independently rerun that verifier."
+}

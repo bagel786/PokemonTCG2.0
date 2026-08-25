@@ -3,10 +3,10 @@
 
 from __future__ import annotations
 
+import argparse
 import csv
 import hashlib
 import json
-import math
 import re
 import sys
 from collections import Counter, defaultdict
@@ -51,13 +51,17 @@ def safe_relative(value: str) -> bool:
     )
 
 
-def runtime_cache(relative: str) -> bool:
-    parts = PurePosixPath(relative).parts
-    return "__pycache__" in parts or relative.endswith((".pyc", ".pyo"))
-
-
-def verify_manifest() -> dict[str, Any]:
+def verify_manifest(expected_manifest_sha256: str | None = None) -> dict[str, Any]:
     path = RELEASE / "MANIFEST.sha256"
+    if not path.is_file() or path.is_symlink() or path.stat().st_nlink != 1:
+        raise VerificationError(
+            "MANIFEST.sha256 must be a regular, single-link, non-symlink file"
+        )
+    manifest_sha256 = sha256(path)
+    if expected_manifest_sha256 is not None:
+        if re.fullmatch(r"[0-9a-f]{64}", expected_manifest_sha256) is None:
+            raise VerificationError("external manifest pin must be one lowercase SHA-256")
+        require(manifest_sha256, expected_manifest_sha256, "external manifest pin")
     entries: dict[str, str] = {}
     for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
         match = MANIFEST_LINE.fullmatch(line)
@@ -70,25 +74,47 @@ def verify_manifest() -> dict[str, Any]:
             raise VerificationError(f"duplicate manifest path: {relative}")
         entries[relative] = digest
     actual: set[str] = set()
-    caches: list[str] = []
+    actual_directories: set[str] = set()
     for item in RELEASE.rglob("*"):
         relative = item.relative_to(RELEASE).as_posix()
         if item.is_symlink():
             raise VerificationError(f"symlink prohibited: {relative}")
         if item.is_file():
-            if runtime_cache(relative):
-                caches.append(relative)
-            elif relative != "MANIFEST.sha256":
+            if item.stat().st_nlink != 1:
+                raise VerificationError(f"hard-linked file prohibited: {relative}")
+            if relative != "MANIFEST.sha256":
                 actual.add(relative)
-        elif not item.is_dir():
+        elif item.is_dir():
+            actual_directories.add(relative)
+        else:
             raise VerificationError(f"special filesystem object prohibited: {relative}")
     require(actual, set(entries), "manifest entry set")
+    expected_directories = {
+        parent.as_posix()
+        for relative in entries
+        for parent in PurePosixPath(relative).parents
+        if parent.as_posix() != "."
+    }
+    require(actual_directories, expected_directories, "manifest directory set")
     for relative, digest in entries.items():
         file_path = RELEASE / relative
         if not file_path.is_file() or file_path.is_symlink():
             raise VerificationError(f"manifest entry is not a regular file: {relative}")
         require(sha256(file_path), digest, f"manifest digest {relative}")
-    return {"entries": len(entries), "runtime_cache_files_ignored": len(caches)}
+    return {
+        "entries": len(entries),
+        "manifest_sha256": manifest_sha256,
+        "trust_anchor": (
+            "caller_supplied_manifest_pin"
+            if expected_manifest_sha256 is not None
+            else "internal_consistency_only"
+        ),
+        "integrity_scope": (
+            "manifest bytes matched the caller-supplied SHA-256; external provenance remains the caller's responsibility"
+            if expected_manifest_sha256 is not None
+            else "internal consistency only; no external manifest pin supplied"
+        ),
+    }
 
 
 def load_json(relative: str) -> dict[str, Any]:
@@ -109,7 +135,7 @@ def percentile(values: np.ndarray) -> list[float]:
     return [float(value) for value in np.quantile(values, [0.025, 0.975])]
 
 
-def binary_bootstrap(values: Iterable[int], seed: int) -> dict[str, Any]:
+def binary_reweighting(values: Iterable[int], seed: int) -> dict[str, Any]:
     vector = np.asarray(list(values), dtype=np.float64)
     if not len(vector) or not np.all(np.isin(vector, [0.0, 1.0])):
         raise VerificationError("binary cluster vector is empty or nonbinary")
@@ -124,13 +150,38 @@ def binary_bootstrap(values: Iterable[int], seed: int) -> dict[str, Any]:
     return {
         "clusters": int(len(vector)),
         "estimate": float(vector.mean()),
-        "bootstrap_95_ci": percentile(samples),
-        "bootstrap_draws": 100_000,
-        "bootstrap_seed": seed,
+        "quantiles_2_5_97_5": percentile(samples),
+        "reweighting_draws": 100_000,
+        "reweighting_seed": seed,
     }
 
 
-def factorial_bootstrap(arrays: dict[str, np.ndarray]) -> dict[str, dict[str, Any]]:
+def stratified_binary_reweighting(
+    strata: dict[str, list[int]], seed: int
+) -> dict[str, Any]:
+    if not strata:
+        raise VerificationError("stratified reweighting requires at least one stratum")
+    vectors = {key: np.asarray(strata[key], dtype=np.float64) for key in sorted(strata)}
+    if any(not len(vector) or not np.all(np.isin(vector, [0.0, 1.0])) for vector in vectors.values()):
+        raise VerificationError("stratified cluster vectors must be nonempty and binary")
+    rng = np.random.default_rng(seed)
+    samples = np.zeros(100_000, dtype=np.float64)
+    for key in sorted(vectors):
+        vector = vectors[key]
+        indices = rng.integers(0, len(vector), size=(100_000, len(vector)))
+        samples += vector[indices].mean(axis=1) / len(vectors)
+    return {
+        "estimate": float(np.mean([vector.mean() for vector in vectors.values()])),
+        "quantiles_2_5_97_5": percentile(samples),
+        "reweighting_draws": 100_000,
+        "reweighting_seed": seed,
+        "stratum_disagreement_counts": {
+            key: int(vectors[key].sum()) for key in sorted(vectors)
+        },
+    }
+
+
+def factorial_reweighting(arrays: dict[str, np.ndarray]) -> dict[str, dict[str, Any]]:
     if len(arrays) != 10 or any(value.shape != (200, 4) for value in arrays.values()):
         raise VerificationError("factorial requires ten 200-by-4 strata")
     names = ("primary_c4_minus_c1", "representation_main", "training_main", "interaction")
@@ -171,22 +222,13 @@ def factorial_bootstrap(arrays: dict[str, np.ndarray]) -> dict[str, dict[str, An
         cursor += batch
     return {
         name: {
-            "bootstrap_95_ci": percentile(samples[name]),
-            "bootstrap_draws": 100_000,
-            "bootstrap_seed": 2026083117,
-            "resampling": "paired units within each of ten opponent-by-order strata",
+            "quantiles_2_5_97_5": percentile(samples[name]),
+            "reweighting_draws": 100_000,
+            "reweighting_seed": 2026083117,
+            "reweighting": "stratified paired-unit empirical reweighting within each of ten fixed opponent-by-order strata",
         }
         for name in names
     }
-
-
-def exact_mcnemar(first_only: int, second_only: int) -> float:
-    discordant = first_only + second_only
-    if not discordant:
-        return 1.0
-    lower = min(first_only, second_only)
-    tail = sum(math.comb(discordant, index) for index in range(lower + 1)) / (2**discordant)
-    return min(1.0, 2 * tail)
 
 
 HISTORICAL_FIELDS = (
@@ -306,16 +348,46 @@ def verify_stress() -> dict[str, Any]:
         "error_disagreement_clusters": 0,
         "policy_error_present_clusters": 0,
     }, "stress frozen counts")
-    require(summary["first_divergence_actor_counts"], {"opponent": 99}, "stress localized actor counts")
-    require(binary_bootstrap((int(row["trace_disagreement"]) for row in rows), 2026083118), summary["trace_disagreement"], "stress bootstrap")
+    observed_overall = binary_reweighting(
+        (int(row["trace_disagreement"]) for row in rows), 2026083118
+    )
+    for field, value in observed_overall.items():
+        require(value, summary["trace_disagreement"][field], f"stress reweighting {field}")
     grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in rows:
         grouped[f"{row['context']}/{row['actual_order']}"].append(row)
     require(set(grouped), set(summary["strata"]), "stress strata")
     for key, subset in grouped.items():
         require(len(subset), 50, f"stress stratum units {key}")
-        require(binary_bootstrap((int(row["trace_disagreement"]) for row in subset), 2026083118), summary["strata"][key]["trace_disagreement"], f"stress bootstrap {key}")
-    return {"clusters": len(rows), **counts, "trace_disagreement": summary["trace_disagreement"]}
+        observed = binary_reweighting(
+            (int(row["trace_disagreement"]) for row in subset), 2026083118
+        )
+        for field, value in observed.items():
+            require(
+                value,
+                summary["strata"][key]["trace_disagreement"][field],
+                f"stress stratum reweighting {key} {field}",
+            )
+    sensitivity = stratified_binary_reweighting(
+        {
+            key: [int(row["trace_disagreement"]) for row in subset]
+            for key, subset in grouped.items()
+        },
+        2026083118,
+    )
+    for field, value in sensitivity.items():
+        require(
+            value,
+            summary["fixed_composition_reweighting_sensitivity"][field],
+            f"stress fixed-composition sensitivity {field}",
+        )
+    require(summary["earliest_divergence_localization_included"], False, "stress localization omission")
+    return {
+        "clusters": len(rows),
+        **counts,
+        "trace_disagreement": summary["trace_disagreement"],
+        "fixed_composition_reweighting_sensitivity": summary["fixed_composition_reweighting_sensitivity"],
+    }
 
 
 FACTORIAL_FIELDS = (
@@ -369,38 +441,99 @@ def verify_factorial() -> dict[str, Any]:
     require(summary["games"], 12_000, "factorial summary games")
     require(summary["control_mismatch_units"], 0, "factorial control gate")
     require(rates, summary["cell_win_rates"], "factorial cell rates")
-    bootstrap = factorial_bootstrap(arrays)
+    reweighting = factorial_reweighting(arrays)
     for name, estimate in estimates.items():
         require(estimate, summary["contrasts"][name]["estimate"], f"factorial estimate {name}")
-        for field, value in bootstrap[name].items():
+        for field, value in reweighting[name].items():
             require(value, summary["contrasts"][name][field], f"factorial {name} {field}")
-    c4_only = int(np.sum((c4 == 1) & (c1 == 0)))
-    c1_only = int(np.sum((c4 == 0) & (c1 == 1)))
-    require(c4_only, summary["primary_mcnemar"]["c4_only_wins"], "factorial C4-only wins")
-    require(c1_only, summary["primary_mcnemar"]["c1_only_wins"], "factorial C1-only wins")
-    require(exact_mcnemar(c4_only, c1_only), summary["primary_mcnemar"]["exact_two_sided_p"], "factorial McNemar p")
-    return {"units": len(rows), "games": 12_000, "strata": len(grouped), "cell_win_rates": rates, "contrasts": estimates, "mcnemar": summary["primary_mcnemar"]}
+    require("primary_mcnemar" in summary, False, "factorial inferential McNemar field omitted")
+    require(summary["mcnemar_recalculation_included"], False, "factorial McNemar omission marker")
+    return {"units": len(rows), "games": 12_000, "strata": len(grouped), "cell_win_rates": rates, "contrasts": estimates}
 
 
 def verify_synthetic() -> dict[str, Any]:
     from pevl_bench import synthetic
+    from pevl_bench.admission import load_json_document
+    from pevl_bench.schema_subset import CheckedSchemaError, validate_instance
 
     failures = synthetic.verify_outputs(RELEASE / "pevl_bench/results")
     if failures:
         raise VerificationError("synthetic fixtures failed: " + "; ".join(failures))
-    report = json.loads((RELEASE / "pevl_bench/results/pevl_results.json").read_text(encoding="utf-8"))
+    report = load_json_document(RELEASE / "pevl_bench/results/pevl_results.json")
+    schema = load_json_document(RELEASE / "pevl_bench/results/pevl_results.schema.json")
+    try:
+        validate_instance(report, schema, label="synthetic results")
+    except CheckedSchemaError as exc:
+        raise VerificationError(f"synthetic JSON Schema validation failed: {exc}") from exc
     require(len(report["modes"]), 5, "synthetic mode count")
     require(len(report["levels"]), 8, "synthetic level count")
-    return {"modes": 5, "levels": 8, "status": "verified"}
+    return {
+        "modes": 5,
+        "levels": 8,
+        "status": "verified",
+        "json_schema": "checked_subset_validated",
+    }
 
 
-def main() -> int:
+def verify_admission() -> dict[str, Any]:
+    from pevl_bench import synthetic_admission
+    from pevl_bench.admission import AdmissionProtocol, load_json_document
+    from pevl_bench.evidence import verify_and_admit
+
+    protocol = AdmissionProtocol.load(RELEASE / "protocol")
+    retained_table = (RELEASE / "docs/ADMISSION_DECISION_TABLE.md").read_text(
+        encoding="utf-8"
+    )
+    require(retained_table, protocol.render_decision_table(), "admission decision table")
+    example = verify_and_admit(
+        load_json_document(RELEASE / "examples/example_evidence.json"),
+        protocol,
+        evidence_root=RELEASE / "examples",
+    )
+    require(example["input_valid"], True, "worked admission example validity")
+    require(example["evidence_verified"], True, "worked admission evidence verification")
+    failures = synthetic_admission.verify_outputs(
+        RELEASE / "pevl_bench/admission_results", protocol
+    )
+    if failures:
+        raise VerificationError(
+            "synthetic admission decisions failed: " + "; ".join(failures)
+        )
+    return {
+        "status": "verified",
+        "protocol_bundle_sha256": protocol.bundle_sha256,
+        "worked_example_claim_class": example["permitted_claim_class"],
+        "worked_example_external_scientific_provenance_verified": example[
+            "external_scientific_provenance_verified"
+        ],
+        "worked_example_trust_anchor": example["evidence_trust_anchor"],
+        "synthetic_modes_routed": 5,
+    }
+
+
+def _parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description="Verify the exact release tree and independently reaggregate retained evidence."
+    )
+    parser.add_argument(
+        "--expected-manifest-sha256",
+        help=(
+            "optional external trust anchor; without it verification establishes "
+            "internal consistency only"
+        ),
+    )
+    return parser
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = _parser().parse_args(argv)
     report = {
         "status": "PASS",
         "scope": "engine-independent processed review package",
         "protocol_commit": PROTOCOL_COMMIT,
-        "manifest": verify_manifest(),
+        "manifest": verify_manifest(args.expected_manifest_sha256),
         "synthetic": verify_synthetic(),
+        "admission": verify_admission(),
         "historical": verify_historical(),
         "preflight": verify_preflight(),
         "stress": verify_stress(),

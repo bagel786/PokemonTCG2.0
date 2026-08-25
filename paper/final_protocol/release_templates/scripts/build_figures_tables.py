@@ -36,9 +36,15 @@ def load_json(name: str) -> Any:
     return json.loads((SOURCE / name).read_text(encoding="utf-8"))
 
 
-def load_csv(name: str) -> list[dict[str, str]]:
+def load_csv(name: str, expected_fields: tuple[str, ...]) -> list[dict[str, str]]:
     with (SOURCE / name).open(encoding="utf-8", newline="") as handle:
-        return list(csv.DictReader(handle))
+        reader = csv.DictReader(handle)
+        observed = tuple(reader.fieldnames or ())
+        if observed != expected_fields:
+            raise ValueError(
+                f"{name} fields differ: expected {expected_fields!r}, found {observed!r}"
+            )
+        return list(reader)
 
 
 def save_figure(figure: plt.Figure, stem: str) -> None:
@@ -101,7 +107,7 @@ def figure_2() -> None:
 
 
 def figure_3() -> None:
-    rows = load_csv("figure_3_synthetic_matrix.csv")
+    rows = load_csv("figure_3_synthetic_matrix.csv", ("mode", "level", "status"))
     modes = list(dict.fromkeys(row["mode"] for row in rows))
     levels = sorted({int(row["level"]) for row in rows})
     codes = {"pass": 0, "admit": 0, "fail": 1, "downgrade": 1, "blocked": 2, "suppress": 2}
@@ -121,11 +127,14 @@ def figure_3() -> None:
 
 
 def figure_4() -> None:
-    rows = load_csv("figure_4_timed_search.csv")
+    rows = load_csv(
+        "figure_4_timed_search.csv",
+        ("stratum", "clusters", "estimate", "quantile_2_5", "quantile_97_5"),
+    )
     labels = [row["stratum"] for row in rows]
     estimates = np.asarray([float(row["estimate"]) for row in rows])
-    low = np.asarray([float(row["ci_low"]) for row in rows])
-    high = np.asarray([float(row["ci_high"]) for row in rows])
+    low = np.asarray([float(row["quantile_2_5"]) for row in rows])
+    high = np.asarray([float(row["quantile_97_5"]) for row in rows])
     y = np.arange(len(rows))[::-1]
     figure, axis = plt.subplots(figsize=(9.2, 4.3))
     axis.errorbar(estimates, y, xerr=np.vstack([estimates - low, high - estimates]), fmt="o", color=PURPLE, ecolor=PURPLE, capsize=4)
@@ -138,11 +147,21 @@ def figure_4() -> None:
 
 
 def figure_5() -> None:
-    rows = load_csv("figure_5_factorial.csv")
+    rows = load_csv(
+        "figure_5_factorial.csv",
+        (
+            "contrast",
+            "estimate_pp",
+            "quantile_2_5_pp",
+            "quantile_97_5_pp",
+            "units",
+            "reweighting_draws",
+        ),
+    )
     labels = [row["contrast"] for row in rows]
     estimates = np.asarray([float(row["estimate_pp"]) for row in rows])
-    low = np.asarray([float(row["ci_low_pp"]) for row in rows])
-    high = np.asarray([float(row["ci_high_pp"]) for row in rows])
+    low = np.asarray([float(row["quantile_2_5_pp"]) for row in rows])
+    high = np.asarray([float(row["quantile_97_5_pp"]) for row in rows])
     y = np.arange(len(rows))[::-1]
     figure, axis = plt.subplots(figsize=(9.2, 4.0))
     axis.axvline(0, color=MUTED, linewidth=1)
@@ -158,20 +177,20 @@ def write_tables() -> None:
     TABLES.mkdir(parents=True, exist_ok=True)
     (TABLES / "table_1_prior_work.tex").write_text(
         "\\begin{tabular}{p{0.27\\linewidth}p{0.31\\linewidth}p{0.34\\linewidth}}\n"
-        "\\toprule\nArea & Established contribution & Role here \\\\\n+\\midrule\n"
-        "Common random numbers & Conditions and stream management & Operational evidence gates \\\\\n+"
-        "Paired-seed evaluation & Shared schedules and uncertainty & Trace-based admission checks \\\\\n+"
-        "Metamorphic and A/A testing & Invariance-based software checks & Repeat and worker profiles \\\\\n+"
-        "Simulation verification & Credibility and validation practice & Fail-closed artifact workflow \\\\\n+"
+        "\\toprule\nArea & Established contribution & Role here \\\\\n\\midrule\n"
+        "Common random numbers & Conditions and stream management & Operational evidence gates \\\\\n"
+        "Paired-seed evaluation & Shared schedules and uncertainty & Trace-based admission checks \\\\\n"
+        "Metamorphic and A/A testing & Invariance-based software checks & Repeat and worker profiles \\\\\n"
+        "Simulation verification & Credibility and validation practice & Fail-closed artifact workflow \\\\\n"
         "\\bottomrule\n\\end{tabular}\n",
         encoding="utf-8",
     )
     (TABLES / "table_2_protocol_stages.tex").write_text(
-        "\\begin{tabular}{llll}\n\\toprule\nStage & Evidence & Permitted statement & Failure action \\\\\n+\\midrule\n"
-        "Schedule & Seeds, order, seat & Matched schedule & Correct or suppress \\\\\n+"
-        "Repeatability & Digest and byte count & Bounded execution parity & Downgrade or suppress \\\\\n+"
-        "Event alignment & Event/value pairs & Ontology-bounded coupling & Seed-matched wording only \\\\\n+"
-        "Admission & Frozen map & Scoped statistical claim & Suppress disallowed claim \\\\\n+"
+        "\\begin{tabular}{llll}\n\\toprule\nStage & Evidence & Permitted statement & Failure action \\\\\n\\midrule\n"
+        "Schedule & Seeds, order, seat & Matched schedule & Correct or suppress \\\\\n"
+        "Repeatability & Digest and byte count & Bounded execution parity & Downgrade or suppress \\\\\n"
+        "Event alignment & Event/value pairs & Ontology-bounded coupling & Seed-matched wording only \\\\\n"
+        "Admission & Frozen map & Scoped statistical claim & Suppress disallowed claim \\\\\n"
         "\\bottomrule\n\\end{tabular}\n",
         encoding="utf-8",
     )
@@ -179,10 +198,10 @@ def write_tables() -> None:
     preflight = json.loads((RELEASE / "data/processed/preflight_summary.json").read_text(encoding="utf-8"))
     stress = json.loads((RELEASE / "data/processed/timed_search_stress.json").read_text(encoding="utf-8"))
     (TABLES / "table_3_prospective_results.tex").write_text(
-        "\\begin{tabular}{lrrl}\n\\toprule\nAudit & Units & Mismatches & Decision \\\\\n+\\midrule\n"
-        f"Historical outcome record & {historical['units']} & {historical['outcome_record_mismatches']} & historical contrasts suppressed \\\\\n+"
-        f"Deterministic preflight & {preflight['trajectory_units']} & {preflight['trace_mismatch_units']} & passed \\\\\n+"
-        f"Timed-search trace digest & {stress['clusters']} & {stress['trace_disagreement_clusters']} & exact repeatability rejected \\\\\n+"
+        "\\begin{tabular}{lrrl}\n\\toprule\nAudit & Units & Mismatches & Decision \\\\\n\\midrule\n"
+        f"Historical outcome record & {historical['units']} & {historical['outcome_record_mismatches']} & historical contrasts suppressed \\\\\n"
+        f"Deterministic preflight & {preflight['trajectory_units']} & {preflight['trace_mismatch_units']} & passed \\\\\n"
+        f"Timed-search trace digest & {stress['clusters']} & {stress['trace_disagreement_clusters']} & exact repeatability rejected \\\\\n"
         "\\bottomrule\n\\end{tabular}\n",
         encoding="utf-8",
     )
@@ -193,10 +212,15 @@ def write_tables() -> None:
         "training_main": "Training",
         "interaction": "Interaction",
     }
-    lines = ["\\begin{tabular}{lrr}", "\\toprule", "Contrast & Estimate (pp) & 95\\% interval (pp) \\\\", "\\midrule"]
+    lines = [
+        "\\begin{tabular}{lrr}",
+        "\\toprule",
+        "Contrast & Estimate (pp) & Empirical reweighting 2.5--97.5\\% quantiles (pp) \\\\",
+        "\\midrule",
+    ]
     for key in labels:
         row = factorial["contrasts"][key]
-        low, high = row["bootstrap_95_ci"]
+        low, high = row["quantiles_2_5_97_5"]
         lines.append(f"{labels[key]} & {100 * row['estimate']:.2f} & [{100 * low:.2f}, {100 * high:.2f}] \\\\")
     lines.extend(["\\bottomrule", "\\end{tabular}", ""])
     (TABLES / "table_4_factorial.tex").write_text("\n".join(lines), encoding="utf-8")

@@ -1,5 +1,6 @@
 {
   "failure_action": "suppress or downgrade the affected claim",
+  "level_6_boundary": "fixed-battery descriptive contrast and empirical reweighting only",
   "levels": [
     {
       "label": "Artifact identity",

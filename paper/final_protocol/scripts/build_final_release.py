@@ -57,10 +57,33 @@ PROTOCOLS = {
     "protocol_representation": "REPRESENTATION_ABLATION_PROTOCOL.md",
 }
 TEMPLATE_FILES = {
+    "docs/ADMISSION_DECISION_TABLE.md",
+    "docs/WORKED_ADMISSION_EXAMPLE.md",
+    "examples/example_evidence.json",
+    "examples/evidence/candidate_agent.txt",
+    "examples/evidence/candidate_trace.txt",
+    "examples/evidence/condition.txt",
+    "examples/evidence/configuration.json",
+    "examples/evidence/control_agent.txt",
+    "examples/evidence/control_trace_fresh.txt",
+    "examples/evidence/control_trace_worker.txt",
+    "examples/evidence/engine.txt",
+    "examples/evidence/initial_state.txt",
+    "examples/evidence/protocol.txt",
+    "examples/evidence/runner.txt",
     "pevl_bench/__init__.py",
     "pevl_bench/__main__.py",
+    "pevl_bench/admission.py",
+    "pevl_bench/evidence.py",
+    "pevl_bench/schema_subset.py",
+    "pevl_bench/synthetic_admission.py",
+    "protocol/admission_rules.json",
+    "protocol/admission_schema.json",
+    "protocol/claim_classes.json",
+    "protocol/evidence_bundle_schema.json",
     "scripts/verify_release.py",
     "scripts/build_figures_tables.py",
+    "tests/test_admission_hardening.py",
     "tests/test_release.py",
 }
 SOURCE_DATA_FILES = {
@@ -453,8 +476,11 @@ def build_preflight(stage: Path) -> None:
 
 def build_stress(stage: Path) -> None:
     source = load_json(PINNED_INPUTS["stress_summary"][0])
+    remediated = load_json(FINAL / "source_data/processed_stress.json")
     require(source.get("protocol_commit"), PROTOCOL_COMMIT, "stress protocol commit")
     require(source.get("status"), "TRACE_DIVERGENCE", "stress status")
+    require(remediated.get("protocol_commit"), PROTOCOL_COMMIT, "remediated stress protocol commit")
+    require(remediated.get("status"), "TRACE_DIVERGENCE", "remediated stress status")
     grouped: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
     rows = source.get("cluster_rows")
     if not isinstance(rows, list):
@@ -476,31 +502,33 @@ def build_stress(stage: Path) -> None:
                 "error_disagreement": bool(row["error_disagreement"]),
                 "policy_error_present": bool(row["policy_error_present"]),
             })
-    strata: dict[str, Any] = {}
-    for key, value in source["strata"].items():
-        private, order = key.split("/", 1)
-        strata[f"{context(private)}/{order}"] = value
-    allowed = {
-        key: source[key]
-        for key in (
-            "schema_version", "analysis_id", "protocol_commit", "status", "clusters", "executions",
-            "trace_disagreement_clusters", "outcome_disagreement_clusters",
-            "decision_count_disagreement_clusters", "error_disagreement_clusters",
-            "policy_error_present_clusters", "trace_disagreement", "bootstrap_note",
-            "pevl_level_6_boundary", "first_divergence_actor_counts",
-        )
-    }
+    for key in (
+        "clusters", "executions", "trace_disagreement_clusters",
+        "outcome_disagreement_clusters", "decision_count_disagreement_clusters",
+        "error_disagreement_clusters", "policy_error_present_clusters",
+    ):
+        require(remediated[key], source[key], f"remediated stress {key}")
+    require(
+        set(remediated["strata"]),
+        {f"{context(key.split('/', 1)[0])}/{key.split('/', 1)[1]}" for key in source["strata"]},
+        "remediated stress strata",
+    )
+    allowed = {key: value for key, value in remediated.items() if key != "cluster_rows"}
     allowed["cluster_rows"] = released_rows
-    allowed["strata"] = strata
     allowed["trace_payloads_included"] = False
-    allowed["earliest_divergence_boundary"] = "All localized earliest differences occurred on recorded opponent-action events; this does not establish a unique cause."
+    allowed["earliest_divergence_localization_included"] = False
+    allowed["earliest_divergence_localization_reason"] = (
+        "The review package contains no raw trace lines from which to verify an earliest event or actor."
+    )
     write_json(stage / "data/processed/timed_search_stress.json", allowed)
 
 
 def build_factorial(stage: Path) -> None:
     summary = load_json(PINNED_INPUTS["factorial_summary"][0])
+    remediated = load_json(FINAL / "source_data/processed_factorial.json")
     require(summary.get("protocol_commit"), PROTOCOL_COMMIT, "factorial protocol commit")
     require(summary.get("status"), "ADMITTED_SEED_MATCHED", "factorial status")
+    require(remediated.get("protocol_commit"), PROTOCOL_COMMIT, "remediated factorial protocol commit")
     with PINNED_INPUTS["factorial_units"][0].open(encoding="utf-8", newline="") as handle:
         reader = csv.DictReader(handle)
         rows = list(reader)
@@ -515,9 +543,15 @@ def build_factorial(stage: Path) -> None:
     fields = ("context",) + expected_source_fields[1:]
     released = [{"context": context(row["opponent"]), **{key: row[key] for key in expected_source_fields[1:]}} for row in rows]
     write_csv(stage / "data/processed/factorial_units.csv", fields, released)
-    allowed = {key: value for key, value in summary.items() if key != "sources"}
-    allowed["target_population"] = "five prospectively frozen determinism-eligible contexts by two actual orders"
+    for key in ("units", "games", "control_mismatch_units", "cell_win_rates"):
+        require(remediated[key], summary[key], f"remediated factorial {key}")
+    allowed = dict(remediated)
     allowed["raw_traces_included"] = False
+    allowed["mcnemar_recalculation_included"] = False
+    allowed["mcnemar_recalculation_reason"] = (
+        "The arithmetic was checked separately but is omitted because its reference-distribution assumptions "
+        "are not established and no McNemar inference is displayed in the manuscript."
+    )
     write_json(stage / "data/processed/factorial_summary.json", allowed)
 
 
@@ -545,7 +579,11 @@ def copy_static_inputs(stage: Path) -> None:
         banner = (
             "> **Review-package transcription.** Restricted labels and local paths are neutralized. "
             "The statistical plan and identifiers are preserved, but these bytes are not the frozen source artifact. "
-            "Statements about noninspection are protocol conditions; Git proves commit ordering, not when a human inspected uncommitted files.\n\n"
+            "Original interval, p-value, finite-population, and inferential terminology records the frozen plan; "
+            "the current article admits only fixed-battery descriptive contrasts and empirical reweighting sensitivities. "
+            "Statements about noninspection are protocol conditions; Git proves commit ordering, not when a human inspected uncommitted files. "
+            "Historical statements below about package contents are not current availability claims: the package actually distributed is defined "
+            "by the release manifest, README, and processed metadata, which omit unverifiable first-divergence positions and actors.\n\n"
         )
         destination = stage / "docs/protocols" / destination_name
         destination.parent.mkdir(parents=True, exist_ok=True)
@@ -563,11 +601,11 @@ def copy_static_inputs(stage: Path) -> None:
 
 
 def write_metadata(stage: Path, input_report: dict[str, dict[str, str]]) -> None:
-    readme = """# Trace-based validation protocol: review and reproducibility package
+    readme = """# Pairing-assumption validation protocol: review and reproducibility package
 
-This engine-independent package accompanies the Protocol Article **“A Trace-Based
-Validation Protocol for Seed-Matched Evaluations of Black-Box Game-Playing
-Agents.”** It contains the synthetic conformance implementation, expected
+This engine-independent package accompanies the Protocol Article **“A Protocol
+for Validating Pairing Assumptions in Seed-Matched Evaluations of Black-Box
+Game-Playing Agents.”** It contains the synthetic conformance implementation, expected
 fixtures, neutralized processed diagnostics, processed factorial rows, sanitized
 protocol transcriptions, analysis checks, figure/table code, tests, hashes, and
 source data. It does not contain the restricted game engine or source, engine
@@ -579,27 +617,43 @@ packages, private observations, raw restricted traces, credentials, or archives.
 From this directory:
 
 ```bash
-python -m pevl_bench generate
-python -m pevl_bench verify
-python -m pevl_bench report
+python -B -m pevl_bench generate
+python -B -m pevl_bench verify
+python -B -m pevl_bench admit examples/example_evidence.json
+python -B -m pevl_bench explain examples/example_evidence.json
+python -B -m pevl_bench report
+python -B -m pevl_bench report --decision-table
 python -B scripts/verify_release.py
 python -B scripts/build_figures_tables.py
 python -B -m pytest -q -p no:cacheprovider
 ```
 
-When this directory is used inside the complete repository checkout, the full
-article-level rebuild is:
+When this directory is used inside the complete repository checkout, run the
+full article-level rebuild from the repository root:
 
 ```bash
-python paper/final_protocol/scripts/reproduce_all.py
+python -B paper/final_protocol/scripts/reproduce_all.py
 ```
 
 `generate` deterministically recreates the four synthetic fixture files in
-`pevl_bench/results/`; `verify` compares those bytes with the executable model;
-and `report` prints the retained headline diagnostics. `verify_release.py`
+`pevl_bench/results/` and the two synthetic-admission adapter files in
+`pevl_bench/admission_results/`; `verify` compares those bytes with the executable
+models and executes the bundled JSON Schema through the checked standard-library
+validator. `admit` accepts only the closed file-bound record-bundle
+schema, checks its canonical evidence hash, verifies every declared bundle-relative
+regular single-link artifact and trace file against its SHA-256 (and trace byte
+count), derives gate states, and then invokes the common classifier. This verifies
+declared bytes and internal record consistency; scientific roles and provenance
+still require an external trust anchor. `classify-trusted` remains available for explicitly
+prevalidated state files, but its output clearly records that it did not verify
+scientific evidence. `explain` identifies the blocking gate, wording boundary,
+and required redesign; and `report` prints the retained headline diagnostics or
+the generated admission decision table. `verify_release.py`
 independently reaggregates 2,800 historical repeated-control units, 1,000
 deterministic preflight units (3,000 executions), 200 timed-search clusters, and
-2,000 factorial units, including the frozen 100,000-draw bootstrap procedures.
+2,000 factorial units, including the frozen 100,000-draw empirical reweighting
+procedures. Those quantiles describe the retained fixed batteries and are not
+population confidence intervals.
 
 ## Evidence boundary
 
@@ -607,7 +661,7 @@ The historical CSV retains only the three available control records (win, draw,
 and decision count), not complete traces. The preflight CSV retains trace digests
 and byte counts plus outcome/error/decision summaries, not raw observations or
 opaque search state. The stress file retains cluster-level disagreement flags and
-localized actor counts, not raw traces. The factorial CSV retains schedule,
+explicitly omits unverifiable earliest-event or actor localization, not raw traces. The factorial CSV retains schedule,
 outcome, and decision-count fields; trace digests were not captured for that
 acquisition. Neutral context labels are stable within this package but are not
 external entity identifiers.
@@ -616,9 +670,12 @@ external entity identifiers.
 
 `MANIFEST.sha256` covers every staged payload except itself. The release
 builder rejects extra files, links, executable/archive formats, local absolute
-paths, secret-like assignments, and known private identifiers. Python cache
-files created during local verification are explicitly ignored by the runtime manifest
-checker; they are absent from the built package.
+paths, secret-like assignments, and known private identifiers. The runtime
+manifest checker requires the exact manifest tree and rejects caches, `.pyc` or
+`.pyo` files, links, and every other extra entry. Running it without an external
+pin establishes internal consistency only and says so in its JSON report. If an
+independently recorded manifest digest is available, pass it with
+`--expected-manifest-sha256` to bind verification to that external trust anchor.
 
 This is a local review candidate, not an authorized archive deposit or public
 release.
@@ -651,7 +708,7 @@ no DOI is supplied and `LICENSE` grants no permission. Do not cite the incomplet
         "message: >-\n"
         "  Human author metadata is not supplied; do not treat this review metadata as a final citation.\n"
         "title: >-\n"
-        "  A Trace-Based Validation Protocol for Seed-Matched Evaluations of Black-Box Game-Playing Agents\n"
+        "  A Protocol for Validating Pairing Assumptions in Seed-Matched Evaluations of Black-Box Game-Playing Agents\n"
         "type: dataset\n"
         "version: review-candidate-2026-08-24\n"
         "abstract: >-\n"
@@ -668,11 +725,12 @@ no DOI is supplied and `LICENSE` grants no permission. Do not cite the incomplet
         "citation_metadata": "INCOMPLETE_HUMAN_AUTHOR_METADATA",
         "doi": None,
         "license": "NO_LICENSE_GRANTED_PENDING_HUMAN_CONFIRMATION",
+        "machine_verification_scope": "technical internal consistency only; not human, legal, licensing, archival, or publication readiness",
         "protocol_commit": PROTOCOL_COMMIT,
         "release_status": "BUILT_FOR_REVIEW_NOT_AUTHORIZED_FOR_PUBLICATION",
         "restricted_material_included": False,
         "source_inputs": input_report,
-        "title": "A Trace-Based Validation Protocol for Seed-Matched Evaluations of Black-Box Game-Playing Agents",
+        "title": "A Protocol for Validating Pairing Assumptions in Seed-Matched Evaluations of Black-Box Game-Playing Agents",
     })
     python_version = ".".join(str(value) for value in sys.version_info[:3])
     versions = {
@@ -700,9 +758,7 @@ def expected_files(include_manifest: bool) -> set[str]:
         "README.md", "LICENSE", "CITATION.cff", "THIRD_PARTY_NOTICES.md",
         "RELEASE_STATUS.json", "requirements-lock.txt", "environment.yml",
         "generated/results_macros.tex",
-        "pevl_bench/__init__.py", "pevl_bench/__main__.py", "pevl_bench/synthetic.py",
-        "scripts/verify_release.py", "scripts/build_figures_tables.py",
-        "tests/test_release.py", "tests/test_equations.py",
+        "pevl_bench/synthetic.py", "tests/test_equations.py",
         "data/processed/historical_control_repetition.csv",
         "data/processed/historical_summary.json",
         "data/processed/preflight_units.csv",
@@ -711,7 +767,12 @@ def expected_files(include_manifest: bool) -> set[str]:
         "data/processed/factorial_units.csv",
         "data/processed/factorial_summary.json",
     }
+    files.update(TEMPLATE_FILES)
     files.update(f"pevl_bench/results/{name}" for name in ("MANIFEST.sha256", "pevl_matrix.csv", "pevl_results.json", "pevl_results.schema.json"))
+    files.update(
+        f"pevl_bench/admission_results/{name}"
+        for name in ("MANIFEST.sha256", "synthetic_admission_decisions.json")
+    )
     files.update(f"docs/protocols/{name}" for name in PROTOCOLS.values())
     files.update(f"source_data/{name}" for name in SOURCE_DATA_FILES)
     files.update(f"figures/{stem}.{suffix}" for stem in FIGURE_STEMS for suffix in ("pdf", "png"))
@@ -738,10 +799,23 @@ def inspect_tree(root: Path) -> set[str]:
 
 def validate_exact_tree(root: Path, expected: set[str]) -> None:
     actual = inspect_tree(root)
-    if actual != expected:
+    actual_directories = {
+        path.relative_to(root).as_posix()
+        for path in root.rglob("*")
+        if path.is_dir() and not path.is_symlink()
+    }
+    expected_directories = {
+        parent.as_posix()
+        for relative in expected
+        for parent in PurePosixPath(relative).parents
+        if parent.as_posix() != "."
+    }
+    if actual != expected or actual_directories != expected_directories:
         raise ReleaseError(
             "release allow-list mismatch: "
-            f"missing={sorted(expected - actual)}, extra={sorted(actual - expected)}"
+            f"missing={sorted(expected - actual)}, extra={sorted(actual - expected)}, "
+            f"missing_directories={sorted(expected_directories - actual_directories)}, "
+            f"extra_directories={sorted(actual_directories - expected_directories)}"
         )
 
 
@@ -854,12 +928,42 @@ def run_stage_checks(stage: Path) -> dict[str, Any]:
     write_manifest(stage)
     manifest = verify_manifest(stage)
     protected = capture_hashes(stage, expected_files(True))
-    subprocess.run([sys.executable, "-B", "scripts/verify_release.py"], cwd=stage, env=env, check=True)
+    stage_manifest_sha256 = sha256(stage / "MANIFEST.sha256")
+    verified = subprocess.run(
+        [
+            sys.executable,
+            "-B",
+            "scripts/verify_release.py",
+            "--expected-manifest-sha256",
+            stage_manifest_sha256,
+        ],
+        cwd=stage,
+        env=env,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    verifier_report = json.loads(verified.stdout)
+    require(verifier_report.get("status"), "PASS", "release verifier status")
+    require(
+        verifier_report.get("manifest", {}).get("manifest_sha256"),
+        stage_manifest_sha256,
+        "release verifier manifest provenance",
+    )
     purge_runtime_caches(stage)
     require_unchanged(stage, protected, "release verifier modified protected files")
     validate_exact_tree(stage, expected_files(True))
     scan_release(stage)
-    return {"manifest": manifest, "scan": scan}
+    return {
+        "manifest": {**manifest, "sha256": stage_manifest_sha256},
+        "scan": scan,
+        "verification_provenance": {
+            "release_verifier_status": verifier_report["status"],
+            "release_verifier_manifest_trust": verifier_report["manifest"]["trust_anchor"],
+            "protocol_bundle_sha256": verifier_report["admission"]["protocol_bundle_sha256"],
+            "synthetic_json_schema": verifier_report["synthetic"]["json_schema"],
+        },
+    }
 
 
 def publish(stage: Path) -> str:

@@ -1,0 +1,1432 @@
+{
+  "audit_id": "independent-raw-row-statistics-v1",
+  "authoritative_source_hierarchy": [
+    "Git-tracked retained raw acquisition row arrays under paper/data/*/raw",
+    "prospectively frozen protocol and declared analysis units",
+    "prospectively frozen executable for details left ambiguous by the protocol prose (interpretation only, never imported for row values)",
+    "this independent executable reaggregation",
+    "processed summaries, generated macros, figures, and manuscript prose (comparison targets only)"
+  ],
+  "conflicts": [],
+  "displayed_value_audit": {
+    "factorial_macro_checks": {
+      "interaction": {
+        "expected": [
+          "+1.30",
+          "-1.85",
+          "+4.45"
+        ],
+        "observed": [
+          "+1.30",
+          "-1.85",
+          "+4.45"
+        ],
+        "status": "MATCH"
+      },
+      "primary_c4_minus_c1": {
+        "expected": [
+          "+0.55",
+          "-2.05",
+          "+3.15"
+        ],
+        "observed": [
+          "+0.55",
+          "-2.05",
+          "+3.15"
+        ],
+        "status": "MATCH"
+      },
+      "representation_main": {
+        "expected": [
+          "+0.95",
+          "-1.08",
+          "+3.00"
+        ],
+        "observed": [
+          "+0.95",
+          "-1.08",
+          "+3.00"
+        ],
+        "status": "MATCH"
+      },
+      "training_main": {
+        "expected": [
+          "-0.40",
+          "-2.03",
+          "+1.25"
+        ],
+        "observed": [
+          "-0.40",
+          "-2.03",
+          "+1.25"
+        ],
+        "status": "MATCH"
+      }
+    },
+    "figure_4_checks": {
+      "Overall": {
+        "expected": {
+          "clusters": 200,
+          "estimate": 0.495,
+          "quantile_2_5": 0.425,
+          "quantile_97_5": 0.565
+        },
+        "observed": {
+          "clusters": 200,
+          "estimate": 0.495,
+          "quantile_2_5": 0.425,
+          "quantile_97_5": 0.565
+        },
+        "status": "MATCH"
+      },
+      "Timed-search A / order 1": {
+        "expected": {
+          "clusters": 50,
+          "estimate": 0.88,
+          "quantile_2_5": 0.78,
+          "quantile_97_5": 0.96
+        },
+        "observed": {
+          "clusters": 50,
+          "estimate": 0.88,
+          "quantile_2_5": 0.78,
+          "quantile_97_5": 0.96
+        },
+        "status": "MATCH"
+      },
+      "Timed-search A / order 2": {
+        "expected": {
+          "clusters": 50,
+          "estimate": 0.96,
+          "quantile_2_5": 0.9,
+          "quantile_97_5": 1.0
+        },
+        "observed": {
+          "clusters": 50,
+          "estimate": 0.96,
+          "quantile_2_5": 0.9,
+          "quantile_97_5": 1.0
+        },
+        "status": "MATCH"
+      },
+      "Timed-search B / order 1": {
+        "expected": {
+          "clusters": 50,
+          "estimate": 0.08,
+          "quantile_2_5": 0.02,
+          "quantile_97_5": 0.16
+        },
+        "observed": {
+          "clusters": 50,
+          "estimate": 0.08,
+          "quantile_2_5": 0.02,
+          "quantile_97_5": 0.16
+        },
+        "status": "MATCH"
+      },
+      "Timed-search B / order 2": {
+        "expected": {
+          "clusters": 50,
+          "estimate": 0.06,
+          "quantile_2_5": 0.0,
+          "quantile_97_5": 0.14
+        },
+        "observed": {
+          "clusters": 50,
+          "estimate": 0.06,
+          "quantile_2_5": 0.0,
+          "quantile_97_5": 0.14
+        },
+        "status": "MATCH"
+      }
+    },
+    "figure_5_checks": {
+      "Interaction": {
+        "expected": [
+          1.3,
+          -1.8500000000000028,
+          4.449999999999998
+        ],
+        "observed": [
+          1.3,
+          -1.8500000000000028,
+          4.449999999999998
+        ],
+        "status": "MATCH"
+      },
+      "Representation contrast": {
+        "expected": [
+          0.95,
+          -1.075000000000002,
+          2.9999999999999982
+        ],
+        "observed": [
+          0.95,
+          -1.075000000000002,
+          2.9999999999999982
+        ],
+        "status": "MATCH"
+      },
+      "Total intervention": {
+        "expected": [
+          0.5499999999999999,
+          -2.049999999999999,
+          3.1499999999999995
+        ],
+        "observed": [
+          0.5499999999999999,
+          -2.049999999999999,
+          3.1499999999999995
+        ],
+        "status": "MATCH"
+      },
+      "Training contrast": {
+        "expected": [
+          -0.4,
+          -2.0250000000000012,
+          1.2499999999999993
+        ],
+        "observed": [
+          -0.4,
+          -2.0250000000000012,
+          1.2499999999999993
+        ],
+        "status": "MATCH"
+      }
+    },
+    "macro_count_checks": {
+      "FactorialControlMismatch": {
+        "expected": "0",
+        "observed": "0",
+        "status": "MATCH"
+      },
+      "FactorialGames": {
+        "expected": "12,000",
+        "observed": "12,000",
+        "status": "MATCH"
+      },
+      "FactorialUnits": {
+        "expected": "2,000",
+        "observed": "2,000",
+        "status": "MATCH"
+      },
+      "HistoricalAvailableRecordMismatch": {
+        "expected": "458",
+        "observed": "458",
+        "status": "MATCH"
+      },
+      "HistoricalOutcomeMismatch": {
+        "expected": "210",
+        "observed": "210",
+        "status": "MATCH"
+      },
+      "HistoricalUnits": {
+        "expected": "2,800",
+        "observed": "2,800",
+        "status": "MATCH"
+      },
+      "PreflightExecutions": {
+        "expected": "3,000",
+        "observed": "3,000",
+        "status": "MATCH"
+      },
+      "PreflightJobs": {
+        "expected": "20",
+        "observed": "20",
+        "status": "MATCH"
+      },
+      "PreflightMismatches": {
+        "expected": "0",
+        "observed": "0",
+        "status": "MATCH"
+      },
+      "PreflightUnits": {
+        "expected": "1,000",
+        "observed": "1,000",
+        "status": "MATCH"
+      },
+      "ReweightingDraws": {
+        "expected": "100,000",
+        "observed": "100,000",
+        "status": "MATCH"
+      },
+      "StressClusters": {
+        "expected": "200",
+        "observed": "200",
+        "status": "MATCH"
+      },
+      "StressDecisionMismatch": {
+        "expected": "93",
+        "observed": "93",
+        "status": "MATCH"
+      },
+      "StressErrorMismatch": {
+        "expected": "0",
+        "observed": "0",
+        "status": "MATCH"
+      },
+      "StressExecutions": {
+        "expected": "800",
+        "observed": "800",
+        "status": "MATCH"
+      },
+      "StressOutcomeMismatch": {
+        "expected": "47",
+        "observed": "47",
+        "status": "MATCH"
+      },
+      "StressTraceMismatch": {
+        "expected": "99",
+        "observed": "99",
+        "status": "MATCH"
+      }
+    },
+    "mcnemar_recalculation": {
+      "c1_only_wins": 347,
+      "c4_only_wins": 358,
+      "displayed_in_manuscript": false,
+      "exact_two_sided_p": 0.7064831563628252,
+      "interpretation": "Numerically verified but not admitted for manuscript inference because its reference-distribution assumptions are not established."
+    },
+    "percentage_inventory": {
+      "factorial": {
+        "cell_win_percentages": {
+          "C1": 61.8,
+          "C2": 62.1,
+          "C3": 60.75000000000001,
+          "C4": 62.35000000000001
+        },
+        "contrast_percentage_points": {
+          "interaction": {
+            "estimate": 1.3,
+            "reweighting_quantiles": [
+              -1.8500000000000028,
+              4.449999999999998
+            ]
+          },
+          "primary_c4_minus_c1": {
+            "estimate": 0.5499999999999999,
+            "reweighting_quantiles": [
+              -2.049999999999999,
+              3.1499999999999995
+            ]
+          },
+          "representation_main": {
+            "estimate": 0.95,
+            "reweighting_quantiles": [
+              -1.075000000000002,
+              2.9999999999999982
+            ]
+          },
+          "training_main": {
+            "estimate": -0.4,
+            "reweighting_quantiles": [
+              -2.0250000000000012,
+              1.2499999999999993
+            ]
+          }
+        }
+      },
+      "historical": {
+        "available_record_disagreement_percent": 16.357142857142858,
+        "outcome_disagreement_percent": 7.5
+      },
+      "preflight": {
+        "any_required_disagreement_percent": 0.0,
+        "decision_count_disagreement_percent": 0.0,
+        "error_disagreement_percent": 0.0,
+        "outcome_disagreement_percent": 0.0,
+        "trace_byte_count_disagreement_percent": 0.0,
+        "trace_digest_disagreement_percent": 0.0,
+        "trace_projection_disagreement_percent": 0.0
+      },
+      "stress": {
+        "alternative_fixed_composition_quantiles_percent": [
+          46.0,
+          53.0
+        ],
+        "any_required_disagreement_percent": 49.5,
+        "decision_count_disagreement_percent": 46.5,
+        "error_disagreement_percent": 0.0,
+        "outcome_disagreement_percent": 23.5,
+        "specified_pooled_quantiles_percent": [
+          42.5,
+          56.49999999999999
+        ],
+        "strata": {
+          "dipplin/first": {
+            "estimate_percent": 8.0,
+            "quantiles_percent": [
+              2.0,
+              16.0
+            ]
+          },
+          "dipplin/second": {
+            "estimate_percent": 6.0,
+            "quantiles_percent": [
+              0.0,
+              14.000000000000002
+            ]
+          },
+          "starmie/first": {
+            "estimate_percent": 88.0,
+            "quantiles_percent": [
+              78.0,
+              96.0
+            ]
+          },
+          "starmie/second": {
+            "estimate_percent": 96.0,
+            "quantiles_percent": [
+              90.0,
+              100.0
+            ]
+          }
+        },
+        "trace_byte_count_disagreement_percent": 48.0,
+        "trace_digest_disagreement_percent": 49.5,
+        "trace_projection_disagreement_percent": 49.5
+      }
+    },
+    "scope": "All central percentages, percentage-point quantities, and 2.5th/97.5th empirical reweighting quantiles displayed through results_macros.tex and the timed-search/factorial figure source CSVs.",
+    "stress_overall": {
+      "alternative_stratified_sensitivity": {
+        "estimate_percent": 49.5,
+        "quantile_2_5_percent": 46.0,
+        "quantile_97_5_percent": 53.0
+      },
+      "displayed": {
+        "estimate_percent": 49.5,
+        "quantile_2_5_percent": 42.5,
+        "quantile_97_5_percent": 56.5
+      },
+      "matches_alternative_fixed_composition_sensitivity": false,
+      "matches_specified_pooled": true,
+      "protocol_interpretation": {
+        "conclusion": "The specified overall result has pooled whole-cluster 2.5th and 97.5th reweighting quantiles [0.425, 0.565]. The within-stratum fixed-composition quantiles [0.46, 0.53] are a useful alternative sensitivity result, not a factual correction.",
+        "executable_evidence": [
+          "Frozen analyzer lines 350-353 compute four separate stratum resampling distributions.",
+          "Frozen analyzer lines 374-376 compute the overall distribution by passing all 200 cluster indicators to one pooled resampling procedure."
+        ],
+        "finding_status": "PROSE_AMBIGUITY_RESOLVED_BY_FROZEN_EXECUTABLE",
+        "prose_evidence": [
+          "Protocol lines 115-116 define the seed-condition as the statistical/resampling cluster and say results are stratified by opponent and order.",
+          "Protocol lines 165-168 specify 100,000 cluster draws over seed-condition units but do not say that the overall resampling occurs within strata; the factorial language explicitly does say within strata."
+        ],
+        "recommended_wording": "Report pooled whole-cluster empirical reweighting quantiles for the 200-cluster fixed battery, report the four opponent-by-order quantiles separately, and do not label the pooled result stratified or a confidence interval."
+      },
+      "specified_pooled": {
+        "estimate_percent": 49.5,
+        "quantile_2_5_percent": 42.5,
+        "quantile_97_5_percent": 56.49999999999999
+      }
+    }
+  },
+  "factorial": {
+    "analysis_unit": "opponent x actual-order x seed-condition paired unit with one aligned C1/C2/C3/C4 outcome vector",
+    "candidate_executions": 6000,
+    "cell_win_counts": {
+      "C1": 1236,
+      "C2": 1242,
+      "C3": 1215,
+      "C4": 1247
+    },
+    "cell_win_percentages": {
+      "C1": 61.8,
+      "C2": 62.1,
+      "C3": 60.75000000000001,
+      "C4": 62.35000000000001
+    },
+    "cell_win_rates": {
+      "C1": 0.618,
+      "C2": 0.621,
+      "C3": 0.6075,
+      "C4": 0.6235
+    },
+    "conceptual_cell_observations": 8000,
+    "contrasts": {
+      "interaction": {
+        "estimate": 0.013,
+        "estimate_percentage_points": 1.3,
+        "resampling_unit": "whole paired cell-outcome vector within each opponent x actual-order stratum",
+        "reweighting_draws": 100000,
+        "reweighting_quantiles_2_5_97_5": [
+          -0.018500000000000027,
+          0.044499999999999984
+        ],
+        "reweighting_seed": 2026083117,
+        "rng_order": "1000-draw batches, then sorted stratum key",
+        "stratum_weighting": "equal"
+      },
+      "primary_c4_minus_c1": {
+        "estimate": 0.0055,
+        "estimate_percentage_points": 0.5499999999999999,
+        "resampling_unit": "whole paired cell-outcome vector within each opponent x actual-order stratum",
+        "reweighting_draws": 100000,
+        "reweighting_quantiles_2_5_97_5": [
+          -0.02049999999999999,
+          0.03149999999999999
+        ],
+        "reweighting_seed": 2026083117,
+        "rng_order": "1000-draw batches, then sorted stratum key",
+        "stratum_weighting": "equal"
+      },
+      "representation_main": {
+        "estimate": 0.0095,
+        "estimate_percentage_points": 0.95,
+        "resampling_unit": "whole paired cell-outcome vector within each opponent x actual-order stratum",
+        "reweighting_draws": 100000,
+        "reweighting_quantiles_2_5_97_5": [
+          -0.01075000000000002,
+          0.02999999999999998
+        ],
+        "reweighting_seed": 2026083117,
+        "rng_order": "1000-draw batches, then sorted stratum key",
+        "stratum_weighting": "equal"
+      },
+      "training_main": {
+        "estimate": -0.004,
+        "estimate_percentage_points": -0.4,
+        "resampling_unit": "whole paired cell-outcome vector within each opponent x actual-order stratum",
+        "reweighting_draws": 100000,
+        "reweighting_quantiles_2_5_97_5": [
+          -0.02025000000000001,
+          0.012499999999999994
+        ],
+        "reweighting_seed": 2026083117,
+        "rng_order": "1000-draw batches, then sorted stratum key",
+        "stratum_weighting": "equal"
+      }
+    },
+    "mcnemar": {
+      "c1_only_wins": 347,
+      "c4_only_wins": 358,
+      "discordant_units": 705,
+      "exact_two_sided_p": 0.7064831563628252
+    },
+    "order_checks": {
+      "orders": [
+        "first",
+        "second"
+      ],
+      "second_order_seed_offset": 1000000,
+      "units_per_context_order": 200
+    },
+    "policy_error_executions": 0,
+    "raw_execution_rows": 12000,
+    "repeated_control_executions": 6000,
+    "repeated_control_mismatches": {
+      "available_record_disagreement_units": 0,
+      "decision_count_disagreement_units": 0,
+      "error_disagreement_units": 0,
+      "outcome_disagreement_units": 0
+    },
+    "repeated_control_units": 2000,
+    "simple_effects": {
+      "c2_minus_c1": 0.003,
+      "c3_minus_c1": -0.0105,
+      "c4_minus_c1": 0.0055,
+      "c4_minus_c2": 0.0025,
+      "c4_minus_c3": 0.016
+    },
+    "strata": 10,
+    "units_per_cell": 2000,
+    "units_per_stratum": 200
+  },
+  "historical": {
+    "analysis_unit": "opponent x actual-order x seed-condition cluster containing three separately acquired C1 control executions",
+    "available_record_disagreement_percent": 16.357142857142858,
+    "available_record_disagreement_units": 458,
+    "by_context": {
+      "alakazam_no_search": {
+        "available_record_disagreement_percent": 0.0,
+        "available_record_disagreement_units": 0,
+        "decision_count_disagreement_units": 0,
+        "error_disagreement_units": 0,
+        "outcome_disagreement_percent": 0.0,
+        "outcome_disagreement_units": 0,
+        "outcome_or_error_disagreement_units": 0,
+        "units": 400
+      },
+      "b0": {
+        "available_record_disagreement_percent": 0.0,
+        "available_record_disagreement_units": 0,
+        "decision_count_disagreement_units": 0,
+        "error_disagreement_units": 0,
+        "outcome_disagreement_percent": 0.0,
+        "outcome_disagreement_units": 0,
+        "outcome_or_error_disagreement_units": 0,
+        "units": 400
+      },
+      "d842_runtime": {
+        "available_record_disagreement_percent": 0.0,
+        "available_record_disagreement_units": 0,
+        "decision_count_disagreement_units": 0,
+        "error_disagreement_units": 0,
+        "outcome_disagreement_percent": 0.0,
+        "outcome_disagreement_units": 0,
+        "outcome_or_error_disagreement_units": 0,
+        "units": 400
+      },
+      "dipplin": {
+        "available_record_disagreement_percent": 20.25,
+        "available_record_disagreement_units": 81,
+        "decision_count_disagreement_units": 80,
+        "error_disagreement_units": 0,
+        "outcome_disagreement_percent": 4.75,
+        "outcome_disagreement_units": 19,
+        "outcome_or_error_disagreement_units": 19,
+        "units": 400
+      },
+      "master_v1": {
+        "available_record_disagreement_percent": 0.0,
+        "available_record_disagreement_units": 0,
+        "decision_count_disagreement_units": 0,
+        "error_disagreement_units": 0,
+        "outcome_disagreement_percent": 0.0,
+        "outcome_disagreement_units": 0,
+        "outcome_or_error_disagreement_units": 0,
+        "units": 400
+      },
+      "replay_refresh": {
+        "available_record_disagreement_percent": 0.0,
+        "available_record_disagreement_units": 0,
+        "decision_count_disagreement_units": 0,
+        "error_disagreement_units": 0,
+        "outcome_disagreement_percent": 0.0,
+        "outcome_disagreement_units": 0,
+        "outcome_or_error_disagreement_units": 0,
+        "units": 400
+      },
+      "starmie": {
+        "available_record_disagreement_percent": 94.25,
+        "available_record_disagreement_units": 377,
+        "decision_count_disagreement_units": 377,
+        "error_disagreement_units": 0,
+        "outcome_disagreement_percent": 47.75,
+        "outcome_disagreement_units": 191,
+        "outcome_or_error_disagreement_units": 191,
+        "units": 400
+      }
+    },
+    "candidate_executions_not_used_in_mismatch_count": 8400,
+    "contexts": 7,
+    "control_executions_compared": 8400,
+    "decision_count_disagreement_units": 457,
+    "error_disagreement_units": 0,
+    "order_checks": {
+      "orders": [
+        "first",
+        "second"
+      ],
+      "second_order_seed_offset": 1000000,
+      "units_per_context_order": 200
+    },
+    "outcome_disagreement_percent": 7.5,
+    "outcome_disagreement_units": 210,
+    "outcome_or_error_disagreement_units": 210,
+    "projection_definitions": {
+      "available_record": [
+        "win",
+        "draw",
+        "hero_policy_errors",
+        "opponent_policy_errors",
+        "decisions"
+      ],
+      "decision_count": [
+        "decisions"
+      ],
+      "error": [
+        "hero_policy_errors",
+        "opponent_policy_errors"
+      ],
+      "outcome": [
+        "win",
+        "draw"
+      ]
+    },
+    "raw_acquisition_rows": 16800,
+    "strata": 14,
+    "units": 2800
+  },
+  "independence_boundary": "No production analyzer, processed unit CSV, or processed summary supplies a numerator, denominator, outcome, mismatch flag, or reweighting input. Processed display artifacts are read only after raw-row calculation.",
+  "limitations": [
+    "The tracked stress rows contain trace digests and byte counts but not the restricted trace lines; earliest-divergence actor localization is outside this row-level numerical audit.",
+    "Empirical reweighting quantiles condition on the fixed engineering battery and do not describe a sampled population of new opponents, seeds, hardware contexts, or training runs."
+  ],
+  "preflight": {
+    "analysis_unit": "arm x opponent x actual-order x seed-condition trajectory unit containing three executions",
+    "any_required_disagreement_units": 0,
+    "arms": 4,
+    "contexts": 5,
+    "decision_count_disagreement_units": 0,
+    "error_disagreement_units": 0,
+    "executions": 3000,
+    "job_rows": [
+      {
+        "any_required_disagreement_units": 0,
+        "arm": "C1",
+        "context": "alakazam_no_search",
+        "decision_count_disagreement_units": 0,
+        "error_disagreement_units": 0,
+        "executions": 150,
+        "outcome_disagreement_units": 0,
+        "trace_byte_count_disagreement_units": 0,
+        "trace_digest_disagreement_units": 0,
+        "trace_projection_disagreement_units": 0,
+        "trajectory_units": 50
+      },
+      {
+        "any_required_disagreement_units": 0,
+        "arm": "C1",
+        "context": "b0",
+        "decision_count_disagreement_units": 0,
+        "error_disagreement_units": 0,
+        "executions": 150,
+        "outcome_disagreement_units": 0,
+        "trace_byte_count_disagreement_units": 0,
+        "trace_digest_disagreement_units": 0,
+        "trace_projection_disagreement_units": 0,
+        "trajectory_units": 50
+      },
+      {
+        "any_required_disagreement_units": 0,
+        "arm": "C1",
+        "context": "d842",
+        "decision_count_disagreement_units": 0,
+        "error_disagreement_units": 0,
+        "executions": 150,
+        "outcome_disagreement_units": 0,
+        "trace_byte_count_disagreement_units": 0,
+        "trace_digest_disagreement_units": 0,
+        "trace_projection_disagreement_units": 0,
+        "trajectory_units": 50
+      },
+      {
+        "any_required_disagreement_units": 0,
+        "arm": "C1",
+        "context": "master",
+        "decision_count_disagreement_units": 0,
+        "error_disagreement_units": 0,
+        "executions": 150,
+        "outcome_disagreement_units": 0,
+        "trace_byte_count_disagreement_units": 0,
+        "trace_digest_disagreement_units": 0,
+        "trace_projection_disagreement_units": 0,
+        "trajectory_units": 50
+      },
+      {
+        "any_required_disagreement_units": 0,
+        "arm": "C1",
+        "context": "replay",
+        "decision_count_disagreement_units": 0,
+        "error_disagreement_units": 0,
+        "executions": 150,
+        "outcome_disagreement_units": 0,
+        "trace_byte_count_disagreement_units": 0,
+        "trace_digest_disagreement_units": 0,
+        "trace_projection_disagreement_units": 0,
+        "trajectory_units": 50
+      },
+      {
+        "any_required_disagreement_units": 0,
+        "arm": "C2",
+        "context": "alakazam_no_search",
+        "decision_count_disagreement_units": 0,
+        "error_disagreement_units": 0,
+        "executions": 150,
+        "outcome_disagreement_units": 0,
+        "trace_byte_count_disagreement_units": 0,
+        "trace_digest_disagreement_units": 0,
+        "trace_projection_disagreement_units": 0,
+        "trajectory_units": 50
+      },
+      {
+        "any_required_disagreement_units": 0,
+        "arm": "C2",
+        "context": "b0",
+        "decision_count_disagreement_units": 0,
+        "error_disagreement_units": 0,
+        "executions": 150,
+        "outcome_disagreement_units": 0,
+        "trace_byte_count_disagreement_units": 0,
+        "trace_digest_disagreement_units": 0,
+        "trace_projection_disagreement_units": 0,
+        "trajectory_units": 50
+      },
+      {
+        "any_required_disagreement_units": 0,
+        "arm": "C2",
+        "context": "d842",
+        "decision_count_disagreement_units": 0,
+        "error_disagreement_units": 0,
+        "executions": 150,
+        "outcome_disagreement_units": 0,
+        "trace_byte_count_disagreement_units": 0,
+        "trace_digest_disagreement_units": 0,
+        "trace_projection_disagreement_units": 0,
+        "trajectory_units": 50
+      },
+      {
+        "any_required_disagreement_units": 0,
+        "arm": "C2",
+        "context": "master",
+        "decision_count_disagreement_units": 0,
+        "error_disagreement_units": 0,
+        "executions": 150,
+        "outcome_disagreement_units": 0,
+        "trace_byte_count_disagreement_units": 0,
+        "trace_digest_disagreement_units": 0,
+        "trace_projection_disagreement_units": 0,
+        "trajectory_units": 50
+      },
+      {
+        "any_required_disagreement_units": 0,
+        "arm": "C2",
+        "context": "replay",
+        "decision_count_disagreement_units": 0,
+        "error_disagreement_units": 0,
+        "executions": 150,
+        "outcome_disagreement_units": 0,
+        "trace_byte_count_disagreement_units": 0,
+        "trace_digest_disagreement_units": 0,
+        "trace_projection_disagreement_units": 0,
+        "trajectory_units": 50
+      },
+      {
+        "any_required_disagreement_units": 0,
+        "arm": "C3",
+        "context": "alakazam_no_search",
+        "decision_count_disagreement_units": 0,
+        "error_disagreement_units": 0,
+        "executions": 150,
+        "outcome_disagreement_units": 0,
+        "trace_byte_count_disagreement_units": 0,
+        "trace_digest_disagreement_units": 0,
+        "trace_projection_disagreement_units": 0,
+        "trajectory_units": 50
+      },
+      {
+        "any_required_disagreement_units": 0,
+        "arm": "C3",
+        "context": "b0",
+        "decision_count_disagreement_units": 0,
+        "error_disagreement_units": 0,
+        "executions": 150,
+        "outcome_disagreement_units": 0,
+        "trace_byte_count_disagreement_units": 0,
+        "trace_digest_disagreement_units": 0,
+        "trace_projection_disagreement_units": 0,
+        "trajectory_units": 50
+      },
+      {
+        "any_required_disagreement_units": 0,
+        "arm": "C3",
+        "context": "d842",
+        "decision_count_disagreement_units": 0,
+        "error_disagreement_units": 0,
+        "executions": 150,
+        "outcome_disagreement_units": 0,
+        "trace_byte_count_disagreement_units": 0,
+        "trace_digest_disagreement_units": 0,
+        "trace_projection_disagreement_units": 0,
+        "trajectory_units": 50
+      },
+      {
+        "any_required_disagreement_units": 0,
+        "arm": "C3",
+        "context": "master",
+        "decision_count_disagreement_units": 0,
+        "error_disagreement_units": 0,
+        "executions": 150,
+        "outcome_disagreement_units": 0,
+        "trace_byte_count_disagreement_units": 0,
+        "trace_digest_disagreement_units": 0,
+        "trace_projection_disagreement_units": 0,
+        "trajectory_units": 50
+      },
+      {
+        "any_required_disagreement_units": 0,
+        "arm": "C3",
+        "context": "replay",
+        "decision_count_disagreement_units": 0,
+        "error_disagreement_units": 0,
+        "executions": 150,
+        "outcome_disagreement_units": 0,
+        "trace_byte_count_disagreement_units": 0,
+        "trace_digest_disagreement_units": 0,
+        "trace_projection_disagreement_units": 0,
+        "trajectory_units": 50
+      },
+      {
+        "any_required_disagreement_units": 0,
+        "arm": "C4",
+        "context": "alakazam_no_search",
+        "decision_count_disagreement_units": 0,
+        "error_disagreement_units": 0,
+        "executions": 150,
+        "outcome_disagreement_units": 0,
+        "trace_byte_count_disagreement_units": 0,
+        "trace_digest_disagreement_units": 0,
+        "trace_projection_disagreement_units": 0,
+        "trajectory_units": 50
+      },
+      {
+        "any_required_disagreement_units": 0,
+        "arm": "C4",
+        "context": "b0",
+        "decision_count_disagreement_units": 0,
+        "error_disagreement_units": 0,
+        "executions": 150,
+        "outcome_disagreement_units": 0,
+        "trace_byte_count_disagreement_units": 0,
+        "trace_digest_disagreement_units": 0,
+        "trace_projection_disagreement_units": 0,
+        "trajectory_units": 50
+      },
+      {
+        "any_required_disagreement_units": 0,
+        "arm": "C4",
+        "context": "d842",
+        "decision_count_disagreement_units": 0,
+        "error_disagreement_units": 0,
+        "executions": 150,
+        "outcome_disagreement_units": 0,
+        "trace_byte_count_disagreement_units": 0,
+        "trace_digest_disagreement_units": 0,
+        "trace_projection_disagreement_units": 0,
+        "trajectory_units": 50
+      },
+      {
+        "any_required_disagreement_units": 0,
+        "arm": "C4",
+        "context": "master",
+        "decision_count_disagreement_units": 0,
+        "error_disagreement_units": 0,
+        "executions": 150,
+        "outcome_disagreement_units": 0,
+        "trace_byte_count_disagreement_units": 0,
+        "trace_digest_disagreement_units": 0,
+        "trace_projection_disagreement_units": 0,
+        "trajectory_units": 50
+      },
+      {
+        "any_required_disagreement_units": 0,
+        "arm": "C4",
+        "context": "replay",
+        "decision_count_disagreement_units": 0,
+        "error_disagreement_units": 0,
+        "executions": 150,
+        "outcome_disagreement_units": 0,
+        "trace_byte_count_disagreement_units": 0,
+        "trace_digest_disagreement_units": 0,
+        "trace_projection_disagreement_units": 0,
+        "trajectory_units": 50
+      }
+    ],
+    "jobs": 20,
+    "mismatch_percentages": {
+      "any_required_disagreement_percent": 0.0,
+      "decision_count_disagreement_percent": 0.0,
+      "error_disagreement_percent": 0.0,
+      "outcome_disagreement_percent": 0.0,
+      "trace_byte_count_disagreement_percent": 0.0,
+      "trace_digest_disagreement_percent": 0.0,
+      "trace_projection_disagreement_percent": 0.0
+    },
+    "order_checks": {
+      "orders": [
+        "first",
+        "second"
+      ],
+      "second_order_seed_offset": 1000000,
+      "units_per_job_order": 25
+    },
+    "orders": 2,
+    "outcome_disagreement_units": 0,
+    "profiles_per_unit": 3,
+    "trace_byte_count_disagreement_units": 0,
+    "trace_digest_disagreement_units": 0,
+    "trace_projection_disagreement_units": 0,
+    "trajectory_units": 1000,
+    "units_per_job": 50
+  },
+  "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",
+  "source_integrity": {
+    "frozen_analyzer": {
+      "git_object": "803257f102232763fc88d28c14b668f9b62eb277:paper/scripts/analyze_pevl.py",
+      "role": "resolves the prose ambiguity by specifying a pooled overall stress resampling procedure and four separate stratum procedures; it supplies no data to this audit",
+      "sha256": "e258049cedeff13cc84c82e69a43f3416639c98d4e70d25c0799f06e33ba4f7a"
+    },
+    "nonfinite_values": 0,
+    "numeric_values_checked": 422475,
+    "protocol": {
+      "path": "paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md",
+      "sha256": "8b9329b948a054fc7252b9c2662490890e0a8439ad852393c6e25f537c8b887e"
+    },
+    "role_counts": {
+      "factorial_raw_acquisition": 15,
+      "historical_raw_acquisition": 21,
+      "preflight_raw_acquisition": 20,
+      "stress_raw_acquisition": 2
+    },
+    "source_count": 58,
+    "source_manifest_sha256": "b7e9395df9816ec62e487b605949c7c2cf58860ccacc2b50353a7cda49e2eab9",
+    "sources": [
+      {
+        "path": "paper/data/ablation/raw/c2_identity_a2_alakazam_no_search.json",
+        "role": "historical_raw_acquisition",
+        "sha256": "db010f55881867bee9a9954c4de764fa86e76e500ef5ea4ac5ce2f047b7b8416"
+      },
+      {
+        "path": "paper/data/ablation/raw/c2_identity_a2_dipplin.json",
+        "role": "historical_raw_acquisition",
+        "sha256": "27155ea8810d0d466b100fe10bbe9788e2bf73d3154908fbd0cc351461ba2ffa"
+      },
+      {
+        "path": "paper/data/ablation/raw/c2_identity_a2_grim_b0.json",
+        "role": "historical_raw_acquisition",
+        "sha256": "9027d8e1f8e223a9c1302f387eccf1e3f973398fd73614ae30046400930f9233"
+      },
+      {
+        "path": "paper/data/ablation/raw/c2_identity_a2_grim_d842_runtime.json",
+        "role": "historical_raw_acquisition",
+        "sha256": "600501d6b78552e9a410e586763e9b7673b66233520b6f46aaa8221839e45592"
+      },
+      {
+        "path": "paper/data/ablation/raw/c2_identity_a2_grim_master_v1.json",
+        "role": "historical_raw_acquisition",
+        "sha256": "bcaf8401c04a180567fa38e92931e1cffb9fda0447bb2e72132379216327d005"
+      },
+      {
+        "path": "paper/data/ablation/raw/c2_identity_a2_grim_replay_refresh.json",
+        "role": "historical_raw_acquisition",
+        "sha256": "7ef754cbb07ff21899990af9f7ea1d32a6fe74da45a6c732f5d3de4cddf73926"
+      },
+      {
+        "path": "paper/data/ablation/raw/c2_identity_a2_starmie.json",
+        "role": "historical_raw_acquisition",
+        "sha256": "26c08c7ad3bd20742b44ebb80d662eb9d85c67876ade83e5a0fbb15510656b3f"
+      },
+      {
+        "path": "paper/data/ablation/raw/c3_blind_trained_alakazam_no_search.json",
+        "role": "historical_raw_acquisition",
+        "sha256": "eb611718099704492fc2b4192cd87f9dcad67fbbbc75bbbe13aec4a74848fdd0"
+      },
+      {
+        "path": "paper/data/ablation/raw/c3_blind_trained_dipplin.json",
+        "role": "historical_raw_acquisition",
+        "sha256": "fc19c0062ecd04441ca93ba5bfe5d119fde0b0e5b8c89ff79011255053d1a891"
+      },
+      {
+        "path": "paper/data/ablation/raw/c3_blind_trained_grim_b0.json",
+        "role": "historical_raw_acquisition",
+        "sha256": "b8cea10f24913d9b2c1853c847e60d3d10e748f5d891948c8071a29444d53b96"
+      },
+      {
+        "path": "paper/data/ablation/raw/c3_blind_trained_grim_d842_runtime.json",
+        "role": "historical_raw_acquisition",
+        "sha256": "0070df3c12cd02c848fee621a849efe5a626c8aa8b0af00e220819f0ce0f5883"
+      },
+      {
+        "path": "paper/data/ablation/raw/c3_blind_trained_grim_master_v1.json",
+        "role": "historical_raw_acquisition",
+        "sha256": "a53390700ebff70f0514731ecde68435061254211ab125d691da3ab71c0ee246"
+      },
+      {
+        "path": "paper/data/ablation/raw/c3_blind_trained_grim_replay_refresh.json",
+        "role": "historical_raw_acquisition",
+        "sha256": "f1d2006c08a3fda6f847998185590132a7909273bf36fcb44ac5fe16166914a1"
+      },
+      {
+        "path": "paper/data/ablation/raw/c3_blind_trained_starmie.json",
+        "role": "historical_raw_acquisition",
+        "sha256": "9d2b0c987afd49c25e5c54814263c0eace8c8cc5eabe918548e5c2664ea3bf51"
+      },
+      {
+        "path": "paper/data/fresh_confirmation/raw/alakazam_2_4a_no_search.json",
+        "role": "historical_raw_acquisition",
+        "sha256": "e414b58f370c6457e36dcd145c6dbbad80a2fad178ce3112a01fc533ca25bb65"
+      },
+      {
+        "path": "paper/data/fresh_confirmation/raw/dipplin_d1.json",
+        "role": "historical_raw_acquisition",
+        "sha256": "3892c62c01a04a8b8c24a2d824827096c72ba7b543a97407e763d53b0dd0bac1"
+      },
+      {
+        "path": "paper/data/fresh_confirmation/raw/grim_b0.json",
+        "role": "historical_raw_acquisition",
+        "sha256": "3c161a3d52c0e2ee383cb6b7493ad5ded03ab320097bb6b184a7a71d086407fb"
+      },
+      {
+        "path": "paper/data/fresh_confirmation/raw/grim_d842_runtime.json",
+        "role": "historical_raw_acquisition",
+        "sha256": "b2d325adbfa752ea2ef05cc0e6c001ca5b2624e70aa5b3230fe61f16f2032370"
+      },
+      {
+        "path": "paper/data/fresh_confirmation/raw/grim_master_v1.json",
+        "role": "historical_raw_acquisition",
+        "sha256": "c52c072d1df4dd6d8dfbbf668d2aeeee553a50b6cb12b0157a523b1d9b2b9734"
+      },
+      {
+        "path": "paper/data/fresh_confirmation/raw/grim_replay_refresh.json",
+        "role": "historical_raw_acquisition",
+        "sha256": "1c31c89df874ba793112922026db322a2c24c30341b7d71b9562e87982e081ef"
+      },
+      {
+        "path": "paper/data/fresh_confirmation/raw/starmie_v2_boss_atk.json",
+        "role": "historical_raw_acquisition",
+        "sha256": "a25e535548268f23ec364de322a5b42566da35a4b0ada4eb6b6f3bf375457ab7"
+      },
+      {
+        "path": "paper/data/pevl/factorial/raw/c2_alakazam_no_search.json",
+        "role": "factorial_raw_acquisition",
+        "sha256": "36d508dc4419371878b0c12458d340657944b7bbe7e2f56bad1e510772ca42ba"
+      },
+      {
+        "path": "paper/data/pevl/factorial/raw/c2_b0.json",
+        "role": "factorial_raw_acquisition",
+        "sha256": "c849b67724232f827d9fcca7a336e6182ac94c7807c4b624ed3e7a195bdbf55d"
+      },
+      {
+        "path": "paper/data/pevl/factorial/raw/c2_d842.json",
+        "role": "factorial_raw_acquisition",
+        "sha256": "13d67523036b175d547bcbcf9a05087c47825250b17222899a443677143e9cd9"
+      },
+      {
+        "path": "paper/data/pevl/factorial/raw/c2_master.json",
+        "role": "factorial_raw_acquisition",
+        "sha256": "27ada4a5546673f83017a6605b69b571e52ba44977e3bc566bc6adc4155a346c"
+      },
+      {
+        "path": "paper/data/pevl/factorial/raw/c2_replay.json",
+        "role": "factorial_raw_acquisition",
+        "sha256": "ef51759755e705025644090dabbbeb98d41159fd0562ad2560bb8264d16d514d"
+      },
+      {
+        "path": "paper/data/pevl/factorial/raw/c3_alakazam_no_search.json",
+        "role": "factorial_raw_acquisition",
+        "sha256": "b885d8d9685bf77b3e210d978ac810c78de7509197e75681bac27868df6acaf6"
+      },
+      {
+        "path": "paper/data/pevl/factorial/raw/c3_b0.json",
+        "role": "factorial_raw_acquisition",
+        "sha256": "2e2e2fd12e970b51621e22af7828b7d9ba2e76391f9451a2043c5c183aa8f1a4"
+      },
+      {
+        "path": "paper/data/pevl/factorial/raw/c3_d842.json",
+        "role": "factorial_raw_acquisition",
+        "sha256": "c9a9e180ebed69d4466cae5aa7e5f2a0c13c45e4857608fd60d519bf4b233b21"
+      },
+      {
+        "path": "paper/data/pevl/factorial/raw/c3_master.json",
+        "role": "factorial_raw_acquisition",
+        "sha256": "218758bec05ab48833c653d2825d3fba14db9f37186f54980c4137ce1eaf4c6e"
+      },
+      {
+        "path": "paper/data/pevl/factorial/raw/c3_replay.json",
+        "role": "factorial_raw_acquisition",
+        "sha256": "c2ab92fb07a567881d895d6a87df025f52279916b3e92f32198685882d36a998"
+      },
+      {
+        "path": "paper/data/pevl/factorial/raw/c4_alakazam_no_search.json",
+        "role": "factorial_raw_acquisition",
+        "sha256": "513cfef6d6ad4e2a7e2bcd0b7138ec038d907ad32e29385f8947482be292ff34"
+      },
+      {
+        "path": "paper/data/pevl/factorial/raw/c4_b0.json",
+        "role": "factorial_raw_acquisition",
+        "sha256": "64eb94ced8c4704819d2fc29fbf71411d83eac9c0abee94bd5f4fe26bb625110"
+      },
+      {
+        "path": "paper/data/pevl/factorial/raw/c4_d842.json",
+        "role": "factorial_raw_acquisition",
+        "sha256": "306a91fbb888e2851935964e83d24822c66c38e181450db8b0e750c10dc15327"
+      },
+      {
+        "path": "paper/data/pevl/factorial/raw/c4_master.json",
+        "role": "factorial_raw_acquisition",
+        "sha256": "f9db7c96705cbd39fc26ebe6dc255dcd4e7b15f773b88015b8ec2dbbb59eff75"
+      },
+      {
+        "path": "paper/data/pevl/factorial/raw/c4_replay.json",
+        "role": "factorial_raw_acquisition",
+        "sha256": "3f188e641c7f332f5fa601cacd8dba6237dbab91b19075f04caa8b4f3090780f"
+      },
+      {
+        "path": "paper/data/pevl/preflight/raw/c1_alakazam_no_search.json",
+        "role": "preflight_raw_acquisition",
+        "sha256": "7844c370c35a6ecdc6ab05d3e902fb7e0fb10d623093ddc9f5ea0bdf10919b41"
+      },
+      {
+        "path": "paper/data/pevl/preflight/raw/c1_b0.json",
+        "role": "preflight_raw_acquisition",
+        "sha256": "c19205bb2b5593a069b2257fd9f802e6ac25594bd9d6246afd6f632a74f7e3cd"
+      },
+      {
+        "path": "paper/data/pevl/preflight/raw/c1_d842.json",
+        "role": "preflight_raw_acquisition",
+        "sha256": "2cb1af06351851a4790acba58bb43125a0bf933f857980bf5a2c0da65437a5ef"
+      },
+      {
+        "path": "paper/data/pevl/preflight/raw/c1_master.json",
+        "role": "preflight_raw_acquisition",
+        "sha256": "10a802240062830dc922a4dab352a37e567519fac2884cf24728c027ca4fd999"
+      },
+      {
+        "path": "paper/data/pevl/preflight/raw/c1_replay.json",
+        "role": "preflight_raw_acquisition",
+        "sha256": "53ffb50029bf614fe95d3bc9a9e9bee6c32757880ccdc1f99ac5e6f220f34749"
+      },
+      {
+        "path": "paper/data/pevl/preflight/raw/c2_alakazam_no_search.json",
+        "role": "preflight_raw_acquisition",
+        "sha256": "5e320f89a3962cd37940cfc27f931b318e7b73763ef1e281bd4b0fd7d6a024c8"
+      },
+      {
+        "path": "paper/data/pevl/preflight/raw/c2_b0.json",
+        "role": "preflight_raw_acquisition",
+        "sha256": "72a48bebe8f4a6f003228f47aba1f43489d9892e2e3973f631a4d51a2252fba7"
+      },
+      {
+        "path": "paper/data/pevl/preflight/raw/c2_d842.json",
+        "role": "preflight_raw_acquisition",
+        "sha256": "ae1843682bcaf3d1a511fe8ce194705baaede500c6faefa9301f276daaa82f00"
+      },
+      {
+        "path": "paper/data/pevl/preflight/raw/c2_master.json",
+        "role": "preflight_raw_acquisition",
+        "sha256": "76e39b00ea0baa009a310cae096d48e99ff8ec459942c2305f325cdd4f1c40e6"
+      },
+      {
+        "path": "paper/data/pevl/preflight/raw/c2_replay.json",
+        "role": "preflight_raw_acquisition",
+        "sha256": "b7ec500f183238f0b211568694dea5028334044be282a8fd15dcc2cecef43958"
+      },
+      {
+        "path": "paper/data/pevl/preflight/raw/c3_alakazam_no_search.json",
+        "role": "preflight_raw_acquisition",
+        "sha256": "8c902bc88d5740b94d21e31576914455e5a6901917301b10a0614525da5c523f"
+      },
+      {
+        "path": "paper/data/pevl/preflight/raw/c3_b0.json",
+        "role": "preflight_raw_acquisition",
+        "sha256": "c59a044956d175fb6f0d43eed1e6888c9c195d59d63929dd5c5f9bb63da99b6a"
+      },
+      {
+        "path": "paper/data/pevl/preflight/raw/c3_d842.json",
+        "role": "preflight_raw_acquisition",
+        "sha256": "8d95ff7549773601f8cd0e34873d4dbcc008c5393cfa1a58d80186fb1df2c5ca"
+      },
+      {
+        "path": "paper/data/pevl/preflight/raw/c3_master.json",
+        "role": "preflight_raw_acquisition",
+        "sha256": "a1772522229932dfbd66e73bad6747a1b98b881b9da00236c3589aedf367aad5"
+      },
+      {
+        "path": "paper/data/pevl/preflight/raw/c3_replay.json",
+        "role": "preflight_raw_acquisition",
+        "sha256": "e814c53e6b5bbf680494e81dea2669cef7093fd4af9936ad0c244a38cb2834af"
+      },
+      {
+        "path": "paper/data/pevl/preflight/raw/c4_alakazam_no_search.json",
+        "role": "preflight_raw_acquisition",
+        "sha256": "ef193827053b6d32b9e1d8c0be33fe6c9ca5f1eb9368449d85249f87537ab716"
+      },
+      {
+        "path": "paper/data/pevl/preflight/raw/c4_b0.json",
+        "role": "preflight_raw_acquisition",
+        "sha256": "55866a9c661bb9b6ac317a8e0a2c35b4459fa272ac7f849eee7adc7a3c0b1891"
+      },
+      {
+        "path": "paper/data/pevl/preflight/raw/c4_d842.json",
+        "role": "preflight_raw_acquisition",
+        "sha256": "a05e64dadef9961d0feb517633f3cb25b2aa1210262d57dd6120db24ed846665"
+      },
+      {
+        "path": "paper/data/pevl/preflight/raw/c4_master.json",
+        "role": "preflight_raw_acquisition",
+        "sha256": "d237172118b87a0e423d563147aaa992ab2e54f5754f90475d64a0ecb6c222b1"
+      },
+      {
+        "path": "paper/data/pevl/preflight/raw/c4_replay.json",
+        "role": "preflight_raw_acquisition",
+        "sha256": "65fa19c99c178085e74efdee058561ba21fd998052ae64a2b0ec7c9e35e780ec"
+      },
+      {
+        "path": "paper/data/pevl/stress/raw/dipplin.json",
+        "role": "stress_raw_acquisition",
+        "sha256": "9e602ec4f55201a534582519664d0be9f2be320d976719c5cb223ceb5284ba22"
+      },
+      {
+        "path": "paper/data/pevl/stress/raw/starmie.json",
+        "role": "stress_raw_acquisition",
+        "sha256": "cf0fe2bc85e702c5713ddbd6b6aab0697244c5364d06c8b8f310ce8f5251adb3"
+      }
+    ],
+    "validation_checks": {
+      "all_generated_quantile_pairs_finite_and_ordered": true,
+      "analysis_units_explicit": true,
+      "exact_execution_row_schemas_verified": 32600,
+      "exact_source_inventory": true,
+      "exact_top_level_schemas_verified": 58,
+      "orders_and_seed_offsets_verified": true,
+      "source_hashes_verified": 58,
+      "status": "PASS",
+      "stratum_sizes_verified": true
+    }
+  },
+  "status": "PASS",
+  "timed_search_stress": {
+    "alternative_stratified_whole_cluster_sensitivity": {
+      "estimate": 0.495,
+      "resampling_unit": "whole seed-condition cluster retaining all four execution profiles",
+      "reweighting_draws": 100000,
+      "reweighting_quantiles_2_5_97_5": [
+        0.45999999999999996,
+        0.53
+      ],
+      "reweighting_seed": 2026083118,
+      "rng_order": "sorted stratum key, then all draws x all within-stratum positions",
+      "role": "fixed-composition sensitivity calculation, distinct from the pooled procedure selected by the frozen executable",
+      "strata": [
+        "dipplin/first",
+        "dipplin/second",
+        "starmie/first",
+        "starmie/second"
+      ],
+      "stratum_weighting": "equal"
+    },
+    "analysis_unit": "opponent x actual-order x seed-condition cluster containing four serial/parallel and forward/reverse executions",
+    "any_required_disagreement_clusters": 99,
+    "clusters": 200,
+    "decision_count_disagreement_clusters": 93,
+    "disagreement_percentages": {
+      "any_required_disagreement_percent": 49.5,
+      "decision_count_disagreement_percent": 46.5,
+      "error_disagreement_percent": 0.0,
+      "outcome_disagreement_percent": 23.5,
+      "trace_byte_count_disagreement_percent": 48.0,
+      "trace_digest_disagreement_percent": 49.5,
+      "trace_projection_disagreement_percent": 49.5
+    },
+    "error_disagreement_clusters": 0,
+    "executions": 800,
+    "order_checks": {
+      "clusters_per_context_order": 50,
+      "orders": [
+        "first",
+        "second"
+      ],
+      "second_order_seed_offset": 1000000
+    },
+    "outcome_disagreement_clusters": 47,
+    "profiles_per_cluster": 4,
+    "protocol_interpretation": {
+      "conclusion": "The specified overall result has pooled whole-cluster 2.5th and 97.5th reweighting quantiles [0.425, 0.565]. The within-stratum fixed-composition quantiles [0.46, 0.53] are a useful alternative sensitivity result, not a factual correction.",
+      "executable_evidence": [
+        "Frozen analyzer lines 350-353 compute four separate stratum resampling distributions.",
+        "Frozen analyzer lines 374-376 compute the overall distribution by passing all 200 cluster indicators to one pooled resampling procedure."
+      ],
+      "finding_status": "PROSE_AMBIGUITY_RESOLVED_BY_FROZEN_EXECUTABLE",
+      "prose_evidence": [
+        "Protocol lines 115-116 define the seed-condition as the statistical/resampling cluster and say results are stratified by opponent and order.",
+        "Protocol lines 165-168 specify 100,000 cluster draws over seed-condition units but do not say that the overall resampling occurs within strata; the factorial language explicitly does say within strata."
+      ],
+      "recommended_wording": "Report pooled whole-cluster empirical reweighting quantiles for the 200-cluster fixed battery, report the four opponent-by-order quantiles separately, and do not label the pooled result stratified or a confidence interval."
+    },
+    "specified_pooled_whole_cluster_reweighting": {
+      "authority": "frozen executable 803257f102232763fc88d28c14b668f9b62eb277:paper/scripts/analyze_pevl.py lines 374-376",
+      "estimate": 0.495,
+      "pooling": "all 200 fixed-battery clusters",
+      "resampling_unit": "whole seed-condition cluster retaining all four execution profiles",
+      "reweighting_draws": 100000,
+      "reweighting_quantiles_2_5_97_5": [
+        0.425,
+        0.565
+      ],
+      "reweighting_seed": 2026083118
+    },
+    "strata": {
+      "dipplin/first": {
+        "any_required_disagreement_clusters": 4,
+        "clusters": 50,
+        "decision_count_disagreement_clusters": 3,
+        "error_disagreement_clusters": 0,
+        "outcome_disagreement_clusters": 0,
+        "trace_byte_count_disagreement_clusters": 4,
+        "trace_digest_disagreement_clusters": 4,
+        "trace_disagreement": {
+          "estimate": 0.08,
+          "reweighting_draws": 100000,
+          "reweighting_quantiles_2_5_97_5": [
+            0.02,
+            0.16
+          ],
+          "reweighting_seed": 2026083118
+        },
+        "trace_projection_disagreement_clusters": 4
+      },
+      "dipplin/second": {
+        "any_required_disagreement_clusters": 3,
+        "clusters": 50,
+        "decision_count_disagreement_clusters": 0,
+        "error_disagreement_clusters": 0,
+        "outcome_disagreement_clusters": 0,
+        "trace_byte_count_disagreement_clusters": 1,
+        "trace_digest_disagreement_clusters": 3,
+        "trace_disagreement": {
+          "estimate": 0.06,
+          "reweighting_draws": 100000,
+          "reweighting_quantiles_2_5_97_5": [
+            0.0,
+            0.14
+          ],
+          "reweighting_seed": 2026083118
+        },
+        "trace_projection_disagreement_clusters": 3
+      },
+      "starmie/first": {
+        "any_required_disagreement_clusters": 44,
+        "clusters": 50,
+        "decision_count_disagreement_clusters": 43,
+        "error_disagreement_clusters": 0,
+        "outcome_disagreement_clusters": 19,
+        "trace_byte_count_disagreement_clusters": 43,
+        "trace_digest_disagreement_clusters": 44,
+        "trace_disagreement": {
+          "estimate": 0.88,
+          "reweighting_draws": 100000,
+          "reweighting_quantiles_2_5_97_5": [
+            0.78,
+            0.96
+          ],
+          "reweighting_seed": 2026083118
+        },
+        "trace_projection_disagreement_clusters": 44
+      },
+      "starmie/second": {
+        "any_required_disagreement_clusters": 48,
+        "clusters": 50,
+        "decision_count_disagreement_clusters": 47,
+        "error_disagreement_clusters": 0,
+        "outcome_disagreement_clusters": 28,
+        "trace_byte_count_disagreement_clusters": 48,
+        "trace_digest_disagreement_clusters": 48,
+        "trace_disagreement": {
+          "estimate": 0.96,
+          "reweighting_draws": 100000,
+          "reweighting_quantiles_2_5_97_5": [
+            0.9,
+            1.0
+          ],
+          "reweighting_seed": 2026083118
+        },
+        "trace_projection_disagreement_clusters": 48
+      }
+    },
+    "trace_byte_count_disagreement_clusters": 96,
+    "trace_digest_disagreement_clusters": 99,
+    "trace_projection_disagreement_clusters": 99
+  }
+}

@@ -1,0 +1,334 @@
+{
+  "audit_date": "2026-08-24",
+  "timezone": "America/Chicago",
+  "cutoff_statement": "The log reports records visible in the searched authoritative sources on the audit date. Negative searches are dated observations, not proof that no private, unindexed, or later record exists.",
+  "source_policy": {
+    "admitted": [
+      "official publisher pages and DOI landing records",
+      "official conference proceedings",
+      "arXiv abstract and full-text records",
+      "OpenReview forum records",
+      "official American Physical Society journal and policy pages"
+    ],
+    "excluded_as_authority": [
+      "ResearchGate",
+      "Google Scholar snippets",
+      "Semantic Scholar metadata",
+      "blog posts",
+      "repository mirrors",
+      "AI-generated summaries",
+      "search-result snippets without a resolved primary record"
+    ],
+    "fail_closed": "A work with unresolved title, byline, status, or canonical primary record was excluded from references and could not support a novelty claim or manuscript sentence."
+  },
+  "title_candidates": [
+    {
+      "label": "A",
+      "exact_title": "A Trace-Based Validation Protocol for Seed-Matched Evaluations of Black-Box Game-Playing Agents",
+      "exact_authoritative_collision": false,
+      "near_collision": "A Trace-Based Assurance Framework for Agentic AI Orchestration: Contracts, Testing, and Governance",
+      "near_collision_primary_source": "https://doi.org/10.5220/0014840300004015",
+      "disposition": "reject because the shared A Trace-Based lead and adjacent agent assurance/framework topic create avoidable confusion"
+    },
+    {
+      "label": "B",
+      "exact_title": "A Protocol for Validating Pairing Assumptions in Seed-Matched Evaluations of Black-Box Game-Playing Agents",
+      "exact_authoritative_collision": false,
+      "near_collision": null,
+      "near_collision_primary_source": null,
+      "disposition": "freeze; no authoritative exact or near-exact collision surfaced and the wording identifies the remaining contribution and scope"
+    },
+    {
+      "label": "C",
+      "exact_title": "Validating Pairing Assumptions in Seed-Matched Agent Evaluation",
+      "exact_authoritative_collision": false,
+      "near_collision": null,
+      "near_collision_primary_source": null,
+      "disposition": "safe fallback, but less explicit about protocol, black-box scope, and game-playing case"
+    }
+  ],
+  "resolved_close_records": [
+    {
+      "identifier": "arXiv:2605.12131",
+      "exact_title": "Rollout Cards: A Reproducibility Standard for Agent Research",
+      "canonical_primary_source": "https://arxiv.org/abs/2605.12131",
+      "version_checked": "v1, submitted 2026-05-12",
+      "status": "arXiv preprint"
+    },
+    {
+      "identifier": "10.5220/0014840300004015",
+      "exact_title": "A Trace-Based Assurance Framework for Agentic AI Orchestration: Contracts, Testing, and Governance",
+      "canonical_primary_source": "https://doi.org/10.5220/0014840300004015",
+      "author_version": "https://arxiv.org/abs/2603.18096",
+      "version_checked": "ENASE 2026 proceedings, volume 1, pages 420-427; arXiv v1",
+      "status": "published conference-proceedings paper"
+    },
+    {
+      "identifier": "arXiv:2607.16345",
+      "exact_title": "AEVAL: From Anecdotal to Deterministic Testing for Agentic Skill Workflows",
+      "canonical_primary_source": "https://arxiv.org/abs/2607.16345",
+      "version_checked": "v2, revised 2026-07-21",
+      "status": "arXiv preprint; accepted at an ICML 2026 workshop according to the primary record"
+    },
+    {
+      "identifier": "arXiv:2603.11084",
+      "exact_title": "Realizing Common Random Numbers: Event-Keyed Hashing for Causally Valid Stochastic Models",
+      "canonical_primary_source": "https://arxiv.org/abs/2603.11084",
+      "version_checked": "v1, submitted 2026-03-11",
+      "status": "arXiv preprint"
+    }
+  ],
+  "searches": [
+    {
+      "id": "T01",
+      "search_date": "2026-08-24",
+      "search_type": "exact title",
+      "query": "\"A Trace-Based Validation Protocol for Seed-Matched Evaluations of Black-Box Game-Playing Agents\"",
+      "authoritative_targets": ["arxiv.org", "openreview.net", "publisher and proceedings domains"],
+      "authoritative_results": [],
+      "disposition": "no exact authoritative collision surfaced"
+    },
+    {
+      "id": "T02",
+      "search_date": "2026-08-24",
+      "search_type": "exact title",
+      "query": "\"A Protocol for Validating Pairing Assumptions in Seed-Matched Evaluations of Black-Box Game-Playing Agents\"",
+      "authoritative_targets": ["arxiv.org", "openreview.net", "publisher and proceedings domains"],
+      "authoritative_results": [],
+      "disposition": "no exact authoritative collision surfaced"
+    },
+    {
+      "id": "T03",
+      "search_date": "2026-08-24",
+      "search_type": "exact title",
+      "query": "\"Validating Pairing Assumptions in Seed-Matched Agent Evaluation\"",
+      "authoritative_targets": ["arxiv.org", "openreview.net", "publisher and proceedings domains"],
+      "authoritative_results": [],
+      "disposition": "no exact authoritative collision surfaced"
+    },
+    {
+      "id": "T04",
+      "search_date": "2026-08-24",
+      "search_type": "title fragments",
+      "query": "\"trace-based\" validation protocol seed-matched agent",
+      "authoritative_targets": ["arxiv.org", "openreview.net", "scitepress.org", "dl.acm.org", "ieeexplore.ieee.org"],
+      "authoritative_results": ["10.5220/0014840300004015", "arXiv:2603.18096"],
+      "disposition": "near-title collision found for candidate A; not a content-level subsumption"
+    },
+    {
+      "id": "T05",
+      "search_date": "2026-08-24",
+      "search_type": "title fragments",
+      "query": "\"validating pairing assumptions\" seed-matched evaluation agent",
+      "authoritative_targets": ["arxiv.org", "openreview.net", "publisher and proceedings domains"],
+      "authoritative_results": [],
+      "disposition": "no near-exact authoritative title surfaced for candidates B or C"
+    },
+    {
+      "id": "C01",
+      "search_date": "2026-08-24",
+      "search_type": "exact close-work title and identifier",
+      "query": "\"Rollout Cards: A Reproducibility Standard for Agent Research\" OR 2605.12131",
+      "authoritative_targets": ["arxiv.org"],
+      "authoritative_results": ["arXiv:2605.12131"],
+      "disposition": "resolved title, complete byline, v1 status, abstract, full text, DOI, and license from arXiv"
+    },
+    {
+      "id": "C02",
+      "search_date": "2026-08-24",
+      "search_type": "exact close-work title and identifier",
+      "query": "\"A Trace-Based Assurance Framework for Agentic AI Orchestration\" OR 10.5220/0014840300004015 OR 2603.18096",
+      "authoritative_targets": ["scitepress.org", "doi.org", "arxiv.org"],
+      "authoritative_results": ["10.5220/0014840300004015", "arXiv:2603.18096"],
+      "disposition": "publisher record and author version resolved; full text checked for scope and future empirical-work statement"
+    },
+    {
+      "id": "C03",
+      "search_date": "2026-08-24",
+      "search_type": "exact close-work title and identifier",
+      "query": "\"AEVAL: From Anecdotal to Deterministic Testing for Agentic Skill Workflows\" OR 2607.16345",
+      "authoritative_targets": ["arxiv.org"],
+      "authoritative_results": ["arXiv:2607.16345"],
+      "disposition": "resolved current v2 record and workshop-acceptance comment; no archival proceedings record claimed"
+    },
+    {
+      "id": "C04",
+      "search_date": "2026-08-24",
+      "search_type": "exact close-work title and identifier",
+      "query": "\"Realizing Common Random Numbers: Event-Keyed Hashing for Causally Valid Stochastic Models\" OR 2603.11084",
+      "authoritative_targets": ["arxiv.org"],
+      "authoritative_results": ["arXiv:2603.11084"],
+      "disposition": "resolved v1 record and full text; no peer-reviewed status claimed"
+    },
+    {
+      "id": "K01",
+      "search_date": "2026-08-24",
+      "search_type": "keywords and semantic neighbors",
+      "query": "same seed paired evaluation stochastic agent common random numbers",
+      "authoritative_targets": ["arxiv.org", "openreview.net", "pubsonline.informs.org"],
+      "authoritative_results": ["arXiv:2512.24145", "arXiv:2603.11084", "10.1287/mnsc.38.6.884"],
+      "disposition": "Sharma is closest statistical neighbor; Buffalo is closest coupling neighbor; classical CRN retained"
+    },
+    {
+      "id": "K02",
+      "search_date": "2026-08-24",
+      "search_type": "keywords and semantic neighbors",
+      "query": "agent evaluation randomness repeated trajectories deterministic temperature zero",
+      "authoritative_targets": ["arxiv.org", "openreview.net"],
+      "authoritative_results": ["arXiv:2602.07150", "arXiv:2512.06710"],
+      "disposition": "both retained as current semantic neighbors for repetition and within-query reliability; neither validates cross-arm coupling"
+    },
+    {
+      "id": "K03",
+      "search_date": "2026-08-24",
+      "search_type": "keywords and semantic neighbors",
+      "query": "event keyed randomness counter based PRNG causally valid stochastic model common random numbers",
+      "authoritative_targets": ["arxiv.org", "dl.acm.org", "official SC11 proceedings"],
+      "authoritative_results": ["arXiv:2603.11084", "10.1145/2063384.2063405"],
+      "disposition": "Buffalo retained for event-keyed model; Salmon retained as counter-based-generator prior art"
+    },
+    {
+      "id": "K04",
+      "search_date": "2026-08-24",
+      "search_type": "keywords and semantic neighbors",
+      "query": "trace replay deterministic testing agent evaluation trace contracts rollout record",
+      "authoritative_targets": ["arxiv.org", "scitepress.org", "doi.org"],
+      "authoritative_results": ["arXiv:2605.12131", "10.5220/0014840300004015", "arXiv:2607.16345"],
+      "disposition": "three specified close works retained and contrasted by evidence unit and decision consequence"
+    },
+    {
+      "id": "K05",
+      "search_date": "2026-08-24",
+      "search_type": "foundational topic",
+      "query": "common random numbers guidelines guarantees streams substreams simulation",
+      "authoritative_targets": ["pubsonline.informs.org"],
+      "authoritative_results": ["10.1287/mnsc.38.6.884", "10.1287/opre.50.6.1073.358"],
+      "disposition": "publisher records and claims checked; component novelty excluded"
+    },
+    {
+      "id": "K06",
+      "search_date": "2026-08-24",
+      "search_type": "foundational topic",
+      "query": "simulation verification validation metamorphic testing scientific software simulation models",
+      "authoritative_targets": ["tandfonline.com", "ieeexplore.ieee.org", "nist.gov"],
+      "authoritative_results": ["10.1057/jos.2012.20", "10.1109/MCSE.2018.2880577", "10.1109/MET52542.2021.00015"],
+      "disposition": "publisher/proceedings records checked; V&V and metamorphic testing treated as prior art"
+    },
+    {
+      "id": "K07",
+      "search_date": "2026-08-24",
+      "search_type": "foundational topic",
+      "query": "A/A experiment diagnostic online controlled experiments unexpected results",
+      "authoritative_targets": ["kdd.org", "dl.acm.org"],
+      "authoritative_results": ["10.1145/1964897.1964905"],
+      "disposition": "official SIGKDD issue PDF checked; A/A novelty excluded and present use limited to an adaptation"
+    },
+    {
+      "id": "K08",
+      "search_date": "2026-08-24",
+      "search_type": "foundational topic",
+      "query": "empirical design reinforcement learning reproducibility sources variation uncertainty reporting",
+      "authoritative_targets": ["proceedings.mlr.press", "jmlr.org", "proceedings.neurips.cc"],
+      "authoritative_results": ["PMLR v97/bouthillier19a", "JMLR 23-0183", "NeurIPS f514cec81cb148559cf475e7426eed5e", "JMLR 20-303"],
+      "disposition": "empirical-design, uncertainty, and reproducibility records retained as context, not pairing validation"
+    },
+    {
+      "id": "K09",
+      "search_date": "2026-08-24",
+      "search_type": "foundational topic",
+      "query": "Monte Carlo tree search time management fixed work budget",
+      "authoritative_targets": ["ieeexplore.ieee.org"],
+      "authoritative_results": ["10.1109/TCIAIG.2015.2443123"],
+      "disposition": "time/work budgeting treated as prior art; source cannot prove timing caused a case-study mismatch"
+    },
+    {
+      "id": "K10",
+      "search_date": "2026-08-24",
+      "search_type": "related-work section inspection",
+      "query": "full-text related work and references of arXiv:2605.12131, 2603.18096, 2607.16345, and 2603.11084",
+      "authoritative_targets": ["arxiv.org/html"],
+      "authoritative_results": ["arXiv:2605.12131", "arXiv:2603.18096", "arXiv:2607.16345", "arXiv:2603.11084"],
+      "disposition": "inspected for seed, pair, trace, repeat, event, admit, suppress, statistical, and black-box concepts; findings recorded in NOVELTY_AUDIT.md"
+    },
+    {
+      "id": "U01",
+      "search_date": "2026-08-24",
+      "search_type": "unresolved-record recheck",
+      "query": "\"Silent Unpairing: How Mid-Training Probes Break Same-Seed Comparisons and Can Enable Selection Bias\"",
+      "authoritative_targets": ["arxiv.org", "openreview.net", "publisher and proceedings domains", "repository text"],
+      "authoritative_results": [],
+      "disposition": "unresolved stale audit entry removed; do not cite, name authors, assign status, or use for novelty"
+    }
+  ],
+  "citing_and_forward_searches": [
+    {
+      "query": "2605.12131 OR 10.48550/arXiv.2605.12131 citing",
+      "authoritative_record_checked": "https://arxiv.org/abs/2605.12131",
+      "additional_authoritative_citing_records_found": [],
+      "disposition": "no additional primary citing record surfaced on 2026-08-24"
+    },
+    {
+      "query": "0014840300004015 OR 2603.18096 citing",
+      "authoritative_record_checked": "https://doi.org/10.5220/0014840300004015",
+      "additional_authoritative_citing_records_found": [],
+      "disposition": "no additional primary citing record surfaced on 2026-08-24"
+    },
+    {
+      "query": "2607.16345 OR 10.48550/arXiv.2607.16345 citing",
+      "authoritative_record_checked": "https://arxiv.org/abs/2607.16345",
+      "additional_authoritative_citing_records_found": [],
+      "disposition": "no additional primary citing record surfaced on 2026-08-24"
+    },
+    {
+      "query": "2603.11084 OR 10.48550/arXiv.2603.11084 citing",
+      "authoritative_record_checked": "https://arxiv.org/abs/2603.11084",
+      "additional_authoritative_citing_records_found": [],
+      "disposition": "no additional primary citing record surfaced on 2026-08-24"
+    }
+  ],
+  "aps_policy_checks": [
+    {
+      "topic": "Protocol Article definition, broad-audience writing, related-work context, reference titles, DAS and AI reminders",
+      "canonical_source": "https://journals.aps.org/apsos/authors",
+      "verified": true
+    },
+    {
+      "topic": "editorial acceptance criteria",
+      "canonical_source": "https://journals.aps.org/apsos/about",
+      "verified": true
+    },
+    {
+      "topic": "journal scope and representative topics",
+      "canonical_source": "https://journals.aps.org/apsos/scope",
+      "verified": true
+    },
+    {
+      "topic": "Data Availability Statement and data/software citation requirements",
+      "canonical_source": "https://journals.aps.org/authors/data-availability-statements",
+      "verified": true
+    },
+    {
+      "topic": "substantive AI use, disclosure placement, accountability, records, and rights protection",
+      "canonical_source": "https://journals.aps.org/authors/appropriate-use-ai-tools",
+      "verified": true
+    },
+    {
+      "topic": "reference accuracy and preference for a version of record",
+      "canonical_source": "https://journals.aps.org/authors/style-basics",
+      "verified": true
+    }
+  ],
+  "unresolved_records_retained": [],
+  "fatal_novelty_test": {
+    "result": "PASS",
+    "qualification": "narrow and conditional on explicit close-work citation and a claim limited to operational integration",
+    "strongest_pair_tested": ["arXiv:2603.11084", "10.5220/0014840300004015"],
+    "missing_from_strongest_pair": [
+      "observable boundary-seed identity",
+      "complete declared-trace A/A across process, worker, and enqueue contexts",
+      "result-independent statistical claim admission",
+      "automatic paired-claim suppression",
+      "empirical restricted-engine application"
+    ]
+  }
+}
