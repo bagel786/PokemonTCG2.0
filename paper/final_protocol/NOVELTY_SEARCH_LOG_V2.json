@@ -1,0 +1,69 @@
+{
+  "schema_version": "novelty-search-log-2.0.0",
+  "audit_date": "2026-08-25",
+  "searcher": "closeout automation (ox-alpha), human author signoff pending in HUMAN_CLOSEOUT_FORM.md section 12",
+  "queries": [
+    {
+      "query": "paired seeds common random numbers agent evaluation reproducibility protocol 2026",
+      "provider": "websearch",
+      "notable_hits": [
+        "arXiv:2602.07150 (On Randomness in Agentic Evals; already cited as bjarnason2026randomness)",
+        "arXiv:2512.24145 (Sharma paired seeds; already cited)",
+        "arXiv:2605.12131 (Rollout Cards; already cited)",
+        "arXiv:2603.11084 (Buffalo/Pearson/Klein event-keyed CRN; already cited)",
+        "KDD 2026 workshop paper 60: How Much Coordination Gain Is Real? A Paired Noise-Floor Protocol for Multi-Agent LLM Benchmarks (NEW CLOSE WORK)",
+        "RLC 2026: Using Common Random Numbers for Simulation-based Planning with Rollouts (CRN seeding regimes for planning; prior-art ingredient)",
+        "arXiv:2409.02086 (Taming Randomness in ABMs using CRN; Starsim per-decision streams; white-box repair prior art)"
+      ]
+    },
+    {
+      "query": "\"same seed\" OR \"seed-matched\" evaluation stochastic agents paired comparison statistical claims 2026",
+      "provider": "websearch",
+      "notable_hits": [
+        "Sharma arXiv:2512.24145 v3 full text (seed as unit of randomisation; conditional variance reduction)",
+        "KDD 2026 workshop paper 26: Beyond Leaderboards: Protocol Cards for Trustworthy Coding-Agent Evaluation (NEW CLOSE WORK)",
+        "Scorable blog on agentic eval noise (practice article; no verifiable peer review; not a novelty threat)",
+        "agentrel PyPI library (paired comparison tooling; no pairing-assumption validation)",
+        "GraphNetz arXiv:2605.09099 (statistical benchmark reporting layer; generic statistics, no coupling validation)",
+        "emergentmind topic page on Paired Seed Evaluation Design (secondary aggregation of Sharma/Du; not primary)",
+        "agentgauge frozen_protocol.md GitHub document (pre-registration checklist; no executable evidence gates or suppression map)"
+      ]
+    }
+  ],
+  "metadata_verification": {
+    "method": "camera-ready PDF page 1 plus official workshop site cross-check via independent research agent on 2026-08-25",
+    "new_works": [
+      {
+        "bibkey": "kaliyev2026noisefloor",
+        "authors": "Alibek Kaliyev; Artem Maryanskyy",
+        "venue_verified": "KDD Workshop on Evaluation and Trustworthiness of Agentic AI, KDD 2026; non-archival, not in ACM proceedings",
+        "also_at": "arXiv:2606.20695"
+      },
+      {
+        "bibkey": "zhang2026protocolcards",
+        "authors": "Keqin Zhang; Sharon Lee",
+        "venue_verified": "KDD Workshop on Evaluation and Trustworthiness of Agentic AI, KDD 2026; non-archival, not in ACM proceedings",
+        "openreview": "https://openreview.net/forum?id=TzwD3Dg5Lb"
+      }
+    ]
+  },
+  "prior_works_rechecked_unchanged": [
+    {"work": "Glasserman & Yao 1992", "status": "journal record unchanged"},
+    {"work": "L'Ecuyer et al. 2002", "status": "journal record unchanged"},
+    {"work": "Salmon et al. 2011", "status": "conference record unchanged"},
+    {"work": "Paduraru et al. 2026 trace assurance", "status": "SciTePress record unchanged"},
+    {"work": "Anand et al. 2026 AEVAL", "status": "preprint/workshop-accepted record unchanged"}
+  ],
+  "fatal_novelty_test_result": {
+    "test": "Does any single paper or straightforward two-paper combination provide substantially all of: observable seed boundary verification; same-artifact trace repetition across execution contexts; explicit within-arm vs cross-arm distinction; result-independent statistical claim map; suppression after failed pairing evidence; synthetic coupling failure suite; black-box empirical suppression demonstration?",
+    "verdict": "NO — test passes (novelty survives)",
+    "closest_combination_considered": [
+      "kaliyev2026noisefloor + buffalo2026eventkeyed: noise-floor retraction discipline plus event-keyed repair still lacks boundary-seed verification, within-arm/cross-arm distinction, execution-context stress, an executable admission map, and a synthetic conformance suite.",
+      "zhang2026protocolcards + masters2026rolloutcards: disclosure/preservation layers without any coupling verification or suppression consequence."
+    ]
+  },
+  "caveats": [
+    "Searches cover indexed web literature up to 2026-08-25; non-indexed or very recent preprints may exist.",
+    "Human author must countersign the novelty boundary (HUMAN_CLOSEOUT_FORM.md section 12)."
+  ]
+}
