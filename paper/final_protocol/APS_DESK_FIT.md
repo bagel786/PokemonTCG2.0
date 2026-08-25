@@ -5,6 +5,11 @@ Target: APS Open Science, Protocol Article
 Frozen title for this assessment: **A Protocol for Validating Pairing Assumptions in Seed-Matched Evaluations of Black-Box Game-Playing Agents**  
 Decision: **NOT READY — DO NOT SUBMIT.** The methodological desk-fit gates pass at review-package scope, but rights/public-release authorization is an explicit hard failure.
 
+Phase scope: this is the dated pre-final desk-fit assessment. The authoritative
+post-review gate and reproduction disposition are recorded in
+`DESK_REVIEW_SIMULATION.json` and `REPRODUCTION_REPORT.json`; completion of
+those machine steps cannot cure the human or rights failures recorded here.
+
 Scores are independent 0--5 judgments; they are not averaged. A score is not permission to submit.
 
 ## Current official APS requirements
@@ -29,7 +34,7 @@ Scores are independent 0--5 judgments; they are not averaged. A score is not per
 | 6. Generalizability | **4/5** | The protocol is engine-agnostic at the level of evidence interfaces and claim classes. Empirical evidence is one restricted game engine and fixed artifact set, so prevalence and external-performance generalization are explicitly unavailable. |
 | 7. Reproducibility | **4/5** | The engine-free review package regenerates and verifies the synthetic suite, evaluates and explains admission evidence, prints the decision table, and independently reaggregates processed evidence without the restricted engine. The rebuilt release commands `verify`, `admit`, `explain`, `report --decision-table`, and `scripts/verify_release.py` passed in this audit. Restricted trajectories cannot be replayed. |
 | 8. Open-science readiness | **3/5** | Data/software boundaries and unavailable restricted material are described honestly, and a sanitized package exists. No public archive, DOI, approved creators, maintainer contact, or lawful redistribution license exists. APS permits reasoned unavailability, but the current inability to offer restricted inputs even on reasonable request limits openness. |
-| 9. Technical correctness | **4/5** | Schemas, hashes, row-level reaggregation, equation tests, cluster-level resampling, tests, compilation, and page checks support correctness. Intervals are properly scoped as empirical stability summaries; causal timing and semantic-alignment overclaims are rejected. The canonical 25-step pre-review reproduction passed; a final review-bound rerun remains required. |
+| 9. Technical correctness | **4/5** | Schemas, hashes, row-level reaggregation, equation tests, cluster-level resampling, tests, compilation, and page checks support correctness. Intervals are properly scoped as empirical stability summaries; causal timing and semantic-alignment overclaims are rejected. The canonical pre-review reproduction passed; the later hash-bound review aggregate and final reproduction report are phase-separated artifacts and do not alter this dated score. |
 | 10. Readability | **4/5** | The schedule/repeatability/alignment/admission distinctions are explicit and the title foregrounds the actual question. The 207-word abstract passes the mechanical audit, and all 13 deterministic PDF pages were individually inspected with no clipping, unresolved markers, or unreadable figures or tables. Human general-reader signoff remains pending. |
 | 11. Ethical and AI compliance | **3/5** | The manuscript names OpenAI Codex, describes substantive research and writing uses, human direction, verification, and non-authorship in Methods and Acknowledgments, with a machine-readable activity log. A human must confirm completeness of historical AI use and tool/version, terms, confidentiality, privacy, and intellectual-property compliance. |
 | 12. Rights and publication readiness | **1/5 — FAIL** | `release/LICENSE` grants no license; `release/RELEASE_STATUS.json` says `BUILT_FOR_REVIEW_NOT_AUTHORIZED_FOR_PUBLICATION`, has no DOI, and records `NO_LICENSE_GRANTED_PENDING_HUMAN_CONFIRMATION`. Ownership, redistribution authority, third-party terms, archive creators, and permissions remain unresolved. |
@@ -60,7 +65,8 @@ Required thresholds from the final-desk brief are article fit, novelty, usefulne
 
 1. Rights, ownership, licensing, third-party terms, archive authorization, and public-release status.
 2. Human author identity, affiliation, authorship/CRediT, funding, conflicts, permissions, and AI-use confirmation.
-3. Final hash-bound five-review aggregation and the post-review reproduction evidence commit.
+3. Consult the phase-separated final review aggregate and reproduction report;
+   their completion does not resolve blockers 1 or 2.
 
 No submission, archive upload, DOI claim, public license, or editor contact is authorized by this audit.
 
