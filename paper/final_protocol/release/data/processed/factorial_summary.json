@@ -54,8 +54,12 @@
     }
   },
   "control_mismatch_units": 0,
+  "final_reporting_status": "ADMITTED_FIXED_BATTERY_DESCRIPTIVE",
+  "final_reporting_status_reason": "Post-acquisition conservative reporting: only a fixed-battery descriptive seed-indexed contrast and empirical reweighting sensitivity are admitted; no population effect, trace-parity, event-aligned, counterfactual, or full-CRN wording is authorized.",
   "fixed_battery_target": "five prospectively frozen determinism-eligible opponent packages by two actual orders",
   "games": 12000,
+  "legacy_acquisition_status": "ADMITTED_SEED_MATCHED",
+  "legacy_acquisition_status_meaning": "Frozen-plan binary acquisition status recorded at acquisition time; it is not an inferential or reporting claim.",
   "mcnemar_recalculation_included": false,
   "mcnemar_recalculation_reason": "The arithmetic was checked separately but is omitted because its reference-distribution assumptions are not established and no McNemar inference is displayed in the manuscript.",
   "pevl_levels": {

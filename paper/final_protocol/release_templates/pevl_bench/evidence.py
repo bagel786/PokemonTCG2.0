@@ -64,14 +64,23 @@ def compute_admission_evidence_sha256(document: Mapping[str, Any]) -> str:
     return _object_sha256(evidence_projection(document))
 
 
-def _certificate(gate: str, state: str, evidence: Any, reason: str) -> dict[str, Any]:
-    return {
+def _certificate(
+    gate: str,
+    state: str,
+    evidence: Any,
+    reason: str,
+    details: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    certificate = {
         "gate": gate,
         "state": state,
         "evidence_sha256": _object_sha256(evidence),
         "verifier_id": VERIFIER_ID,
         "reason": reason,
     }
+    if details:
+        certificate["machine_checkable_details"] = dict(details)
+    return certificate
 
 
 def _verified_file(
@@ -374,29 +383,55 @@ def derive_gate_states(
     seed_state, schedule_state = _schedule_states(schedule, evidence_root)
     pair_ids = sorted({row["pair_id"] for row in schedule["rows"]})
     identical_state, repeat_state = _execution_states(execution, pair_ids, evidence_root)
+    execution_details = {
+        "stage4_within_artifact_fresh_process_repeatability": {
+            "required_profiles": list(_IDENTICAL_PROFILES),
+            "compared_record_fields": ["trace_sha256", "trace_bytes", "outcome", "error_count", "decision_count"],
+            "scope": (
+                "byte-identical artifacts re-executed in fresh processes on the same declared "
+                "schedule rows; launch provenance is a caller/external trust anchor"
+            ),
+        },
+        "stage5_execution_context_parity": {
+            "required_profiles": list(_REPEAT_PROFILES),
+            "compared_record_fields": ["trace_sha256", "trace_bytes", "outcome", "error_count", "decision_count"],
+            "scope": (
+                "declared worker/enqueue/pool-lifecycle profile variation; the stage-4 fresh-process "
+                "profiles are a subset of this required set, so the gates are nested rather than "
+                "independent"
+            ),
+        },
+        "record_binding": {
+            "pair_arms": len(pair_ids) * len(_ARMS),
+            "records_per_pair_arm": len(_REPEAT_PROFILES),
+            "artifact_roles_verified_by_level_1_records": sorted(_ARTIFACT_ROLES),
+        },
+    }
     states_with_evidence = (
-        ("artifact_identity", artifact_state, artifact),
-        ("seed_namespace_integrity", seed_state, schedule),
-        ("schedule_parity", schedule_state, schedule),
-        ("identical_arm_record_parity", identical_state, execution),
-        ("repeat_and_worker_parity", repeat_state, execution),
+        ("artifact_identity", artifact_state, artifact, None),
+        ("seed_namespace_integrity", seed_state, schedule, None),
+        ("schedule_parity", schedule_state, schedule, None),
+        ("identical_arm_record_parity", identical_state, execution, execution_details["stage4_within_artifact_fresh_process_repeatability"]),
+        ("repeat_and_worker_parity", repeat_state, execution, execution_details["stage5_execution_context_parity"]),
         (
             "stochastic_source_audit",
             ("unavailable", source["reason"]),
             source,
+            None,
         ),
         (
             "cross_arm_event_alignment",
             ("not_applicable", alignment["reason"]),
             alignment,
+            None,
         ),
     )
-    states = {gate: state for gate, (state, _), _evidence in states_with_evidence}
+    states = {gate: state for gate, (state, _), _evidence, _d in states_with_evidence}
     if tuple(states) != protocol.gate_order:
         raise EvidenceVerificationError("derived gate order differs from the protocol")
     certificates = [
-        _certificate(gate, state, evidence, reason)
-        for gate, (state, reason), evidence in states_with_evidence
+        _certificate(gate, state, evidence, reason, details)
+        for gate, (state, reason), evidence, details in states_with_evidence
     ]
     return states, certificates
 

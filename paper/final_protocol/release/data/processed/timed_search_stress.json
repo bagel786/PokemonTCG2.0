@@ -2004,10 +2004,14 @@
   ],
   "clusters": 200,
   "decision_count_disagreement_clusters": 93,
-  "earliest_divergence_localization_included": false,
-  "earliest_divergence_localization_reason": "The review package contains no raw trace lines from which to verify an earliest event or actor.",
   "error_disagreement_clusters": 0,
   "executions": 800,
+  "first_divergence_actor_counts": {
+    "opponent": 99
+  },
+  "first_divergence_actor_counts_included": true,
+  "first_divergence_position_included": false,
+  "first_divergence_position_reason": "First-divergence positions were never recorded in the retained artifacts; only acting-side counts at first divergence were summarized. Raw trace payloads are restricted and are not redistributed, so independent position-level localization remains impossible.",
   "fixed_battery_scope": "four fixed timed-search opponent-by-order strata; 50 clusters per stratum",
   "fixed_composition_reweighting_sensitivity": {
     "estimate": 0.495,
@@ -2032,7 +2036,12 @@
   "pevl_level_6_boundary": "recorded trace mismatches and bounded source inspection identify plausible mechanisms in the exercised executions; no retained evidence supports an earliest-divergence localization or a unique causal source",
   "policy_error_present_clusters": 0,
   "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",
-  "protocol_deviation_status": "PENDING_HUMAN_SIGNOFF_UNSIGNED",
+  "protocol_deviation_status": "PENDING_HUMAN_SIGNOFF_UNSIGNED_POSITIONS_UNRECOVERED",
+  "recovered_secondary_outputs_provenance": {
+    "note": "Acting-side counts at first divergence and per-profile wall-clock timing summaries were recovered from the hash-pinned retained stress summary; they are processed aggregates of the author's own acquisition runs.",
+    "source_role": "stress_summary",
+    "source_sha256": "40b9f5e17a424742ad8a05739646fe56843b8f3a432b124bfc33f9aed1ab5a4b"
+  },
   "schema_version": 1,
   "status": "TRACE_DIVERGENCE",
   "strata": {
@@ -2109,8 +2118,85 @@
       }
     }
   },
-  "timing_summaries_included": false,
-  "timing_summaries_reason": "The review package omits the timing summaries promised by the frozen stress protocol.",
+  "timing_summaries": {
+    "timed-search-A": {
+      "parallel_forward": {
+        "games": 100,
+        "interquartile_range_seconds": [
+          1.8642033755168086,
+          6.270759291262948
+        ],
+        "mean_seconds": 4.976272546223481,
+        "median_seconds": 3.554023270495236
+      },
+      "parallel_reverse": {
+        "games": 100,
+        "interquartile_range_seconds": [
+          2.3101948642652133,
+          6.540734583511949
+        ],
+        "mean_seconds": 4.988991698710306,
+        "median_seconds": 4.1271392710041255
+      },
+      "serial_forward": {
+        "games": 100,
+        "interquartile_range_seconds": [
+          1.5273192297609057,
+          3.966065000000526
+        ],
+        "mean_seconds": 3.49493781462108,
+        "median_seconds": 2.624310916507966
+      },
+      "serial_reverse": {
+        "games": 100,
+        "interquartile_range_seconds": [
+          1.5154848852471332,
+          3.569495781499427
+        ],
+        "mean_seconds": 2.9663995341802365,
+        "median_seconds": 2.383258771005785
+      }
+    },
+    "timed-search-B": {
+      "parallel_forward": {
+        "games": 100,
+        "interquartile_range_seconds": [
+          3.662127916009922,
+          8.32776906224899
+        ],
+        "mean_seconds": 6.150488563670369,
+        "median_seconds": 5.978141853993293
+      },
+      "parallel_reverse": {
+        "games": 100,
+        "interquartile_range_seconds": [
+          3.6068740732516744,
+          8.156083353758731
+        ],
+        "mean_seconds": 6.007744385391998,
+        "median_seconds": 5.703379729005974
+      },
+      "serial_forward": {
+        "games": 100,
+        "interquartile_range_seconds": [
+          1.7592044784978498,
+          4.033817854258814
+        ],
+        "mean_seconds": 3.0245111903484214,
+        "median_seconds": 2.794863583505503
+      },
+      "serial_reverse": {
+        "games": 100,
+        "interquartile_range_seconds": [
+          1.955961864492565,
+          4.318227812756959
+        ],
+        "mean_seconds": 3.2347162146214394,
+        "median_seconds": 3.0331923955091042
+      }
+    }
+  },
+  "timing_summaries_included": true,
   "trace_disagreement": {
     "clusters": 200,
     "estimate": 0.495,

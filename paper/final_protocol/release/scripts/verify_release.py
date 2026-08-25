@@ -381,11 +381,30 @@ def verify_stress() -> dict[str, Any]:
             summary["fixed_composition_reweighting_sensitivity"][field],
             f"stress fixed-composition sensitivity {field}",
         )
-    require(summary["earliest_divergence_localization_included"], False, "stress localization omission")
-    require(summary["timing_summaries_included"], False, "stress timing omission")
+    require(summary["first_divergence_actor_counts_included"], True, "stress actor counts recovered")
+    require(
+        summary["first_divergence_actor_counts"],
+        {"opponent": counts["trace_disagreement_clusters"]},
+        "stress actor counts match disagreement clusters",
+    )
+    require(summary["first_divergence_position_included"], False, "stress position omission")
+    require(summary["timing_summaries_included"], True, "stress timing summaries recovered")
+    timing = summary["timing_summaries"]
+    require(set(timing), {"timed-search-A", "timed-search-B"}, "stress timing opponents")
+    for opponent, profiles in timing.items():
+        require(
+            set(profiles),
+            {"serial_forward", "serial_reverse", "parallel_forward", "parallel_reverse"},
+            f"stress timing profiles {opponent}",
+        )
+        for profile, values in profiles.items():
+            require(values["games"], 100, f"stress timing games {opponent}/{profile}")
+            require(bool(values["median_seconds"] > 0.0), True, f"stress timing median {opponent}/{profile}")
+    provenance = summary["recovered_secondary_outputs_provenance"]
+    require(len(provenance["source_sha256"]), 64, "recovered output source hash present")
     require(
         summary["protocol_deviation_status"],
-        "PENDING_HUMAN_SIGNOFF_UNSIGNED",
+        "PENDING_HUMAN_SIGNOFF_UNSIGNED_POSITIONS_UNRECOVERED",
         "stress protocol deviation status",
     )
     return {
@@ -443,6 +462,8 @@ def verify_factorial() -> dict[str, Any]:
     summary = load_json("data/processed/factorial_summary.json")
     require(summary["protocol_commit"], PROTOCOL_COMMIT, "factorial protocol commit")
     require(summary["status"], "ADMITTED_SEED_MATCHED", "factorial status")
+    require(summary["legacy_acquisition_status"], "ADMITTED_SEED_MATCHED", "factorial legacy acquisition status retained verbatim")
+    require(summary["final_reporting_status"], "ADMITTED_FIXED_BATTERY_DESCRIPTIVE", "factorial final reporting status")
     require(summary["units"], 2_000, "factorial summary units")
     require(summary["games"], 12_000, "factorial summary games")
     require(summary["control_mismatch_units"], 0, "factorial control gate")

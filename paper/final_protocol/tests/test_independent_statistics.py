@@ -110,8 +110,10 @@ def test_canonical_verification_emits_only_bounded_statistical_semantics():
     )
     assert "fixed-composition" in fixed_composition["role"]
     assert "not a confidence interval" in fixed_composition["inferential_status"]
-    assert stress["earliest_divergence_localization_included"] is False
-    assert "first_divergence_actor_counts" not in stress
+    assert stress["first_divergence_actor_counts_included"] is True
+    assert stress["first_divergence_actor_counts"]["opponent"] == 99
+    assert stress["first_divergence_position_included"] is False
+    assert stress["timing_summaries_included"] is True
 
     factorial = payload["factorial"]
     assert set(factorial["contrasts"]) == {

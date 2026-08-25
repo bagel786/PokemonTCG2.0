@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 from typing import Sequence
 
-from . import admission, evidence, synthetic, synthetic_admission
+from . import admission, evidence, stage6_rules, synthetic, synthetic_admission
 from .schema_subset import CheckedSchemaError, validate_instance
 
 
@@ -47,6 +47,10 @@ def _report(protocol: admission.AdmissionProtocol) -> dict:
     decision_table_path = RELEASE / "docs/ADMISSION_DECISION_TABLE.md"
     if decision_table_path.read_text(encoding="utf-8") != decision_table:
         raise ValueError("generated admission decision table is stale")
+    stage6_table = stage6_rules.render_decision_table()
+    stage6_table_path = RELEASE / "docs/STAGE6_DECISION_RULES.md"
+    if stage6_table_path.read_text(encoding="utf-8") != stage6_table:
+        raise ValueError("generated stage 6 decision rules table is stale")
     example = evidence.verify_and_admit(
         admission.load_json_document(RELEASE / "examples/example_evidence.json"),
         protocol,

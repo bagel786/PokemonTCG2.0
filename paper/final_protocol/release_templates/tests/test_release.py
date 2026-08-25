@@ -97,14 +97,32 @@ def test_protocol_deviation_is_explicit_and_unsigned() -> None:
     deviation_words = " ".join(deviation.split())
     stress = json.loads((RELEASE / "data/processed/timed_search_stress.json").read_text())
     assert "PENDING_HUMAN_SIGNOFF_UNSIGNED" in deviation
-    assert "first-divergence positions and actors" in deviation
+    assert "first-divergence positions" in deviation
     assert "timing summaries" in deviation
-    assert "Raw trace lines are absent" in deviation_words
-    assert "reporting/access deviation" in deviation
+    assert "Raw trace lines are absent" in deviation_words or "raw trace payloads are restricted" in deviation_words
+    assert "reporting/access deviation" in deviation or "reporting and access deviation" in deviation
     assert "99 among 200" in deviation
-    assert stress["earliest_divergence_localization_included"] is False
-    assert stress["timing_summaries_included"] is False
-    assert stress["protocol_deviation_status"] == "PENDING_HUMAN_SIGNOFF_UNSIGNED"
+    assert stress["first_divergence_actor_counts_included"] is True
+    assert stress["first_divergence_actor_counts"]["opponent"] == 99
+    assert sum(stress["first_divergence_actor_counts"].values()) == stress["trace_disagreement_clusters"]
+    assert stress["first_divergence_position_included"] is False
+    assert stress["timing_summaries_included"] is True
+    assert set(stress["timing_summaries"]) == {"timed-search-A", "timed-search-B"}
+    for opponent, profiles in stress["timing_summaries"].items():
+        assert set(profiles) == {
+            "serial_forward",
+            "serial_reverse",
+            "parallel_forward",
+            "parallel_reverse",
+        }
+        for summary in profiles.values():
+            assert summary["games"] == 100
+            assert summary["median_seconds"] > 0.0
+    provenance = stress["recovered_secondary_outputs_provenance"]
+    assert len(provenance["source_sha256"]) == 64
+    assert stress["protocol_deviation_status"] == (
+        "PENDING_HUMAN_SIGNOFF_UNSIGNED_POSITIONS_UNRECOVERED"
+    )
 
 
 def test_environment_specs_are_direct_only_and_unevidenced_as_clean_build() -> None:

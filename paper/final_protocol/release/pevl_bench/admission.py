@@ -54,7 +54,7 @@ DEFAULT_PROTOCOL_DIRECTORY = Path(__file__).resolve().parent.parent / "protocol"
 # Semantic trust anchor for the canonicalized four-document protocol bundle.
 # The build/test workflow verifies this value, so syntactically valid rule edits
 # cannot silently change the classifier's meaning.
-EXPECTED_PROTOCOL_BUNDLE_SHA256 = "603588ce613be1acab3d87fe0e942d35aca4de1c6aa5b22243a5bd62fabfae64"
+EXPECTED_PROTOCOL_BUNDLE_SHA256 = "25291c7e6b132db1148d9ea3a87648a2bf992af095abeae473844258bcae17c3"
 MAX_JSON_BYTES = 64 * 1024 * 1024
 
 _SAFE_IDENTIFIER = re.compile(r"[a-z0-9][a-z0-9_.:-]{0,127}\Z")

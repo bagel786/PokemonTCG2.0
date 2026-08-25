@@ -68,26 +68,37 @@ evidence.
   prospective validation.
 - **Status:** Provenance disclosed; human confirmation **PENDING**.
 
-## D03 — Omitted stress localization, actor, and timing outputs
+## D03 — Stress localization, actor, and timing outputs
 
 - **Frozen promise:** The public package would contain digests,
   first-divergence positions and acting sides, decision counts, terminal
   outcomes, errors, and timing summaries. First-divergence position and acting
   side were specified as secondary endpoints.
-- **Current release boundary:** First-divergence position,
-  acting-side/actor localization, and timing summaries are omitted. The retained
-  evidence available to this audit contains digest and byte-count summaries but
-  no raw trace lines from which an independent verifier can reconstruct first
-  divergence.
-- **Scientific impact:** Independent localization and timing verification is
-  unavailable. No localization, actor, or timing result should be represented as
-  independently reproduced from the release.
+- **Closeout recovery (2026-08-25):** A closeout search of retained Git-tracked
+  evidence found that the hash-pinned stress summary
+  (`paper/data/pevl/timed_search_stress_summary.json`) contains two of the
+  promised outputs: `first_divergence_actor_counts` (all 99 disagreeing clusters
+  had their earliest divergence on the opponent side) and per-opponent,
+  per-profile wall-clock timing summaries. Sanitized processed copies were added
+  to the release with the source SHA-256 recorded in
+  `recovered_secondary_outputs_provenance`. Redistribution still requires human
+  approval; this register remains unsigned.
+- **Still unavailable:** First-divergence **positions** were never recorded in
+  any retained artifact, and raw trace payloads remain restricted, so
+  position-level localization cannot be released or independently verified.
+  No position-localization claim may be made.
+- **Scientific impact:** Actor-side localization and timing claims become
+  verifiable from released aggregates once a human approves redistribution.
+  Independent position-level localization verification remains impossible from
+  the release. No localization-position, actor, or timing result should be
+  represented as independently reproduced until that approval exists.
 - **Primary-result impact:** This reporting/access departure does not change the
   frozen digest endpoint or its observed 99/200 disagreement count.
-- **Status:** **UNRESOLVED; UNSIGNED/PENDING.** A human author must confirm the
-  acquisition and retention history, decide whether an authorized output can be
-  supplied, and decide whether to append an amendment to the frozen protocol.
-  This file records neither a completed amendment nor approval of the departure.
+- **Status:** **PARTIALLY RECOVERED; UNSIGNED/PENDING.** A human author must
+  approve redistribution of the recovered aggregates, confirm the acquisition
+  and retention history for the never-recorded positions, and decide whether to
+  append an amendment to the frozen protocol. This file records neither a
+  completed amendment nor approval of the departure.
 
 ## Required human disposition
 
@@ -99,8 +110,9 @@ Before any submission-ready decision, the corresponding author must:
    post-acquisition conservative controls rather than prospectively frozen
    validation criteria;
 3. confirm that byte-count hardening left the frozen digest result unchanged;
-4. account for the promised localization, actor, and timing outputs and the
-   absence of released raw trace lines; and
+4. account for the promised localization, actor, and timing outputs, approve or
+   deny redistribution of the recovered aggregates, and confirm the retention
+   history of the never-recorded positions; and
 5. either append an honest amendment under the frozen protocol's amendment rule
    or explicitly retain this unresolved deviation as a submission blocker.
 

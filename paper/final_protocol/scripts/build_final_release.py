@@ -59,6 +59,7 @@ PROTOCOLS = {
 TEMPLATE_FILES = {
     "docs/ADMISSION_DECISION_TABLE.md",
     "docs/PROTOCOL_DEVIATIONS.md",
+    "docs/STAGE6_DECISION_RULES.md",
     "docs/WORKED_ADMISSION_EXAMPLE.md",
     "examples/example_evidence.json",
     "examples/evidence/candidate_agent.txt",
@@ -77,15 +78,18 @@ TEMPLATE_FILES = {
     "pevl_bench/admission.py",
     "pevl_bench/evidence.py",
     "pevl_bench/schema_subset.py",
+    "pevl_bench/stage6_rules.py",
     "pevl_bench/synthetic_admission.py",
     "protocol/admission_rules.json",
     "protocol/admission_schema.json",
     "protocol/claim_classes.json",
     "protocol/evidence_bundle_schema.json",
+    "protocol/stage6_source_audit_rules.json",
     "scripts/verify_release.py",
     "scripts/build_figures_tables.py",
     "tests/test_admission_hardening.py",
     "tests/test_release.py",
+    "tests/test_stage6_rules.py",
 }
 SOURCE_DATA_FILES = {
     "artifact_identity.json",
@@ -517,15 +521,44 @@ def build_stress(stage: Path) -> None:
     allowed = {key: value for key, value in remediated.items() if key != "cluster_rows"}
     allowed["cluster_rows"] = released_rows
     allowed["trace_payloads_included"] = False
-    allowed["earliest_divergence_localization_included"] = False
-    allowed["earliest_divergence_localization_reason"] = (
-        "The review package contains no raw trace lines from which to verify an earliest event or actor."
+    actor_counts = source.get("first_divergence_actor_counts")
+    if not isinstance(actor_counts, dict) or not actor_counts:
+        raise ReleaseError("stress first-divergence actor counts are missing from retained evidence")
+    source_timing = source.get("timing")
+    if not isinstance(source_timing, dict) or not source_timing:
+        raise ReleaseError("stress timing summaries are missing from retained evidence")
+    neutral_timing: dict[str, Any] = {}
+    for opponent_raw, profiles in sorted(source_timing.items()):
+        if not isinstance(profiles, dict):
+            raise ReleaseError("stress timing profile group is malformed")
+        neutral_timing[context(str(opponent_raw))] = {
+            profile: dict(values) for profile, values in sorted(profiles.items())
+        }
+    total_actor_observations = sum(
+        int(count) for count in actor_counts.values() if isinstance(count, (int, float)) and not isinstance(count, bool)
     )
-    allowed["timing_summaries_included"] = False
-    allowed["timing_summaries_reason"] = (
-        "The review package omits the timing summaries promised by the frozen stress protocol."
+    require(total_actor_observations, int(remediated["trace_disagreement_clusters"]),
+            "actor-count observations equal trace-disagreement clusters")
+    allowed["first_divergence_actor_counts_included"] = True
+    allowed["first_divergence_actor_counts"] = {key: int(value) for key, value in sorted(actor_counts.items())}
+    allowed["first_divergence_position_included"] = False
+    allowed["first_divergence_position_reason"] = (
+        "First-divergence positions were never recorded in the retained artifacts; only acting-side "
+        "counts at first divergence were summarized. Raw trace payloads are restricted and are not "
+        "redistributed, so independent position-level localization remains impossible."
     )
-    allowed["protocol_deviation_status"] = "PENDING_HUMAN_SIGNOFF_UNSIGNED"
+    allowed["timing_summaries_included"] = True
+    allowed["timing_summaries"] = neutral_timing
+    allowed["recovered_secondary_outputs_provenance"] = {
+        "source_role": "stress_summary",
+        "source_sha256": PINNED_INPUTS["stress_summary"][1],
+        "note": (
+            "Acting-side counts at first divergence and per-profile wall-clock timing summaries were "
+            "recovered from the hash-pinned retained stress summary; they are processed aggregates of "
+            "the author's own acquisition runs."
+        ),
+    }
+    allowed["protocol_deviation_status"] = "PENDING_HUMAN_SIGNOFF_UNSIGNED_POSITIONS_UNRECOVERED"
     sensitivity = allowed.get("fixed_composition_reweighting_sensitivity")
     if not isinstance(sensitivity, dict):
         raise ReleaseError("stress fixed-composition sensitivity is missing")
@@ -562,6 +595,17 @@ def build_factorial(stage: Path) -> None:
         require(remediated[key], summary[key], f"remediated factorial {key}")
     allowed = dict(remediated)
     allowed["raw_traces_included"] = False
+    allowed["legacy_acquisition_status"] = summary.get("status")
+    allowed["legacy_acquisition_status_meaning"] = (
+        "Frozen-plan binary acquisition status recorded at acquisition time; it is not an "
+        "inferential or reporting claim."
+    )
+    allowed["final_reporting_status"] = "ADMITTED_FIXED_BATTERY_DESCRIPTIVE"
+    allowed["final_reporting_status_reason"] = (
+        "Post-acquisition conservative reporting: only a fixed-battery descriptive seed-indexed "
+        "contrast and empirical reweighting sensitivity are admitted; no population effect, "
+        "trace-parity, event-aligned, counterfactual, or full-CRN wording is authorized."
+    )
     allowed["mcnemar_recalculation_included"] = False
     allowed["mcnemar_recalculation_reason"] = (
         "The arithmetic was checked separately but is omitted because its reference-distribution assumptions "
@@ -601,8 +645,9 @@ def copy_static_inputs(stage: Path) -> None:
             "rules before acquisition. "
             "Statements about noninspection are protocol conditions; Git proves commit ordering, not when a human inspected uncommitted files. "
             "Historical statements below about package contents are not current availability claims: the package actually distributed is defined "
-            "by the release manifest, README, processed metadata, and PROTOCOL_DEVIATIONS.md, which omit unverifiable "
-            "first-divergence positions, actors, and timing summaries.\n\n"
+            "by the release manifest, README, processed metadata, and PROTOCOL_DEVIATIONS.md. Acting-side first-divergence counts and timing "
+            "summaries were recovered from hash-pinned retained evidence and are included as processed aggregates; first-divergence positions "
+            "were never recorded and raw trace payloads remain restricted.\n\n"
         )
         destination = stage / "docs/protocols" / destination_name
         destination.parent.mkdir(parents=True, exist_ok=True)
