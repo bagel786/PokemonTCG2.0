@@ -1,287 +1,959 @@
 {
   "article_type": "APS Open Science Protocol Article",
+  "canonical_subject": {
+    "algorithm": "SHA-256 over sorted UTF-8 path, NUL, decimal size, NUL, lowercase file SHA-256, LF records",
+    "excluded": [
+      "paper/final_protocol/REPRODUCTION_REPORT.json",
+      "paper/final_protocol/REPRODUCTION_REPORT.sha256",
+      "compiler/cache transients (*.aux, *.blg, *.log, *.out, *.synctex.gz, *.pyc, __pycache__, .pytest_cache)"
+    ],
+    "file_count": 284,
+    "scope": "Final article/release tree, final reviewer bytes, retained protocol/data/synthetic inputs, and invoked scripts/tests",
+    "sha256": "63724d95fdcc98dde13c3009e2b805e9188509b85929eee2acde7801ab809753"
+  },
   "commands": [
     {
-      "command": "git merge-base --is-ancestor 803257f102232763fc88d28c14b668f9b62eb277 HEAD",
-      "duration_seconds": 0.022,
-      "output_tail": "",
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "paper/final_protocol/scripts/verify_starting_state.py"
+      ],
+      "cwd": ".",
+      "purpose": "verify frozen starting-state record and source identities",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "git",
+        "merge-base",
+        "--is-ancestor",
+        "803257f102232763fc88d28c14b668f9b62eb277",
+        "HEAD"
+      ],
+      "cwd": ".",
       "purpose": "verify frozen protocol ancestry",
+      "result": "PASS",
       "returncode": 0
     },
     {
-      "command": "/opt/miniconda3/bin/python paper/scripts/audit_seed_namespace.py",
-      "duration_seconds": 0.044,
-      "output_tail": "{\n  \"historical\": {\n    \"collision_groups\": {},\n    \"conversion_changed\": 2800,\n    \"engine_seed_max\": 745773287,\n    \"engine_seed_min\": 744767088,\n    \"engine_seed_unique\": 2800,\n    \"passed_no_collision\": true,\n    \"recorded_field_semantics\": \"Historical JSON stores the requested Python integer under `seed`; the adapter passed ctypes.c_uint32(seed).value to BattleStartSeeded.\",\n    \"scheduled_count\": 2800,\n    \"scheduled_max\": 202609236199,\n    \"scheduled_min\": 202608230000,\n    \"scheduled_outside_uint32\": 2800,\n    \"scheduled_unique\": 2800\n  },\n  \"historical_prospective_overlap\": 0,\n  \"output\": \"<repo>/paper/data/seed_namespace_audit.json\",\n  \"prospective\": {\n    \"collision_groups\": {},\n    \"conversion_changed\": 0,\n    \"engine_seed_max\": 2027093749,\n    \"engine_seed_min\": 2026072700,\n    \"engine_seed_unique\": 2450,\n    \"passed_no_collision\": true,\n    \"scheduled_count\": 2450,\n    \"scheduled_max\": 2027093749,\n    \"scheduled_min\": 2026072700,\n    \"scheduled_outside_uint32\": 0,\n    \"scheduled_unique\": 2450\n  }\n}",
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "paper/scripts/audit_seed_namespace.py"
+      ],
+      "cwd": ".",
       "purpose": "rebuild observable boundary-seed namespace audit",
+      "result": "PASS",
       "returncode": 0
     },
     {
-      "command": "/opt/miniconda3/bin/python paper/scripts/audit_stochastic_sources.py",
-      "duration_seconds": 0.798,
-      "output_tail": "{\n  \"level_1\": {\n    \"all_expected_digests_present_in_frozen_protocol\": true,\n    \"all_frozen_hashes_match\": true,\n    \"artifact_count\": 13,\n    \"status\": \"pass\",\n    \"verified_artifact_count\": 13\n  },\n  \"level_6\": {\n    \"admission_interpretation\": \"Source hits identify mechanisms for dynamic testing. A clean static category does not admit a paired contrast or establish determinism.\",\n    \"aggregate_hits_by_category\": {\n      \"clock_or_deadline\": 82,\n      \"explicit_randomness\": 26,\n      \"module_global_state\": 258,\n      \"native_pointer_or_state\": 920,\n      \"process_or_thread_parallelism\": 0\n    },\n    \"artifacts_with_hits_by_category\": {\n      \"clock_or_deadline\": 3,\n      \"explicit_randomness\": 11,\n      \"module_global_state\": 11,\n      \"native_pointer_or_state\": 11,\n      \"process_or_thread_parallelism\": 0\n    },\n    \"status\": \"bounded_audit_recorded\",\n    \"verified_package_tree_count\": 11\n  },\n  \"output\": \"<repo>/paper/data/stochastic_source_audit.json\"\n}",
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "paper/scripts/audit_stochastic_sources.py"
+      ],
+      "cwd": ".",
       "purpose": "rebuild bounded stochastic-source pattern audit",
+      "result": "PASS",
       "returncode": 0
     },
     {
-      "command": "/opt/miniconda3/bin/python paper/scripts/analyze_pevl.py",
-      "duration_seconds": 4.931,
-      "output_tail": "{\n  \"factorial\": \"ADMITTED_SEED_MATCHED\",\n  \"output\": \"paper/data/pevl/summary.json\",\n  \"preflight\": \"PASS\",\n  \"stress\": \"TRACE_DIVERGENCE\"\n}",
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "paper/scripts/analyze_pevl.py"
+      ],
+      "cwd": ".",
       "purpose": "rebuild canonical PEVL summaries and factorial units from retained acquisition artifacts",
+      "result": "PASS",
       "returncode": 0
     },
     {
-      "command": "/opt/miniconda3/bin/python paper/final_protocol/scripts/verify_statistics.py",
-      "duration_seconds": 4.487,
-      "output_tail": "{\"output\": \"<repo>/paper/final_protocol/source_data/statistics_verification.json\", \"status\": \"PASS\"}",
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "paper/final_protocol/scripts/verify_statistics.py"
+      ],
+      "cwd": ".",
       "purpose": "independently verify raw-source hashes, schedules, audits, reaggregation, and statistics",
+      "result": "PASS",
       "returncode": 0
     },
     {
-      "command": "/opt/miniconda3/bin/python paper/final_protocol/scripts/build_final_artifacts.py",
-      "duration_seconds": 1.284,
-      "output_tail": "{\"files\": 22, \"status\": \"PASS\"}",
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "paper/final_protocol/scripts/independent_statistics_audit.py",
+        "--check"
+      ],
+      "cwd": ".",
+      "purpose": "recalculate all central statistics independently from retained raw rows",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "paper/final_protocol/scripts/build_final_artifacts.py"
+      ],
+      "cwd": ".",
       "purpose": "rebuild generated macros, tables, figures, and source data",
+      "result": "PASS",
       "returncode": 0
     },
     {
-      "command": "/opt/miniconda3/bin/python paper/final_protocol/scripts/recalculate_equation_examples.py",
-      "duration_seconds": 0.021,
-      "output_tail": "{\"bootstrap_replicate\": 0.6666666666666666, \"factorial\": {\"interaction\": 0.010000000000000009, \"representation\": 0.025000000000000022, \"total\": 0.040000000000000036, \"training\": 0.015000000000000013}, \"paired_difference\": 1, \"status\": \"PASS\", \"trace_disagreement\": 0.4}",
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "paper/final_protocol/scripts/recalculate_equation_examples.py"
+      ],
+      "cwd": ".",
       "purpose": "recalculate independent equation examples",
+      "result": "PASS",
       "returncode": 0
     },
     {
-      "command": "/opt/miniconda3/bin/python -m pytest -q tests/test_analyze_pevl.py tests/test_build_pevl_artifacts.py tests/test_build_pevl_result_macros.py tests/test_build_release_pevl.py tests/test_pevl_synthetic.py tests/test_seed_namespace_audit.py tests/test_stochastic_source_audit.py tests/test_verify_pevl_release.py paper/final_protocol/tests/test_equations.py",
-      "duration_seconds": 1.661,
-      "output_tail": "...........................................................              [100%]\n59 passed in 1.21s",
-      "purpose": "run targeted analyzer, audit, synthetic, release, and equation tests",
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "paper/final_protocol/scripts/audit_readability.py"
+      ],
+      "cwd": ".",
+      "purpose": "run mechanical sentence, acronym, repetition, number, terminology, and paragraph-purpose checks",
+      "result": "PASS",
       "returncode": 0
     },
     {
-      "command": "/opt/miniconda3/bin/python paper/final_protocol/scripts/build_final_release.py",
-      "duration_seconds": 20.026,
-      "output_tail": "  \"scope\": \"engine-independent processed review package\",\n  \"status\": \"PASS\",\n  \"stress\": {\n    \"clusters\": 200,\n    \"decision_count_disagreement_clusters\": 93,\n    \"error_disagreement_clusters\": 0,\n    \"outcome_disagreement_clusters\": 47,\n    \"policy_error_present_clusters\": 0,\n    \"trace_disagreement\": {\n      \"bootstrap_95_ci\": [\n        0.425,\n        0.565\n      ],\n      \"bootstrap_draws\": 100000,\n      \"bootstrap_seed\": 2026083118,\n      \"clusters\": 200,\n      \"estimate\": 0.495\n    },\n    \"trace_disagreement_clusters\": 99\n  },\n  \"synthetic\": {\n    \"levels\": 8,\n    \"modes\": 5,\n    \"status\": \"verified\"\n  }\n}\n{\n  \"manifest\": {\n    \"entries\": 50,\n    \"files_including_manifest\": 51\n  },\n  \"manifest_sha256\": \"ac497430a7d1d72f0428ec4ca668a8712df03455c3f7286ef608f27a51f41e66\",\n  \"publication\": \"staged validation followed by directory replacement\",\n  \"release\": \"paper/final_protocol/release\",\n  \"scan\": {\n    \"files_scanned\": 50,\n    \"problems\": 0\n  },\n  \"status\": \"PASS\"\n}",
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "paper/final_protocol/scripts/verify_research_audits.py"
+      ],
+      "cwd": ".",
+      "purpose": "verify novelty, reference, title-collision, and APS desk-fit audits",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "paper/final_protocol/scripts/build_claim_ledger.py"
+      ],
+      "cwd": ".",
+      "purpose": "rebuild exhaustive sentence-level claim ledger and scope audit",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_analyze_pevl.py",
+        "tests/test_build_pevl_artifacts.py",
+        "tests/test_build_pevl_result_macros.py",
+        "tests/test_build_release_pevl.py",
+        "tests/test_pevl_synthetic.py",
+        "tests/test_seed_namespace_audit.py",
+        "tests/test_stochastic_source_audit.py",
+        "tests/test_verify_pevl_release.py",
+        "paper/final_protocol/tests/test_equations.py",
+        "paper/final_protocol/tests/test_claim_ledger.py",
+        "paper/final_protocol/tests/test_independent_statistics.py",
+        "paper/final_protocol/tests/test_research_audits.py",
+        "paper/final_protocol/tests/test_protocol_reporting_provenance.py",
+        "paper/final_protocol/tests/test_reproduction_provenance.py"
+      ],
+      "cwd": ".",
+      "purpose": "run targeted analyzer, audit, synthetic, release, equation, claim-scope, and provenance tests",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "paper/final_protocol/scripts/build_final_release.py"
+      ],
+      "cwd": ".",
       "purpose": "build sanitized engine-free review package",
+      "result": "PASS",
       "returncode": 0
     },
     {
-      "command": "/opt/miniconda3/bin/python -m pevl_bench generate",
-      "duration_seconds": 0.045,
-      "output_tail": "generated and verified <repo>/paper/final_protocol/release/pevl_bench/results",
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "-m",
+        "pevl_bench",
+        "generate"
+      ],
+      "cwd": "paper/final_protocol/release",
       "purpose": "regenerate synthetic conformance outputs through the review-package interface",
+      "result": "PASS",
       "returncode": 0
     },
     {
-      "command": "/opt/miniconda3/bin/python -m pevl_bench verify",
-      "duration_seconds": 0.04,
-      "output_tail": "verified <repo>/paper/final_protocol/release/pevl_bench/results",
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "-m",
+        "pevl_bench",
+        "verify"
+      ],
+      "cwd": "paper/final_protocol/release",
       "purpose": "verify synthetic conformance outputs through the review-package interface",
+      "result": "PASS",
       "returncode": 0
     },
     {
-      "command": "/opt/miniconda3/bin/python -m pevl_bench report --json",
-      "duration_seconds": 0.042,
-      "output_tail": "          -0.02025000000000001,\n          0.012499999999999994\n        ],\n        \"bootstrap_draws\": 100000,\n        \"bootstrap_seed\": 2026083117,\n        \"estimate\": -0.004,\n        \"resampling\": \"paired units within each of ten opponent-by-order strata\"\n      }\n    },\n    \"games\": 12000,\n    \"status\": \"ADMITTED_SEED_MATCHED\",\n    \"units\": 2000\n  },\n  \"historical_repeated_control\": {\n    \"available_record_mismatches\": 458,\n    \"outcome_record_mismatches\": 210,\n    \"units\": 2800\n  },\n  \"package_scope\": \"processed diagnostics and a synthetic conformance suite; no restricted engine\",\n  \"protocol_commit\": \"803257f102232763fc88d28c14b668f9b62eb277\",\n  \"synthetic\": {\n    \"modes\": 5,\n    \"status\": \"verified\"\n  },\n  \"timed_search_stress\": {\n    \"clusters\": 200,\n    \"status\": \"TRACE_DIVERGENCE\",\n    \"trace_disagreement\": {\n      \"bootstrap_95_ci\": [\n        0.425,\n        0.565\n      ],\n      \"bootstrap_draws\": 100000,\n      \"bootstrap_seed\": 2026083118,\n      \"clusters\": 200,\n      \"estimate\": 0.495\n    },\n    \"trace_disagreement_clusters\": 99\n  }\n}",
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "-m",
+        "pevl_bench",
+        "admit",
+        "examples/example_evidence.json"
+      ],
+      "cwd": "paper/final_protocol/release",
+      "purpose": "evaluate worked admission evidence through the review-package interface",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "-m",
+        "pevl_bench",
+        "explain",
+        "examples/example_evidence.json"
+      ],
+      "cwd": "paper/final_protocol/release",
+      "purpose": "explain the blocking gate and redesign for the worked example",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "-m",
+        "pevl_bench",
+        "report",
+        "--json"
+      ],
+      "cwd": "paper/final_protocol/release",
       "purpose": "summarize processed evidence through the review-package interface",
+      "result": "PASS",
       "returncode": 0
     },
     {
-      "command": "/opt/miniconda3/bin/python -m pytest -q tests/test_release.py",
-      "duration_seconds": 0.204,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.02s",
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "-m",
+        "pevl_bench",
+        "report",
+        "--decision-table"
+      ],
+      "cwd": "paper/final_protocol/release",
+      "purpose": "regenerate the human-readable admission decision table",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_release.py"
+      ],
+      "cwd": "paper/final_protocol/release",
       "purpose": "run engine-independent release tests",
+      "result": "PASS",
       "returncode": 0
     },
     {
-      "command": "/opt/miniconda3/bin/python scripts/verify_release.py",
-      "duration_seconds": 4.533,
-      "output_tail": "    \"runtime_cache_files_ignored\": 0\n  },\n  \"preflight\": {\n    \"decision_count_identical_failures\": 0,\n    \"error_identical_failures\": 0,\n    \"executions\": 3000,\n    \"jobs\": 20,\n    \"outcome_identical_failures\": 0,\n    \"trace_bytes_identical_failures\": 0,\n    \"trace_digest_identical_failures\": 0,\n    \"trajectory_units\": 1000,\n    \"unit_identical_failures\": 0\n  },\n  \"protocol_commit\": \"803257f102232763fc88d28c14b668f9b62eb277\",\n  \"scope\": \"engine-independent processed review package\",\n  \"status\": \"PASS\",\n  \"stress\": {\n    \"clusters\": 200,\n    \"decision_count_disagreement_clusters\": 93,\n    \"error_disagreement_clusters\": 0,\n    \"outcome_disagreement_clusters\": 47,\n    \"policy_error_present_clusters\": 0,\n    \"trace_disagreement\": {\n      \"bootstrap_95_ci\": [\n        0.425,\n        0.565\n      ],\n      \"bootstrap_draws\": 100000,\n      \"bootstrap_seed\": 2026083118,\n      \"clusters\": 200,\n      \"estimate\": 0.495\n    },\n    \"trace_disagreement_clusters\": 99\n  },\n  \"synthetic\": {\n    \"levels\": 8,\n    \"modes\": 5,\n    \"status\": \"verified\"\n  }\n}",
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "scripts/verify_release.py"
+      ],
+      "cwd": "paper/final_protocol/release",
       "purpose": "verify release manifest and reaggregate processed rows",
+      "result": "PASS",
       "returncode": 0
     },
     {
-      "command": "/opt/miniconda3/bin/python paper/final_protocol/scripts/build_claim_ledger.py",
-      "duration_seconds": 0.035,
-      "output_tail": "wrote 30 claims to <repo>/paper/final_protocol/claim_ledger.csv",
-      "purpose": "rebuild sentence-level claim ledger",
+      "command": [
+        "tectonic",
+        "main.tex"
+      ],
+      "cwd": "paper/final_protocol",
+      "purpose": "compile current REVTeX manuscript without retaining transient logs",
+      "result": "PASS",
       "returncode": 0
     },
     {
-      "command": "/opt/miniconda3/bin/python paper/final_protocol/scripts/build_final_release.py",
-      "duration_seconds": 19.729,
-      "output_tail": "  \"scope\": \"engine-independent processed review package\",\n  \"status\": \"PASS\",\n  \"stress\": {\n    \"clusters\": 200,\n    \"decision_count_disagreement_clusters\": 93,\n    \"error_disagreement_clusters\": 0,\n    \"outcome_disagreement_clusters\": 47,\n    \"policy_error_present_clusters\": 0,\n    \"trace_disagreement\": {\n      \"bootstrap_95_ci\": [\n        0.425,\n        0.565\n      ],\n      \"bootstrap_draws\": 100000,\n      \"bootstrap_seed\": 2026083118,\n      \"clusters\": 200,\n      \"estimate\": 0.495\n    },\n    \"trace_disagreement_clusters\": 99\n  },\n  \"synthetic\": {\n    \"levels\": 8,\n    \"modes\": 5,\n    \"status\": \"verified\"\n  }\n}\n{\n  \"manifest\": {\n    \"entries\": 50,\n    \"files_including_manifest\": 51\n  },\n  \"manifest_sha256\": \"ac497430a7d1d72f0428ec4ca668a8712df03455c3f7286ef608f27a51f41e66\",\n  \"publication\": \"staged validation followed by directory replacement\",\n  \"release\": \"paper/final_protocol/release\",\n  \"scan\": {\n    \"files_scanned\": 50,\n    \"problems\": 0\n  },\n  \"status\": \"PASS\"\n}",
-      "purpose": "refresh release manifest after claim-ledger generation",
-      "returncode": 0
-    },
-    {
-      "command": "tectonic --keep-logs main.tex",
-      "duration_seconds": 3.709,
-      "output_tail": "warning: main.tex:396: Underfull \\hbox (badness 2111) in paragraph at lines 390--396\nwarning: tables/table_3_prospective_results.tex:13: Overfull \\hbox (1.30089pt too wide) in paragraph at lines 13--13\nwarning: main.tex:482: Underfull \\hbox (badness 1661) in paragraph at lines 482--482\nwarning: main.tex:515: Underfull \\hbox (badness 2698) in paragraph at lines 507--515\nwarning: main.tex:515: Underfull \\hbox (badness 1107) in paragraph at lines 507--515\nwarning: main.tex:515: Underfull \\hbox (badness 1189) in paragraph at lines 507--515\nwarning: main.tex:515: Underfull \\hbox (badness 2753) in paragraph at lines 507--515\nwarning: tables/table_4_factorial.tex:2: Underfull \\hbox (badness 1939) in paragraph at lines 2--2\nwarning: tables/table_4_factorial.tex:2: Underfull \\hbox (badness 3861) in paragraph at lines 2--2\nwarning: main.tex:536: Underfull \\hbox (badness 1502) in paragraph at lines 536--536\nwarning: main.tex:551: Underfull \\hbox (badness 2012) in paragraph at lines 542--551\nwarning: main.tex:558: Underfull \\hbox (badness 4543) in paragraph at lines 552--558\nwarning: main.tex:573: Underfull \\hbox (badness 1189) in paragraph at lines 567--573\nwarning: main.tex:580: Underfull \\hbox (badness 1019) in paragraph at lines 574--580\nwarning: main.tex:593: Underfull \\hbox (badness 6625) in paragraph at lines 589--593\nnote: Rerunning TeX because \"main.aux\" changed ...\nwarning: main.tex:396: Underfull \\hbox (badness 2556) in paragraph at lines 390--396\nwarning: main.tex:396: Underfull \\hbox (badness 2181) in paragraph at lines 390--396\nwarning: main.tex:396: Underfull \\hbox (badness 2111) in paragraph at lines 390--396\nwarning: tables/table_3_prospective_results.tex:13: Overfull \\hbox (1.30089pt too wide) in paragraph at lines 13--13\nwarning: main.tex:482: Underfull \\hbox (badness 1661) in paragraph at lines 482--482\nwarning: main.tex:515: Underfull \\hbox (badness 2698) in paragraph at lines 507--515\nwarning: main.tex:515: Underfull \\hbox (badness 1107) in paragraph at lines 507--515\nwarning: main.tex:515: Underfull \\hbox (badness 1189) in paragraph at lines 507--515\nwarning: main.tex:515: Underfull \\hbox (badness 2753) in paragraph at lines 507--515\nwarning: tables/table_4_factorial.tex:2: Underfull \\hbox (badness 1939) in paragraph at lines 2--2\nwarning: tables/table_4_factorial.tex:2: Underfull \\hbox (badness 3861) in paragraph at lines 2--2\nwarning: main.tex:536: Underfull \\hbox (badness 1502) in paragraph at lines 536--536\nwarning: main.tex:551: Underfull \\hbox (badness 2012) in paragraph at lines 542--551\nwarning: main.tex:558: Underfull \\hbox (badness 4543) in paragraph at lines 552--558\nwarning: main.tex:573: Underfull \\hbox (badness 1189) in paragraph at lines 567--573\nwarning: main.tex:580: Underfull \\hbox (badness 1019) in paragraph at lines 574--580\nwarning: main.tex:593: Underfull \\hbox (badness 6625) in paragraph at lines 589--593\nwarning: main.bbl:156: Underfull \\hbox (badness 1092) in paragraph at lines 150--156\nwarning: warnings were issued by the TeX engine; use --print and/or --keep-logs for details.\nnote: Running xdvipdfmx ...\nnote: Writing `main.pdf` (216.03515625 KiB)\nnote: Writing `main.log` (19.9697265625 KiB)\nnote: Writing `main.blg` (940 B)\nnote: Skipped writing 4 intermediate files (use --keep-intermediates to keep them)",
-      "purpose": "compile current REVTeX manuscript",
-      "returncode": 0
-    },
-    {
-      "command": "pdftotext main.pdf -",
-      "duration_seconds": 0.059,
-      "output_tail": "Protocol Article title matched compiled PDF text.",
+      "command": [
+        "pdftotext",
+        "main.pdf",
+        "-"
+      ],
+      "cwd": "paper/final_protocol",
       "purpose": "extract compiled PDF text for identity check",
+      "result": "PASS",
       "returncode": 0
     },
     {
-      "command": "/opt/miniconda3/bin/python paper/final_protocol/scripts/audit_contradictions.py",
-      "duration_seconds": 0.29,
-      "output_tail": "contradiction audit: PASS_WITH_HUMAN_OR_LEGAL_BLOCKERS (0 contradictions, 0 machine blockers, 17 human/legal blockers)",
-      "purpose": "run cross-file contradiction audit",
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "paper/final_protocol/scripts/audit_contradictions.py"
+      ],
+      "cwd": ".",
+      "purpose": "run cross-file contradiction and claim-scope audit",
+      "result": "PASS",
       "returncode": 0
     },
     {
-      "command": "/opt/miniconda3/bin/python paper/final_protocol/scripts/red_team_audit.py",
-      "duration_seconds": 0.239,
-      "output_tail": "red-team audit: NOT_READY_DO_NOT_SUBMIT (6 open criticisms, 17 human/legal blockers)",
-      "purpose": "run three-pass adversarial review",
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "paper/final_protocol/scripts/aggregate_desk_reviews.py"
+      ],
+      "cwd": ".",
+      "purpose": "validate and aggregate five independent hash-bound desk reviews",
+      "result": "PASS",
       "returncode": 0
     }
   ],
+  "desk_review_status": "VALIDATED_FIVE_FINAL_REVIEWS",
   "environment": {
-    "matplotlib": "3.10.5",
-    "numpy": "2.2.5",
-    "platform": "macOS-26.1-arm64-arm-64bit-Mach-O",
-    "python": "3.13.2",
-    "tectonic_available": true
+    "architecture": {
+      "machine": "arm64",
+      "processor": "arm",
+      "python_architecture": [
+        "64bit",
+        "Mach-O"
+      ],
+      "sysconfig_platform": "macosx-11.1-arm64"
+    },
+    "conda_direct_declarations": {
+      "matplotlib": "3.10.5",
+      "numpy": "2.2.5",
+      "pytest": "8.4.2",
+      "python": "3.13.2"
+    },
+    "conda_direct_versions_match_observed": true,
+    "dependency_declarations": [
+      {
+        "path": "paper/final_protocol/release/requirements-lock.txt",
+        "sha256": "19732c0dc8820e6ada48ce24144b7fbf31785602c3278ef73a1aab92d9816876",
+        "size_bytes": 112
+      },
+      {
+        "path": "paper/final_protocol/release/environment.yml",
+        "sha256": "e6017d4096f6d5f2c7bd791b7a6a879810864f64a33bc0da7a1a9535d949c1ea",
+        "size_bytes": 209
+      }
+    ],
+    "direct_declared_packages": {
+      "matplotlib": "3.10.5",
+      "numpy": "2.2.5",
+      "pytest": "8.4.2"
+    },
+    "direct_package_versions_match": true,
+    "environment_boundary": {
+      "fresh_environment_created": false,
+      "fresh_environment_verified": false,
+      "observation_scope": "Commands execute in the active workspace environment; exact observed versions and tool binaries are recorded.",
+      "requirements_lock_semantics": "requirements-lock.txt declares three direct packages only; it is not a transitive lock.",
+      "transitive_environment_locked": false
+    },
+    "observed_direct_packages": {
+      "matplotlib": "3.10.5",
+      "numpy": "2.2.5",
+      "pytest": "8.4.2"
+    },
+    "operating_system": {
+      "mac_version": "26.1",
+      "platform": "macOS-26.1-arm64-arm-64bit-Mach-O",
+      "release": "25.1.0",
+      "system": "Darwin",
+      "version": "Darwin Kernel Version 25.1.0: Mon Oct 20 19:32:47 PDT 2025; root:xnu-12377.41.6~2/RELEASE_ARM64_T8103"
+    },
+    "python": {
+      "byte_order": "little",
+      "compiler": "Clang 14.0.6 ",
+      "executable": "/opt/miniconda3/bin/python3.13",
+      "executable_sha256": "ff1b490b5e956491c9af91875f037c5e9859cb868506a8af269fcd3cc35276f3",
+      "implementation": "CPython",
+      "pointer_bits": 64,
+      "version": "3.13.2",
+      "version_full": "3.13.2 | packaged by Anaconda, Inc. | (main, Feb  6 2025, 12:55:35) [Clang 14.0.6 ]"
+    },
+    "tools": {
+      "pdfinfo": {
+        "executable": "/opt/homebrew/Cellar/poppler/26.08.0/bin/pdfinfo",
+        "executable_sha256": "8a48bb18e99c8f1add637ffae1d860c3cdabe11f4f1672f3c1b5ef4c3e6e8461",
+        "name": "Poppler pdfinfo",
+        "version_output": "pdfinfo version 26.08.0\nCopyright 2005-2026 The Poppler Developers - http://poppler.freedesktop.org\nCopyright 1996-2011, 2022 Glyph & Cog, LLC"
+      },
+      "pdftoppm": {
+        "executable": "/opt/homebrew/Cellar/poppler/26.08.0/bin/pdftoppm",
+        "executable_sha256": "504dd5b6efe73d7d23bc04c90d2cfd75962b8893df95de6db7f45ab54bf47fc1",
+        "name": "Poppler pdftoppm",
+        "version_output": "pdftoppm version 26.08.0\nCopyright 2005-2026 The Poppler Developers - http://poppler.freedesktop.org\nCopyright 1996-2011, 2022 Glyph & Cog, LLC"
+      },
+      "pdftotext": {
+        "executable": "/opt/homebrew/Cellar/poppler/26.08.0/bin/pdftotext",
+        "executable_sha256": "52cb759b328134d667e0e9ba9142e952811473fba6caa3a053ff1e2605512fd9",
+        "name": "Poppler pdftotext",
+        "version_output": "pdftotext version 26.08.0\nCopyright 2005-2026 The Poppler Developers - http://poppler.freedesktop.org\nCopyright 1996-2011, 2022 Glyph & Cog, LLC"
+      },
+      "tectonic": {
+        "executable": "/opt/homebrew/Cellar/tectonic/0.16.9/bin/tectonic",
+        "executable_sha256": "7333a5d99cf1fcfef70ee4a9bd1d2a070169c3e79ee038e1aa96291eeff90efc",
+        "name": "Tectonic",
+        "version_output": "Tectonic 0.16.9"
+      }
+    }
   },
-  "generated_at_utc": "2026-08-25T00:54:16.747766+00:00",
+  "generated_at_utc": "2026-08-24T00:00:00+00:00",
   "limitations": [
     "The restricted game engine and private acquisition materials are not rerun.",
     "The command verifies retained canonical artifacts and reproduces synthetic and processed analyses.",
-    "Rights, licensing, DOI, human metadata, and author comprehension remain human blockers."
+    "The active environment is observed exactly but was not created fresh; direct dependency declarations are not a transitive lock.",
+    "Rights, licensing, DOI, human metadata, author comprehension, and author approval remain open blockers."
   ],
   "outputs": {
     "artifact_build": {
       "exists": true,
       "path": "paper/final_protocol/source_data/build_report.json",
-      "sha256": "366d9e54c7e5427e53934fc395a139f3f6ca0645029a2b45411005bbd1b18f93"
+      "sha256": "b0ccadbab99d8dd79d02ca8aca8a6883ec30504158678ad88f51145996e2abf2",
+      "size_bytes": 3609
     },
     "claim_ledger": {
       "exists": true,
       "path": "paper/final_protocol/claim_ledger.csv",
-      "sha256": "625f8e31ba259ad475c24f928b505183c05821d125cd77df390974c9197fa820"
+      "sha256": "8cb8d61364588269e6e847a4dbc53ac54bf04ad0e7fa35d956fc27726fa481ba",
+      "size_bytes": 502071
+    },
+    "claim_scope_audit": {
+      "exists": true,
+      "path": "paper/final_protocol/source_data/claim_scope_audit.json",
+      "sha256": "940517def0903b3d541fc542f64f909345fca287ca95699741625765c672d76c",
+      "size_bytes": 320075
     },
     "contradiction_audit": {
       "exists": true,
       "path": "paper/final_protocol/CONTRADICTION_AUDIT.json",
-      "sha256": "1bb15f66e3f0e15b6b00fedcdbd023232157c6137f8091325d5dae7463bb6e26"
+      "sha256": "496b9733f3d2efd5dfa2b768e6c1c755a8d53e8f3a0090976bf6907131519501",
+      "size_bytes": 74575
+    },
+    "desk_review_simulation": {
+      "exists": true,
+      "path": "paper/final_protocol/DESK_REVIEW_SIMULATION.json",
+      "sha256": "2f6ab4f94ba2b0dbf9dcd548b21004df9ba5024eeecd4e19910dc401a28d32f8",
+      "size_bytes": 5713
+    },
+    "independent_statistics_verification": {
+      "exists": true,
+      "path": "paper/final_protocol/source_data/independent_statistics_verification.json",
+      "sha256": "447f4e9cd0150138d75854b93f2f4a2f311e84a981cf0aece182d23430becd62",
+      "size_bytes": 50630
     },
     "manuscript_pdf": {
       "exists": true,
       "path": "paper/final_protocol/main.pdf",
-      "sha256": "3f6f92649258a9d90b29d115b6fab69c0ea1b25fd95cdfce16fb401bc40909fc"
+      "sha256": "33cc0f2fe9dd2cfdadb7e85d7fd2e6ba4ba4b03cccceb9749538a4d69815cce8",
+      "size_bytes": 244175
+    },
+    "novelty_matrix": {
+      "exists": true,
+      "path": "paper/final_protocol/NOVELTY_MATRIX.csv",
+      "sha256": "69d75b44ad1bc5484a49b65666e60fb11e2ab46669c37ba26e7a3983efc03576",
+      "size_bytes": 20131
     },
     "pdf_visual_audit": {
       "exists": true,
       "path": "paper/final_protocol/supplement/PDF_VISUAL_AUDIT.json",
-      "sha256": "d44c92765f49dcdaa71a8341c94cb99a10cba259b3bff357a05d6bdd75fbe5d3"
+      "sha256": "8e7bc727b05cf2be89e7ed802ab430ec1184e844f63d9ac1616991d0e8ca032b",
+      "size_bytes": 3527
     },
-    "red_team": {
+    "readability_audit": {
       "exists": true,
-      "path": "paper/final_protocol/FINAL_RED_TEAM.json",
-      "sha256": "bc525246ab80b2b4a3077c8ac2012b21e2b3ad4b10bbecaa9111823bcc88e797"
+      "path": "paper/final_protocol/READABILITY_AUDIT.json",
+      "sha256": "1fada9587001cb32c72f4fbd7225bc63d0a345b33bf4b82cd4b669619771a4a7",
+      "size_bytes": 26252
+    },
+    "reference_audit": {
+      "exists": true,
+      "path": "paper/final_protocol/REFERENCE_AUDIT.csv",
+      "sha256": "b3f4e50d4643cae843bd64259f62c0f2b93120474812c5c6865e647e8f6c8ec5",
+      "size_bytes": 14058
     },
     "release_manifest": {
       "exists": true,
       "path": "paper/final_protocol/release/MANIFEST.sha256",
-      "sha256": "ac497430a7d1d72f0428ec4ca668a8712df03455c3f7286ef608f27a51f41e66"
+      "sha256": "ddd49c5ae62237adb842e0cac5ffff3ecfaabc950379b307acde86d6a8d132f1",
+      "size_bytes": 7535
     },
     "results_macros": {
       "exists": true,
       "path": "paper/final_protocol/results_macros.tex",
-      "sha256": "a7e0d92bc2371c44091d5e0b2464beaf788185f0dbada8863b0b81ef54daab96"
+      "sha256": "a909963f9811877c412630b6579847bff5447cd2287a96dd4ad1b8180650f70d",
+      "size_bytes": 2235
     },
     "statistics_verification": {
       "exists": true,
       "path": "paper/final_protocol/source_data/statistics_verification.json",
-      "sha256": "9b66090b467b5e7892b0aa31d8a70a3e0c9f459175fe23e314919b184cf282d7"
+      "sha256": "6a8a2bbd083896bfcdb5230b03307bcfcaabe45657a87c91f608b0ef2f89f330",
+      "size_bytes": 7934
     }
   },
   "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",
+  "provenance_inventory": {
+    "groups": {
+      "dependency_declarations": [
+        {
+          "path": "paper/final_protocol/release/environment.yml",
+          "sha256": "e6017d4096f6d5f2c7bd791b7a6a879810864f64a33bc0da7a1a9535d949c1ea",
+          "size_bytes": 209
+        },
+        {
+          "path": "paper/final_protocol/release/requirements-lock.txt",
+          "sha256": "19732c0dc8820e6ada48ce24144b7fbf31785602c3278ef73a1aab92d9816876",
+          "size_bytes": 112
+        }
+      ],
+      "invoked_scripts_and_modules": [
+        {
+          "path": "paper/final_protocol/release/pevl_bench/__main__.py",
+          "sha256": "422c98016faa162c296f6858594af66a8ed95cec5aba90702e641d05448ae7cd",
+          "size_bytes": 11433
+        },
+        {
+          "path": "paper/final_protocol/release/pevl_bench/admission.py",
+          "sha256": "175b8b83e493ad8e9d33af234443f5652b0be883bd8013c5b2efbd40bfadb364",
+          "size_bytes": 47831
+        },
+        {
+          "path": "paper/final_protocol/release/pevl_bench/evidence.py",
+          "sha256": "6f259492c1453e02794cad8d79ab2faf87e3ab550a881710c9aa0af2f34ea80a",
+          "size_bytes": 18235
+        },
+        {
+          "path": "paper/final_protocol/release/pevl_bench/schema_subset.py",
+          "sha256": "078198f91a2fdf90332ec216cb503e06ffc9a08c80fdf28513c4450a50f481d0",
+          "size_bytes": 11608
+        },
+        {
+          "path": "paper/final_protocol/release/pevl_bench/synthetic.py",
+          "sha256": "3b85d01c37bf522008b5fb1a20192ddfb1141db801b275093e0aa7f779bc3f86",
+          "size_bytes": 49727
+        },
+        {
+          "path": "paper/final_protocol/release/pevl_bench/synthetic_admission.py",
+          "sha256": "9794d10658cc7455051eed9ba1ecf19c7214b8de684cb644a9bc127546f3d86f",
+          "size_bytes": 7521
+        },
+        {
+          "path": "paper/final_protocol/release/scripts/verify_release.py",
+          "sha256": "23bd9e4646b92819faae0f4ad7fc87d6b6c436a7a991d896e9c4cb8a823e1a1c",
+          "size_bytes": 26175
+        },
+        {
+          "path": "paper/final_protocol/scripts/aggregate_desk_reviews.py",
+          "sha256": "93934ee39f76c5380d14bc7fb9b5382a327a1bb18bf0411b2c49e2bc11fb1c25",
+          "size_bytes": 7321
+        },
+        {
+          "path": "paper/final_protocol/scripts/audit_contradictions.py",
+          "sha256": "2464cefdf942dcc3ee770a11114280e5300879d0d90269109a0b2996d1e15752",
+          "size_bytes": 110919
+        },
+        {
+          "path": "paper/final_protocol/scripts/audit_readability.py",
+          "sha256": "739605513f38501089ee674412598eb2d5e31ac9a10661ca6ebf9bf0acc6f3d6",
+          "size_bytes": 10203
+        },
+        {
+          "path": "paper/final_protocol/scripts/build_claim_ledger.py",
+          "sha256": "0d3294c01bcdaae790944e59a072920fc0503f0feb70301a3f19a0e8221e7520",
+          "size_bytes": 62706
+        },
+        {
+          "path": "paper/final_protocol/scripts/build_final_artifacts.py",
+          "sha256": "dc62eb9d8e6e90cd7f1cd8d444697a3e3068b6552a67eb6bf82d021bfeff10d4",
+          "size_bytes": 61748
+        },
+        {
+          "path": "paper/final_protocol/scripts/build_final_release.py",
+          "sha256": "916da8a13a44d09027a748d52b886df2aa9485078bc7cac428b6488fedac27e2",
+          "size_bytes": 54428
+        },
+        {
+          "path": "paper/final_protocol/scripts/independent_statistics_audit.py",
+          "sha256": "ce5b018281402b0e39684cd4272562d5b674fea4730990412a275fe106efc3b1",
+          "size_bytes": 75933
+        },
+        {
+          "path": "paper/final_protocol/scripts/recalculate_equation_examples.py",
+          "sha256": "7ae3b14ed27afb22818433f84d1ab8177aa58380c34bfa3c5dc7005b3b660ebd",
+          "size_bytes": 3617
+        },
+        {
+          "path": "paper/final_protocol/scripts/reproduce_all.py",
+          "sha256": "9560aec33e4e6c11e7aa0e3b6c3af9d183290aa83ca19d7055cfed8eac64a24e",
+          "size_bytes": 44431
+        },
+        {
+          "path": "paper/final_protocol/scripts/verify_reproduction_report.py",
+          "sha256": "834f54cf28f74b82ca966330de11839469cd03c0d11967de9a4789c17455551f",
+          "size_bytes": 19547
+        },
+        {
+          "path": "paper/final_protocol/scripts/verify_research_audits.py",
+          "sha256": "9734870f51a240a4a518069f7edae62895e34b84993f88e4ab916f53e4e574d7",
+          "size_bytes": 32062
+        },
+        {
+          "path": "paper/final_protocol/scripts/verify_starting_state.py",
+          "sha256": "1ed879c72352ac6014a5f49987b67ebb59a8307020923a897c5495473f7fda8d",
+          "size_bytes": 3645
+        },
+        {
+          "path": "paper/final_protocol/scripts/verify_statistics.py",
+          "sha256": "8890704493bc40c6e428ebc09e8c52448583bc1521e6bf246b3e70b117e60a6f",
+          "size_bytes": 37377
+        },
+        {
+          "path": "paper/scripts/analyze_pevl.py",
+          "sha256": "acd128d3131f70a1b6aaee466e13e65b652f57077229a4260aac720f7b1b8fc8",
+          "size_bytes": 52564
+        },
+        {
+          "path": "paper/scripts/audit_seed_namespace.py",
+          "sha256": "571589fc2f2637979c7f4fd3d807f6f574485fce31a7789cfc17d39f94ff9b27",
+          "size_bytes": 6229
+        },
+        {
+          "path": "paper/scripts/audit_stochastic_sources.py",
+          "sha256": "545b33aaa3c446d9651a4f252f6ed1700084e774e14123c75eea10c7d126af12",
+          "size_bytes": 32693
+        }
+      ],
+      "manifests": [
+        {
+          "path": "paper/final_protocol/release/MANIFEST.sha256",
+          "sha256": "ddd49c5ae62237adb842e0cac5ffff3ecfaabc950379b307acde86d6a8d132f1",
+          "size_bytes": 7535
+        },
+        {
+          "path": "paper/final_protocol/release/pevl_bench/admission_results/MANIFEST.sha256",
+          "sha256": "cd063e708e5a1ca2853df49684cb1c01b8895698c10291646542dccee552ab0b",
+          "size_bytes": 101
+        },
+        {
+          "path": "paper/final_protocol/release/pevl_bench/results/MANIFEST.sha256",
+          "sha256": "0a6eade794c4434275663315442a8e5528a8c3c602f42da5de3ecd0b34792621",
+          "size_bytes": 257
+        }
+      ],
+      "schemas_and_rules": [
+        {
+          "path": "paper/final_protocol/release/examples/example_evidence.json",
+          "sha256": "1b8453cf80695efb8fd576fd1eb32c6c5bde124a0c2c929530cc1e0e6b128b01",
+          "size_bytes": 6179
+        },
+        {
+          "path": "paper/final_protocol/release/pevl_bench/results/pevl_results.schema.json",
+          "sha256": "d173b3255a19b985bf5d0c102b67bfebcddcec6911b38d18a77048b74f63aafb",
+          "size_bytes": 4755
+        },
+        {
+          "path": "paper/final_protocol/release/protocol/admission_rules.json",
+          "sha256": "44fe890051cff65fa27a70464e2d018da30bf8923c9863859d1629bad454acff",
+          "size_bytes": 9207
+        },
+        {
+          "path": "paper/final_protocol/release/protocol/admission_schema.json",
+          "sha256": "0e006936b0b3b0e1a9d27e3f2382332d4c5e29f836224271c7a6c55e0dbf6e03",
+          "size_bytes": 3542
+        },
+        {
+          "path": "paper/final_protocol/release/protocol/claim_classes.json",
+          "sha256": "c4b41697e14f67788e9d43a7f9d6fd7f4ae8162fa714dba514443c8cf62dbf16",
+          "size_bytes": 7605
+        },
+        {
+          "path": "paper/final_protocol/release/protocol/evidence_bundle_schema.json",
+          "sha256": "a2bb916c9f46af4daf8ab39320485ec804018e826d6c9c6870c62c843d639bbc",
+          "size_bytes": 9626
+        },
+        {
+          "path": "paper/final_protocol/release_templates/protocol/admission_rules.json",
+          "sha256": "44fe890051cff65fa27a70464e2d018da30bf8923c9863859d1629bad454acff",
+          "size_bytes": 9207
+        },
+        {
+          "path": "paper/final_protocol/release_templates/protocol/admission_schema.json",
+          "sha256": "0e006936b0b3b0e1a9d27e3f2382332d4c5e29f836224271c7a6c55e0dbf6e03",
+          "size_bytes": 3542
+        },
+        {
+          "path": "paper/final_protocol/release_templates/protocol/claim_classes.json",
+          "sha256": "c4b41697e14f67788e9d43a7f9d6fd7f4ae8162fa714dba514443c8cf62dbf16",
+          "size_bytes": 7605
+        },
+        {
+          "path": "paper/final_protocol/release_templates/protocol/evidence_bundle_schema.json",
+          "sha256": "a2bb916c9f46af4daf8ab39320485ec804018e826d6c9c6870c62c843d639bbc",
+          "size_bytes": 9626
+        }
+      ],
+      "targeted_tests": [
+        {
+          "path": "paper/final_protocol/release/tests/test_release.py",
+          "sha256": "053d1deff97aa51997b24d13a9b6a9c441dc0c7f73302f4b3fea7c4d060d199f",
+          "size_bytes": 23467
+        },
+        {
+          "path": "paper/final_protocol/tests/test_claim_ledger.py",
+          "sha256": "d472bc2406f2e20f06cfd5c0c2472be86c2e4beba1095844fd50db2c49d84f63",
+          "size_bytes": 4015
+        },
+        {
+          "path": "paper/final_protocol/tests/test_equations.py",
+          "sha256": "ad66f45dcd7ab2129c404fcc5c6db3bf3b787c7ed30cc385fed832daa71773c2",
+          "size_bytes": 2725
+        },
+        {
+          "path": "paper/final_protocol/tests/test_independent_statistics.py",
+          "sha256": "bb35fa04f6200b20268c6467f74e86aab5359f335de0f739800d4e0bedbecc4b",
+          "size_bytes": 14910
+        },
+        {
+          "path": "paper/final_protocol/tests/test_protocol_reporting_provenance.py",
+          "sha256": "9543df2b7284bcb09df0243f523aa4d1e2cba5c9fbf1a6a08977f0bd9eb03a1d",
+          "size_bytes": 6443
+        },
+        {
+          "path": "paper/final_protocol/tests/test_reproduction_provenance.py",
+          "sha256": "9f95f28bb2f964d70fe2ac2919601861eec4d8a47a6a6ae4a4031c52b40ad300",
+          "size_bytes": 15580
+        },
+        {
+          "path": "paper/final_protocol/tests/test_research_audits.py",
+          "sha256": "819e3acb14754f13957f016b932aaa5c573b3116b6fab2f46e5424b7764c3df1",
+          "size_bytes": 3705
+        },
+        {
+          "path": "tests/test_analyze_pevl.py",
+          "sha256": "26f39e302ddf4568955c9c7eb9e354ea356705a34f22fed8c4801a948c747ebd",
+          "size_bytes": 17177
+        },
+        {
+          "path": "tests/test_build_pevl_artifacts.py",
+          "sha256": "4405d66bd1862839a5a3cb0fc80f82a2afca08d2565aa89547908996ddeef4dc",
+          "size_bytes": 16540
+        },
+        {
+          "path": "tests/test_build_pevl_result_macros.py",
+          "sha256": "f6ed15b86cdaa41043f86fd8b069bb22d8ab5cce48d9a4a50d0b5c5640e2477a",
+          "size_bytes": 15335
+        },
+        {
+          "path": "tests/test_build_release_pevl.py",
+          "sha256": "61b35d769ab987a22f506e8f6d3a4e9383d0b6e65eddd9b8a7cd4f206601976e",
+          "size_bytes": 1351
+        },
+        {
+          "path": "tests/test_pevl_synthetic.py",
+          "sha256": "41f8a7a38ba02887380376b4ea1f96a86ef0936d83934ff60f101be7113394ac",
+          "size_bytes": 10776
+        },
+        {
+          "path": "tests/test_seed_namespace_audit.py",
+          "sha256": "07744f5e7378923e13110bdc06c6b7ee83f56a5544ec6a524e36bad44ca116f4",
+          "size_bytes": 932
+        },
+        {
+          "path": "tests/test_stochastic_source_audit.py",
+          "sha256": "98e6da493328b7b4908b87d728d418627bc83de30c5f988eb32998b33da48eb8",
+          "size_bytes": 3887
+        },
+        {
+          "path": "tests/test_verify_pevl_release.py",
+          "sha256": "78f73994eb6783e26c67134c46220e6ab6606fe23126d63cb7b3a1948a311e5d",
+          "size_bytes": 1943
+        }
+      ]
+    },
+    "missing": [],
+    "sha256": "00aa85ae1444765c25de5a45f67a6d66636ccf4b929e4fafa4f190ecfb71933f",
+    "unique_file_count": 53
+  },
+  "read_only_verifier": {
+    "command": [
+      "/opt/miniconda3/bin/python",
+      "paper/final_protocol/scripts/verify_reproduction_report.py"
+    ],
+    "path": "paper/final_protocol/scripts/verify_reproduction_report.py"
+  },
   "readiness_decision": "NOT_READY_DO_NOT_SUBMIT",
-  "schema_version": 1,
+  "report_determinism": {
+    "canonical_serialization": "UTF-8 JSON, sorted keys, two-space indentation, no non-finite values, one trailing LF",
+    "report_and_sidecar_excluded_from_subject_digest": true,
+    "source_date_epoch": "1787529600",
+    "wall_clock_fields_or_durations_recorded": false
+  },
+  "repository_identity": {
+    "boundary": "HEAD/tree identify clean reproduced subject commit S; branch is informational only. The final verifier requires current HEAD E to be S's sole direct child, with exactly the self-excluded canonical report and sidecar as E's committed tree delta.",
+    "branch": "paper/apsos-final-desk-gate-202608",
+    "head_commit": "c0596ed9e4df0597422caaaee02cb531e2da401f",
+    "head_tree": "d8bf79a686a977526fdaf926084025d821c96238",
+    "non_envelope_dirty_path_count": 0,
+    "non_envelope_dirty_pathname_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "non_envelope_worktree_clean": true,
+    "report_envelope_paths_excluded_from_cleanliness": [
+      "paper/final_protocol/REPRODUCTION_REPORT.json",
+      "paper/final_protocol/REPRODUCTION_REPORT.sha256"
+    ],
+    "tracked_dirty_path_count": 0,
+    "tracked_dirty_pathname_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tracked_worktree_clean": true,
+    "untracked_non_envelope_path_count": 0,
+    "untracked_non_envelope_pathname_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "review_phase": "FINAL_FIVE_REVIEW",
+  "rights_and_human_gate": {
+    "effect_on_submission": "Blocks redistribution and submission regardless of technical reproduction PASS.",
+    "human_signoffs_complete": false,
+    "rights_and_license_resolved": false,
+    "status": "FAIL_OPEN_BLOCKERS"
+  },
+  "schema_version": 2,
   "scope": "Derived-artifact reproduction only; no restricted-engine execution and no new policy experiment.",
   "status": "PASS",
-  "title": "A Trace-Based Validation Protocol for Seed-Matched Evaluations of Black-Box Game-Playing Agents",
+  "submission_ready": false,
+  "technical_reproduction_status": "PASS",
+  "timestamp_basis": "SOURCE_DATE_EPOCH; this is a deterministic build timestamp, not wall-clock execution time.",
+  "title": "A Protocol for Validating Pairing Assumptions in Seed-Matched Evaluations of Black-Box Game-Playing Agents",
+  "tracked_drift": {
+    "baseline_semantics": "The run starts from a clean subject; only the report and sidecar may differ from HEAD at completion.",
+    "generated_output_paths": [
+      "paper/data/seed_namespace_audit.json",
+      "paper/data/stochastic_source_audit.json",
+      "paper/data/pevl/summary.json",
+      "paper/data/pevl/trace_preflight_summary.json",
+      "paper/data/pevl/timed_search_stress_summary.json",
+      "paper/data/pevl/factorial_summary.json",
+      "paper/data/pevl/factorial/units.csv",
+      "paper/final_protocol/claim_ledger.csv",
+      "paper/final_protocol/results_macros.tex",
+      "paper/final_protocol/cover_letter.md",
+      "paper/final_protocol/main.pdf",
+      "paper/final_protocol/main.log",
+      "paper/final_protocol/READABILITY_AUDIT.json",
+      "paper/final_protocol/CONTRADICTION_AUDIT.json",
+      "paper/final_protocol/DESK_REVIEW_SIMULATION.json",
+      "paper/final_protocol/REPRODUCTION_REPORT.json",
+      "paper/final_protocol/REPRODUCTION_REPORT.sha256"
+    ],
+    "generated_output_prefixes": [
+      "paper/final_protocol/figures/",
+      "paper/final_protocol/tables/",
+      "paper/final_protocol/source_data/",
+      "paper/final_protocol/release/"
+    ],
+    "policy": "Protected tracked files remain byte-identical during the run, and the final Git gate requires every non-envelope tracked or untracked path to match subject commit S.",
+    "protected_file_count_after": 2285,
+    "protected_file_count_before": 2285,
+    "protected_snapshot_sha256_after": "348fa2093f05d3e572b3cac90dcbd8cdc98a3726ab84f096cd71ab9065a3bde6",
+    "protected_snapshot_sha256_before": "348fa2093f05d3e572b3cac90dcbd8cdc98a3726ab84f096cd71ab9065a3bde6",
+    "status": "PASS",
+    "unexpected_changes": []
+  },
   "visual_audit": {
     "attestation": "paper/final_protocol/supplement/PDF_VISUAL_AUDIT.json",
-    "attestation_sha256": "d44c92765f49dcdaa71a8341c94cb99a10cba259b3bff357a05d6bdd75fbe5d3",
-    "manuscript_pdf_sha256": "3f6f92649258a9d90b29d115b6fab69c0ea1b25fd95cdfce16fb401bc40909fc",
-    "manuscript_source_sha256": "2f961dcba1109a735449cf7e2d0861ce0186710874d340650b74a6be572e6cdb",
-    "method": "Every page rendered at 150 dpi; PNG structure and dimensions checked; PDF-bound checklist records page-by-page visual inspection.",
-    "page_count": 10,
+    "attestation_sha256": "8e7bc727b05cf2be89e7ed802ab430ec1184e844f63d9ac1616991d0e8ca032b",
+    "manuscript_pdf_sha256": "33cc0f2fe9dd2cfdadb7e85d7fd2e6ba4ba4b03cccceb9749538a4d69815cce8",
+    "manuscript_source_sha256": "bb2df31e61bf2585e89f2d7d8aed98b5b3b2bbba0ab5b80e26635db713d1d8e0",
+    "method": "Every page rendered at 150 dpi; PNG structure/dimensions checked; a PDF-bound checklist records human visual inspection.",
+    "page_count": 13,
     "rendered_pages": [
       {
         "height_pixels": 1650,
         "page": 1,
-        "sha256": "e9953e4d494e37d8c4c7b6619413f8ec45f0ce13f5908548cb1e1203b53af487",
+        "sha256": "f0573c34bd84f240a551d4c0b31095df469aa250f77dc8d0bfb60449b8149071",
         "width_pixels": 1275
       },
       {
         "height_pixels": 1650,
         "page": 2,
-        "sha256": "df628b200dbefa572e374d363cdb90601ed404d31bed88411fd5ca6049892e7b",
+        "sha256": "8d5509434e4a1ad86718fc4b62c08923e624c4a6e348f8b15c30d618929dab5e",
         "width_pixels": 1275
       },
       {
         "height_pixels": 1650,
         "page": 3,
-        "sha256": "ae74cefdc9bc0a8e3438f0da1607bbceb8aea2500869f6e080f90cc1b4320312",
+        "sha256": "c575a279da924441a842d59cf1f19bb73a280b3ab31866bd3a25242f95c199c8",
         "width_pixels": 1275
       },
       {
         "height_pixels": 1650,
         "page": 4,
-        "sha256": "3e8b794126b86caf38bbaf56aab96b95510ccf2236e25ce5f9fffb8f190d15fe",
+        "sha256": "40922c64218438a7948051563b68a7d01506492190f4319da2469872e09d4a24",
         "width_pixels": 1275
       },
       {
         "height_pixels": 1650,
         "page": 5,
-        "sha256": "387039850b420877840f0aec3d6c7b17619a7d90d24d23c59da4b7aee6e9091b",
+        "sha256": "98ec90b23646a7596eba886bb43ef816508654ea9cb2d971fcf6709ce156f33e",
         "width_pixels": 1275
       },
       {
         "height_pixels": 1650,
         "page": 6,
-        "sha256": "8e040130db39e740d8d110a262e0fe7809e39ba5efa0e3287de4dc71e116293a",
+        "sha256": "db37ce3a13b680c4971ed6764ea75398e43a991365001d31d36ad2804829e4da",
         "width_pixels": 1275
       },
       {
         "height_pixels": 1650,
         "page": 7,
-        "sha256": "babebafa3674c7f68a76d752e9c37b3f53e14fe458866761771cdc0f41d1f168",
+        "sha256": "5e6c81c21531c834f04088035a1fd2cd8a7c45e9379a6618b0404390242cad2e",
         "width_pixels": 1275
       },
       {
         "height_pixels": 1650,
         "page": 8,
-        "sha256": "d7ba4379f1c30a2b4fa9dd5975aca8afa55f59763a2cb477422044391aeb818a",
+        "sha256": "87c33e4c23b89241baedfedc73574a131009faeb2501878a3d7dfa54777835bd",
         "width_pixels": 1275
       },
       {
         "height_pixels": 1650,
         "page": 9,
-        "sha256": "9f170de6b746a2bf107ee011fafbdc19e5e4ebd8a0e96f0499e48c9bc625aa36",
+        "sha256": "436ccd609a12c99999c64d0fb0dc1b099724d01d16f3d6f1d29d2380449e8bd6",
         "width_pixels": 1275
       },
       {
         "height_pixels": 1650,
         "page": 10,
-        "sha256": "77b565dbf727bb1141cdf250e1c3f098218432c98bbb2ad6c13dcdf1253a1ecd",
+        "sha256": "9475bfd9cfdf15ba9612013b4b350d390e3544d90000e34f634efc4a20a4d33e",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 11,
+        "sha256": "3d925c3fe264b2c18c401ba129ab4ce23f54be5973057b9ecf93648ae646da86",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 12,
+        "sha256": "3a7bf0d647f19e4a5229982b70db46f678d33c8149d6b1bf0c128ff647c6e82a",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 13,
+        "sha256": "063508469a26f826de5519224e4764629ab3c8ff6e844762700244aa105d00b2",
         "width_pixels": 1275
       }
     ],
     "status": "PASS"
   },
   "word_count": {
-    "abstract_source_words_approximate": 225,
-    "compiled_pdf_text_including_references": 5924,
+    "abstract_source_words_approximate": 203,
+    "compiled_pdf_text_including_references": 8236,
     "method": "whitespace words from pdftotext; approximate regex words from the unexpanded TeX abstract"
   }
 }
