@@ -1,0 +1,53 @@
+{
+  "reviewer_id": "B",
+  "reviewer_role": "stochastic simulation expert",
+  "verdict": "DESK_REJECT",
+  "confidence": 0.97,
+  "fatal_issues": [
+    "The submission is not author-cleared: supplement/PROTOCOL_DEVIATIONS.md remains UNSIGNED/PENDING and D03 leaves frozen-promised first-divergence localization, actor, and timing outputs absent from the release. This does not invalidate the frozen 99/200 digest endpoint, but it does invalidate complete-protocol-reporting and submission-readiness claims until an accountable human disposition is recorded.",
+    "The article and companion are explicitly not publication-ready: author, email, and affiliation remain placeholders, while RELEASE_STATUS.json says BUILT_FOR_REVIEW_NOT_AUTHORIZED_FOR_PUBLICATION and records no license, DOI, or clean-environment build evidence. A final APS desk gate cannot pass an unauthorized and incomplete submission."
+  ],
+  "major_issues": [
+    "The chronology is mostly candid, but main.tex lines 565-578 say that the named Level taxonomy was added after acquisition even though the frozen PEVL protocol already enumerated eight stages. What was post-acquisition was the generic claim-class taxonomy and Level-6 descriptive-only restriction. This distinction must be made exact because prospective provenance is central to the contribution.",
+    "The preflight pass depends on a bounded transfer from different seeds to factorial rows that were not trace-repeated, and the executable verifier itself cannot establish artifact-role or fresh-pool/profile provenance without an external trust anchor. The manuscript discloses these limits, but author-signed acquisition provenance is still pending; the case cannot support factorial trace-repeatability, inferential pairing, semantic alignment, or full-CRN wording."
+  ],
+  "minor_issues": [
+    "Table II and Figure 2 compress the frozen experiment-specific binary rule and the later generic claim-class taxonomy into one visual flow; a sharper visual provenance marker would reduce the chance that readers interpret the generic taxonomy as prospectively frozen.",
+    "Equation 1 uses the current digest-plus-byte definition while the case-study primary stress endpoint was digest-only. The prose correctly discloses this and the counts coincide, but the table or figure should carry the same explicit digest-primary/byte-post-acquisition label.",
+    "The pooled whole-cluster stress reweighting reproduces the frozen executable but can vary the four-context composition in a highly heterogeneous battery. The adjacent fixed-composition sensitivity and non-inferential labels are therefore essential and must not be dropped in revision."
+  ],
+  "exact_manuscript_locations": [
+    "main.tex lines 26-29 (unconfirmed author metadata)",
+    "main.tex lines 181-185 and 193-210 (digest-only provenance versus current digest-plus-byte disagreement definition)",
+    "main.tex lines 229-256 (descriptive pairing, inferential pairing, and post-acquisition claim restriction)",
+    "main.tex lines 344-389 (two Stage-8 provenance layers and the missing external trust anchor)",
+    "main.tex lines 565-578 (protocol chronology and overbroad named-Level-taxonomy wording)",
+    "main.tex lines 608-640 (stress clustering, heterogeneous strata, and omitted localization/actor/timing outputs)",
+    "main.tex lines 654-679 (factorial transfer assumption, absent candidate trace digests, and descriptive-only consequence)",
+    "main.tex lines 712-758 (fixed-battery limits, unsigned deviation, rights, and stated submission blockers)",
+    "main.tex lines 803-828 (data availability and unauthorized public-release boundary)",
+    "main.tex lines 832-842 and 894-912 (trace-record scope and exact resampling units)"
+  ],
+  "required_fixes": [
+    "Obtain a dated corresponding-author disposition of D01-D03. Supply the promised localization, actor, and timing outputs when legally and scientifically supportable, or append an honest signed amendment that preserves the omission and limits all affected claims; rebuild and rehash every release copy.",
+    "Replace all author and disclosure placeholders, approve CRediT/conflict/funding/AI-use statements, establish release authority and an appropriate license, provide the archival plan or DOI status, and change release status only after those facts are true.",
+    "Revise main.tex lines 565-578 and related visuals to say explicitly that the frozen protocol contained the eight-stage PEVL ladder, whereas the generic claim-class taxonomy and descriptive-only Level-6 interpretation were post-acquisition.",
+    "Provide an author-signed or independently controlled acquisition manifest that attests the executed artifact roles and fresh serial/worker profile launches; continue to describe preflight-to-factorial applicability only as a bounded transfer assumption.",
+    "Keep all factorial intervals labeled empirical reweighting quantiles, omit McNemar inference from admitted results, retain whole-unit and whole-cluster resampling, and preserve explicit prohibitions on population, trace-parity, event-aligned, counterfactual, superiority, equivalence, and full-CRN claims.",
+    "Add an explicit digest-primary/byte-post-acquisition note to Table III or Figure 4 and keep the fixed-composition stress sensitivity adjacent to the frozen pooled result."
+  ],
+  "general_reader_answers": {
+    "problem": "A recorded seed can match a schedule without proving that either arm repeats across executions or that divergent policies receive the same random quantities for the same semantic events.",
+    "protocol": "The article proposes an eight-stage fail-closed workflow covering artifact and boundary-seed identity, complete schedule parity, identical-arm and repeat/worker trace-projection checks, a bounded stochastic-source audit, semantic event alignment, and evidence-linked claim admission, with synthetic conformance cases and a restricted-engine demonstration.",
+    "contribution": "Its defensible contribution is the executable integration of established CRN, stream, trace, testing, and event-key ideas into a black-box evidence-to-claim admission and suppression protocol; it does not originate CRN theory, the stateful draw-shift diagnosis, or event-keyed repair.",
+    "effectiveness_result": "The synthetic suite distinguishes the intended failure modes; the deterministic preflight had zero required mismatches in 1,000 arm-seed units and 3,000 executions; the timed-search battery had digest disagreement in 99/200 four-profile clusters; a retrospectively frozen historical available-record audit found 458/2,800 mismatches and suppressed that comparison; and the later factorial contrast was +0.55 percentage points with descriptive reweighting quantiles [-2.05, +3.15], supporting no inferential conclusion.",
+    "limitation": "The restricted engine exposes no semantic event identifiers, the batteries are fixed rather than probability samples or randomized assignments, factorial rows lack candidate trace digests and use different seeds from preflight, restricted trajectories cannot be replayed publicly, profile provenance needs a human or external trust anchor, and promised secondary stress outputs remain omitted under an unsigned deviation."
+  },
+  "reviewed_artifact_hashes": {
+    "main_tex": "bb2df31e61bf2585e89f2d7d8aed98b5b3b2bbba0ab5b80e26635db713d1d8e0",
+    "main_pdf": "33cc0f2fe9dd2cfdadb7e85d7fd2e6ba4ba4b03cccceb9749538a4d69815cce8",
+    "novelty_audit": "3f32a11e3efb2c528aad7e85839f76991541eb6bac167aab40b11979cf7952e1",
+    "release_manifest": "ddd49c5ae62237adb842e0cac5ffff3ecfaabc950379b307acde86d6a8d132f1"
+  },
+  "independence_attestation": "I completed this review independently and without access to another reviewer, any aggregate conclusion, or the prohibited desk-review simulation materials."
+}

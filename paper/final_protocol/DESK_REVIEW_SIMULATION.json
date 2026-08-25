@@ -1,0 +1,85 @@
+{
+  "aps_staff_editor_verdict": "DESK_REJECT",
+  "desk_gate": "FAIL",
+  "fatal_review_findings": [
+    {
+      "issues": [
+        "The current manuscript is not a valid submission package: the author name, corresponding-author email, and affiliation are literal placeholders, and authorship, CRediT roles, funding, conflicts, AI-use completeness, and final human approval remain unresolved.",
+        "The companion is explicitly BUILT_FOR_REVIEW_NOT_AUTHORIZED_FOR_PUBLICATION and its LICENSE grants no permission. More importantly for APS policy, the Data Availability Statement says the restricted material is not offered on reasonable request because neither legal authority nor a controlled-access mechanism exists. The honesty of that disclosure does not cure the present inability to meet APS data-access expectations or to distribute the very package offered as the reproducible protocol companion."
+      ],
+      "reviewer_id": "A"
+    },
+    {
+      "issues": [
+        "The submission is not author-cleared: supplement/PROTOCOL_DEVIATIONS.md remains UNSIGNED/PENDING and D03 leaves frozen-promised first-divergence localization, actor, and timing outputs absent from the release. This does not invalidate the frozen 99/200 digest endpoint, but it does invalidate complete-protocol-reporting and submission-readiness claims until an accountable human disposition is recorded.",
+        "The article and companion are explicitly not publication-ready: author, email, and affiliation remain placeholders, while RELEASE_STATUS.json says BUILT_FOR_REVIEW_NOT_AUTHORIZED_FOR_PUBLICATION and records no license, DOI, or clean-environment build evidence. A final APS desk gate cannot pass an unauthorized and incomplete submission."
+      ],
+      "reviewer_id": "B"
+    },
+    {
+      "issues": [
+        "The manuscript is not submission-capable as rendered: the author name, corresponding-author email, affiliation, CRediT roles, conflicts, and related human attestations remain explicit placeholders or pending items, and the manuscript itself calls them submission blockers.",
+        "The companion is not authorized for distribution: LICENSE grants no rights, RELEASE_STATUS.json says publication is unauthorized, and ownership, processed-data redistribution authority, maintainer metadata, and a DOI remain unresolved. A no-license local review tree cannot satisfy the article's open-science companion obligation.",
+        "The frozen stress protocol promised first-divergence positions/actors and timing summaries, but the release omits them and contains no raw trace lines from which localization can be reconstructed; the deviation record remains unsigned and pending human disposition. Transparency preserves the primary 99/200 result, but it does not cure the unresolved protocol/reporting departure for submission as-is."
+      ],
+      "reviewer_id": "C"
+    },
+    {
+      "issues": [
+        "The submitted artifact is knowingly incomplete: the PDF still contains author, corresponding-email, and affiliation placeholders; authorship, contributions, funding, conflicts, acknowledgments, AI-use completeness, manuscript approval, and every scientific-comprehension sign-off remain pending. This is not a legally or scientifically attributable submission.",
+        "The companion cannot be distributed as supplied. Ownership and redistribution authority are unresolved, LICENSE explicitly grants no permission, citation metadata are incomplete, no archive or DOI exists, and RELEASE_STATUS marks the package unauthorized for publication. A reproducibility package that reviewers and readers have no permission to copy is incompatible with a submission-ready open-science protocol package.",
+        "The frozen plan promised first-divergence position, actor/acting-side localization, and timing summaries, yet the release omits all of them and contains no raw trace lines from which localization can be reconstructed. The deviation record is explicitly UNRESOLVED and UNSIGNED/PENDING, with no amendment or author disposition. Honest disclosure preserves the 99/200 digest result but does not cure incomplete protocol reporting."
+      ],
+      "reviewer_id": "E"
+    }
+  ],
+  "final_decision": "NOT_READY_DO_NOT_SUBMIT",
+  "gate_requirements": {
+    "aps_staff_editor_send_to_review": false,
+    "at_least_four_send_to_review": false,
+    "no_fatal_issue": false,
+    "release_rights_resolved": false
+  },
+  "review_count": 5,
+  "review_files": {
+    "A": {
+      "confidence": 0.98,
+      "path": "reviews/reviewer_a.json",
+      "sha256": "58383fc1d76e4c3a8eec26f42aaaa02ade94fec464a63fe275bfe31691d229de",
+      "verdict": "DESK_REJECT"
+    },
+    "B": {
+      "confidence": 0.97,
+      "path": "reviews/reviewer_b.json",
+      "sha256": "5adc44b0c64e2650f234a37a6234c99313552a68225b3a457c7bf7d62efc84cf",
+      "verdict": "DESK_REJECT"
+    },
+    "C": {
+      "confidence": 0.97,
+      "path": "reviews/reviewer_c.json",
+      "sha256": "3313f19e6269c6e8978d0da5be58f7f373b30a5f27c506fbeffec19dbb0069ca",
+      "verdict": "DESK_REJECT"
+    },
+    "D": {
+      "confidence": 0.82,
+      "path": "reviews/reviewer_d.json",
+      "sha256": "e6ebcb1468f0fdea911772b6acc09fd5dfccec80211b98cc227779908ce5812a",
+      "verdict": "SEND_TO_REVIEW"
+    },
+    "E": {
+      "confidence": 0.99,
+      "path": "reviews/reviewer_e.json",
+      "sha256": "50f705955b346ce9847126e3c8638959a78d5671114995274d5ca58e53eb9266",
+      "verdict": "DESK_REJECT"
+    }
+  },
+  "reviewers_were_independent": true,
+  "rights_unresolved": true,
+  "schema_version": "aps-independent-desk-review-v1",
+  "status": "PASS",
+  "verdict_counts": {
+    "BORDERLINE": 0,
+    "DESK_REJECT": 4,
+    "SEND_TO_REVIEW": 1
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "reviewer_id": "A",
+  "reviewer_role": "APS staff editor",
+  "verdict": "DESK_REJECT",
+  "confidence": 0.98,
+  "fatal_issues": [
+    "The current manuscript is not a valid submission package: the author name, corresponding-author email, and affiliation are literal placeholders, and authorship, CRediT roles, funding, conflicts, AI-use completeness, and final human approval remain unresolved.",
+    "The companion is explicitly BUILT_FOR_REVIEW_NOT_AUTHORIZED_FOR_PUBLICATION and its LICENSE grants no permission. More importantly for APS policy, the Data Availability Statement says the restricted material is not offered on reasonable request because neither legal authority nor a controlled-access mechanism exists. The honesty of that disclosure does not cure the present inability to meet APS data-access expectations or to distribute the very package offered as the reproducible protocol companion."
+  ],
+  "major_issues": [
+    "The frozen PEVL protocol already enumerated an eight-level ladder and used Level 7 and statistical-admission language. Only the later generic completed-case claim-class taxonomy and descriptive-only Level-6 reporting class are post-acquisition. Most of the manuscript makes that distinction, but main.tex:575-577 says without qualification that 'The named Level taxonomy' was added after acquisition; this is materially ambiguous and should be corrected before review.",
+    "The frozen stress protocol promised first-divergence positions, acting-side or actor localization, and timing summaries. They are absent, raw trace lines do not permit reconstruction, and both deviation records remain unsigned and pending. Narrowing the claims preserves the 99/200 digest result but does not complete or authorize the deviation.",
+    "Protocol-Article fit is otherwise strong, but the empirical proof of effectiveness is bounded: the restricted engine cannot establish cross-arm semantic event alignment; the factorial rows were not trace repeated; and the preflight-to-factorial transfer uses different seed ranges. The completed case therefore demonstrates failure detection, bounded qualification, and suppression, not validation of a fully paired stochastic coupling.",
+    "The contribution is a defensible but narrow integration of prior CRN, streams, paired-seed analysis, trace assurance, A/A, metamorphic testing, and event-keyed randomness. The executable admission formalization was created after acquisition, so the case cannot serve as prospective validation of that generic taxonomy; the article must continue to present it as a future-freeze template and not as a prospectively tested novelty.",
+    "The subject is plausibly within APS Open Science's listed AI and computational-methods scope, yet its only real application is a game-agent engine and the connection to physics or a related scientific field remains indirect. A scope inquiry or a concrete physics-adjacent adoption example is needed to show a meaningful addition for this journal's readership.",
+    "Reproduction passes at the declared engine-free processed-data scope, and the release manifest verifies, but adoption evidence is incomplete: no fresh clean-environment build is documented, dependency files are direct-package declarations rather than transitive locks, restricted trajectories cannot be replayed, and the admission example verifies internal file consistency rather than external scientific provenance."
+  ],
+  "minor_issues": [
+    "The 13-page PDF is visually clean, with legible figures and tables and no clipping or unresolved glyphs, but the prose is dense for the required broad readership and repeatedly switches among stages, evidence levels, and claim classes.",
+    "The main article devotes substantial space to repository, rights, and pending-human-control language. That transparency is valuable, but a submission version should resolve the placeholders and move purely operational audit detail out of the narrative where it does not help readers execute the protocol.",
+    "The AI disclosure identifies OpenAI Codex and a GPT-5-family model but cannot provide the exact deployed snapshot; the corresponding author still must confirm the complete use history and compliance with tool terms, privacy, confidentiality, and intellectual-property obligations."
+  ],
+  "exact_manuscript_locations": [
+    "main.tex:26-28 (main.pdf p. 1): unresolved author, email, and affiliation placeholders.",
+    "main.tex:82-102 (main.pdf pp. 1-2): research problem and narrow integration contribution.",
+    "main.tex:243-256 (main.pdf p. 3): frozen binary gate provenance, paired-resampling and McNemar plan, and post-acquisition descriptive restriction.",
+    "main.tex:344-389 (main.pdf pp. 5-6): frozen Stage-8 actions versus the later generic executable taxonomy and its external-trust-anchor limitation.",
+    "main.tex:539-561 (main.pdf pp. 7-8): historical available-record audit explicitly frozen retrospectively after outcomes existed.",
+    "main.tex:563-577 (main.pdf p. 8): prospective commit ordering, frozen paired-resampling and McNemar plan, and the overbroad phrase 'The named Level taxonomy'.",
+    "main.tex:584-640 (main.pdf pp. 8-9): deterministic preflight, 99/200 stress disagreement result, and omitted localization and timing outputs.",
+    "main.tex:654-681 (main.pdf pp. 9-10): factorial gate consequence, different-seed transfer assumption, lack of candidate traces, and fixed-battery result.",
+    "main.tex:712-758 (main.pdf p. 10): fixed-battery, trace-projection, deviation, replay, rights, and human-approval limitations.",
+    "main.tex:775-828 (main.pdf p. 11): pending AI confirmation, author contributions, competing interests, release status, and Data Availability Statement refusing request-based access."
+  ],
+  "required_fixes": [
+    "Replace all author and affiliation placeholders; obtain and record author eligibility, order, corresponding-author contact, CRediT roles, funding, competing interests, acknowledgments, AI-use confirmation, and final approval.",
+    "Resolve ownership and redistribution authority for every proposed companion component, replace the no-license placeholder with author-approved licensing where lawful, and create final citation and archive metadata only after an authorized deposit exists.",
+    "Bring the Data Availability Statement into a policy-compliant state by establishing lawful public or controlled/private access on reasonable request, or obtain an explicit editorially accepted exception and narrow the evidentiary claims accordingly.",
+    "Resolve D03 through an accountable human disposition: provide authorized localization and timing outputs with verifiable source evidence, or sign and date a transparent amendment or deviation that explains why they cannot be supplied and preserves the resulting claim boundary.",
+    "Rewrite main.tex:575-577 and harmonize the numbering throughout: state that the frozen protocol already contained the eight PEVL evidence stages and binary gate consequences, while the generic completed-case claim-class taxonomy and descriptive-only reporting reinterpretation were post-acquisition.",
+    "Keep the historical audit described as retrospectively frozen and not as prospective blinding; keep the later retained case plan described as binary gates followed, on a pass, by paired-resampling intervals and secondary McNemar inference.",
+    "Strengthen the journal-fit argument with a concrete adoption pathway in physics or an adjacent scientific simulation domain, or obtain a favorable APS Open Science scope response before submission.",
+    "Demonstrate a fresh clean-environment installation and verification with an adequate dependency lock, then rerun the hash-bound reproduction and visual checks on the final authorized manuscript and release."
+  ],
+  "general_reader_answers": {
+    "problem": "A shared recorded seed proves only that two evaluation rows used the same schedule field; it does not prove that either arm repeats exactly or that diverging policies receive equal random quantities for the same semantic events, so paired statistical wording can be unsupported.",
+    "protocol": "The article gives an eight-stage fail-closed workflow: identify artifacts and boundary seeds, verify complete schedules, repeat identical arms and trace projections across process and worker contexts, audit bounded stochastic sources, seek cross-arm event evidence, and admit, downgrade, or suppress the statistical claim permitted by those gates.",
+    "contribution": "The meaningful addition is operational integration rather than a new CRN component: an executable evidence-to-claim workflow, synthetic failure and repair fixtures, and a real suppression example. The generic completed-case claim taxonomy is a post-acquisition conservative formalization for future prospective freezing, not part of the frozen case plan.",
+    "effectiveness_result": "The synthetic suite detects its designed seed-conversion, draw-shift, clock, and process-state failures and verifies an event-keyed repair. In the restricted case, deterministic preflight had 0 mismatches across 3,000 executions, timed-search stress had trace disagreements in 99 of 200 clusters, and a favorable-looking historical comparison was suppressed under a retrospectively frozen rule; the later fixed-battery contrast was +0.55 percentage points with descriptive reweighting quantiles from -2.05 to +3.15 and remained unresolved.",
+    "limitation": "The restricted engine exposes no semantic event identifiers and cannot be replayed from the release; the factorial has no candidate trace digests and uses a transfer assumption from another seed battery, the omitted localization and timing outputs remain unsigned, the batteries do not support population inference, and current rights prevent public or request-based access to key material."
+  },
+  "reviewed_artifact_hashes": {
+    "main_tex": "bb2df31e61bf2585e89f2d7d8aed98b5b3b2bbba0ab5b80e26635db713d1d8e0",
+    "main_pdf": "33cc0f2fe9dd2cfdadb7e85d7fd2e6ba4ba4b03cccceb9749538a4d69815cce8",
+    "novelty_audit": "3f32a11e3efb2c528aad7e85839f76991541eb6bac167aab40b11979cf7952e1",
+    "release_manifest": "ddd49c5ae62237adb842e0cac5ffff3ecfaabc950379b307acde86d6a8d132f1"
+  },
+  "independence_attestation": "I completed this assessment independently and without access to another reviewer or any aggregate review conclusion."
+}
