@@ -16,7 +16,7 @@
   },
   "sentence_length": {
     "sentence_count": 404,
-    "mean_words": 17.86,
+    "mean_words": 17.83,
     "maximum_words": 50,
     "over_40_words": [
       {
@@ -289,15 +289,15 @@
     },
     {
       "line": 115,
-      "word_count": 166,
-      "inferred_purpose": "method_or_definition",
+      "word_count": 49,
+      "inferred_purpose": "narrative_or_interpretation",
       "topic_sentence": "Three close 2026 works strengthen the boundary."
     },
     {
-      "line": 137,
-      "word_count": 112,
+      "line": 124,
+      "word_count": 217,
       "inferred_purpose": "scope_or_limitation",
-      "topic_sentence": "The broader empirical literature distinguishes reproducible code from reproducible findings, emphasizes explicit units and sources of variation, and recommends uncertainty-aware reporting across heterogeneous tasks ."
+      "topic_sentence": "Two further 2026 evaluation-auditing works are closest in spirit."
     },
     {
       "line": null,

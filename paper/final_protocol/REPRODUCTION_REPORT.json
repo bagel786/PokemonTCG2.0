@@ -1,17 +1,394 @@
 {
+  "article_type": "APS Open Science Protocol Article",
+  "commands": [
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "paper/final_protocol/scripts/verify_starting_state.py"
+      ],
+      "cwd": ".",
+      "purpose": "verify frozen starting-state record and source identities",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "git",
+        "merge-base",
+        "--is-ancestor",
+        "803257f102232763fc88d28c14b668f9b62eb277",
+        "HEAD"
+      ],
+      "cwd": ".",
+      "purpose": "verify frozen protocol ancestry",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "paper/scripts/audit_seed_namespace.py"
+      ],
+      "cwd": ".",
+      "purpose": "rebuild observable boundary-seed namespace audit",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "paper/scripts/audit_stochastic_sources.py"
+      ],
+      "cwd": ".",
+      "purpose": "rebuild bounded stochastic-source pattern audit",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "paper/scripts/analyze_pevl.py"
+      ],
+      "cwd": ".",
+      "purpose": "rebuild canonical PEVL summaries and factorial units from retained acquisition artifacts",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "paper/final_protocol/scripts/verify_statistics.py"
+      ],
+      "cwd": ".",
+      "purpose": "independently verify raw-source hashes, schedules, audits, reaggregation, and statistics",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "paper/final_protocol/scripts/independent_statistics_audit.py",
+        "--check"
+      ],
+      "cwd": ".",
+      "purpose": "recalculate all central statistics independently from retained raw rows",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "paper/final_protocol/scripts/build_final_artifacts.py"
+      ],
+      "cwd": ".",
+      "purpose": "rebuild generated macros, tables, figures, and source data",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "paper/final_protocol/scripts/recalculate_equation_examples.py"
+      ],
+      "cwd": ".",
+      "purpose": "recalculate independent equation examples",
+      "result": "PASS",
+      "returncode": 0
+    }
+  ],
+  "environment": {
+    "architecture": {
+      "machine": "arm64",
+      "processor": "arm",
+      "python_architecture": [
+        "64bit",
+        ""
+      ],
+      "sysconfig_platform": "macosx-10.9-universal2"
+    },
+    "conda_direct_declarations": {
+      "matplotlib": "3.10.5",
+      "numpy": "2.4.6",
+      "pytest": "9.1.1",
+      "python": "3.11.5"
+    },
+    "conda_direct_versions_match_observed": true,
+    "dependency_declarations": [
+      {
+        "path": "paper/final_protocol/release/requirements-lock.txt",
+        "sha256": "213e2b0a986407d2c9ea37c7f362204754cec1429ac589045cc32bd2739c8684",
+        "size_bytes": 112
+      },
+      {
+        "path": "paper/final_protocol/release/environment.yml",
+        "sha256": "ab845f75a23642e2ec9893a9fc98e6b2f61744aefebc6205486a65af34c460fc",
+        "size_bytes": 209
+      }
+    ],
+    "direct_declared_packages": {
+      "matplotlib": "3.10.5",
+      "numpy": "2.4.6",
+      "pytest": "9.1.1"
+    },
+    "direct_package_versions_match": true,
+    "environment_boundary": {
+      "clean_environment_summary": {
+        "created": true,
+        "direct_packages": {
+          "matplotlib": "3.10.5",
+          "numpy": "2.4.6",
+          "pytest": "9.1.1"
+        },
+        "python_version": "3.11.5",
+        "record": "CLEAN_ENV_REPRODUCTION.json",
+        "transitive_freeze_packages": [
+          "contourpy==1.3.3",
+          "cycler==0.12.1",
+          "fonttools==4.63.0",
+          "iniconfig==2.3.0",
+          "kiwisolver==1.5.0",
+          "matplotlib==3.10.5",
+          "numpy==2.4.6",
+          "packaging==26.3",
+          "pillow==12.3.0",
+          "pluggy==1.6.0",
+          "Pygments==2.21.0",
+          "pyparsing==3.3.2",
+          "pytest==9.1.1",
+          "python-dateutil==2.9.0.post0",
+          "six==1.17.0"
+        ],
+        "verified": true
+      },
+      "fresh_environment_created": true,
+      "fresh_environment_verified": true,
+      "observation_scope": "Commands execute in the active workspace environment; exact observed versions and tool binaries are recorded.",
+      "requirements_lock_semantics": "requirements-lock.txt declares three direct packages only; it is not a transitive lock.",
+      "transitive_environment_locked": true
+    },
+    "observed_direct_packages": {
+      "matplotlib": "3.10.5",
+      "numpy": "2.4.6",
+      "pytest": "9.1.1"
+    },
+    "operating_system": {
+      "mac_version": "26.1",
+      "platform": "macOS-26.1-arm64-arm-64bit",
+      "release": "25.1.0",
+      "system": "Darwin",
+      "version": "Darwin Kernel Version 25.1.0: Mon Oct 20 19:32:47 PDT 2025; root:xnu-12377.41.6~2/RELEASE_ARM64_T8103"
+    },
+    "python": {
+      "byte_order": "little",
+      "compiler": "Clang 13.0.0 (clang-1300.0.29.30)",
+      "executable": "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3.11",
+      "executable_sha256": "ff2d7180d4aa2dcc03193194c1999509239e00101ade54fcdd736d9fc25bd0c6",
+      "implementation": "CPython",
+      "pointer_bits": 64,
+      "version": "3.11.5",
+      "version_full": "3.11.5 (v3.11.5:cce6ba91b3, Aug 24 2023, 10:50:31) [Clang 13.0.0 (clang-1300.0.29.30)]"
+    },
+    "tools": {
+      "pdfinfo": {
+        "executable": "/opt/homebrew/Cellar/poppler/26.08.0/bin/pdfinfo",
+        "executable_sha256": "8a48bb18e99c8f1add637ffae1d860c3cdabe11f4f1672f3c1b5ef4c3e6e8461",
+        "name": "Poppler pdfinfo",
+        "version_output": "pdfinfo version 26.08.0\nCopyright 2005-2026 The Poppler Developers - http://poppler.freedesktop.org\nCopyright 1996-2011, 2022 Glyph & Cog, LLC"
+      },
+      "pdftoppm": {
+        "executable": "/opt/homebrew/Cellar/poppler/26.08.0/bin/pdftoppm",
+        "executable_sha256": "504dd5b6efe73d7d23bc04c90d2cfd75962b8893df95de6db7f45ab54bf47fc1",
+        "name": "Poppler pdftoppm",
+        "version_output": "pdftoppm version 26.08.0\nCopyright 2005-2026 The Poppler Developers - http://poppler.freedesktop.org\nCopyright 1996-2011, 2022 Glyph & Cog, LLC"
+      },
+      "pdftotext": {
+        "executable": "/opt/homebrew/Cellar/poppler/26.08.0/bin/pdftotext",
+        "executable_sha256": "52cb759b328134d667e0e9ba9142e952811473fba6caa3a053ff1e2605512fd9",
+        "name": "Poppler pdftotext",
+        "version_output": "pdftotext version 26.08.0\nCopyright 2005-2026 The Poppler Developers - http://poppler.freedesktop.org\nCopyright 1996-2011, 2022 Glyph & Cog, LLC"
+      },
+      "tectonic": {
+        "executable": "/opt/homebrew/Cellar/tectonic/0.16.9/bin/tectonic",
+        "executable_sha256": "7333a5d99cf1fcfef70ee4a9bd1d2a070169c3e79ee038e1aa96291eeff90efc",
+        "name": "Tectonic",
+        "version_output": "Tectonic 0.16.9"
+      }
+    }
+  },
+  "error": "{\"command\": [\"<repo>/.venv-clean/bin/python\", \"paper/final_protocol/scripts/audit_readability.py\"], \"cwd\": \".\", \"output_tail\": \"{\\\"status\\\": \\\"FAIL\\\", \\\"output\\\": \\\"<repo>/paper/final_protocol/READABILITY_AUDIT.json\\\", \\\"failures\\\": [\\\"1 paragraphs exceed 220 words\\\"]}\", \"purpose\": \"run mechanical sentence, acronym, repetition, number, terminology, and paragraph-purpose checks\", \"result\": \"FAIL\", \"returncode\": 1}",
   "generated_at_utc": "2026-08-24T00:00:00+00:00",
+  "limitations": [
+    "The restricted game engine and private acquisition materials are not rerun.",
+    "The command verifies retained canonical artifacts and reproduces synthetic and processed analyses.",
+    "The active environment is observed exactly but was not created fresh; direct dependency declarations are not a transitive lock.",
+    "Rights, licensing, DOI, human metadata, author comprehension, and author approval remain open blockers."
+  ],
+  "outputs": {
+    "artifact_build": {
+      "exists": true,
+      "path": "paper/final_protocol/source_data/build_report.json",
+      "sha256": "bd29b93966d98629282a56568fe3470d81a290dd10e985143de0f7f4c64f5076",
+      "size_bytes": 3609
+    },
+    "claim_ledger": {
+      "exists": true,
+      "path": "paper/final_protocol/claim_ledger.csv",
+      "sha256": "38fea9032ae98ddf2c0013e7e9231cf6e8b1c927b40a267dcc430e1b8ca9f097",
+      "size_bytes": 531460
+    },
+    "claim_scope_audit": {
+      "exists": true,
+      "path": "paper/final_protocol/source_data/claim_scope_audit.json",
+      "sha256": "d69b95a6f2c5e536bf60701069d9970e999852690265ea87a4f50770abf768f7",
+      "size_bytes": 339482
+    },
+    "contradiction_audit": {
+      "exists": true,
+      "path": "paper/final_protocol/CONTRADICTION_AUDIT.json",
+      "sha256": "496b9733f3d2efd5dfa2b768e6c1c755a8d53e8f3a0090976bf6907131519501",
+      "size_bytes": 74575
+    },
+    "desk_review_simulation": {
+      "exists": true,
+      "path": "paper/final_protocol/DESK_REVIEW_SIMULATION.json",
+      "sha256": "2f6ab4f94ba2b0dbf9dcd548b21004df9ba5024eeecd4e19910dc401a28d32f8",
+      "size_bytes": 5713
+    },
+    "independent_statistics_verification": {
+      "exists": true,
+      "path": "paper/final_protocol/source_data/independent_statistics_verification.json",
+      "sha256": "447f4e9cd0150138d75854b93f2f4a2f311e84a981cf0aece182d23430becd62",
+      "size_bytes": 50630
+    },
+    "manuscript_pdf": {
+      "exists": true,
+      "path": "paper/final_protocol/main.pdf",
+      "sha256": "57df4382a2e1095ae9c651e3ee879297bf7995611902ace93a535227551f5217",
+      "size_bytes": 255625
+    },
+    "novelty_matrix": {
+      "exists": true,
+      "path": "paper/final_protocol/NOVELTY_MATRIX.csv",
+      "sha256": "47dfad24059ed2c36ff6b6fb11bd377e29811a3aba91de3b4ea4e51c43b0340e",
+      "size_bytes": 22694
+    },
+    "pdf_visual_audit": {
+      "exists": true,
+      "path": "paper/final_protocol/supplement/PDF_VISUAL_AUDIT.json",
+      "sha256": "99ab391edd6d750d661cfa8804e815d6c3654ef208ea9acbcfc354e07205fb97",
+      "size_bytes": 3961
+    },
+    "readability_audit": {
+      "exists": true,
+      "path": "paper/final_protocol/READABILITY_AUDIT.json",
+      "sha256": "e7623dd6266f930fe4257bf1fbcc4ee5191f9e8a2df92c9849472a30762daadb",
+      "size_bytes": 27206
+    },
+    "reference_audit": {
+      "exists": true,
+      "path": "paper/final_protocol/REFERENCE_AUDIT.csv",
+      "sha256": "7aa01c95f05fae1c6bf0c780d57576304833f2318920adfcf82fa8fb702ec294",
+      "size_bytes": 15471
+    },
+    "release_manifest": {
+      "exists": true,
+      "path": "paper/final_protocol/release/MANIFEST.sha256",
+      "sha256": "cb4ab12640cd5b35aa833f611ea960ce61bf2b17609d4093b87e48eb1812a014",
+      "size_bytes": 7923
+    },
+    "results_macros": {
+      "exists": true,
+      "path": "paper/final_protocol/results_macros.tex",
+      "sha256": "a909963f9811877c412630b6579847bff5447cd2287a96dd4ad1b8180650f70d",
+      "size_bytes": 2235
+    },
+    "statistics_verification": {
+      "exists": true,
+      "path": "paper/final_protocol/source_data/statistics_verification.json",
+      "sha256": "2f1771126e8988bd29c35b85a124a33ca1396f04ed7b376bb2e9be969511474b",
+      "size_bytes": 8155
+    }
+  },
+  "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",
+  "read_only_verifier": {
+    "command": [
+      "/Users/safiullahbaig/Projects/pokemonTCG2.0/.venv-clean/bin/python",
+      "paper/final_protocol/scripts/verify_reproduction_report.py"
+    ],
+    "path": "paper/final_protocol/scripts/verify_reproduction_report.py"
+  },
   "readiness_decision": "NOT_READY_DO_NOT_SUBMIT",
+  "report_determinism": {
+    "canonical_serialization": "UTF-8 JSON, sorted keys, two-space indentation, no non-finite values, one trailing LF",
+    "report_and_sidecar_excluded_from_subject_digest": true,
+    "source_date_epoch": "1787529600",
+    "wall_clock_fields_or_durations_recorded": false
+  },
+  "repository_identity": {
+    "boundary": "HEAD/tree identify clean reproduced subject commit S; branch is informational only. The final verifier requires current HEAD E to be S's sole direct child, with exactly the self-excluded canonical report and sidecar as E's committed tree delta.",
+    "branch": "paper/apsos-submission-closeout-20260825",
+    "head_commit": "828b2daa10ce5afcd3661b8af57f780e03927cfd",
+    "head_tree": "10eed10378934403bd6729343a4b9cb15fc27a09",
+    "non_envelope_dirty_path_count": 0,
+    "non_envelope_dirty_pathname_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "non_envelope_worktree_clean": true,
+    "report_envelope_paths_excluded_from_cleanliness": [
+      "paper/final_protocol/REPRODUCTION_REPORT.json",
+      "paper/final_protocol/REPRODUCTION_REPORT.sha256"
+    ],
+    "tracked_dirty_path_count": 0,
+    "tracked_dirty_pathname_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tracked_worktree_clean": true,
+    "untracked_non_envelope_path_count": 0,
+    "untracked_non_envelope_pathname_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
   "review_phase": "FINAL_FIVE_REVIEW",
   "rights_and_human_gate": {
+    "effect_on_submission": "Blocks redistribution and submission regardless of technical reproduction PASS.",
     "human_signoffs_complete": false,
     "rights_and_license_resolved": false,
     "status": "FAIL_OPEN_BLOCKERS"
   },
   "schema_version": 2,
-  "startup_error": "reproduction start requires a clean worktree outside the report envelope",
+  "scope": "Derived-artifact reproduction only; no restricted-engine execution and no new policy experiment.",
   "status": "FAIL",
   "submission_ready": false,
   "technical_reproduction_status": "FAIL",
-  "timestamp_basis": "SOURCE_DATE_EPOCH; deterministic failure-report timestamp.",
-  "title": "A Protocol for Validating Pairing Assumptions in Seed-Matched Evaluations of Black-Box Game-Playing Agents"
+  "timestamp_basis": "SOURCE_DATE_EPOCH; this is a deterministic build timestamp, not wall-clock execution time.",
+  "title": "A Protocol for Validating Pairing Assumptions in Seed-Matched Evaluations of Black-Box Game-Playing Agents",
+  "tracked_drift": {
+    "baseline_semantics": "The run starts from a clean subject; only the report and sidecar may differ from HEAD at completion.",
+    "generated_output_paths": [
+      "paper/data/seed_namespace_audit.json",
+      "paper/data/stochastic_source_audit.json",
+      "paper/data/pevl/summary.json",
+      "paper/data/pevl/trace_preflight_summary.json",
+      "paper/data/pevl/timed_search_stress_summary.json",
+      "paper/data/pevl/factorial_summary.json",
+      "paper/data/pevl/factorial/units.csv",
+      "paper/final_protocol/claim_ledger.csv",
+      "paper/final_protocol/results_macros.tex",
+      "paper/final_protocol/cover_letter.md",
+      "paper/final_protocol/main.pdf",
+      "paper/final_protocol/main.log",
+      "paper/final_protocol/READABILITY_AUDIT.json",
+      "paper/final_protocol/CONTRADICTION_AUDIT.json",
+      "paper/final_protocol/DESK_REVIEW_SIMULATION.json",
+      "paper/final_protocol/REPRODUCTION_REPORT.json",
+      "paper/final_protocol/REPRODUCTION_REPORT.sha256"
+    ],
+    "generated_output_prefixes": [
+      "paper/final_protocol/figures/",
+      "paper/final_protocol/tables/",
+      "paper/final_protocol/source_data/",
+      "paper/final_protocol/release/"
+    ],
+    "policy": "Protected tracked files remain byte-identical during the run, and the final Git gate requires every non-envelope tracked or untracked path to match subject commit S.",
+    "protected_file_count_after": 5817,
+    "protected_file_count_before": 5817,
+    "protected_snapshot_sha256_after": "d5f6c426d82838bd75626599d15e998494766ff1ad9c76181a914db420510d57",
+    "protected_snapshot_sha256_before": "d5f6c426d82838bd75626599d15e998494766ff1ad9c76181a914db420510d57",
+    "status": "PASS",
+    "unexpected_changes": []
+  }
 }
