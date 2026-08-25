@@ -81,6 +81,12 @@ def _report(protocol: admission.AdmissionProtocol) -> dict:
         },
         "factorial": {
             "status": factorial["status"],
+            "legacy_acquisition_status_meaning": (
+                "Frozen-plan binary acquisition status recorded at acquisition time; "
+                "it is not an inferential or reporting claim."
+            ),
+            "final_reporting_status": factorial.get("final_reporting_status"),
+            "final_reporting_status_reason": factorial.get("final_reporting_status_reason"),
             "units": factorial["units"],
             "games": factorial["games"],
             "contrasts": factorial["contrasts"],
@@ -254,7 +260,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
         print(
             "Factorial: "
-            f"{report['factorial']['status']}, {report['factorial']['units']} paired units"
+            f"{report['factorial']['status']} (legacy acquisition status; "
+            f"final reporting: {report['factorial']['final_reporting_status']}), "
+            f"{report['factorial']['units']} paired units"
         )
         print(
             "Admission protocol: "

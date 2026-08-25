@@ -430,40 +430,35 @@ upper gates conservatively rather than manufacturing stronger evidence.
 \paragraph{Admission-safety proposition.}
 For any structurally valid evidence record, the implemented admission map is
 result independent, prerequisite monotone, failure dominant, projection
-scoped, statelessly deterministic, and fail closed for unknown states.  Missing,
-malformed, contradictory, or unrecognized evidence cannot strengthen a claim,
-and the ordering of schedule-matched, execution-repeatable, and event-aligned
-wording is strict.  These are seven properties when strict claim ordering is
-counted separately.  Checked property tests replace all result values, weaken
-every prerequisite, inject extreme favorable results after failures, remove
-trace-projection scope, repeat identical evaluations, exercise malformed and
-unknown inputs, and enumerate every combination of the six evidence states
-across seven gates.  Protocol, schema, and claim-class tampering are rejected.
+scoped, statelessly deterministic, and fail closed for unknown states; with
+strict claim ordering counted separately, these are seven properties, each
+backed by checked property tests that replace all result values, weaken every
+prerequisite, inject extreme favorable results after failures, remove
+trace-projection scope, repeat identical evaluations, and enumerate every
+combination of the six evidence states across seven gates.  Protocol, schema,
+and claim-class tampering are rejected.
 
-In ordinary language, result independence means that changing a favorable
-outcome payload to an unfavorable one leaves the gate decision unchanged.
-Prerequisite monotonicity and failure dominance mean that removing evidence or
-turning an earlier pass into a failure can never strengthen the wording,
-regardless of a later estimate.  Projection scoping confines repeatability to
-the named recorded fields.  Stateless repeat-run determinism means that the
-same evidence record returns the same answer on every evaluation; no
-mathematical endofunction-idempotence claim is made.  Unknown-state
-fail-closedness maps missing,
-malformed, contradictory, or unrecognized states to suppression, while
-claim-class ordering prevents schedule evidence from producing execution or
-event-aligned wording.  For example, if Levels~1--4 pass but the repeat/worker
-gate fails, a carried result of either $+20$ or $-20$ percentage points yields
-the same schedule-matched downgrade; deleting artifact evidence weakens it
-further rather than rescuing the claim.
+In ordinary language: changing a favorable outcome payload to an unfavorable
+one leaves the gate decision unchanged (result independence); removing evidence
+or turning an earlier pass into a failure can never strengthen the wording,
+regardless of a later estimate (monotonicity and failure dominance);
+repeatability is confined to the named recorded fields (projection scoping);
+the same evidence record returns the same answer on every evaluation (no
+mathematical idempotence claim is made); and missing, malformed,
+contradictory, or unrecognized states map to suppression.  For example, if
+Levels~1--4 pass but the repeat/worker gate fails, a carried result of either
+$+20$ or $-20$ percentage points yields the same schedule-matched downgrade;
+deleting artifact evidence weakens it further rather than rescuing the claim.
 
 An engine-independent internal-consistency example passes declared-file
 identity, seed, schedule, and identical-arm record checks but fails the required
-repeat/worker gate; it is not evidence that external executions occurred. Running
-\texttt{python -m pevl\_bench admit examples/example\_evidence.json} returns
-the \texttt{schedule\_matched} class; \texttt{explain} names the blocking gate,
-forbids a paired treatment-effect claim, and recommends reacquisition across
-the required fresh-process profiles.  The same companion exposes
-\texttt{generate}, \texttt{verify}, and \texttt{report} commands.
+repeat/worker gate; it is not evidence that external executions occurred.
+Running \texttt{python -m pevl\_bench admit examples/example\_evidence.json}
+returns the \texttt{schedule\_matched} class; \texttt{explain} names the
+blocking gate, forbids a paired treatment-effect claim, and recommends
+reacquisition across the required fresh-process profiles.  The companion also
+exposes \texttt{generate}, \texttt{verify}, and \texttt{report} commands and
+ships the generated Stage-6 decision table described above.
 
 \subsection{Seed-indexed descriptive contrast and reweighting}
 
