@@ -120,13 +120,13 @@ fault injection, localization, and governance
 \cite{paduraru2026traceassurance}.  AEVAL turns agent-workflow changes into
 deterministic evaluation-contract tests and preserves first-attempt evidence
 \cite{anand2026aeval}.  Two further 2026 evaluation-auditing works are closest
-in spirit: protocol cards disclose the protocol conditions behind coding-agent
-scores \cite{zhang2026protocolcards}, and a paired noise-floor protocol bounds
+in spirit.  Protocol cards disclose the protocol conditions behind coding-agent
+scores \cite{zhang2026protocolcards}.  A paired noise-floor protocol bounds
 same-configuration paired gaps across repeated seeds and retracts contrasts
-that fail to replicate \cite{kaliyev2026noisefloor}; neither validates
+that fail to replicate \cite{kaliyev2026noisefloor}.  Neither validates
 seed-to-execution coupling through within-arm trace repetition across
-execution contexts or maps failed pairing evidence to automatic suppression of
-a statistical claim.  These five works improve evidence preservation,
+execution contexts, and neither maps failed pairing evidence to automatic
+suppression of a statistical claim.  These five works improve evidence preservation,
 protocol disclosure, and reporting honesty, but none validates same-seed
 stochastic coupling through the within-arm/cross-arm distinction or maps a
 failed pairing gate to automatic suppression of a statistical claim.  Recent empirical studies of randomness
@@ -360,17 +360,20 @@ show that the branch executed or caused a mismatch; a zero-hit scan does not
 prove determinism.  The scanner does not inspect binary-engine internals or
 classify hardware and external state.  The stage is invalid if the inventory or
 its scope is missing, and it cannot identify a unique cause.  Every audit
-resolves to one of five outcomes: \textsc{controlled} (a mechanism was found
-and its influence bounded or disabled with recorded evidence),
-\textsc{residual} (a mechanism remains possible and is not shown
-estimand-changing, so claims are downgraded), \textsc{estimand-changing} (a
-mechanism directly changes the execution relation needed by the comparison, so
-paired mechanistic wording is suppressed), \textsc{unavailable} (the source is
-unavailable at a black-box boundary, blocking stronger source-level claims), or
-\textsc{unresolved} (a hit exists without sufficient evidence and no automatic
-pass exists).  Each outcome carries a required remediation, and the mapping is
-generated from machine-readable rules shipped with the companion rather than
-from ad hoc judgment.
+resolves to exactly one of five outcomes.
+\textsc{Controlled}: a mechanism was found and its influence bounded or
+disabled with recorded evidence.
+\textsc{Residual}: a mechanism remains possible and is not shown
+estimand-changing, so claims are downgraded.
+\textsc{Estimand-changing}: a mechanism directly changes the execution
+relation needed by the comparison, so paired mechanistic wording is suppressed.
+\textsc{Unavailable}: the source sits behind a black-box boundary, blocking
+stronger source-level claims.
+\textsc{Unresolved}: a hit exists without sufficient evidence, and no
+automatic pass exists.
+Each outcome carries a required remediation, and the mapping is generated from
+machine-readable rules shipped with the companion rather than from ad hoc
+judgment.
 
 \subsection{Stages 7--8: alignment and claim map}
 
@@ -413,12 +416,13 @@ after acquisition as a conservative restriction on what the article reports.
 It did not exist at the protocol commit, cannot be credited as prospective
 validation for the completed case, and deliberately authorizes less than the
 frozen plan's inferential outputs.  The original binary failure actions remain
-authoritative historical constraints.  The evidence-bound
-\texttt{admit} path checks a closed support tree, hashes declared regular files,
-checks trace byte counts, and derives gate states from structurally validated
-records;
-an explicitly trusted-state classifier is a separate interface for formal
-conformance checks whose caller supplies those states as trusted inputs.  The
+authoritative historical constraints.
+
+The evidence-bound \texttt{admit} path checks a closed support tree, hashes
+declared regular files, checks trace byte counts, and derives gate states from
+structurally validated records.  An explicitly trusted-state classifier is a
+separate interface for formal conformance checks whose caller supplies those
+states as trusted inputs.  The
 generic rule evaluation receives only the seven gate states and declared trace
 projection.  Observed outcomes, treatment estimates, reweighting quantiles,
 $p$ values, and result favorability are outside its input projection.
@@ -437,21 +441,22 @@ upper gates conservatively rather than manufacturing stronger evidence.
 \paragraph{Admission-safety proposition.}
 For any structurally valid evidence record, the implemented admission map is
 result independent, prerequisite monotone, failure dominant, projection
-scoped, statelessly deterministic, and fail closed for unknown states; with
-strict claim ordering counted separately, these are seven properties, each
-backed by checked property tests that replace all result values, weaken every
-prerequisite, inject extreme favorable results after failures, remove
-trace-projection scope, repeat identical evaluations, and enumerate every
-combination of the six evidence states across seven gates.  Protocol, schema,
-and claim-class tampering are rejected.
+scoped, statelessly deterministic, and fail closed for unknown states.  Strict
+claim ordering counts as a seventh property.  Missing, malformed,
+contradictory, or unrecognized evidence can never strengthen a claim.  Each
+property is backed by checked property tests that replace all result values,
+weaken every prerequisite, inject extreme favorable results after failures,
+remove trace-projection scope, repeat identical evaluations, and enumerate
+every combination of the six evidence states across seven gates.  Protocol,
+schema, and claim-class tampering are rejected.
 
 In ordinary language: changing a favorable outcome payload to an unfavorable
-one leaves the gate decision unchanged (result independence); removing evidence
-or turning an earlier pass into a failure can never strengthen the wording,
-regardless of a later estimate (monotonicity and failure dominance);
-repeatability is confined to the named recorded fields (projection scoping);
-the same evidence record returns the same answer on every evaluation (no
-mathematical idempotence claim is made); and missing, malformed,
+one leaves the gate decision unchanged (result independence).  Removing
+evidence or turning an earlier pass into a failure can never strengthen the
+wording, regardless of a later estimate (monotonicity and failure dominance).
+Repeatability is confined to the named recorded fields (projection scoping).
+The same evidence record returns the same answer on every evaluation; no
+mathematical idempotence claim is made.  Missing, malformed,
 contradictory, or unrecognized states map to suppression.  For example, if
 Levels~1--4 pass but the repeat/worker gate fails, a carried result of either
 $+20$ or $-20$ percentage points yields the same schedule-matched downgrade;
@@ -864,9 +869,10 @@ relationships with engine or game rights holders before submission.
 \textbf{Public (with submission, pending rights approval).} The computational
 companion contains the synthetic protocol implementation and fixtures with
 expected outputs, the executable admission engine with generated decision
-tables (including the Stage-6 source-audit rules), processed historical,
-preflight, stress, and factorial diagnostics (including recovered acting-side
-first-divergence counts and timing aggregates), analysis and verification
+tables (including the Stage-6 source-audit rules), and processed historical,
+preflight, stress, and factorial diagnostics.  The processed diagnostics
+include recovered acting-side first-divergence counts and timing aggregates.
+The companion also contains analysis and verification
 scripts, protocol transcriptions, figures with source data, schemas, hashes,
 tests, environment declarations, and one-command reproduction instructions.
 It is computationally self-contained for the synthetic and processed analyses

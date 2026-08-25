@@ -1,6 +1,101 @@
 {
   "article_type": "APS Open Science Protocol Article",
-  "commands": [],
+  "commands": [
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "paper/final_protocol/scripts/verify_starting_state.py"
+      ],
+      "cwd": ".",
+      "purpose": "verify frozen starting-state record and source identities",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "git",
+        "merge-base",
+        "--is-ancestor",
+        "803257f102232763fc88d28c14b668f9b62eb277",
+        "HEAD"
+      ],
+      "cwd": ".",
+      "purpose": "verify frozen protocol ancestry",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "paper/scripts/audit_seed_namespace.py"
+      ],
+      "cwd": ".",
+      "purpose": "rebuild observable boundary-seed namespace audit",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "paper/scripts/audit_stochastic_sources.py"
+      ],
+      "cwd": ".",
+      "purpose": "rebuild bounded stochastic-source pattern audit",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "paper/scripts/analyze_pevl.py"
+      ],
+      "cwd": ".",
+      "purpose": "rebuild canonical PEVL summaries and factorial units from retained acquisition artifacts",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "paper/final_protocol/scripts/verify_statistics.py"
+      ],
+      "cwd": ".",
+      "purpose": "independently verify raw-source hashes, schedules, audits, reaggregation, and statistics",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "paper/final_protocol/scripts/independent_statistics_audit.py",
+        "--check"
+      ],
+      "cwd": ".",
+      "purpose": "recalculate all central statistics independently from retained raw rows",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "paper/final_protocol/scripts/build_final_artifacts.py"
+      ],
+      "cwd": ".",
+      "purpose": "rebuild generated macros, tables, figures, and source data",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "paper/final_protocol/scripts/recalculate_equation_examples.py"
+      ],
+      "cwd": ".",
+      "purpose": "recalculate independent equation examples",
+      "result": "PASS",
+      "returncode": 0
+    }
+  ],
   "environment": {
     "architecture": {
       "machine": "arm64",
@@ -120,7 +215,7 @@
       }
     }
   },
-  "error": "{\"command\": [\"<repo>/.venv-clean/bin/python\", \"paper/final_protocol/scripts/verify_starting_state.py\"], \"cwd\": \".\", \"output_tail\": \"Traceback (most recent call last):\\n  File \\\"<repo>/paper/final_protocol/scripts/verify_starting_state.py\\\", line 92, in <module>\\n    raise SystemExit(main())\\n                     ^^^^^^\\n  File \\\"<repo>/paper/final_protocol/scripts/verify_starting_state.py\\\", line 48, in main\\n    raise ValueError(\\\"verification is not running on the recorded target branch\\\")\\nValueError: verification is not running on the recorded target branch\", \"purpose\": \"verify frozen starting-state record and source identities\", \"result\": \"FAIL\", \"returncode\": 1}",
+  "error": "{\"command\": [\"<repo>/.venv-clean/bin/python\", \"paper/final_protocol/scripts/audit_readability.py\"], \"cwd\": \".\", \"output_tail\": \"{\\\"status\\\": \\\"FAIL\\\", \\\"output\\\": \\\"<repo>/paper/final_protocol/READABILITY_AUDIT.json\\\", \\\"failures\\\": [\\\"5 sentences exceed 55 words\\\", \\\"1 paragraphs exceed 220 words\\\"]}\", \"purpose\": \"run mechanical sentence, acronym, repetition, number, terminology, and paragraph-purpose checks\", \"result\": \"FAIL\", \"returncode\": 1}",
   "generated_at_utc": "2026-08-24T00:00:00+00:00",
   "limitations": [
     "The restricted game engine and private acquisition materials are not rerun.",
@@ -132,7 +227,7 @@
     "artifact_build": {
       "exists": true,
       "path": "paper/final_protocol/source_data/build_report.json",
-      "sha256": "b0ccadbab99d8dd79d02ca8aca8a6883ec30504158678ad88f51145996e2abf2",
+      "sha256": "bd29b93966d98629282a56568fe3470d81a290dd10e985143de0f7f4c64f5076",
       "size_bytes": 3609
     },
     "claim_ledger": {
@@ -186,8 +281,8 @@
     "readability_audit": {
       "exists": true,
       "path": "paper/final_protocol/READABILITY_AUDIT.json",
-      "sha256": "1fada9587001cb32c72f4fbd7225bc63d0a345b33bf4b82cd4b669619771a4a7",
-      "size_bytes": 26252
+      "sha256": "c378530e5f00c4cdb91992bf1e97c82a18a137353089d9f0c0d427e14683bf78",
+      "size_bytes": 34860
     },
     "reference_audit": {
       "exists": true,
@@ -232,8 +327,8 @@
   "repository_identity": {
     "boundary": "HEAD/tree identify clean reproduced subject commit S; branch is informational only. The final verifier requires current HEAD E to be S's sole direct child, with exactly the self-excluded canonical report and sidecar as E's committed tree delta.",
     "branch": "paper/apsos-submission-closeout-20260825",
-    "head_commit": "d9b0c4425f8125dea28652e14cd5929c7f7b43c2",
-    "head_tree": "30c1d056821b75e3c4b5a3038411b387c554068e",
+    "head_commit": "398c1e49af31cbcce55dee9fa2a10ac1ee45e13e",
+    "head_tree": "af79ccc936d3740aa7774af2587bb831496f9239",
     "non_envelope_dirty_path_count": 0,
     "non_envelope_dirty_pathname_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "non_envelope_worktree_clean": true,
@@ -291,8 +386,8 @@
     "policy": "Protected tracked files remain byte-identical during the run, and the final Git gate requires every non-envelope tracked or untracked path to match subject commit S.",
     "protected_file_count_after": 5817,
     "protected_file_count_before": 5817,
-    "protected_snapshot_sha256_after": "15e3aa7dc9c571dd48a36e2603704bf53b362a78d938b8985e14c1caf3b1e07e",
-    "protected_snapshot_sha256_before": "15e3aa7dc9c571dd48a36e2603704bf53b362a78d938b8985e14c1caf3b1e07e",
+    "protected_snapshot_sha256_after": "81608aeece0ef43906bf0ae7ce1cd345d358d8a8898f3d6772228f6d9254f4c2",
+    "protected_snapshot_sha256_before": "81608aeece0ef43906bf0ae7ce1cd345d358d8a8898f3d6772228f6d9254f4c2",
     "status": "PASS",
     "unexpected_changes": []
   }
