@@ -688,7 +688,7 @@ def reproduction_commands(python: str) -> list[tuple[list[str], str, Path]]:
         ([python, "-m", "pevl_bench", "report", "--decision-table"], "regenerate the human-readable admission decision table", FINAL / "release"),
         ([python, "-m", "pytest", "-q", "tests/test_release.py"], "run engine-independent release tests", FINAL / "release"),
         ([python, "scripts/verify_release.py"], "verify release manifest and reaggregate processed rows", FINAL / "release"),
-        (["tectonic", "--keep-logs", "main.tex"], "compile current REVTeX manuscript", FINAL),
+        (["tectonic", "main.tex"], "compile current REVTeX manuscript without retaining transient logs", FINAL),
     ]
 
 
