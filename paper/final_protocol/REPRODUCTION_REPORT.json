@@ -9,7 +9,7 @@
     ],
     "file_count": 284,
     "scope": "Final article/release tree, final reviewer bytes, retained protocol/data/synthetic inputs, and invoked scripts/tests",
-    "sha256": "63724d95fdcc98dde13c3009e2b805e9188509b85929eee2acde7801ab809753"
+    "sha256": "a86b61dcf0bdf21437e2a736276f62f52417db95af29baef0ec13a5928ca0e8c"
   },
   "commands": [
     {
@@ -798,8 +798,8 @@
   "repository_identity": {
     "boundary": "HEAD/tree identify clean reproduced subject commit S; branch is informational only. The final verifier requires current HEAD E to be S's sole direct child, with exactly the self-excluded canonical report and sidecar as E's committed tree delta.",
     "branch": "paper/apsos-final-desk-gate-202608",
-    "head_commit": "c0596ed9e4df0597422caaaee02cb531e2da401f",
-    "head_tree": "d8bf79a686a977526fdaf926084025d821c96238",
+    "head_commit": "dd0c47dbc08aeb4cb75488a1115d57b5be69eced",
+    "head_tree": "8e394484efd4fbaa4f9e554eaa0e021882c9fc62",
     "non_envelope_dirty_path_count": 0,
     "non_envelope_dirty_pathname_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "non_envelope_worktree_clean": true,
@@ -857,8 +857,8 @@
     "policy": "Protected tracked files remain byte-identical during the run, and the final Git gate requires every non-envelope tracked or untracked path to match subject commit S.",
     "protected_file_count_after": 2285,
     "protected_file_count_before": 2285,
-    "protected_snapshot_sha256_after": "348fa2093f05d3e572b3cac90dcbd8cdc98a3726ab84f096cd71ab9065a3bde6",
-    "protected_snapshot_sha256_before": "348fa2093f05d3e572b3cac90dcbd8cdc98a3726ab84f096cd71ab9065a3bde6",
+    "protected_snapshot_sha256_after": "dccd867d30b3e6616a4dfe1fa45c8ba66abb84058a3fb3f9f11bb465d42d6de1",
+    "protected_snapshot_sha256_before": "dccd867d30b3e6616a4dfe1fa45c8ba66abb84058a3fb3f9f11bb465d42d6de1",
     "status": "PASS",
     "unexpected_changes": []
   },
