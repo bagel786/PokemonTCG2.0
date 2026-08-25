@@ -1,42 +1,17 @@
 {
-  "schema_version": "desk-review-simulation-v2-2.0.0",
-  "generated": "2026-08-25",
-  "review_count": 5,
-  "reviews_blind_to_each_other": true,
-  "review_files": [
-    "reviews_v2/reviewer_a.json",
-    "reviews_v2/reviewer_b.json",
-    "reviews_v2/reviewer_c.json",
-    "reviews_v2/reviewer_d.json",
-    "reviews_v2/reviewer_e.json"
-  ],
-  "gate_design_note": "Per closeout specification, scientific desk risk and submission-completeness risk are aggregated separately. Human-only placeholders must not be conflated with methodology validity.",
-  "verdicts": {
-    "A_aps_staff_editor": "BORDERLINE",
-    "B_stochastic_simulation": "SEND_TO_REVIEW",
-    "C_software_reproducibility": "SEND_TO_REVIEW",
-    "D_agent_evaluation": "SEND_TO_REVIEW",
-    "E_hostile_integrity": "SEND_TO_REVIEW"
-  },
-  "verdict_counts_scientific": {
-    "SEND_TO_REVIEW": 4,
-    "BORDERLINE": 1,
-    "DESK_REJECT": 0
-  },
   "SCIENTIFIC_DESK_GATE": {
-    "result": "PASS_SCIENTIFICALLY_SEND_TO_REVIEW",
     "checks": {
-      "reviewer_A_send_or_borderline_scope_only": true,
-      "at_least_four_of_five_send_to_review": true,
       "any_fatal_scientific_finding": false,
+      "at_least_four_of_five_send_to_review": true,
       "no_major_contradiction": true,
       "no_unsupported_claim_detected": true,
-      "novelty_boundary_survives_refreshed_audit": true
+      "novelty_boundary_survives_refreshed_audit": true,
+      "reviewer_A_send_or_borderline_scope_only": true
     },
+    "result": "PASS_SCIENTIFICALLY_SEND_TO_REVIEW",
     "scope_risk_note": "Reviewer A borderline is scope-only (game-engine case with argued, not demonstrated, adjacent-science adoption); the unsent scope inquiry remains the mitigation path."
   },
   "SUBMISSION_COMPLETENESS_GATE": {
-    "result": "BLOCKED_PENDING_HUMAN_ACTIONS",
     "blockers": [
       "author name / corresponding email / affiliation placeholders",
       "CRediT, funding, conflicts, acknowledgments unresolved",
@@ -46,16 +21,78 @@
       "release ownership matrix approvals pending; no approved license; RELEASE_STATUS unauthorized",
       "no archive/DOI authorization",
       "D03 deviation record unsigned pending disposition of recovered aggregates and never-recorded positions"
-    ]
+    ],
+    "result": "BLOCKED_PENDING_HUMAN_ACTIONS"
+  },
+  "closeout_artifact_hashes": {
+    "main_pdf": "92d1658338f668f80ed82dd1c4fa2cf315e6255e1f146949107b826bf837351a",
+    "main_tex": "4bbb64a3a82b2f91a09dac23ccaf2c825cae287af52968f826ee755512da6395",
+    "novelty_audit_v2": "6848d4fe2c4dfb2b3b8a63fe8e71276a3978ca10e248f3620c62caa247c23df7",
+    "release_manifest": "cb4ab12640cd5b35aa833f611ea960ce61bf2b17609d4093b87e48eb1812a014"
   },
   "combined_decision": {
-    "scientific": "SCIENTIFICALLY_SEND_TO_REVIEW",
     "completeness": "BLOCKED_BY_HUMAN_ACTIONS",
-    "overall_submission_status": "NOT_READY_DO_NOT_SUBMIT_UNTIL_HUMAN_CLOSEOUT_COMPLETE"
+    "overall_submission_status": "NOT_READY_DO_NOT_SUBMIT_UNTIL_HUMAN_CLOSEOUT_COMPLETE",
+    "scientific": "SCIENTIFICALLY_SEND_TO_REVIEW"
   },
   "comparison_to_v1": {
-    "v1": {"SEND_TO_REVIEW": 1, "BORDERLINE": 0, "DESK_REJECT": 4, "gates_conflated": true},
-    "v2": {"SEND_TO_REVIEW": 4, "BORDERLINE": 1, "DESK_REJECT": 0, "gates_separated": true},
-    "driver": "V1 fatal findings were dominated by human/legal completeness items plus three fixable scientific defects (chronology wording, outcome-independence phrasing, missing Stage-6 operationalization), all of which were fixed or explicitly narrowed during closeout."
+    "driver": "V1 fatal findings were dominated by human/legal completeness items plus three fixable scientific defects (chronology wording, outcome-independence phrasing, missing Stage-6 operationalization), all fixed or explicitly narrowed during closeout.",
+    "v1": {
+      "BORDERLINE": 0,
+      "DESK_REJECT": 4,
+      "SEND_TO_REVIEW": 1,
+      "gates_conflated": true
+    },
+    "v2": {
+      "BORDERLINE": 1,
+      "DESK_REJECT": 0,
+      "SEND_TO_REVIEW": 4,
+      "gates_separated": true
+    }
+  },
+  "gate_design_note": "Scientific desk risk and submission-completeness risk are aggregated separately. Human-only placeholders must not be conflated with methodology validity.",
+  "generated": "2026-08-25",
+  "review_count": 5,
+  "review_files": {
+    "A": {
+      "decision": "BORDERLINE",
+      "path": "reviews_v2/reviewer_a.json",
+      "sha256": "77a88bad60bb9b6b2bf9b78e5856852094abed5bb3c5bbf453e5f9d36785fd3c"
+    },
+    "B": {
+      "decision": "SEND_TO_REVIEW",
+      "path": "reviews_v2/reviewer_b.json",
+      "sha256": "534317976ef47c66c9a20c6887a813b84f44bfaeb15c19bf0edd965be2155312"
+    },
+    "C": {
+      "decision": "SEND_TO_REVIEW",
+      "path": "reviews_v2/reviewer_c.json",
+      "sha256": "03e514ad8e69f1e11633f13d2a2ac81229598d6347713b8ddea50517ccef961e"
+    },
+    "D": {
+      "decision": "SEND_TO_REVIEW",
+      "path": "reviews_v2/reviewer_d.json",
+      "sha256": "e081f562226a2388f0ecb5463e6cdc4b9810b1c01d09a313b884a40184de916f"
+    },
+    "E": {
+      "decision": "SEND_TO_REVIEW",
+      "path": "reviews_v2/reviewer_e.json",
+      "sha256": "0da8c7938be73dad17d00cb2c9fe8caf951129427a2cfe8b0992ab7946b10de1"
+    }
+  },
+  "reviews_blind_to_each_other": true,
+  "schema_version": "desk-review-simulation-v2-2.1.0",
+  "status": "PASS",
+  "verdict_counts_scientific": {
+    "BORDERLINE": 1,
+    "DESK_REJECT": 0,
+    "SEND_TO_REVIEW": 4
+  },
+  "verdicts": {
+    "A_aps_staff_editor": "BORDERLINE",
+    "B_stochastic_simulation": "SEND_TO_REVIEW",
+    "C_software_reproducibility": "SEND_TO_REVIEW",
+    "D_agent_evaluation": "SEND_TO_REVIEW",
+    "E_hostile_integrity": "SEND_TO_REVIEW"
   }
 }

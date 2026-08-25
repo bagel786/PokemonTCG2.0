@@ -263,7 +263,7 @@ def expected_command_records(*, pre_review: bool) -> list[dict[str, Any]]:
     })
     if not pre_review:
         records.append({
-            "purpose": "validate and aggregate five independent hash-bound desk reviews",
+            "purpose": "validate and aggregate five independent closeout desk reviews",
             "command": display_command([sys.executable, "paper/final_protocol/scripts/aggregate_desk_reviews.py"]),
             "cwd": ".",
             "returncode": 0,

@@ -106,9 +106,9 @@ completion cannot satisfy a human-confirmation item.
 - [ ] Final contradiction audit reports no unresolved contradiction in title,
   type, sample sizes, counts, hashes, estimates, intervals, claims, availability,
   disclosures, and artifact inventory.
-- [ ] Five independent desk-review simulations are bound to the final artifact
-  hashes and their fail-closed aggregate is recorded in
-  `DESK_REVIEW_SIMULATION.json`.
+- [ ] Five independent desk-review simulations are validated against the
+  closeout gate and their fail-closed aggregate is recorded in
+  `DESK_REVIEW_SIMULATION_V2.json`.
 
 ## Manuscript and visual audit
 

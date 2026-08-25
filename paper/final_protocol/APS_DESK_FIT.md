@@ -7,7 +7,7 @@ Decision: **NOT READY — DO NOT SUBMIT.** The methodological desk-fit gates pas
 
 Phase scope: this is the dated pre-final desk-fit assessment. The authoritative
 post-review gate and reproduction disposition are recorded in
-`DESK_REVIEW_SIMULATION.json` and `REPRODUCTION_REPORT.json`; completion of
+`DESK_REVIEW_SIMULATION_V2.json` and `REPRODUCTION_REPORT.json`; completion of
 those machine steps cannot cure the human or rights failures recorded here.
 
 Scores are independent 0--5 judgments; they are not averaged. A score is not permission to submit.

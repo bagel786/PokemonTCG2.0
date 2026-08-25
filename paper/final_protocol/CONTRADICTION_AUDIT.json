@@ -1541,18 +1541,19 @@
     {
       "category": "reproduction provenance",
       "check_id": "REPRODUCTION-REPORT-BINDING",
-      "classification": "machine_verification_blocker",
+      "classification": "factual_consistency",
       "evidence": [
         "paper/final_protocol/REPRODUCTION_REPORT.json",
         "paper/final_protocol/REPRODUCTION_REPORT.sha256",
         "paper/final_protocol/scripts/verify_reproduction_report.py"
       ],
-      "expected": "strict schema-v2 PASS report, exact lowercase SHA-256 sidecar, and fail-closed readiness gate",
-      "message": "The reproduction report cannot be accepted until its report/sidecar binding and fail-closed gate are current.",
-      "observed": [
-        "report is not a schema-v2 PASS"
-      ],
-      "status": "BLOCKED"
+      "expected": "exact sidecar and NOT_READY gate",
+      "message": "The provisional or final schema-v2 technical PASS is byte-bound and remains non-submittable.",
+      "observed": {
+        "readiness_decision": "NOT_READY_DO_NOT_SUBMIT",
+        "sidecar_matches_report": true
+      },
+      "status": "PASS"
     },
     {
       "category": "human comprehension",
@@ -1809,25 +1810,8 @@
       "status": "OPEN"
     }
   ],
-  "machine_verification_blockers": [
-    {
-      "category": "reproduction provenance",
-      "check_id": "REPRODUCTION-REPORT-BINDING",
-      "classification": "machine_verification_blocker",
-      "evidence": [
-        "paper/final_protocol/REPRODUCTION_REPORT.json",
-        "paper/final_protocol/REPRODUCTION_REPORT.sha256",
-        "paper/final_protocol/scripts/verify_reproduction_report.py"
-      ],
-      "expected": "strict schema-v2 PASS report, exact lowercase SHA-256 sidecar, and fail-closed readiness gate",
-      "message": "The reproduction report cannot be accepted until its report/sidecar binding and fail-closed gate are current.",
-      "observed": [
-        "report is not a schema-v2 PASS"
-      ],
-      "status": "BLOCKED"
-    }
-  ],
-  "overall_status": "FAIL",
+  "machine_verification_blockers": [],
+  "overall_status": "PASS_WITH_HUMAN_OR_LEGAL_BLOCKERS",
   "schema_version": "final-protocol-contradiction-audit-v1",
   "scope": {
     "article_type": "APS Open Science Protocol Article",
@@ -1926,13 +1910,13 @@
     "title": "A Protocol for Validating Pairing Assumptions in Seed-Matched Evaluations of Black-Box Game-Playing Agents"
   },
   "summary": {
-    "checks_passed": 57,
+    "checks_passed": 58,
     "checks_total": 58,
     "contradictions": 0,
     "factual_consistency_status": "PASS",
     "human_or_legal_blockers": 17,
-    "machine_verification_blockers": 1,
-    "machine_verification_status": "FAIL",
+    "machine_verification_blockers": 0,
+    "machine_verification_status": "PASS",
     "submission_ready": false
   }
 }

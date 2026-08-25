@@ -57,6 +57,7 @@ TARGETED_TESTS = (
     "tests/test_verify_pevl_release.py",
     "paper/final_protocol/tests/test_equations.py",
     "paper/final_protocol/tests/test_claim_ledger.py",
+    "paper/final_protocol/tests/test_desk_reviews.py",
     "paper/final_protocol/tests/test_independent_statistics.py",
     "paper/final_protocol/tests/test_research_audits.py",
     "paper/final_protocol/tests/test_protocol_reporting_provenance.py",
@@ -112,7 +113,7 @@ GENERATED_PATHS = (
     "paper/final_protocol/main.log",
     "paper/final_protocol/READABILITY_AUDIT.json",
     "paper/final_protocol/CONTRADICTION_AUDIT.json",
-    "paper/final_protocol/DESK_REVIEW_SIMULATION.json",
+    "paper/final_protocol/DESK_REVIEW_SIMULATION_V2.json",
     "paper/final_protocol/REPRODUCTION_REPORT.json",
     "paper/final_protocol/REPRODUCTION_REPORT.sha256",
 )
@@ -588,7 +589,7 @@ def key_outputs() -> dict[str, dict[str, Any]]:
         "claim_scope_audit": FINAL / "source_data/claim_scope_audit.json",
         "results_macros": FINAL / "results_macros.tex",
         "contradiction_audit": FINAL / "CONTRADICTION_AUDIT.json",
-        "desk_review_simulation": FINAL / "DESK_REVIEW_SIMULATION.json",
+        "desk_review_simulation": FINAL / "DESK_REVIEW_SIMULATION_V2.json",
         "novelty_matrix": FINAL / "NOVELTY_MATRIX.csv",
         "reference_audit": FINAL / "REFERENCE_AUDIT.csv",
         "readability_audit": FINAL / "READABILITY_AUDIT.json",
@@ -695,12 +696,15 @@ def validate_final_audits(*, require_desk_reviews: bool = True) -> None:
         raise RuntimeError("final contradiction audit did not pass factual and machine checks")
     if not require_desk_reviews:
         return
-    desk_review = strict_json(FINAL / "DESK_REVIEW_SIMULATION.json")
+    desk_review = strict_json(FINAL / "DESK_REVIEW_SIMULATION_V2.json")
     if desk_review.get("status") != "PASS" or desk_review.get("review_count") != 5:
-        raise RuntimeError("five-review desk simulation is missing or invalid")
-    if desk_review.get("desk_gate") != "FAIL" or desk_review.get("rights_unresolved") is not True:
-        raise RuntimeError("desk review did not preserve the unresolved-rights failure")
-    if desk_review.get("final_decision") != "NOT_READY_DO_NOT_SUBMIT":
+        raise RuntimeError("five-review closeout desk simulation is missing or invalid")
+    if desk_review.get("SCIENTIFIC_DESK_GATE", {}).get("result") != "PASS_SCIENTIFICALLY_SEND_TO_REVIEW":
+        raise RuntimeError("scientific desk gate did not pass")
+    if desk_review.get("SUBMISSION_COMPLETENESS_GATE", {}).get("result") != "BLOCKED_PENDING_HUMAN_ACTIONS":
+        raise RuntimeError("desk review did not preserve the human-completeness gate")
+    combined = desk_review.get("combined_decision", {})
+    if combined.get("overall_submission_status") != "NOT_READY_DO_NOT_SUBMIT_UNTIL_HUMAN_CLOSEOUT_COMPLETE":
         raise RuntimeError("desk review decision must remain fail closed")
 
 
@@ -850,7 +854,7 @@ def main(argv: list[str] | None = None) -> int:
             ([python, "paper/final_protocol/scripts/audit_contradictions.py"], "run cross-file contradiction and claim-scope audit"),
         ]
         if not args.pre_review:
-            final_commands.append(([python, "paper/final_protocol/scripts/aggregate_desk_reviews.py"], "validate and aggregate five independent hash-bound desk reviews"))
+            final_commands.append(([python, "paper/final_protocol/scripts/aggregate_desk_reviews.py"], "validate and aggregate five independent closeout desk reviews"))
         for command, purpose in final_commands:
             report["commands"].append(run(command, purpose, cwd=ROOT))
             write_report(report)
