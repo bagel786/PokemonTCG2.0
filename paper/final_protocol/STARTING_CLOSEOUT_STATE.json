@@ -1,0 +1,62 @@
+{
+  "recorded_at": "2026-08-25",
+  "purpose": "Frozen snapshot of submission-closeout starting state. Recorded before any closeout edits on branch paper/apsos-submission-closeout-20260825.",
+  "source_branch": "paper/apsos-final-desk-gate-202608",
+  "source_commit": "c5c2130cb1c02201e1b842483c5788ba97b6f62d",
+  "tree_hash": "8a031f79eee76d8d1c255977f48305d84fd27e6d",
+  "worktree_state": {
+    "status": "clean",
+    "porcelain_line_count": 0,
+    "verified_before_branch_creation": true
+  },
+  "new_closeout_branch": "paper/apsos-submission-closeout-20260825",
+  "current_pdf_hash": {
+    "path": "paper/final_protocol/main.pdf",
+    "sha256": "33cc0f2fe9dd2cfdadb7e85d7fd2e6ba4ba4b03cccceb9749538a4d69815cce8"
+  },
+  "current_release_manifest_hash": {
+    "path": "paper/final_protocol/release/MANIFEST.sha256",
+    "sha256": "ddd49c5ae62237adb842e0cac5ffff3ecfaabc950379b307acde86d6a8d132f1"
+  },
+  "current_reproduction_report_hash": {
+    "path": "paper/final_protocol/REPRODUCTION_REPORT.json",
+    "sha256": "031e0b43c8e505e89ebb3d9eb618a3a7aaca102f28d44e7f3f440574f9bbafd5"
+  },
+  "full_manuscript_tree_backup": {
+    "path_outside_repo": "/var/folders/d8/k9njndpd09nfsv4y2_dgs1z40000gp/T/opencode/closeout_backup/final_protocol_pre_closeout_c5c2130.tar.gz",
+    "sha256": "da0f675ca970f1704cfefc954f731472a3177ff730bb2c18d8fd7236163c64dd",
+    "note": "Tarball of paper/final_protocol at source commit; primary preservation is Git history itself (no history rewrite performed)."
+  },
+  "current_desk_review_aggregate": {
+    "source": "DESK_REVIEW_SIMULATION.json @ c5c2130",
+    "aps_staff_editor_verdict": "DESK_REJECT",
+    "desk_gate": "FAIL"
+  },
+  "current_unresolved_blockers": [
+    "author name placeholder",
+    "corresponding-author email placeholder",
+    "affiliation/postal address placeholder",
+    "CRediT roles unresolved",
+    "funding statement unresolved",
+    "conflicts unresolved",
+    "acknowledgments unresolved",
+    "AI-use completeness unresolved",
+    "claim_ledger.csv human signoffs incomplete",
+    "equation audit signoffs incomplete (EQUATION_AUDIT.md)",
+    "method assumption signoffs incomplete (METHOD_ASSUMPTION_AUDIT.md)",
+    "author defense guide comprehension signoffs incomplete (AUTHOR_DEFENSE_GUIDE.md)",
+    "ownership/redistribution authority unresolved for release components",
+    "no approved public license (LICENSE grants no permission)",
+    "no DOI/archive deposit authorized or existing",
+    "D03 protocol deviation unsigned/pending (frozen-promised first-divergence localization, actor, timing outputs absent from release)"
+  ],
+  "constraints_acknowledged": [
+    "Do not rewrite history",
+    "Do not overwrite raw acquisition files",
+    "Do not delete audit evidence",
+    "Do not fabricate human metadata/signatures/permissions/licensing/DOI/conflicts/CRediT/authorship decisions",
+    "Do not submit to APS",
+    "No new policy-tuning experiments",
+    "Fail closed whenever a human/legal/scientific requirement cannot be satisfied"
+  ]
+}
