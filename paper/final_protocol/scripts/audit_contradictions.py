@@ -35,7 +35,7 @@ EXPECTED_TITLE = (
 )
 EXPECTED_ARTICLE_TYPE = "APS Open Science Protocol Article"
 EXPECTED_PROTOCOL_COMMIT = "803257f102232763fc88d28c14b668f9b62eb277"
-EXPECTED_BRANCH = "paper/apsos-final-desk-gate-202608"
+EXPECTED_BRANCH = "paper/apsos-submission-closeout-20260825"
 
 REQUIRED_BASE_FILES = (
     "STARTING_STATE.json",
@@ -329,26 +329,30 @@ def provenance_semantics_state(
             ),
             max_span=950,
         ),
-        "stress_omission_is_reporting_deviation": semantic_terms_within(
+        "stress_partial_recovery_and_position_deviation_disclosed": semantic_terms_within(
             manuscript,
             (
                 r"\bstress\b",
-                r"\bfrozen\s+(?:plan|protocol)\b",
+                r"\bfrozen\s+(?:plan|(?:stress\s+)?protocol)\b",
                 r"\b(?:promised|required|specified|planned)\b",
-                r"\blocali[sz]ation\b",
-                r"\btiming\b",
-                r"\bomitt(?:ed|ing|s)\b",
+                r"\bfirst[- ]divergence\s+positions\b",
+                r"\bacting[- ]side\s+counts\b",
+                r"\btiming\s+summaries\b",
+                r"\b(?:found|recovered)\b.{0,350}\bhash[- ]pinned\b",
+                r"\bincluded\s+as\s+processed\s+aggregates\b",
+                r"\bpending\b.{0,100}\b(?:approval|redistribution)\b",
+                r"\bpositions\s+were\s+never\s+recorded\b",
                 (
-                    r"(?:\b(?:unverifiable|cannot\s+be\s+verified|not\s+verifiable)\b|"
-                    r"\bno\b.{0,120}\bpermit(?:s|ted)?\b.{0,80}"
-                    r"\b(?:independent\s+)?locali[sz]ation\s+verification\b)"
+                    r"(?:\bposition[- ]level\s+locali[sz]ation\b.{0,80}"
+                    r"\bcannot\s+be\s+verified\b|\bcannot\s+be\s+verified\b.{0,80}"
+                    r"\bposition[- ]level\s+locali[sz]ation\b)"
                 ),
                 (
                     r"(?:\bprotocol\s*(?:/|and|-)\s*reporting\s+deviation\b|"
                     r"\breporting\s+(?:and\s+access\s+)?deviation\b)"
                 ),
             ),
-            max_span=1200,
+            max_span=1500,
         ),
     }
     state["prohibited_phrase_hits"] = sorted(
@@ -1468,13 +1472,15 @@ def check_protocol_reporting_provenance(audit: Audit) -> None:
         ),
         (
             "PROVENANCE-STRESS-REPORTING-DEVIATION",
-            "stress_omission_is_reporting_deviation",
+            "stress_partial_recovery_and_position_deviation_disclosed",
             (
-                "the manuscript says promised stress localization and timing outputs are omitted "
-                "and unverifiable, and labels this a protocol/reporting deviation"
+                "the manuscript says acting-side counts and timing summaries were recovered from "
+                "hash-pinned evidence but remain redistribution-rights-pending, while promised "
+                "positions were never recorded, position-level localization remains unverifiable, "
+                "and the omission remains a protocol/reporting deviation"
             ),
             [relative(manuscript_path), relative(protocol_path)],
-            "Promised but unavailable stress outputs require an explicit deviation disclosure.",
+            "Partial recovery must not conceal the unrecovered position-level deviation or its rights gate.",
         ),
     )
     for check_id, key, expected, evidence, message in requirements:

@@ -12,7 +12,7 @@ completion cannot satisfy a human-confirmation item.
 - [x] Title is **“A Protocol for Validating Pairing Assumptions in Seed-Matched
   Evaluations of Black-Box Game-Playing Agents.”**
 - [x] Work is isolated on branch
-  `paper/apsos-final-desk-gate-202608`.
+  `paper/apsos-submission-closeout-20260825`.
 - [x] Historical branches and immutable raw result rows were not rewritten by
   the finalization workflow.
 - [x] No new outcome-driven policy experiment was authorized for this

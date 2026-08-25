@@ -64,7 +64,7 @@
   ],
   "human_verification_boundary": "All claim_ledger.csv rows remain NO; this audit proves coverage and byte identity, not human comprehension or sign-off.",
   "ledger": "paper/final_protocol/claim_ledger.csv",
-  "ledger_sha256": "7f51b71e8ed48fa25a0729dbecd85546cc1f19e0add98e22e77b8eb0f199c4b0",
+  "ledger_sha256": "ea75e06225c362aea563c8b44f14d9aa15f69be513b788f84000f740e519480d",
   "manuscript": "paper/final_protocol/main.tex",
   "manuscript_sha256": "4bbb64a3a82b2f91a09dac23ccaf2c825cae287af52968f826ee755512da6395",
   "records": [

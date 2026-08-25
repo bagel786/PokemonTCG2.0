@@ -34,9 +34,12 @@ The digest-byte-count comparison is a later integrity extension. The frozen
 primary endpoint was the trace digest, and adding byte counts changed no
 reported mismatch counts.
 
-For the stress test, the frozen protocol promised localization and timing
-summaries. Those outputs are omitted and unverifiable; this is a
-protocol/reporting deviation.
+For the stress test, the frozen protocol promised first-divergence positions,
+acting sides, and timing summaries. Acting-side counts and timing summaries
+were recovered from hash-pinned evidence and included as processed aggregates
+pending approval of redistribution. Positions were never recorded, so
+position-level localization cannot be verified. This remains a
+protocol/reporting deviation for the omitted positions.
 """
 
 
@@ -98,9 +101,27 @@ def test_complete_explicit_provenance_disclosure_passes(audit_module) -> None:
         ),
         (
             "manuscript",
-            "omitted and unverifiable",
-            "not included",
-            "stress_omission_is_reporting_deviation",
+            "recovered from hash-pinned evidence",
+            "found in retained evidence",
+            "stress_partial_recovery_and_position_deviation_disclosed",
+        ),
+        (
+            "manuscript",
+            "pending approval of redistribution",
+            "approved for redistribution",
+            "stress_partial_recovery_and_position_deviation_disclosed",
+        ),
+        (
+            "manuscript",
+            "Positions were never recorded",
+            "Positions were retained",
+            "stress_partial_recovery_and_position_deviation_disclosed",
+        ),
+        (
+            "manuscript",
+            "cannot be verified",
+            "can be verified",
+            "stress_partial_recovery_and_position_deviation_disclosed",
         ),
     ),
 )
@@ -184,7 +205,7 @@ def test_file_bound_audit_routes_missing_boundary_to_contradiction(
     assert len(passing.checks) == 8
 
     manuscript_path.write_text(
-        MANUSCRIPT.replace("omitted and unverifiable", "not included", 1),
+        MANUSCRIPT.replace("Positions were never recorded", "Positions were retained", 1),
         encoding="utf-8",
     )
     failing = audit_module.Audit()
