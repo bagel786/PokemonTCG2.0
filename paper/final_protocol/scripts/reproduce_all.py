@@ -485,7 +485,7 @@ def environment_record() -> dict[str, Any]:
     clean_env_path = FINAL / "CLEAN_ENV_REPRODUCTION.json"
     fresh_created = False
     fresh_verified = False
-    transitive_locked = False
+    transitive_snapshot_recorded = False
     clean_env_summary: dict[str, Any] = None
     if clean_env_path.is_file():
         try:
@@ -501,9 +501,11 @@ def environment_record() -> dict[str, Any]:
             if clean_python == platform.python_version() and clean_direct == observed:
                 fresh_created = bool(clean_env.get("environment_created"))
                 fresh_verified = bool(clean_env.get("verification", {}).get("tests_passed"))
-                transitive_locked = bool(clean_env.get("transitive_freeze"))
+                transitive_snapshot_recorded = bool(clean_env.get("transitive_freeze"))
                 clean_env_summary = {
                     "record": "CLEAN_ENV_REPRODUCTION.json",
+                    "record_sha256": sha256(clean_env_path),
+                    "record_size_bytes": clean_env_path.stat().st_size,
                     "python_version": clean_python,
                     "direct_packages": clean_direct,
                     "transitive_freeze_packages": clean_env.get("transitive_freeze"),
@@ -527,7 +529,8 @@ def environment_record() -> dict[str, Any]:
         "dependency_declarations": [file_record(DIRECT_REQUIREMENTS), file_record(CONDA_ENVIRONMENT)],
         "environment_boundary": {
             "requirements_lock_semantics": "requirements-lock.txt declares three direct packages only; it is not a transitive lock.",
-            "transitive_environment_locked": transitive_locked,
+            "transitive_environment_locked": False,
+            "transitive_environment_snapshot_recorded": transitive_snapshot_recorded,
             "fresh_environment_created": fresh_created,
             "fresh_environment_verified": fresh_verified,
             "clean_environment_summary": clean_env_summary,

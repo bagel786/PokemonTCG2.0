@@ -155,15 +155,21 @@ def test_environment_boundary_and_direct_versions_are_exact() -> None:
         passed = clean.get("status") == "PASS"
         assert boundary["fresh_environment_created"] == (passed and bool(clean.get("environment_created")))
         assert boundary["fresh_environment_verified"] == (passed and bool(clean.get("verification", {}).get("tests_passed")))
-        assert boundary["transitive_environment_locked"] == (passed and bool(clean.get("transitive_freeze")))
+        assert boundary["transitive_environment_locked"] is False
+        assert boundary["transitive_environment_snapshot_recorded"] == (
+            passed and bool(clean.get("transitive_freeze"))
+        )
         if boundary["fresh_environment_created"]:
             summary = boundary["clean_environment_summary"]
+            assert summary["record_sha256"] == reproduction.sha256(clean_record)
+            assert summary["record_size_bytes"] == clean_record.stat().st_size
             assert summary["python_version"] == record["python"]["version"]
             assert summary["direct_packages"] == record["observed_direct_packages"]
     else:
         assert boundary["fresh_environment_created"] is False
         assert boundary["fresh_environment_verified"] is False
         assert boundary["transitive_environment_locked"] is False
+        assert boundary["transitive_environment_snapshot_recorded"] is False
     assert record["tools"]["tectonic"]["version_output"]
     assert record["tools"]["pdftoppm"]["version_output"]
     assert record["operating_system"]["system"]

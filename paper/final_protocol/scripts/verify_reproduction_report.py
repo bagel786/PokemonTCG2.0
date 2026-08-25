@@ -357,9 +357,12 @@ def verify(report_path: Path = REPORT, sidecar_path: Path = REPORT_SIDECAR) -> d
     boundary = report.get("environment", {}).get("environment_boundary", {})
     if boundary.get("transitive_environment_locked") is not False:
         raise ValueError("report misrepresents the direct dependency declaration as transitive")
-    if boundary.get("fresh_environment_created") is not False or boundary.get("fresh_environment_verified") is not False:
-        raise ValueError("report misrepresents the active environment as fresh")
-    if report.get("environment") != environment_record():
+    if boundary.get("transitive_environment_snapshot_recorded") is not True:
+        raise ValueError("report omits the recorded clean-environment transitive snapshot")
+    if boundary.get("fresh_environment_created") is not True or boundary.get("fresh_environment_verified") is not True:
+        raise ValueError("report omits the verified fresh-environment reproduction")
+    expected_environment = environment_record()
+    if report.get("environment") != expected_environment:
         raise ValueError("observed Python/package/tool/OS environment differs from the report")
     verify_repository_identity_boundary(
         report.get("repository_identity", {}),
