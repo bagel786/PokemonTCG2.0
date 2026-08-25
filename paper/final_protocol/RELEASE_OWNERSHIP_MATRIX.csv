@@ -1,0 +1,18 @@
+path/component,creator,copyright owner,third-party material,restriction,redistributable,proposed license,human approval,notes
+release/pevl_bench/ (admission engine),human author + OpenAI Codex assistance under direction,PENDING HUMAN CONFIRMATION (presumed author; unverified),none known,none known beyond unresolved ownership record,PENDING,MIT (proposed),PENDING - HUMAN_CLOSEOUT_FORM.md section 10,"Admission classifier/evidence verifier/stage6 rules; provenance anchor pins bundle semantics"
+release/pevl_bench/synthetic.py + results/,human author + Codex assistance,PENDING HUMAN CONFIRMATION,none known,synthetic ontology is original,PENDING,MIT (proposed),PENDING,"Synthetic conformance suite; self-contained"
+release/scripts/,human author + Codex assistance,PENDING HUMAN CONFIRMATION,none known,none known,PENDING,MIT (proposed),PENDING,"verify_release.py build_figures_tables.py"
+release/tests/,human author + Codex assistance,PENDING HUMAN CONFIRMATION,none known,none known,PENDING,MIT (proposed),PENDING,
+release/data/processed/*,derived by author's own acquisition runs,PENDING HUMAN CONFIRMATION,contains aggregates derived from restricted engine executions,processed neutralized summaries only,PENDING (aggregates),CC BY 4.0 (proposed for data),PENDING,"Includes recovered first_divergence_actor_counts and timing_summaries - redistribution explicitly requires section 11 approval"
+release/source_data/*,author analysis pipeline,PENDING HUMAN CONFIRMATION,none known,figure source data only,PENDING,CC BY 4.0 (proposed),PENDING,
+release/docs/ protocols transcriptions,transcribed from frozen author protocols,PENDING HUMAN CONFIRMATION,none known,neutralized transcription of frozen plans,PENDING,CC BY 4.0 (proposed),PENDING,
+release/examples/*,author,PENDING HUMAN CONFIRMATION,none known,synthetic fixture bytes,PENDING,MIT (proposed),PENDING,
+release/figures+tables+generated,deterministic builder from source data,PENDING HUMAN CONFIRMATION,none known,none known,PENDING,CC BY 4.0 (proposed),PENDING,
+paper/final_protocol manuscript text,human author with disclosed AI drafting/editing assistance,PENDING HUMAN CONFIRMATION,quoted/cited third-party works limited to scholarly citation,scholarly citation norms,PENDING (with article),APS publication agreement on acceptance,PENDING,"Author must approve before submission"
+game engine binaries + source,third-party organizer,THIRD PARTY,yes,organizer terms; not owned by author,NO,none,NOT APPLICABLE,"Excluded; digests only"
+third-party opponent packages,third-party developers,THIRD PARTY,yes,organizer/third-party terms,NO,none,NOT APPLICABLE,"Neutralized to timed-search-A/B and deterministic-N labels"
+game/card assets + metadata,rights holder,THIRD PARTY,yes,IP restrictions,NO,none,NOT APPLICABLE,
+private replay observations,organizer/participants,THIRD PARTY / privacy-affected,yes,privacy constraints,NO,none,NOT APPLICABLE,
+policy packages (C1-C4),human author,PENDING HUMAN CONFIRMATION,may embed third-party training data/tooling,weights excluded regardless,PENDING but weights NO,pending,PENDING,"Weights excluded even if code approved"
+raw restricted traces,acquired by author via restricted engine,PENDING HUMAN CONFIRMATION,derived from engine execution,redistribution field in raw files says false,NO,none,PENDING section 11,"Only digest-level diagnostics released"
+credentials/archives/local paths,n/a,n/a,n/a,security,NO,none,NOT APPLICABLE,"Manifest rejects them"

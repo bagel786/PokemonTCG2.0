@@ -496,7 +496,10 @@ $b$ is
 \end{equation}
 The index $I_{bkj}$ reweights whole schedule-indexed paired-unit identifiers
 within stratum $k$ by sampling their indices with replacement; arms are never
-reweighted separately.  Conditional on each fixed empirical stratum, the
+reweighted separately.  Because strata may contain unequal unit counts, the
+outer $1/K$ makes each replicate an equally weighted mean of stratum means
+rather than an unqualified battery mean over all units; with equal $n_k$ the
+two coincide.  Conditional on each fixed empirical stratum, the
 $I_{bkj}$ are independent draws for this reweighting calculation.  The result is a unitless mean, reported in percentage
 points.  With one stratum, differences $[1,0,-1]$, and sampled indices
 $[1,1,2]$, the replicate is $(1+1+0)/3=2/3$.  The equation assumes the frozen
@@ -858,30 +861,33 @@ relationships with engine or game rights holders before submission.
 
 \section*{Data Availability Statement}
 
-The computational companion included with this repository contains the
-synthetic protocol implementation and fixtures, expected outputs, processed
-historical and prospective diagnostics, processed factorial units, analysis
-and artifact code, protocols, generated figures and source data, manifests,
-tests, and reproduction commands.  It is computationally self-contained for
-the synthetic and processed analyses and does not require the game engine.
+\textbf{Public (with submission, pending rights approval).} The computational
+companion contains the synthetic protocol implementation and fixtures with
+expected outputs, the executable admission engine with generated decision
+tables (including the Stage-6 source-audit rules), processed historical,
+preflight, stress, and factorial diagnostics (including recovered acting-side
+first-divergence counts and timing aggregates), analysis and verification
+scripts, protocol transcriptions, figures with source data, schemas, hashes,
+tests, environment declarations, and one-command reproduction instructions.
+It is computationally self-contained for the synthetic and processed analyses
+and does not require the game engine. Public archival availability is not yet
+established: ownership, an approved software/data license, archive creators,
+maintainer contact, and a DOI await explicit human authorization, so this
+manuscript does not describe the package as public or promise a later release.
 The unsigned chronology and omission register is included as
 \texttt{supplement/PROTOCOL\_DEVIATIONS.md}; its pending status is neither an
 amendment nor human approval.
-Public archival availability is not established: the author has not confirmed
-ownership, an open-source/software-data license, archive creators, maintainer
-contact, or a DOI.  The present no-license placeholder therefore does not grant
-redistribution rights, and this manuscript does not promise a later release or
-describe the package as public.
 
-The tournament engine and source, engine binaries, third-party opponent
-packages, game assets and metadata, private replay observations, policy
-packages, and restricted raw traces are unavailable because of organizer
-terms, third-party rights, privacy constraints, and unresolved release
-authority.  They are not offered on request because the repository does not
-establish legal authority or a practical controlled-access mechanism.  Their
-identities are represented only by approved digests and bounded processed
-summaries.  Exact restricted gameplay regeneration consequently requires
-separately authorized access that this article cannot provide.
+\textbf{Restricted.} The tournament engine and source, engine binaries,
+third-party opponent packages, game assets and metadata, private replay
+observations, policy packages, and restricted raw traces are unavailable
+because of organizer terms, third-party rights, privacy constraints, and
+unresolved release authority. They are not offered on request because the
+repository does not establish legal authority or a practical controlled-access
+mechanism; this limitation is flagged as an editorial-risk item rather than
+resolved by wording. Their identities are represented only by approved digests
+and bounded processed summaries, and exact restricted gameplay regeneration
+requires separately authorized access that this article cannot provide.
 
 \appendix
 
