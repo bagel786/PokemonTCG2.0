@@ -29,30 +29,27 @@
 \date{August 24, 2026}
 
 \begin{abstract}
-Matching a recorded seed across two game-playing agents establishes a schedule
-field, but it does not establish repeatable execution or equal random quantities
-for the same semantic events after policy paths diverge.  We present an
-executable, fail-closed protocol that validates artifacts, boundary seeds,
-schedules, identical-arm trace projections across execution contexts,
-stochastic sources, cross-arm event evidence, and result-independent claim
-admission.  Controlled synthetic modes distinguish seed-conversion,
-execution-state, draw-index, and event-key failures and reject schema or
-manifest tampering.  In the restricted-engine case study, the deterministic preflight
-found zero required trace, outcome, error, or decision-count mismatches across
-\PreflightExecutions{} executions.  A separate fixed timed-search battery
-produced complete recorded-trace-projection disagreements in
-\StressTraceMismatch{}/\StressClusters{} seed-condition clusters.  An
-apparently favorable historical comparison failed a repeated-control audit
-rule frozen retrospectively after those outcomes existed and was suppressed;
-this is not evidence of prospective blinding.  A later plan fixed acquisition
-and suppression before retained results and authorized paired-resampling
-intervals and secondary McNemar inference.  Without changing those outcomes,
-a post-acquisition conservative audit instead admits only a fixed-battery
-descriptive contrast and treats the resampling quantiles as sensitivity rather
-than confidence intervals or tests.  The admitted policy contrast remained
-unresolved.  Because the restricted engine exposes no semantic event
-identifiers or event-keyed streams, the case cannot establish cross-arm event
-alignment.
+When two game-playing agents are evaluated under the same recorded seed, the
+shared value names a matched schedule; it does not by itself establish
+repeatable execution or equal random quantities for the same semantic events.
+We present an executable, fail-closed protocol that validates artifact
+identity, boundary seeds, row-level schedules, identical-arm trace projections
+across execution contexts, stochastic sources, cross-arm event evidence, and
+statistical claim admission, downgrading or suppressing paired wording whenever
+required evidence is absent.  A standalone synthetic suite reproduces
+seed-conversion, stateful draw-shift, timing, and process-state failures,
+demonstrates event-keyed repair for a declared ontology, and rejects schema or
+manifest tampering.  In a restricted-engine case study, a deterministic
+preflight showed zero required mismatches across \PreflightExecutions{}
+executions.  A fixed timed-search battery disagreed on the recorded trace
+projection in \StressTraceMismatch{} of \StressClusters{} seed-condition
+clusters.  One apparently favorable historical comparison failed a
+repeated-control repeatability audit and was therefore suppressed, while a
+later comparison acquired under a narrower frozen rule was admitted even
+though its policy contrast remained unresolved; admission tracked evidence
+rather than favorability.
+Because the restricted engine exposes no semantic event identifiers, the case
+cannot establish event-aligned coupling.
 \end{abstract}
 
 \maketitle
@@ -154,6 +151,21 @@ protocol does not replace simulator validation, prove favorable seed-level
 covariance, or guarantee external generalization.  It supplies a black-box
 workflow that turns prior component methods into an explicit decision about
 which paired claim, if any, the recorded evidence permits.
+
+Although the case study is a game engine, the evidence interfaces are not
+game-specific.  Simulation methodology has long distinguished implementation
+verification from operational validity \cite{sargent2013verification}, and
+empirical work across machine learning emphasizes explicit units and sources of
+variation \cite{bouthillier2019reproducible,patterson2024empirical}.  Monte
+Carlo studies, agent-based models, stochastic numerical experiments,
+scientific-machine-learning benchmarks, and digital-twin simulators all face the
+same adoption question: does a shared seed or matched schedule license paired
+analysis of two configurations?  A setting that exposes a seeded entry point,
+hashes its artifacts, and records per-run outcomes can apply the identity,
+schedule, and repeatability stages directly; alignment stages apply wherever
+stable event identifiers exist.  The protocol thereby offers computational and
+adjacent sciences a concrete path, while prevalence of these failure modes in
+any new domain remains unmeasured until audited.
 
 \section{Definitions}
 
@@ -308,19 +320,29 @@ of the full stage.
 
 \subsection{Stages 4--6: trace repetition and source audit}
 
-Stage 4 launches byte-identical arms separately and compares their records in
-increasing strength: outcome, errors, decision count, and the digest plus byte
-count of the recorded trace projection.  This A/A adaptation detects
-implementation or execution differences that an outcome check can miss.  Its
-assumptions are that the serialization is canonical, the digest comparison is
-implemented correctly, and all fields relevant to the claim are declared.
-It does not establish cross-arm coupling.
+Stage 4 is within-artifact fresh-process repeatability: byte-identical arms
+are re-executed in separate fresh processes on the same schedule rows and their
+records are compared in increasing strength---outcome, errors, decision count,
+and the digest plus byte count of the recorded trace projection.  This
+adaptation of the A/A diagnostic detects implementation or execution
+differences that an outcome check can miss.  Its assumptions are that the
+serialization is canonical, the digest comparison is implemented correctly, and
+all fields relevant to the claim are declared.  The verifier checks the
+declared artifact hashes, the shared schedule-row identifiers, and the two
+fresh-process records per arm; it cannot authenticate launch provenance, so
+which bytes actually ran in which process remains a caller assertion anchored
+outside the file-bound verifier.  Stage 4 does not establish cross-arm
+coupling.
 
-Stage 5 prespecifies fresh serial repeats, worker counts, enqueue orders, and
-pool lifecycles.  Repeats within one seed condition share the same planned
-inputs and are not independent observations.  Worker profiles test execution
+Stage 5 prespecifies execution-context variation: fresh serial repeats,
+worker counts, enqueue orders, and pool lifecycles.  The stage-4 fresh-process
+profiles are a subset of the stage-5 required profile set, so the two gates are
+nested rather than independent; stage 5 adds the worker and reversed-enqueue
+contexts.  Repeats within one seed condition share the same planned inputs and
+are not independent observations.  Worker profiles test execution
 contexts; they are not sampled hardware replicates.  The output is a
-cluster-level trace-parity report.  Any required mismatch rejects exact parity
+cluster-level trace-parity report with machine-checkable profile sets recorded
+in each gate certificate.  Any required mismatch rejects exact parity
 for at least that exercised seed condition.
 
 The implemented Stage 6 is a bounded Python AST and source-pattern scan of
@@ -330,7 +352,18 @@ patterns.  A static hit identifies a mechanism for dynamic testing but does not
 show that the branch executed or caused a mismatch; a zero-hit scan does not
 prove determinism.  The scanner does not inspect binary-engine internals or
 classify hardware and external state.  The stage is invalid if the inventory or
-its scope is missing, and it cannot identify a unique cause.
+its scope is missing, and it cannot identify a unique cause.  Every audit
+resolves to one of five outcomes: \textsc{controlled} (a mechanism was found
+and its influence bounded or disabled with recorded evidence),
+\textsc{residual} (a mechanism remains possible and is not shown
+estimand-changing, so claims are downgraded), \textsc{estimand-changing} (a
+mechanism directly changes the execution relation needed by the comparison, so
+paired mechanistic wording is suppressed), \textsc{unavailable} (the source is
+unavailable at a black-box boundary, blocking stronger source-level claims), or
+\textsc{unresolved} (a hit exists without sufficient evidence and no automatic
+pass exists).  Each outcome carries a required remediation, and the mapping is
+generated from machine-readable rules shipped with the companion rather than
+from ad hoc judgment.
 
 \subsection{Stages 7--8: alignment and claim map}
 
@@ -386,7 +419,13 @@ This establishes declared-byte binding and cross-profile record checks only.
 The generic verifier does not parse engine-specific trace semantics or prove
 artifact roles or execution-profile provenance; those remain caller assertions
 and require an independently controlled acquisition manifest or equivalent
-external trust anchor.
+external trust anchor.  Machine verification of arbitrary external evidence
+therefore extends fully through the lower stages only.  Successful Level 6 and
+Level 7 demonstrations are currently available through the synthetic
+conformance suite's declared adapters and the explicitly trusted-state
+interface; reusable file-bound evidence schemas for completed source audits and
+event-alignment records remain future work, and the bundled example marks both
+upper gates conservatively rather than manufacturing stronger evidence.
 
 \paragraph{Admission-safety proposition.}
 For any structurally valid evidence record, the implemented admission map is
@@ -549,9 +588,11 @@ That projection disagreed on
 draw fields and on
 \HistoricalAvailableRecordMismatch{}/\HistoricalUnits{} units after decision count
 was added.  Both mismatch sets were confined to two timed-search opponent
-packages.  This audit rule was frozen only for retrospective reanalysis after
-the historical outcomes already existed.  Its classifier is outcome
-independent, but the exercise is not evidence of prospective blinding or
+packages.  That audit rule was frozen only for retrospective reanalysis after
+the historical outcomes already existed.  Its rule consumes only repeated
+control-arm records, so it is independent of candidate-effect magnitude,
+direction, or favorability, but it is not outcome blind in a literal sense and
+the exercise is not evidence of prospective blinding or
 pre-acquisition specification.  An apparently favorable estimate failed that
 retrospective control gate, so the rule suppressed the historical paired
 comparison.  The
@@ -572,10 +613,14 @@ human blinding.
 Artifact hashes, the boundary seed conversion, schedule rows, trace schema,
 execution profiles, sample sizes, resampling seeds, and binary failure actions
 are recorded in that protocol commit.  The same frozen plan prescribed 95\%
-paired-resampling intervals and secondary exact McNemar inference.  The named
-Level taxonomy, descriptive-only reinterpretation, and digest-plus-byte
-integrity extension were added after acquisition and are not attributed to that
-commit.  The prospective boundary-seed
+paired-resampling intervals and secondary exact McNemar inference.  The frozen
+protocol already enumerated the full eight-stage evidence ladder with binary
+gate consequences; what was added after acquisition is narrower: the generic
+completed-case claim-class taxonomy, the descriptive-only reinterpretation of
+those intervals as empirical reweighting, and a digest-plus-byte integrity
+extension.  None of these later additions is attributed to that commit, and the
+completed case does not prospectively validate them; future users should freeze
+them before collecting outcomes.  The prospective boundary-seed
 audit found all scheduled values in range and distinct, with no overlap with
 the converted historical namespace.
 
@@ -631,13 +676,20 @@ This rejects
 exact repeatability for at least one exercised seed condition and identifies
 plausible clock or process mechanisms; it does not prove a unique cause.
 
-The frozen plan also promised first-divergence positions and actors plus timing
-summaries in the review package.  They are omitted here: no released raw trace
-lines permit independent localization verification, and timing summaries are
-not in the release.  This is a reporting and access deviation, not a zero or a
-passed endpoint.  It does not change the primary 99/200 digest result, but it
-prevents a compliant localization or timing claim and awaits human-author
-confirmation in the unsigned deviation record.
+The frozen stress protocol promised first-divergence positions and acting
+sides plus timing summaries in the review package.  A closeout search of
+retained evidence found acting-side counts at first divergence (all 99
+disagreeing clusters localized to the opponent side) and per-profile wall-clock
+timing summaries in the hash-pinned stress summary; both are now included as
+processed aggregates with the source digest recorded, pending human approval of
+their redistribution.  First-divergence positions were never recorded, and raw
+trace payloads remain restricted, so independent position-level localization
+cannot be verified from the release.  This remains a protocol and reporting
+deviation for the omitted positions; it does not change the primary
+\StressTraceMismatch{}/\StressClusters{} digest result, but position-level,
+actor-side, and timing claims require that human approval before they are
+represented as independently reproducible, pending confirmation in the unsigned
+deviation record.
 
 \begin{figure}[t]
  \includegraphics[width=\columnwidth]{figures/figure_4_timed_search.pdf}
@@ -736,13 +788,15 @@ record.  Applying the preflight qualification to those later rows is a bounded
 transfer assumption rather than observed trace repeatability on the factorial
 battery.
 
-The unsigned deviation record also documents two missing secondary stress
-outputs promised by the frozen plan.  First-divergence localization cannot be
-independently verified without released raw trace lines, and timing summaries
-are absent from the release.  Neither omission is treated as zero.  They leave
-the primary digest-disagreement result intact but prevent a claim of complete
-protocol reporting until a human author verifies the underlying retention and
-approves or amends the deviation record.
+The unsigned deviation record documents the frozen stress protocol's promised
+secondary outputs.  Acting-side first-divergence counts and timing summaries
+were recovered from hash-pinned retained evidence and are included as processed
+aggregates pending redistribution approval; first-divergence positions were
+never recorded, so position-level localization cannot be verified from raw
+trace lines that remain restricted.  The unrecovered positions are not treated
+as zero.  They leave the primary digest-disagreement result intact but prevent
+a claim of complete protocol reporting until a human author verifies the
+underlying retention and approves or amends the deviation record.
 
 The engine, third-party opponents, game assets and metadata, private replay
 observations, policy packages, and restricted raw traces cannot be

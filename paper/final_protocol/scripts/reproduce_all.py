@@ -481,6 +481,34 @@ def environment_record() -> dict[str, Any]:
     observed = {name: importlib.metadata.version(name) for name in sorted(declared)}
     conda_declared = parse_conda_declarations(CONDA_ENVIRONMENT)
     expected_conda = {"python": platform.python_version(), **observed}
+    clean_env_path = FINAL / "CLEAN_ENV_REPRODUCTION.json"
+    fresh_created = False
+    fresh_verified = False
+    transitive_locked = False
+    clean_env_summary: dict[str, Any] = None
+    if clean_env_path.is_file():
+        try:
+            clean_env = json.loads(clean_env_path.read_text(encoding="utf-8"))
+        except ValueError:
+            clean_env = None
+        if isinstance(clean_env, dict) and clean_env.get("status") == "PASS":
+            clean_python = str(clean_env.get("python", {}).get("version", ""))
+            clean_direct = {
+                str(name): str(version)
+                for name, version in clean_env.get("direct_packages", {}).items()
+            }
+            if clean_python == platform.python_version() and clean_direct == observed:
+                fresh_created = bool(clean_env.get("environment_created"))
+                fresh_verified = bool(clean_env.get("verification", {}).get("tests_passed"))
+                transitive_locked = bool(clean_env.get("transitive_freeze"))
+                clean_env_summary = {
+                    "record": "CLEAN_ENV_REPRODUCTION.json",
+                    "python_version": clean_python,
+                    "direct_packages": clean_direct,
+                    "transitive_freeze_packages": clean_env.get("transitive_freeze"),
+                    "created": fresh_created,
+                    "verified": fresh_verified,
+                }
     return {
         "python": {
             "version": platform.python_version(), "version_full": sys.version,
@@ -498,9 +526,10 @@ def environment_record() -> dict[str, Any]:
         "dependency_declarations": [file_record(DIRECT_REQUIREMENTS), file_record(CONDA_ENVIRONMENT)],
         "environment_boundary": {
             "requirements_lock_semantics": "requirements-lock.txt declares three direct packages only; it is not a transitive lock.",
-            "transitive_environment_locked": False,
-            "fresh_environment_created": False,
-            "fresh_environment_verified": False,
+            "transitive_environment_locked": transitive_locked,
+            "fresh_environment_created": fresh_created,
+            "fresh_environment_verified": fresh_verified,
+            "clean_environment_summary": clean_env_summary,
             "observation_scope": "Commands execute in the active workspace environment; exact observed versions and tool binaries are recorded.",
         },
         "tools": {

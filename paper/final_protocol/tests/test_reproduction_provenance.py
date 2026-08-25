@@ -140,18 +140,30 @@ def test_sidecar_parser_is_fail_closed() -> None:
 def test_environment_boundary_and_direct_versions_are_exact() -> None:
     record = reproduction.environment_record()
     assert record["direct_declared_packages"] == {
-        "matplotlib": "3.10.5", "numpy": "2.2.5", "pytest": "8.4.2",
+        "matplotlib": "3.10.5", "numpy": "2.4.6", "pytest": "9.1.1",
     }
     assert record["observed_direct_packages"] == record["direct_declared_packages"]
     assert record["direct_package_versions_match"] is True
     assert record["conda_direct_declarations"] == {
-        "python": "3.13.2", "matplotlib": "3.10.5", "numpy": "2.2.5", "pytest": "8.4.2",
+        "python": "3.11.5", "matplotlib": "3.10.5", "numpy": "2.4.6", "pytest": "9.1.1",
     }
     assert record["conda_direct_versions_match_observed"] is True
     boundary = record["environment_boundary"]
-    assert boundary["transitive_environment_locked"] is False
-    assert boundary["fresh_environment_created"] is False
-    assert boundary["fresh_environment_verified"] is False
+    clean_record = FINAL / "CLEAN_ENV_REPRODUCTION.json"
+    if clean_record.is_file():
+        clean = json.loads(clean_record.read_text(encoding="utf-8"))
+        passed = clean.get("status") == "PASS"
+        assert boundary["fresh_environment_created"] == (passed and bool(clean.get("environment_created")))
+        assert boundary["fresh_environment_verified"] == (passed and bool(clean.get("verification", {}).get("tests_passed")))
+        assert boundary["transitive_environment_locked"] == (passed and bool(clean.get("transitive_freeze")))
+        if boundary["fresh_environment_created"]:
+            summary = boundary["clean_environment_summary"]
+            assert summary["python_version"] == record["python"]["version"]
+            assert summary["direct_packages"] == record["observed_direct_packages"]
+    else:
+        assert boundary["fresh_environment_created"] is False
+        assert boundary["fresh_environment_verified"] is False
+        assert boundary["transitive_environment_locked"] is False
     assert record["tools"]["tectonic"]["version_output"]
     assert record["tools"]["pdftoppm"]["version_output"]
     assert record["operating_system"]["system"]

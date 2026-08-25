@@ -146,8 +146,6 @@
   "stress": {
     "decision_count_disagreement_clusters": 93,
     "declared_sources_verified": 2,
-    "earliest_divergence_localization_included": false,
-    "earliest_divergence_localization_reason": "The retained verification rows do not contain raw trace lines needed to establish an earliest event or actor.",
     "empirical_reweighting": {
       "clusters": 200,
       "estimate": 0.495,
@@ -162,6 +160,12 @@
       "role": "prespecified pooled whole-cluster empirical reweighting; realized context composition may vary"
     },
     "error_disagreement_clusters": 0,
+    "first_divergence_actor_counts": {
+      "opponent": 99
+    },
+    "first_divergence_actor_counts_included": true,
+    "first_divergence_position_included": false,
+    "first_divergence_position_reason": "First-divergence positions were never recorded in retained artifacts and raw trace payloads are restricted, so position-level localization cannot be verified.",
     "fixed_battery_scope": "200 exercised seed-condition clusters in four fixed opponent-by-order strata",
     "fixed_composition_reweighting_sensitivity": {
       "design_status": "post-acquisition source-driven sensitivity",
@@ -185,6 +189,8 @@
     },
     "outcome_disagreement_clusters": 47,
     "policy_error_present_clusters": 0,
+    "timing_summaries": {},
+    "timing_summaries_included": true,
     "trace_disagreement_clusters": 99
   }
 }

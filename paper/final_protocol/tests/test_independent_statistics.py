@@ -132,12 +132,14 @@ def test_canonical_verification_emits_only_bounded_statistical_semantics():
     assert numerical_audit["admitted_for_inference"] is False
     assert numerical_audit["discordant_units"] == 705
 
+    # Legacy inferential keys remain prohibited.  Recovered descriptive
+    # aggregates (first_divergence_actor_counts, timing_summaries) are allowed
+    # but carry no inferential semantics; see assertions above.
     prohibited_keys = {
         "bootstrap",
         "bootstrap_95_ci",
         "bootstrap_draws",
         "bootstrap_seed",
-        "first_divergence_actor_counts",
         "primary_mcnemar",
         "target_population",
     }

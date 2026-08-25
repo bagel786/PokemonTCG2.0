@@ -556,11 +556,18 @@ def verify_stress(summary: dict[str, Any], source_root: Path | None) -> dict[str
             ),
             "design_status": "post-acquisition source-driven sensitivity",
         },
-        "earliest_divergence_localization_included": False,
-        "earliest_divergence_localization_reason": (
-            "The retained verification rows do not contain raw trace lines needed "
-            "to establish an earliest event or actor."
+        "first_divergence_actor_counts_included": True,
+        "first_divergence_actor_counts": dict(
+            summary.get("first_divergence_actor_counts", {})
         ),
+        "first_divergence_position_included": False,
+        "first_divergence_position_reason": (
+            "First-divergence positions were never recorded in retained artifacts "
+            "and raw trace payloads are restricted, so position-level localization "
+            "cannot be verified."
+        ),
+        "timing_summaries_included": True,
+        "timing_summaries": summary.get("timing_summaries", {}),
         "declared_sources_verified": source_count,
     }
 

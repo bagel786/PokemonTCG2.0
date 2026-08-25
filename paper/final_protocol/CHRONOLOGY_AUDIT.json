@@ -1,0 +1,149 @@
+{
+  "schema_version": "chronology-audit-2.0.0",
+  "generated": "2026-08-25",
+  "branch": "paper/apsos-submission-closeout-20260825",
+  "method": {
+    "description": "Every chronology statement in the manuscript is mapped to Git-verifiable evidence: the commit that introduced it, its file, its commit timestamp, an evidence category, and whether retained outcomes already existed at that commit.",
+    "verification_commands": [
+      "git show --stat 803257f102232763fc88d28c14b668f9b62eb277",
+      "git show 803257f:paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md",
+      "git merge-base --is-ancestor 803257f 23b9106",
+      "git log --diff-filter=A -- <path>"
+    ],
+    "limitation": "Git establishes commit ordering only. It cannot prove when a human inspected uncommitted files or when results were first observed outside Git."
+  },
+  "key_commits": [
+    {
+      "commit": "803257f102232763fc88d28c14b668f9b62eb277",
+      "date": "2026-08-24T16:20:39-05:00",
+      "subject": "Freeze PEVL protocol and validation tooling",
+      "contents": [
+        "paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md (frozen prospective protocol)",
+        "paper/release/synthetic/pevl_synthetic.py (synthetic conformance suite)",
+        "paper/data/stochastic_source_audit.json",
+        "paper/scripts/analyze_pevl.py"
+      ]
+    },
+    {
+      "commit": "23b9106",
+      "date": "2026-08-24T17:55:00-05:00",
+      "subject": "Add PEVL manuscript and prospective validation results",
+      "contents": [
+        "paper/data/pevl/trace_preflight_summary.json",
+        "paper/data/pevl/timed_search_stress_summary.json",
+        "paper/data/pevl/factorial_summary.json",
+        "paper/data/pevl/factorial/units.csv"
+      ]
+    },
+    {
+      "commit": "1a26289",
+      "date": "2026-08-25",
+      "subject": "Harden APS Open Science protocol article package",
+      "contents": [
+        "release_templates/pevl_bench/admission.py (generic executable admission map)",
+        "release_templates/protocol/admission_rules.json",
+        "release_templates/protocol/claim_classes.json"
+      ]
+    }
+  ],
+  "ordering_facts": [
+    {
+      "fact": "The frozen protocol commit is an ancestor of the retained-results commit.",
+      "evidence": "git merge-base --is-ancestor 803257f 23b9106 exits 0; commit timestamps differ by about 95 minutes on 2026-08-24.",
+      "outcomes_existed_at_protocol_commit": false
+    }
+  ],
+  "statements": [
+    {
+      "id": "CHRON-01",
+      "statement": "The frozen case-study protocol already contained the eight-stage (eight-level) evidence ladder with binary gate consequences.",
+      "manuscript_location": "Prospective validation results; Stages 1-8 sections",
+      "commit": "803257f102232763fc88d28c14b668f9b62eb277",
+      "file": "paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md",
+      "timestamp": "2026-08-24T16:20:39-05:00",
+      "evidence_category": "frozen_protocol_text",
+      "evidence_detail": "The frozen protocol enumerates levels 1-8 by name: artifact identity; seed-namespace integrity; schedule parity; identical-arm record parity; repeat and worker parity; stochastic-source audit; cross-arm event alignment; statistical admission. It prescribes binary consequences (preflight mismatch blocks acquisition; invalidating mismatch suppresses factorial contrasts).",
+      "outcomes_already_existed": false,
+      "manuscript_must_say": "the frozen protocol contained the full ladder and binary gates",
+      "manuscript_must_not_say": "that the named Level taxonomy as a whole was added after acquisition"
+    },
+    {
+      "id": "CHRON-02",
+      "statement": "The frozen plan prescribed finite-population paired resampling with 95% intervals and secondary exact two-sided McNemar inference conditional on gate passes.",
+      "commit": "803257f102232763fc88d28c14b668f9b62eb277",
+      "file": "paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md (Estimands and uncertainty section)",
+      "timestamp": "2026-08-24T16:20:39-05:00",
+      "evidence_category": "frozen_protocol_text",
+      "evidence_detail": "'95% intervals use 100,000 paired resamples within each of the ten strata with seed 2026083117. Exact two-sided McNemar inference for the primary binary contrast.'",
+      "outcomes_already_existed": false
+    },
+    {
+      "id": "CHRON-03",
+      "statement": "The frozen stress protocol promised public-package first-divergence positions, actors, and timing summaries as secondary endpoints.",
+      "commit": "803257f102232763fc88d28c14b668f9b62eb277",
+      "file": "paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md (Timed-search stress test section)",
+      "timestamp": "2026-08-24T16:20:39-05:00",
+      "evidence_category": "frozen_protocol_text",
+      "evidence_detail": "'the public package contains digests, first-divergence positions and actors, decision counts, terminal outcomes, errors, and timing summaries'; 'Secondary endpoints are first divergence position and acting side.'",
+      "outcomes_already_existed": false
+    },
+    {
+      "id": "CHRON-04",
+      "statement": "Retained prospective result artifacts (preflight, stress, factorial) first appear in a descendant of the frozen protocol commit.",
+      "commit": "23b9106",
+      "file": "paper/data/pevl/* summaries and units",
+      "timestamp": "2026-08-24T17:55:00-05:00",
+      "evidence_category": "result_artifact_introduction",
+      "evidence_detail": "git log --diff-filter=A shows all four retained result files first added at 23b9106, after 803257f in ancestry.",
+      "outcomes_already_existed_at_freeze": false
+    },
+    {
+      "id": "CHRON-05",
+      "statement": "The historical repeated-control audit rule and its suppression consequence were frozen retrospectively, after the historical outcomes already existed.",
+      "file": "paper/final_protocol/supplement/PROTOCOL_DEVIATIONS.md; METHOD_ASSUMPTION_AUDIT.md M10",
+      "commit": "closeout-era commits (post-acquisition analysis artifacts)",
+      "timestamp": "after 2026-08-24 retention of historical data",
+      "evidence_category": "retrospective_analysis_disclosure",
+      "evidence_detail": "The historical files predate any current-protocol audit; the available-record gate was formulated for retrospective reanalysis of already-acquired records. The manuscript states this is not prospective blinding evidence.",
+      "outcomes_already_existed": true
+    },
+    {
+      "id": "CHRON-06",
+      "statement": "The generic executable claim-class taxonomy, the conservative descriptive-only Level-6 reporting restriction, and the digest-plus-byte integrity extension were formalized after acquisition.",
+      "commit": "1a26289 and descendants",
+      "file": "release_templates/pevl_bench/admission.py; release_templates/protocol/admission_rules.json; release_templates/protocol/claim_classes.json",
+      "timestamp": "2026-08-25",
+      "evidence_category": "post_acquisition_formalization",
+      "evidence_detail": "admission.py embeds created_after_acquisition=true and status=post_acquisition_executable_formalization; the bundle trust anchor pins these values. The byte-count extension appears only in closeout-era verifier code, not in the frozen endpoint text.",
+      "outcomes_already_existed": true,
+      "manuscript_must_say": "a post-acquisition conservative formalization and reusable template that future users must freeze before outcome acquisition",
+      "manuscript_must_not_say": "that the completed case prospectively validated the generic taxonomy"
+    },
+    {
+      "id": "CHRON-07",
+      "statement": "Acting-side first-divergence counts and per-profile timing summaries were recovered during closeout from the hash-pinned stress summary and added to the release as processed aggregates; first-divergence positions were never recorded.",
+      "commit": "closeout branch commit recovering D03 outputs",
+      "file": "scripts/build_final_release.py build_stress(); release/data/processed/timed_search_stress.json",
+      "timestamp": "2026-08-25",
+      "evidence_category": "closeout_recovery_from_pinned_source",
+      "evidence_detail": "first_divergence_actor_counts={opponent: 99} and timing summaries exist in paper/data/pevl/timed_search_stress_summary.json (sha256 40b9f5e17a424742ad8a05739646fe56843b8f3a432b124bfc33f9aed1ab5a4b). No retained artifact contains position-level records; raw trace payloads remain restricted.",
+      "outcomes_already_existed": true
+    },
+    {
+      "id": "CHRON-08",
+      "statement": "The Stage-6 machine-readable decision rules and Stage-4/5 certificate fields were added during closeout as documentation/verification infrastructure; they are not part of the frozen protocol and make no empirical claim.",
+      "commit": "closeout branch",
+      "file": "release_templates/protocol/stage6_source_audit_rules.json; release_templates/pevl_bench/{stage6_rules.py,evidence.py}",
+      "timestamp": "2026-08-25",
+      "evidence_category": "closeout_tooling_addition",
+      "evidence_detail": "Pure tooling: classifies audit inputs and exposes machine-checkable profile sets; no retained outcome changes.",
+      "outcomes_already_existed": true
+    }
+  ],
+  "prohibited_conclusions": [
+    "Do not describe the historical repeated-control gate as prospectively blinded or preregistered.",
+    "Do not attribute the generic claim-class taxonomy or the descriptive-only Level-6 mapping to the frozen protocol commit.",
+    "Do not describe the byte-count integrity extension as the frozen primary endpoint (it is a post-acquisition extension; counts unchanged at 99/200).",
+    "Do not present recovered actor/timing aggregates as having been released at acquisition time."
+  ]
+}
