@@ -551,7 +551,7 @@ def figure_admission_flow() -> list[Path]:
     source = {
         "levels": [{"level": level, "label": label.replace("\n", " ")} for level, label in levels],
         "failure_action": "suppress or downgrade the affected claim",
-        "success_action": "apply the frozen admission map",
+        "success_action": "apply the evidence-to-claim rule with its provenance stated",
         "restricted_engine_boundary": "Level 7 unavailable",
         "level_6_boundary": "fixed-battery descriptive contrast and empirical reweighting only",
     }
@@ -578,7 +578,7 @@ def figure_admission_flow() -> list[Path]:
     ax.text(4.9, 1.67, "Suppress or downgrade the affected claim;\nlater statistics cannot repair the gate.", ha="center", va="center", color=INK, fontsize=9.7, linespacing=1.25)
     admit_box = FancyBboxPatch((8.55, 1.35), 3.0, 1.15, boxstyle="round,pad=0.06", facecolor="#EFF7F3", edgecolor=GREEN, linewidth=2)
     ax.add_patch(admit_box)
-    ax.text(10.05, 2.10, "L8: claim map", ha="center", va="center", color=GREEN, fontweight="bold", fontsize=11.5)
+    ax.text(10.05, 2.10, "L8: claim rule", ha="center", va="center", color=GREEN, fontweight="bold", fontsize=11.5)
     ax.text(10.05, 1.68, "admit / downgrade / suppress", ha="center", va="center", color=INK, fontsize=10.2)
     ax.add_patch(FancyArrowPatch((10.275, 3.43), (10.05, 2.52), arrowstyle="-|>", mutation_scale=12, color=GREEN, linewidth=2))
     ax.add_patch(FancyArrowPatch((9.78, 3.46), (8.08, 2.48), arrowstyle="-|>", mutation_scale=10, color=RED, linewidth=1.2))
@@ -742,7 +742,7 @@ Stage & Evidence & Permitted statement & Failure action \\
 5 Repeat/worker parity & Fresh repeats, worker counts, enqueue orders, and process lifecycles & Within-arm traces repeat in tested contexts. & Freeze a passing context or model run variation. \\
 6 Source audit & Bounded Python source-pattern scan; binary internals remain unassessed & Candidate mechanisms and the uninspected boundary are recorded. & Control, dynamically test, or narrow the estimand and wording. \\
 7 Event alignment & Stable event identifiers and equal values for shared exogenous events & Event-aligned coupling for the logged ontology. & Retain at most bounded descriptive seed-indexed wording. \\
-8 Statistical admission & Frozen map from gates to estimand, unit, descriptive summary or justified uncertainty procedure, target, and wording & Level 6 permits a fixed-battery descriptive schedule-indexed contrast and empirical reweighting only; inferential pairing requires an additional sampling or randomization basis. & Admit, downgrade, or suppress automatically. \\
+8 Statistical admission & For future use, a prospectively frozen map from gates to estimand, unit, procedure, target, and wording; for this completed case, the frozen experimental plan and later generic taxonomy are kept distinct. & The frozen case plan prescribed paired-resampling intervals and secondary McNemar inference; this article's post-acquisition taxonomy reports only a Level 6 fixed-battery description and empirical sensitivity. & Apply the authoritative frozen rule; a later conservative taxonomy may narrow reporting but cannot be described as prospective. \\
 \bottomrule
 \end{tabularx}
 \end{table*}
@@ -757,13 +757,13 @@ Stage & Units/clusters & Executions & Trace-record disagreement & Outcome disagr
 \\midrule
 Deterministic preflight & {payloads['preflight']['trajectory_units']:,} & {payloads['preflight']['executions']:,} & 0 & 0 & Qualify acquisition for the newly frozen five-context scope; later-seed transfer remains an assumption. \\\\
 Timed-search stress & {stress['clusters']} & {stress['executions']} & {stress['trace_disagreement_clusters']} & {stress['outcome_disagreement_clusters']} & Reject exact repeatability for at least one exercised seed condition. \\\\
-Factorial repeated control & {factorial['units']:,} per cell & {factorial['games']:,} games & --- & {factorial['control_mismatch_units']} & Admit a fixed-battery descriptive schedule-indexed contrast plus reweighting sensitivity; no inferential or Level-7 claim. \\\\
+Factorial repeated control & {factorial['units']:,} per cell & {factorial['games']:,} games & --- & {factorial['control_mismatch_units']} & Frozen plan admitted its paired analysis; the later conservative taxonomy reports a fixed-battery description plus reweighting sensitivity and no Level-7 claim. \\\\
 \\bottomrule
 \\end{{tabularx}}
 \\end{{table*}}
 """,
         "table_4_factorial.tex": r"""\begin{table}[t]
-\caption{Admitted fixed-battery factorial contrasts. Values are percentage-point win-rate differences with the 2.5th and 97.5th percentiles of the frozen stratified paired-unit reweighting distribution; these are not confidence intervals.}
+\caption{Fixed-battery factorial contrasts. Values are percentage-point win-rate differences with the 2.5th and 97.5th percentiles from the prespecified stratified paired-unit resampling algorithm, reported post-acquisition as empirical reweighting sensitivity rather than confidence intervals.}
 \label{tab:factorial}
 \small
 \begin{tabularx}{\columnwidth}{>{\raggedright\arraybackslash}Xrrr}
@@ -819,26 +819,32 @@ validation workflow. A self-contained conformance suite exercises clean,
 draw-shift, clock-budget, process-state, and seed-conversion modes, rejects
 schema or manifest tampering, and supplies a machine-readable admission map
 with exhaustive tests for result independence, prerequisite monotonicity,
-failure dominance, projection scoping, determinism, unknown-state
-fail-closedness, and claim-class ordering. This generic executable taxonomy is a
-post-acquisition formalization; the prospectively frozen experiment-specific
-rules remain authoritative for the completed case study.
+failure dominance, projection scoping, stateless repeat-run determinism,
+unknown-state fail-closedness, and claim-class ordering. This generic
+executable taxonomy is a post-acquisition conservative formalization for future
+prospective freezing; the completed case study's frozen experiment-specific
+rules, including its paired-resampling intervals and secondary McNemar
+analysis, remain the provenance authority.
 
 The case study found zero required mismatches across
 {preflight['executions']:,} deterministic executions, while
 {stress['trace_disagreement_clusters']} of {stress['clusters']} fixed
 timed-search seed-condition clusters disagreed on the complete recorded trace
 projection, with pronounced context heterogeneity.
-The frozen rule suppressed an apparently favorable historical comparison after
-its repeated-control gate failed. For a later {factorial['units']:,}-unit-per-cell
-comparison, Git history places the rule and acquisition-gate commit before the
-retained result artifacts; changing the outcome payload while holding gate
-evidence fixed leaves admission unchanged. Its five deterministic contexts were
-a newly frozen, audit-informed target. The qualification preflight used a
-different seed range, and candidate factorial rows contain no trace digests.
-The admitted output is therefore a fixed-battery descriptive contrast with
-empirical reweighting sensitivity, not a confidence interval, p-value, or
-population-effect claim.
+An apparently favorable historical comparison failed a repeated-control audit
+rule frozen retrospectively after those outcomes existed and was suppressed;
+this is not evidence of prospective blinding. For a later
+{factorial['units']:,}-unit-per-cell comparison, Git history places the
+acquisition and suppression rule before the retained result artifacts, and
+changing the outcome payload while holding gate evidence fixed leaves the gate
+decision unchanged. Its five deterministic contexts were a newly frozen,
+audit-informed target. The qualification preflight used a different seed
+range, and candidate factorial rows contain no trace digests. The frozen plan
+authorized paired-resampling intervals and secondary McNemar inference. This
+article instead applies a post-acquisition conservative reporting taxonomy:
+only the fixed-battery descriptive contrast is retained, and the unchanged
+resampling quantiles are labeled empirical sensitivity rather than a
+confidence interval, p-value, or population-effect claim.
 
 This contribution is narrower than Rollout Cards, trace-assurance frameworks,
 AEVAL, and event-keyed randomness individually: those works provide evidence

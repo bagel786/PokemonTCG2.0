@@ -25,26 +25,32 @@ validation workflow. A self-contained conformance suite exercises clean,
 draw-shift, clock-budget, process-state, and seed-conversion modes, rejects
 schema or manifest tampering, and supplies a machine-readable admission map
 with exhaustive tests for result independence, prerequisite monotonicity,
-failure dominance, projection scoping, determinism, unknown-state
-fail-closedness, and claim-class ordering. This generic executable taxonomy is a
-post-acquisition formalization; the prospectively frozen experiment-specific
-rules remain authoritative for the completed case study.
+failure dominance, projection scoping, stateless repeat-run determinism,
+unknown-state fail-closedness, and claim-class ordering. This generic
+executable taxonomy is a post-acquisition conservative formalization for future
+prospective freezing; the completed case study's frozen experiment-specific
+rules, including its paired-resampling intervals and secondary McNemar
+analysis, remain the provenance authority.
 
 The case study found zero required mismatches across
 3,000 deterministic executions, while
 99 of 200 fixed
 timed-search seed-condition clusters disagreed on the complete recorded trace
 projection, with pronounced context heterogeneity.
-The frozen rule suppressed an apparently favorable historical comparison after
-its repeated-control gate failed. For a later 2,000-unit-per-cell
-comparison, Git history places the rule and acquisition-gate commit before the
-retained result artifacts; changing the outcome payload while holding gate
-evidence fixed leaves admission unchanged. Its five deterministic contexts were
-a newly frozen, audit-informed target. The qualification preflight used a
-different seed range, and candidate factorial rows contain no trace digests.
-The admitted output is therefore a fixed-battery descriptive contrast with
-empirical reweighting sensitivity, not a confidence interval, p-value, or
-population-effect claim.
+An apparently favorable historical comparison failed a repeated-control audit
+rule frozen retrospectively after those outcomes existed and was suppressed;
+this is not evidence of prospective blinding. For a later
+2,000-unit-per-cell comparison, Git history places the
+acquisition and suppression rule before the retained result artifacts, and
+changing the outcome payload while holding gate evidence fixed leaves the gate
+decision unchanged. Its five deterministic contexts were a newly frozen,
+audit-informed target. The qualification preflight used a different seed
+range, and candidate factorial rows contain no trace digests. The frozen plan
+authorized paired-resampling intervals and secondary McNemar inference. This
+article instead applies a post-acquisition conservative reporting taxonomy:
+only the fixed-battery descriptive contrast is retained, and the unchanged
+resampling quantiles are labeled empirical sensitivity rather than a
+confidence interval, p-value, or population-effect claim.
 
 This contribution is narrower than Rollout Cards, trace-assurance frameworks,
 AEVAL, and event-keyed randomness individually: those works provide evidence

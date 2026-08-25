@@ -62,7 +62,10 @@ opaque search snapshots, or semantic random-event identifiers.
   difference marks the cluster. A missing required profile fails the gate rather
   than disappearing from the denominator. Tuple equality remains a claim about
   an observable projection, not an assertion that the entire black-box state
-  was captured.
+  was captured. The frozen stress endpoint was digest equality alone; byte count
+  was added after acquisition as integrity hardening. Both the frozen digest
+  endpoint and the later tuple identify 99/200 stress clusters because the 96
+  byte-count disagreements are contained within the 99 digest disagreements.
 - **human_verified:** PENDING
 
 ## 4. Why can two identical agents differ under timed search?
@@ -189,7 +192,10 @@ Neither procedure reweights arms or profiles separately.
   are strongly heterogeneous across the four strata: 44/50, 48/50, 4/50, and
   3/50. The frozen pooled quantiles are 42.5%–56.5%; an explicitly
   post-acquisition, source-driven fixed-composition sensitivity gives 46%–53%.
-  Neither range is a confidence interval or coverage statement.
+  Neither range is a confidence interval or coverage statement in the final
+  article. The case-study protocol originally called the finite-population
+  resampling outputs bootstrap intervals; `empirical reweighting quantiles` is a
+  later conservative descriptive label.
 - **human_verified:** PENDING
 
 ## 11. Why was the historical factorial suppressed?
@@ -199,7 +205,9 @@ on the strongest projection available in the historical rows. There were 210
 of 2,800 available-outcome (win/draw) mismatches and 458 of 2,800 mismatches
 after decision count was added. The frozen rule therefore suppressed the
 planned historical contrasts instead of selecting only the agreeing contexts
-after inspection.
+after inspection. The gate and suppression consequence were frozen
+retrospectively after these historical outcomes already existed; this is an
+auditable safeguard, not evidence of prospective blinding.
 
 - **Manuscript section:** Restricted game-agent case study
 - **Evidence file:** `../data/ablation/canonical_ablation.csv`;
@@ -209,20 +217,23 @@ after inspection.
   projection and current Stage-3 field set, so the audit is explicitly an
   available-record projection. The mismatches were confined to two timed-search
   context packages, but removing them post hoc would change the frozen target
-  and is not a valid rescue analysis.
+  and is not a valid rescue analysis. Retrospective freezing does not convert
+  the historical audit into prospective validation.
 - **human_verified:** PENDING
 
-## 12. Why did the frozen rule admit a descriptive factorial summary?
+## 12. Why is the gated factorial reported only as a descriptive summary?
 
-**Plain-language answer (2–4 sentences).** Git orders the deterministic
+**Plain-language answer (2–4 sentences).** Git orders the binary deterministic
 qualification protocol before the retained preflight and factorial artifacts,
 and the factorial’s frozen repeated-control available-record gate had zero
-mismatches. The five deterministic contexts were a newly frozen,
-audit-informed target, not a rescue subset of the historical target. Admission
-is limited to a fixed-battery descriptive contrast and reweighting sensitivity:
-the preflight and factorial used different seed ranges, factorial candidate
-rows have no trace digests, and the engine cannot establish semantic event
-alignment.
+mismatches. The frozen plan then called for finite-population paired bootstrap
+intervals and secondary exact McNemar inference, but the article later adopted
+a conservative descriptive-only taxonomy. It therefore reports a fixed-battery
+contrast and empirical reweighting sensitivity: the preflight and factorial
+used different seed ranges, factorial candidate rows have no trace digests, and
+the engine cannot establish semantic event alignment. The five deterministic
+contexts were a newly frozen, audit-informed target, not a rescue subset of the
+historical target.
 
 - **Manuscript section:** Prospective validation results — Deterministic
   preflight; Claim-admission consequence
@@ -236,7 +247,9 @@ alignment.
   bounded assumption about the same identified artifacts and contexts, not
   observed candidate-arm trace repeatability on factorial rows. The admitted
   label is descriptive seed matching, not inferential pairing or event
-  alignment.
+  alignment. The later taxonomy cannot evidence its own prospective validation;
+  future studies must freeze it and its reporting consequences before
+  acquisition.
 - **human_verified:** PENDING
 
 ## 13. What do the factorial reweighting quantiles mean?
@@ -248,6 +261,8 @@ For the total C4-minus-C1 contrast, the descriptive value is +0.55 percentage
 points and the 2.5th and 97.5th reweighting percentiles are −2.05 and +3.15
 percentage points. These are sensitivity quantiles for this battery, not a
 confidence interval or a claim about new seeds, opponents, or training runs.
+The frozen plan used the term finite-population paired bootstrap interval; the
+descriptive quantile label was adopted conservatively after acquisition.
 
 - **Manuscript section:** Claim-admission consequence; Appendix — Secondary
   factorial details
@@ -258,6 +273,9 @@ confidence interval or a claim about new seeds, opponents, or training runs.
   recomputed, and percentile endpoints are taken from 100,000 draws. Equal
   stratum weighting and the frozen seed are part of the descriptive procedure;
   no inferential sampling or assignment mechanism is asserted.
+  The frozen plan also specified secondary exact two-sided McNemar inference for
+  C4 versus C1. Its value is retained only in the numerical audit and is not
+  admitted as inference under the later descriptive-only taxonomy.
 - **human_verified:** PENDING
 
 ## 14. Why do sign-spanning reweighting quantiles not prove equality?
@@ -328,10 +346,13 @@ not ownership of the component ideas or a population effect estimate.
 - **Evidence file:** `source_data/processed_synthetic.json`;
   `tables/table_2_protocol_stages.tex`;
   `../protocol/PEVL_PROSPECTIVE_PROTOCOL.md`
-- **Technical answer:** Each stage produces a falsifiable artifact
-  and a predetermined reporting consequence. The same map explains both the
-  suppressed historical analysis and the later fixed-battery descriptive
-  factorial summary, which is the practical integration being demonstrated.
+- **Technical answer:** Each stage produces a falsifiable artifact and a
+  reporting consequence. The case-study protocol prospectively froze binary
+  acquisition/suppression consequences for the new acquisitions, while its
+  historical gate was frozen retrospectively and the multi-level generic map
+  was formalized after acquisition. The later map consistently describes the
+  suppressed historical analysis and fixed-battery factorial summary, but that
+  consistency is not evidence that the taxonomy was prospectively validated.
 - **human_verified:** PENDING
 
 ## 18. Which files let another researcher verify each result?
@@ -355,7 +376,13 @@ engine and package access.
   hashes and schemas, rebuild statistics, macros, tables, and figures, run the
   contradiction audit and tests, compile the PDF, and write a reproduction
   report. The release is computationally self-contained for synthetic and
-  processed analyses only after its final manifest passes.
+  processed analyses only after its final manifest passes. It omits the frozen
+  protocol's promised first-divergence position, acting-side/actor localization,
+  and timing summaries for the stress diagnostic, and it includes no raw trace
+  lines from which first divergence can be independently reconstructed. This is
+  an unresolved reporting/access protocol deviation; it does not change the
+  frozen primary digest count of 99/200, but human confirmation and an amendment
+  decision remain PENDING.
 - **human_verified:** PENDING
 
 ## 19. Which materials are restricted and why?
@@ -433,13 +460,14 @@ unknown, malformed, or contradictory evidence suppresses rather than admits.
   `release_templates/protocol/admission_rules.json`;
   `release_templates/tests/test_release.py`
 - **Technical answer:** Result independence means that replacing the outcome
-  payload leaves admission unchanged. Monotonicity and failure dominance mean
-  that weakening or failing a prerequisite cannot strengthen wording;
-  projection scoping limits repeatability to named recorded fields;
-  determinism/idempotence means the same record evaluated again returns the
-  same answer; unknown-state fail-closedness suppresses malformed states; and
-  ordered strength prevents schedule evidence from becoming event-aligned
-  wording. For example, if Levels 1–4 pass and the repeat/worker gate fails,
+  payload leaves admission unchanged. The seven named properties are **result
+  independence**, **prerequisite monotonicity**, **failure dominance**,
+  **projection scoping**, **stateless determinism**, **unknown-state
+  fail-closedness**, and **strict claim ordering**. Stateless determinism means
+  that separate evaluations of unchanged inputs, with no retained evaluator
+  state, return the same answer; this is a repeat-run property, not a
+  state-mutating operation. For
+  example, if Levels 1–4 pass and the repeat/worker gate fails,
   carried contrasts of +20 and −20 percentage points receive the same
   schedule-matched downgrade, and deleting artifact evidence can only weaken
   it. The tests replace result payloads, weaken prerequisites, insert extreme favorable
@@ -447,16 +475,18 @@ unknown, malformed, or contradictory evidence suppresses rather than admits.
   exercise malformed and tampered documents, and enumerate all six declared
   states across all seven gates. The generic bundle is explicitly a
   post-acquisition formalization; prospectively frozen experiment-specific
-  rules remain authoritative.
+  rules remain authoritative. The tests cannot establish that the taxonomy was
+  prospectively validated for already completed acquisitions.
 - **human_verified:** PENDING
 
 ## 23. Why do the later sign-spanning descriptive quantiles not weaken the protocol result?
 
 **Plain-language answer (2–4 sentences).** Gate evidence, rather than result
 favorability, determines what wording the rule permits. The frozen historical
-rule suppressed an apparently favorable comparison after a required gate
-failed; the later rule admitted only a fixed-battery descriptive contrast and
-reweighting sensitivity after its qualification gates passed. Sign-spanning
+retrospective rule suppressed an apparently favorable comparison after a
+required gate failed; the post-acquisition taxonomy reports the later case only
+as a fixed-battery descriptive contrast and reweighting sensitivity after its
+binary qualification gates passed. Sign-spanning
 quantiles describe that sensitivity and are neither a failed protocol test nor
 a population null result.
 
@@ -468,7 +498,8 @@ a population null result.
   `../protocol/PEVL_PROSPECTIVE_PROTOCOL.md`
 - **Technical answer:** Git orders the experiment-specific rule commit before
   the retained result artifacts; it does not establish when a human viewed
-  uncommitted files. Functional tests show that replacing outcome payloads while
+  uncommitted files, and the historical gate was frozen only after historical
+  outcomes existed. Functional tests show that replacing outcome payloads while
   holding evidence fixed leaves admission unchanged. Direction, reweighting
   quantiles, p-values, and favorability are excluded from the decision
   projection. “Null-compatible” can describe only the sign-spanning empirical
@@ -604,7 +635,8 @@ and release only materials they are authorized to distribute.
   contexts, runs the bounded source audit, tests event alignment when observable,
   and invokes admission on a schema-valid evidence record. Any missing,
   malformed, contradictory, or unrecognized prerequisite fails closed. The
-  adopter must validate the generic taxonomy against the study-specific rule;
+  adopter must freeze and validate the generic taxonomy against the
+  study-specific rule before acquisition;
   the supplied post-acquisition formalization cannot retroactively authorize a
   completed comparison.
 - **human_verified:** PENDING
@@ -648,4 +680,6 @@ is insufficient.
 | 29 |  |  | NO |  |
 
 Until every row is confirmed, the package cannot receive a ready-to-submit
-decision.
+decision. The unsigned `supplement/PROTOCOL_DEVIATIONS.md` record also requires
+human confirmation and an explicit amendment decision; this guide records
+neither one.

@@ -382,6 +382,12 @@ def verify_stress() -> dict[str, Any]:
             f"stress fixed-composition sensitivity {field}",
         )
     require(summary["earliest_divergence_localization_included"], False, "stress localization omission")
+    require(summary["timing_summaries_included"], False, "stress timing omission")
+    require(
+        summary["protocol_deviation_status"],
+        "PENDING_HUMAN_SIGNOFF_UNSIGNED",
+        "stress protocol deviation status",
+    )
     return {
         "clusters": len(rows),
         **counts,

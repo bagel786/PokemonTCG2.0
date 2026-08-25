@@ -32,5 +32,5 @@
     }
   ],
   "restricted_engine_boundary": "Level 7 unavailable",
-  "success_action": "apply the frozen admission map"
+  "success_action": "apply the current post-acquisition map"
 }

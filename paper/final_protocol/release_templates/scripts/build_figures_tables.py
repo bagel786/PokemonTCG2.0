@@ -102,7 +102,7 @@ def figure_2() -> None:
     axis.text(3.65, 0.75, payload["success_action"], ha="center", fontsize=10, color=GREEN, fontweight="bold")
     axis.text(3.65, 0.35, payload["failure_action"], ha="center", fontsize=10, color=RED, fontweight="bold")
     axis.text(6.55, 0.75, payload["restricted_engine_boundary"], ha="center", fontsize=9, color=ORANGE)
-    axis.set_title("Prospectively frozen claim-admission flow", fontsize=14, color=INK)
+    axis.set_title("Current post-acquisition claim-admission flow", fontsize=14, color=INK)
     save_figure(figure, "figure_2_admission_flow")
 
 
@@ -190,7 +190,7 @@ def write_tables() -> None:
         "Schedule & Seeds, order, seat & Matched schedule & Correct or suppress \\\\\n"
         "Repeatability & Digest and byte count & Bounded execution parity & Downgrade or suppress \\\\\n"
         "Event alignment & Event/value pairs & Ontology-bounded coupling & Seed-matched wording only \\\\\n"
-        "Admission & Frozen map & Scoped statistical claim & Suppress disallowed claim \\\\\n"
+        "Admission & Current post-acquisition map & Scoped statistical claim & Suppress disallowed claim \\\\\n"
         "\\bottomrule\n\\end{tabular}\n",
         encoding="utf-8",
     )

@@ -59,6 +59,7 @@ TARGETED_TESTS = (
     "paper/final_protocol/tests/test_claim_ledger.py",
     "paper/final_protocol/tests/test_independent_statistics.py",
     "paper/final_protocol/tests/test_research_audits.py",
+    "paper/final_protocol/tests/test_protocol_reporting_provenance.py",
     "paper/final_protocol/tests/test_reproduction_provenance.py",
 )
 
@@ -611,6 +612,13 @@ def render_and_validate_pdf() -> dict[str, Any]:
         raise RuntimeError("PDF visual-inspection attestation page count is stale")
     if attestation.get("inspected_pages") != list(range(1, expected_pages + 1)):
         raise RuntimeError("PDF visual-inspection attestation must enumerate every page")
+    inspected_page_hashes = attestation.get("inspected_page_png_sha256")
+    if (
+        not isinstance(inspected_page_hashes, list)
+        or len(inspected_page_hashes) != expected_pages
+        or any(not isinstance(value, str) or re.fullmatch(r"[0-9a-f]{64}", value) is None for value in inspected_page_hashes)
+    ):
+        raise RuntimeError("PDF visual-inspection attestation must bind every inspected page hash")
     checklist = attestation.get("checklist")
     if not isinstance(checklist, dict) or not checklist or not all(value is True for value in checklist.values()):
         raise RuntimeError("PDF visual-inspection checklist is incomplete")
@@ -636,7 +644,10 @@ def render_and_validate_pdf() -> dict[str, Any]:
             height = int.from_bytes(data[20:24], "big")
             if width < 900 or height < 900:
                 raise RuntimeError(f"rendered page {index} is unexpectedly small: {width}x{height}")
-            page_records.append({"page": index, "width_pixels": width, "height_pixels": height, "sha256": sha256(path)})
+            page_hash = sha256(path)
+            if page_hash != inspected_page_hashes[index - 1]:
+                raise RuntimeError(f"rendered page {index} differs from the visually inspected page")
+            page_records.append({"page": index, "width_pixels": width, "height_pixels": height, "sha256": page_hash})
     return {
         "status": "PASS",
         "method": "Every page rendered at 150 dpi; PNG structure/dimensions checked; a PDF-bound checklist records human visual inspection.",

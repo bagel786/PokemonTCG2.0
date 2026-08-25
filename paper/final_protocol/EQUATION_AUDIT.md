@@ -7,6 +7,17 @@ output is `source_data/equation_examples.json` with status `PASS`. Directional
 and algebraic identities are independently checked in
 `tests/test_equations.py`.
 
+Protocol chronology matters for interpreting these equations. The frozen
+case-study plan used binary acquisition/suppression gates and, after a pass,
+specified finite-population paired bootstrap intervals plus secondary exact
+two-sided McNemar inference for the primary binary contrast. The later generic
+admission taxonomy and the article's descriptive-only terminology were added
+after acquisition: the same paired resampling arithmetic is now reported as
+fixed-battery empirical reweighting quantiles, and the McNemar value is retained
+only as a numerical audit. This conservative relabeling cannot establish that
+the later taxonomy was prospectively validated; future studies must freeze it
+before acquisition.
+
 ## EQ01 — Trace-disagreement proportion (`eq:trace-disagreement`)
 
 - **equation_id:** EQ01
@@ -32,7 +43,9 @@ and algebraic identities are independently checked in
   execution profiles, each carrying the complete `(digest, byte_count)` record.
 - **assumptions:** The profile set is complete and frozen; every digest uses the
   same canonical trace projection; missing profiles fail rather than vanish;
-  clusters, not profile pairs, form the denominator.
+  clusters, not profile pairs, form the denominator. The frozen stress endpoint
+  compared digest values alone. The byte-count component was added after
+  acquisition as integrity hardening.
 - **toy_example:** Five complete clusters contain three profile records each.
   One cluster differs by digest and one differs only by byte count; the other
   three have identical tuples, so `q-hat = 2/5 = 0.40`.
@@ -43,6 +56,11 @@ and algebraic identities are independently checked in
 - **test_result:** PASS — independent output records
   `trace_disagreement = 0.4`, `byte_count_only_disagreement = true`, and
   `missing_profile_fail_closed = true`.
+- **case-study provenance check:** In the retained stress evidence, digest
+  disagreement occurs in 99/200 clusters and the later digest-or-byte tuple also
+  disagrees in 99/200; the 96 byte-count disagreements are a subset of the 99
+  digest disagreements. The hardening therefore leaves the frozen observed
+  primary count unchanged.
 - **sign_and_index_check:** The indicator is nonnegative; the estimate must lie
   in `[0,1]`; profile labels do not affect the result; each cluster contributes
   at most one to the numerator.
@@ -111,7 +129,11 @@ and algebraic identities are independently checked in
   reweighting objects; unit identifiers retain all arm outcomes together;
   stratum weights, draw count, random seed, and percentile rule are frozen.
   No probability sample, randomized assignment, or defended population model
-  is supplied, so the quantiles are not confidence limits.
+  is supplied, so the final article does not interpret the quantiles as
+  confidence limits. The frozen plan called the same finite-population paired
+  resampling endpoints 95% bootstrap intervals; the descriptive
+  `empirical reweighting quantiles` label is a post-acquisition conservative
+  reporting change.
 - **toy_example:** With one stratum, differences `[1,0,−1]`, and one-based sampled
   indices `[1,1,2]`, the replicate is `(1+1+0)/3 = 2/3`.
 - **test_file:**
@@ -150,6 +172,9 @@ and algebraic identities are independently checked in
 - **assumptions:** Cell-to-subscript mapping and signs are correct; all four cell
   outcomes are present for every unit; the frozen repeated-control gate is
   satisfied; absent factorial trace digests are not treated as observed zeros.
+  The frozen plan also specified a secondary exact two-sided McNemar analysis
+  for the primary binary contrast. Its arithmetic is checked separately but is
+  not admitted as inference under the later descriptive-only taxonomy.
 - **toy_example:** For rates `(0.50,0.52,0.51,0.54)`, `(T,R,G,J)` equals
   `(0.04,0.025,0.015,0.01)` before multiplication by 100.
 - **test_file:** `tests/test_equations.py::test_factorial_signs_and_directions`
@@ -180,9 +205,10 @@ and algebraic identities are independently checked in
   factorial. The displayed EQ03 defines the latter. Neither distribution is
   presented as population inference.
 - The admission-safety proposition is deliberately stated in prose rather than
-  as a decorative equation. Its result independence, prerequisite monotonicity,
-  failure dominance, projection scoping, determinism/idempotence, unknown-state
-  fail-closedness, and claim-class ordering are independently executable
+  as a decorative equation. Its **result independence**, **prerequisite
+  monotonicity**, **failure dominance**, **projection scoping**, **stateless
+  determinism**, **unknown-state fail-closedness**, and **strict claim
+  ordering** are independently executable
   properties in `release_templates/tests/test_release.py`, including exhaustive
   enumeration of the declared gate-state space.
 - Semantic event alignment is stated as a verbal criterion because the stable-

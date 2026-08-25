@@ -2,7 +2,7 @@
 
 Generated from `protocol/admission_rules.json` and `protocol/claim_classes.json`; do not edit this table independently.
 
-Formalization status: `post_acquisition_executable_formalization`. This executable map was created after acquisition. The frozen experiment-specific protocol remains authoritative.
+Formalization status: `post_acquisition_executable_formalization`. This executable map was created after acquisition. The frozen experiment-specific protocol—including its finite-population paired-bootstrap intervals and secondary exact McNemar inference—remains authoritative. The current Level-6 descriptive-only restriction is a later conservative reporting rule, not frozen provenance or evidence of prospective validation; future adopters must freeze it before acquisition.
 
 ## Interfaces and trust boundary
 
@@ -30,8 +30,8 @@ A pass prefix is the number of consecutive `pass` states from Level 1. After the
 | 1--2 | `descriptive_unmatched` | downgrade | The arms may be described separately; this evidence does not admit a schedule-matched or paired comparison. | Arm-specific empirical summaries with no seed-matched or paired interpretation. | Separate arm-specific observation; no cross-arm pair is asserted. | Arm-wise uncertainty that preserves the acquisition structure; no paired procedure. | Report arms separately or redesign the seed boundary and schedule; suppress every paired contrast. |
 | 3--4 | `schedule_matched` | downgrade | The declared schedule fields matched across arms; schedule matching alone does not establish repeatable execution, paired randomness, or event alignment. | A descriptive contrast indexed by common recorded schedule fields, without execution-pair interpretation. | Recorded schedule row within each arm; no execution-level pair is asserted. | Use an unpaired or purely descriptive procedure justified independently of shared execution; do not use a paired procedure. | Suppress planned paired contrasts; repair the first blocked parity or repeatability gate and reacquire if required by the frozen protocol. |
 | 5 | `execution_repeatable` | downgrade | Execution was repeatable across the declared within-arm profiles only for recorded trace projection {projection_id}@{projection_version} with fields [{projection_fields}]; this does not establish cross-arm event alignment or admit a paired outcome contrast. | Exact-repeatability diagnostics for the declared recorded trace projection on the exercised schedule. | Seed-condition cluster containing all prespecified within-arm execution profiles. | Report exact mismatch indicators or cluster-level disagreement summaries for the exercised schedule; no paired outcome procedure. | Do not use paired outcome inference; complete and pass the stochastic-source audit before seeking bounded seed-matched admission. |
-| 6 | `seed_matched_bounded` | admit | Within the frozen schedule and validated execution contexts, a fixed-battery descriptive seed-indexed contrast is admitted with empirical reweighting sensitivity only; inferential pairing, confidence intervals, hypothesis tests, population effects, and semantic event alignment are not established. Repeatability is asserted only for recorded trace projection {projection_id}@{projection_version} with fields [{projection_fields}]. | The fixed-battery descriptive seed-indexed contrast specified by the authoritative frozen analysis plan. | Seed-indexed unit within each fixed schedule stratum, with repeated profiles retained as one cluster where applicable. | Empirical whole-unit reweighting of the declared fixed battery as descriptive sensitivity only; not a confidence interval, hypothesis test, or population uncertainty statement. | Use only fixed-battery descriptive wording and empirical reweighting sensitivity; suppress the contrast if any experiment-specific invalidator or required gate fails. |
-| 7 | `event_aligned` | admit | Within the declared event ontology, shared exogenous events were aligned and a fixed-battery descriptive contrast is admitted; this does not by itself establish inferential pairing, a confidence interval, a hypothesis test, or a population effect. Repeatability is asserted only for recorded trace projection {projection_id}@{projection_version} with fields [{projection_fields}]. | A fixed-battery descriptive event-aligned contrast within the declared schedule and semantic event ontology. | Event-aligned trajectory pair within the declared semantic ontology and schedule stratum. | Empirical reweighting of the declared fixed battery may be reported as descriptive sensitivity; it is not a confidence interval, hypothesis test, or population uncertainty statement. | Preserve the ontology, event keys, projection, and frozen analysis unit; any drift requires a new admission decision, and inferential pairing requires a separate justified design. |
+| 6 | `seed_matched_bounded` | admit | Within the frozen schedule and validated execution contexts, a fixed-battery descriptive seed-indexed contrast is admitted with empirical reweighting sensitivity only; inferential pairing, confidence intervals, hypothesis tests, population effects, and semantic event alignment are not established. Repeatability is asserted only for recorded trace projection {projection_id}@{projection_version} with fields [{projection_fields}]. | A fixed-battery descriptive seed-indexed contrast under the current post-acquisition conservative reporting restriction; this taxonomy is not the frozen analysis plan. | Seed-indexed unit within each fixed schedule stratum, with repeated profiles retained as one cluster where applicable. | Empirical whole-unit reweighting of the declared fixed battery as descriptive sensitivity only; not a confidence interval, hypothesis test, or population uncertainty statement. | Use only fixed-battery descriptive wording and empirical reweighting sensitivity; suppress the contrast if any experiment-specific invalidator or required gate fails. |
+| 7 | `event_aligned` | admit | Within the declared event ontology, shared exogenous events were aligned and a fixed-battery descriptive contrast is admitted; this does not by itself establish inferential pairing, a confidence interval, a hypothesis test, or a population effect. Repeatability is asserted only for recorded trace projection {projection_id}@{projection_version} with fields [{projection_fields}]. | A fixed-battery descriptive event-aligned contrast within the declared schedule and semantic event ontology. | Event-aligned trajectory pair within the declared semantic ontology and schedule stratum. | Empirical reweighting of the declared fixed battery may be reported as descriptive sensitivity; it is not a confidence interval, hypothesis test, or population uncertainty statement. | Preserve the ontology, event keys, projection, and declared analysis unit; any drift requires a new admission decision, and inferential pairing requires a separate justified design. |
 
 ## Fail-closed cases
 
@@ -39,9 +39,26 @@ Missing gates, extra gates, unknown states, malformed projections, and unknown s
 
 The rule matcher receives only gate states and the declared trace projection. Result data—including effect estimates, p-values, interval direction, and favorability—are outside the rule projection.
 
+## Verified classifier properties
+
+The implementation test is named `stateless repeat-run determinism`; the seven-property count uses the concise label stateless determinism.
+
+The bundled tests count exactly seven named properties:
+
+1. `result independence`
+2. `prerequisite monotonicity`
+3. `failure dominance`
+4. `projection scoping`
+5. `stateless determinism`
+6. `unknown-state fail-closedness`
+7. `strict claim ordering`
+
 ## Mapping assumptions
 
-- The seven evidence gates preserve Levels 1 through 7 of the frozen ladder; Level 8 is represented by the decision returned by this engine, which admits only fixed-battery descriptive wording absent a separate inferential design.
+- The frozen case-study protocols prespecified finite-population paired percentile bootstrap intervals and secondary exact two-sided McNemar inference; that original plan remains visible in the protocol transcriptions.
+- The current Level-6 fixed-battery descriptive-only restriction is a later post-acquisition conservative reporting restriction, not frozen provenance and not evidence that this taxonomy was prospectively validated.
+- Future adopters must freeze the claim taxonomy, gate-to-claim mapping, estimands, and uncertainty rules before data acquisition.
+- The seven evidence gates preserve Levels 1 through 7 of the frozen ladder; Level 8 is represented by the decision returned by this engine, which under the current restriction admits only fixed-battery descriptive wording absent a separate inferential design.
 - The named intermediate claim classes are a post-acquisition taxonomy. They do not retroactively replace the frozen experiment-specific binary suppression rules.
 - A claim is limited by the longest contiguous prefix of passed gates. A later pass cannot repair an earlier fail, unavailable, or not-applicable prerequisite.
 - Level 5 is the minimum evidence for execution-repeatability wording because the frozen protocol separates identical-arm record parity at Level 4 from repeat-and-worker parity at Level 5.

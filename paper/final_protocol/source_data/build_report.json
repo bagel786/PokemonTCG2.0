@@ -25,11 +25,11 @@
     "figures/figure_5_factorial.png"
   ],
   "generated_sha256": {
-    "cover_letter.md": "5630525d5e0fd539dc584ebb55b79dae2cdbf1e09678c9e310d6c6594c9ffff4",
+    "cover_letter.md": "7a1a6f7fb6b1016738d691852288d1e34879b711a714efda730cfd10baabe5f0",
     "figures/figure_1_distinctions.pdf": "4a71d15e98a127d7a35545190c6c321fc2de3c026df3e3f3ffc0bbcf63c8baa3",
     "figures/figure_1_distinctions.png": "365e9db73a563d0d3deb22907e0215033598826f6d69fd9f488ba8c3d0b701f9",
-    "figures/figure_2_admission_flow.pdf": "df03c7ab55e82cd439bb31c32cdd2513271476f7067c7fce48083e9b2bb99691",
-    "figures/figure_2_admission_flow.png": "3a7004868b72b66dd209c10a4f6a7f8aa5a48ff1d06e2ddafbff0ec68881f4fa",
+    "figures/figure_2_admission_flow.pdf": "115f2d214f8619cd937a5ecb5081e8efcc23a64ff3da988a3f3b9c8d14a3e17e",
+    "figures/figure_2_admission_flow.png": "4fc952c7b5a19c5ffd0434f869d7a276a58f665a56f1c25a8c4d913e4504f192",
     "figures/figure_3_synthetic_matrix.pdf": "c73ca03459034edec8d29c09ea9e987f90e2740bacc0458ce8dc8963a1b4268c",
     "figures/figure_3_synthetic_matrix.png": "012d8e141fcb1330ef8e61bf48317199e3cdc579c4b2ac2a464265fc336e38a8",
     "figures/figure_4_timed_search.pdf": "de32e29b25a0ff34e7e7fa8b044b1ffa7a75fe81a8e3e5d3d2c327bb5d537e2d",
@@ -37,7 +37,7 @@
     "figures/figure_5_factorial.pdf": "54bbe3c980855f210d64c74635e118bb4e2dce2742cd0c4b663109dba296b7fb",
     "figures/figure_5_factorial.png": "89cb0a9df7f8e0e207b466e07e0d85e4157e68b39a6fe123f670fb39190294a4",
     "results_macros.tex": "a909963f9811877c412630b6579847bff5447cd2287a96dd4ad1b8180650f70d",
-    "source_data/artifact_identity.json": "1ba02613f17ea951bf07b48552306a809c33948825435cf7a526c32c75f3d2e2",
+    "source_data/artifact_identity.json": "22c8c7934177b84d934c788a6af59d943a2ffeaf40fe4e40373da1c825519d4f",
     "source_data/processed_factorial.json": "3cbec1b68ff2a11f79b64bf2aae4d2d8208e7f3ee71477a0adec4057ac50cf21",
     "source_data/processed_preflight.json": "02ba1678955326af07b5e476532f456c6626c38a3292d2e58018d7552e557c23",
     "source_data/processed_seed_namespace_audit.json": "9ea538be53ca4558231732669df422980d38d974aa851a644321fea5214e46d8",
@@ -45,9 +45,9 @@
     "source_data/processed_stress.json": "221bb3cb4ea9ac3e07a71791cf23764dda3f0028c5ee4535656f522d55a63be3",
     "source_data/processed_synthetic.json": "d34a2ea1546a0a88e90a5ca58b49f1085edfcaf753f70ed49e0f04202e9ba6f9",
     "tables/table_1_prior_work.tex": "be8aa409e6ae4a25c9754b3acbfc2b669999afb8ca26388831483efc75c0aaa8",
-    "tables/table_2_protocol_stages.tex": "61169a9e4db9073b7cef42a4c34818f6236dd6d4860810a668da5ed3a6a648b6",
-    "tables/table_3_prospective_results.tex": "bd02c266486d4ad59eb760bcf17d47542f101c4f523fd9678f39996e7284e72d",
-    "tables/table_4_factorial.tex": "687ab74c238fac7f33f7bf749991ccd456e027253b752de8d7ce122f90f278cd"
+    "tables/table_2_protocol_stages.tex": "a32d148977b0c58e19724c13131709f1644f248f3657ab2d518cd62a85bfaf6a",
+    "tables/table_3_prospective_results.tex": "fe6f8aa8dcc62bf2b27cdc076d2042250111af2ca20ab227123650b0d39d61ab",
+    "tables/table_4_factorial.tex": "0739e6ef2ee99e1c5f20b60f31ac1b409390af31b96a709f54d0b595b420ddc0"
   },
   "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",
   "status": "PASS"

@@ -1,3 +1,4 @@
+# Direct package snapshot only; not a transitive dependency lock.
 numpy==2.2.5
 matplotlib==3.10.5
 pytest==8.4.2

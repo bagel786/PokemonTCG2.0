@@ -2,71 +2,71 @@
   "all_in_scope_bound": true,
   "all_outside_scope_explained": true,
   "builder": "paper/final_protocol/scripts/build_claim_ledger.py",
-  "builder_sha256": "613de44aea9c148e349d59351af46de1ac0b8fb11fe2270a11afd9040427a5e7",
+  "builder_sha256": "0d3294c01bcdaae790944e59a072920fc0503f0feb70301a3f19a0e8221e7520",
   "counts": {
-    "automatic_rows": 292,
-    "curated_rows_retained": 30,
+    "automatic_rows": 313,
+    "curated_rows_retained": 39,
     "human_verified_yes": 0,
-    "in_scope_occurrences": 321,
+    "in_scope_occurrences": 351,
     "in_scope_occurrences_by_type": {
-      "comparative": 61,
+      "comparative": 64,
       "contribution": 5,
-      "novelty": 30,
-      "procedural": 218,
-      "quantitative": 135,
+      "novelty": 32,
+      "procedural": 239,
+      "quantitative": 141,
       "rights": 10
     },
     "outside_scope_occurrences": 0,
-    "prose_sentence_occurrences": 321,
-    "unique_ledger_rows": 322
+    "prose_sentence_occurrences": 351,
+    "unique_ledger_rows": 352
   },
   "excluded_structured_constructs": [
     {
       "construct": "input:tables/table_1_prior_work.tex",
       "reason": "The included artifact is generated macro or tabular data, not an evidentiary prose sentence; its values and inventory are checked by artifact, statistics, and release tests.",
-      "source_line": 152
+      "source_line": 150
     },
     {
       "construct": "equation environment",
       "reason": "Displayed mathematics or tabular structure is not a prose sentence; equations and tables are independently generated and audited.",
-      "source_line": 193
+      "source_line": 197
     },
     {
       "construct": "input:tables/table_2_protocol_stages.tex",
       "reason": "The included artifact is generated macro or tabular data, not an evidentiary prose sentence; its values and inventory are checked by artifact, statistics, and release tests.",
-      "source_line": 278
+      "source_line": 285
     },
     {
       "construct": "equation environment",
       "reason": "Displayed mathematics or tabular structure is not a prose sentence; equations and tables are independently generated and audited.",
-      "source_line": 420
+      "source_line": 433
     },
     {
       "construct": "equation environment",
       "reason": "Displayed mathematics or tabular structure is not a prose sentence; equations and tables are independently generated and audited.",
-      "source_line": 435
+      "source_line": 448
     },
     {
       "construct": "input:tables/table_3_prospective_results.tex",
       "reason": "The included artifact is generated macro or tabular data, not an evidentiary prose sentence; its values and inventory are checked by artifact, statistics, and release tests.",
-      "source_line": 560
+      "source_line": 582
     },
     {
       "construct": "align environment",
       "reason": "Displayed mathematics or tabular structure is not a prose sentence; equations and tables are independently generated and audited.",
-      "source_line": 805
+      "source_line": 857
     },
     {
       "construct": "input:tables/table_4_factorial.tex",
       "reason": "The included artifact is generated macro or tabular data, not an evidentiary prose sentence; its values and inventory are checked by artifact, statistics, and release tests.",
-      "source_line": 828
+      "source_line": 880
     }
   ],
   "human_verification_boundary": "All claim_ledger.csv rows remain NO; this audit proves coverage and byte identity, not human comprehension or sign-off.",
   "ledger": "paper/final_protocol/claim_ledger.csv",
-  "ledger_sha256": "4a30739cb2a38f296fa59afe6ecae689436ba500c75a32c7d882915ef2ae1857",
+  "ledger_sha256": "8cb8d61364588269e6e847a4dbc53ac54bf04ad0e7fa35d956fc27726fa481ba",
   "manuscript": "paper/final_protocol/main.tex",
-  "manuscript_sha256": "c1c09cc89c55485ee8f4ba9e27b770e6cdb046cfcd1eb351328a152fc512def5",
+  "manuscript_sha256": "bb2df31e61bf2585e89f2d7d8aed98b5b3b2bbba0ab5b80e26635db713d1d8e0",
   "records": [
     {
       "claim_id": "AUTO-98b55ce634c42521",
@@ -88,8 +88,8 @@
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-4f481df694604034",
-      "exact_sentence": "We present an executable, fail-closed protocol that validates artifact and configuration identity, the seed passed at the observable engine boundary, schedule rows, identical-arm recorded-trace projections across fresh processes and execution contexts, bounded stochastic sources, cross-arm event evidence, and a result-independent claim-admission map.",
+      "claim_id": "AUTO-24b6d885f110fbbd",
+      "exact_sentence": "We present an executable, fail-closed protocol that validates artifacts, boundary seeds, schedules, identical-arm trace projections across execution contexts, stochastic sources, cross-arm event evidence, and result-independent claim admission.",
       "kind": "narrative",
       "matched_claim_types": [
         "quantitative",
@@ -107,13 +107,13 @@
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Abstract",
-      "sentence_sha256": "4f481df69460403406c8e5abc87d0c4108adfd380a97f20e54c9f7bd4593989d",
+      "sentence_sha256": "24b6d885f110fbbd247a1db3e188b377e80aaad554ab4642fbc69a6fa328862d",
       "source_line": 32,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-0140f11aa21281d4",
-      "exact_sentence": "Controlled synthetic modes pass deterministic fixtures, detect seed conversion and execution-state failures, expose stateful draw-index misalignment, demonstrate event-keyed repair only within a declared ontology, and reject schema or manifest tampering.",
+      "claim_id": "AUTO-2ab6f02d913ec0ba",
+      "exact_sentence": "Controlled synthetic modes distinguish seed-conversion, execution-state, draw-index, and event-key failures and reject schema or manifest tampering.",
       "kind": "narrative",
       "matched_claim_types": [
         "quantitative",
@@ -127,13 +127,13 @@
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Abstract",
-      "sentence_sha256": "0140f11aa21281d48f6ff7f7cfb4d6854db2f034e3b326fdb4283e5317a9570d",
+      "sentence_sha256": "2ab6f02d913ec0baea4ee28038b752918afc7cc37143fc7b90e2c244b44093eb",
       "source_line": 32,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
       "claim_id": "C026",
-      "exact_sentence": "In the restricted-engine case study, the deterministic preflight found zero required trace, outcome, error, or decision-count mismatches across \\PreflightUnits{} arm--seed-condition units and \\PreflightExecutions{} executions.",
+      "exact_sentence": "In the restricted-engine case study, the deterministic preflight found zero required trace, outcome, error, or decision-count mismatches across \\PreflightExecutions{} executions.",
       "kind": "narrative",
       "matched_claim_types": [
         "quantitative",
@@ -148,13 +148,13 @@
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Abstract",
-      "sentence_sha256": "0a85f85f4035fd0f3a7a319d7610b40a0a34b0245ffad254f6237ce90b2facd4",
+      "sentence_sha256": "780cb636cf5ff559114ce9670d3678cca4672a76753f39b6e6deac8be203240b",
       "source_line": 32,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-e9bfd6848208598a",
-      "exact_sentence": "A separate fixed timed-search battery produced complete recorded-trace-projection disagreements in \\StressTraceMismatch{}/\\StressClusters{} seed-condition clusters, with strong context heterogeneity.",
+      "claim_id": "C027",
+      "exact_sentence": "A separate fixed timed-search battery produced complete recorded-trace-projection disagreements in \\StressTraceMismatch{}/\\StressClusters{} seed-condition clusters.",
       "kind": "narrative",
       "matched_claim_types": [
         "quantitative"
@@ -166,13 +166,13 @@
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Abstract",
-      "sentence_sha256": "e9bfd6848208598a68d8dda533e336af79847569ef62992240aa971dfce15478",
+      "sentence_sha256": "14eb8861afcc1a3f7e1343ecadf2dec2da37604f604570561b31867cde7f3541",
       "source_line": 32,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-abe539125b5ded11",
-      "exact_sentence": "An apparently favorable historical comparison failed its frozen repeated-control gate and was suppressed.",
+      "claim_id": "AUTO-16d6302174e4e43f",
+      "exact_sentence": "An apparently favorable historical comparison failed a repeated-control audit rule frozen retrospectively after those outcomes existed and was suppressed; this is not evidence of prospective blinding.",
       "kind": "narrative",
       "matched_claim_types": [
         "comparative",
@@ -185,13 +185,30 @@
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Abstract",
-      "sentence_sha256": "abe539125b5ded1118084b43aef760fddaa0c2759cf562d629c299b33530392c",
+      "sentence_sha256": "16d6302174e4e43fff1bf920aa6c93eccb7fe1db19d060120ae71102c6797037",
       "source_line": 32,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-d5a70c1b1c65bd03",
-      "exact_sentence": "For a later comparison, Git orders the frozen rule before retained result artifacts, and outcome replacement leaves admission unchanged.",
+      "claim_id": "AUTO-6bd9e42dc9bae0b8",
+      "exact_sentence": "A later plan fixed acquisition and suppression before retained results and authorized paired-resampling intervals and secondary McNemar inference.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "quantitative"
+      ],
+      "matched_rules": [
+        "quantitative:\\b(?:estimate|interval|quantile|rate|count|mismatch|executions?|clusters?|units?|rows?|strata|bootstrap|resampl|p[ -]?value|McNemar)\\b"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Abstract",
+      "sentence_sha256": "6bd9e42dc9bae0b8ec45319bd2e5304360eec4720eef67069ea6263963610ab2",
+      "source_line": 32,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-e8fdd12f474e9bd1",
+      "exact_sentence": "Without changing those outcomes, a post-acquisition conservative audit instead admits only a fixed-battery descriptive contrast and treats the resampling quantiles as sensitivity rather than confidence intervals or tests.",
       "kind": "narrative",
       "matched_claim_types": [
         "comparative",
@@ -204,70 +221,43 @@
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Abstract",
-      "sentence_sha256": "d5a70c1b1c65bd0346164a1f021fa9d80b9ff13cade3f5906dd023a28c7016e9",
+      "sentence_sha256": "e8fdd12f474e9bd105633c25a06aa68262a73f090fd48d7d6472f8f984a30c07",
       "source_line": 32,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-83570ea9c6d42691",
-      "exact_sentence": "Level~6 admits only a fixed-battery descriptive seed-indexed contrast and frozen stratified paired-unit reweighting sensitivity, not a confidence interval, p value, or population effect.",
+      "claim_id": "AUTO-637df8a5d357ae15",
+      "exact_sentence": "The admitted policy contrast remained unresolved.",
       "kind": "narrative",
       "matched_claim_types": [
-        "quantitative",
-        "comparative",
-        "procedural"
+        "comparative"
       ],
       "matched_rules": [
-        "quantitative:(?<![A-Za-z\\\\])\\d+(?:[.,]\\d+)*(?:\\\\?%|\\b)",
-        "quantitative:\\b(?:estimate|interval|quantile|rate|count|mismatch|executions?|clusters?|units?|rows?|strata|bootstrap|resampl|p[ -]?value|McNemar)\\b",
-        "comparative:\\b(?:compar(?:e|ed|ing|ison)|contrast|difference|versus|between arms?|relative to|more than|less than|higher|lower|stronger|weaker|same|equal|identical|improve)\\b",
-        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b",
-        "procedural:\\b(?:schedule matching|execution repeatability|event alignment|analysis unit|seed-indexed|result independent|deterministic|synthetic)\\b"
+        "comparative:\\b(?:compar(?:e|ed|ing|ison)|contrast|difference|versus|between arms?|relative to|more than|less than|higher|lower|stronger|weaker|same|equal|identical|improve)\\b"
       ],
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Abstract",
-      "sentence_sha256": "83570ea9c6d4269107d588d0d4d35c53ed354eacdcd54c2eb5522b2f7fac2392",
+      "sentence_sha256": "637df8a5d357ae15b913cfd7fc34f22c66f31894ac3028ab4858dd13a5ef16d9",
       "source_line": 32,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-e3c06d0b1d0d9816",
-      "exact_sentence": "Those descriptive reweighting quantiles span both signs; this is not a null test.",
+      "claim_id": "C028",
+      "exact_sentence": "Because the restricted engine exposes no semantic event identifiers or event-keyed streams, the case cannot establish cross-arm event alignment.",
       "kind": "narrative",
       "matched_claim_types": [
-        "quantitative",
-        "procedural"
-      ],
-      "matched_rules": [
-        "quantitative:\\bboth signs\\b",
-        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
-      ],
-      "outside_scope_reason": null,
-      "scope": "IN_SCOPE",
-      "section": "Abstract",
-      "sentence_sha256": "e3c06d0b1d0d9816ad1875902f7b76b460c567c427d023c115528914dfc92d66",
-      "source_line": 32,
-      "source_path": "paper/final_protocol/main.tex"
-    },
-    {
-      "claim_id": "AUTO-a46f73f005566cf8",
-      "exact_sentence": "The restricted engine exposes neither semantic event identifiers nor event-keyed streams, and the factorial rows contain no trace digests, so the case cannot establish cross-arm semantic event alignment or factorial-row trace repeatability.",
-      "kind": "narrative",
-      "matched_claim_types": [
-        "quantitative",
         "comparative",
         "procedural"
       ],
       "matched_rules": [
-        "quantitative:\\b(?:estimate|interval|quantile|rate|count|mismatch|executions?|clusters?|units?|rows?|strata|bootstrap|resampl|p[ -]?value|McNemar)\\b",
         "comparative:cross-arm",
         "procedural:\\b(?:schedule matching|execution repeatability|event alignment|analysis unit|seed-indexed|result independent|deterministic|synthetic)\\b"
       ],
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Abstract",
-      "sentence_sha256": "a46f73f005566cf86bd90d3fe91a6d0275e0b7f82120d547edc545d6f3949e1d",
+      "sentence_sha256": "7a733536bb08e08696ff1f229fd1bce25ab948f69b0c0ec3d0a00f18e9970d18",
       "source_line": 32,
       "source_path": "paper/final_protocol/main.tex"
     },
@@ -285,7 +275,7 @@
       "scope": "IN_SCOPE",
       "section": "Introduction",
       "sentence_sha256": "c71b6d8e20c5c025e3e676d50d4560a47f0c2a861f5b060b2fdb3ebc24f654e0",
-      "source_line": 67,
+      "source_line": 62,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -302,7 +292,7 @@
       "scope": "IN_SCOPE",
       "section": "Introduction",
       "sentence_sha256": "0714b84b819185b63a889ebcac80118dfd46eee0e1c24561fc292c67005fbddb",
-      "source_line": 67,
+      "source_line": 62,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -320,7 +310,7 @@
       "scope": "IN_SCOPE",
       "section": "Introduction",
       "sentence_sha256": "baba5790e18c2ada6babfdaa4ded265485f17c33f576155a317f8bb4bea2c63f",
-      "source_line": 67,
+      "source_line": 62,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -338,7 +328,7 @@
       "scope": "IN_SCOPE",
       "section": "Introduction",
       "sentence_sha256": "bfc7779413dedb18b046e96111b8ddfa92f76ea55184afbf4f6690b4ad6f56fa",
-      "source_line": 67,
+      "source_line": 62,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -355,7 +345,7 @@
       "scope": "IN_SCOPE",
       "section": "Introduction",
       "sentence_sha256": "174338f31e722b420a443eccc8f4ca6890f594e9822b233724857fed7a629292",
-      "source_line": 67,
+      "source_line": 62,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -372,7 +362,7 @@
       "scope": "IN_SCOPE",
       "section": "Introduction",
       "sentence_sha256": "ceb5e4158c5fdaf240caec35c5e1a70b5e8b6a75fbd5d72cad0fa8c4162e8aae",
-      "source_line": 78,
+      "source_line": 73,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -389,7 +379,7 @@
       "scope": "IN_SCOPE",
       "section": "Introduction",
       "sentence_sha256": "952911750716314099f52ab3542e7765bf3202fc07816dfe00537c82bb47bafe",
-      "source_line": 78,
+      "source_line": 73,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -406,7 +396,7 @@
       "scope": "IN_SCOPE",
       "section": "Introduction",
       "sentence_sha256": "96c3664be33974b2a871eee91fccd6e9f7fd502258f3f2bba5b1cb1aa122fd52",
-      "source_line": 78,
+      "source_line": 73,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -425,7 +415,7 @@
       "scope": "IN_SCOPE",
       "section": "Introduction",
       "sentence_sha256": "5e8faff7f4f355ff6126846df503e35c932dc8d2e2ebe82d4d78ef1d39bb00c7",
-      "source_line": 78,
+      "source_line": 73,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -444,7 +434,7 @@
       "scope": "IN_SCOPE",
       "section": "Introduction",
       "sentence_sha256": "68c19ecf675b71eb5d228b1914dc522edfa2f7b4218d9bbbe916d4d1446d3fa2",
-      "source_line": 87,
+      "source_line": 82,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -469,12 +459,12 @@
       "scope": "IN_SCOPE",
       "section": "Introduction",
       "sentence_sha256": "81d7c4e41ae4509831f23cb392d3bbccd757f8388b2c4d73d1837ca21138554b",
-      "source_line": 87,
+      "source_line": 82,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-4b2f65d751edc150",
-      "exact_sentence": "The protocol records artifact and seed-boundary identity, audits every scheduled row, compares a declared trace projection in A/A and repeat/worker tests, inventories stochastic sources, and enforces a prospectively frozen claim map.",
+      "claim_id": "AUTO-4dec2a0223560384",
+      "exact_sentence": "The protocol records artifact and seed-boundary identity, audits every scheduled row, compares a declared trace projection in A/A and repeat/worker tests, inventories stochastic sources, and links gate evidence to bounded wording.",
       "kind": "narrative",
       "matched_claim_types": [
         "quantitative",
@@ -489,8 +479,8 @@
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Introduction",
-      "sentence_sha256": "4b2f65d751edc150d6c659de144a818b1da259ff36b8da70163bd6d16a0e2536",
-      "source_line": 87,
+      "sentence_sha256": "4dec2a02235603843510fa19b7c911f555d40d2ad758b9ab6e514913a30e72cb",
+      "source_line": 82,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -509,7 +499,24 @@
       "scope": "IN_SCOPE",
       "section": "Introduction",
       "sentence_sha256": "9da44a17d997c8aba3566732019284bcca8ef3710a48347ca50ebcf225314a75",
-      "source_line": 87,
+      "source_line": 82,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-4ff44b6f85ff2964",
+      "exact_sentence": "For the completed case, frozen binary acquisition and suppression rules are kept distinct from a post-acquisition conservative claim taxonomy; future users must freeze that taxonomy before collecting outcomes.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "procedural"
+      ],
+      "matched_rules": [
+        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Introduction",
+      "sentence_sha256": "4ff44b6f85ff29640a94a4c86c8a8c8da9fc09b64e7d17bde7e94db9cf853234",
+      "source_line": 82,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -528,7 +535,7 @@
       "scope": "IN_SCOPE",
       "section": "Introduction",
       "sentence_sha256": "eddb130963c928c8dbc14ae11dfd3da77fd5d064c750d5e8c1d32700f6d0a7e7",
-      "source_line": 98,
+      "source_line": 96,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -547,7 +554,7 @@
       "scope": "IN_SCOPE",
       "section": "Introduction",
       "sentence_sha256": "552d4497eb9f66f09c0ba4d9327296abce78d6a64a9d340cb96c8aaebdf81368",
-      "source_line": 98,
+      "source_line": 96,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -564,7 +571,7 @@
       "scope": "IN_SCOPE",
       "section": "Introduction",
       "sentence_sha256": "ae15ff7773a934e3ddd9b89285d5c20cf9b7df0dc3a90ffc5ce1bede0a1a8473",
-      "source_line": 98,
+      "source_line": 96,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -581,7 +588,7 @@
       "scope": "IN_SCOPE",
       "section": "Related work and contribution boundary",
       "sentence_sha256": "4e86b2efbf3f66482895384ae0d42a24990181289c8dd8566922b286e63cceb8",
-      "source_line": 108,
+      "source_line": 106,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -600,7 +607,7 @@
       "scope": "IN_SCOPE",
       "section": "Related work and contribution boundary",
       "sentence_sha256": "33e28a446003e4b305fce306e287d93831c8ad7706d9f88eeba372a20478b8a7",
-      "source_line": 108,
+      "source_line": 106,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -619,7 +626,7 @@
       "scope": "IN_SCOPE",
       "section": "Related work and contribution boundary",
       "sentence_sha256": "7d0acc9ae4f0a8c52f74008a49e358bb26839b9930340d5dcbe62b7962dcbbb6",
-      "source_line": 108,
+      "source_line": 106,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -636,7 +643,7 @@
       "scope": "IN_SCOPE",
       "section": "Related work and contribution boundary",
       "sentence_sha256": "88ed7804212706a8bdb432017e5c11459375d24c338ab16b40e9b823ff6e2dfa",
-      "source_line": 108,
+      "source_line": 106,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -653,7 +660,7 @@
       "scope": "IN_SCOPE",
       "section": "Related work and contribution boundary",
       "sentence_sha256": "fb4b80c9ea05a08f974d779ee6b1ec89c1415e7ec78d1b1f7f29392b1567920c",
-      "source_line": 108,
+      "source_line": 106,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -670,7 +677,7 @@
       "scope": "IN_SCOPE",
       "section": "Related work and contribution boundary",
       "sentence_sha256": "6b6ed5e365f0cb583c750061454f448c0c37f864df84652f00e70bd97ecbd35a",
-      "source_line": 120,
+      "source_line": 118,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -689,7 +696,7 @@
       "scope": "IN_SCOPE",
       "section": "Related work and contribution boundary",
       "sentence_sha256": "14bc67f27f044d21938ddc40a5cb890f4899e69e95934d1ff2be368ffb320ca4",
-      "source_line": 120,
+      "source_line": 118,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -706,7 +713,7 @@
       "scope": "IN_SCOPE",
       "section": "Related work and contribution boundary",
       "sentence_sha256": "6d30229203a903120de171e0577fcf31b41dc76ffac621008a33e1de98ac6212",
-      "source_line": 120,
+      "source_line": 118,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -727,7 +734,7 @@
       "scope": "IN_SCOPE",
       "section": "Related work and contribution boundary",
       "sentence_sha256": "adb0de7118749f44003c808a51ea7ec5ec504e05b71ba318adb7477e6b66d069",
-      "source_line": 120,
+      "source_line": 118,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -748,7 +755,7 @@
       "scope": "IN_SCOPE",
       "section": "Related work and contribution boundary",
       "sentence_sha256": "c2fda7f57f1e7406860f4ff0511cfb6f0a2a7a40c96aabcb62452e758bbd97be",
-      "source_line": 120,
+      "source_line": 118,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -765,7 +772,7 @@
       "scope": "IN_SCOPE",
       "section": "Related work and contribution boundary",
       "sentence_sha256": "182866ffb4958fa606d70321af145f649e3684e26c21aa678293adf86b1bb99c",
-      "source_line": 120,
+      "source_line": 118,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -785,7 +792,7 @@
       "scope": "IN_SCOPE",
       "section": "Related work and contribution boundary",
       "sentence_sha256": "5a44767d314644fcb246a437b720b6e0772f56981d441e1db6ead62c7f7ac553",
-      "source_line": 135,
+      "source_line": 133,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -804,7 +811,7 @@
       "scope": "IN_SCOPE",
       "section": "Related work and contribution boundary",
       "sentence_sha256": "ce66c8c5b6c96e3bf53ba4c44121b474a448ead9ce74c7778a7bd70c8a0da662",
-      "source_line": 135,
+      "source_line": 133,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -823,7 +830,7 @@
       "scope": "IN_SCOPE",
       "section": "Related work and contribution boundary",
       "sentence_sha256": "58e084fa6633546dedc4c96558ffea16e094126d7641426f5e2d951e64f09763",
-      "source_line": 135,
+      "source_line": 133,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -844,7 +851,7 @@
       "scope": "IN_SCOPE",
       "section": "Related work and contribution boundary",
       "sentence_sha256": "804ee03429f2ce086b9ae26b978afe021bf9db20761d5e3ab282bb287b9427d7",
-      "source_line": 135,
+      "source_line": 133,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -861,7 +868,7 @@
       "scope": "IN_SCOPE",
       "section": "Related work and contribution boundary",
       "sentence_sha256": "ab29782df6ac24e04888d8a7977315f815393779abfb4b2bd223299e6d1da514",
-      "source_line": 135,
+      "source_line": 133,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -878,7 +885,7 @@
       "scope": "IN_SCOPE",
       "section": "Related work and contribution boundary",
       "sentence_sha256": "fe0eba84cba94aba15b8b6dc4856ac03ad3f479de5b07492e5205dc2e9bb067f",
-      "source_line": 135,
+      "source_line": 133,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -895,7 +902,7 @@
       "scope": "IN_SCOPE",
       "section": "Related work and contribution boundary",
       "sentence_sha256": "fc1f89f79e1d91f404f43b632eeac66998b2097d2b05a086604563e3df05b051",
-      "source_line": 154,
+      "source_line": 152,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -912,7 +919,7 @@
       "scope": "IN_SCOPE",
       "section": "Related work and contribution boundary",
       "sentence_sha256": "eecc432612e74a2fd29b88f737d7b4be78e07b726a13379dba5413c4f821cd5f",
-      "source_line": 154,
+      "source_line": 152,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -929,7 +936,7 @@
       "scope": "IN_SCOPE",
       "section": "Related work and contribution boundary",
       "sentence_sha256": "1a2c91cc80ca11771fa97c4328e77d6dc4edde112dc655659dce9042585f8607",
-      "source_line": 154,
+      "source_line": 152,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -946,7 +953,7 @@
       "scope": "IN_SCOPE",
       "section": "Schedule matching",
       "sentence_sha256": "2d3fb4f11828edb6f20fb4e81b4566f7ea90c704f4a05585e0a3df55a1f0a3fc",
-      "source_line": 164,
+      "source_line": 162,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -965,7 +972,7 @@
       "scope": "IN_SCOPE",
       "section": "Schedule matching",
       "sentence_sha256": "322aa715c279f74696bd7b9a6a9f444e0013e8d84079f5431b3150bd4702d38d",
-      "source_line": 164,
+      "source_line": 162,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -982,7 +989,7 @@
       "scope": "IN_SCOPE",
       "section": "Schedule matching",
       "sentence_sha256": "94f0b130ce10b0949f636b61f346ab3b292bdef045832421b1aa12083109f9d0",
-      "source_line": 164,
+      "source_line": 162,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1001,7 +1008,7 @@
       "scope": "IN_SCOPE",
       "section": "Schedule matching",
       "sentence_sha256": "b9b3b43422f7b21a941d930dc41e3d9c8d50c1c742d985081d16da5bc16f76e6",
-      "source_line": 164,
+      "source_line": 162,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1022,7 +1029,7 @@
       "scope": "IN_SCOPE",
       "section": "Execution repeatability",
       "sentence_sha256": "33788358059a81b94cb50df60816bc9e4a3dabe98e649ad08713da2069068bd6",
-      "source_line": 173,
+      "source_line": 171,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1043,7 +1050,7 @@
       "scope": "IN_SCOPE",
       "section": "Execution repeatability",
       "sentence_sha256": "6b3a1ae2373241df64ceea1a1fc00d16b51030b0271810b894240f9d08ce04d2",
-      "source_line": 173,
+      "source_line": 171,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1060,7 +1067,7 @@
       "scope": "IN_SCOPE",
       "section": "Execution repeatability",
       "sentence_sha256": "41224b2e484f55e67c3d85ac640827410cfee693302100331b77fe5491765ee7",
-      "source_line": 173,
+      "source_line": 171,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1081,7 +1088,7 @@
       "scope": "IN_SCOPE",
       "section": "Execution repeatability",
       "sentence_sha256": "0e54e24ebd3e245816c9d3d05a5daf1a4e9682c4e5fceb83b09f2674aee4da2c",
-      "source_line": 173,
+      "source_line": 171,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1098,7 +1105,7 @@
       "scope": "IN_SCOPE",
       "section": "Execution repeatability",
       "sentence_sha256": "403629e2eff3244cda9d8e0a88c394c2f105ff4a5de59ee854405b55389860a5",
-      "source_line": 173,
+      "source_line": 171,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1115,7 +1122,65 @@
       "scope": "IN_SCOPE",
       "section": "Execution repeatability",
       "sentence_sha256": "00180f79dc854cb6c47942841a4c307bb6d49f122f32ac6b57d83db48a4904e2",
-      "source_line": 173,
+      "source_line": 171,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-4f7d9c8a9f4e6e68",
+      "exact_sentence": "The frozen case-study stress endpoint compared trace digests.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "comparative",
+        "procedural"
+      ],
+      "matched_rules": [
+        "comparative:\\b(?:compar(?:e|ed|ing|ison)|contrast|difference|versus|between arms?|relative to|more than|less than|higher|lower|stronger|weaker|same|equal|identical|improve)\\b",
+        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Execution repeatability",
+      "sentence_sha256": "4f7d9c8a9f4e6e68b9ad5f07f50843ba7b6f58d8fb5a32472fac220526aca8e1",
+      "source_line": 181,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-ed10956c7f36eacf",
+      "exact_sentence": "Adding byte-count equality is a post-acquisition integrity extension: the retained stress battery has 99/200 disagreements by digest alone and the same 99/200 by the extended digest-or-byte rule.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "quantitative",
+        "comparative",
+        "procedural"
+      ],
+      "matched_rules": [
+        "quantitative:(?<![A-Za-z\\\\])\\d+(?:[.,]\\d+)*(?:\\\\?%|\\b)",
+        "quantitative:\\b(?:estimate|interval|quantile|rate|count|mismatch|executions?|clusters?|units?|rows?|strata|bootstrap|resampl|p[ -]?value|McNemar)\\b",
+        "comparative:\\b(?:compar(?:e|ed|ing|ison)|contrast|difference|versus|between arms?|relative to|more than|less than|higher|lower|stronger|weaker|same|equal|identical|improve)\\b",
+        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Execution repeatability",
+      "sentence_sha256": "ed10956c7f36eacf9ad0c8f50319c487d9f5056b9edb27a9c2d87598d3e661f4",
+      "source_line": 181,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-35858a1a4d27bd83",
+      "exact_sentence": "The byte-count-only toy case below tests the current definition; it is not evidence that this extension was prospectively specified.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "quantitative"
+      ],
+      "matched_rules": [
+        "quantitative:\\b(?:estimate|interval|quantile|rate|count|mismatch|executions?|clusters?|units?|rows?|strata|bootstrap|resampl|p[ -]?value|McNemar)\\b"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Execution repeatability",
+      "sentence_sha256": "35858a1a4d27bd83ccd717da128c91898431e6d281def738900a8cb41e0654ce",
+      "source_line": 181,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1132,7 +1197,7 @@
       "scope": "IN_SCOPE",
       "section": "Execution repeatability",
       "sentence_sha256": "c53dfb1a46505b9c418358277059f9f890ba799920df05ab51677d9f07e31c02",
-      "source_line": 183,
+      "source_line": 187,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1149,7 +1214,7 @@
       "scope": "IN_SCOPE",
       "section": "Execution repeatability",
       "sentence_sha256": "ae2f1af77bc2f4e84f04629f76bd71dee6bcea287be590d485fc74863df5dec2",
-      "source_line": 183,
+      "source_line": 187,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1166,7 +1231,7 @@
       "scope": "IN_SCOPE",
       "section": "Execution repeatability",
       "sentence_sha256": "ba6128443dabc9b3b31aa0a205413642210f041ca15ab1f01d407f79e792efec",
-      "source_line": 183,
+      "source_line": 187,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1187,7 +1252,7 @@
       "scope": "IN_SCOPE",
       "section": "Execution repeatability",
       "sentence_sha256": "57f409c470b5cc32499e08d3cb1596d970e312fbe9cb797244a65804b633a1b1",
-      "source_line": 189,
+      "source_line": 193,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1204,7 +1269,7 @@
       "scope": "IN_SCOPE",
       "section": "Execution repeatability",
       "sentence_sha256": "0dc8211dbbc27868d1d3a4538f0a3cbe8912f2f93a6b6146e9ac5ad11129adec",
-      "source_line": 189,
+      "source_line": 193,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1221,7 +1286,7 @@
       "scope": "IN_SCOPE",
       "section": "Execution repeatability",
       "sentence_sha256": "3d380ae29e5432d07f9ac0a0125303a73e74366815ba517bfee45b505461ccfd",
-      "source_line": 198,
+      "source_line": 202,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1238,7 +1303,7 @@
       "scope": "IN_SCOPE",
       "section": "Execution repeatability",
       "sentence_sha256": "0c31d0de92a6e707ee8f6a282056729f80f8f892cca63c5fe2ecec69d38982e3",
-      "source_line": 198,
+      "source_line": 202,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1255,7 +1320,7 @@
       "scope": "IN_SCOPE",
       "section": "Execution repeatability",
       "sentence_sha256": "99444848eb1403f56fe15b9099ea87e3314b47d24488d03493705ac8781b0cc3",
-      "source_line": 198,
+      "source_line": 202,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1273,7 +1338,7 @@
       "scope": "IN_SCOPE",
       "section": "Execution repeatability",
       "sentence_sha256": "3dd5ce70d4fb6af46a8e3f951917f2b756787fbd08ebdc5b33ee3b35dc8de0fd",
-      "source_line": 198,
+      "source_line": 202,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1291,7 +1356,7 @@
       "scope": "IN_SCOPE",
       "section": "Execution repeatability",
       "sentence_sha256": "0ea7ce1bd983f16c6b2221ca9aeff22423da59b98bbe87da9969c1c33a74415a",
-      "source_line": 198,
+      "source_line": 202,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1310,7 +1375,7 @@
       "scope": "IN_SCOPE",
       "section": "Semantic event alignment",
       "sentence_sha256": "7c455bae25018539fbeb54830a476e5b36a9e33b1594a674ded91308616cc4d2",
-      "source_line": 210,
+      "source_line": 214,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1327,7 +1392,7 @@
       "scope": "IN_SCOPE",
       "section": "Semantic event alignment",
       "sentence_sha256": "cb44f9438d2d086bae058f0a49cc205d1af01afd414a2fefeaf36bb01b475c50",
-      "source_line": 210,
+      "source_line": 214,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1344,7 +1409,7 @@
       "scope": "IN_SCOPE",
       "section": "Semantic event alignment",
       "sentence_sha256": "5e64776fdeb893ed37b34eaefab36d2ea372e59318b7d3c6942472ee9b01c9a5",
-      "source_line": 210,
+      "source_line": 214,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1362,7 +1427,7 @@
       "scope": "IN_SCOPE",
       "section": "Semantic event alignment",
       "sentence_sha256": "a304f1a9f8752d9e2607a916c918a182c79bd1a79ad778de993a2a159a708ff7",
-      "source_line": 210,
+      "source_line": 214,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1379,7 +1444,7 @@
       "scope": "IN_SCOPE",
       "section": "Semantic event alignment",
       "sentence_sha256": "7656c92c92360e67702c29eeb616eaf5a1e6b6428016a0bf6ac1e7b582c86fc1",
-      "source_line": 220,
+      "source_line": 224,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1396,7 +1461,7 @@
       "scope": "IN_SCOPE",
       "section": "Semantic event alignment",
       "sentence_sha256": "e5857275114453d1f547178dca909775e14367fc4cc77ceb952c4928ee483862",
-      "source_line": 220,
+      "source_line": 224,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1417,7 +1482,7 @@
       "scope": "IN_SCOPE",
       "section": "Descriptive pairing, inferential pairing, and admission",
       "sentence_sha256": "cc5b8c95270feafe5fcab75cd4196973ac5506f9b110a34b8b66007545ec929c",
-      "source_line": 227,
+      "source_line": 231,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1436,7 +1501,7 @@
       "scope": "IN_SCOPE",
       "section": "Descriptive pairing, inferential pairing, and admission",
       "sentence_sha256": "3063641804b0943531003c13727f40afb4286440dc9cfdee21b51e11cde817f8",
-      "source_line": 227,
+      "source_line": 231,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1453,7 +1518,7 @@
       "scope": "IN_SCOPE",
       "section": "Descriptive pairing, inferential pairing, and admission",
       "sentence_sha256": "b687722f9b67b470639db5b756fc678008aedf2332f8b7e1b2fc6c043cc3ae62",
-      "source_line": 227,
+      "source_line": 231,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1472,7 +1537,7 @@
       "scope": "IN_SCOPE",
       "section": "Descriptive pairing, inferential pairing, and admission",
       "sentence_sha256": "d027a4dfaa044d660e37b46ce1a9e730382fc0a7b9697e72684c38e9b0292d8b",
-      "source_line": 227,
+      "source_line": 231,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1489,7 +1554,7 @@
       "scope": "IN_SCOPE",
       "section": "Descriptive pairing, inferential pairing, and admission",
       "sentence_sha256": "579579ec2e557589c9ed210bac75129c295cadae600ba642ac1e7d798232ce0f",
-      "source_line": 227,
+      "source_line": 231,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1509,7 +1574,7 @@
       "scope": "IN_SCOPE",
       "section": "Descriptive pairing, inferential pairing, and admission",
       "sentence_sha256": "8a81e1eb1a988d267dc7a2fd5235834982e6201a3a7f4c62fc24a83e8d6142fc",
-      "source_line": 239,
+      "source_line": 243,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1526,51 +1591,66 @@
       "scope": "IN_SCOPE",
       "section": "Descriptive pairing, inferential pairing, and admission",
       "sentence_sha256": "99c9c3c1d6dcaab5455daaa01ee1cef67c324776a7c52aba3246181f6d56c653",
-      "source_line": 239,
+      "source_line": 243,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-b600589d8db63e92",
-      "exact_sentence": "Under the frozen experiment-specific rule, repeatability plus a bounded source audit can authorize an implementation-conditional, fixed-battery seed-indexed contrast and a prespecified empirical reweighting sensitivity.",
-      "kind": "narrative",
-      "matched_claim_types": [
-        "comparative",
-        "procedural"
-      ],
-      "matched_rules": [
-        "comparative:\\b(?:compar(?:e|ed|ing|ison)|contrast|difference|versus|between arms?|relative to|more than|less than|higher|lower|stronger|weaker|same|equal|identical|improve)\\b",
-        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b",
-        "procedural:\\b(?:schedule matching|execution repeatability|event alignment|analysis unit|seed-indexed|result independent|deterministic|synthetic)\\b"
-      ],
-      "outside_scope_reason": null,
-      "scope": "IN_SCOPE",
-      "section": "Descriptive pairing, inferential pairing, and admission",
-      "sentence_sha256": "b600589d8db63e926c92348c8047f2b46cdbb3bd2fa1795acf0c1d92014c8c1f",
-      "source_line": 239,
-      "source_path": "paper/final_protocol/main.tex"
-    },
-    {
-      "claim_id": "AUTO-ebbf9786ed9ad6b2",
-      "exact_sentence": "It does not authorize a confidence interval, hypothesis test, or population effect without the additional inferential-design evidence just named.",
+      "claim_id": "AUTO-41d74c0f4dc8373a",
+      "exact_sentence": "The completed case study's frozen rule gated acquisition and suppression but, on a pass, specified 95\\% paired-resampling intervals and secondary McNemar inference.",
       "kind": "narrative",
       "matched_claim_types": [
         "quantitative",
         "procedural"
       ],
       "matched_rules": [
+        "quantitative:(?<![A-Za-z\\\\])\\d+(?:[.,]\\d+)*(?:\\\\?%|\\b)",
         "quantitative:\\b(?:estimate|interval|quantile|rate|count|mismatch|executions?|clusters?|units?|rows?|strata|bootstrap|resampl|p[ -]?value|McNemar)\\b",
         "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
       ],
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Descriptive pairing, inferential pairing, and admission",
-      "sentence_sha256": "ebbf9786ed9ad6b218da8819f97ec040b9976f0228c2455bde2795ced93e19f3",
-      "source_line": 239,
+      "sentence_sha256": "41d74c0f4dc8373a0ab03f3798d611d25d90ff1bacf365332a12fe456458d99c",
+      "source_line": 243,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-e26ef5bd82b41651",
-      "exact_sentence": "Event-aligned wording additionally requires semantic event evidence.",
+      "claim_id": "AUTO-9d6db58350ac932c",
+      "exact_sentence": "It did not contain the later named Level~6 descriptive taxonomy.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "quantitative"
+      ],
+      "matched_rules": [
+        "quantitative:(?<![A-Za-z\\\\])\\d+(?:[.,]\\d+)*(?:\\\\?%|\\b)"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Descriptive pairing, inferential pairing, and admission",
+      "sentence_sha256": "9d6db58350ac932c685fb3492b15de46d904f52ea0dc1c53fe486715c7463070",
+      "source_line": 243,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-2f30c87f29e4207f",
+      "exact_sentence": "After acquisition, a conservative methods audit judged inferential wording unsupported without a randomized assignment, probability sample, or defended joint stochastic model.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "procedural"
+      ],
+      "matched_rules": [
+        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Descriptive pairing, inferential pairing, and admission",
+      "sentence_sha256": "2f30c87f29e4207f9af68ef86a7c9ca87285c6dc714dfdcf41132ed8d1b699d1",
+      "source_line": 243,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-67a5ff5ae8ce6949",
+      "exact_sentence": "This article therefore reports strictly less: fixed-battery differences and the unchanged prespecified resampling quantiles, relabeled as descriptive empirical sensitivity.",
       "kind": "narrative",
       "matched_claim_types": [
         "procedural"
@@ -1581,27 +1661,42 @@
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Descriptive pairing, inferential pairing, and admission",
-      "sentence_sha256": "e26ef5bd82b416514320d24f638badd00217ee9bd0051e3daa87e68ff7c9c5b4",
-      "source_line": 239,
+      "sentence_sha256": "67a5ff5ae8ce6949b6ea9ac37a2ddfd85b33058ad6a2f47f48c4c785d451e959",
+      "source_line": 243,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-bff18a88a8131692",
-      "exact_sentence": "A failed required gate suppresses or downgrades the affected comparison even when a later numerical summary looks favorable.",
+      "claim_id": "AUTO-4d3346fc2f4b150a",
+      "exact_sentence": "That post-acquisition restriction is not evidence of prospective claim-map validation.",
       "kind": "narrative",
       "matched_claim_types": [
-        "comparative",
         "procedural"
       ],
       "matched_rules": [
-        "comparative:\\b(?:compar(?:e|ed|ing|ison)|contrast|difference|versus|between arms?|relative to|more than|less than|higher|lower|stronger|weaker|same|equal|identical|improve)\\b",
         "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
       ],
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Descriptive pairing, inferential pairing, and admission",
-      "sentence_sha256": "bff18a88a8131692208329cf9967dd4908af5f9a49438b7dae7b2148d7316a5d",
-      "source_line": 239,
+      "sentence_sha256": "4d3346fc2f4b150a3f5edd028698de7dcdb1813d79eadc674d81e1b0cf1d4944",
+      "source_line": 243,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-88adc71b77dbfe6f",
+      "exact_sentence": "Required gate failures still suppress comparisons under the frozen rule, and event-aligned wording still requires semantic event evidence.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "procedural"
+      ],
+      "matched_rules": [
+        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Descriptive pairing, inferential pairing, and admission",
+      "sentence_sha256": "88adc71b77dbfe6f9d22f52e7938b1f57695ae3f9911d2ed533ca0923999aa57",
+      "source_line": 243,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1618,7 +1713,7 @@
       "scope": "IN_SCOPE",
       "section": "Descriptive pairing, inferential pairing, and admission",
       "sentence_sha256": "d4b74c09f8bf491c916dbb69d8a2cd8f2a28a960013f66f9dfd5860965baf093",
-      "source_line": 251,
+      "source_line": 258,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1641,7 +1736,7 @@
       "scope": "IN_SCOPE",
       "section": "Descriptive pairing, inferential pairing, and admission \u2014 figure caption",
       "sentence_sha256": "b6837382ee82d74f4b984bb43e558828892dfcedc44e2ec95af7bbd8f84cd02d",
-      "source_line": 256,
+      "source_line": 263,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1658,7 +1753,7 @@
       "scope": "IN_SCOPE",
       "section": "Descriptive pairing, inferential pairing, and admission \u2014 figure caption",
       "sentence_sha256": "541e1a49caa1854e48e2d0638670698effd95f5312ed5a0479792dc761dfa858",
-      "source_line": 256,
+      "source_line": 263,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1677,7 +1772,7 @@
       "scope": "IN_SCOPE",
       "section": "Descriptive pairing, inferential pairing, and admission \u2014 figure caption",
       "sentence_sha256": "5c9b457da9c6171119e9c8e039f0dd720d032cda24fa4fa7163e0698d6bf998b",
-      "source_line": 256,
+      "source_line": 263,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1694,7 +1789,7 @@
       "scope": "IN_SCOPE",
       "section": "Pairing-assumption validation protocol",
       "sentence_sha256": "295a2eeafd52b96a876c6dd226f7b24c4f5d670c3503cff023d63f6783b44234",
-      "source_line": 266,
+      "source_line": 273,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1714,7 +1809,7 @@
       "scope": "IN_SCOPE",
       "section": "Pairing-assumption validation protocol",
       "sentence_sha256": "58a286da8727c4a858e1acb63e5946c55f81f194adbd6c10794789e2e0282579",
-      "source_line": 266,
+      "source_line": 273,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1731,7 +1826,7 @@
       "scope": "IN_SCOPE",
       "section": "Pairing-assumption validation protocol",
       "sentence_sha256": "74c9137c67b22445a04bae8ea13070e5a7d3b6e60793a74e486c8bbdd7a0c44d",
-      "source_line": 266,
+      "source_line": 273,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1748,7 +1843,7 @@
       "scope": "IN_SCOPE",
       "section": "Pairing-assumption validation protocol",
       "sentence_sha256": "45c02cc8d426f0da2711815b5ac5c7764f4cbc19dccf0959e4357adaa7cf5402",
-      "source_line": 266,
+      "source_line": 273,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1767,7 +1862,7 @@
       "scope": "IN_SCOPE",
       "section": "Pairing-assumption validation protocol",
       "sentence_sha256": "927610143a9f3a3eeb6ffd560720ef5a145b9957941a14af73850d6c6be5abca",
-      "source_line": 266,
+      "source_line": 273,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1786,7 +1881,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 1--3: identity, boundary seed, and schedule",
       "sentence_sha256": "06fc349fede9498e8dc279eaf7ba69b84275df9625cc907f871777ba9db7a6cb",
-      "source_line": 282,
+      "source_line": 289,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1803,7 +1898,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 1--3: identity, boundary seed, and schedule",
       "sentence_sha256": "878ad790e1ef06ce7887b7d5d06cbf96541e5020ac80f6ab34ce70bf9e06073c",
-      "source_line": 282,
+      "source_line": 289,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1820,7 +1915,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 1--3: identity, boundary seed, and schedule",
       "sentence_sha256": "b050d079ecb9eb61fc1976f6f17226de287148d22a09c83c5824feaf030f209f",
-      "source_line": 282,
+      "source_line": 289,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1837,7 +1932,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 1--3: identity, boundary seed, and schedule",
       "sentence_sha256": "e190b46f9da6c82eae5bcf06774d96e9de1d77d35b8ad18da51593211e39c478",
-      "source_line": 282,
+      "source_line": 289,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1856,7 +1951,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 1--3: identity, boundary seed, and schedule",
       "sentence_sha256": "8f2db20b6f3061746ccf5404d00ff9ea7628d5b88031326ea5f503225ab5b4b6",
-      "source_line": 288,
+      "source_line": 295,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1873,7 +1968,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 1--3: identity, boundary seed, and schedule",
       "sentence_sha256": "fdad84b4036fc0e774061b172420f249e810192e461e6c42bc0a420d6c3f3013",
-      "source_line": 288,
+      "source_line": 295,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1890,7 +1985,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 1--3: identity, boundary seed, and schedule",
       "sentence_sha256": "fd62e0fc043bd266aff7d18c5bae5d061eeafc8472895020c3075f6dbb24489e",
-      "source_line": 288,
+      "source_line": 295,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1907,7 +2002,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 1--3: identity, boundary seed, and schedule",
       "sentence_sha256": "9571422291239463970379bdfbfa08ebdd718afd85a8a08ca3d3cf9731c3852d",
-      "source_line": 288,
+      "source_line": 295,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1926,7 +2021,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 1--3: identity, boundary seed, and schedule",
       "sentence_sha256": "3541f84d5ef7001fcda05c0b0bf60e2f0528de5df5601e43d1a95eb65befeb92",
-      "source_line": 295,
+      "source_line": 302,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1943,7 +2038,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 1--3: identity, boundary seed, and schedule",
       "sentence_sha256": "1e03eee2e4e91c91014492bf7b064b93d9915f5db894d4677556da2743049ab6",
-      "source_line": 295,
+      "source_line": 302,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1960,7 +2055,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 1--3: identity, boundary seed, and schedule",
       "sentence_sha256": "21a42334c5f9889a13477b7530d367653a47d1e34a299faf84400c8cf434cda1",
-      "source_line": 295,
+      "source_line": 302,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1977,7 +2072,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 1--3: identity, boundary seed, and schedule",
       "sentence_sha256": "d88484051f630bb0d3fea1a862897e414156f078cc10a387eaf3bc99d608671e",
-      "source_line": 295,
+      "source_line": 302,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -1999,7 +2094,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 4--6: trace repetition and source audit",
       "sentence_sha256": "f8e02d89d195a9ca02738bf6fc37645ae0b62ef3056aad19f079bd548e53994f",
-      "source_line": 304,
+      "source_line": 311,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2020,7 +2115,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 4--6: trace repetition and source audit",
       "sentence_sha256": "4071ca2226dff27920ad4d1c063952cad7fd33f21dc765226da244bb4130b2b6",
-      "source_line": 304,
+      "source_line": 311,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2037,7 +2132,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 4--6: trace repetition and source audit",
       "sentence_sha256": "6942b5b08af8d0063f55e8cf30c63d047cb545b2c0d5c9b189d2a38afc6e2071",
-      "source_line": 304,
+      "source_line": 311,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2054,7 +2149,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 4--6: trace repetition and source audit",
       "sentence_sha256": "1bddd4e9547dd5507b3e8907ee39359f785867e60980289d699eb0209f1ba781",
-      "source_line": 304,
+      "source_line": 311,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2073,7 +2168,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 4--6: trace repetition and source audit",
       "sentence_sha256": "49ea60991874597af0780000175f83f5a7c5b2fb489809c42dc2441a44c56877",
-      "source_line": 312,
+      "source_line": 319,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2090,7 +2185,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 4--6: trace repetition and source audit",
       "sentence_sha256": "552956c1cfd414d8e0252c169b45af31aaa6f88dc5d0a3831e128a932218d451",
-      "source_line": 312,
+      "source_line": 319,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2109,7 +2204,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 4--6: trace repetition and source audit",
       "sentence_sha256": "2ae48a6554205a5532a5562be2d4b1d3794eb93e24fef0ba12c755964ed66ea9",
-      "source_line": 312,
+      "source_line": 319,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2126,7 +2221,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 4--6: trace repetition and source audit",
       "sentence_sha256": "1220e64583670104eb1397976a6c1d6294ece015cfa8aacfc1c49d5117496ad2",
-      "source_line": 312,
+      "source_line": 319,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2143,7 +2238,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 4--6: trace repetition and source audit",
       "sentence_sha256": "7b60fb1404c2d66f125de2cb08f53ef6b0027f3bba4074d6cdc0b3f5d9124063",
-      "source_line": 312,
+      "source_line": 319,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2162,7 +2257,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 4--6: trace repetition and source audit",
       "sentence_sha256": "259796e69dc878b9f03c6cf2492953946ca4de162a5e74acc7093922f46c944c",
-      "source_line": 319,
+      "source_line": 326,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2179,7 +2274,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 4--6: trace repetition and source audit",
       "sentence_sha256": "4372a928455aa31146bb50ba7680869221b82de82232cb9b7990e98bb4b415eb",
-      "source_line": 319,
+      "source_line": 326,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2197,7 +2292,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 4--6: trace repetition and source audit",
       "sentence_sha256": "12e96516d7c56525015b8dfb5ad9430814a58c2ed76c94aab1ddfff8ad098696",
-      "source_line": 319,
+      "source_line": 326,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2214,7 +2309,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 4--6: trace repetition and source audit",
       "sentence_sha256": "bbb78f0a103f88d425e45595bc729fe470a85862b1bd0ed6b2381489d05696be",
-      "source_line": 319,
+      "source_line": 326,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2231,7 +2326,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 4--6: trace repetition and source audit",
       "sentence_sha256": "5eaff6c87a76ce9b0b42a9026f6be5ec8e581af663285350acc41c81db946154",
-      "source_line": 319,
+      "source_line": 326,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2250,7 +2345,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 7--8: alignment and claim map",
       "sentence_sha256": "f19f579430f03d6aad1a4f9a833bdb424189c9b1f3f4502c6902b719edf6e150",
-      "source_line": 330,
+      "source_line": 337,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2267,7 +2362,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 7--8: alignment and claim map",
       "sentence_sha256": "52f1a769547df60d1ea13780f70b9124e76360fe704e3be3e0c4f1487b74bea7",
-      "source_line": 330,
+      "source_line": 337,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2284,7 +2379,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 7--8: alignment and claim map",
       "sentence_sha256": "766eaff7d073757d4f68c07334dcfd11d9df30ff7cfea087911c82b7cf99d00c",
-      "source_line": 330,
+      "source_line": 337,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2301,12 +2396,12 @@
       "scope": "IN_SCOPE",
       "section": "Stages 7--8: alignment and claim map",
       "sentence_sha256": "d256362a77f886115b8d9958d48a2832e32eb4058efb48f12e070d210b6960ed",
-      "source_line": 330,
+      "source_line": 337,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-f3398953c0ce43a9",
-      "exact_sentence": "Stage 8 executes the frozen admission map shown in Fig.~\\ref{fig:admission-flow}.",
+      "claim_id": "AUTO-8c3d23e008446cc1",
+      "exact_sentence": "Stage 8 has two provenance layers.",
       "kind": "narrative",
       "matched_claim_types": [
         "quantitative",
@@ -2319,34 +2414,70 @@
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Stages 7--8: alignment and claim map",
-      "sentence_sha256": "f3398953c0ce43a99695696c2298ab7af7ecad80922fd059c8464eccec6abb4c",
-      "source_line": 337,
+      "sentence_sha256": "8c3d23e008446cc1fb61e90c912a74881b711713f2fb9ab7a80d5be69626756b",
+      "source_line": 344,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-49f20bee64800cc7",
-      "exact_sentence": "For the case study, Level~6 may admit a bounded fixed-battery descriptive seed-matched contrast and empirical reweighting, downgrade the wording, or suppress the comparison.",
+      "claim_id": "AUTO-4577d3a09d1f2836",
+      "exact_sentence": "The frozen experiment-specific rule applied binary acquisition and suppression actions and, on a pass, planned seed-matched intervals and secondary McNemar inference.",
       "kind": "narrative",
       "matched_claim_types": [
         "quantitative",
-        "comparative",
+        "procedural"
+      ],
+      "matched_rules": [
+        "quantitative:\\b(?:estimate|interval|quantile|rate|count|mismatch|executions?|clusters?|units?|rows?|strata|bootstrap|resampl|p[ -]?value|McNemar)\\b",
+        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Stages 7--8: alignment and claim map",
+      "sentence_sha256": "4577d3a09d1f28364270bf03302dc5385575150d5aab84fa69bf7b7c90ce58f1",
+      "source_line": 344,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-f74d4e9cea9d3047",
+      "exact_sentence": "The Level~6 wording shown in Fig.~\\ref{fig:admission-flow} is a post-acquisition conservative taxonomy.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "quantitative",
         "procedural"
       ],
       "matched_rules": [
         "quantitative:(?<![A-Za-z\\\\])\\d+(?:[.,]\\d+)*(?:\\\\?%|\\b)",
+        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Stages 7--8: alignment and claim map",
+      "sentence_sha256": "f74d4e9cea9d304756e755832b1d1a0a6e6fdb874a27a2affbbefe6f25b7cecd",
+      "source_line": 344,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-f495d2327442b1d6",
+      "exact_sentence": "For the completed case it permits only a fixed-battery descriptive contrast and empirical reweighting; for a future study it must be frozen before acquisition.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "comparative",
+        "procedural"
+      ],
+      "matched_rules": [
         "comparative:\\b(?:compar(?:e|ed|ing|ison)|contrast|difference|versus|between arms?|relative to|more than|less than|higher|lower|stronger|weaker|same|equal|identical|improve)\\b",
         "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
       ],
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Stages 7--8: alignment and claim map",
-      "sentence_sha256": "49f20bee64800cc732952e707864c5a37bd15984fcfa365a71e9ace6fbc0b2da",
-      "source_line": 337,
+      "sentence_sha256": "f495d2327442b1d6e7f16ac0e96adfa6c8763fc2ee57c1fad8aac82da1d12e28",
+      "source_line": 344,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-27700fc0eb99783d",
-      "exact_sentence": "Paired population inference requires additional design evidence and is not admitted here.",
+      "claim_id": "AUTO-2479abc9e01835d4",
+      "exact_sentence": "Neither layer can use a favorable result to waive an earlier failure.",
       "kind": "narrative",
       "matched_claim_types": [
         "procedural"
@@ -2357,25 +2488,8 @@
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Stages 7--8: alignment and claim map",
-      "sentence_sha256": "27700fc0eb99783d9382be327ee2b7246e2f9412c0741f5cb9b6c8a3e616a417",
-      "source_line": 337,
-      "source_path": "paper/final_protocol/main.tex"
-    },
-    {
-      "claim_id": "AUTO-1c7161e3ae60adbc",
-      "exact_sentence": "The map cannot use a favorable result to waive an earlier requirement.",
-      "kind": "narrative",
-      "matched_claim_types": [
-        "procedural"
-      ],
-      "matched_rules": [
-        "procedural:fail-closed-evidentiary-prose-catch-all"
-      ],
-      "outside_scope_reason": null,
-      "scope": "IN_SCOPE",
-      "section": "Stages 7--8: alignment and claim map",
-      "sentence_sha256": "1c7161e3ae60adbcedf01919a2884ab372b8f5934bb2500f2d3d3b806a20e598",
-      "source_line": 337,
+      "sentence_sha256": "2479abc9e01835d4fb93fea9f59555a7ec9aedf76fe85787be4560bf56fb5f62",
+      "source_line": 344,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2394,7 +2508,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 7--8: alignment and claim map",
       "sentence_sha256": "40623da1d0a365943c0e718f25eb06ca4084ce30933b36ac65d2748ce5a8d32a",
-      "source_line": 337,
+      "source_line": 344,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2411,7 +2525,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 7--8: alignment and claim map \u2014 figure caption",
       "sentence_sha256": "43bdd6ebd2483efedacbb0a950a6ecf00ad5c167d24b504abe723fbab8751ad9",
-      "source_line": 348,
+      "source_line": 356,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2428,12 +2542,12 @@
       "scope": "IN_SCOPE",
       "section": "Stages 7--8: alignment and claim map \u2014 figure caption",
       "sentence_sha256": "f1cc237dbac28a8a7dc156556f41bdfb75da83ffa893da509eda6ea7262056c7",
-      "source_line": 348,
+      "source_line": 356,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-564bfc12c8886018",
-      "exact_sentence": "Any required failure invokes the prospectively frozen failure action; Level 8 cannot repair it.",
+      "claim_id": "AUTO-622b57faa9a80a92",
+      "exact_sentence": "A frozen required failure retains its suppression action; Level 8 cannot repair it.",
       "kind": "caption",
       "matched_claim_types": [
         "quantitative",
@@ -2446,8 +2560,25 @@
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Stages 7--8: alignment and claim map \u2014 figure caption",
-      "sentence_sha256": "564bfc12c888601877048b045c5b89cafff2d64bfa610c5afd5350c86dadd2b5",
-      "source_line": 348,
+      "sentence_sha256": "622b57faa9a80a92d1c727936fe14ea858a302cda0d672c2ccabaf23b0c99c63",
+      "source_line": 356,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-f931fb70d91dd533",
+      "exact_sentence": "The colored claim classes are a later conservative reporting taxonomy for this completed case and a template to freeze before a future acquisition.",
+      "kind": "caption",
+      "matched_claim_types": [
+        "procedural"
+      ],
+      "matched_rules": [
+        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Stages 7--8: alignment and claim map \u2014 figure caption",
+      "sentence_sha256": "f931fb70d91dd533a4b14ad2a29c8a66f6915a547633085b2b8659248ecb4373",
+      "source_line": 356,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2464,7 +2595,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 7--8: alignment and claim map \u2014 figure caption",
       "sentence_sha256": "a7ad371573fbe89abef5ec6650f0fefc89f58778887158d55dec7fc5dde6f4f7",
-      "source_line": 348,
+      "source_line": 356,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2483,7 +2614,7 @@
       "scope": "IN_SCOPE",
       "section": "Stages 7--8: alignment and claim map \u2014 figure caption",
       "sentence_sha256": "6b64c82b43af2e090802242649ce26552e4e4791a72d3b7bc8a29b1be4d74af4",
-      "source_line": 348,
+      "source_line": 356,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2500,29 +2631,29 @@
       "scope": "IN_SCOPE",
       "section": "Executable admission map and formal properties",
       "sentence_sha256": "cfeef7110f87630976d3a875f3bf62a345338f5c4966eaa9bd4a8562863d2477",
-      "source_line": 358,
+      "source_line": 368,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-8c51d9e46034f37d",
-      "exact_sentence": "This generic executable taxonomy was created after acquisition as a conservative formalization of the prospectively frozen experiment-specific admission logic.",
+      "claim_id": "AUTO-688db899052faee1",
+      "exact_sentence": "This generic executable taxonomy was created after acquisition as a conservative restriction on what the article reports.",
       "kind": "narrative",
       "matched_claim_types": [
         "procedural"
       ],
       "matched_rules": [
-        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
+        "procedural:fail-closed-evidentiary-prose-catch-all"
       ],
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Executable admission map and formal properties",
-      "sentence_sha256": "8c51d9e46034f37d19e2ff84fa317191802bd5dc4de89865636835df2d638eaf",
-      "source_line": 358,
+      "sentence_sha256": "688db899052faee17d94fc7c6b1f819353930bdc09a1cb915d3c824243f69de6",
+      "source_line": 368,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-996933fcd9592bb7",
-      "exact_sentence": "It did not exist at the protocol commit and cannot retroactively authorize a completed comparison; the frozen experiment-specific rules remain authoritative.",
+      "claim_id": "C008A",
+      "exact_sentence": "It did not exist at the protocol commit, cannot be credited as prospective validation for the completed case, and deliberately authorizes less than the frozen plan's inferential outputs.",
       "kind": "narrative",
       "matched_claim_types": [
         "comparative",
@@ -2535,8 +2666,25 @@
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Executable admission map and formal properties",
-      "sentence_sha256": "996933fcd9592bb73c10d6ac73d90478998251f4ced0f27b3217025065995e5c",
-      "source_line": 358,
+      "sentence_sha256": "dad28669c63eafecb7d618616e560faa565e05338a32966138ff8258b7cd9f40",
+      "source_line": 368,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-557cfb7ca20827ff",
+      "exact_sentence": "The original binary failure actions remain authoritative historical constraints.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "procedural"
+      ],
+      "matched_rules": [
+        "procedural:fail-closed-evidentiary-prose-catch-all"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Executable admission map and formal properties",
+      "sentence_sha256": "557cfb7ca20827ff0b1ea1f1571da71a2681709b0faa5ccfa5177cf7a3ddf430",
+      "source_line": 368,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2554,7 +2702,7 @@
       "scope": "IN_SCOPE",
       "section": "Executable admission map and formal properties",
       "sentence_sha256": "623156bbb1fb40cb8416e304bdc6554acfd71bb2fbc40c474126b9f647f60a57",
-      "source_line": 358,
+      "source_line": 368,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2571,7 +2719,7 @@
       "scope": "IN_SCOPE",
       "section": "Executable admission map and formal properties",
       "sentence_sha256": "8dc68ac1490103868ed7f5fc9a8ed4f049b9e8e51172b74d5e60a87ea0cedcdb",
-      "source_line": 358,
+      "source_line": 368,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2588,7 +2736,7 @@
       "scope": "IN_SCOPE",
       "section": "Executable admission map and formal properties",
       "sentence_sha256": "ada3fcf30ec46bd5262a484d25715490d6c2b601a60ef88fc83a709a97278bda",
-      "source_line": 358,
+      "source_line": 368,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2605,7 +2753,7 @@
       "scope": "IN_SCOPE",
       "section": "Executable admission map and formal properties",
       "sentence_sha256": "cf3adbaaa21ecb089b321966ff6459470cc6a0745f5b3f8f0ebbb7a6f9e7619b",
-      "source_line": 358,
+      "source_line": 368,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2624,12 +2772,12 @@
       "scope": "IN_SCOPE",
       "section": "Executable admission map and formal properties",
       "sentence_sha256": "7c7524c2f06dbff755ac215c06ff51bba94411914ff62eb57b510398720bfc9a",
-      "source_line": 358,
+      "source_line": 368,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-de29162f8db57947",
-      "exact_sentence": "\\paragraph{Admission-safety proposition.} For any structurally valid evidence record, the implemented admission map is result independent, prerequisite monotone, failure dominant, projection scoped, deterministic, idempotent, and fail closed for unknown states.",
+      "claim_id": "AUTO-a69ca22c15fc2d63",
+      "exact_sentence": "\\paragraph{Admission-safety proposition.} For any structurally valid evidence record, the implemented admission map is result independent, prerequisite monotone, failure dominant, projection scoped, statelessly deterministic, and fail closed for unknown states.",
       "kind": "narrative",
       "matched_claim_types": [
         "procedural"
@@ -2641,8 +2789,8 @@
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Executable admission map and formal properties",
-      "sentence_sha256": "de29162f8db57947d4df32ea05fbd87810d9c109bc1a066ba94c54b74e7c8fd6",
-      "source_line": 380,
+      "sentence_sha256": "a69ca22c15fc2d63b14e32d8526d8c2f308a04568ea5cde1c21a23defb1454e3",
+      "source_line": 391,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2659,7 +2807,24 @@
       "scope": "IN_SCOPE",
       "section": "Executable admission map and formal properties",
       "sentence_sha256": "80828a1617e3d31ea83642c47d489ca31c26f60e0afb9a14de111306126828cc",
-      "source_line": 380,
+      "source_line": 391,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-d282cef48ee46b33",
+      "exact_sentence": "These are seven properties when strict claim ordering is counted separately.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "procedural"
+      ],
+      "matched_rules": [
+        "procedural:fail-closed-evidentiary-prose-catch-all"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Executable admission map and formal properties",
+      "sentence_sha256": "d282cef48ee46b33989355edcec96cab357ec1c72fa3cca3e99d05cb9bc0de3c",
+      "source_line": 391,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2676,7 +2841,7 @@
       "scope": "IN_SCOPE",
       "section": "Executable admission map and formal properties",
       "sentence_sha256": "58a0cf5963700e879a064b8a0d204ce52a3d93e287177851abbed90f8fab7683",
-      "source_line": 380,
+      "source_line": 391,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2693,7 +2858,7 @@
       "scope": "IN_SCOPE",
       "section": "Executable admission map and formal properties",
       "sentence_sha256": "ff427098bd7a9cb5a3b559971df1de87d4e4d04d3ebfd3b936ab6a8fdea9bcdf",
-      "source_line": 380,
+      "source_line": 391,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2710,7 +2875,7 @@
       "scope": "IN_SCOPE",
       "section": "Executable admission map and formal properties",
       "sentence_sha256": "ea62d8afa63b885e4d2e70cf91cb6b49436519729fafc79182b3b3d41b0cd314",
-      "source_line": 392,
+      "source_line": 404,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2727,7 +2892,7 @@
       "scope": "IN_SCOPE",
       "section": "Executable admission map and formal properties",
       "sentence_sha256": "e936d6df5146daea895df4ae0a2aaa241c775ef94bebb3cec0aae5cee2f37d03",
-      "source_line": 392,
+      "source_line": 404,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2744,12 +2909,12 @@
       "scope": "IN_SCOPE",
       "section": "Executable admission map and formal properties",
       "sentence_sha256": "eb4e8a623b465507d5c52ca3bfc234682fdb9971adb3bf0c24a538b9441ecf6f",
-      "source_line": 392,
+      "source_line": 404,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-18e68324bd00f975",
-      "exact_sentence": "Determinism and idempotence mean that the same evidence record returns the same answer on every evaluation, including when the answer is evaluated again.",
+      "claim_id": "AUTO-41c2346b4c7c5db3",
+      "exact_sentence": "Stateless repeat-run determinism means that the same evidence record returns the same answer on every evaluation; no mathematical endofunction-idempotence claim is made.",
       "kind": "narrative",
       "matched_claim_types": [
         "comparative",
@@ -2762,8 +2927,8 @@
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Executable admission map and formal properties",
-      "sentence_sha256": "18e68324bd00f975e9af8cc1d9e4885f12dddb55880ef3115fcbd372ed46472d",
-      "source_line": 392,
+      "sentence_sha256": "41c2346b4c7c5db35e3e7fb056d46a9f87248b8e03a13d1e37f8e3697df2fdac",
+      "source_line": 404,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2780,7 +2945,7 @@
       "scope": "IN_SCOPE",
       "section": "Executable admission map and formal properties",
       "sentence_sha256": "02c77294ec69c815ec86fce5994cb69b7cdd2afb238f6b48b87c68407bdc4c4b",
-      "source_line": 392,
+      "source_line": 404,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2801,7 +2966,7 @@
       "scope": "IN_SCOPE",
       "section": "Executable admission map and formal properties",
       "sentence_sha256": "eab5ec345d5166febf268c0774910476e5cc1dcd8d487fae81b198c1ea74ff20",
-      "source_line": 392,
+      "source_line": 404,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2822,7 +2987,7 @@
       "scope": "IN_SCOPE",
       "section": "Executable admission map and formal properties",
       "sentence_sha256": "280c2d8a693dbf0c84a603048dd8bfe18982087d8c53eb2a2c133179606c615c",
-      "source_line": 407,
+      "source_line": 420,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2841,7 +3006,7 @@
       "scope": "IN_SCOPE",
       "section": "Executable admission map and formal properties",
       "sentence_sha256": "2bb79f495eb528cfa5c3835544819f11eb0e16a4576dab881ae6680a6f7c47e8",
-      "source_line": 407,
+      "source_line": 420,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2861,7 +3026,7 @@
       "scope": "IN_SCOPE",
       "section": "Executable admission map and formal properties",
       "sentence_sha256": "717942a383b4b891acbde1c3996e58c5dc43ae00fe9b6e4ef67db54411e52665",
-      "source_line": 407,
+      "source_line": 420,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2881,7 +3046,7 @@
       "scope": "IN_SCOPE",
       "section": "Seed-indexed descriptive contrast and reweighting",
       "sentence_sha256": "3d6ea044890df06ddea3dc2d37bf4919cfec1e8507dc2e38e982855c3b4de00a",
-      "source_line": 418,
+      "source_line": 431,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2898,7 +3063,7 @@
       "scope": "IN_SCOPE",
       "section": "Seed-indexed descriptive contrast and reweighting",
       "sentence_sha256": "ffb5124ed0c4c91087710c864d238bfccf1625021325d5e7cbeee0fa23ac3e17",
-      "source_line": 424,
+      "source_line": 437,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2917,7 +3082,7 @@
       "scope": "IN_SCOPE",
       "section": "Seed-indexed descriptive contrast and reweighting",
       "sentence_sha256": "e732de7a6b0e68addc204327345177eedfcc57ee9b051275684f68c42c7ed744",
-      "source_line": 424,
+      "source_line": 437,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2934,7 +3099,7 @@
       "scope": "IN_SCOPE",
       "section": "Seed-indexed descriptive contrast and reweighting",
       "sentence_sha256": "d097765e7c4b0669fa0557bea1d4e81face286e1c9add5322213374e9737572a",
-      "source_line": 424,
+      "source_line": 437,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2951,7 +3116,7 @@
       "scope": "IN_SCOPE",
       "section": "Seed-indexed descriptive contrast and reweighting",
       "sentence_sha256": "b53f24830e485f4b56d0e7a6cc5e530b5063c23071c54f26558f3adc429765e2",
-      "source_line": 424,
+      "source_line": 437,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2969,7 +3134,7 @@
       "scope": "IN_SCOPE",
       "section": "Seed-indexed descriptive contrast and reweighting",
       "sentence_sha256": "a797764e5ee5dcdb2759be75817fec3e509997f3963727746199aad69fa6b016",
-      "source_line": 424,
+      "source_line": 437,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -2986,7 +3151,7 @@
       "scope": "IN_SCOPE",
       "section": "Seed-indexed descriptive contrast and reweighting",
       "sentence_sha256": "be3fe64f65a41f3b05658504182883527fa17b6d97d9d17f09812d1f3d0f22ee",
-      "source_line": 424,
+      "source_line": 437,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3005,7 +3170,7 @@
       "scope": "IN_SCOPE",
       "section": "Seed-indexed descriptive contrast and reweighting",
       "sentence_sha256": "60c4046ffca4b4f57de53d5c885eff14b008483e561c86821c3519ebd0ff2ff4",
-      "source_line": 433,
+      "source_line": 446,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3022,7 +3187,24 @@
       "scope": "IN_SCOPE",
       "section": "Seed-indexed descriptive contrast and reweighting",
       "sentence_sha256": "3e3e88568a360e95709dd0e72d1abd5f14329ca5edd09aaca8a407219f51bd1b",
-      "source_line": 443,
+      "source_line": 456,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-0e7614ae92d5b4ea",
+      "exact_sentence": "Conditional on each fixed empirical stratum, the $I_{bkj}$ are independent draws for this reweighting calculation.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "procedural"
+      ],
+      "matched_rules": [
+        "procedural:fail-closed-evidentiary-prose-catch-all"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Seed-indexed descriptive contrast and reweighting",
+      "sentence_sha256": "0e7614ae92d5b4ea7acb18dca58e6d057e02003d5444f316433219828006d01b",
+      "source_line": 456,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3039,7 +3221,7 @@
       "scope": "IN_SCOPE",
       "section": "Seed-indexed descriptive contrast and reweighting",
       "sentence_sha256": "2256887afe3a9d12941811541d2cffde3eb80e7a75d9f920c2c2eebfad076656",
-      "source_line": 443,
+      "source_line": 456,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3056,7 +3238,7 @@
       "scope": "IN_SCOPE",
       "section": "Seed-indexed descriptive contrast and reweighting",
       "sentence_sha256": "d3f47576f8d05f6e78545712b688d692ba270eb92406100e2acace8ae4068bc6",
-      "source_line": 443,
+      "source_line": 456,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3073,7 +3255,7 @@
       "scope": "IN_SCOPE",
       "section": "Seed-indexed descriptive contrast and reweighting",
       "sentence_sha256": "47ce8722ba019a0652dd27578982f4422fa941438cde08fee196434828148633",
-      "source_line": 443,
+      "source_line": 456,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3090,7 +3272,7 @@
       "scope": "IN_SCOPE",
       "section": "Seed-indexed descriptive contrast and reweighting",
       "sentence_sha256": "f455d36b91d5abe94a8ec5336ef9261e2ce772ff75eebfb05e34552fe0dc646b",
-      "source_line": 443,
+      "source_line": 456,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3112,7 +3294,7 @@
       "scope": "IN_SCOPE",
       "section": "Seed-indexed descriptive contrast and reweighting",
       "sentence_sha256": "3f7b6eb08a3756acdffefa1720c3ac0244535d2ac378731706e78e518d2265ff",
-      "source_line": 443,
+      "source_line": 456,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3129,7 +3311,7 @@
       "scope": "IN_SCOPE",
       "section": "AI-assisted research methods",
       "sentence_sha256": "1aa0f9e32b1435a26bbff147c64cdaf1415bc80783e451d593d4b580c3e00302",
-      "source_line": 457,
+      "source_line": 471,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3149,7 +3331,7 @@
       "scope": "IN_SCOPE",
       "section": "AI-assisted research methods",
       "sentence_sha256": "c5e6083ad49f22ac2c0fe96ea1c5ed29048d415ea097b35b29cb8a51d333fdda",
-      "source_line": 457,
+      "source_line": 471,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3166,7 +3348,7 @@
       "scope": "IN_SCOPE",
       "section": "AI-assisted research methods",
       "sentence_sha256": "71363a141036735141de423317f69490fae9cd539e4caa5df7f81865e4b1a4cd",
-      "source_line": 457,
+      "source_line": 471,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3187,7 +3369,7 @@
       "scope": "IN_SCOPE",
       "section": "AI-assisted research methods",
       "sentence_sha256": "adaa9e4c760d0d3a2bb8e7a95a8b1fb4b178dcc081c94b857d596d144e090c75",
-      "source_line": 457,
+      "source_line": 471,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3205,7 +3387,7 @@
       "scope": "IN_SCOPE",
       "section": "AI-assisted research methods",
       "sentence_sha256": "1b305da115ba694c852574a5d630cdb8e0304b6560e91c4dd5f30cb87a5321f3",
-      "source_line": 457,
+      "source_line": 471,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3222,7 +3404,7 @@
       "scope": "IN_SCOPE",
       "section": "AI-assisted research methods",
       "sentence_sha256": "bd7cb06180f7d42472c5c67e23a86e0ce19216127df34ac7b06c736edd7617eb",
-      "source_line": 457,
+      "source_line": 471,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3239,7 +3421,7 @@
       "scope": "IN_SCOPE",
       "section": "Self-contained synthetic conformance suite",
       "sentence_sha256": "2ccdbd379b345d0ee3b75d9171b1438868b8452526ff80544f5ca0b6284ff89d",
-      "source_line": 474,
+      "source_line": 488,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3256,7 +3438,7 @@
       "scope": "IN_SCOPE",
       "section": "Self-contained synthetic conformance suite",
       "sentence_sha256": "b7e2190e4fb6fdf07298970ed1e8a321125d4a28abf666d17392adbe267ad4a4",
-      "source_line": 474,
+      "source_line": 488,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3273,7 +3455,7 @@
       "scope": "IN_SCOPE",
       "section": "Self-contained synthetic conformance suite",
       "sentence_sha256": "fc3d661a97261aa5f48abf09498eeb7466258ef8a5f2b9e42d8399318de1b94d",
-      "source_line": 474,
+      "source_line": 488,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3290,7 +3472,7 @@
       "scope": "IN_SCOPE",
       "section": "Self-contained synthetic conformance suite",
       "sentence_sha256": "38d005bbd4f80bd94af993554e0d2b9a0cd2dd0abb72e91f5cb94fae548926e4",
-      "source_line": 483,
+      "source_line": 497,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3307,7 +3489,7 @@
       "scope": "IN_SCOPE",
       "section": "Self-contained synthetic conformance suite",
       "sentence_sha256": "c8447bcbd8cce668d217e83dfd77553399fcd4c30d502970f206a2729ba96866",
-      "source_line": 483,
+      "source_line": 497,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3324,7 +3506,7 @@
       "scope": "IN_SCOPE",
       "section": "Self-contained synthetic conformance suite",
       "sentence_sha256": "1f01789a7b0da4494fb93af9441b609f164d7da8d216be7dc796f6deac130bd6",
-      "source_line": 483,
+      "source_line": 497,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3341,7 +3523,7 @@
       "scope": "IN_SCOPE",
       "section": "Self-contained synthetic conformance suite",
       "sentence_sha256": "39d7067eeff929eafc728cd94de13277e151c087f88b8ba3439e9f934d9bd270",
-      "source_line": 483,
+      "source_line": 497,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3358,7 +3540,7 @@
       "scope": "IN_SCOPE",
       "section": "Self-contained synthetic conformance suite",
       "sentence_sha256": "605496de260ca12754a3e0613a2ce6fc268dac412adb2ff7279445485af16b69",
-      "source_line": 483,
+      "source_line": 497,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3376,7 +3558,7 @@
       "scope": "IN_SCOPE",
       "section": "Self-contained synthetic conformance suite \u2014 figure caption",
       "sentence_sha256": "964c5e4c6b0bafd80fc7b52abccf379b3877a8f3797162d7b0aa4dc3f054d5a0",
-      "source_line": 493,
+      "source_line": 507,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3393,7 +3575,7 @@
       "scope": "IN_SCOPE",
       "section": "Self-contained synthetic conformance suite \u2014 figure caption",
       "sentence_sha256": "9b2d6e80ab15e8e6f11cff05b6e6fab4fdd3e26f3759b39c55d2900e9b4f8bd1",
-      "source_line": 493,
+      "source_line": 507,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3412,7 +3594,7 @@
       "scope": "IN_SCOPE",
       "section": "Self-contained synthetic conformance suite \u2014 figure caption",
       "sentence_sha256": "873af8d5cab4512c28e7e9475b0f4ed4b989fb8b8707822cbc78e2548bb288ef",
-      "source_line": 493,
+      "source_line": 507,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3431,7 +3613,7 @@
       "scope": "IN_SCOPE",
       "section": "Self-contained synthetic conformance suite \u2014 figure caption",
       "sentence_sha256": "2a21d81517ba0426f5e058be2495ba334ade9e77d7d9d59e8d427b438b7cd1da",
-      "source_line": 493,
+      "source_line": 507,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3451,7 +3633,7 @@
       "scope": "IN_SCOPE",
       "section": "Self-contained synthetic conformance suite",
       "sentence_sha256": "b59feb5594ef339470850d42d8ba4accbd5deaf95a64fe12b2c42bac4ca648bb",
-      "source_line": 501,
+      "source_line": 515,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3470,7 +3652,7 @@
       "scope": "IN_SCOPE",
       "section": "Self-contained synthetic conformance suite",
       "sentence_sha256": "b0aa4bd6dead58e1f9468563cd2f837314166aacd401723f7af9069a92685b9c",
-      "source_line": 501,
+      "source_line": 515,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3487,7 +3669,7 @@
       "scope": "IN_SCOPE",
       "section": "Self-contained synthetic conformance suite",
       "sentence_sha256": "84722f572f959d7f9eb1643af3d8529e2c916a6a16ad734d6031e3e429489b5a",
-      "source_line": 501,
+      "source_line": 515,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3508,7 +3690,7 @@
       "scope": "IN_SCOPE",
       "section": "Restricted game-agent case study",
       "sentence_sha256": "9ac9c6b49a773b30f3532ea93e822c8209ba34ef1dc6b78edeca88cdb2c31a23",
-      "source_line": 510,
+      "source_line": 524,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3525,7 +3707,7 @@
       "scope": "IN_SCOPE",
       "section": "Restricted game-agent case study",
       "sentence_sha256": "5adbb52c53a177e857eec3f52fc8d6870f924b44b8136377e157681374d6bbc8",
-      "source_line": 510,
+      "source_line": 524,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3544,7 +3726,7 @@
       "scope": "IN_SCOPE",
       "section": "Restricted game-agent case study",
       "sentence_sha256": "946bd8b413cb155ce5b25556a3569de254bd15da8ffdd67b6c4282a90b2c319a",
-      "source_line": 510,
+      "source_line": 524,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3561,7 +3743,7 @@
       "scope": "IN_SCOPE",
       "section": "Restricted game-agent case study",
       "sentence_sha256": "deacb380a766dc0d17bd1f89811567c70473bebd9b9703049959b3d9e0e97098",
-      "source_line": 510,
+      "source_line": 524,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3580,7 +3762,7 @@
       "scope": "IN_SCOPE",
       "section": "Restricted game-agent case study",
       "sentence_sha256": "e23ac9c715c888d01ac92be07a2a03381abd56f28816a3f1003a51b69bd1f4d6",
-      "source_line": 518,
+      "source_line": 532,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3597,7 +3779,7 @@
       "scope": "IN_SCOPE",
       "section": "Restricted game-agent case study",
       "sentence_sha256": "09fb8ee48f8c4d351eafb7205ec98f5b69f65ce4b3172cb500b47b356e0a8015",
-      "source_line": 518,
+      "source_line": 532,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3614,7 +3796,7 @@
       "scope": "IN_SCOPE",
       "section": "Restricted game-agent case study",
       "sentence_sha256": "a7a7c7f23e4bc7a72e6b36d366247a642eb2bacdb4c79544d8e9048ba0f31ae4",
-      "source_line": 518,
+      "source_line": 532,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3631,7 +3813,7 @@
       "scope": "IN_SCOPE",
       "section": "Restricted game-agent case study",
       "sentence_sha256": "dd51796a1dcfbeb7387594064fd15a1bbf0163c1312993f7573408f0d762efdf",
-      "source_line": 525,
+      "source_line": 539,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3650,7 +3832,7 @@
       "scope": "IN_SCOPE",
       "section": "Restricted game-agent case study",
       "sentence_sha256": "83a8b54a503e2ae396e5ad411f83b8fc09a33bc3af20e5ab1b97e51fb1558e64",
-      "source_line": 525,
+      "source_line": 539,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3669,7 +3851,7 @@
       "scope": "IN_SCOPE",
       "section": "Restricted game-agent case study",
       "sentence_sha256": "6888aaf088e10453a123306391312efe4077a85bb64f198dcc533113477f3f08",
-      "source_line": 525,
+      "source_line": 539,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3686,7 +3868,7 @@
       "scope": "IN_SCOPE",
       "section": "Restricted game-agent case study",
       "sentence_sha256": "3385f25550518817931726b2ebbb586abee6ff16345afd05f45c72143e6bd653",
-      "source_line": 525,
+      "source_line": 539,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3704,7 +3886,7 @@
       "scope": "IN_SCOPE",
       "section": "Restricted game-agent case study",
       "sentence_sha256": "3bba00a4644d2657ce2055abbb78b323a470d4d4051f539492197eec27d1aa9b",
-      "source_line": 533,
+      "source_line": 547,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3721,12 +3903,46 @@
       "scope": "IN_SCOPE",
       "section": "Restricted game-agent case study",
       "sentence_sha256": "1bc6f1e7d1b7e37816ede2c2f0de24b62fb06a30d8dd22dca387fb0520c1316a",
-      "source_line": 533,
+      "source_line": 547,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-fd1e2087f2d6fa85",
+      "exact_sentence": "This audit rule was frozen only for retrospective reanalysis after the historical outcomes already existed.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "procedural"
+      ],
+      "matched_rules": [
+        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Restricted game-agent case study",
+      "sentence_sha256": "fd1e2087f2d6fa855fc8b629de900e8d2aaed9872aa74307cb1971992fb8dd6c",
+      "source_line": 547,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-b48e198b4efb78f5",
+      "exact_sentence": "Its classifier is outcome independent, but the exercise is not evidence of prospective blinding or pre-acquisition specification.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "procedural"
+      ],
+      "matched_rules": [
+        "procedural:fail-closed-evidentiary-prose-catch-all"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Restricted game-agent case study",
+      "sentence_sha256": "b48e198b4efb78f57b582e260f41ab94babf07e31dbb1b267a55f15f133bb5a6",
+      "source_line": 547,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
       "claim_id": "C015",
-      "exact_sentence": "An apparently favorable estimate failed the prespecified control gate, so the frozen rule suppressed the historical paired comparison.",
+      "exact_sentence": "An apparently favorable estimate failed that retrospective control gate, so the rule suppressed the historical paired comparison.",
       "kind": "narrative",
       "matched_claim_types": [
         "quantitative",
@@ -3741,8 +3957,8 @@
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Restricted game-agent case study",
-      "sentence_sha256": "83d0f8a2fc544e09c72b137da40bf7893a68231a12c9a259cbc735cc2dbe0ce7",
-      "source_line": 533,
+      "sentence_sha256": "28d3454d7e73289fd2c130db9311eef6b2c24633dd20baacb9bf3fadddf723fc",
+      "source_line": 547,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3759,7 +3975,7 @@
       "scope": "IN_SCOPE",
       "section": "Restricted game-agent case study",
       "sentence_sha256": "db34d80bb9973c4fa3fb7572e2050bf9836ea3504a0d6b5b7793d69cd6390b8a",
-      "source_line": 533,
+      "source_line": 547,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3776,7 +3992,7 @@
       "scope": "IN_SCOPE",
       "section": "Restricted game-agent case study",
       "sentence_sha256": "3898de0e3be15467b35bc9477e01d11462f01f05aa9bcca07aa51b54661d9ce6",
-      "source_line": 533,
+      "source_line": 547,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3795,7 +4011,7 @@
       "scope": "IN_SCOPE",
       "section": "Prospective validation results",
       "sentence_sha256": "0784c82bb84990e62084f93f0562006c6b1e8d80f2b64ec51d535b9b2af02b1e",
-      "source_line": 547,
+      "source_line": 565,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3812,7 +4028,7 @@
       "scope": "IN_SCOPE",
       "section": "Prospective validation results",
       "sentence_sha256": "39bd1956c11faa7f4831d298b1955e80bce923e636652c4883dcf8ac14c06b38",
-      "source_line": 547,
+      "source_line": 565,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3829,7 +4045,7 @@
       "scope": "IN_SCOPE",
       "section": "Prospective validation results",
       "sentence_sha256": "0d0943d5d59f3c293c365626274a362938635bcc688250694e85e4cc35dc13ef",
-      "source_line": 547,
+      "source_line": 565,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3846,12 +4062,12 @@
       "scope": "IN_SCOPE",
       "section": "Prospective validation results",
       "sentence_sha256": "a76b6b95b2644a6546f0b4a1e3f93e3f4349dbfe05cdce4cba65f1a2ab8823b2",
-      "source_line": 547,
+      "source_line": 565,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-6ebeb7c48195472c",
-      "exact_sentence": "Artifact hashes, the boundary seed conversion, schedule rows, trace schema, execution profiles, sample sizes, reweighting seeds, and admission actions are recorded in that protocol commit.",
+      "claim_id": "AUTO-b3048c82e089e671",
+      "exact_sentence": "Artifact hashes, the boundary seed conversion, schedule rows, trace schema, execution profiles, sample sizes, resampling seeds, and binary failure actions are recorded in that protocol commit.",
       "kind": "narrative",
       "matched_claim_types": [
         "quantitative",
@@ -3864,8 +4080,47 @@
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Prospective validation results",
-      "sentence_sha256": "6ebeb7c48195472c44d6517c27af5d548a9788c34fc94229c8c8decaa47750d9",
-      "source_line": 547,
+      "sentence_sha256": "b3048c82e089e67176476d96ee2007582a35b3219a54de150fa50b050adf4966",
+      "source_line": 565,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-5558f7548b2819a2",
+      "exact_sentence": "The same frozen plan prescribed 95\\% paired-resampling intervals and secondary exact McNemar inference.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "quantitative",
+        "comparative",
+        "procedural"
+      ],
+      "matched_rules": [
+        "quantitative:(?<![A-Za-z\\\\])\\d+(?:[.,]\\d+)*(?:\\\\?%|\\b)",
+        "quantitative:\\b(?:estimate|interval|quantile|rate|count|mismatch|executions?|clusters?|units?|rows?|strata|bootstrap|resampl|p[ -]?value|McNemar)\\b",
+        "comparative:\\b(?:compar(?:e|ed|ing|ison)|contrast|difference|versus|between arms?|relative to|more than|less than|higher|lower|stronger|weaker|same|equal|identical|improve)\\b",
+        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Prospective validation results",
+      "sentence_sha256": "5558f7548b2819a248050b28f07accd445cb476745bfde3e133ec641ff9a465b",
+      "source_line": 565,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-eddb9ef74309bbdb",
+      "exact_sentence": "The named Level taxonomy, descriptive-only reinterpretation, and digest-plus-byte integrity extension were added after acquisition and are not attributed to that commit.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "procedural"
+      ],
+      "matched_rules": [
+        "procedural:fail-closed-evidentiary-prose-catch-all"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Prospective validation results",
+      "sentence_sha256": "eddb9ef74309bbdbfc0c9f1ad9f55d793bcd76f69308e6b5460603d4fb230bb8",
+      "source_line": 565,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3882,7 +4137,7 @@
       "scope": "IN_SCOPE",
       "section": "Prospective validation results",
       "sentence_sha256": "596c918ce9ed14e79414244651e3e72111baae0a02f0de27b17b03995e480848",
-      "source_line": 547,
+      "source_line": 565,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3899,7 +4154,7 @@
       "scope": "IN_SCOPE",
       "section": "Deterministic preflight",
       "sentence_sha256": "a85c5a29747d8db2f99c796a050f9e0275d91df825f6f3edbbf661960b9ad9a2",
-      "source_line": 564,
+      "source_line": 586,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3916,7 +4171,7 @@
       "scope": "IN_SCOPE",
       "section": "Deterministic preflight",
       "sentence_sha256": "f50865a6aa7f9cba1da1e990f96a598568f5b20623b3fb0bfcff8d6a0e5634b5",
-      "source_line": 564,
+      "source_line": 586,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3933,12 +4188,12 @@
       "scope": "IN_SCOPE",
       "section": "Deterministic preflight",
       "sentence_sha256": "6a732b5c7e34a3526031f12604167dfff06fe247334fc442c2f842f8d17c8ea9",
-      "source_line": 564,
+      "source_line": 586,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
       "claim_id": "C016",
-      "exact_sentence": "Across \\PreflightUnits{} arm--seed-condition units and \\PreflightExecutions{} execution trajectories, the digest and byte count of the complete recorded public-observation-hash/action stream, terminal outcome, errors, and decision count had \\PreflightMismatches{} mismatches.",
+      "exact_sentence": "Across \\PreflightUnits{} arm--seed-condition units and \\PreflightExecutions{} execution trajectories, the frozen trace-digest, terminal-outcome, error, and decision-count checks had \\PreflightMismatches{} mismatches.",
       "kind": "narrative",
       "matched_claim_types": [
         "quantitative",
@@ -3952,13 +4207,32 @@
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Deterministic preflight",
-      "sentence_sha256": "028f39ef68261f2e7df12582db40cbcec8b2a50dc03ac69d82a24d0a9a1b7650",
-      "source_line": 564,
+      "sentence_sha256": "9285915bcd61858d8a03a822666945cf4a0ddcdff34856c1a9624a7555be42e6",
+      "source_line": 586,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-df525d75488c58e2",
-      "exact_sentence": "This passed the frozen repeatability gate and admitted factorial acquisition.",
+      "claim_id": "AUTO-3f130e9475e85692",
+      "exact_sentence": "A later audit of the recorded byte counts also found zero and did not alter the decision.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "quantitative",
+        "procedural"
+      ],
+      "matched_rules": [
+        "quantitative:\\bzero\\b",
+        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Deterministic preflight",
+      "sentence_sha256": "3f130e9475e85692f0149750e1d4770508e62d987d9a8ff92baeb72f243d40dc",
+      "source_line": 586,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-84f99001a9e7eeb4",
+      "exact_sentence": "This passed the frozen digest-based repeatability gate and admitted factorial acquisition.",
       "kind": "narrative",
       "matched_claim_types": [
         "procedural"
@@ -3969,8 +4243,8 @@
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Deterministic preflight",
-      "sentence_sha256": "df525d75488c58e24882a4d8379b113996a770069d19f1508a978460860859d3",
-      "source_line": 564,
+      "sentence_sha256": "84f99001a9e7eeb43cd08391796ef381f7a72ae6b21a28c6a9ed8ed60e55d209",
+      "source_line": 586,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -3987,7 +4261,7 @@
       "scope": "IN_SCOPE",
       "section": "Deterministic preflight",
       "sentence_sha256": "22e8655b2625b9bbbb43842bd212f81f7c16b087e029d73e3c4656cc7859e14a",
-      "source_line": 564,
+      "source_line": 586,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4006,7 +4280,7 @@
       "scope": "IN_SCOPE",
       "section": "Deterministic preflight",
       "sentence_sha256": "573c7d46adbfc2db87318fb06a20535d3d4ac17b2f25dec2e9c8adda7ac58800",
-      "source_line": 564,
+      "source_line": 586,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4025,7 +4299,7 @@
       "scope": "IN_SCOPE",
       "section": "Deterministic preflight",
       "sentence_sha256": "c25c9190727bea7f47d645b5ebc11f21407f8b4901cde8fb9628149f12bb61dd",
-      "source_line": 564,
+      "source_line": 586,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4042,7 +4316,7 @@
       "scope": "IN_SCOPE",
       "section": "Timed-search stress test",
       "sentence_sha256": "43b777d603b92abbb4360e489057326b1aa3f1eeebb3f8da71290a70b4480bd3",
-      "source_line": 585,
+      "source_line": 608,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4059,30 +4333,12 @@
       "scope": "IN_SCOPE",
       "section": "Timed-search stress test",
       "sentence_sha256": "a516bb8b29316365f7ceca325bda6827be70f6e9a974fd028c818045f97e1d1d",
-      "source_line": 585,
+      "source_line": 608,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-bc97d8fbb11047fb",
-      "exact_sentence": "Of \\StressClusters{} clusters and \\StressExecutions{} executions, \\StressTraceMismatch{} clusters had a trace-projection disagreement (\\StressTracePct\\%).",
-      "kind": "narrative",
-      "matched_claim_types": [
-        "quantitative"
-      ],
-      "matched_rules": [
-        "quantitative:\\\\(?:Preflight|Stress|Factorial|Historical|Primary|Representation|Training|Interaction|McNemar|Synthetic)[A-Za-z]*\\{?\\}?",
-        "quantitative:\\b(?:estimate|interval|quantile|rate|count|mismatch|executions?|clusters?|units?|rows?|strata|bootstrap|resampl|p[ -]?value|McNemar)\\b"
-      ],
-      "outside_scope_reason": null,
-      "scope": "IN_SCOPE",
-      "section": "Timed-search stress test",
-      "sentence_sha256": "bc97d8fbb11047fb32c09b6de47010bf4314a7878713bd665f2a58bb5ed61d89",
-      "source_line": 585,
-      "source_path": "paper/final_protocol/main.tex"
-    },
-    {
-      "claim_id": "AUTO-2a1665855441ecaa",
-      "exact_sentence": "The 2.5th and 97.5th percentiles of the frozen pooled whole-cluster empirical reweighting distribution were [\\StressTraceLowPct\\%, \\StressTraceHighPct\\%].",
+      "claim_id": "C017",
+      "exact_sentence": "Of \\StressClusters{} clusters and \\StressExecutions{} executions, \\StressTraceMismatch{} clusters disagreed on the frozen trace-digest endpoint (\\StressTracePct\\%).",
       "kind": "narrative",
       "matched_claim_types": [
         "quantitative",
@@ -4090,15 +4346,52 @@
       ],
       "matched_rules": [
         "quantitative:\\\\(?:Preflight|Stress|Factorial|Historical|Primary|Representation|Training|Interaction|McNemar|Synthetic)[A-Za-z]*\\{?\\}?",
-        "quantitative:(?<![A-Za-z\\\\])\\d+(?:[.,]\\d+)*(?:\\\\?%|\\b)",
         "quantitative:\\b(?:estimate|interval|quantile|rate|count|mismatch|executions?|clusters?|units?|rows?|strata|bootstrap|resampl|p[ -]?value|McNemar)\\b",
         "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
       ],
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Timed-search stress test",
-      "sentence_sha256": "2a1665855441ecaaebd7b02ec162490231d3598ac29dae2f361139fd3fe9a4b0",
-      "source_line": 585,
+      "sentence_sha256": "051d64c0a21561d9e705e5f8d1f38ad748ac77623a60ffb3f879e98bf9e70c9b",
+      "source_line": 608,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-d4dcaaad5ee13aa0",
+      "exact_sentence": "The later digest-or-byte definition gives the same count.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "quantitative",
+        "comparative"
+      ],
+      "matched_rules": [
+        "quantitative:\\b(?:estimate|interval|quantile|rate|count|mismatch|executions?|clusters?|units?|rows?|strata|bootstrap|resampl|p[ -]?value|McNemar)\\b",
+        "comparative:\\b(?:compar(?:e|ed|ing|ison)|contrast|difference|versus|between arms?|relative to|more than|less than|higher|lower|stronger|weaker|same|equal|identical|improve)\\b"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Timed-search stress test",
+      "sentence_sha256": "d4dcaaad5ee13aa014c241e73487b8adbac8823c6a02d8bb3286474e273b2416",
+      "source_line": 608,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-7f2af7fd6768b622",
+      "exact_sentence": "The 2.5th and 97.5th percentiles from the prespecified pooled whole-cluster resampling algorithm, now reported as an empirical reweighting distribution, were [\\StressTraceLowPct\\%, \\StressTraceHighPct\\%].",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "quantitative"
+      ],
+      "matched_rules": [
+        "quantitative:\\\\(?:Preflight|Stress|Factorial|Historical|Primary|Representation|Training|Interaction|McNemar|Synthetic)[A-Za-z]*\\{?\\}?",
+        "quantitative:(?<![A-Za-z\\\\])\\d+(?:[.,]\\d+)*(?:\\\\?%|\\b)",
+        "quantitative:\\b(?:estimate|interval|quantile|rate|count|mismatch|executions?|clusters?|units?|rows?|strata|bootstrap|resampl|p[ -]?value|McNemar)\\b"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Timed-search stress test",
+      "sentence_sha256": "7f2af7fd6768b622431a19aafd68dc0b0464db4a8baeeab9c1f3e88516798de8",
+      "source_line": 608,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4115,7 +4408,7 @@
       "scope": "IN_SCOPE",
       "section": "Timed-search stress test",
       "sentence_sha256": "35ee2f48b22695dc534730d70c554703f50624c9a2e73d9dbdae858530c1f062",
-      "source_line": 585,
+      "source_line": 608,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4133,7 +4426,7 @@
       "scope": "IN_SCOPE",
       "section": "Timed-search stress test",
       "sentence_sha256": "d5eab897cd5d715e3364b84fca3516f790cd36e67c9622c0fad083e896a5e32c",
-      "source_line": 585,
+      "source_line": 608,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4151,7 +4444,7 @@
       "scope": "IN_SCOPE",
       "section": "Timed-search stress test",
       "sentence_sha256": "8dc6de8318dda8ecf3ee2ec87352f6ada881e8f4082c001043656e3d5806ce28",
-      "source_line": 585,
+      "source_line": 608,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4169,7 +4462,7 @@
       "scope": "IN_SCOPE",
       "section": "Timed-search stress test",
       "sentence_sha256": "14881fed12e6d774b813ec01fb1a7b5eeb1ee59cb531227bec6e20af543da689",
-      "source_line": 585,
+      "source_line": 608,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4186,7 +4479,79 @@
       "scope": "IN_SCOPE",
       "section": "Timed-search stress test",
       "sentence_sha256": "31e07b87d139f2694ecd74415166fc999cb9c0377c0d4ec2aaadd020af8c13de",
-      "source_line": 585,
+      "source_line": 608,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-d1ec7b7ff52cf976",
+      "exact_sentence": "The frozen plan also promised first-divergence positions and actors plus timing summaries in the review package.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "novelty",
+        "procedural"
+      ],
+      "matched_rules": [
+        "novelty:\\bfirst\\b",
+        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Timed-search stress test",
+      "sentence_sha256": "d1ec7b7ff52cf9766aff62d85f48ef6ad45295d8e31f3d653cd72759b9800d03",
+      "source_line": 634,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-4f7ec204b3d75086",
+      "exact_sentence": "They are omitted here: no released raw trace lines permit independent localization verification, and timing summaries are not in the release.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "procedural"
+      ],
+      "matched_rules": [
+        "procedural:fail-closed-evidentiary-prose-catch-all"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Timed-search stress test",
+      "sentence_sha256": "4f7ec204b3d7508696f9e17b12ebcdfab3f31044a87965e6ec4faced6f803611",
+      "source_line": 634,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-259138a6cc95b7cb",
+      "exact_sentence": "This is a reporting and access deviation, not a zero or a passed endpoint.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "quantitative"
+      ],
+      "matched_rules": [
+        "quantitative:\\bzero\\b"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Timed-search stress test",
+      "sentence_sha256": "259138a6cc95b7cba11561ca7ee70e9389e0a4e3eb26750d1596f773239ac21f",
+      "source_line": 634,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-ef898029ef273db4",
+      "exact_sentence": "It does not change the primary 99/200 digest result, but it prevents a compliant localization or timing claim and awaits human-author confirmation in the unsigned deviation record.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "quantitative",
+        "procedural"
+      ],
+      "matched_rules": [
+        "quantitative:(?<![A-Za-z\\\\])\\d+(?:[.,]\\d+)*(?:\\\\?%|\\b)",
+        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Timed-search stress test",
+      "sentence_sha256": "ef898029ef273db447b7dc804cab728ef465f69222dbf70168002e03177a11ac",
+      "source_line": 634,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4203,7 +4568,7 @@
       "scope": "IN_SCOPE",
       "section": "Timed-search stress test \u2014 figure caption",
       "sentence_sha256": "d110ae598bfbe9cdfa90d8d13caa73919136976cb45dc13dd0dc8ec695f6599c",
-      "source_line": 612,
+      "source_line": 644,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4220,7 +4585,7 @@
       "scope": "IN_SCOPE",
       "section": "Timed-search stress test \u2014 figure caption",
       "sentence_sha256": "9e8f14ef3d99223b3e28690f18716f4ae983995ac06f4c8a42a86ae39264518b",
-      "source_line": 612,
+      "source_line": 644,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4237,7 +4602,7 @@
       "scope": "IN_SCOPE",
       "section": "Timed-search stress test \u2014 figure caption",
       "sentence_sha256": "f2bf4b0c684e5373836f68f12090647a5df80a37738331f3186b126087842a96",
-      "source_line": 612,
+      "source_line": 644,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4254,7 +4619,7 @@
       "scope": "IN_SCOPE",
       "section": "Timed-search stress test \u2014 figure caption",
       "sentence_sha256": "5e371e9f0bfa0c7ec93002ff592bc0be63a603e45199965a293a6c433e34d953",
-      "source_line": 612,
+      "source_line": 644,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4271,7 +4636,7 @@
       "scope": "IN_SCOPE",
       "section": "Timed-search stress test \u2014 figure caption",
       "sentence_sha256": "e85c917b9647be737c74f7b4eb53ade4af8b316517de08fe41e0554955ce70aa",
-      "source_line": 612,
+      "source_line": 644,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4290,7 +4655,7 @@
       "scope": "IN_SCOPE",
       "section": "Timed-search stress test \u2014 figure caption",
       "sentence_sha256": "14610e2bc8bfdc5b234086d7ebe1e17f19b699c92e80d8343d3a6c5891a85e42",
-      "source_line": 612,
+      "source_line": 644,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4312,30 +4677,28 @@
       "scope": "IN_SCOPE",
       "section": "Claim-admission consequence",
       "sentence_sha256": "8390b14f018853f6175c44112085acd1f6e8c652c259ac55a6517e110cfc2c0d",
-      "source_line": 624,
+      "source_line": 656,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-2a8efec0669841c5",
-      "exact_sentence": "Under the frozen rule this admitted a fixed-battery descriptive seed-indexed contrast and prespecified empirical reweighting sensitivity for \\FactorialUnits{} common units per cell (\\FactorialGames{} engine games).",
+      "claim_id": "C020",
+      "exact_sentence": "Under the actual frozen rule this gate pass authorized the planned seed-matched estimates, 95\\% paired-resampling intervals, and secondary exact McNemar calculation for \\FactorialUnits{} common units per cell (\\FactorialGames{} engine games).",
       "kind": "narrative",
       "matched_claim_types": [
         "quantitative",
-        "comparative",
         "procedural"
       ],
       "matched_rules": [
         "quantitative:\\\\(?:Preflight|Stress|Factorial|Historical|Primary|Representation|Training|Interaction|McNemar|Synthetic)[A-Za-z]*\\{?\\}?",
+        "quantitative:(?<![A-Za-z\\\\])\\d+(?:[.,]\\d+)*(?:\\\\?%|\\b)",
         "quantitative:\\b(?:estimate|interval|quantile|rate|count|mismatch|executions?|clusters?|units?|rows?|strata|bootstrap|resampl|p[ -]?value|McNemar)\\b",
-        "comparative:\\b(?:compar(?:e|ed|ing|ison)|contrast|difference|versus|between arms?|relative to|more than|less than|higher|lower|stronger|weaker|same|equal|identical|improve)\\b",
-        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b",
-        "procedural:\\b(?:schedule matching|execution repeatability|event alignment|analysis unit|seed-indexed|result independent|deterministic|synthetic)\\b"
+        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
       ],
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Claim-admission consequence",
-      "sentence_sha256": "2a8efec0669841c5f2d14ee6684a0aed0346f9ed22c9abce0cab97e00f1385aa",
-      "source_line": 624,
+      "sentence_sha256": "cc172a508022831893f80cbdc0c4d3a3fe07c8e93271a4cfe69fd8007aadb842",
+      "source_line": 656,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4352,11 +4715,11 @@
       "scope": "IN_SCOPE",
       "section": "Claim-admission consequence",
       "sentence_sha256": "cf0e7e6e9992415d8315d06dc0eb287366e2168098ce094b56fb3515233d66ff",
-      "source_line": 624,
+      "source_line": 656,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-a9c828c75ccf1a47",
+      "claim_id": "C019",
       "exact_sentence": "The factorial candidate rows were not trace repeated and recorded schedule, boundary seed, outcome, error, and decision count but no trace digests or semantic event identifiers.",
       "kind": "narrative",
       "matched_claim_types": [
@@ -4369,30 +4732,48 @@
       "scope": "IN_SCOPE",
       "section": "Claim-admission consequence",
       "sentence_sha256": "a9c828c75ccf1a474138046ce6f872d448ebbbb6365811b255ea762409182fea",
-      "source_line": 624,
+      "source_line": 656,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-7ad4ef3c6c9a6341",
-      "exact_sentence": "The rule therefore admitted no confidence interval, hypothesis test, population effect, trace-parity, event-aligned, counterfactual, or full-CRN wording.",
+      "claim_id": "AUTO-96db2f891cbad6f4",
+      "exact_sentence": "A post-acquisition methods audit therefore declines the frozen plan's inferential labels and permits only a fixed-battery descriptive seed-indexed contrast and empirical reweighting sensitivity.",
       "kind": "narrative",
       "matched_claim_types": [
-        "quantitative",
+        "comparative",
         "procedural"
       ],
       "matched_rules": [
-        "quantitative:\\b(?:estimate|interval|quantile|rate|count|mismatch|executions?|clusters?|units?|rows?|strata|bootstrap|resampl|p[ -]?value|McNemar)\\b",
-        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
+        "comparative:\\b(?:compar(?:e|ed|ing|ison)|contrast|difference|versus|between arms?|relative to|more than|less than|higher|lower|stronger|weaker|same|equal|identical|improve)\\b",
+        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b",
+        "procedural:\\b(?:schedule matching|execution repeatability|event alignment|analysis unit|seed-indexed|result independent|deterministic|synthetic)\\b"
       ],
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Claim-admission consequence",
-      "sentence_sha256": "7ad4ef3c6c9a63412900915de2577561882ad5cb7dfdd037967444517f9c201b",
-      "source_line": 624,
+      "sentence_sha256": "96db2f891cbad6f4b1e5aa9878094929d4dcb5a027fa9c8c81c439adca1f71c6",
+      "source_line": 656,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-05990e045d7cadf4",
+      "claim_id": "AUTO-b0c20b7874eae9c7",
+      "exact_sentence": "It admits no population effect, trace-parity, event-aligned, counterfactual, or full-CRN wording.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "procedural"
+      ],
+      "matched_rules": [
+        "procedural:fail-closed-evidentiary-prose-catch-all"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Claim-admission consequence",
+      "sentence_sha256": "b0c20b7874eae9c7418276712be1b628cd3c8fc35ed8aed30b2a3c0933777097",
+      "source_line": 656,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "C021",
       "exact_sentence": "The total fixed-package contrast on that battery was \\PrimaryEstimatePP{} \\pp{}.",
       "kind": "narrative",
       "matched_claim_types": [
@@ -4407,52 +4788,50 @@
       "scope": "IN_SCOPE",
       "section": "Claim-admission consequence",
       "sentence_sha256": "05990e045d7cadf4009797db0965da253211ec8f245ec6914da7310828ab80e5",
-      "source_line": 637,
+      "source_line": 671,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-aad1f57df25662e3",
-      "exact_sentence": "The 2.5th and 97.5th percentiles of the frozen stratified paired-unit reweighting distribution were [\\PrimaryLowPP{}, \\PrimaryHighPP{}].",
+      "claim_id": "AUTO-3ec258d0a583c7ad",
+      "exact_sentence": "The 2.5th and 97.5th percentiles from the prespecified stratified paired- unit resampling algorithm, relabeled as descriptive empirical reweighting, were [\\PrimaryLowPP{}, \\PrimaryHighPP{}].",
       "kind": "narrative",
       "matched_claim_types": [
-        "quantitative",
-        "procedural"
+        "quantitative"
       ],
       "matched_rules": [
         "quantitative:\\\\(?:Preflight|Stress|Factorial|Historical|Primary|Representation|Training|Interaction|McNemar|Synthetic)[A-Za-z]*\\{?\\}?",
         "quantitative:(?<![A-Za-z\\\\])\\d+(?:[.,]\\d+)*(?:\\\\?%|\\b)",
-        "quantitative:\\b(?:estimate|interval|quantile|rate|count|mismatch|executions?|clusters?|units?|rows?|strata|bootstrap|resampl|p[ -]?value|McNemar)\\b",
-        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
+        "quantitative:\\b(?:estimate|interval|quantile|rate|count|mismatch|executions?|clusters?|units?|rows?|strata|bootstrap|resampl|p[ -]?value|McNemar)\\b"
       ],
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Claim-admission consequence",
-      "sentence_sha256": "aad1f57df25662e3335b03a448190ec2c1d64148b828f0732d11ba08e8f895af",
-      "source_line": 637,
+      "sentence_sha256": "3ec258d0a583c7adadc8473702ce291cd1887425f73ea1da4b5c2e2476de7100",
+      "source_line": 671,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-49ce970853b811c0",
-      "exact_sentence": "They span zero; ``null-compatible'' is used here, if at all, only to describe that empirical reweighting sensitivity and not as a hypothesis-test result, an unresolved population effect, or evidence of equivalence.",
+      "claim_id": "AUTO-ec9876b2d2978cf0",
+      "exact_sentence": "They span both signs; no null test, population effect, or equivalence conclusion is drawn.",
       "kind": "narrative",
       "matched_claim_types": [
         "quantitative",
         "procedural"
       ],
       "matched_rules": [
-        "quantitative:\\bzero\\b",
+        "quantitative:\\bboth signs\\b",
         "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
       ],
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Claim-admission consequence",
-      "sentence_sha256": "49ce970853b811c0ce5ded54556a3bc718a998519177a5fde012939906bf6c97",
-      "source_line": 637,
+      "sentence_sha256": "ec9876b2d2978cf09a60fc62d252dd2f07f3f12c90d28cf35fce97dfdc3b23ea",
+      "source_line": 671,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-72e439a6aa6990de",
-      "exact_sentence": "Git history orders the rule commit before retained result artifacts, and replacing every outcome value while holding the evidence fixed leaves the admission decision unchanged.",
+      "claim_id": "C020A",
+      "exact_sentence": "Git history orders the binary gate commit before retained result artifacts, and replacing every outcome value while holding gate evidence fixed leaves that gate decision unchanged.",
       "kind": "narrative",
       "matched_claim_types": [
         "procedural"
@@ -4463,8 +4842,25 @@
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Claim-admission consequence",
-      "sentence_sha256": "72e439a6aa6990de6508a5900b2d08e20aa9c1a2c7a0f5347b9eeab7f8d7686b",
-      "source_line": 637,
+      "sentence_sha256": "cb9dc3a26713443f71c336c5f29f0638f6cd74bc9c740eab33672647e386a323",
+      "source_line": 671,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-7648237ebefa927d",
+      "exact_sentence": "This functional invariance does not make the later descriptive taxonomy prospective.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "procedural"
+      ],
+      "matched_rules": [
+        "procedural:fail-closed-evidentiary-prose-catch-all"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Claim-admission consequence",
+      "sentence_sha256": "7648237ebefa927d18a99fdde7d884735667669065cce0594b4305b45bef8949",
+      "source_line": 671,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4483,7 +4879,7 @@
       "scope": "IN_SCOPE",
       "section": "Claim-admission consequence",
       "sentence_sha256": "1b46cd762fc5c3a800b30f26f1269527e76ac84e64043701134dc4178ac85acd",
-      "source_line": 637,
+      "source_line": 671,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4500,7 +4896,7 @@
       "scope": "IN_SCOPE",
       "section": "Interpretation and permitted claims",
       "sentence_sha256": "04a3d0c04f2acd8963ce4cccf3068dc544a44318f457f34e8df49bf08ecfc404",
-      "source_line": 651,
+      "source_line": 685,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4522,26 +4918,24 @@
       "scope": "IN_SCOPE",
       "section": "Interpretation and permitted claims",
       "sentence_sha256": "f644af1566c118a2701dde58b3fdacae9ebad66f0e602fad8b299ac2e841d519",
-      "source_line": 651,
+      "source_line": 685,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-ca8562f050c15872",
-      "exact_sentence": "Second, the historical available-record mismatch invalidated the planned historical paired decomposition under its frozen rule.",
+      "claim_id": "AUTO-052094bee84b683d",
+      "exact_sentence": "Second, a retrospectively frozen audit of already acquired historical outcomes invalidated the planned paired decomposition; it is a rule- application example, not prospective blinding evidence.",
       "kind": "narrative",
       "matched_claim_types": [
-        "quantitative",
         "procedural"
       ],
       "matched_rules": [
-        "quantitative:\\b(?:estimate|interval|quantile|rate|count|mismatch|executions?|clusters?|units?|rows?|strata|bootstrap|resampl|p[ -]?value|McNemar)\\b",
         "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
       ],
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Interpretation and permitted claims",
-      "sentence_sha256": "ca8562f050c1587232f6cbb0bdd6bf4039f4215e5371b033eb783a7d65434f7c",
-      "source_line": 651,
+      "sentence_sha256": "052094bee84b683dfc0a027202320fa8533183030065e80ca358b8a4a68fbae9",
+      "source_line": 685,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4563,24 +4957,24 @@
       "scope": "IN_SCOPE",
       "section": "Interpretation and permitted claims",
       "sentence_sha256": "9a7916e0c70dd413438b016dee50b3f149abe895a4fe30a1de968dd4844f0e08",
-      "source_line": 651,
+      "source_line": 685,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-83ebff5fd12dce88",
-      "exact_sentence": "Fourth, the admitted factorial produced fixed-battery descriptive contrasts and empirical reweighting quantiles that span zero, without establishing a population effect, equivalence, or superiority.",
+      "claim_id": "AUTO-92cc88627c86a2bd",
+      "exact_sentence": "Fourth, a post-acquisition conservative report of the factorial gives fixed-battery descriptive contrasts and empirical reweighting quantiles that span both signs, without establishing a population effect, equivalence, or superiority.",
       "kind": "narrative",
       "matched_claim_types": [
         "quantitative"
       ],
       "matched_rules": [
-        "quantitative:\\bzero\\b"
+        "quantitative:\\bboth signs\\b"
       ],
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Interpretation and permitted claims",
-      "sentence_sha256": "83ebff5fd12dce8815f16e1b9f2a0df0d0a2f18c6b0efb578818c1bb53cc79f8",
-      "source_line": 651,
+      "sentence_sha256": "92cc88627c86a2bd0c559e682f89f1287ca50edde003e06caca72e60ab3a8ba9",
+      "source_line": 685,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4600,7 +4994,7 @@
       "scope": "IN_SCOPE",
       "section": "Interpretation and permitted claims",
       "sentence_sha256": "8fbbf3ad0ee7567343981b76a062fd5be0ac0dad9eb0a8f758c3440552b21157",
-      "source_line": 662,
+      "source_line": 698,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4617,7 +5011,7 @@
       "scope": "IN_SCOPE",
       "section": "Interpretation and permitted claims",
       "sentence_sha256": "daf0c59d045c235c0c54d9b2831fa31f266f26e96f48c73ced6bad66d1a10d22",
-      "source_line": 662,
+      "source_line": 698,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4636,7 +5030,7 @@
       "scope": "IN_SCOPE",
       "section": "Interpretation and permitted claims",
       "sentence_sha256": "51951df2fda00784b2dafd4a2582a83c056a413d37efb9cb9d3a2255353cffc1",
-      "source_line": 662,
+      "source_line": 698,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4653,7 +5047,7 @@
       "scope": "IN_SCOPE",
       "section": "Interpretation and permitted claims",
       "sentence_sha256": "8a6a11ff55f2a0341a06bdb68dc022f6c05e089893ab102400d066666706ba19",
-      "source_line": 662,
+      "source_line": 698,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4670,7 +5064,7 @@
       "scope": "IN_SCOPE",
       "section": "Interpretation and permitted claims",
       "sentence_sha256": "da9233d7d66d1d6c8e517990aa6189ca406b539287d14e9b958031a5dc255ce8",
-      "source_line": 670,
+      "source_line": 706,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4687,7 +5081,7 @@
       "scope": "IN_SCOPE",
       "section": "Interpretation and permitted claims",
       "sentence_sha256": "52be121e0bfc7e1471998f8be3bd1284da8532f71d0354afe0d5b0cef62171b6",
-      "source_line": 670,
+      "source_line": 706,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4704,7 +5098,7 @@
       "scope": "IN_SCOPE",
       "section": "Interpretation and permitted claims",
       "sentence_sha256": "bd7829ecf8713bcc35459673a45d1c6877f96c5dd18f49a102f12fe3f44bddc2",
-      "source_line": 670,
+      "source_line": 706,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4721,7 +5115,7 @@
       "scope": "IN_SCOPE",
       "section": "Interpretation and permitted claims",
       "sentence_sha256": "07bee232639d3845f3b837ae7b0980d5e4462a976544282910837540fce857a7",
-      "source_line": 670,
+      "source_line": 706,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4740,7 +5134,7 @@
       "scope": "IN_SCOPE",
       "section": "Limitations",
       "sentence_sha256": "933d07d8d31bf0e50723c868b51903a914c63d2ea0593d2bdd0c6c8c59d2ef46",
-      "source_line": 678,
+      "source_line": 714,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4757,7 +5151,7 @@
       "scope": "IN_SCOPE",
       "section": "Limitations",
       "sentence_sha256": "e2da33f81c9e7540052f4237da895b0d8f0b8519db10a338e2e00284e4e860ce",
-      "source_line": 678,
+      "source_line": 714,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4774,7 +5168,7 @@
       "scope": "IN_SCOPE",
       "section": "Limitations",
       "sentence_sha256": "1e57903f739cb4aa1fe264555ab112ad7430b953bbea926dc927ec0f8177673b",
-      "source_line": 678,
+      "source_line": 714,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4791,7 +5185,26 @@
       "scope": "IN_SCOPE",
       "section": "Limitations",
       "sentence_sha256": "cf6765066253375adeb5dd3b1db44ddbcd91f35c54a3ea6581604adf729afa36",
-      "source_line": 678,
+      "source_line": 714,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-22a6141900657ea8",
+      "exact_sentence": "The frozen plan used inferential labels for these resampling outputs; treating the same numbers only as descriptive sensitivity is a post-acquisition conservative reporting decision, not a prospectively validated claim map.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "comparative",
+        "procedural"
+      ],
+      "matched_rules": [
+        "comparative:\\b(?:compar(?:e|ed|ing|ison)|contrast|difference|versus|between arms?|relative to|more than|less than|higher|lower|stronger|weaker|same|equal|identical|improve)\\b",
+        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Limitations",
+      "sentence_sha256": "22a6141900657ea889f16a79b6ff274949ca2590636f3fb316842aed545ce39f",
+      "source_line": 714,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4808,24 +5221,26 @@
       "scope": "IN_SCOPE",
       "section": "Limitations",
       "sentence_sha256": "b2a4938ab26fb8ba83ef81fc9c957fac791e79c6d0ab59a97c4c85a93a62300f",
-      "source_line": 689,
+      "source_line": 728,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-23b1210efadf0f04",
-      "exact_sentence": "Digest--byte-count agreement is exact for the recorded projection but cannot validate omitted state.",
+      "claim_id": "AUTO-401c7bf0665482c5",
+      "exact_sentence": "Digest--byte-count agreement is exact for the recorded projection but cannot validate omitted state; byte-count equality is a later integrity extension to the frozen digest endpoint.",
       "kind": "narrative",
       "matched_claim_types": [
-        "quantitative"
+        "quantitative",
+        "procedural"
       ],
       "matched_rules": [
-        "quantitative:\\b(?:estimate|interval|quantile|rate|count|mismatch|executions?|clusters?|units?|rows?|strata|bootstrap|resampl|p[ -]?value|McNemar)\\b"
+        "quantitative:\\b(?:estimate|interval|quantile|rate|count|mismatch|executions?|clusters?|units?|rows?|strata|bootstrap|resampl|p[ -]?value|McNemar)\\b",
+        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
       ],
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Limitations",
-      "sentence_sha256": "23b1210efadf0f049a9af751f382e4bba7e7ac9e8e36d95c41c588109939542a",
-      "source_line": 689,
+      "sentence_sha256": "401c7bf0665482c5f491f64dd064623dc44cbe8c9f62ab2adbbd07715f286e93",
+      "source_line": 728,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4844,7 +5259,7 @@
       "scope": "IN_SCOPE",
       "section": "Limitations",
       "sentence_sha256": "f9fe2faf141c6fcf9708339a637c4c524198446aaa54235028e75e7defd861f1",
-      "source_line": 689,
+      "source_line": 728,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4861,7 +5276,77 @@
       "scope": "IN_SCOPE",
       "section": "Limitations",
       "sentence_sha256": "13a948186945b29ce698dd14727e5c106dd7cbfeaf6a29e8e46e9c20fd47815f",
-      "source_line": 689,
+      "source_line": 728,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-dad80a8029bea38a",
+      "exact_sentence": "The unsigned deviation record also documents two missing secondary stress outputs promised by the frozen plan.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "procedural"
+      ],
+      "matched_rules": [
+        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Limitations",
+      "sentence_sha256": "dad80a8029bea38a6f85d15cfbf77deeef5c33bf3e893c93e9525f4904c26905",
+      "source_line": 739,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-c39770fd72459fe1",
+      "exact_sentence": "First-divergence localization cannot be independently verified without released raw trace lines, and timing summaries are absent from the release.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "novelty",
+        "procedural"
+      ],
+      "matched_rules": [
+        "novelty:\\bfirst\\b",
+        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Limitations",
+      "sentence_sha256": "c39770fd72459fe1b022e6b79d51b1195df27cc1d21f0003a531f83f2940bc3c",
+      "source_line": 739,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-ef8a83a6e39ce643",
+      "exact_sentence": "Neither omission is treated as zero.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "quantitative"
+      ],
+      "matched_rules": [
+        "quantitative:\\bzero\\b"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Limitations",
+      "sentence_sha256": "ef8a83a6e39ce643222360bb34a6ad75cacf196fc339ba4c922e88263d8d4322",
+      "source_line": 739,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-8c4121e9b48e3e0c",
+      "exact_sentence": "They leave the primary digest-disagreement result intact but prevent a claim of complete protocol reporting until a human author verifies the underlying retention and approves or amends the deviation record.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "procedural"
+      ],
+      "matched_rules": [
+        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Limitations",
+      "sentence_sha256": "8c4121e9b48e3e0c8083aaced89f63f803a6c33344591c2c11e1f20fc7736a55",
+      "source_line": 739,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4881,7 +5366,7 @@
       "scope": "IN_SCOPE",
       "section": "Limitations",
       "sentence_sha256": "146178deec868860397f0c328084c14791de94eddd878ac14183db53e97ca6bb",
-      "source_line": 699,
+      "source_line": 747,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4899,7 +5384,7 @@
       "scope": "IN_SCOPE",
       "section": "Limitations",
       "sentence_sha256": "4f8f5a07691c7220fd00d5bc9f874f98f8a8a2b9dabb3dd2f490e1f399d7121f",
-      "source_line": 699,
+      "source_line": 747,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4920,7 +5405,7 @@
       "scope": "IN_SCOPE",
       "section": "Limitations",
       "sentence_sha256": "c236702811020fbfe03caf5ed49b5e0d7e50a4a19e5cd071eb331d9bca7ecd4d",
-      "source_line": 699,
+      "source_line": 747,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4939,7 +5424,7 @@
       "scope": "IN_SCOPE",
       "section": "Limitations",
       "sentence_sha256": "35916721ae91245a732bf4322d012fa5d62dbdb8dafdb81a33de0ee5e3f34074",
-      "source_line": 707,
+      "source_line": 755,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4956,7 +5441,7 @@
       "scope": "IN_SCOPE",
       "section": "Limitations",
       "sentence_sha256": "21f6fdd1c56d9ef74d5513a900a15abfcca0afe5d4943cca861915cd55d8e3e1",
-      "source_line": 707,
+      "source_line": 755,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -4973,12 +5458,12 @@
       "scope": "IN_SCOPE",
       "section": "Conclusion",
       "sentence_sha256": "b08b81627eadc1aa598be3e5bdb3e42c9d9201cd598c5c35ee68ae004e6f7074",
-      "source_line": 714,
+      "source_line": 762,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-a524df2708d53df3",
-      "exact_sentence": "The protocol connects each object to observable evidence and to a frozen reporting consequence.",
+      "claim_id": "AUTO-20dbba4257f7693c",
+      "exact_sentence": "The protocol connects each object to observable evidence and to a fail-closed reporting consequence that future users must freeze before acquisition.",
       "kind": "narrative",
       "matched_claim_types": [
         "procedural"
@@ -4989,13 +5474,13 @@
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Conclusion",
-      "sentence_sha256": "a524df2708d53df3ecb89da70197ddc80fbe5d28cb2b0e1b9bf03bb098b406b2",
-      "source_line": 714,
+      "sentence_sha256": "20dbba4257f7693c0f64b241f4badd20c83f6fe05e9ba9c4540ded599333f7c0",
+      "source_line": 762,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-740fb3dcb56614e4",
-      "exact_sentence": "Its synthetic suite demonstrates the logical failure modes and an event-keyed repair; its restricted case study shows both a failed historical gate and a passing prospective qualification scope, followed by a fixed-battery descriptive factorial and reweighting sensitivity.",
+      "claim_id": "AUTO-c2f46f4932f2de96",
+      "exact_sentence": "Its synthetic suite demonstrates the logical failure modes and an event-keyed repair; its restricted case study shows both a failed retrospective historical audit and a passing prospective qualification scope, followed by a deliberately conservative post-acquisition description of the fixed factorial battery.",
       "kind": "narrative",
       "matched_claim_types": [
         "procedural"
@@ -5007,8 +5492,8 @@
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Conclusion",
-      "sentence_sha256": "740fb3dcb56614e416773a84bd282399eee43a97caa7abf0f66c8b0dd8aa2fc0",
-      "source_line": 714,
+      "sentence_sha256": "c2f46f4932f2de9683d75682c6820af9ed831622996f2324e665d6136d0d6316",
+      "source_line": 762,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5029,7 +5514,7 @@
       "scope": "IN_SCOPE",
       "section": "Conclusion",
       "sentence_sha256": "9803a1483cb8081f078e0af72ee5364701ce0c33b54804346e51b85099b42905",
-      "source_line": 714,
+      "source_line": 762,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5046,7 +5531,7 @@
       "scope": "IN_SCOPE",
       "section": "Artificial-intelligence assistance",
       "sentence_sha256": "3d5660c63e7db6bcef04964bb6feba6e75de86907ccedc858a042e0322a23b2f",
-      "source_line": 728,
+      "source_line": 777,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5063,7 +5548,7 @@
       "scope": "IN_SCOPE",
       "section": "Artificial-intelligence assistance",
       "sentence_sha256": "fbc880b5deb1573a62610f7ad521495f419d507bb5bf157eb449696d192ffee4",
-      "source_line": 728,
+      "source_line": 777,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5082,7 +5567,7 @@
       "scope": "IN_SCOPE",
       "section": "Artificial-intelligence assistance",
       "sentence_sha256": "ade24cc5561e76e02e645d6bdb59becf8f6f055d82d926268e59e7f75fd86d47",
-      "source_line": 728,
+      "source_line": 777,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5099,7 +5584,7 @@
       "scope": "IN_SCOPE",
       "section": "Artificial-intelligence assistance",
       "sentence_sha256": "4bc9007297c928738def62c9634e6bccb316e0f5320093436a041d610d765135",
-      "source_line": 728,
+      "source_line": 777,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5116,7 +5601,7 @@
       "scope": "IN_SCOPE",
       "section": "Artificial-intelligence assistance",
       "sentence_sha256": "336ec77e7925253c8cd0137ff9a07ced7a785eef58ce2ccf2a2ec3763bda68a8",
-      "source_line": 728,
+      "source_line": 777,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5133,7 +5618,7 @@
       "scope": "IN_SCOPE",
       "section": "Author contributions",
       "sentence_sha256": "155201d2307b3682b8648f3ed4905f82bb45f481551b5e4881a5a48135b4d3a7",
-      "source_line": 741,
+      "source_line": 790,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5150,7 +5635,7 @@
       "scope": "IN_SCOPE",
       "section": "Author contributions",
       "sentence_sha256": "9d4bf565a5b523c735384be3d908249ba995b25ddf11afc072a3e379ccdc5132",
-      "source_line": 741,
+      "source_line": 790,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5167,7 +5652,7 @@
       "scope": "IN_SCOPE",
       "section": "Competing interests",
       "sentence_sha256": "9f713d8cc9f7eeb4f5a390f7d67a0d786ea4dd5dc90229b396d881b8a5a0863f",
-      "source_line": 749,
+      "source_line": 798,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5184,7 +5669,7 @@
       "scope": "IN_SCOPE",
       "section": "Competing interests",
       "sentence_sha256": "acffa69e8c67c3db4b6961f1b458736526a2d7a3776f89d8b5c4887081fecf11",
-      "source_line": 749,
+      "source_line": 798,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5204,7 +5689,7 @@
       "scope": "IN_SCOPE",
       "section": "Data Availability Statement",
       "sentence_sha256": "ab1f1cbbcbbadf31565b08287c6d3bddd69fb33c59c28bd7a71990283495b314",
-      "source_line": 756,
+      "source_line": 805,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5222,7 +5707,25 @@
       "scope": "IN_SCOPE",
       "section": "Data Availability Statement",
       "sentence_sha256": "33eeb97d12bbefa76ba9d946fb761798367364708a2c8869c66fd4967014a81c",
-      "source_line": 756,
+      "source_line": 805,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-8682c7f8781d3dca",
+      "exact_sentence": "The unsigned chronology and omission register is included as \\texttt{supplement/PROTOCOL\\_DEVIATIONS.md}; its pending status is neither an amendment nor human approval.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "procedural"
+      ],
+      "matched_rules": [
+        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b",
+        "procedural:\\\\texttt\\{"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Data Availability Statement",
+      "sentence_sha256": "8682c7f8781d3dcab721c7253a9ac51cd731bd1044fd2995c31815de4b4b9f7c",
+      "source_line": 805,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5244,7 +5747,7 @@
       "scope": "IN_SCOPE",
       "section": "Data Availability Statement",
       "sentence_sha256": "6fe1d999932135fc3a15cdaa6d9e13eca36325006d6084e4ebf86dcbecbe7c33",
-      "source_line": 756,
+      "source_line": 805,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5263,7 +5766,7 @@
       "scope": "IN_SCOPE",
       "section": "Data Availability Statement",
       "sentence_sha256": "ec19d9f89a90510ac8810d310de906f82b687ad957be0fd275457c917a91fdf6",
-      "source_line": 756,
+      "source_line": 805,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5282,7 +5785,7 @@
       "scope": "IN_SCOPE",
       "section": "Data Availability Statement",
       "sentence_sha256": "02ba1da02bcb9bdf8098c2acbdc07ca77a4d4362f0efdf491eb33244cce13c11",
-      "source_line": 768,
+      "source_line": 820,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5299,7 +5802,7 @@
       "scope": "IN_SCOPE",
       "section": "Data Availability Statement",
       "sentence_sha256": "da9ae2a0933d3b1d324b02c3c8842e8b137c5c872046354495a8eff8d6081257",
-      "source_line": 768,
+      "source_line": 820,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5316,7 +5819,7 @@
       "scope": "IN_SCOPE",
       "section": "Data Availability Statement",
       "sentence_sha256": "cd18975b635217ef11382b8b67e31dcf0d55279044a5336c7222d39df4945e08",
-      "source_line": 768,
+      "source_line": 820,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5333,7 +5836,7 @@
       "scope": "IN_SCOPE",
       "section": "Data Availability Statement",
       "sentence_sha256": "432b4f1a4b44270528cbf52d47f1b3052a87bc34a3a087aa487976348fc36bdc",
-      "source_line": 768,
+      "source_line": 820,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5352,7 +5855,7 @@
       "scope": "IN_SCOPE",
       "section": "Trace record and study-specific fields",
       "sentence_sha256": "36411b4d73e5f3e908b28593476b769ba63169574bd74fc888ea462a34dd9531",
-      "source_line": 782,
+      "source_line": 834,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5369,7 +5872,7 @@
       "scope": "IN_SCOPE",
       "section": "Trace record and study-specific fields",
       "sentence_sha256": "eb4adfd6ac87937f7e57eebbf5611904c9fe1288f37f4ba28980bf9c0591139f",
-      "source_line": 782,
+      "source_line": 834,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5386,7 +5889,7 @@
       "scope": "IN_SCOPE",
       "section": "Trace record and study-specific fields",
       "sentence_sha256": "19bc8061957efc97ae0ccf72b979579d335f2901d0f24f54c45df46809df2022",
-      "source_line": 782,
+      "source_line": 834,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5403,7 +5906,7 @@
       "scope": "IN_SCOPE",
       "section": "Trace record and study-specific fields",
       "sentence_sha256": "715cbb52469d40167a11a9623a5e8f9301e1797d714c45ba91eddd5414f4a663",
-      "source_line": 782,
+      "source_line": 834,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5420,7 +5923,7 @@
       "scope": "IN_SCOPE",
       "section": "Trace record and study-specific fields",
       "sentence_sha256": "1a19b6454841cfdddd1d29430615245abb29eb0f3b675f3e82927aa0964687ce",
-      "source_line": 782,
+      "source_line": 834,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5437,7 +5940,7 @@
       "scope": "IN_SCOPE",
       "section": "Secondary factorial details",
       "sentence_sha256": "b9069116c6cfc9a1501926c7a83278be3ade52b5776fa289e57ba89d97d7ebbc",
-      "source_line": 794,
+      "source_line": 846,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5457,7 +5960,7 @@
       "scope": "IN_SCOPE",
       "section": "Secondary factorial details",
       "sentence_sha256": "ad9e614eeff905655ae9871176bad718b9da473d9984a8c73475b6e634f13c1a",
-      "source_line": 794,
+      "source_line": 846,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5474,7 +5977,7 @@
       "scope": "IN_SCOPE",
       "section": "Secondary factorial details",
       "sentence_sha256": "b6e7f82ae7d3ce28d3d3aff151371edd0869a41ff4f6c5ff3a1043eaf5996960",
-      "source_line": 794,
+      "source_line": 846,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5493,7 +5996,7 @@
       "scope": "IN_SCOPE",
       "section": "Secondary factorial details",
       "sentence_sha256": "2028b2f479f6c466b82cbe037aa29fdbe303d19bc43228adf113d365646b676e",
-      "source_line": 801,
+      "source_line": 853,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5510,7 +6013,7 @@
       "scope": "IN_SCOPE",
       "section": "Secondary factorial details",
       "sentence_sha256": "a93784f4838b29b00a89b8c587e721f82b757d7841485da1fdaea9a23e270059",
-      "source_line": 801,
+      "source_line": 853,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5527,7 +6030,7 @@
       "scope": "IN_SCOPE",
       "section": "Secondary factorial details",
       "sentence_sha256": "25cb63c918d786e48bb6fc11f86162bb388738a04bf9c7994ccfa88b733236d4",
-      "source_line": 812,
+      "source_line": 864,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5544,7 +6047,7 @@
       "scope": "IN_SCOPE",
       "section": "Secondary factorial details",
       "sentence_sha256": "51e62319741d235632f0c4f72293a727b9e087c88e2b017767148e399c92a93c",
-      "source_line": 812,
+      "source_line": 864,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5561,7 +6064,7 @@
       "scope": "IN_SCOPE",
       "section": "Secondary factorial details",
       "sentence_sha256": "a5c339732bc84563817aae4491e06d44bda41e34916cb4527f41ab01dea60a14",
-      "source_line": 812,
+      "source_line": 864,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5579,7 +6082,7 @@
       "scope": "IN_SCOPE",
       "section": "Secondary factorial details",
       "sentence_sha256": "e9cb033b5384f6acf4af0e1c4d79936d51f18401d0c091942f320ffe8728fa50",
-      "source_line": 812,
+      "source_line": 864,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5596,11 +6099,11 @@
       "scope": "IN_SCOPE",
       "section": "Secondary factorial details",
       "sentence_sha256": "1aed2daccd519356c73076eb0ff44c39dd4f6f8db233bcbbe03aad65aab0259d",
-      "source_line": 812,
+      "source_line": 864,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-81de346a7b6b8d81",
+      "claim_id": "C022",
       "exact_sentence": "The representation, training, and interaction contrasts were \\RepresentationEstimatePP{}, \\TrainingEstimatePP{}, and \\InteractionEstimatePP{} \\pp{}, respectively; the empirical reweighting quantiles for all four contrasts span zero.",
       "kind": "narrative",
       "matched_claim_types": [
@@ -5614,7 +6117,7 @@
       "scope": "IN_SCOPE",
       "section": "Secondary factorial details",
       "sentence_sha256": "81de346a7b6b8d817b4df103b59bf4bed8f26fdb6df3127033b6c885cdd0c37f",
-      "source_line": 820,
+      "source_line": 872,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5633,7 +6136,7 @@
       "scope": "IN_SCOPE",
       "section": "Secondary factorial details",
       "sentence_sha256": "2d19bd84a7de135652ccf10d43d57e9f389e726f015d24eb13e144e4339e1506",
-      "source_line": 820,
+      "source_line": 872,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5650,28 +6153,26 @@
       "scope": "IN_SCOPE",
       "section": "Secondary factorial details",
       "sentence_sha256": "82091d25515dafe20b02d31046f2c80af98c11c32d4ac63bd05ccb2d79ff9b37",
-      "source_line": 820,
+      "source_line": 872,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-b86464243d0bd5b4",
-      "exact_sentence": "Prespecified fixed-battery factorial contrasts and the 2.5th and 97.5th percentiles of the frozen stratified paired-unit reweighting distribution for \\FactorialUnits{} schedule-indexed units.",
+      "claim_id": "AUTO-80d7dee4cceb4b9e",
+      "exact_sentence": "Prespecified fixed-battery factorial contrasts and the 2.5th and 97.5th percentiles from the prespecified stratified paired-unit resampling algorithm, reported as empirical reweighting for \\FactorialUnits{} schedule-indexed units.",
       "kind": "caption",
       "matched_claim_types": [
-        "quantitative",
-        "procedural"
+        "quantitative"
       ],
       "matched_rules": [
         "quantitative:\\\\(?:Preflight|Stress|Factorial|Historical|Primary|Representation|Training|Interaction|McNemar|Synthetic)[A-Za-z]*\\{?\\}?",
         "quantitative:(?<![A-Za-z\\\\])\\d+(?:[.,]\\d+)*(?:\\\\?%|\\b)",
-        "quantitative:\\b(?:estimate|interval|quantile|rate|count|mismatch|executions?|clusters?|units?|rows?|strata|bootstrap|resampl|p[ -]?value|McNemar)\\b",
-        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
+        "quantitative:\\b(?:estimate|interval|quantile|rate|count|mismatch|executions?|clusters?|units?|rows?|strata|bootstrap|resampl|p[ -]?value|McNemar)\\b"
       ],
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Secondary factorial details \u2014 figure caption",
-      "sentence_sha256": "b86464243d0bd5b4c7b9609a3d3f430f832e42406fcae810103b82aed39a8ac3",
-      "source_line": 832,
+      "sentence_sha256": "80d7dee4cceb4b9efc98109c9204a18b926fbbedd564f224626dc156bcf89506",
+      "source_line": 884,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5688,7 +6189,7 @@
       "scope": "IN_SCOPE",
       "section": "Secondary factorial details \u2014 figure caption",
       "sentence_sha256": "cb032628ac59671e03a18a1f77327982d5e9eacb63b975d58885099c594bf817",
-      "source_line": 832,
+      "source_line": 884,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5707,26 +6208,24 @@
       "scope": "IN_SCOPE",
       "section": "Secondary factorial details \u2014 figure caption",
       "sentence_sha256": "c9d7b536d7a579bd5cfdd7fb5261b942e27922e71f8f4c581f6331903f77d823",
-      "source_line": 832,
+      "source_line": 884,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
-      "claim_id": "AUTO-380a6e2be761dcca",
-      "exact_sentence": "The frozen timed-search procedure reweights whole seed-condition clusters, retaining all four execution profiles together.",
+      "claim_id": "AUTO-d28c01aa1bafe304",
+      "exact_sentence": "The prespecified timed-search resampling algorithm reweights whole seed-condition clusters, retaining all four execution profiles together.",
       "kind": "narrative",
       "matched_claim_types": [
-        "quantitative",
-        "procedural"
+        "quantitative"
       ],
       "matched_rules": [
-        "quantitative:\\b(?:estimate|interval|quantile|rate|count|mismatch|executions?|clusters?|units?|rows?|strata|bootstrap|resampl|p[ -]?value|McNemar)\\b",
-        "procedural:\\b(?:protocol|procedure|workflow|method|implementation|stage|gate|rule|admission|audit|verify|verified|validation|test|suite|schema|manifest|hash|record|declare|freeze|frozen|require|reject|suppress|fail(?:s|ed)? closed|generate|compute|apply|define|classif|enumerat|input projection)\\b"
+        "quantitative:\\b(?:estimate|interval|quantile|rate|count|mismatch|executions?|clusters?|units?|rows?|strata|bootstrap|resampl|p[ -]?value|McNemar)\\b"
       ],
       "outside_scope_reason": null,
       "scope": "IN_SCOPE",
       "section": "Empirical reweighting details",
-      "sentence_sha256": "380a6e2be761dccafcce04320e85d964295f9496e3abefd3efb6ab07ff42d11f",
-      "source_line": 843,
+      "sentence_sha256": "d28c01aa1bafe304e87b6a3b291bdeaa8a138df7ab9727cceaaa199f0975627e",
+      "source_line": 896,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5745,7 +6244,7 @@
       "scope": "IN_SCOPE",
       "section": "Empirical reweighting details",
       "sentence_sha256": "b72daa2ac4c79e1d949fd2b30a1c09dda1f1cb4c7eebc06853c91303c9184f15",
-      "source_line": 843,
+      "source_line": 896,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5764,7 +6263,7 @@
       "scope": "IN_SCOPE",
       "section": "Empirical reweighting details",
       "sentence_sha256": "4047bf34578df2d9a111f58dc786825ce5e8214d8100e289e2169ebc94e8ab32",
-      "source_line": 843,
+      "source_line": 896,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5783,7 +6282,7 @@
       "scope": "IN_SCOPE",
       "section": "Empirical reweighting details",
       "sentence_sha256": "7c9936a5df285bb4e4f2d2fa6082b02148f82f7a3f4c377aec3f7243544595a3",
-      "source_line": 852,
+      "source_line": 905,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5800,7 +6299,24 @@
       "scope": "IN_SCOPE",
       "section": "Empirical reweighting details",
       "sentence_sha256": "de448ad7eae95d2142dedd15f8c4ce53ece1e2a04b4ac7251a273ab9c6174a9f",
-      "source_line": 852,
+      "source_line": 905,
+      "source_path": "paper/final_protocol/main.tex"
+    },
+    {
+      "claim_id": "AUTO-2e6570ea2dc9d1c0",
+      "exact_sentence": "Their descriptive interpretation is post-acquisition.",
+      "kind": "narrative",
+      "matched_claim_types": [
+        "procedural"
+      ],
+      "matched_rules": [
+        "procedural:fail-closed-evidentiary-prose-catch-all"
+      ],
+      "outside_scope_reason": null,
+      "scope": "IN_SCOPE",
+      "section": "Empirical reweighting details",
+      "sentence_sha256": "2e6570ea2dc9d1c0075547ba6d892fd85037cd73bed6169c5db2b73598a59821",
+      "source_line": 905,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5817,7 +6333,7 @@
       "scope": "IN_SCOPE",
       "section": "Empirical reweighting details",
       "sentence_sha256": "521d507bed5116d05821fb9b9d47e6a73ec836c6da856c0797c8aff84537716d",
-      "source_line": 852,
+      "source_line": 905,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5836,7 +6352,7 @@
       "scope": "IN_SCOPE",
       "section": "Empirical reweighting details",
       "sentence_sha256": "b9b1f9348df6c1d37d30ad5b816ffaeb0db917be4bb4573ca2831ac1f5b69237",
-      "source_line": 852,
+      "source_line": 905,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5853,7 +6369,7 @@
       "scope": "IN_SCOPE",
       "section": "Artifact and rights boundary",
       "sentence_sha256": "999b1473fc9ffda7a92f01b156cd1bc095c3e9f8e4e45ea4897a6203d4b79391",
-      "source_line": 862,
+      "source_line": 916,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5870,7 +6386,7 @@
       "scope": "IN_SCOPE",
       "section": "Artifact and rights boundary",
       "sentence_sha256": "2fb2e0bbd7a30ccbecca82c86b323553e5855671fb849782d6ef02af0bfe4fe0",
-      "source_line": 862,
+      "source_line": 916,
       "source_path": "paper/final_protocol/main.tex"
     },
     {
@@ -5887,7 +6403,7 @@
       "scope": "IN_SCOPE",
       "section": "Artifact and rights boundary",
       "sentence_sha256": "5ca6ff79230680073e1b05a157488c48b98d76dc7b02d99583549c89b3c40abf",
-      "source_line": 862,
+      "source_line": 916,
       "source_path": "paper/final_protocol/main.tex"
     }
   ],

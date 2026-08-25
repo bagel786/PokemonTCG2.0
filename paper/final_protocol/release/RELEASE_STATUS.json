@@ -1,7 +1,9 @@
 {
   "article_type": "APS Open Science Protocol Article",
   "citation_metadata": "INCOMPLETE_HUMAN_AUTHOR_METADATA",
+  "clean_environment_build_evidenced": false,
   "doi": null,
+  "environment_spec_scope": "direct_packages_only_not_transitive_locks",
   "license": "NO_LICENSE_GRANTED_PENDING_HUMAN_CONFIRMATION",
   "machine_verification_scope": "technical internal consistency only; not human, legal, licensing, archival, or publication readiness",
   "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",

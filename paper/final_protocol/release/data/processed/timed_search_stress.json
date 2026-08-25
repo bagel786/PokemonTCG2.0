@@ -2019,7 +2019,7 @@
     "reweighting_draws": 100000,
     "reweighting_seed": 2026083118,
     "reweighting_unit": "whole seed-condition cluster retaining all four profiles",
-    "role": "post-acquisition fixed-composition sensitivity to the frozen pooled reweighting",
+    "role": "post-acquisition fixed-composition descriptive sensitivity applied to the pooled resampling computation prespecified in the frozen plan",
     "stratum_disagreement_counts": {
       "timed-search-A/first": 44,
       "timed-search-A/second": 48,
@@ -2032,6 +2032,7 @@
   "pevl_level_6_boundary": "recorded trace mismatches and bounded source inspection identify plausible mechanisms in the exercised executions; no retained evidence supports an earliest-divergence localization or a unique causal source",
   "policy_error_present_clusters": 0,
   "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",
+  "protocol_deviation_status": "PENDING_HUMAN_SIGNOFF_UNSIGNED",
   "schema_version": 1,
   "status": "TRACE_DIVERGENCE",
   "strata": {
@@ -2108,6 +2109,8 @@
       }
     }
   },
+  "timing_summaries_included": false,
+  "timing_summaries_reason": "The review package omits the timing summaries promised by the frozen stress protocol.",
   "trace_disagreement": {
     "clusters": 200,
     "estimate": 0.495,

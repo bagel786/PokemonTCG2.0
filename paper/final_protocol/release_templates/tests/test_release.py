@@ -84,7 +84,42 @@ def test_admission_bundle_is_post_acquisition_formalization() -> None:
     assert "repeat and worker parity" in frozen
     assert "cross-arm event alignment" in frozen
     assert "finite-population" in frozen
+    assert "McNemar" in frozen
     assert "One mismatch suppresses every planned factorial contrast" in frozen
+    assumptions = " ".join(provenance["mapping_assumptions"])
+    assert "later post-acquisition conservative reporting restriction" in assumptions
+    assert "not evidence that this taxonomy was prospectively validated" in assumptions
+    assert "before data acquisition" in assumptions
+
+
+def test_protocol_deviation_is_explicit_and_unsigned() -> None:
+    deviation = (RELEASE / "docs/PROTOCOL_DEVIATIONS.md").read_text(encoding="utf-8")
+    deviation_words = " ".join(deviation.split())
+    stress = json.loads((RELEASE / "data/processed/timed_search_stress.json").read_text())
+    assert "PENDING_HUMAN_SIGNOFF_UNSIGNED" in deviation
+    assert "first-divergence positions and actors" in deviation
+    assert "timing summaries" in deviation
+    assert "Raw trace lines are absent" in deviation_words
+    assert "reporting/access deviation" in deviation
+    assert "99 among 200" in deviation
+    assert stress["earliest_divergence_localization_included"] is False
+    assert stress["timing_summaries_included"] is False
+    assert stress["protocol_deviation_status"] == "PENDING_HUMAN_SIGNOFF_UNSIGNED"
+
+
+def test_environment_specs_are_direct_only_and_unevidenced_as_clean_build() -> None:
+    readme = (RELEASE / "README.md").read_text(encoding="utf-8")
+    readme_words = " ".join(readme.split())
+    requirements = (RELEASE / "requirements-lock.txt").read_text(encoding="utf-8")
+    environment = (RELEASE / "environment.yml").read_text(encoding="utf-8")
+    status = json.loads((RELEASE / "RELEASE_STATUS.json").read_text())
+    assert "conda env create --file environment.yml" in readme
+    assert "python3 -m venv ../trace-validation-review-venv" in readme
+    assert "Neither file is a transitive dependency lock" in readme_words
+    assert "no successful fresh clean-environment construction" in readme_words
+    assert "not a transitive dependency lock" in requirements
+    assert "not a transitive dependency lock" in environment
+    assert status["clean_environment_build_evidenced"] is False
 
 
 def test_admission_decision_table_is_generated_from_rules() -> None:
@@ -93,6 +128,16 @@ def test_admission_decision_table_is_generated_from_rules() -> None:
     retained = (RELEASE / "docs/ADMISSION_DECISION_TABLE.md").read_text(encoding="utf-8")
     assert retained == generated
     assert protocol.decision_table_sha256() == __import__("hashlib").sha256(retained.encode()).hexdigest()
+    property_names = (
+        "result independence",
+        "prerequisite monotonicity",
+        "failure dominance",
+        "projection scoping",
+        "stateless determinism",
+        "unknown-state fail-closedness",
+        "strict claim ordering",
+    )
+    assert all(retained.count(f"`{name}`") == 1 for name in property_names)
 
 
 def test_result_independence_replaces_all_result_values() -> None:
@@ -225,7 +270,7 @@ def test_projection_scoping_and_unscoped_repeatability_suppression() -> None:
     assert result_scoped_decision["permitted_claim_class"] == "suppress"
 
 
-def test_determinism_and_idempotence() -> None:
+def test_stateless_repeat_run_determinism() -> None:
     from pevl_bench.evidence import verify_and_admit
 
     protocol = _protocol()
@@ -326,7 +371,7 @@ def test_public_admit_rejects_unavailable_external_evidence_root() -> None:
     assert rejected["verification_scope"].startswith("Verification failed")
 
 
-def test_unknown_missing_malformed_and_contradictory_fail_closed() -> None:
+def test_unknown_state_fail_closedness() -> None:
     protocol = _protocol()
     cases = []
 
@@ -376,7 +421,7 @@ def test_unknown_missing_malformed_and_contradictory_fail_closed() -> None:
         assert decision["permitted_claim_class"] == "suppress"
 
 
-def test_claim_class_ordering_and_complete_state_space() -> None:
+def test_strict_claim_ordering_and_complete_state_space() -> None:
     from pevl_bench.admission import CLAIM_CLASS_ORDER, EVIDENCE_STATES, FATAL_STATES
 
     protocol = _protocol()

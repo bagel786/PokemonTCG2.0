@@ -13,6 +13,7 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import itertools
 import json
 import math
 import re
@@ -116,6 +117,17 @@ ALLOWED_CLAIM_STATUSES = {
     "DERIVED_BY_CHECKED_SCRIPT",
 }
 
+PROHIBITED_PROVENANCE_PHRASES = {
+    "prospectively_frozen_claim_map": r"\bprospectively\s+frozen\s+claim\s+map\b",
+    "frozen_rule_admitted_descriptive": (
+        r"\bunder\s+the\s+frozen\s+rule\s+this\s+admitted\s+a\s+"
+        r"fixed[- ]battery\s+descriptive\b"
+    ),
+    "stage_8_executes_frozen_map": (
+        r"\bstage\s*8\s+executes\s+the\s+frozen\s+admission\s+map\b"
+    ),
+}
+
 
 def reject_json_constant(value: str) -> None:
     raise ValueError(f"non-finite JSON constant prohibited: {value}")
@@ -169,6 +181,182 @@ def normalize_title(value: str) -> str:
     value = value.replace("“", "").replace("”", "").replace('"', "")
     value = re.sub(r"[*_`{}]", "", value)
     return normalize_space(value).rstrip(".")
+
+
+def normalize_visible_prose(value: str, *, strip_latex_comments: bool = False) -> str:
+    """Normalize visible Markdown/LaTeX prose for bounded semantic checks.
+
+    LaTeX comments cannot satisfy a manuscript-disclosure requirement.  The
+    small amount of markup normalization here is intentionally conservative:
+    it preserves visible words while making escaped percent signs, nonbreaking
+    spaces, and TeX dashes comparable to ordinary prose.
+    """
+    visible_lines: list[str] = []
+    for line in value.splitlines():
+        comment = re.search(r"(?<!\\)%", line) if strip_latex_comments else None
+        visible_lines.append(line[: comment.start()] if comment else line)
+    text = "\n".join(visible_lines)
+    text = text.replace(r"\%", "%").replace("~", " ")
+    text = text.replace("---", "-").replace("--", "-")
+    text = text.replace("–", "-").replace("—", "-")
+    text = re.sub(
+        r"\\(?:emph|textbf|textit|texttt|paragraph|subsection|section)\*?\{([^{}]*)\}",
+        r" \1 ",
+        text,
+    )
+    text = text.replace("{", " ").replace("}", " ").replace("\\", " ")
+    return normalize_space(text)
+
+
+def semantic_terms_within(
+    text: str,
+    patterns: Iterable[str],
+    *,
+    max_span: int,
+) -> bool:
+    """Return true only when every required term occurs in one bounded window."""
+    matches = [list(re.finditer(pattern, text, re.I)) for pattern in patterns]
+    if any(not group for group in matches):
+        return False
+    for combination in itertools.product(*matches):
+        left = min(match.start() for match in combination)
+        right = max(match.end() for match in combination)
+        if right - left <= max_span:
+            return True
+    return False
+
+
+def provenance_semantics_state(
+    protocol_text: str,
+    manuscript_text: str,
+) -> dict[str, Any]:
+    """Evaluate the frozen-plan/completed-reporting provenance boundary.
+
+    These checks deliberately require explicit nearby terms.  Scattered uses
+    of words such as ``retrospective`` or ``deviation`` cannot accidentally
+    satisfy a disclosure about a different part of the study.
+    """
+    protocol = normalize_visible_prose(protocol_text)
+    manuscript = normalize_visible_prose(manuscript_text, strip_latex_comments=True)
+
+    state: dict[str, Any] = {
+        "frozen_95_percent_intervals": bool(
+            re.search(
+                r"\b95\s*%\s+intervals?\s+(?:use|uses|will use|are computed (?:with|from))\b",
+                protocol,
+                re.I,
+            )
+        ),
+        "frozen_exact_two_sided_mcnemar": bool(
+            re.search(
+                r"\bexact\s+two[- ]sided\s+mcnemar\s+(?:inference|test|analysis)\b",
+                protocol,
+                re.I,
+            )
+        ),
+        "frozen_stress_localization_timing_promise": semantic_terms_within(
+            protocol,
+            (
+                r"\bstress\s+test\b",
+                r"\blocali[sz]ation\b",
+                r"\btiming\s+summaries\b",
+                r"\bpublic\s+package\b",
+            ),
+            max_span=1200,
+        ),
+        "completed_case_taxonomy_is_post_acquisition": semantic_terms_within(
+            manuscript,
+            (
+                r"\bcompleted[- ]case\b",
+                r"\bdescriptive\b",
+                r"\blevel(?:\s+\d+)?\b",
+                r"\btaxonomy\b",
+                (
+                    r"(?:\breporting\s+(?:restriction|limit|taxonomy)s?\b|"
+                    r"\b(?:permits?|restricts?)\s+only\b|\bonly\b.{0,80}\bdescriptive\b)"
+                ),
+                r"\b(?:post[- ]acquisition|after\s+acquisition)\b",
+                (
+                    r"(?:(?:not|never|did\s+not|was\s+not).{0,100}\bfrozen\s+"
+                    r"(?:plan|protocol)\b|\bfrozen\s+(?:plan|protocol)\b.{0,100}"
+                    r"(?:not|never|did\s+not|was\s+not)|\bfuture\s+(?:study|users?)\b"
+                    r".{0,100}\bmust\s+(?:be\s+)?(?:freeze|frozen)\b.{0,80}"
+                    r"\b(?:before\s+acquisition|before\s+collecting\s+outcomes)\b)"
+                ),
+            ),
+            max_span=1200,
+        ),
+        "historical_audit_is_retrospective_not_blinding": semantic_terms_within(
+            manuscript,
+            (
+                r"\bfrozen\b",
+                r"\bhistorical\b",
+                r"\baudit(?:\s+rule)?\b",
+                r"\bretrospective\b",
+                (
+                    r"(?:\boutcomes?\b|\boutcome\s+(?:data|records?)\b).{0,90}"
+                    r"(?:already\s+existed|were\s+already\s+available|had\s+(?:already\s+)?"
+                    r"been\s+(?:generated|recorded|observed|created)|existed|were\s+available)"
+                ),
+                (
+                    r"(?:not|does\s+not|did\s+not|cannot).{0,90}(?:evidence|proof|establish)"
+                    r".{0,70}\bprospective\s+blinding\b"
+                ),
+            ),
+            max_span=900,
+        ),
+        "digest_byte_is_later_extension_without_count_change": semantic_terms_within(
+            manuscript,
+            (
+                r"\bdigests?\b",
+                r"\bbyte[- ]counts?\b",
+                (
+                    r"\b(?:(?:later|post[- ]acquisition)\s+(?:integrity\s+)?(?:extension|addition)|"
+                    r"added\s+later\s+as\s+an?\s+integrity\s+(?:extension|check))\b"
+                ),
+                (
+                    r"(?:\bfrozen\b.{0,70}\bendpoint\b.{0,70}\bdigests?\b|"
+                    r"\bdigests?\b.{0,70}\b(?:was|remained)\b.{0,50}\bfrozen\b"
+                    r".{0,40}\bendpoint\b)"
+                ),
+                (
+                    r"(?:\b(?:did|does)\s+not\b.{0,60}\bchange\b.{0,50}\bcounts?\b|"
+                    r"\bchanged\s+no\b.{0,50}\bcounts?\b|\bcounts?\b.{0,50}"
+                    r"(?:\bunchanged\b|\bdid\s+not\s+change\b)|\bthe\s+same\s+"
+                    r"\d+\s*/\s*\d+\b|\b(?:did|does)\s+not\b.{0,40}\balter\b"
+                    r".{0,40}\bdecision\b)"
+                ),
+            ),
+            max_span=950,
+        ),
+        "stress_omission_is_reporting_deviation": semantic_terms_within(
+            manuscript,
+            (
+                r"\bstress\b",
+                r"\bfrozen\s+(?:plan|protocol)\b",
+                r"\b(?:promised|required|specified|planned)\b",
+                r"\blocali[sz]ation\b",
+                r"\btiming\b",
+                r"\bomitt(?:ed|ing|s)\b",
+                (
+                    r"(?:\b(?:unverifiable|cannot\s+be\s+verified|not\s+verifiable)\b|"
+                    r"\bno\b.{0,120}\bpermit(?:s|ted)?\b.{0,80}"
+                    r"\b(?:independent\s+)?locali[sz]ation\s+verification\b)"
+                ),
+                (
+                    r"(?:\bprotocol\s*(?:/|and|-)\s*reporting\s+deviation\b|"
+                    r"\breporting\s+(?:and\s+access\s+)?deviation\b)"
+                ),
+            ),
+            max_span=1200,
+        ),
+    }
+    state["prohibited_phrase_hits"] = sorted(
+        name
+        for name, pattern in PROHIBITED_PROVENANCE_PHRASES.items()
+        if re.search(pattern, manuscript, re.I)
+    )
+    return state
 
 
 def count_markdown_headings(path: Path, pattern: str) -> int:
@@ -1214,6 +1402,123 @@ def check_seeds(audit: Audit, payloads: dict[str, Any], truth: dict[str, Any]) -
         )
 
 
+def check_protocol_reporting_provenance(audit: Audit) -> None:
+    """Fail closed on frozen-plan claims added only after outcome acquisition."""
+    protocol_path = PAPER / "protocol/PEVL_PROSPECTIVE_PROTOCOL.md"
+    manuscript_path = FINAL / "main.tex"
+    protocol_text = (
+        protocol_path.read_text(encoding="utf-8") if protocol_path.is_file() else ""
+    )
+    manuscript_text = (
+        manuscript_path.read_text(encoding="utf-8") if manuscript_path.is_file() else ""
+    )
+    state = provenance_semantics_state(protocol_text, manuscript_text)
+
+    requirements = (
+        (
+            "PROVENANCE-FROZEN-95-INTERVALS",
+            "frozen_95_percent_intervals",
+            "the frozen protocol visibly prescribes 95% intervals",
+            [relative(protocol_path)],
+            "The completed report must not conceal or rewrite the frozen 95% interval prescription.",
+        ),
+        (
+            "PROVENANCE-FROZEN-EXACT-MCNEMAR",
+            "frozen_exact_two_sided_mcnemar",
+            "the frozen protocol visibly prescribes exact two-sided McNemar inference",
+            [relative(protocol_path)],
+            "The completed report must preserve the frozen exact two-sided McNemar prescription as protocol history.",
+        ),
+        (
+            "PROVENANCE-FROZEN-STRESS-OUTPUTS",
+            "frozen_stress_localization_timing_promise",
+            "the frozen stress section promises localization and timing summaries in the public package",
+            [relative(protocol_path)],
+            "The frozen stress-output promise must remain machine visible when omissions are assessed.",
+        ),
+        (
+            "PROVENANCE-POST-ACQUISITION-TAXONOMY",
+            "completed_case_taxonomy_is_post_acquisition",
+            (
+                "the manuscript explicitly identifies the completed-case descriptive-only Level "
+                "taxonomy/reporting restriction as post-acquisition and outside the frozen plan"
+            ),
+            [relative(manuscript_path), relative(protocol_path)],
+            "A later conservative reporting restriction cannot be described as prospectively frozen.",
+        ),
+        (
+            "PROVENANCE-HISTORICAL-RETROSPECTIVE",
+            "historical_audit_is_retrospective_not_blinding",
+            (
+                "the manuscript says the frozen historical audit was retrospective after outcomes "
+                "existed and is not evidence of prospective blinding"
+            ),
+            [relative(manuscript_path), relative(protocol_path)],
+            "Git ordering or an outcome-invariant audit cannot be promoted to prospective blinding.",
+        ),
+        (
+            "PROVENANCE-DIGEST-BYTE-EXTENSION",
+            "digest_byte_is_later_extension_without_count_change",
+            (
+                "the manuscript says digest-plus-byte-count is a later integrity extension, the "
+                "frozen endpoint was the digest, and no reported mismatch count changed"
+            ),
+            [relative(manuscript_path), relative(protocol_path)],
+            "A later integrity extension must not be attributed to the frozen endpoint.",
+        ),
+        (
+            "PROVENANCE-STRESS-REPORTING-DEVIATION",
+            "stress_omission_is_reporting_deviation",
+            (
+                "the manuscript says promised stress localization and timing outputs are omitted "
+                "and unverifiable, and labels this a protocol/reporting deviation"
+            ),
+            [relative(manuscript_path), relative(protocol_path)],
+            "Promised but unavailable stress outputs require an explicit deviation disclosure.",
+        ),
+    )
+    for check_id, key, expected, evidence, message in requirements:
+        observed = bool(state[key])
+        if observed:
+            audit.pass_check(
+                check_id,
+                "protocol/reporting provenance",
+                expected,
+                "explicit bounded disclosure found",
+                evidence,
+                message,
+            )
+        else:
+            audit.conflict(
+                check_id,
+                "protocol/reporting provenance",
+                expected,
+                "required explicit disclosure not found",
+                evidence,
+                message,
+            )
+
+    prohibited_hits = state["prohibited_phrase_hits"]
+    if prohibited_hits:
+        audit.conflict(
+            "PROVENANCE-NO-FALSE-FROZEN-PHRASES",
+            "protocol/reporting provenance",
+            "none of the known false frozen-admission formulations",
+            prohibited_hits,
+            [relative(manuscript_path), relative(protocol_path)],
+            "The manuscript retains language that falsely attributes a post-acquisition admission taxonomy to the frozen plan.",
+        )
+    else:
+        audit.pass_check(
+            "PROVENANCE-NO-FALSE-FROZEN-PHRASES",
+            "protocol/reporting provenance",
+            "none of the known false frozen-admission formulations",
+            "none detected",
+            [relative(manuscript_path), relative(protocol_path)],
+            "Known false frozen-admission formulations are absent.",
+        )
+
+
 def check_hashes(audit: Audit, payloads: dict[str, Any], truth: dict[str, Any]) -> None:
     identities = truth["identity_hashes"]
     observed: dict[str, Any] = {}
@@ -1972,6 +2277,7 @@ def build_report() -> dict[str, Any]:
     macros = macro_map(macro_path.read_text(encoding="utf-8")) if macro_path.is_file() else {}
 
     check_identity(audit, payloads, macros)
+    check_protocol_reporting_provenance(audit)
     truth = expected_truth(payloads)
     if truth is None:
         audit.machine(

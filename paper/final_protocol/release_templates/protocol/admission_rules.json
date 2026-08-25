@@ -72,7 +72,10 @@
     "frozen_protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",
     "frozen_source_protocol": "docs/protocols/PEVL_PROSPECTIVE_PROTOCOL.md",
     "mapping_assumptions": [
-    "The seven evidence gates preserve Levels 1 through 7 of the frozen ladder; Level 8 is represented by the decision returned by this engine, which admits only fixed-battery descriptive wording absent a separate inferential design.",
+      "The frozen case-study protocols prespecified finite-population paired percentile bootstrap intervals and secondary exact two-sided McNemar inference; that original plan remains visible in the protocol transcriptions.",
+      "The current Level-6 fixed-battery descriptive-only restriction is a later post-acquisition conservative reporting restriction, not frozen provenance and not evidence that this taxonomy was prospectively validated.",
+      "Future adopters must freeze the claim taxonomy, gate-to-claim mapping, estimands, and uncertainty rules before data acquisition.",
+      "The seven evidence gates preserve Levels 1 through 7 of the frozen ladder; Level 8 is represented by the decision returned by this engine, which under the current restriction admits only fixed-battery descriptive wording absent a separate inferential design.",
       "The named intermediate claim classes are a post-acquisition taxonomy. They do not retroactively replace the frozen experiment-specific binary suppression rules.",
       "A claim is limited by the longest contiguous prefix of passed gates. A later pass cannot repair an earlier fail, unavailable, or not-applicable prerequisite.",
       "Level 5 is the minimum evidence for execution-repeatability wording because the frozen protocol separates identical-arm record parity at Level 4 from repeat-and-worker parity at Level 5.",

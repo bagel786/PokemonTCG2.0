@@ -54,7 +54,7 @@ DEFAULT_PROTOCOL_DIRECTORY = Path(__file__).resolve().parent.parent / "protocol"
 # Semantic trust anchor for the canonicalized four-document protocol bundle.
 # The build/test workflow verifies this value, so syntactically valid rule edits
 # cannot silently change the classifier's meaning.
-EXPECTED_PROTOCOL_BUNDLE_SHA256 = "736f180967d34f17a942b895a3e4d4cd99da0a819ae0d0a50d1f0897cc0698a4"
+EXPECTED_PROTOCOL_BUNDLE_SHA256 = "603588ce613be1acab3d87fe0e942d35aca4de1c6aa5b22243a5bd62fabfae64"
 MAX_JSON_BYTES = 64 * 1024 * 1024
 
 _SAFE_IDENTIFIER = re.compile(r"[a-z0-9][a-z0-9_.:-]{0,127}\Z")
@@ -912,7 +912,11 @@ class AdmissionProtocol:
             "`protocol/claim_classes.json`; do not edit this table independently.",
             "",
             f"Formalization status: `{provenance['status']}`. This executable map was "
-            "created after acquisition. The frozen experiment-specific protocol remains authoritative.",
+            "created after acquisition. The frozen experiment-specific protocol—including its "
+            "finite-population paired-bootstrap intervals and secondary exact McNemar inference—"
+            "remains authoritative. The current Level-6 descriptive-only restriction is a later "
+            "conservative reporting rule, not frozen provenance or evidence of prospective validation; "
+            "future adopters must freeze it before acquisition.",
             "",
             "## Interfaces and trust boundary",
             "",
@@ -970,6 +974,21 @@ class AdmissionProtocol:
                 "The rule matcher receives only gate states and the declared trace projection. "
                 "Result data—including effect estimates, "
                 "p-values, interval direction, and favorability—are outside the rule projection.",
+                "",
+                "## Verified classifier properties",
+                "",
+                "The implementation test is named `stateless repeat-run determinism`; "
+                "the seven-property count uses the concise label stateless determinism.",
+                "",
+                "The bundled tests count exactly seven named properties:",
+                "",
+                "1. `result independence`",
+                "2. `prerequisite monotonicity`",
+                "3. `failure dominance`",
+                "4. `projection scoping`",
+                "5. `stateless determinism`",
+                "6. `unknown-state fail-closedness`",
+                "7. `strict claim ordering`",
                 "",
                 "## Mapping assumptions",
                 "",

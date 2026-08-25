@@ -21,7 +21,7 @@
       "analysis_unit": "Event-aligned trajectory pair within the declared semantic ontology and schedule stratum.",
       "decision_status": "admit",
       "estimand": "A fixed-battery descriptive event-aligned contrast within the declared schedule and semantic event ontology.",
-      "failure_action": "Preserve the ontology, event keys, projection, and frozen analysis unit; any drift requires a new admission decision, and inferential pairing requires a separate justified design.",
+      "failure_action": "Preserve the ontology, event keys, projection, and declared analysis unit; any drift requires a new admission decision, and inferential pairing requires a separate justified design.",
       "forbidden_wording": [
         "alignment outside the declared event ontology",
         "general common-random-number guarantee",
@@ -72,7 +72,7 @@
     "seed_matched_bounded": {
       "analysis_unit": "Seed-indexed unit within each fixed schedule stratum, with repeated profiles retained as one cluster where applicable.",
       "decision_status": "admit",
-      "estimand": "The fixed-battery descriptive seed-indexed contrast specified by the authoritative frozen analysis plan.",
+      "estimand": "A fixed-battery descriptive seed-indexed contrast under the current post-acquisition conservative reporting restriction; this taxonomy is not the frozen analysis plan.",
       "failure_action": "Use only fixed-battery descriptive wording and empirical reweighting sensitivity; suppress the contrast if any experiment-specific invalidator or required gate fails.",
       "forbidden_wording": [
         "cross-arm event alignment",

@@ -11,6 +11,33 @@ packages, private observations, raw restricted traces, credentials, or archives.
 
 ## Quick start
 
+The commands below were exercised in the builder's existing environment. They
+do not evidence a fresh clean-environment build.
+
+For a new conda environment:
+
+```bash
+conda env create --file environment.yml
+conda activate trace-validation-review
+python -B scripts/verify_release.py
+python -B -m pytest -q -p no:cacheprovider
+```
+
+For a new virtual environment created outside this exact-tree release directory:
+
+```bash
+python3 -m venv ../trace-validation-review-venv
+source ../trace-validation-review-venv/bin/activate
+python -m pip install --requirement requirements-lock.txt
+python -B scripts/verify_release.py
+python -B -m pytest -q -p no:cacheprovider
+```
+
+`requirements-lock.txt` and `environment.yml` pin the directly requested
+packages only. Neither file is a transitive dependency lock, and no successful
+fresh clean-environment construction from either file is evidenced by this
+review package.
+
 From this directory:
 
 ```bash
@@ -48,9 +75,20 @@ and required redesign; and `report` prints the retained headline diagnostics or
 the generated admission decision table. `verify_release.py`
 independently reaggregates 2,800 historical repeated-control units, 1,000
 deterministic preflight units (3,000 executions), 200 timed-search clusters, and
-2,000 factorial units, including the frozen 100,000-draw empirical reweighting
-procedures. Those quantiles describe the retained fixed batteries and are not
-population confidence intervals.
+2,000 factorial units, including the 100,000-draw computations prespecified as
+paired bootstrap procedures. Under the later reporting restriction, those
+quantiles are labeled empirical reweighting sensitivities: they describe the
+retained fixed batteries and are not population confidence intervals.
+
+## Frozen plan and current reporting restriction
+
+The frozen case-study protocols prespecified finite-population paired percentile
+bootstrap intervals and secondary exact two-sided McNemar inference. That
+original language remains visible in `docs/protocols/`. The bundled Level-6
+fixed-battery descriptive-only taxonomy is a later, post-acquisition conservative
+reporting restriction. It is not part of the frozen provenance and is not
+evidence of prospective validation. Future adopters must freeze the taxonomy,
+gate-to-claim mapping, estimands, and uncertainty rules before data acquisition.
 
 ## Evidence boundary
 
@@ -62,6 +100,13 @@ explicitly omits unverifiable earliest-event or actor localization, not raw trac
 outcome, and decision-count fields; trace digests were not captured for that
 acquisition. Neutral context labels are stable within this package but are not
 external entity identifiers.
+
+The frozen stress protocol also promised first-divergence positions and actors
+and timing summaries. This package omits both localization and timing, and it
+contains no raw trace lines from which localization can be verified. Therefore
+it makes no localization or timing claims. The omission does not change the
+primary complete-trace digest mismatch count, but it is a reporting/access
+deviation pending human signoff; see `docs/PROTOCOL_DEVIATIONS.md`.
 
 ## Integrity and status
 

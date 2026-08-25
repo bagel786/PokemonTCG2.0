@@ -58,6 +58,7 @@ PROTOCOLS = {
 }
 TEMPLATE_FILES = {
     "docs/ADMISSION_DECISION_TABLE.md",
+    "docs/PROTOCOL_DEVIATIONS.md",
     "docs/WORKED_ADMISSION_EXAMPLE.md",
     "examples/example_evidence.json",
     "examples/evidence/candidate_agent.txt",
@@ -520,6 +521,20 @@ def build_stress(stage: Path) -> None:
     allowed["earliest_divergence_localization_reason"] = (
         "The review package contains no raw trace lines from which to verify an earliest event or actor."
     )
+    allowed["timing_summaries_included"] = False
+    allowed["timing_summaries_reason"] = (
+        "The review package omits the timing summaries promised by the frozen stress protocol."
+    )
+    allowed["protocol_deviation_status"] = "PENDING_HUMAN_SIGNOFF_UNSIGNED"
+    sensitivity = allowed.get("fixed_composition_reweighting_sensitivity")
+    if not isinstance(sensitivity, dict):
+        raise ReleaseError("stress fixed-composition sensitivity is missing")
+    sensitivity = dict(sensitivity)
+    sensitivity["role"] = (
+        "post-acquisition fixed-composition descriptive sensitivity applied to the pooled "
+        "resampling computation prespecified in the frozen plan"
+    )
+    allowed["fixed_composition_reweighting_sensitivity"] = sensitivity
     write_json(stage / "data/processed/timed_search_stress.json", allowed)
 
 
@@ -579,11 +594,15 @@ def copy_static_inputs(stage: Path) -> None:
         banner = (
             "> **Review-package transcription.** Restricted labels and local paths are neutralized. "
             "The statistical plan and identifiers are preserved, but these bytes are not the frozen source artifact. "
-            "Original interval, p-value, finite-population, and inferential terminology records the frozen plan; "
-            "the current article admits only fixed-battery descriptive contrasts and empirical reweighting sensitivities. "
+            "The original finite-population paired-bootstrap interval and secondary exact-McNemar language remains visible "
+            "below and records the frozen case-study plan. The current Level-6 fixed-battery descriptive-only restriction "
+            "is a later, post-acquisition conservative reporting rule: it is not frozen provenance and is not evidence that "
+            "the claim taxonomy was prospectively validated. Future adopters must freeze that taxonomy and its uncertainty "
+            "rules before acquisition. "
             "Statements about noninspection are protocol conditions; Git proves commit ordering, not when a human inspected uncommitted files. "
             "Historical statements below about package contents are not current availability claims: the package actually distributed is defined "
-            "by the release manifest, README, and processed metadata, which omit unverifiable first-divergence positions and actors.\n\n"
+            "by the release manifest, README, processed metadata, and PROTOCOL_DEVIATIONS.md, which omit unverifiable "
+            "first-divergence positions, actors, and timing summaries.\n\n"
         )
         destination = stage / "docs/protocols" / destination_name
         destination.parent.mkdir(parents=True, exist_ok=True)
@@ -594,7 +613,15 @@ def copy_static_inputs(stage: Path) -> None:
             raise ReleaseError(f"required source-data file missing: {source}")
         destination = stage / "source_data" / name
         destination.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(source, destination)
+        if name == "figure_2_admission_flow.json":
+            payload = load_json(source)
+            original_action = payload.get("success_action")
+            if original_action != "apply the evidence-to-claim rule with its provenance stated":
+                raise ReleaseError("source figure-2 provenance wording changed unexpectedly")
+            payload["success_action"] = "apply the current post-acquisition map"
+            write_json(destination, payload)
+        else:
+            shutil.copyfile(source, destination)
     (stage / "generated").mkdir(parents=True, exist_ok=True)
     shutil.copyfile(FINAL / "results_macros.tex", stage / "generated/results_macros.tex")
     shutil.copyfile(FINAL / "tests/test_equations.py", stage / "tests/test_equations.py")
@@ -613,6 +640,33 @@ binaries, third-party opponent packages, game assets or metadata, policy
 packages, private observations, raw restricted traces, credentials, or archives.
 
 ## Quick start
+
+The commands below were exercised in the builder's existing environment. They
+do not evidence a fresh clean-environment build.
+
+For a new conda environment:
+
+```bash
+conda env create --file environment.yml
+conda activate trace-validation-review
+python -B scripts/verify_release.py
+python -B -m pytest -q -p no:cacheprovider
+```
+
+For a new virtual environment created outside this exact-tree release directory:
+
+```bash
+python3 -m venv ../trace-validation-review-venv
+source ../trace-validation-review-venv/bin/activate
+python -m pip install --requirement requirements-lock.txt
+python -B scripts/verify_release.py
+python -B -m pytest -q -p no:cacheprovider
+```
+
+`requirements-lock.txt` and `environment.yml` pin the directly requested
+packages only. Neither file is a transitive dependency lock, and no successful
+fresh clean-environment construction from either file is evidenced by this
+review package.
 
 From this directory:
 
@@ -651,9 +705,20 @@ and required redesign; and `report` prints the retained headline diagnostics or
 the generated admission decision table. `verify_release.py`
 independently reaggregates 2,800 historical repeated-control units, 1,000
 deterministic preflight units (3,000 executions), 200 timed-search clusters, and
-2,000 factorial units, including the frozen 100,000-draw empirical reweighting
-procedures. Those quantiles describe the retained fixed batteries and are not
-population confidence intervals.
+2,000 factorial units, including the 100,000-draw computations prespecified as
+paired bootstrap procedures. Under the later reporting restriction, those
+quantiles are labeled empirical reweighting sensitivities: they describe the
+retained fixed batteries and are not population confidence intervals.
+
+## Frozen plan and current reporting restriction
+
+The frozen case-study protocols prespecified finite-population paired percentile
+bootstrap intervals and secondary exact two-sided McNemar inference. That
+original language remains visible in `docs/protocols/`. The bundled Level-6
+fixed-battery descriptive-only taxonomy is a later, post-acquisition conservative
+reporting restriction. It is not part of the frozen provenance and is not
+evidence of prospective validation. Future adopters must freeze the taxonomy,
+gate-to-claim mapping, estimands, and uncertainty rules before data acquisition.
 
 ## Evidence boundary
 
@@ -665,6 +730,13 @@ explicitly omits unverifiable earliest-event or actor localization, not raw trac
 outcome, and decision-count fields; trace digests were not captured for that
 acquisition. Neutral context labels are stable within this package but are not
 external entity identifiers.
+
+The frozen stress protocol also promised first-divergence positions and actors
+and timing summaries. This package omits both localization and timing, and it
+contains no raw trace lines from which localization can be verified. Therefore
+it makes no localization or timing claims. The omission does not change the
+primary complete-trace digest mismatch count, but it is a reporting/access
+deviation pending human signoff; see `docs/PROTOCOL_DEVIATIONS.md`.
 
 ## Integrity and status
 
@@ -726,6 +798,8 @@ no DOI is supplied and `LICENSE` grants no permission. Do not cite the incomplet
         "doi": None,
         "license": "NO_LICENSE_GRANTED_PENDING_HUMAN_CONFIRMATION",
         "machine_verification_scope": "technical internal consistency only; not human, legal, licensing, archival, or publication readiness",
+        "clean_environment_build_evidenced": False,
+        "environment_spec_scope": "direct_packages_only_not_transitive_locks",
         "protocol_commit": PROTOCOL_COMMIT,
         "release_status": "BUILT_FOR_REVIEW_NOT_AUTHORIZED_FOR_PUBLICATION",
         "restricted_material_included": False,
@@ -738,10 +812,12 @@ no DOI is supplied and `LICENSE` grants no permission. Do not cite the incomplet
         for name in ("numpy", "matplotlib", "pytest")
     }
     (stage / "requirements-lock.txt").write_text(
-        "".join(f"{name}=={versions[name]}\n" for name in ("numpy", "matplotlib", "pytest")),
+        "# Direct package snapshot only; not a transitive dependency lock.\n"
+        + "".join(f"{name}=={versions[name]}\n" for name in ("numpy", "matplotlib", "pytest")),
         encoding="utf-8",
     )
     (stage / "environment.yml").write_text(
+        "# Direct package snapshot only; not a transitive dependency lock.\n"
         "name: trace-validation-review\n"
         "channels:\n  - conda-forge\n"
         "dependencies:\n"

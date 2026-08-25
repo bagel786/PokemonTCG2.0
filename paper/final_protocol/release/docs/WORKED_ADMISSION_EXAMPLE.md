@@ -43,6 +43,11 @@ by the frozen design, complete the stochastic-source audit, and rerun admission.
 The JSON rule bundle is explicitly a post-acquisition executable formalization.
 It does not claim to have existed at the frozen protocol commit, and it cannot
 override an experiment-specific suppression rule in the frozen protocol. The
+frozen case-study plan's finite-population paired-bootstrap intervals and
+secondary exact McNemar inference remain visible in the protocol transcriptions;
+the current Level-6 descriptive-only restriction is a later conservative
+reporting rule, not prospective validation. Future adopters must freeze that
+taxonomy and its uncertainty rules before acquisition. The
 separate `classify-trusted` interface is a pure classifier for callers that have
 already validated their own states; its output explicitly says that evidence
 was not machine verified.

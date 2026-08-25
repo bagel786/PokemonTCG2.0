@@ -7,6 +7,33 @@ analysis. The source-of-truth order is raw rows, frozen protocol, validated
 analyzer output, executable code, hashes, generated macros, manuscript prose,
 historical reports, and conversation summaries.
 
+## Chronology and protocol-status qualification
+
+The frozen case-study protocol preceded the retained deterministic preflight,
+timed-search stress, and five-context factorial acquisitions. Its prespecified
+decision structure was binary: any preflight mismatch blocked factorial
+acquisition, and any invalidating factorial or repeated-C1 mismatch suppressed
+all planned contrasts. Conditional on those gates passing, the protocol called
+for finite-population seed-matched paired bootstrap intervals and a secondary
+exact two-sided McNemar analysis for the primary binary contrast.
+
+Two later changes must not be conflated with that frozen plan. First, the
+multi-level generic admission taxonomy and executable rule bundle were created
+after acquisition. Second, the final article conservatively relabels the
+paired-bootstrap output as fixed-battery empirical reweighting quantiles and
+does not admit the McNemar value as inference. Those changes narrow claims; they
+do not show that the later taxonomy was prospectively validated. A future study
+must freeze that taxonomy, its inputs, and its consequences before acquisition
+if it wishes to make a prospective-validation claim.
+
+The historical repeated-control audit has a different chronology again. Its
+gate and suppression consequence were frozen retrospectively after the
+historical outcomes already existed. Retaining every mismatch and applying the
+frozen retrospective rule is an auditable safeguard, but it is not prospective
+blinding evidence. These distinctions and the unresolved reporting/access
+departure for stress-test localization and timing are recorded in
+`supplement/PROTOCOL_DEVIATIONS.md`.
+
 ## M01 — Artifact identity
 
 - **Problem solved:** Prevents results from being attributed to unspecified or
@@ -214,9 +241,13 @@ historical reports, and conversation summaries.
   or suppresses the comparison; schema, commit, sample-size, stratum, and
   nonfinite-value checks fail closed. The executable property suite replaces all
   result values, weakens each prerequisite, inserts favorable results after
-  failures, removes projection scope, repeats identical evaluations, supplies
+  failures, removes projection scope, repeats an evaluation from unchanged
+  inputs without retained evaluator state, supplies
   unknown/malformed/contradictory states, exhaustively enumerates all six states
-  across seven gates, and rejects rule/schema/class tampering.
+  across seven gates, and rejects rule/schema/class tampering. The seven named
+  properties are **result independence**, **prerequisite monotonicity**,
+  **failure dominance**, **projection scoping**, **stateless determinism**,
+  **unknown-state fail-closedness**, and **strict claim ordering**.
 - **Output:** A deterministic admission status, ordered permitted claim class,
   permitted and forbidden wording, contrast, analysis unit, descriptive
   reweighting rule,
@@ -229,8 +260,11 @@ historical reports, and conversation summaries.
 - **Does not support:** Admission is not proof that assumptions are universally
   true or that future executions will pass. It cannot turn a schedule-matched
   estimate into inferential pairing, a population effect, or a fully
-  event-aligned counterfactual effect. The later executable bundle is not
-  evidence that its generic taxonomy was prospectively frozen.
+  event-aligned counterfactual effect. The later executable bundle and
+  descriptive-only relabeling are post-acquisition conservative controls, not
+  evidence that the generic taxonomy was prospectively frozen or validated.
+  Future prospective use requires freezing the taxonomy and consequences before
+  acquisition.
 - **human_verified:** PENDING — a human author must confirm the prospective
   experiment-specific authority, post-acquisition formalization provenance,
   result-independent input projection, and all seven claimed safety properties;
@@ -247,7 +281,9 @@ historical reports, and conversation summaries.
   profiles.
 - **Assumptions:** Cluster membership and profile set are frozen; equality is
   computed on the same canonical `(digest, byte_count)` projection record;
-  missing profiles fail rather than disappear.
+  missing profiles fail rather than disappear. The frozen primary endpoint was
+  digest disagreement alone. Adding byte count to the comparison tuple was a
+  later integrity hardening, not a prospectively frozen endpoint change.
 - **Implementation:** Equation (1) assigns an indicator of one when more than one
   required profile `(digest, byte_count)` tuple occurs in a cluster and averages
   over complete clusters. A byte-count-only difference is a disagreement.
@@ -257,6 +293,10 @@ historical reports, and conversation summaries.
   pairwise rows.
 - **Does not support:** The proportion is not prevalence in a population of
   agents, hardware, or workloads and does not identify the cause of disagreement.
+  In the retained stress battery the frozen digest endpoint and the later
+  digest-or-byte tuple both identify 99 of 200 clusters; all 96 byte-count
+  disagreements are contained within the 99 digest disagreements. The hardening
+  therefore does not alter the observed primary count.
 - **human_verified:** PENDING — a human author must confirm the cluster
   denominator and complete profile set; this remains a submission blocker until
   signed.
@@ -273,7 +313,9 @@ historical reports, and conversation summaries.
   projection; the three control columns refer to the same schedule unit; equality
   is recomputed without dropping mismatches.
 - **Implementation:** The audit compares the three repeated-control win/draw
-  records, then extends that available projection with decision count.
+  records, then extends that available projection with decision count. This gate
+  and its suppression rule were frozen only after the historical outcomes
+  already existed.
 - **Output:** 210 of 2,800 available-outcome (win/draw) mismatches and 458 of
   2,800 available-record mismatches after decision count is added, with the
   planned historical factorial suppressed.
@@ -282,7 +324,9 @@ historical reports, and conversation summaries.
   projection is a complete trace.
 - **Does not support:** The audit does not isolate wall-clock timing as the unique
   cause, and a post hoc subset of agreeing contexts does not rescue the frozen
-  historical estimand.
+  historical estimand. Retrospective freezing and complete retention improve
+  auditability but do not establish prospective blinding or prospective
+  validation.
 - **human_verified:** PENDING — a human author must confirm the available-record
   projection, all retained historical units, and the suppression consequence;
   this remains a submission blocker until signed.
@@ -343,13 +387,25 @@ historical reports, and conversation summaries.
   for Timed-search B/orders 1 and 2; post-acquisition fixed-composition
   sensitivity percentiles 46%–53%; 47 outcome disagreements, 93 decision-count
   disagreements, and zero error-record disagreements.
+- **Protocol provenance:** The frozen primary endpoint was equality of all four
+  complete public-state/action trace **digests**. The later
+  `(digest, byte_count)` integrity tuple produces the same 99/200 count. The
+  protocol also promised first-divergence position and acting-side/actor
+  localization plus timing summaries as secondary public outputs. Those
+  localization, actor, and timing outputs are omitted from the release, and the
+  evidence available to this audit contains no raw trace lines from which an
+  independent verifier could reconstruct first divergence. This is an
+  unresolved reporting/access protocol deviation; it does not change the
+  frozen primary digest result. Human confirmation and an amendment decision
+  remain PENDING; this audit does not supply either one.
 - **Invalidating result:** Missing profile rows, changed clustering or frozen
   reweighting seed, noncanonical traces, or treating profiles within a cluster
   as independent.
 - **Does not support:** Neither percentile range is a population confidence
   interval. The context-heterogeneous association does not prove wall-clock
   timing, process state, or any other mechanism uniquely caused every
-  difference.
+  difference. The omitted localization and timing outputs also preclude an
+  independently verified first-divergence or timing claim from the release.
 - **human_verified:** PENDING — a human author must confirm the frozen pooled
   procedure, the post-acquisition label on the fixed-composition sensitivity,
   the fixed-battery interpretation, and noncausal wording; this remains a
@@ -392,6 +448,12 @@ historical reports, and conversation summaries.
   draws, the analysis seed, and percentile rule are frozen. No probability
   sample, randomized assignment, or defended stochastic population model
   supplies an inferential reference distribution.
+- **Protocol provenance:** The frozen case-study plan called these outputs 95%
+  paired-bootstrap intervals for the finite test population. The post-acquisition
+  article relabels the same bounded resampling arithmetic as descriptive
+  empirical reweighting quantiles because no defended inferential reference
+  distribution was established. That is a conservative reporting change, not a
+  prospectively frozen analysis label.
 - **Implementation:** Equation (3) samples whole unit identifiers with
   replacement within each stratum, computes each stratum mean, weights the ten
   strata equally, and recomputes contrasts.
@@ -423,6 +485,9 @@ historical reports, and conversation summaries.
 - **Implementation:** Equation (4) computes four prespecified linear contrasts
   on the fixed battery. The stratified paired-unit procedure supplies only an
   empirical reweighting sensitivity; no manuscript hypothesis test is admitted.
+  The frozen plan's secondary exact two-sided McNemar arithmetic is retained for
+  numerical audit only and is excluded from admitted inference under the later
+  descriptive-only reporting rule.
 - **Output:** Descriptive total +0.55 percentage points with reweighting
   percentiles [−2.05,+3.15], representation +0.95 [−1.08,+3.00], training
   −0.40 [−2.03,+1.25], and interaction +1.30 [−1.85,+4.45].
@@ -493,6 +558,7 @@ historical reports, and conversation summaries.
 The methods are explainable within their bounded purposes, but human
 verification remains required. In particular, the corresponding author must
 confirm the completeness of the AI-use history, understand every assumption,
-and approve the distinction between a complete **recorded projection** and an
-unobservable complete engine trace. Rights, license, DOI, and human metadata
+approve the distinction between a complete **recorded projection** and an
+unobservable complete engine trace, and resolve or explicitly amend the
+unsigned protocol-deviation record. Rights, license, DOI, and human metadata
 are outside these method checks and remain submission blockers.

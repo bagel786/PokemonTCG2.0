@@ -2,7 +2,8 @@
 
 ## Verdict
 
-**PASS, with one protocol-interpretation note and no factual numerical conflict.**
+**PASS for numerical reproduction, with protocol-provenance qualifications and
+no factual numerical conflict.**
 
 This audit recalculates the central results from 58 Git-tracked retained raw
 acquisition files. It does not import the production analyzer and does not use
@@ -15,11 +16,22 @@ The machine-readable record is
 `scripts/independent_statistics_audit.py`, and its independent tests are
 `tests/test_independent_statistics.py`.
 
+This numerical PASS is not a finding of prospective validation. The frozen
+case-study plan used binary acquisition/suppression gates, then specified
+finite-population paired bootstrap intervals and secondary exact two-sided
+McNemar inference if those gates passed. After acquisition, the article adopted
+a conservative descriptive-only taxonomy: it relabels the paired-bootstrap
+outputs as fixed-battery empirical reweighting quantiles and does not admit the
+McNemar value as inference. The later generic taxonomy cannot retroactively
+evidence prospective validation and must be frozen before acquisition in a
+future study.
+
 ## Authoritative source hierarchy used
 
 1. The retained execution-row arrays in `paper/data/ablation/raw/`,
    `paper/data/fresh_confirmation/raw/`, and `paper/data/pevl/*/raw/`.
-2. The prospectively frozen protocol, SHA-256
+2. The protocol frozen before the retained preflight, stress, and factorial
+   acquisitions—but not before the historical outcomes—SHA-256
    `8b9329b948a054fc7252b9c2662490890e0a8439ad852393c6e25f537c8b887e`.
 3. The executable frozen at protocol commit `803257f1` when the prose leaves an
    implementation detail ambiguous. The frozen analyzer blob has SHA-256
@@ -37,6 +49,11 @@ JSON values and found no nonfinite value. The combined source-manifest digest
 is `b7e9395df9816ec62e487b605949c7c2cf58860ccacc2b50353a7cda49e2eab9`.
 
 ## Historical repeated-control audit
+
+The historical outcomes predate the frozen gate applied in this audit. The gate
+and its suppression consequence were therefore frozen retrospectively. Complete
+retention and result-independent recomputation make the application auditable,
+but they are not evidence of prospective blinding.
 
 The analysis unit is an opponent × actual-order × seed-condition cluster with
 three separately acquired C1 control executions. The 21 acquisition files
@@ -100,6 +117,12 @@ The independent disagreement counts are:
 | Decision count | 93 / 200 | 46.5% |
 | Error record | 0 / 200 | 0.0% |
 
+The prospectively frozen primary endpoint was complete public-state/action
+**digest** agreement. The `(digest, byte_count)` tuple is a post-acquisition
+integrity hardening. It does not change the observed primary result: the digest
+endpoint and the tuple each identify 99/200 disagreement clusters, because the
+96 byte-count disagreements are contained within the 99 digest disagreements.
+
 The four separately reported strata reproduce as follows; each range gives the
 2.5th and 97.5th quantiles from 100,000 whole-cluster empirical reweighting
 draws with seed `2026083118`:
@@ -134,7 +157,16 @@ fixed-composition sensitivity, not a correction to the frozen executable
 result. The pooled and fixed-composition quantiles describe different empirical
 reweightings of the fixed battery; neither estimates coverage for a population.
 
-## Admitted factorial
+The frozen protocol also promised first-divergence position, acting-side/actor
+localization, and timing summaries as secondary public outputs. Those outputs
+are omitted from the release, and the tracked evidence available to this audit
+contains no raw trace lines from which first divergence can be independently
+reconstructed. This is an unresolved reporting/access protocol deviation. It
+does not change the primary digest count, but it prevents independent
+verification of localization and timing claims. Human author confirmation and
+an amendment decision remain PENDING.
+
+## Gated factorial, descriptively reported
 
 The 15 raw candidate-control acquisitions contain 12,000 execution rows. They
 form 2,000 aligned C1/C2/C3/C4 unit vectors in 10 opponent-by-order strata of
@@ -161,6 +193,11 @@ within-stratum empirical reweighting draws with seed `2026083117` are:
 | Training main contrast | −0.40 | [−2.03, +1.25] |
 | Interaction | +1.30 | [−1.85, +4.45] |
 
+These calculations are the arithmetic the frozen plan described as 95%
+finite-population paired bootstrap intervals. Their final label as descriptive
+empirical reweighting quantiles is a post-acquisition conservative relabeling,
+not a prospectively frozen inferential claim.
+
 For C4 versus C1, there are 358 C4-only wins and 347 C1-only wins, 705
 discordant units total, and the independently recalculated exact two-sided
 McNemar value is `0.7064831563628252`. This number is retained only as a
@@ -178,8 +215,11 @@ calculation under the frozen executable interpretation. No factual conflict was
 found.
 
 The tracked stress rows contain trace digests and byte counts, not the
-restricted trace lines. Earliest-divergence actor localization is therefore
-outside this row-level numerical audit and is not retained in evidentiary prose.
+restricted trace lines. Earliest-divergence position, acting-side/actor
+localization, and timing are therefore outside this row-level numerical audit
+and cannot be independently reconstructed from the release. Their omission is
+the reporting/access deviation described above, not evidence that those
+secondary outputs were executed and passed.
 All empirical reweighting quantiles condition on the fixed engineering battery;
 they are not population intervals over new opponents, seeds, hardware contexts,
 or training runs.
