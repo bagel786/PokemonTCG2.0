@@ -1,0 +1,27 @@
+{
+  "reviewer_id": "A",
+  "role": "APS staff editor",
+  "blind": true,
+  "reviewed_artifacts": ["main.pdf (14 pp)", "cover_letter.md", "APS_DESK_FIT.md", "NOVELTY_MATRIX.csv", "RELEASE_STATUS.json"],
+  "scientific_assessment": {
+    "protocol_fit": "5/5. Stepwise computational procedure with declared evidence layers, executable claim map, conformance suite, and pass/fail empirical demonstration; squarely within the journal's Protocol Article definition.",
+    "novelty": "4/5. Integration boundary survives the refreshed audit including two close KDD-2026 workshop papers now cited and contrasted; no component-priority claims remain.",
+    "usefulness": "4/5. Evidence-to-claim decision with suppression behavior is actionable for seeded-but-opaque simulators.",
+    "readability": "3.5/5. Abstract now leads problem->protocol->result->limitation in 182 words; body still dense in the admission-map section but no longer a compliance dossier."
+  },
+  "scope_risk": {
+    "assessment": "The only real editorial risk. The sole empirical system is a game engine; the physics/adjacent-science connection is argued through established simulation methodology and a factual adoption paragraph (Monte Carlo, agent-based, SciML, digital twins) rather than demonstrated empirically.",
+    "mitigation": "Unsent scope inquiry drafted; adoption paragraph is factual and citation-backed.",
+    "counts_as_scope_only": true
+  },
+  "completeness_findings_separated": [
+    "Author name/email/affiliation placeholders remain on page 1 (human-only).",
+    "LICENSE grants no rights; RELEASE_STATUS unauthorized; no DOI/archive (human-only).",
+    "D03 deviation record unsigned pending human disposition of recovered outputs (human-only); recovered aggregates are now in the release with provenance.",
+    "Restricted material not offered on reasonable request - flagged honestly as editorial-risk item in DAS."
+  ],
+  "desk_decision_scientific": "BORDERLINE",
+  "scope_only_borderline": true,
+  "rationale": "Scientifically this is now a credible Protocol Article: chronology is precise, claims are bounded, the factorial is demoted correctly, and validation is three-pronged. I would still not send it to full review until the scope question is answered by the editor-in-chief conversation AND submission-completeness items clear; neither is a methodology defect.",
+  "would_send_after_scope_answer_and_completeness": true
+}

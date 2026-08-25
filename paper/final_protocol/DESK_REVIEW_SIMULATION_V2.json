@@ -1,0 +1,61 @@
+{
+  "schema_version": "desk-review-simulation-v2-2.0.0",
+  "generated": "2026-08-25",
+  "review_count": 5,
+  "reviews_blind_to_each_other": true,
+  "review_files": [
+    "reviews_v2/reviewer_a.json",
+    "reviews_v2/reviewer_b.json",
+    "reviews_v2/reviewer_c.json",
+    "reviews_v2/reviewer_d.json",
+    "reviews_v2/reviewer_e.json"
+  ],
+  "gate_design_note": "Per closeout specification, scientific desk risk and submission-completeness risk are aggregated separately. Human-only placeholders must not be conflated with methodology validity.",
+  "verdicts": {
+    "A_aps_staff_editor": "BORDERLINE",
+    "B_stochastic_simulation": "SEND_TO_REVIEW",
+    "C_software_reproducibility": "SEND_TO_REVIEW",
+    "D_agent_evaluation": "SEND_TO_REVIEW",
+    "E_hostile_integrity": "SEND_TO_REVIEW"
+  },
+  "verdict_counts_scientific": {
+    "SEND_TO_REVIEW": 4,
+    "BORDERLINE": 1,
+    "DESK_REJECT": 0
+  },
+  "SCIENTIFIC_DESK_GATE": {
+    "result": "PASS_SCIENTIFICALLY_SEND_TO_REVIEW",
+    "checks": {
+      "reviewer_A_send_or_borderline_scope_only": true,
+      "at_least_four_of_five_send_to_review": true,
+      "any_fatal_scientific_finding": false,
+      "no_major_contradiction": true,
+      "no_unsupported_claim_detected": true,
+      "novelty_boundary_survives_refreshed_audit": true
+    },
+    "scope_risk_note": "Reviewer A borderline is scope-only (game-engine case with argued, not demonstrated, adjacent-science adoption); the unsent scope inquiry remains the mitigation path."
+  },
+  "SUBMISSION_COMPLETENESS_GATE": {
+    "result": "BLOCKED_PENDING_HUMAN_ACTIONS",
+    "blockers": [
+      "author name / corresponding email / affiliation placeholders",
+      "CRediT, funding, conflicts, acknowledgments unresolved",
+      "AI-use completeness unconfirmed by human",
+      "claim-ledger curated signoff worksheet unsigned (33 rows + automatic attestation)",
+      "equation/method/defense comprehension signoffs unsigned",
+      "release ownership matrix approvals pending; no approved license; RELEASE_STATUS unauthorized",
+      "no archive/DOI authorization",
+      "D03 deviation record unsigned pending disposition of recovered aggregates and never-recorded positions"
+    ]
+  },
+  "combined_decision": {
+    "scientific": "SCIENTIFICALLY_SEND_TO_REVIEW",
+    "completeness": "BLOCKED_BY_HUMAN_ACTIONS",
+    "overall_submission_status": "NOT_READY_DO_NOT_SUBMIT_UNTIL_HUMAN_CLOSEOUT_COMPLETE"
+  },
+  "comparison_to_v1": {
+    "v1": {"SEND_TO_REVIEW": 1, "BORDERLINE": 0, "DESK_REJECT": 4, "gates_conflated": true},
+    "v2": {"SEND_TO_REVIEW": 4, "BORDERLINE": 1, "DESK_REJECT": 0, "gates_separated": true},
+    "driver": "V1 fatal findings were dominated by human/legal completeness items plus three fixable scientific defects (chronology wording, outcome-independence phrasing, missing Stage-6 operationalization), all of which were fixed or explicitly narrowed during closeout."
+  }
+}

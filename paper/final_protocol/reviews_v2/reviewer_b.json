@@ -1,0 +1,23 @@
+{
+  "reviewer_id": "B",
+  "role": "stochastic simulation expert (CRN, event alignment, clustering, resampling, chronology)",
+  "blind": true,
+  "scientific_assessment": {
+    "chronology": "Fixed and now precise. The frozen protocol demonstrably contained the eight-stage ladder and binary gates (verified at commit 803257f1); only the generic claim-class taxonomy, descriptive relabeling of quantiles, and byte-count extension are disclosed as post-acquisition. CHRONOLOGY_AUDIT.json maps every statement to commits with outcomes-existed flags. My earlier fatal objection is resolved.",
+    "crn_and_alignment": "The within-arm/cross-arm distinction is stated correctly; the engine's inability to pass Level 7 is recorded as a boundary, not hidden. Event-keyed repair is correctly scoped to the synthetic ontology.",
+    "clustering": "Seed-condition clusters with all profiles together; missing profiles fail closed rather than shrinking denominators; Eq. 1 toy example independently tested.",
+    "resampling": "Whole-unit/whole-cluster resampling preserved; quantiles labeled empirical reweighting everywhere; McNemar retained as numerical audit only. The new equal-weighted-mean-of-stratum-means sentence for unequal n_k resolves my remaining Eq. 3 concern.",
+    "historical_gate": "Correctly described as retrospective and independent of candidate-effect magnitude/direction/favorability - not 'outcome independent'. The wording defect I flagged is fixed."
+  },
+  "residual_scientific_notes": [
+    "Preflight-to-factorial transfer across seed ranges remains a bounded transfer assumption - disclosed, acceptable for a protocol article.",
+    "Pooled stress reweighting can vary context composition; the fixed-composition sensitivity sits adjacent with correct non-inferential labels."
+  ],
+  "completeness_findings_separated": [
+    "Deviation record unsigned pending human disposition (recovered actor/timing aggregates now included with provenance; positions documented as never recorded).",
+    "Author metadata placeholders.",
+    "License/DOI unresolved."
+  ],
+  "desk_decision_scientific": "SEND_TO_REVIEW",
+  "rationale": "Every scientific objection from V1 has been resolved or explicitly bounded. The statistics are conservative to a fault. Methodology merits peer review."
+}

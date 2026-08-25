@@ -1,0 +1,23 @@
+{
+  "reviewer_id": "C",
+  "role": "software testing / reproducibility expert",
+  "blind": true,
+  "scientific_assessment": {
+    "stage_4_5": "Resolved. Stage 4 is now named within-artifact fresh-process repeatability; the nesting inside Stage 5's profile set is stated in the manuscript AND made machine-checkable via certificate fields (required_profiles, compared_record_fields, record_binding). Launch provenance is declared an external trust anchor rather than oversold.",
+    "levels_6_7": "Narrowed honestly per the acceptable option: file-bound verification explicitly extends through lower stages only; upper-level demonstrations live in synthetic adapters/trusted-state interface; reusable schemas marked future work. The bundled example conservatively marks both upper gates.",
+    "stage_6": "Now operationalized: machine-readable rules generate docs/STAGE6_DECISION_RULES.md with CONTROLLED/RESIDUAL/ESTIMAND_CHANGING/UNAVAILABLE/UNRESOLVED outcomes, required remediation, and a tested clean-scan-never-passes rule. My R6 ask is implemented with tests (11 stage-6 tests).",
+    "status_rename": "Done correctly: legacy ADMITTED_SEED_MATCHED retained verbatim as frozen-plan acquisition status alongside final_reporting_status=ADMITTED_FIXED_BATTERY_DESCRIPTIVE with reason, surfaced in CLI JSON and human output.",
+    "release": "Manifest exact-tree verification passes; tamper/hardlink/symlink rejection tests pass; bundle trust anchor re-pinned deliberately with the evidence-verifier change documented.",
+    "clean_environment": "Fresh venv (CPython 3.11.5) built from scratch with direct pins: 60/60 release tests, generate+verify, CLI report, verify_release all PASS; CLEAN_ENV_REPRODUCTION.json records commands, transitive freeze, and platform scope (macOS arm64; no universal portability claim)."
+  },
+  "residual_scientific_notes": [
+    "Transitive freeze is a recorded snapshot of the clean env, not an enforced lockfile install - acceptable, disclosed.",
+    "Trace-content semantics remain caller assertions behind the external trust anchor - now stated in certificates themselves."
+  ],
+  "completeness_findings_separated": [
+    "Placeholders/license/DOI unchanged (human-only).",
+    "Deviation register unsigned pending human approval of recovered aggregates redistribution."
+  ],
+  "desk_decision_scientific": "SEND_TO_REVIEW",
+  "rationale": "Every implementation gap I identified in V1 was either closed with tests or converted into an explicit scoped limitation. The verification story is now internally consistent end to end."
+}
