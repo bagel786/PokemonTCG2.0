@@ -1,5 +1,16 @@
 {
   "article_type": "APS Open Science Protocol Article",
+  "canonical_subject": {
+    "algorithm": "SHA-256 over sorted UTF-8 path, NUL, decimal size, NUL, lowercase file SHA-256, LF records",
+    "excluded": [
+      "paper/final_protocol/REPRODUCTION_REPORT.json",
+      "paper/final_protocol/REPRODUCTION_REPORT.sha256",
+      "compiler/cache transients (*.aux, *.blg, *.log, *.out, *.synctex.gz, *.pyc, __pycache__, .pytest_cache)"
+    ],
+    "file_count": 312,
+    "scope": "Final article/release tree, final reviewer bytes, retained protocol/data/synthetic inputs, and invoked scripts/tests",
+    "sha256": "d1ed6ae9b6e78a1dd6bb25685306072aba4774ec8b61461a298f001f62a99a42"
+  },
   "commands": [
     {
       "command": [
@@ -94,8 +105,216 @@
       "purpose": "recalculate independent equation examples",
       "result": "PASS",
       "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "paper/final_protocol/scripts/audit_readability.py"
+      ],
+      "cwd": ".",
+      "purpose": "run mechanical sentence, acronym, repetition, number, terminology, and paragraph-purpose checks",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "paper/final_protocol/scripts/verify_research_audits.py"
+      ],
+      "cwd": ".",
+      "purpose": "verify novelty, reference, title-collision, and APS desk-fit audits",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "paper/final_protocol/scripts/build_claim_ledger.py"
+      ],
+      "cwd": ".",
+      "purpose": "rebuild exhaustive sentence-level claim ledger and scope audit",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_analyze_pevl.py",
+        "tests/test_build_pevl_artifacts.py",
+        "tests/test_build_pevl_result_macros.py",
+        "tests/test_build_release_pevl.py",
+        "tests/test_pevl_synthetic.py",
+        "tests/test_seed_namespace_audit.py",
+        "tests/test_stochastic_source_audit.py",
+        "tests/test_verify_pevl_release.py",
+        "paper/final_protocol/tests/test_equations.py",
+        "paper/final_protocol/tests/test_claim_ledger.py",
+        "paper/final_protocol/tests/test_desk_reviews.py",
+        "paper/final_protocol/tests/test_independent_statistics.py",
+        "paper/final_protocol/tests/test_research_audits.py",
+        "paper/final_protocol/tests/test_protocol_reporting_provenance.py",
+        "paper/final_protocol/tests/test_reproduction_provenance.py"
+      ],
+      "cwd": ".",
+      "purpose": "run targeted analyzer, audit, synthetic, release, equation, claim-scope, and provenance tests",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "paper/final_protocol/scripts/build_final_release.py"
+      ],
+      "cwd": ".",
+      "purpose": "build sanitized engine-free review package",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "-m",
+        "pevl_bench",
+        "generate"
+      ],
+      "cwd": "paper/final_protocol/release",
+      "purpose": "regenerate synthetic conformance outputs through the review-package interface",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "-m",
+        "pevl_bench",
+        "verify"
+      ],
+      "cwd": "paper/final_protocol/release",
+      "purpose": "verify synthetic conformance outputs through the review-package interface",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "-m",
+        "pevl_bench",
+        "admit",
+        "examples/example_evidence.json"
+      ],
+      "cwd": "paper/final_protocol/release",
+      "purpose": "evaluate worked admission evidence through the review-package interface",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "-m",
+        "pevl_bench",
+        "explain",
+        "examples/example_evidence.json"
+      ],
+      "cwd": "paper/final_protocol/release",
+      "purpose": "explain the blocking gate and redesign for the worked example",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "-m",
+        "pevl_bench",
+        "report",
+        "--json"
+      ],
+      "cwd": "paper/final_protocol/release",
+      "purpose": "summarize processed evidence through the review-package interface",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "-m",
+        "pevl_bench",
+        "report",
+        "--decision-table"
+      ],
+      "cwd": "paper/final_protocol/release",
+      "purpose": "regenerate the human-readable admission decision table",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_release.py"
+      ],
+      "cwd": "paper/final_protocol/release",
+      "purpose": "run engine-independent release tests",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "scripts/verify_release.py"
+      ],
+      "cwd": "paper/final_protocol/release",
+      "purpose": "verify release manifest and reaggregate processed rows",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "tectonic",
+        "main.tex"
+      ],
+      "cwd": "paper/final_protocol",
+      "purpose": "compile current REVTeX manuscript without retaining transient logs",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "pdftotext",
+        "main.pdf",
+        "-"
+      ],
+      "cwd": "paper/final_protocol",
+      "purpose": "extract compiled PDF text for identity check",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "paper/final_protocol/scripts/audit_contradictions.py"
+      ],
+      "cwd": ".",
+      "purpose": "run cross-file contradiction and claim-scope audit",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv-clean/bin/python",
+        "paper/final_protocol/scripts/aggregate_desk_reviews.py"
+      ],
+      "cwd": ".",
+      "purpose": "validate and aggregate five independent closeout desk reviews",
+      "result": "PASS",
+      "returncode": 0
     }
   ],
+  "desk_review_status": "VALIDATED_FIVE_FINAL_REVIEWS",
   "environment": {
     "architecture": {
       "machine": "arm64",
@@ -215,7 +434,6 @@
       }
     }
   },
-  "error": "{\"command\": [\"<repo>/.venv-clean/bin/python\", \"paper/final_protocol/scripts/audit_readability.py\"], \"cwd\": \".\", \"output_tail\": \"{\\\"status\\\": \\\"FAIL\\\", \\\"output\\\": \\\"<repo>/paper/final_protocol/READABILITY_AUDIT.json\\\", \\\"failures\\\": [\\\"1 paragraphs exceed 220 words\\\"]}\", \"purpose\": \"run mechanical sentence, acronym, repetition, number, terminology, and paragraph-purpose checks\", \"result\": \"FAIL\", \"returncode\": 1}",
   "generated_at_utc": "2026-08-24T00:00:00+00:00",
   "limitations": [
     "The restricted game engine and private acquisition materials are not rerun.",
@@ -233,26 +451,26 @@
     "claim_ledger": {
       "exists": true,
       "path": "paper/final_protocol/claim_ledger.csv",
-      "sha256": "38fea9032ae98ddf2c0013e7e9231cf6e8b1c927b40a267dcc430e1b8ca9f097",
-      "size_bytes": 531460
+      "sha256": "ea75e06225c362aea563c8b44f14d9aa15f69be513b788f84000f740e519480d",
+      "size_bytes": 531415
     },
     "claim_scope_audit": {
       "exists": true,
       "path": "paper/final_protocol/source_data/claim_scope_audit.json",
-      "sha256": "d69b95a6f2c5e536bf60701069d9970e999852690265ea87a4f50770abf768f7",
-      "size_bytes": 339482
+      "sha256": "97a416dc0486d24e6219aa3cfa7ec34349dbb6e119b442566d45bed282c8a0e3",
+      "size_bytes": 339370
     },
     "contradiction_audit": {
       "exists": true,
       "path": "paper/final_protocol/CONTRADICTION_AUDIT.json",
-      "sha256": "496b9733f3d2efd5dfa2b768e6c1c755a8d53e8f3a0090976bf6907131519501",
-      "size_bytes": 74575
+      "sha256": "04fd8aaefefaba2ba0ee9d75b3ec000c4d15a49945569334445cbf02db7fe967",
+      "size_bytes": 72706
     },
     "desk_review_simulation": {
       "exists": true,
-      "path": "paper/final_protocol/DESK_REVIEW_SIMULATION.json",
-      "sha256": "2f6ab4f94ba2b0dbf9dcd548b21004df9ba5024eeecd4e19910dc401a28d32f8",
-      "size_bytes": 5713
+      "path": "paper/final_protocol/DESK_REVIEW_SIMULATION_V2.json",
+      "sha256": "7841fdb19e16c198c67b5510e72f51227b4ea0a26b1f05da09512a513fea1be9",
+      "size_bytes": 4062
     },
     "independent_statistics_verification": {
       "exists": true,
@@ -263,8 +481,8 @@
     "manuscript_pdf": {
       "exists": true,
       "path": "paper/final_protocol/main.pdf",
-      "sha256": "57df4382a2e1095ae9c651e3ee879297bf7995611902ace93a535227551f5217",
-      "size_bytes": 255625
+      "sha256": "92d1658338f668f80ed82dd1c4fa2cf315e6255e1f146949107b826bf837351a",
+      "size_bytes": 255567
     },
     "novelty_matrix": {
       "exists": true,
@@ -275,14 +493,14 @@
     "pdf_visual_audit": {
       "exists": true,
       "path": "paper/final_protocol/supplement/PDF_VISUAL_AUDIT.json",
-      "sha256": "99ab391edd6d750d661cfa8804e815d6c3654ef208ea9acbcfc354e07205fb97",
+      "sha256": "19217dd8329598566fe1ce9021efd0b31d662639420395a8e5963a298b8d0de9",
       "size_bytes": 3961
     },
     "readability_audit": {
       "exists": true,
       "path": "paper/final_protocol/READABILITY_AUDIT.json",
-      "sha256": "e7623dd6266f930fe4257bf1fbcc4ee5191f9e8a2df92c9849472a30762daadb",
-      "size_bytes": 27206
+      "sha256": "2875c12ba481172645c6a72f42052b5d8c38f5dbbebd21e4850f64d654bde150",
+      "size_bytes": 27372
     },
     "reference_audit": {
       "exists": true,
@@ -310,6 +528,303 @@
     }
   },
   "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",
+  "provenance_inventory": {
+    "groups": {
+      "dependency_declarations": [
+        {
+          "path": "paper/final_protocol/release/environment.yml",
+          "sha256": "ab845f75a23642e2ec9893a9fc98e6b2f61744aefebc6205486a65af34c460fc",
+          "size_bytes": 209
+        },
+        {
+          "path": "paper/final_protocol/release/requirements-lock.txt",
+          "sha256": "213e2b0a986407d2c9ea37c7f362204754cec1429ac589045cc32bd2739c8684",
+          "size_bytes": 112
+        }
+      ],
+      "invoked_scripts_and_modules": [
+        {
+          "path": "paper/final_protocol/release/pevl_bench/__main__.py",
+          "sha256": "11de043a914f1bf5d57c64f066a7f527f36e852eca45893290bf8d7978757fd4",
+          "size_bytes": 12229
+        },
+        {
+          "path": "paper/final_protocol/release/pevl_bench/admission.py",
+          "sha256": "842fb07bad1c47eabd61383d876238516dc5873750e02561dab75c725d98b4e2",
+          "size_bytes": 47831
+        },
+        {
+          "path": "paper/final_protocol/release/pevl_bench/evidence.py",
+          "sha256": "3b2ccfed636c1fe532177ea4232345de27b807ca86b54bb601df270794976857",
+          "size_bytes": 19847
+        },
+        {
+          "path": "paper/final_protocol/release/pevl_bench/schema_subset.py",
+          "sha256": "078198f91a2fdf90332ec216cb503e06ffc9a08c80fdf28513c4450a50f481d0",
+          "size_bytes": 11608
+        },
+        {
+          "path": "paper/final_protocol/release/pevl_bench/synthetic.py",
+          "sha256": "3b85d01c37bf522008b5fb1a20192ddfb1141db801b275093e0aa7f779bc3f86",
+          "size_bytes": 49727
+        },
+        {
+          "path": "paper/final_protocol/release/pevl_bench/synthetic_admission.py",
+          "sha256": "9794d10658cc7455051eed9ba1ecf19c7214b8de684cb644a9bc127546f3d86f",
+          "size_bytes": 7521
+        },
+        {
+          "path": "paper/final_protocol/release/scripts/verify_release.py",
+          "sha256": "10af67f43fe496b2206ad9c6408d18b354af20b48312c58570332a19bb044cb1",
+          "size_bytes": 27514
+        },
+        {
+          "path": "paper/final_protocol/scripts/aggregate_desk_reviews.py",
+          "sha256": "9d93bc186885e04a8e4f48ee3138930f88b1e9766e4d586b5150f8b0097a1688",
+          "size_bytes": 11273
+        },
+        {
+          "path": "paper/final_protocol/scripts/audit_contradictions.py",
+          "sha256": "d41f96308b0e4d12bdb980a682282edaa6d4aac8b46c8e2826b2f85b8edf5bfa",
+          "size_bytes": 111464
+        },
+        {
+          "path": "paper/final_protocol/scripts/audit_readability.py",
+          "sha256": "739605513f38501089ee674412598eb2d5e31ac9a10661ca6ebf9bf0acc6f3d6",
+          "size_bytes": 10203
+        },
+        {
+          "path": "paper/final_protocol/scripts/build_claim_ledger.py",
+          "sha256": "0d3294c01bcdaae790944e59a072920fc0503f0feb70301a3f19a0e8221e7520",
+          "size_bytes": 62706
+        },
+        {
+          "path": "paper/final_protocol/scripts/build_final_artifacts.py",
+          "sha256": "dc62eb9d8e6e90cd7f1cd8d444697a3e3068b6552a67eb6bf82d021bfeff10d4",
+          "size_bytes": 61748
+        },
+        {
+          "path": "paper/final_protocol/scripts/build_final_release.py",
+          "sha256": "d41fa956c9aec6168429d16536442e35eef2a367dd2db4937f016caa263647c5",
+          "size_bytes": 57259
+        },
+        {
+          "path": "paper/final_protocol/scripts/independent_statistics_audit.py",
+          "sha256": "ce5b018281402b0e39684cd4272562d5b674fea4730990412a275fe106efc3b1",
+          "size_bytes": 75933
+        },
+        {
+          "path": "paper/final_protocol/scripts/recalculate_equation_examples.py",
+          "sha256": "7ae3b14ed27afb22818433f84d1ab8177aa58380c34bfa3c5dc7005b3b660ebd",
+          "size_bytes": 3617
+        },
+        {
+          "path": "paper/final_protocol/scripts/reproduce_all.py",
+          "sha256": "552d078f930718ada893a14fee69f9be13a61833ed75a45e53f8504b21d17314",
+          "size_bytes": 46287
+        },
+        {
+          "path": "paper/final_protocol/scripts/verify_reproduction_report.py",
+          "sha256": "2c47c0fcf79215c58d6a7b08cd3264044bb44e2b7bc2591f559ba924ed159cd9",
+          "size_bytes": 19545
+        },
+        {
+          "path": "paper/final_protocol/scripts/verify_research_audits.py",
+          "sha256": "9734870f51a240a4a518069f7edae62895e34b84993f88e4ab916f53e4e574d7",
+          "size_bytes": 32062
+        },
+        {
+          "path": "paper/final_protocol/scripts/verify_starting_state.py",
+          "sha256": "1ed879c72352ac6014a5f49987b67ebb59a8307020923a897c5495473f7fda8d",
+          "size_bytes": 3645
+        },
+        {
+          "path": "paper/final_protocol/scripts/verify_statistics.py",
+          "sha256": "774c57d9b69696f5c25dcfd0eedc15823b62af3a8960a88783e4611b19e15fd3",
+          "size_bytes": 37710
+        },
+        {
+          "path": "paper/scripts/analyze_pevl.py",
+          "sha256": "acd128d3131f70a1b6aaee466e13e65b652f57077229a4260aac720f7b1b8fc8",
+          "size_bytes": 52564
+        },
+        {
+          "path": "paper/scripts/audit_seed_namespace.py",
+          "sha256": "571589fc2f2637979c7f4fd3d807f6f574485fce31a7789cfc17d39f94ff9b27",
+          "size_bytes": 6229
+        },
+        {
+          "path": "paper/scripts/audit_stochastic_sources.py",
+          "sha256": "545b33aaa3c446d9651a4f252f6ed1700084e774e14123c75eea10c7d126af12",
+          "size_bytes": 32693
+        }
+      ],
+      "manifests": [
+        {
+          "path": "paper/final_protocol/release/MANIFEST.sha256",
+          "sha256": "cb4ab12640cd5b35aa833f611ea960ce61bf2b17609d4093b87e48eb1812a014",
+          "size_bytes": 7923
+        },
+        {
+          "path": "paper/final_protocol/release/pevl_bench/admission_results/MANIFEST.sha256",
+          "sha256": "ae28280a33c6f0c41b56533d06f24f518e714265cce60938eb3e61998cea7043",
+          "size_bytes": 101
+        },
+        {
+          "path": "paper/final_protocol/release/pevl_bench/results/MANIFEST.sha256",
+          "sha256": "0a6eade794c4434275663315442a8e5528a8c3c602f42da5de3ecd0b34792621",
+          "size_bytes": 257
+        }
+      ],
+      "schemas_and_rules": [
+        {
+          "path": "paper/final_protocol/release/examples/example_evidence.json",
+          "sha256": "1b8453cf80695efb8fd576fd1eb32c6c5bde124a0c2c929530cc1e0e6b128b01",
+          "size_bytes": 6179
+        },
+        {
+          "path": "paper/final_protocol/release/pevl_bench/results/pevl_results.schema.json",
+          "sha256": "d173b3255a19b985bf5d0c102b67bfebcddcec6911b38d18a77048b74f63aafb",
+          "size_bytes": 4755
+        },
+        {
+          "path": "paper/final_protocol/release/protocol/admission_rules.json",
+          "sha256": "44fe890051cff65fa27a70464e2d018da30bf8923c9863859d1629bad454acff",
+          "size_bytes": 9207
+        },
+        {
+          "path": "paper/final_protocol/release/protocol/admission_schema.json",
+          "sha256": "0e006936b0b3b0e1a9d27e3f2382332d4c5e29f836224271c7a6c55e0dbf6e03",
+          "size_bytes": 3542
+        },
+        {
+          "path": "paper/final_protocol/release/protocol/claim_classes.json",
+          "sha256": "c4b41697e14f67788e9d43a7f9d6fd7f4ae8162fa714dba514443c8cf62dbf16",
+          "size_bytes": 7605
+        },
+        {
+          "path": "paper/final_protocol/release/protocol/evidence_bundle_schema.json",
+          "sha256": "a2bb916c9f46af4daf8ab39320485ec804018e826d6c9c6870c62c843d639bbc",
+          "size_bytes": 9626
+        },
+        {
+          "path": "paper/final_protocol/release/protocol/stage6_source_audit_rules.json",
+          "sha256": "792c832d6c029e7479736f6a35c7a88376a61caa178e0b7f92d8c166cd83c376",
+          "size_bytes": 5041
+        },
+        {
+          "path": "paper/final_protocol/release_templates/protocol/admission_rules.json",
+          "sha256": "44fe890051cff65fa27a70464e2d018da30bf8923c9863859d1629bad454acff",
+          "size_bytes": 9207
+        },
+        {
+          "path": "paper/final_protocol/release_templates/protocol/admission_schema.json",
+          "sha256": "0e006936b0b3b0e1a9d27e3f2382332d4c5e29f836224271c7a6c55e0dbf6e03",
+          "size_bytes": 3542
+        },
+        {
+          "path": "paper/final_protocol/release_templates/protocol/claim_classes.json",
+          "sha256": "c4b41697e14f67788e9d43a7f9d6fd7f4ae8162fa714dba514443c8cf62dbf16",
+          "size_bytes": 7605
+        },
+        {
+          "path": "paper/final_protocol/release_templates/protocol/evidence_bundle_schema.json",
+          "sha256": "a2bb916c9f46af4daf8ab39320485ec804018e826d6c9c6870c62c843d639bbc",
+          "size_bytes": 9626
+        },
+        {
+          "path": "paper/final_protocol/release_templates/protocol/stage6_source_audit_rules.json",
+          "sha256": "792c832d6c029e7479736f6a35c7a88376a61caa178e0b7f92d8c166cd83c376",
+          "size_bytes": 5041
+        }
+      ],
+      "targeted_tests": [
+        {
+          "path": "paper/final_protocol/release/tests/test_release.py",
+          "sha256": "dd33f6e073d05b4bf258595f08ebfc7f233ad0405aa86a0843b4216b7f6434b3",
+          "size_bytes": 24405
+        },
+        {
+          "path": "paper/final_protocol/tests/test_claim_ledger.py",
+          "sha256": "d472bc2406f2e20f06cfd5c0c2472be86c2e4beba1095844fd50db2c49d84f63",
+          "size_bytes": 4015
+        },
+        {
+          "path": "paper/final_protocol/tests/test_desk_reviews.py",
+          "sha256": "caeb771b986f9dc2e444526f2896ffc51b0eb776cefdf6e4946debcdfb6aba73",
+          "size_bytes": 2861
+        },
+        {
+          "path": "paper/final_protocol/tests/test_equations.py",
+          "sha256": "ad66f45dcd7ab2129c404fcc5c6db3bf3b787c7ed30cc385fed832daa71773c2",
+          "size_bytes": 2725
+        },
+        {
+          "path": "paper/final_protocol/tests/test_independent_statistics.py",
+          "sha256": "31dff54e2b68f31d46e7006cb39c15e1f9de8df4d3e541c5a9aadcb0b06f47b6",
+          "size_bytes": 15212
+        },
+        {
+          "path": "paper/final_protocol/tests/test_protocol_reporting_provenance.py",
+          "sha256": "179ce33a2c4b4bf7e91748b6a54e898898c1318cc890dac6b5fb67176e7d8dfd",
+          "size_bytes": 7353
+        },
+        {
+          "path": "paper/final_protocol/tests/test_reproduction_provenance.py",
+          "sha256": "99b698ebd5c220651629637ecfa9aa0bdd4b3ab8db870cb61849e444dc0e18aa",
+          "size_bytes": 16420
+        },
+        {
+          "path": "paper/final_protocol/tests/test_research_audits.py",
+          "sha256": "819e3acb14754f13957f016b932aaa5c573b3116b6fab2f46e5424b7764c3df1",
+          "size_bytes": 3705
+        },
+        {
+          "path": "tests/test_analyze_pevl.py",
+          "sha256": "26f39e302ddf4568955c9c7eb9e354ea356705a34f22fed8c4801a948c747ebd",
+          "size_bytes": 17177
+        },
+        {
+          "path": "tests/test_build_pevl_artifacts.py",
+          "sha256": "4405d66bd1862839a5a3cb0fc80f82a2afca08d2565aa89547908996ddeef4dc",
+          "size_bytes": 16540
+        },
+        {
+          "path": "tests/test_build_pevl_result_macros.py",
+          "sha256": "f6ed15b86cdaa41043f86fd8b069bb22d8ab5cce48d9a4a50d0b5c5640e2477a",
+          "size_bytes": 15335
+        },
+        {
+          "path": "tests/test_build_release_pevl.py",
+          "sha256": "61b35d769ab987a22f506e8f6d3a4e9383d0b6e65eddd9b8a7cd4f206601976e",
+          "size_bytes": 1351
+        },
+        {
+          "path": "tests/test_pevl_synthetic.py",
+          "sha256": "41f8a7a38ba02887380376b4ea1f96a86ef0936d83934ff60f101be7113394ac",
+          "size_bytes": 10776
+        },
+        {
+          "path": "tests/test_seed_namespace_audit.py",
+          "sha256": "07744f5e7378923e13110bdc06c6b7ee83f56a5544ec6a524e36bad44ca116f4",
+          "size_bytes": 932
+        },
+        {
+          "path": "tests/test_stochastic_source_audit.py",
+          "sha256": "98e6da493328b7b4908b87d728d418627bc83de30c5f988eb32998b33da48eb8",
+          "size_bytes": 3887
+        },
+        {
+          "path": "tests/test_verify_pevl_release.py",
+          "sha256": "78f73994eb6783e26c67134c46220e6ab6606fe23126d63cb7b3a1948a311e5d",
+          "size_bytes": 1943
+        }
+      ]
+    },
+    "missing": [],
+    "sha256": "4ce7b702d09cb43c78213b6d4b68186d8a6a309383ad5988f37c80d5020dd48f",
+    "unique_file_count": 56
+  },
   "read_only_verifier": {
     "command": [
       "/Users/safiullahbaig/Projects/pokemonTCG2.0/.venv-clean/bin/python",
@@ -327,8 +842,8 @@
   "repository_identity": {
     "boundary": "HEAD/tree identify clean reproduced subject commit S; branch is informational only. The final verifier requires current HEAD E to be S's sole direct child, with exactly the self-excluded canonical report and sidecar as E's committed tree delta.",
     "branch": "paper/apsos-submission-closeout-20260825",
-    "head_commit": "828b2daa10ce5afcd3661b8af57f780e03927cfd",
-    "head_tree": "10eed10378934403bd6729343a4b9cb15fc27a09",
+    "head_commit": "06536d7593507b9b7ba6ae60078639d856bb25b9",
+    "head_tree": "ff5c45cd89d967c976ebf202b6057d3ae4b3685e",
     "non_envelope_dirty_path_count": 0,
     "non_envelope_dirty_pathname_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "non_envelope_worktree_clean": true,
@@ -351,9 +866,9 @@
   },
   "schema_version": 2,
   "scope": "Derived-artifact reproduction only; no restricted-engine execution and no new policy experiment.",
-  "status": "FAIL",
+  "status": "PASS",
   "submission_ready": false,
-  "technical_reproduction_status": "FAIL",
+  "technical_reproduction_status": "PASS",
   "timestamp_basis": "SOURCE_DATE_EPOCH; this is a deterministic build timestamp, not wall-clock execution time.",
   "title": "A Protocol for Validating Pairing Assumptions in Seed-Matched Evaluations of Black-Box Game-Playing Agents",
   "tracked_drift": {
@@ -373,7 +888,7 @@
       "paper/final_protocol/main.log",
       "paper/final_protocol/READABILITY_AUDIT.json",
       "paper/final_protocol/CONTRADICTION_AUDIT.json",
-      "paper/final_protocol/DESK_REVIEW_SIMULATION.json",
+      "paper/final_protocol/DESK_REVIEW_SIMULATION_V2.json",
       "paper/final_protocol/REPRODUCTION_REPORT.json",
       "paper/final_protocol/REPRODUCTION_REPORT.sha256"
     ],
@@ -384,11 +899,111 @@
       "paper/final_protocol/release/"
     ],
     "policy": "Protected tracked files remain byte-identical during the run, and the final Git gate requires every non-envelope tracked or untracked path to match subject commit S.",
-    "protected_file_count_after": 5817,
-    "protected_file_count_before": 5817,
-    "protected_snapshot_sha256_after": "d5f6c426d82838bd75626599d15e998494766ff1ad9c76181a914db420510d57",
-    "protected_snapshot_sha256_before": "d5f6c426d82838bd75626599d15e998494766ff1ad9c76181a914db420510d57",
+    "protected_file_count_after": 5819,
+    "protected_file_count_before": 5819,
+    "protected_snapshot_sha256_after": "c2373393afed1b39fdd8cda3b8b3984a3cf021f64a5e6f8d7109c2cb48105dfd",
+    "protected_snapshot_sha256_before": "c2373393afed1b39fdd8cda3b8b3984a3cf021f64a5e6f8d7109c2cb48105dfd",
     "status": "PASS",
     "unexpected_changes": []
+  },
+  "visual_audit": {
+    "attestation": "paper/final_protocol/supplement/PDF_VISUAL_AUDIT.json",
+    "attestation_sha256": "19217dd8329598566fe1ce9021efd0b31d662639420395a8e5963a298b8d0de9",
+    "manuscript_pdf_sha256": "92d1658338f668f80ed82dd1c4fa2cf315e6255e1f146949107b826bf837351a",
+    "manuscript_source_sha256": "4bbb64a3a82b2f91a09dac23ccaf2c825cae287af52968f826ee755512da6395",
+    "method": "Every page rendered at 150 dpi; PNG structure/dimensions checked; a PDF-bound checklist records human visual inspection.",
+    "page_count": 14,
+    "rendered_pages": [
+      {
+        "height_pixels": 1650,
+        "page": 1,
+        "sha256": "76686e7778fdccb02910339157486a459aaf1e12b4ff11ded37dc94dcd03d99a",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 2,
+        "sha256": "fe7613bcf16911f60950e24a94483a8a0280fda8f5f667b37d62c88fc1f48b41",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 3,
+        "sha256": "e0585936cddab07c5aee617f28751bbd6215d79e70a35fb704b643600fb0df75",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 4,
+        "sha256": "2d02e0fd983b4eaa38f18b09fcb6c923f8642c3bffa2b23df01f45646e2c8d4b",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 5,
+        "sha256": "aa5a2752a9feb862bc466de1fe9a1f40d3af77b3a603d8cc31eb5379563022c0",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 6,
+        "sha256": "f309cdb325527d5a627843cc39470f9d8efcceea40a389b09f16486f025838b9",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 7,
+        "sha256": "f0ee2916ffdda286545d77a1f0880f0b36771f16dda76c6a34851e427c4c523f",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 8,
+        "sha256": "21ad9776e48837f159aa9823416cb86c0ce45a747aabc5c36c45b90c81316bbb",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 9,
+        "sha256": "814ea463418e473f1460d78cf40a00ecd769a1fb6b369bb3f392703a225126bc",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 10,
+        "sha256": "35aa81fef03203a065fbbcda989a84c20ca8dd33ab4cc6a3628ea94e0352fb31",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 11,
+        "sha256": "18173a94b9882e245771ab7ef51efc5ed2dbfe1ceae55ee61ee6753709a6483a",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 12,
+        "sha256": "a4258d54acbfd1d854ce89a0e4c08580d076dae4f23a3a0a67eb7d5bdf1f29b6",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 13,
+        "sha256": "6500bdc6d455f35c225f6828e3a7b74ca0a0da09f4fba8aa5799d278ebb15cf6",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 14,
+        "sha256": "393bfcccae8cafb8396a34877dbad86d4fb0adf113c22b3ccc3cc1c91cb08c2a",
+        "width_pixels": 1275
+      }
+    ],
+    "status": "PASS"
+  },
+  "word_count": {
+    "abstract_source_words_approximate": 181,
+    "compiled_pdf_text_including_references": 8927,
+    "method": "whitespace words from pdftotext; approximate regex words from the unexpanded TeX abstract"
   }
 }
