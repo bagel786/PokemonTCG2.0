@@ -62,7 +62,7 @@
   ],
   "inspection_method": "Machine-finalization re-inspection (same directed procedure as the prior closeout phase): every page of the final manuscript state was rendered at 150 dpi, structurally verified (PNG signature, IHDR, minimum dimensions), checked against pdftotext output for unresolved markers, and hash-bound. Human visual re-inspection remains required before submission and is recorded as PENDING below.",
   "limitation": "Automated structural inspection cannot judge typographic aesthetics or legibility the way a human reader can; the PENDING signoff gate covers exactly that.",
-  "manuscript_pdf_sha256": "89b319428d5f2188fd60c5c0a7e2dda28e9067e3468c48c2b51a77904c5b022c",
+  "manuscript_pdf_sha256": "0eff0c625709a11b01dfbd3b84f475b66fbb10c15112feac27bf56abfe00d590",
   "manuscript_source_sha256": "0220a758d14fdf945fb377630a079d688415db9edf4d9262233eeacf1d30478d",
   "page_count": 14,
   "page_size": [
