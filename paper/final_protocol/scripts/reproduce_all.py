@@ -390,7 +390,7 @@ def changed_snapshot_paths(before: dict[str, str], after: dict[str, str]) -> lis
 
 
 def _subject_excluded(path: Path) -> bool:
-    if path in {REPORT, REPORT_SIDECAR}:
+    if path in {REPORT, REPORT_SIDECAR, MACHINE_FINAL_REPORT, MACHINE_FINAL_SIDECAR}:
         return True
     relative = path.relative_to(ROOT).as_posix()
     if {"__pycache__", ".pytest_cache"} & set(path.parts):
