@@ -7,9 +7,9 @@
       "paper/final_protocol/REPRODUCTION_REPORT.sha256",
       "compiler/cache transients (*.aux, *.blg, *.log, *.out, *.synctex.gz, *.pyc, __pycache__, .pytest_cache)"
     ],
-    "file_count": 455,
+    "file_count": 466,
     "scope": "Final article/release tree, final reviewer bytes, retained protocol/data/synthetic inputs, and invoked scripts/tests",
-    "sha256": "dfbc8bdd3a0d199d05bf55aa622d1ea5b8a5c1c7c840e614d7681fe13c953127"
+    "sha256": "d48343be1ac107d9fd3aa48bcc69f7af11fd4fc88d52a2704df40c123cf62ab8"
   },
   "commands": [
     {
@@ -448,31 +448,31 @@
     "artifact_build": {
       "exists": true,
       "path": "paper/final_protocol/source_data/build_report.json",
-      "sha256": "eaf7427efbf6c1296323caf32807cab3f18e393281bc078205824676060bb7d3",
+      "sha256": "669a54273ceb77e17687fb93a5396aa2c5639467f6f7396142a354002e6948c7",
       "size_bytes": 3609
     },
     "claim_ledger": {
       "exists": true,
       "path": "paper/final_protocol/claim_ledger.csv",
-      "sha256": "9641dd5d5a36ae842242be5e12d83e89ed3389fe9995b0399df0fb9bd47f4863",
-      "size_bytes": 482974
+      "sha256": "0acd48b6ea90eeedf676e85568144e56ececdfbf7facf21808e5483f989d99dd",
+      "size_bytes": 479099
     },
     "claim_scope_audit": {
       "exists": true,
       "path": "paper/final_protocol/source_data/claim_scope_audit.json",
-      "sha256": "56d1d88e3681b234fd95c9da2285fa59fbe560c38c52e53432618e4263a35e68",
-      "size_bytes": 312218
+      "sha256": "ef7a369612c20e47fde8fc9056fb8422996aab2bbf4cb2fe17f73111de77e473",
+      "size_bytes": 308451
     },
     "contradiction_audit": {
       "exists": true,
       "path": "paper/final_protocol/CONTRADICTION_AUDIT.json",
-      "sha256": "7caa17d0005ba4c90f92451e74eecb48a4abd9c4aae36b87a84421b3577f5305",
+      "sha256": "d6c6b13c2ca5cc509f17ee95190c3775e40b733176f8a353089b083990b90bab",
       "size_bytes": 72884
     },
     "desk_review_simulation": {
       "exists": true,
       "path": "paper/final_protocol/DESK_REVIEW_SIMULATION_V2.json",
-      "sha256": "b45783dd7949a44426e9ab4f3d14fb49315a75a739296acbede8db21c5b36317",
+      "sha256": "0a1ff5fba6a1d814e5484450c5ff2875f25701676f3f2470d0c27de5df74c72a",
       "size_bytes": 4062
     },
     "independent_statistics_verification": {
@@ -484,8 +484,8 @@
     "manuscript_pdf": {
       "exists": true,
       "path": "paper/final_protocol/main.pdf",
-      "sha256": "0eff0c625709a11b01dfbd3b84f475b66fbb10c15112feac27bf56abfe00d590",
-      "size_bytes": 253477
+      "sha256": "64eac783289c4170d47288b833ae21a78a58e2f04a44ca051789c70dc2e7c2a8",
+      "size_bytes": 259533
     },
     "novelty_matrix": {
       "exists": true,
@@ -496,14 +496,14 @@
     "pdf_visual_audit": {
       "exists": true,
       "path": "paper/final_protocol/supplement/PDF_VISUAL_AUDIT.json",
-      "sha256": "c119761b4f6a7dab29927ca910ff886d50d8fbe7badc499599b1b061cfaf473b",
-      "size_bytes": 4434
+      "sha256": "6750777771bd2bc1658266578da8228a8cfce2feb0809cac891dd4f9802c079e",
+      "size_bytes": 4183
     },
     "readability_audit": {
       "exists": true,
       "path": "paper/final_protocol/READABILITY_AUDIT.json",
-      "sha256": "eb693c474144938bbd96747e8a0346e878944917504e3c5b62c2ab58b9bd96d3",
-      "size_bytes": 30728
+      "sha256": "8c0cab35d3d5a539c761866f951bd333d60a2ba41e3f4de64011df870a83867a",
+      "size_bytes": 28357
     },
     "reference_audit": {
       "exists": true,
@@ -514,7 +514,7 @@
     "release_manifest": {
       "exists": true,
       "path": "paper/final_protocol/release/MANIFEST.sha256",
-      "sha256": "63af371974554f3a9b4930a9b5a86997706306f78c8a4fe7471593811ea831ce",
+      "sha256": "18ac3a8242b3d7fe9550f5c3426cea8375f00a571d4458b67937458049e5ea3e",
       "size_bytes": 7923
     },
     "results_macros": {
@@ -603,8 +603,8 @@
         },
         {
           "path": "paper/final_protocol/scripts/build_final_artifacts.py",
-          "sha256": "a2de147756b6e4045a1bc722acd6db590053bdc11f0a9950524fef9e43c7f253",
-          "size_bytes": 61548
+          "sha256": "aa5d985ac09734fe755ac55d852f8a69201c4168dca9c7d98ed98651b7ade666",
+          "size_bytes": 64805
         },
         {
           "path": "paper/final_protocol/scripts/build_final_release.py",
@@ -665,7 +665,7 @@
       "manifests": [
         {
           "path": "paper/final_protocol/release/MANIFEST.sha256",
-          "sha256": "63af371974554f3a9b4930a9b5a86997706306f78c8a4fe7471593811ea831ce",
+          "sha256": "18ac3a8242b3d7fe9550f5c3426cea8375f00a571d4458b67937458049e5ea3e",
           "size_bytes": 7923
         },
         {
@@ -825,7 +825,7 @@
       ]
     },
     "missing": [],
-    "sha256": "fe80a42e7bbedd732a883cfa4d253aeca1730b0527623e64594db17ca5c2270c",
+    "sha256": "73298ff7517cd4cf312d4391d3ed07b86a2508c59d56699ac1ac6f1e5f32c79c",
     "unique_file_count": 56
   },
   "read_only_verifier": {
@@ -845,8 +845,8 @@
   "repository_identity": {
     "boundary": "HEAD/tree identify clean reproduced subject commit S; branch is informational only. The final verifier requires current HEAD E to be S's sole direct child, with exactly the self-excluded canonical report and sidecar as E's committed tree delta.",
     "branch": "paper/apsos-machine-finalization-20260826",
-    "head_commit": "54da0beffc9e1f955f0eca9c5a66df1617ce208d",
-    "head_tree": "e8c4a6efd857ec6b11466bd64af37f965ecac658",
+    "head_commit": "edda89c5709f44c4d190d09760ff4f9393592ee1",
+    "head_tree": "a7c5f96e01ca9ffff3a445154f3b4fc687c64a61",
     "non_envelope_dirty_path_count": 0,
     "non_envelope_dirty_pathname_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "non_envelope_worktree_clean": true,
@@ -904,20 +904,20 @@
       "paper/final_protocol/release/"
     ],
     "policy": "Protected tracked files remain byte-identical during the run, and the final Git gate requires every non-envelope tracked or untracked path to match subject commit S.",
-    "protected_file_count_after": 2455,
-    "protected_file_count_before": 2455,
-    "protected_snapshot_sha256_after": "cf00a4898c3166168944d98b66b1307e33e5ccab0f717affad27c0f098cd6a4d",
-    "protected_snapshot_sha256_before": "cf00a4898c3166168944d98b66b1307e33e5ccab0f717affad27c0f098cd6a4d",
+    "protected_file_count_after": 2466,
+    "protected_file_count_before": 2466,
+    "protected_snapshot_sha256_after": "37c72dbbb82965ef421ef59d24f6d36b35cfc372f47d3bdf920f0e076da11684",
+    "protected_snapshot_sha256_before": "37c72dbbb82965ef421ef59d24f6d36b35cfc372f47d3bdf920f0e076da11684",
     "status": "PASS",
     "unexpected_changes": []
   },
   "visual_audit": {
     "attestation": "paper/final_protocol/supplement/PDF_VISUAL_AUDIT.json",
-    "attestation_sha256": "c119761b4f6a7dab29927ca910ff886d50d8fbe7badc499599b1b061cfaf473b",
-    "manuscript_pdf_sha256": "0eff0c625709a11b01dfbd3b84f475b66fbb10c15112feac27bf56abfe00d590",
-    "manuscript_source_sha256": "0220a758d14fdf945fb377630a079d688415db9edf4d9262233eeacf1d30478d",
+    "attestation_sha256": "6750777771bd2bc1658266578da8228a8cfce2feb0809cac891dd4f9802c079e",
+    "manuscript_pdf_sha256": "64eac783289c4170d47288b833ae21a78a58e2f04a44ca051789c70dc2e7c2a8",
+    "manuscript_source_sha256": "0ca61efccd4a142bb92d548c67765f89cb2706f67adebc0bd7b004b8a66ca143",
     "method": "Every page rendered at 150 dpi; PNG structure/dimensions checked; a PDF-bound checklist records human visual inspection.",
-    "page_count": 14,
+    "page_count": 13,
     "rendered_pages": [
       {
         "height_pixels": 1650,
@@ -946,61 +946,55 @@
       {
         "height_pixels": 1650,
         "page": 5,
-        "sha256": "226f51277cae087a6091a5f236a94a581b9d10d67240b78f7168d55a6c1ab16b",
+        "sha256": "100626759b22dc7c2b8d29025d0c57acbb5fce93921148a11a728f3eba45037d",
         "width_pixels": 1275
       },
       {
         "height_pixels": 1650,
         "page": 6,
-        "sha256": "dad9e0c77fe2cf5fbd6ba2a08830cdd6484daa6998f81a3990db8c886b3c339e",
+        "sha256": "94bfe8114c9e003142a6de523dab22278028f63caee66312048014474d1c42fa",
         "width_pixels": 1275
       },
       {
         "height_pixels": 1650,
         "page": 7,
-        "sha256": "a6f69ef6c48f04922725c65af384fad1435eb82ad30c30e3346eb4a1feb445f6",
+        "sha256": "162175544bcc35152f4c7d5dd20d61af3ccfa6f705dcb7fec174a27b2162d121",
         "width_pixels": 1275
       },
       {
         "height_pixels": 1650,
         "page": 8,
-        "sha256": "d1fd8caea5dd962a74af09497db83fe5494ba4d46965eb5289ab5aeca06c0463",
+        "sha256": "878bd64f8d39782b765762091281304c8c03c16700bca66d37da62f800b23261",
         "width_pixels": 1275
       },
       {
         "height_pixels": 1650,
         "page": 9,
-        "sha256": "3b9bf212ff99a8fe03d908464b17c1c5f20cc4d85fb9436b0c42a4bb7ee3dd6f",
+        "sha256": "a1f47608f0d53738bbf51c089913fb8230ecd1e933bd893cacbdc35717ce3e9c",
         "width_pixels": 1275
       },
       {
         "height_pixels": 1650,
         "page": 10,
-        "sha256": "da7d85ba8be742e2c8848ea1f0b41d6c9aaeb57da5825882f4f4bde7bcb0cbe3",
+        "sha256": "2aad4e4055367a5f037763aaa0e237c5420ad076566ed4b2834a52d4d3d9fec3",
         "width_pixels": 1275
       },
       {
         "height_pixels": 1650,
         "page": 11,
-        "sha256": "ad4d60a4b65b1daf4d6984bf8d44782486d673cb18997e82dd351805e7fba9f5",
+        "sha256": "be1fdcf721f534ea6f51e9c0f7597c0948c70b7428f09795d7063f0dad1b3133",
         "width_pixels": 1275
       },
       {
         "height_pixels": 1650,
         "page": 12,
-        "sha256": "bf5a65e8176bcded9285fe865734c98264a6e17d4297d0abc8b4a8bd662009f1",
+        "sha256": "08cf5b2c132ec4b025c747cfc56f4c65354aa542b87602fd58196f9c6808468f",
         "width_pixels": 1275
       },
       {
         "height_pixels": 1650,
         "page": 13,
-        "sha256": "89d51704ea4602eea9e18723a579b6db50336d074ce2dda3d9a6c72b6ca7a2cf",
-        "width_pixels": 1275
-      },
-      {
-        "height_pixels": 1650,
-        "page": 14,
-        "sha256": "9a62cd48a3dd71b9b8f5babd1bca0ee328b436aff72a4f78d14067b8f80734cc",
+        "sha256": "9052732d9ed89b4bc285602c701f902710b5d14972141b1f561f2e32563e79c6",
         "width_pixels": 1275
       }
     ],
@@ -1008,7 +1002,7 @@
   },
   "word_count": {
     "abstract_source_words_approximate": 181,
-    "compiled_pdf_text_including_references": 8713,
+    "compiled_pdf_text_including_references": 8690,
     "method": "whitespace words from pdftotext; approximate regex words from the unexpanded TeX abstract"
   }
 }

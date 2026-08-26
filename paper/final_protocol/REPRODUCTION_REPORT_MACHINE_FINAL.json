@@ -1,5 +1,5 @@
 {
-  "canonical_report_sha256": "ef1e4a1c8778885e8c74c86645f0c0522c897bbd4a41e7180ebc163060e1a9a8",
+  "canonical_report_sha256": "09bcd471c462a93dd64a5add51a6634af05692628281ed6aebc3b0f60fc84ffb",
   "final_desk_simulation_sha256": "c10cd80e470cc9fedb583e35c97eb4c35e70cd495690dd24eea1de63f9fb7b6d",
   "generated_by": "paper/final_protocol/scripts/machine_finalize.py",
   "human_gate": {
@@ -29,7 +29,7 @@
     "REFERENCE_AUDIT_FINAL.csv": "7f8cf1f6d22bb6a8f5861e14adffeb39ee3997962f9aa5518b9151e845023120",
     "RELEASE_OWNERSHIP_MATRIX_FINAL.csv": "1fe52823f7d3ebef7788b8b7ff79ede32c0c3890fb4717d792505b40a6562fab",
     "STALE_ARTIFACT_AUDIT.json": "6b0617bdc11a342f43faaab8b25af87e386e7f97d7fbecf01349703b2694427e",
-    "SUBMISSION_METADATA_DRAFT.yaml": "6387e29a1a873d3cbe9fbfe8a6f576052328c55970ef73216d8fcee7314c4c1f",
+    "SUBMISSION_METADATA_DRAFT.yaml": "1386399665b83585b506b0f44176cb85008688fd804d705c27edaf1ee30a6281",
     "SUGGESTED_REVIEWERS_CANDIDATES.md": "f37252f0579a267bf2d02b6f17397c8f54eb10a71fe4220c9441b59f9e987e67",
     "WHAT_TO_SUBMIT_TO_APS.md": "f1b073b6d2df0471f0a371f1cd08582366c36ee7ebd0af4dc14c9c62b9803624",
     "ZENODO_METADATA_TEMPLATE.json": "2d7256c82c2e4e30d41ca6ad64e41252093d1f970d3474147debbd91d347b146",
@@ -40,8 +40,8 @@
     "scripts/apply_human_answers.py": "a19e83528b24f0b472fddbab37ec790eb3f7c92699934c416c24572636b10a1e",
     "scripts/validate_human_answers.py": "552dfa643c6d9e1b1c50a22edfaabb4b8221985f9b3ffe77525c3bc742fa5c7b"
   },
-  "public_release_candidate_zip_sha256": "576ceb154a8559f532e81223313213eca1c5b43b6e715d9b9c56a6a293acae94",
+  "public_release_candidate_zip_sha256": "4987c29c58ff16963207d4a447db36dcb56707ad6b50f53fea1ec473f0e360ed",
   "schema_version": "machine-final-reproduction-report-v1",
   "status": "PASS",
-  "subject_head_commit": "54da0beffc9e1f955f0eca9c5a66df1617ce208d"
+  "subject_head_commit": "edda89c5709f44c4d190d09760ff4f9393592ee1"
 }
