@@ -1,5 +1,16 @@
 {
   "article_type": "APS Open Science Protocol Article",
+  "canonical_subject": {
+    "algorithm": "SHA-256 over sorted UTF-8 path, NUL, decimal size, NUL, lowercase file SHA-256, LF records",
+    "excluded": [
+      "paper/final_protocol/REPRODUCTION_REPORT.json",
+      "paper/final_protocol/REPRODUCTION_REPORT.sha256",
+      "compiler/cache transients (*.aux, *.blg, *.log, *.out, *.synctex.gz, *.pyc, __pycache__, .pytest_cache)"
+    ],
+    "file_count": 454,
+    "scope": "Final article/release tree, final reviewer bytes, retained protocol/data/synthetic inputs, and invoked scripts/tests",
+    "sha256": "d1a64269beb465920a62a3896451c14c379b634a92c4915753ec937755d9a700"
+  },
   "commands": [
     {
       "command": [
@@ -281,8 +292,29 @@
       "purpose": "extract compiled PDF text for identity check",
       "result": "PASS",
       "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv/bin/python3",
+        "paper/final_protocol/scripts/audit_contradictions.py"
+      ],
+      "cwd": ".",
+      "purpose": "run cross-file contradiction and claim-scope audit",
+      "result": "PASS",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "<repo>/.venv/bin/python3",
+        "paper/final_protocol/scripts/aggregate_desk_reviews.py"
+      ],
+      "cwd": ".",
+      "purpose": "validate and aggregate five independent closeout desk reviews",
+      "result": "PASS",
+      "returncode": 0
     }
   ],
+  "desk_review_status": "VALIDATED_FIVE_FINAL_REVIEWS",
   "environment": {
     "architecture": {
       "machine": "arm64",
@@ -405,7 +437,6 @@
       }
     }
   },
-  "error": "PDF visual-inspection attestation is stale for main.pdf",
   "generated_at_utc": "2026-08-24T00:00:00+00:00",
   "limitations": [
     "The restricted game engine and private acquisition materials are not rerun.",
@@ -441,7 +472,7 @@
     "desk_review_simulation": {
       "exists": true,
       "path": "paper/final_protocol/DESK_REVIEW_SIMULATION_V2.json",
-      "sha256": "7841fdb19e16c198c67b5510e72f51227b4ea0a26b1f05da09512a513fea1be9",
+      "sha256": "b45783dd7949a44426e9ab4f3d14fb49315a75a739296acbede8db21c5b36317",
       "size_bytes": 4062
     },
     "independent_statistics_verification": {
@@ -465,7 +496,7 @@
     "pdf_visual_audit": {
       "exists": true,
       "path": "paper/final_protocol/supplement/PDF_VISUAL_AUDIT.json",
-      "sha256": "773fb3c822e6b3744d9b05416af82235d9190664630e5191cd42509f4e0b7e42",
+      "sha256": "c119761b4f6a7dab29927ca910ff886d50d8fbe7badc499599b1b061cfaf473b",
       "size_bytes": 4434
     },
     "readability_audit": {
@@ -500,6 +531,303 @@
     }
   },
   "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",
+  "provenance_inventory": {
+    "groups": {
+      "dependency_declarations": [
+        {
+          "path": "paper/final_protocol/release/environment.yml",
+          "sha256": "ab845f75a23642e2ec9893a9fc98e6b2f61744aefebc6205486a65af34c460fc",
+          "size_bytes": 209
+        },
+        {
+          "path": "paper/final_protocol/release/requirements-lock.txt",
+          "sha256": "213e2b0a986407d2c9ea37c7f362204754cec1429ac589045cc32bd2739c8684",
+          "size_bytes": 112
+        }
+      ],
+      "invoked_scripts_and_modules": [
+        {
+          "path": "paper/final_protocol/release/pevl_bench/__main__.py",
+          "sha256": "11de043a914f1bf5d57c64f066a7f527f36e852eca45893290bf8d7978757fd4",
+          "size_bytes": 12229
+        },
+        {
+          "path": "paper/final_protocol/release/pevl_bench/admission.py",
+          "sha256": "842fb07bad1c47eabd61383d876238516dc5873750e02561dab75c725d98b4e2",
+          "size_bytes": 47831
+        },
+        {
+          "path": "paper/final_protocol/release/pevl_bench/evidence.py",
+          "sha256": "3b2ccfed636c1fe532177ea4232345de27b807ca86b54bb601df270794976857",
+          "size_bytes": 19847
+        },
+        {
+          "path": "paper/final_protocol/release/pevl_bench/schema_subset.py",
+          "sha256": "078198f91a2fdf90332ec216cb503e06ffc9a08c80fdf28513c4450a50f481d0",
+          "size_bytes": 11608
+        },
+        {
+          "path": "paper/final_protocol/release/pevl_bench/synthetic.py",
+          "sha256": "3b85d01c37bf522008b5fb1a20192ddfb1141db801b275093e0aa7f779bc3f86",
+          "size_bytes": 49727
+        },
+        {
+          "path": "paper/final_protocol/release/pevl_bench/synthetic_admission.py",
+          "sha256": "9794d10658cc7455051eed9ba1ecf19c7214b8de684cb644a9bc127546f3d86f",
+          "size_bytes": 7521
+        },
+        {
+          "path": "paper/final_protocol/release/scripts/verify_release.py",
+          "sha256": "10af67f43fe496b2206ad9c6408d18b354af20b48312c58570332a19bb044cb1",
+          "size_bytes": 27514
+        },
+        {
+          "path": "paper/final_protocol/scripts/aggregate_desk_reviews.py",
+          "sha256": "9d93bc186885e04a8e4f48ee3138930f88b1e9766e4d586b5150f8b0097a1688",
+          "size_bytes": 11273
+        },
+        {
+          "path": "paper/final_protocol/scripts/audit_contradictions.py",
+          "sha256": "a30e14cea3565edce412f58d72a89de6a94676b5ffe2fb91d55dd52e67c2dd78",
+          "size_bytes": 111608
+        },
+        {
+          "path": "paper/final_protocol/scripts/audit_readability.py",
+          "sha256": "739605513f38501089ee674412598eb2d5e31ac9a10661ca6ebf9bf0acc6f3d6",
+          "size_bytes": 10203
+        },
+        {
+          "path": "paper/final_protocol/scripts/build_claim_ledger.py",
+          "sha256": "0d3294c01bcdaae790944e59a072920fc0503f0feb70301a3f19a0e8221e7520",
+          "size_bytes": 62706
+        },
+        {
+          "path": "paper/final_protocol/scripts/build_final_artifacts.py",
+          "sha256": "a2de147756b6e4045a1bc722acd6db590053bdc11f0a9950524fef9e43c7f253",
+          "size_bytes": 61548
+        },
+        {
+          "path": "paper/final_protocol/scripts/build_final_release.py",
+          "sha256": "c9b9a7b19dde2b189c04eefae904825495e9deeb0fece597ab23c2b17443e958",
+          "size_bytes": 58313
+        },
+        {
+          "path": "paper/final_protocol/scripts/independent_statistics_audit.py",
+          "sha256": "ce5b018281402b0e39684cd4272562d5b674fea4730990412a275fe106efc3b1",
+          "size_bytes": 75933
+        },
+        {
+          "path": "paper/final_protocol/scripts/recalculate_equation_examples.py",
+          "sha256": "7ae3b14ed27afb22818433f84d1ab8177aa58380c34bfa3c5dc7005b3b660ebd",
+          "size_bytes": 3617
+        },
+        {
+          "path": "paper/final_protocol/scripts/reproduce_all.py",
+          "sha256": "51e298e137b29640e83e5613d99de2f34e8b4d2af56440e2f9610829286851cc",
+          "size_bytes": 46992
+        },
+        {
+          "path": "paper/final_protocol/scripts/verify_reproduction_report.py",
+          "sha256": "e5812d142bfb072ffa2676b63e13034f8cd584022703d2236c4c5e23666175c5",
+          "size_bytes": 22038
+        },
+        {
+          "path": "paper/final_protocol/scripts/verify_research_audits.py",
+          "sha256": "9734870f51a240a4a518069f7edae62895e34b84993f88e4ab916f53e4e574d7",
+          "size_bytes": 32062
+        },
+        {
+          "path": "paper/final_protocol/scripts/verify_starting_state.py",
+          "sha256": "c7fcb613657d802024422b1040965d699dcc40714700280170968940e0799363",
+          "size_bytes": 3841
+        },
+        {
+          "path": "paper/final_protocol/scripts/verify_statistics.py",
+          "sha256": "774c57d9b69696f5c25dcfd0eedc15823b62af3a8960a88783e4611b19e15fd3",
+          "size_bytes": 37710
+        },
+        {
+          "path": "paper/scripts/analyze_pevl.py",
+          "sha256": "acd128d3131f70a1b6aaee466e13e65b652f57077229a4260aac720f7b1b8fc8",
+          "size_bytes": 52564
+        },
+        {
+          "path": "paper/scripts/audit_seed_namespace.py",
+          "sha256": "571589fc2f2637979c7f4fd3d807f6f574485fce31a7789cfc17d39f94ff9b27",
+          "size_bytes": 6229
+        },
+        {
+          "path": "paper/scripts/audit_stochastic_sources.py",
+          "sha256": "545b33aaa3c446d9651a4f252f6ed1700084e774e14123c75eea10c7d126af12",
+          "size_bytes": 32693
+        }
+      ],
+      "manifests": [
+        {
+          "path": "paper/final_protocol/release/MANIFEST.sha256",
+          "sha256": "63af371974554f3a9b4930a9b5a86997706306f78c8a4fe7471593811ea831ce",
+          "size_bytes": 7923
+        },
+        {
+          "path": "paper/final_protocol/release/pevl_bench/admission_results/MANIFEST.sha256",
+          "sha256": "ae28280a33c6f0c41b56533d06f24f518e714265cce60938eb3e61998cea7043",
+          "size_bytes": 101
+        },
+        {
+          "path": "paper/final_protocol/release/pevl_bench/results/MANIFEST.sha256",
+          "sha256": "0a6eade794c4434275663315442a8e5528a8c3c602f42da5de3ecd0b34792621",
+          "size_bytes": 257
+        }
+      ],
+      "schemas_and_rules": [
+        {
+          "path": "paper/final_protocol/release/examples/example_evidence.json",
+          "sha256": "1b8453cf80695efb8fd576fd1eb32c6c5bde124a0c2c929530cc1e0e6b128b01",
+          "size_bytes": 6179
+        },
+        {
+          "path": "paper/final_protocol/release/pevl_bench/results/pevl_results.schema.json",
+          "sha256": "d173b3255a19b985bf5d0c102b67bfebcddcec6911b38d18a77048b74f63aafb",
+          "size_bytes": 4755
+        },
+        {
+          "path": "paper/final_protocol/release/protocol/admission_rules.json",
+          "sha256": "44fe890051cff65fa27a70464e2d018da30bf8923c9863859d1629bad454acff",
+          "size_bytes": 9207
+        },
+        {
+          "path": "paper/final_protocol/release/protocol/admission_schema.json",
+          "sha256": "0e006936b0b3b0e1a9d27e3f2382332d4c5e29f836224271c7a6c55e0dbf6e03",
+          "size_bytes": 3542
+        },
+        {
+          "path": "paper/final_protocol/release/protocol/claim_classes.json",
+          "sha256": "c4b41697e14f67788e9d43a7f9d6fd7f4ae8162fa714dba514443c8cf62dbf16",
+          "size_bytes": 7605
+        },
+        {
+          "path": "paper/final_protocol/release/protocol/evidence_bundle_schema.json",
+          "sha256": "a2bb916c9f46af4daf8ab39320485ec804018e826d6c9c6870c62c843d639bbc",
+          "size_bytes": 9626
+        },
+        {
+          "path": "paper/final_protocol/release/protocol/stage6_source_audit_rules.json",
+          "sha256": "792c832d6c029e7479736f6a35c7a88376a61caa178e0b7f92d8c166cd83c376",
+          "size_bytes": 5041
+        },
+        {
+          "path": "paper/final_protocol/release_templates/protocol/admission_rules.json",
+          "sha256": "44fe890051cff65fa27a70464e2d018da30bf8923c9863859d1629bad454acff",
+          "size_bytes": 9207
+        },
+        {
+          "path": "paper/final_protocol/release_templates/protocol/admission_schema.json",
+          "sha256": "0e006936b0b3b0e1a9d27e3f2382332d4c5e29f836224271c7a6c55e0dbf6e03",
+          "size_bytes": 3542
+        },
+        {
+          "path": "paper/final_protocol/release_templates/protocol/claim_classes.json",
+          "sha256": "c4b41697e14f67788e9d43a7f9d6fd7f4ae8162fa714dba514443c8cf62dbf16",
+          "size_bytes": 7605
+        },
+        {
+          "path": "paper/final_protocol/release_templates/protocol/evidence_bundle_schema.json",
+          "sha256": "a2bb916c9f46af4daf8ab39320485ec804018e826d6c9c6870c62c843d639bbc",
+          "size_bytes": 9626
+        },
+        {
+          "path": "paper/final_protocol/release_templates/protocol/stage6_source_audit_rules.json",
+          "sha256": "792c832d6c029e7479736f6a35c7a88376a61caa178e0b7f92d8c166cd83c376",
+          "size_bytes": 5041
+        }
+      ],
+      "targeted_tests": [
+        {
+          "path": "paper/final_protocol/release/tests/test_release.py",
+          "sha256": "dc4599abebe312be9ca83f5f5589a95848b3248205a062667ec9466772256025",
+          "size_bytes": 24382
+        },
+        {
+          "path": "paper/final_protocol/tests/test_claim_ledger.py",
+          "sha256": "d472bc2406f2e20f06cfd5c0c2472be86c2e4beba1095844fd50db2c49d84f63",
+          "size_bytes": 4015
+        },
+        {
+          "path": "paper/final_protocol/tests/test_desk_reviews.py",
+          "sha256": "caeb771b986f9dc2e444526f2896ffc51b0eb776cefdf6e4946debcdfb6aba73",
+          "size_bytes": 2861
+        },
+        {
+          "path": "paper/final_protocol/tests/test_equations.py",
+          "sha256": "ad66f45dcd7ab2129c404fcc5c6db3bf3b787c7ed30cc385fed832daa71773c2",
+          "size_bytes": 2725
+        },
+        {
+          "path": "paper/final_protocol/tests/test_independent_statistics.py",
+          "sha256": "31dff54e2b68f31d46e7006cb39c15e1f9de8df4d3e541c5a9aadcb0b06f47b6",
+          "size_bytes": 15212
+        },
+        {
+          "path": "paper/final_protocol/tests/test_protocol_reporting_provenance.py",
+          "sha256": "179ce33a2c4b4bf7e91748b6a54e898898c1318cc890dac6b5fb67176e7d8dfd",
+          "size_bytes": 7353
+        },
+        {
+          "path": "paper/final_protocol/tests/test_reproduction_provenance.py",
+          "sha256": "534dc0efc30e8156cd3bc6ed0694316fed881f070b6fb483f5d55f864b15972c",
+          "size_bytes": 18028
+        },
+        {
+          "path": "paper/final_protocol/tests/test_research_audits.py",
+          "sha256": "819e3acb14754f13957f016b932aaa5c573b3116b6fab2f46e5424b7764c3df1",
+          "size_bytes": 3705
+        },
+        {
+          "path": "tests/test_analyze_pevl.py",
+          "sha256": "26f39e302ddf4568955c9c7eb9e354ea356705a34f22fed8c4801a948c747ebd",
+          "size_bytes": 17177
+        },
+        {
+          "path": "tests/test_build_pevl_artifacts.py",
+          "sha256": "4405d66bd1862839a5a3cb0fc80f82a2afca08d2565aa89547908996ddeef4dc",
+          "size_bytes": 16540
+        },
+        {
+          "path": "tests/test_build_pevl_result_macros.py",
+          "sha256": "f6ed15b86cdaa41043f86fd8b069bb22d8ab5cce48d9a4a50d0b5c5640e2477a",
+          "size_bytes": 15335
+        },
+        {
+          "path": "tests/test_build_release_pevl.py",
+          "sha256": "61b35d769ab987a22f506e8f6d3a4e9383d0b6e65eddd9b8a7cd4f206601976e",
+          "size_bytes": 1351
+        },
+        {
+          "path": "tests/test_pevl_synthetic.py",
+          "sha256": "41f8a7a38ba02887380376b4ea1f96a86ef0936d83934ff60f101be7113394ac",
+          "size_bytes": 10776
+        },
+        {
+          "path": "tests/test_seed_namespace_audit.py",
+          "sha256": "07744f5e7378923e13110bdc06c6b7ee83f56a5544ec6a524e36bad44ca116f4",
+          "size_bytes": 932
+        },
+        {
+          "path": "tests/test_stochastic_source_audit.py",
+          "sha256": "98e6da493328b7b4908b87d728d418627bc83de30c5f988eb32998b33da48eb8",
+          "size_bytes": 3887
+        },
+        {
+          "path": "tests/test_verify_pevl_release.py",
+          "sha256": "78f73994eb6783e26c67134c46220e6ab6606fe23126d63cb7b3a1948a311e5d",
+          "size_bytes": 1943
+        }
+      ]
+    },
+    "missing": [],
+    "sha256": "75cd5c1e3afb37b1ea408b09783ee9e077b9f663a2d4fca056401f0f0ffb5639",
+    "unique_file_count": 56
+  },
   "read_only_verifier": {
     "command": [
       "/Users/safiullahbaig/Projects/pokemonTCG2.0/.venv/bin/python3",
@@ -517,8 +845,8 @@
   "repository_identity": {
     "boundary": "HEAD/tree identify clean reproduced subject commit S; branch is informational only. The final verifier requires current HEAD E to be S's sole direct child, with exactly the self-excluded canonical report and sidecar as E's committed tree delta.",
     "branch": "paper/apsos-machine-finalization-20260826",
-    "head_commit": "abcde085628447d8dc70a0e2581a5da6478dba6d",
-    "head_tree": "5d89ddc0e3bc8f0e11cf358c2278697f5d663724",
+    "head_commit": "43d7c200309d0e2d0f703fa7f0c78a25fa55e850",
+    "head_tree": "c9e0b93f12f5b496e87594c3ab33909c37c9d8b9",
     "non_envelope_dirty_path_count": 0,
     "non_envelope_dirty_pathname_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "non_envelope_worktree_clean": true,
@@ -543,9 +871,9 @@
   },
   "schema_version": 2,
   "scope": "Derived-artifact reproduction only; no restricted-engine execution and no new policy experiment.",
-  "status": "FAIL",
+  "status": "PASS",
   "submission_ready": false,
-  "technical_reproduction_status": "FAIL",
+  "technical_reproduction_status": "PASS",
   "timestamp_basis": "SOURCE_DATE_EPOCH; this is a deterministic build timestamp, not wall-clock execution time.",
   "title": "A Protocol for Validating Pairing Assumptions in Seed-Matched Evaluations of Black-Box Game-Playing Agents",
   "tracked_drift": {
@@ -578,10 +906,105 @@
     "policy": "Protected tracked files remain byte-identical during the run, and the final Git gate requires every non-envelope tracked or untracked path to match subject commit S.",
     "protected_file_count_after": 2454,
     "protected_file_count_before": 2454,
-    "protected_snapshot_sha256_after": "94be6ae4b4bd18cd213116c8eb19e4c67312d7e4fb270c792cb1084ede926858",
-    "protected_snapshot_sha256_before": "94be6ae4b4bd18cd213116c8eb19e4c67312d7e4fb270c792cb1084ede926858",
+    "protected_snapshot_sha256_after": "90c1dfab0ecba18573f5abbb2720fd518e0bd0cc04c7cc1bcc40222916b3de96",
+    "protected_snapshot_sha256_before": "90c1dfab0ecba18573f5abbb2720fd518e0bd0cc04c7cc1bcc40222916b3de96",
     "status": "PASS",
     "unexpected_changes": []
+  },
+  "visual_audit": {
+    "attestation": "paper/final_protocol/supplement/PDF_VISUAL_AUDIT.json",
+    "attestation_sha256": "c119761b4f6a7dab29927ca910ff886d50d8fbe7badc499599b1b061cfaf473b",
+    "manuscript_pdf_sha256": "0eff0c625709a11b01dfbd3b84f475b66fbb10c15112feac27bf56abfe00d590",
+    "manuscript_source_sha256": "0220a758d14fdf945fb377630a079d688415db9edf4d9262233eeacf1d30478d",
+    "method": "Every page rendered at 150 dpi; PNG structure/dimensions checked; a PDF-bound checklist records human visual inspection.",
+    "page_count": 14,
+    "rendered_pages": [
+      {
+        "height_pixels": 1650,
+        "page": 1,
+        "sha256": "0f725e6a027a40a287f69971c7a41049d968de404f30ea47baae352fd6e100d8",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 2,
+        "sha256": "13b1984b4845e16efdebffb04e510dbdc9d65c09068c8e5c04b9bb7445597542",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 3,
+        "sha256": "13ec9c72e1277d0df3dece918f495e6f013fbd101e91d12e3e25676d7fe44a13",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 4,
+        "sha256": "645ef58e4cc5c24e3d93d76e98806fc28f43fafe647fbe35031b25eed70645e6",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 5,
+        "sha256": "226f51277cae087a6091a5f236a94a581b9d10d67240b78f7168d55a6c1ab16b",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 6,
+        "sha256": "dad9e0c77fe2cf5fbd6ba2a08830cdd6484daa6998f81a3990db8c886b3c339e",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 7,
+        "sha256": "a6f69ef6c48f04922725c65af384fad1435eb82ad30c30e3346eb4a1feb445f6",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 8,
+        "sha256": "d1fd8caea5dd962a74af09497db83fe5494ba4d46965eb5289ab5aeca06c0463",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 9,
+        "sha256": "3b9bf212ff99a8fe03d908464b17c1c5f20cc4d85fb9436b0c42a4bb7ee3dd6f",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 10,
+        "sha256": "da7d85ba8be742e2c8848ea1f0b41d6c9aaeb57da5825882f4f4bde7bcb0cbe3",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 11,
+        "sha256": "ad4d60a4b65b1daf4d6984bf8d44782486d673cb18997e82dd351805e7fba9f5",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 12,
+        "sha256": "bf5a65e8176bcded9285fe865734c98264a6e17d4297d0abc8b4a8bd662009f1",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 13,
+        "sha256": "89d51704ea4602eea9e18723a579b6db50336d074ce2dda3d9a6c72b6ca7a2cf",
+        "width_pixels": 1275
+      },
+      {
+        "height_pixels": 1650,
+        "page": 14,
+        "sha256": "9a62cd48a3dd71b9b8f5babd1bca0ee328b436aff72a4f78d14067b8f80734cc",
+        "width_pixels": 1275
+      }
+    ],
+    "status": "PASS"
   },
   "word_count": {
     "abstract_source_words_approximate": 181,
