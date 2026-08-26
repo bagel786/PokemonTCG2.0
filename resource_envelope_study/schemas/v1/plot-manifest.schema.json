@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/resource-envelope-study/schemas/v1/plot-manifest.schema.json",
+  "title": "Publication plot manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "plot_version",
+    "input_kind",
+    "summary_file_sha256",
+    "summary_content_hash",
+    "analysis_lock_hash",
+    "source_inventory_file_sha256",
+    "source_inventory_content_hash",
+    "plots",
+    "content_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "publication-plot-manifest-1.0.0"},
+    "plot_version": {"const": "resource-envelope-publication-plots-1.0.0"},
+    "input_kind": {"const": "frozen_analysis_summary_only"},
+    "summary_file_sha256": {"$ref": "#/$defs/hash"},
+    "summary_content_hash": {"$ref": "#/$defs/hash"},
+    "analysis_lock_hash": {"$ref": "#/$defs/hash"},
+    "source_inventory_file_sha256": {"$ref": "#/$defs/hash"},
+    "source_inventory_content_hash": {"$ref": "#/$defs/hash"},
+    "plots": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["filename", "plot_group", "sha256"],
+        "properties": {
+          "filename": {"type": "string", "pattern": "^[a-z0-9_-]+\\.svg$"},
+          "plot_group": {"enum": ["work_relative", "probability_difference"]},
+          "sha256": {"$ref": "#/$defs/hash"}
+        }
+      }
+    },
+    "content_hash": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {"hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+}

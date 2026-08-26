@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/resource-envelope-study/schemas/v1/decision.schema.json",
+  "title": "Resource-envelope decision telemetry v1.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "case_id",
+    "block_id",
+    "decision_index",
+    "agent_id",
+    "budget_mode",
+    "load_condition",
+    "lifecycle",
+    "lifecycle_id",
+    "process_instance_id",
+    "worker_pid",
+    "sequence_index",
+    "load_batch_id",
+    "requested_budget_ns",
+    "requested_work_units",
+    "completed_work_units",
+    "completed_simulations",
+    "completed_nodes",
+    "completed_sweeps",
+    "forward_model_calls",
+    "setup_wall_ns",
+    "search_wall_ns",
+    "selection_wall_ns",
+    "cleanup_wall_ns",
+    "process_cpu_ns",
+    "overshoot_ns",
+    "state_hash",
+    "agent_seed_hash",
+    "selected_action",
+    "selected_action_hash",
+    "value_estimates",
+    "timeout_reason",
+    "fallback_reason",
+    "cleanup_succeeded",
+    "instrumentation_enabled",
+    "work_counters_collected",
+    "terminal_status",
+    "error_type",
+    "error_message",
+    "extra"
+  ],
+  "properties": {
+    "schema_version": {"const": "decision-1.1.0"},
+    "case_id": {"type": "string", "minLength": 1},
+    "block_id": {"type": "string", "minLength": 1},
+    "decision_index": {"type": "integer", "minimum": 0},
+    "agent_id": {"type": "string", "minLength": 1},
+    "budget_mode": {"enum": ["wall_clock", "fixed_work"]},
+    "load_condition": {"enum": ["idle", "loaded"]},
+    "lifecycle": {"enum": ["fresh", "persistent"]},
+    "lifecycle_id": {"type": "string", "minLength": 1},
+    "process_instance_id": {"type": "string", "minLength": 1},
+    "worker_pid": {"type": "integer", "minimum": 1},
+    "sequence_index": {"type": "integer", "minimum": 0},
+    "load_batch_id": {"type": "string", "minLength": 1},
+    "requested_budget_ns": {"type": ["integer", "null"], "minimum": 0},
+    "requested_work_units": {"type": ["integer", "null"], "minimum": 0},
+    "completed_work_units": {"type": "integer", "minimum": 0},
+    "completed_simulations": {"type": "integer", "minimum": 0},
+    "completed_nodes": {"type": "integer", "minimum": 0},
+    "completed_sweeps": {"type": "integer", "minimum": 0},
+    "forward_model_calls": {"type": "integer", "minimum": 0},
+    "setup_wall_ns": {"type": "integer", "minimum": 0},
+    "search_wall_ns": {"type": "integer", "minimum": 0},
+    "selection_wall_ns": {"type": "integer", "minimum": 0},
+    "cleanup_wall_ns": {"type": "integer", "minimum": 0},
+    "process_cpu_ns": {"type": "integer", "minimum": 0},
+    "overshoot_ns": {"type": "integer", "minimum": 0},
+    "state_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "agent_seed_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "selected_action": {"type": "array", "items": {"type": "integer"}},
+    "selected_action_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "value_estimates": {
+      "type": "array",
+      "items": {"type": ["number", "null"]}
+    },
+    "timeout_reason": {"type": "string"},
+    "fallback_reason": {"type": "string"},
+    "cleanup_succeeded": {"type": "boolean"},
+    "instrumentation_enabled": {"type": "boolean"},
+    "work_counters_collected": {"type": "boolean"},
+    "terminal_status": {
+      "enum": [
+        "ok",
+        "deadline_no_work",
+        "search_error",
+        "cleanup_error",
+        "fixed_work_invalid",
+        "illegal_action",
+        "infrastructure_error"
+      ]
+    },
+    "error_type": {"type": "string"},
+    "error_message": {"type": "string"},
+    "extra": {"type": "object"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"budget_mode": {"const": "fixed_work"}}},
+      "then": {
+        "properties": {
+          "requested_budget_ns": {"type": "null"},
+          "requested_work_units": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"budget_mode": {"const": "wall_clock"}}},
+      "then": {
+        "properties": {
+          "requested_budget_ns": {"type": "integer", "minimum": 0},
+          "requested_work_units": {"type": "null"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"instrumentation_enabled": {"const": false}}},
+      "then": {
+        "properties": {
+          "work_counters_collected": {"const": false},
+          "completed_simulations": {"const": 0},
+          "completed_nodes": {"const": 0},
+          "completed_sweeps": {"const": 0},
+          "forward_model_calls": {"const": 0}
+        }
+      },
+      "else": {
+        "properties": {
+          "work_counters_collected": {"const": true}
+        }
+      }
+    }
+  ]
+}

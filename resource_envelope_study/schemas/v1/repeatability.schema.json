@@ -1,0 +1,228 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/resource-envelope-study/schemas/v1/repeatability.schema.json",
+  "title": "Frozen-state repeatability manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "config",
+    "design",
+    "states",
+    "state_inventory_hash",
+    "excluded_seed_ledger",
+    "excluded_seed_ledger_hash",
+    "seed_inventory",
+    "rows",
+    "content_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "repeatability-manifest-1.0.0"},
+    "config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bank_id",
+        "master_seed",
+        "agents",
+        "envelopes",
+        "wall_clock_budget_ns",
+        "fixed_work_by_agent",
+        "target_state_count",
+        "repeats",
+        "load_batch_count",
+        "persistent_sequence_length"
+      ],
+      "properties": {
+        "bank_id": {"type": "string", "minLength": 1},
+        "master_seed": {"type": "integer", "minimum": 0},
+        "agents": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "envelopes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/envelope"}
+        },
+        "wall_clock_budget_ns": {"type": "integer", "minimum": 1},
+        "fixed_work_by_agent": {
+          "type": "object",
+          "minProperties": 3,
+          "maxProperties": 3,
+          "additionalProperties": {"type": "integer", "minimum": 1}
+        },
+        "target_state_count": {"type": "integer", "minimum": 1},
+        "repeats": {"const": 10},
+        "load_batch_count": {"type": "integer", "minimum": 1},
+        "persistent_sequence_length": {"type": "integer", "minimum": 1}
+      }
+    },
+    "design": {"type": "object"},
+    "states": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/state"}
+    },
+    "state_inventory_hash": {"$ref": "#/$defs/hash"},
+    "excluded_seed_ledger": {
+      "type": "object",
+      "required": ["calibration", "gate", "final", "reserve"],
+      "additionalProperties": {"$ref": "#/$defs/seedList"}
+    },
+    "excluded_seed_ledger_hash": {"$ref": "#/$defs/hash"},
+    "seed_inventory": {"type": "object"},
+    "rows": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/row"}
+    },
+    "content_hash": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "seedList": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "integer", "minimum": 0}
+    },
+    "envelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "envelope_id",
+        "budget_mode",
+        "load_condition",
+        "lifecycle",
+        "resource_profile_sha256"
+      ],
+      "properties": {
+        "envelope_id": {"type": "string", "minLength": 1},
+        "budget_mode": {"enum": ["wall_clock", "fixed_work"]},
+        "load_condition": {"enum": ["idle", "loaded"]},
+        "lifecycle": {"enum": ["fresh", "persistent"]},
+        "resource_profile_sha256": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state_id",
+        "source_game_id",
+        "state_artifact_sha256",
+        "state_seed",
+        "history_prefix_sha256",
+        "history_seed",
+        "history_length",
+        "pseudo_sequence_slot"
+      ],
+      "properties": {
+        "state_id": {"type": "string", "minLength": 1},
+        "source_game_id": {"type": "string", "minLength": 1},
+        "state_artifact_sha256": {"$ref": "#/$defs/hash"},
+        "state_seed": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+        "history_prefix_sha256": {"$ref": "#/$defs/hash"},
+        "history_seed": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+        "history_length": {"type": "integer", "minimum": 0},
+        "pseudo_sequence_slot": {"type": "integer", "minimum": 0}
+      }
+    },
+    "row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "repeatability_case_id",
+        "bank_id",
+        "inference_unit_id",
+        "state_id",
+        "source_game_id",
+        "state_artifact_sha256",
+        "state_seed",
+        "history_prefix_sha256",
+        "history_seed",
+        "history_length",
+        "pseudo_sequence_slot",
+        "sequence_index",
+        "agent_id",
+        "agent_seed",
+        "envelope_id",
+        "resource_profile_sha256",
+        "load_condition",
+        "lifecycle",
+        "budget_mode",
+        "requested_budget_ns",
+        "requested_work_units",
+        "repeat_index",
+        "session_id",
+        "process_instance_id",
+        "session_seed",
+        "schedule_seed",
+        "load_batch_id",
+        "load_seed",
+        "load_period_order",
+        "execution_index"
+      ],
+      "properties": {
+        "schema_version": {"const": "repeatability-row-1.0.0"},
+        "repeatability_case_id": {"type": "string", "minLength": 1},
+        "bank_id": {"type": "string", "minLength": 1},
+        "inference_unit_id": {"type": "string", "minLength": 1},
+        "state_id": {"type": "string", "minLength": 1},
+        "source_game_id": {"type": "string", "minLength": 1},
+        "state_artifact_sha256": {"$ref": "#/$defs/hash"},
+        "state_seed": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+        "history_prefix_sha256": {"$ref": "#/$defs/hash"},
+        "history_seed": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+        "history_length": {"type": "integer", "minimum": 0},
+        "pseudo_sequence_slot": {"type": "integer", "minimum": 0},
+        "sequence_index": {"type": "integer", "minimum": 0},
+        "agent_id": {"type": "string", "minLength": 1},
+        "agent_seed": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+        "envelope_id": {"type": "string", "minLength": 1},
+        "resource_profile_sha256": {"$ref": "#/$defs/hash"},
+        "load_condition": {"enum": ["idle", "loaded"]},
+        "lifecycle": {"enum": ["fresh", "persistent"]},
+        "budget_mode": {"enum": ["wall_clock", "fixed_work"]},
+        "requested_budget_ns": {
+          "type": ["integer", "null"],
+          "minimum": 1
+        },
+        "requested_work_units": {
+          "type": ["integer", "null"],
+          "minimum": 1
+        },
+        "repeat_index": {"type": "integer", "minimum": 0, "maximum": 9},
+        "session_id": {"type": "string", "minLength": 1},
+        "process_instance_id": {"type": "string", "minLength": 1},
+        "session_seed": {"type": "integer", "minimum": 0},
+        "schedule_seed": {"type": "integer", "minimum": 0},
+        "load_batch_id": {"type": "string", "minLength": 1},
+        "load_seed": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+        "load_period_order": {"enum": ["idle_then_loaded", "loaded_then_idle"]},
+        "execution_index": {"type": "integer", "minimum": 0}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"budget_mode": {"const": "wall_clock"}}},
+          "then": {
+            "properties": {
+              "requested_budget_ns": {"type": "integer", "minimum": 1},
+              "requested_work_units": {"type": "null"}
+            }
+          },
+          "else": {
+            "properties": {
+              "requested_budget_ns": {"type": "null"},
+              "requested_work_units": {"type": "integer", "minimum": 1}
+            }
+          }
+        }
+      ]
+    }
+  }
+}

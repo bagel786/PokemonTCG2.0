@@ -1,0 +1,14 @@
+# Raw run records can be large and may contain non-redistributable engine state.
+runs/**/raw_cases.jsonl
+runs/**/captured_states.jsonl
+runs/**/period_journals/
+build/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Keep summaries, resource-episode metadata, and hash inventories tracked.
+!runs/**/acquisition_summary.json
+!runs/**/resource_episodes.jsonl
+!runs/**/ARTIFACT_HASHES.json

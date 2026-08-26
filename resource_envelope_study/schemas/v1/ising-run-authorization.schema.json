@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ising-run-authorization.schema.json",
+  "title": "Explicit human authorization for a bounded Ising Azure run",
+  "type": "object",
+  "required": [
+    "schema_version", "human_approved", "cloud_cost_authorized",
+    "diagnostic_execution_authorized", "approval_id",
+    "authorized_until_unix", "phase", "manifest_content_hash", "manifest_sha256",
+    "maximum_load_batches", "maximum_total_cases", "maximum_worker_seconds_per_period"
+  ],
+  "properties": {
+    "schema_version": {"const": "ising-run-authorization-1.0.0"},
+    "human_approved": {"const": true},
+    "cloud_cost_authorized": {"const": true},
+    "diagnostic_execution_authorized": {"const": true},
+    "approval_id": {"type": "string", "minLength": 1},
+    "authorized_until_unix": {"type": "number", "exclusiveMinimum": 0},
+    "phase": {"enum": ["pilot", "final"]},
+    "manifest_content_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "maximum_load_batches": {"type": "integer", "minimum": 20},
+    "maximum_total_cases": {"type": "integer", "minimum": 280},
+    "maximum_worker_seconds_per_period": {"type": "number", "exclusiveMinimum": 0},
+    "protocol_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "branch": {"type": "string", "minLength": 1}
+  }
+}

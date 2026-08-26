@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/resource-envelope-study/schemas/v1/state-panel-history-prefix.schema.json",
+  "title": "Frozen source-game history for persistent replay v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "capture_id", "state_id", "source_game_id",
+    "source_environment_seed", "target_eligible_index", "history_seed",
+    "history_length", "gameplay_decision_count", "history_prefix", "content_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "state-panel-history-prefix-1.0.0"},
+    "capture_id": {"type": "string", "minLength": 1},
+    "state_id": {"type": "string", "minLength": 1},
+    "source_game_id": {"type": "string", "minLength": 1},
+    "source_environment_seed": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+    "target_eligible_index": {"type": "integer", "minimum": 0},
+    "history_seed": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+    "history_length": {"type": "integer", "minimum": 0},
+    "gameplay_decision_count": {"type": "integer", "minimum": 0},
+    "history_prefix": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["decision_index", "acting_seat", "public_state_hash", "action"],
+        "properties": {
+          "decision_index": {"type": "integer", "minimum": 0},
+          "acting_seat": {"type": ["integer", "null"]},
+          "public_state_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "action": {"type": "array", "items": {"type": "integer"}}
+        }
+      }
+    },
+    "content_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

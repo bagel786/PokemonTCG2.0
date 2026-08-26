@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/resource-envelope-study/schemas/v1/acquisition-summary.schema.json",
+  "title": "Resource-envelope acquisition summary v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "status",
+    "phase",
+    "schedule_content_hash",
+    "schedule_file_sha256",
+    "artifact_hashes",
+    "engine_path",
+    "machine",
+    "committed_load_batches",
+    "invalid_load_batches",
+    "scheduled_cases",
+    "observed_cases",
+    "missing_cases",
+    "terminal_status_counts",
+    "content_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "acquisition-summary-1.0.0"},
+    "status": {"const": "complete"},
+    "phase": {"enum": ["smoke", "pilot", "final"]},
+    "schedule_content_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "schedule_file_sha256": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "artifact_hashes": {
+      "type": "object",
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    },
+    "engine_path": {"type": "string"},
+    "machine": {"type": "object"},
+    "committed_load_batches": {"type": "integer", "minimum": 1},
+    "invalid_load_batches": {"type": "integer", "minimum": 0},
+    "scheduled_cases": {"type": "integer", "minimum": 1},
+    "observed_cases": {"type": "integer", "minimum": 1},
+    "missing_cases": {"type": "array", "maxItems": 0},
+    "terminal_status_counts": {"type": "object"},
+    "content_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

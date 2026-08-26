@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/resource-envelope-study/schemas/v1/state-panel-resource-episode.schema.json",
+  "title": "State-panel resource episode v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "group_id", "period_id", "period_index", "load_condition",
+    "case_ids", "resource_profile_sha256", "status", "error", "resource_metadata",
+    "test_mode", "artifact_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": "state-panel-resource-episode-1.0.0"},
+    "group_id": {"type": "string", "minLength": 1},
+    "period_id": {"type": "string", "minLength": 1},
+    "period_index": {"type": "integer", "minimum": 0},
+    "load_condition": {"enum": ["idle", "loaded"]},
+    "case_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "resource_profile_sha256": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/hash"}},
+    "status": {"enum": ["scientific_complete", "infrastructure_invalid"]},
+    "error": {"type": ["string", "null"]},
+    "test_mode": {"type": "boolean"},
+    "resource_metadata": {"type": "object"},
+    "artifact_sha256": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {"hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+}

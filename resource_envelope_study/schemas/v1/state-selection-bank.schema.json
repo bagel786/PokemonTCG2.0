@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/resource-envelope-study/schemas/v1/state-selection-bank.schema.json",
+  "title": "Bound state-selection bank v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "bank_name", "execution_manifest_path",
+    "execution_manifest_file_sha256", "execution_manifest_content_hash",
+    "capture_inventory_path", "capture_inventory_file_sha256",
+    "capture_inventory_content_hash", "states", "seed_inventory", "content_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "state-selection-bank-1.0.0"},
+    "bank_name": {
+      "enum": [
+        "deadline_calibration", "fixed_work_calibration", "repeatability_pilot",
+        "repeatability_final", "repeatability_reserve"
+      ]
+    },
+    "execution_manifest_path": {"type": "string", "minLength": 1},
+    "execution_manifest_file_sha256": {"$ref": "#/$defs/hash"},
+    "execution_manifest_content_hash": {"$ref": "#/$defs/hash"},
+    "capture_inventory_path": {"type": "string", "minLength": 1},
+    "capture_inventory_file_sha256": {"$ref": "#/$defs/hash"},
+    "capture_inventory_content_hash": {"$ref": "#/$defs/hash"},
+    "states": {"type": "array", "minItems": 1, "items": {"type": "object"}},
+    "seed_inventory": {"type": "object"},
+    "content_hash": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {"hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+}

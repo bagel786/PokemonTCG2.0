@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/resource-envelope-study/schemas/v1/plot-source-inventory.schema.json",
+  "title": "Frozen publication-plot source inventory v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "freeze_status",
+    "plot_version",
+    "summary_filename",
+    "summary_schema_version",
+    "summary_file_sha256",
+    "summary_content_hash",
+    "analysis_lock_hash",
+    "protocol_freeze_hash",
+    "content_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "plot-source-inventory-1.0.0"},
+    "freeze_status": {"const": "FROZEN_PLOT_INPUT"},
+    "plot_version": {"const": "resource-envelope-publication-plots-1.0.0"},
+    "summary_filename": {"type": "string", "minLength": 1},
+    "summary_schema_version": {"const": "locked-analysis-summary-1.0.0"},
+    "summary_file_sha256": {"$ref": "#/$defs/hash"},
+    "summary_content_hash": {"$ref": "#/$defs/hash"},
+    "analysis_lock_hash": {"$ref": "#/$defs/hash"},
+    "protocol_freeze_hash": {"$ref": "#/$defs/hash"},
+    "content_hash": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {"hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+}

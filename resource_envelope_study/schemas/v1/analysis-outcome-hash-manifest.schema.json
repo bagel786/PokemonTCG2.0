@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/resource-envelope-study/schemas/v1/analysis-outcome-hash-manifest.schema.json",
+  "title": "Hash-bound locked-analysis outcome journals v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "outcome_kind",
+    "design_manifest_content_hash",
+    "files",
+    "content_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "analysis-outcome-hash-manifest-1.0.0"},
+    "outcome_kind": {"enum": ["main_game", "repeatability"]},
+    "design_manifest_content_hash": {"$ref": "#/$defs/hash"},
+    "files": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["results", "commits", "episodes"],
+      "properties": {
+        "results": {"$ref": "#/$defs/file"},
+        "commits": {"$ref": "#/$defs/file"},
+        "episodes": {"$ref": "#/$defs/file"}
+      }
+    },
+    "content_hash": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["filename", "sha256", "record_count"],
+      "properties": {
+        "filename": {"type": "string", "pattern": "^[^/\\\\]+$", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/hash"},
+        "record_count": {"type": "integer", "minimum": 1}
+      }
+    }
+  }
+}

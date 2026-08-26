@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/resource-envelope-study/schemas/v1/invalid-load-batch-attempt.schema.json",
+  "title": "Preserved invalid paired-load-batch attempt v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "load_batch_id",
+    "error",
+    "attempted_results",
+    "resource_episodes",
+    "attempted_result_hashes",
+    "resource_episode_hashes",
+    "content_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "invalid-load-batch-attempt-1.0.0"},
+    "load_batch_id": {"type": "string", "minLength": 1},
+    "error": {"type": "string", "minLength": 1},
+    "attempted_results": {"type": "array", "items": {"type": "object"}},
+    "resource_episodes": {"type": "array", "items": {"type": "object"}},
+    "attempted_result_hashes": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    },
+    "resource_episode_hashes": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    },
+    "content_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

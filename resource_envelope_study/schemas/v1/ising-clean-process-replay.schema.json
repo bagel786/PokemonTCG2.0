@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ising-clean-process-replay.schema.json",
+  "title": "Designated Ising fixed-work clean-process replay",
+  "type": "object",
+  "required": [
+    "schema_version", "case_id", "manifest_row_hash", "repeats",
+    "python_hash_seeds", "scientific_fingerprints", "passed", "report_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "ising-clean-process-replay-1.0.0"},
+    "case_id": {"type": "string", "minLength": 1},
+    "manifest_row_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "repeats": {"type": "integer", "minimum": 2},
+    "python_hash_seeds": {
+      "type": "array", "minItems": 2, "uniqueItems": true,
+      "items": {"type": "integer", "minimum": 0}
+    },
+    "scientific_fingerprints": {
+      "type": "array", "minItems": 2,
+      "items": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    },
+    "passed": {"type": "boolean"},
+    "report_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

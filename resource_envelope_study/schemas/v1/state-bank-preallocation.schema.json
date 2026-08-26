@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/resource-envelope-study/schemas/v1/state-bank-preallocation.schema.json",
+  "title": "State-bank preallocation v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "required_banks", "banks", "content_hash"],
+  "properties": {
+    "schema_version": {"const": "state-bank-preallocation-1.0.0"},
+    "required_banks": {
+      "const": [
+        "deadline_calibration",
+        "fixed_work_calibration",
+        "repeatability_pilot",
+        "repeatability_final",
+        "repeatability_reserve"
+      ]
+    },
+    "banks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "deadline_calibration",
+        "fixed_work_calibration",
+        "repeatability_pilot",
+        "repeatability_final",
+        "repeatability_reserve"
+      ],
+      "properties": {
+        "deadline_calibration": {"$ref": "#/$defs/bank"},
+        "fixed_work_calibration": {"$ref": "#/$defs/bank"},
+        "repeatability_pilot": {"$ref": "#/$defs/bank"},
+        "repeatability_final": {"$ref": "#/$defs/bank"},
+        "repeatability_reserve": {"$ref": "#/$defs/bank"}
+      }
+    },
+    "content_hash": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "bank": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["purpose", "requests"],
+      "properties": {
+        "purpose": {"enum": ["calibration", "repeatability"]},
+        "requests": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/request"}}
+      }
+    },
+    "request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "capture_id", "state_id", "source_game_id", "state_seed", "history_seed",
+        "history_length", "capture_kwargs"
+      ],
+      "properties": {
+        "capture_id": {"type": "string", "minLength": 1},
+        "state_id": {"type": "string", "minLength": 1},
+        "source_game_id": {"type": "string", "minLength": 1},
+        "state_seed": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+        "history_seed": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+        "history_length": {"type": "integer", "minimum": 0},
+        "capture_kwargs": {"type": "object"}
+      }
+    }
+  }
+}

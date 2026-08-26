@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ising-experiment-manifest.schema.json",
+  "title": "Ising resource-envelope experiment manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "config", "design", "rows", "content_hash"],
+  "properties": {
+    "schema_version": {"const": "ising-experiment-manifest-1.0.0"},
+    "content_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "config": {
+      "type": "object",
+      "required": [
+        "master_seed", "phase", "lattice_size", "temperatures", "coupling_j",
+        "burn_in_sweeps", "wall_clock_budget_ns", "fixed_sweeps",
+        "fixed_sweeps_source", "load_batch_count", "chains_per_temperature_batch",
+        "instrumentation_enabled", "diagnostic_chain_count",
+        "diagnostic_draws_per_chain", "diagnostic_burn_in_sweeps",
+        "exact_reference_lattice_size", "instrumentation_pair_count",
+        "gate_thresholds"
+      ],
+      "properties": {
+        "master_seed": {"type": "integer"},
+        "phase": {"enum": ["smoke", "pilot", "final"]},
+        "lattice_size": {"type": "integer", "minimum": 2},
+        "temperatures": {
+          "type": "array",
+          "prefixItems": [
+            {"const": 1.5},
+            {"const": 2.269185314213022},
+            {"const": 3.5}
+          ],
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "coupling_j": {"type": "number", "exclusiveMinimum": 0},
+        "burn_in_sweeps": {"type": "integer", "minimum": 0},
+        "wall_clock_budget_ns": {"type": "integer", "minimum": 1},
+        "fixed_sweeps": {"type": "integer", "minimum": 1},
+        "fixed_sweeps_source": {"type": "string", "minLength": 1},
+        "load_batch_count": {"type": "integer", "minimum": 20, "multipleOf": 2},
+        "chains_per_temperature_batch": {"type": "integer", "minimum": 1},
+        "instrumentation_enabled": {"type": "boolean"},
+        "diagnostic_chain_count": {"type": "integer", "minimum": 4},
+        "diagnostic_draws_per_chain": {"type": "integer", "minimum": 4},
+        "diagnostic_burn_in_sweeps": {"type": "integer", "minimum": 0},
+        "exact_reference_lattice_size": {"type": "integer", "minimum": 2, "maximum": 4},
+        "instrumentation_pair_count": {"type": "integer", "minimum": 20, "multipleOf": 2},
+        "gate_thresholds": {"type": "object"}
+      }
+    },
+    "design": {
+      "type": "object",
+      "required": [
+        "scientific_scope", "lattice", "update", "attempts_per_sweep",
+        "burn_in_timing", "observables", "independent_unit", "pairing",
+        "load_assignment_unit", "load_period_balance", "resource_controller",
+        "rng_domains", "clean_process_replay", "diagnostic_plan",
+        "instrumentation_plan", "pokemon_scope_effect"
+      ],
+      "properties": {
+        "scientific_scope": {"const": "open_ising_companion_only"},
+        "update": {"const": "single_spin_random_scan_metropolis"},
+        "attempts_per_sweep": {"const": "L^2"},
+        "burn_in_timing": {"const": "outside_measurement"},
+        "load_period_balance": {"const": "exact_AB_BA"},
+        "rng_domains": {"type": "object"},
+        "clean_process_replay": {"type": "object"},
+        "diagnostic_plan": {"type": "object"},
+        "instrumentation_plan": {"type": "object"},
+        "pokemon_scope_effect": {"const": "none"}
+      }
+    },
+    "rows": {
+      "type": "array",
+      "minItems": 240,
+      "items": {"$ref": "#/$defs/caseRow"}
+    }
+  },
+  "$defs": {
+    "caseRow": {
+      "type": "object",
+      "required": [
+        "schema_version", "case_id", "phase", "chain_id", "chain_seed",
+        "temperature_index", "temperature", "lattice_size", "coupling_j",
+        "burn_in_sweeps", "burn_in_in_measurement", "work_unit", "budget_mode",
+        "requested_budget_ns", "requested_sweeps", "load_condition", "load_batch_id",
+        "load_seed", "load_period_order", "instrumentation_enabled",
+        "resource_profile_contract", "execution_index"
+      ],
+      "properties": {
+        "schema_version": {"const": "ising-case-row-1.0.0"},
+        "case_id": {"type": "string", "minLength": 1},
+        "chain_id": {"type": "string", "minLength": 1},
+        "chain_seed": {"type": "integer", "minimum": 0},
+        "temperature_index": {"type": "integer", "minimum": 0, "maximum": 2},
+        "temperature": {"enum": [1.5, 2.269185314213022, 3.5]},
+        "lattice_size": {"type": "integer", "minimum": 2},
+        "coupling_j": {"type": "number", "exclusiveMinimum": 0},
+        "burn_in_sweeps": {"type": "integer", "minimum": 0},
+        "burn_in_in_measurement": {"const": false},
+        "work_unit": {"const": "one_random_scan_sweep_L_squared_attempts"},
+        "budget_mode": {"enum": ["wall_clock", "fixed_sweeps"]},
+        "requested_budget_ns": {"type": ["integer", "null"], "minimum": 1},
+        "requested_sweeps": {"type": ["integer", "null"], "minimum": 1},
+        "load_condition": {"enum": ["idle", "loaded"]},
+        "load_batch_id": {"type": "string", "minLength": 1},
+        "load_seed": {"type": "integer", "minimum": 0},
+        "load_period_order": {"enum": ["idle_then_loaded", "loaded_then_idle"]},
+        "instrumentation_enabled": {"type": "boolean"},
+        "execution_index": {"type": "integer", "minimum": 0},
+        "resource_profile_contract": {
+          "type": "object",
+          "required": [
+            "schema_version", "condition", "load_batch_id", "load_seed",
+            "requires_external_controller"
+          ],
+          "properties": {
+            "schema_version": {"const": "resource-envelope-request-1.0.0"},
+            "condition": {"enum": ["idle", "loaded"]},
+            "load_batch_id": {"type": "string", "minLength": 1},
+            "load_seed": {"type": "integer", "minimum": 0},
+            "requires_external_controller": {"const": true}
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,304 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/resource-envelope-study/schemas/v1/analysis-summary.schema.json",
+  "title": "Locked analysis summary v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "freeze_status",
+    "analysis_version",
+    "analysis_lock",
+    "analysis_lock_hash",
+    "protocol_freeze_hash",
+    "confirmatory_estimand_ids",
+    "familywise_confidence_level",
+    "simultaneous_method",
+    "member_confidence_level",
+    "point_estimate_content_hash",
+    "inventory_counts",
+    "simultaneous_evidence_hashes",
+    "simultaneous_evidence",
+    "source_artifacts",
+    "source_artifact_inventory_hash",
+    "estimands",
+    "rank_reversal",
+    "content_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "locked-analysis-summary-1.0.0"},
+    "freeze_status": {"const": "FROZEN_ANALYSIS_SUMMARY"},
+    "analysis_version": {"const": "resource-envelope-analysis-1.2.0"},
+    "analysis_lock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bootstrap_seed",
+        "bootstrap_replicates",
+        "confidence_level",
+        "score_equivalence_margin",
+        "work_relative_equivalence_margin",
+        "action_divergence_margin",
+        "rank_tie_margin",
+        "simultaneous_method"
+      ],
+      "properties": {
+        "bootstrap_seed": {"type": "integer", "minimum": 0},
+        "bootstrap_replicates": {"type": "integer", "minimum": 1999},
+        "confidence_level": {"type": "number", "exclusiveMinimum": 0.5, "exclusiveMaximum": 1},
+        "score_equivalence_margin": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1},
+        "work_relative_equivalence_margin": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1},
+        "action_divergence_margin": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1},
+        "rank_tie_margin": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1},
+        "simultaneous_method": {"const": "bonferroni_over_10_confirmatory_estimands"}
+      }
+    },
+    "analysis_lock_hash": {"$ref": "#/$defs/hash"},
+    "protocol_freeze_hash": {"$ref": "#/$defs/hash"},
+    "confirmatory_estimand_ids": {
+      "type": "array",
+      "const": [
+        "wall_work_ratio_fresh_equal_agent",
+        "wall_score_load_effect_fresh_equal_agent",
+        "fixed_score_load_effect_fresh_equal_agent",
+        "score_attenuation_fresh_equal_agent",
+        "wall_action_excess_divergence_fresh_equal_agent",
+        "wall_work_ratio_persistent_equal_agent",
+        "wall_score_load_effect_persistent_equal_agent",
+        "fixed_score_load_effect_persistent_equal_agent",
+        "score_attenuation_persistent_equal_agent",
+        "wall_action_excess_divergence_persistent_equal_agent"
+      ]
+    },
+    "familywise_confidence_level": {"const": 0.95},
+    "simultaneous_method": {"const": "bonferroni_over_10_confirmatory_estimands"},
+    "member_confidence_level": {"const": 0.995},
+    "point_estimate_content_hash": {"$ref": "#/$defs/hash"},
+    "inventory_counts": {"$ref": "#/$defs/inventoryCounts"},
+    "simultaneous_evidence_hashes": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/hash"}
+    },
+    "simultaneous_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["frozen_states", "main_matched_blocks"],
+      "properties": {
+        "frozen_states": {"$ref": "#/$defs/evidence"},
+        "main_matched_blocks": {"$ref": "#/$defs/evidence"}
+      }
+    },
+    "source_artifacts": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {"$ref": "#/$defs/source"}
+    },
+    "source_artifact_inventory_hash": {"$ref": "#/$defs/hash"},
+    "estimands": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {"$ref": "#/$defs/estimand"}
+    },
+    "rank_reversal": {"type": "object"},
+    "content_hash": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "schema_version", "sha256"],
+      "properties": {
+        "role": {
+          "enum": [
+            "final_schedule",
+            "main_outcome_hash_manifest",
+            "repeatability_outcome_hash_manifest",
+            "protocol_freeze",
+            "analysis_code"
+          ]
+        },
+        "schema_version": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "estimand": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "estimand_id",
+        "display_label",
+        "estimate",
+        "interval",
+        "confidence_level",
+        "multiplicity_method",
+        "inference_unit",
+        "plot_group",
+        "equivalence_margin",
+        "equivalence_decision",
+        "inventory"
+      ],
+      "properties": {
+        "estimand_id": {"type": "string", "minLength": 1},
+        "display_label": {"type": "string", "minLength": 1},
+        "estimate": {"type": "number"},
+        "interval": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {"type": "number"}
+        },
+        "confidence_level": {"const": 0.995},
+        "multiplicity_method": {"const": "bonferroni_over_10_confirmatory_estimands"},
+        "inference_unit": {"enum": ["matched_block", "frozen_state"]},
+        "plot_group": {"enum": ["work_relative", "probability_difference"]},
+        "equivalence_margin": {"type": "number", "exclusiveMinimum": 0},
+        "equivalence_decision": {"enum": ["equivalent", "not_established"]},
+        "inventory": {
+          "oneOf": [
+            {"$ref": "#/$defs/mainInventory"},
+            {"$ref": "#/$defs/workInventory"},
+            {"$ref": "#/$defs/stateInventory"}
+          ]
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "analysis_version",
+        "analysis_lock_hash",
+        "simultaneous_method",
+        "familywise_confidence_level",
+        "member_confidence_level",
+        "confirmatory_family_size",
+        "endpoint_ids",
+        "intervals",
+        "content_hash"
+      ],
+      "properties": {
+        "schema_version": {"const": "simultaneous-intervals-1.0.0"},
+        "analysis_version": {"const": "resource-envelope-analysis-1.2.0"},
+        "analysis_lock_hash": {"$ref": "#/$defs/hash"},
+        "simultaneous_method": {"const": "bonferroni_over_10_confirmatory_estimands"},
+        "familywise_confidence_level": {"const": 0.95},
+        "member_confidence_level": {"const": 0.995},
+        "confirmatory_family_size": {"const": 10},
+        "endpoint_ids": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "intervals": {
+          "type": "object",
+          "minProperties": 2,
+          "additionalProperties": {
+            "type": "object",
+            "required": ["estimate", "interval"],
+            "properties": {
+              "estimate": {"type": "number"},
+              "interval": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": {"type": "number"}
+              }
+            }
+          }
+        },
+        "content_hash": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "mainInventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["agent_count", "matched_block_count", "load_batch_count", "contributing_case_count"],
+      "properties": {
+        "agent_count": {"const": 3},
+        "matched_block_count": {"type": "integer", "minimum": 1},
+        "load_batch_count": {"type": "integer", "minimum": 1},
+        "contributing_case_count": {"type": "integer", "minimum": 1}
+      }
+    },
+    "workInventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "agent_count", "matched_block_count", "load_batch_count", "contributing_case_count",
+        "zero_eligible_decision_game_count", "zero_eligible_decision_game_rate",
+        "nonzero_complete_pair_count_by_agent"
+      ],
+      "properties": {
+        "agent_count": {"const": 3},
+        "matched_block_count": {"type": "integer", "minimum": 1},
+        "load_batch_count": {"type": "integer", "minimum": 1},
+        "contributing_case_count": {"type": "integer", "minimum": 1},
+        "zero_eligible_decision_game_count": {"type": "integer", "minimum": 0},
+        "zero_eligible_decision_game_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "nonzero_complete_pair_count_by_agent": {
+          "type": "object",
+          "minProperties": 3,
+          "maxProperties": 3,
+          "additionalProperties": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "stateInventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "agent_count", "state_count", "source_game_count", "state_agent_count",
+        "load_batch_count", "contributing_result_count", "repeats_per_envelope"
+      ],
+      "properties": {
+        "agent_count": {"const": 3},
+        "state_count": {"type": "integer", "minimum": 1},
+        "source_game_count": {"type": "integer", "minimum": 1},
+        "state_agent_count": {"type": "integer", "minimum": 1},
+        "load_batch_count": {"type": "integer", "minimum": 1},
+        "contributing_result_count": {"type": "integer", "minimum": 1},
+        "repeats_per_envelope": {"const": 10}
+      }
+    },
+    "inventoryCounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "agent_count",
+        "main_case_count",
+        "main_matched_block_count",
+        "main_load_batch_count",
+        "zero_eligible_decision_game_count",
+        "zero_eligible_decision_game_rate",
+        "repeatability_result_count",
+        "repeatability_state_count",
+        "repeatability_source_game_count",
+        "repeatability_state_agent_count",
+        "repeatability_load_batch_count",
+        "repeats_per_envelope"
+      ],
+      "properties": {
+        "agent_count": {"const": 3},
+        "main_case_count": {"type": "integer", "minimum": 1},
+        "main_matched_block_count": {"type": "integer", "minimum": 1},
+        "main_load_batch_count": {"type": "integer", "minimum": 1},
+        "zero_eligible_decision_game_count": {"type": "integer", "minimum": 0},
+        "zero_eligible_decision_game_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "repeatability_result_count": {"type": "integer", "minimum": 1},
+        "repeatability_state_count": {"type": "integer", "minimum": 1},
+        "repeatability_source_game_count": {"type": "integer", "minimum": 1},
+        "repeatability_state_agent_count": {"type": "integer", "minimum": 1},
+        "repeatability_load_batch_count": {"type": "integer", "minimum": 1},
+        "repeats_per_envelope": {"const": 10}
+      }
+    }
+  }
+}

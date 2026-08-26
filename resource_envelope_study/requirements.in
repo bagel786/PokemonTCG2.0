@@ -1,0 +1,5 @@
+# Acquisition and analysis dependencies.  Exact hashes are generated on the
+# authorized Azure worker after its Python ABI is frozen.
+numpy==2.2.6
+matplotlib==3.10.5
+pytest==8.4.1

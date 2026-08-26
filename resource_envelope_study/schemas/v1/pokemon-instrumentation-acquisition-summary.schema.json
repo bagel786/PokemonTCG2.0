@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pokemon-instrumentation-acquisition-summary.schema.json",
+  "title": "Pokemon instrumentation acquisition summary",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "status", "manifest_content_hash", "manifest_file_sha256",
+    "run_config_content_hash", "run_config_file_sha256", "committed_pair_count",
+    "pair_commit_hashes", "result_hashes", "resource_episode_hashes", "machine",
+    "content_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "pokemon-instrumentation-acquisition-summary-1.0.0"},
+    "status": {"const": "complete"},
+    "manifest_content_hash": {"$ref": "#/$defs/hash"},
+    "manifest_file_sha256": {"$ref": "#/$defs/hash"},
+    "run_config_content_hash": {"$ref": "#/$defs/hash"},
+    "run_config_file_sha256": {"$ref": "#/$defs/hash"},
+    "committed_pair_count": {"type": "integer", "minimum": 20},
+    "pair_commit_hashes": {"type": "array", "minItems": 20, "items": {"$ref": "#/$defs/hash"}},
+    "result_hashes": {"type": "array", "minItems": 40, "items": {"$ref": "#/$defs/hash"}},
+    "resource_episode_hashes": {"type": "array", "minItems": 20, "items": {"$ref": "#/$defs/hash"}},
+    "machine": {"type": "object"},
+    "content_hash": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {"hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+}

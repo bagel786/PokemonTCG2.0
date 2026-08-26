@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pokemon-instrumentation-gate-report.schema.json",
+  "title": "Outcome-blind Pokemon instrumentation pilot gate report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "decision", "manifest_content_hash", "manifest_file_sha256",
+    "run_config_content_hash", "run_config_file_sha256", "pilot_gate_file_sha256",
+    "gate_specification", "expected_pair_count", "committed_pair_count",
+    "pair_commit_hashes", "pair_ratios", "paired_interval_90",
+    "exact_semantic_equality", "invalid_or_interrupted_attempts", "reasons",
+    "interpretation", "report_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "pokemon-instrumentation-gate-report-1.0.0"},
+    "decision": {"enum": ["GO", "NARROW", "STOP"]},
+    "manifest_content_hash": {"$ref": "#/$defs/hash"},
+    "manifest_file_sha256": {"$ref": "#/$defs/hash"},
+    "run_config_content_hash": {"$ref": "#/$defs/hash"},
+    "run_config_file_sha256": {"$ref": "#/$defs/hash"},
+    "pilot_gate_file_sha256": {"$ref": "#/$defs/hash"},
+    "gate_specification": {"type": "object"},
+    "expected_pair_count": {"type": "integer", "minimum": 20},
+    "committed_pair_count": {"type": "integer", "minimum": 0},
+    "pair_commit_hashes": {"type": "array", "items": {"$ref": "#/$defs/hash"}},
+    "pair_ratios": {"type": "array", "items": {"type": "number", "exclusiveMinimum": 0}},
+    "paired_interval_90": {"type": ["object", "null"]},
+    "exact_semantic_equality": {"type": "object"},
+    "invalid_or_interrupted_attempts": {"type": "array", "items": {"type": "object"}},
+    "reasons": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "interpretation": {"type": "string", "minLength": 1},
+    "report_hash": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {"hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+}

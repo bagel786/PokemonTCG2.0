@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/resource-envelope-study/schemas/v1/state-panel-run-config.schema.json",
+  "title": "Frozen state-panel run config v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "entrypoint", "entrypoint_payload", "target_cpus", "load_workers",
+    "worker_timeout_s", "require_linux_affinity", "thread_env", "platform_expectations",
+    "authorized_state_bank",
+    "selection_bank_files", "selection_bank_sha256", "required_selection_banks",
+    "content_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "state-panel-run-config-1.0.0"},
+    "entrypoint": {"const": "resource_envelope_study.state_panel:pokemon_panel_entrypoint"},
+    "entrypoint_payload": {"type": "object"},
+    "target_cpus": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "integer", "minimum": 0}},
+    "load_workers": {"type": "integer", "minimum": 1},
+    "worker_timeout_s": {"type": "number", "exclusiveMinimum": 0},
+    "require_linux_affinity": {"const": true},
+    "thread_env": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "NUMEXPR_NUM_THREADS", "PYTHONHASHSEED"],
+      "properties": {
+        "OMP_NUM_THREADS": {"const": "1"},
+        "OPENBLAS_NUM_THREADS": {"const": "1"},
+        "MKL_NUM_THREADS": {"const": "1"},
+        "NUMEXPR_NUM_THREADS": {"const": "1"},
+        "PYTHONHASHSEED": {"type": "string", "pattern": "^[0-9]+$"}
+      }
+    },
+    "platform_expectations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["system", "machine"],
+      "properties": {
+        "system": {"const": "Linux"},
+        "machine": {"type": "string", "minLength": 1}
+      }
+    },
+    "authorized_state_bank": {
+      "enum": [
+        "deadline_calibration", "fixed_work_calibration", "repeatability_pilot",
+        "repeatability_final", "repeatability_reserve"
+      ]
+    },
+    "selection_bank_files": {"type": "object", "minProperties": 5, "maxProperties": 5, "additionalProperties": {"type": "string", "minLength": 1}},
+    "selection_bank_sha256": {"type": "object", "minProperties": 5, "maxProperties": 5, "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}},
+    "required_selection_banks": {"type": "array", "minItems": 5, "maxItems": 5, "uniqueItems": true},
+    "content_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

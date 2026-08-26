@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/resource-envelope-study/schemas/v1/calibration.schema.json",
+  "title": "Outcome-blind calibration manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "config",
+    "design",
+    "states",
+    "source_states_hash",
+    "excluded_seed_ledger",
+    "excluded_seed_ledger_hash",
+    "seed_inventory",
+    "rows",
+    "content_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "calibration-manifest-1.0.0"},
+    "config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bank_id",
+        "role",
+        "master_seed",
+        "agents",
+        "deadline_ms",
+        "deadline_selection_hash"
+      ],
+      "properties": {
+        "bank_id": {"type": "string", "minLength": 1},
+        "role": {"enum": ["deadline_selection", "fixed_work"]},
+        "master_seed": {"type": "integer", "minimum": 0},
+        "agents": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "deadline_ms": {"type": ["integer", "null"], "enum": [10, 25, 50, 100, null]},
+        "deadline_selection_hash": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "design": {"type": "object"},
+    "states": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/state"}
+    },
+    "source_states_hash": {"$ref": "#/$defs/hash"},
+    "excluded_seed_ledger": {
+      "type": "object",
+      "required": ["gate", "final", "reserve"],
+      "additionalProperties": {"$ref": "#/$defs/seedList"}
+    },
+    "excluded_seed_ledger_hash": {"$ref": "#/$defs/hash"},
+    "seed_inventory": {"type": "object"},
+    "rows": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/row"}
+    },
+    "content_hash": {"$ref": "#/$defs/hash"}
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "config": {
+            "properties": {"role": {"const": "fixed_work"}},
+            "required": ["role"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "excluded_seed_ledger": {"required": ["deadline_calibration"]}
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "seedList": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "integer", "minimum": 0}
+    },
+    "state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state_id",
+        "source_game_id",
+        "state_artifact_sha256",
+        "state_seed",
+        "eligibility_sha256"
+      ],
+      "properties": {
+        "state_id": {"type": "string", "minLength": 1},
+        "source_game_id": {"type": "string", "minLength": 1},
+        "state_artifact_sha256": {"$ref": "#/$defs/hash"},
+        "state_seed": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+        "eligibility_sha256": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "calibration_case_id",
+        "bank_id",
+        "role",
+        "block_id",
+        "block_index",
+        "state_id",
+        "source_game_id",
+        "state_artifact_sha256",
+        "eligibility_sha256",
+        "state_seed",
+        "agent_id",
+        "agent_seed",
+        "schedule_seed",
+        "budget_mode",
+        "load_condition",
+        "lifecycle",
+        "deadline_ms",
+        "requested_budget_ns",
+        "execution_index"
+      ],
+      "properties": {
+        "schema_version": {"const": "calibration-row-1.0.0"},
+        "calibration_case_id": {"type": "string", "minLength": 1},
+        "bank_id": {"type": "string", "minLength": 1},
+        "role": {"enum": ["deadline_selection", "fixed_work"]},
+        "block_id": {"type": "string", "minLength": 1},
+        "block_index": {"type": "integer", "minimum": 0},
+        "state_id": {"type": "string", "minLength": 1},
+        "source_game_id": {"type": "string", "minLength": 1},
+        "state_artifact_sha256": {"$ref": "#/$defs/hash"},
+        "eligibility_sha256": {"$ref": "#/$defs/hash"},
+        "state_seed": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+        "agent_id": {"type": "string", "minLength": 1},
+        "agent_seed": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+        "schedule_seed": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+        "budget_mode": {"const": "wall_clock"},
+        "load_condition": {"const": "idle"},
+        "lifecycle": {"const": "fresh"},
+        "deadline_ms": {"enum": [10, 25, 50, 100]},
+        "requested_budget_ns": {"type": "integer", "minimum": 10000000},
+        "execution_index": {"type": "integer", "minimum": 0}
+      }
+    }
+  }
+}

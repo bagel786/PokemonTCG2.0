@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pokemon-instrumentation-resource-episode.schema.json",
+  "title": "One paired idle ResourceEnvelope episode",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "pair_id", "pair_plan_hash", "manifest_content_hash",
+    "manifest_file_sha256", "run_config_content_hash", "run_config_file_sha256",
+    "case_ids", "resource_envelope", "resource_envelope_hash", "terminal_status",
+    "error", "artifact_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": "pokemon-instrumentation-resource-episode-1.0.0"},
+    "pair_id": {"type": "string", "minLength": 1},
+    "pair_plan_hash": {"$ref": "#/$defs/hash"},
+    "manifest_content_hash": {"$ref": "#/$defs/hash"},
+    "manifest_file_sha256": {"$ref": "#/$defs/hash"},
+    "run_config_content_hash": {"$ref": "#/$defs/hash"},
+    "run_config_file_sha256": {"$ref": "#/$defs/hash"},
+    "case_ids": {"type": "array", "minItems": 2, "maxItems": 2, "uniqueItems": true, "items": {"type": "string"}},
+    "resource_envelope": {"type": "object"},
+    "resource_envelope_hash": {"$ref": "#/$defs/hash"},
+    "terminal_status": {"enum": ["scientific_complete", "invalid_stopped"]},
+    "error": {"type": "string"},
+    "artifact_sha256": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {"hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+}

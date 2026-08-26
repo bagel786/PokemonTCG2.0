@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/resource-envelope-study/schemas/v1/acquisition-run-config.schema.json",
+  "title": "Scientific acquisition run config v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifacts",
+    "target_cpus",
+    "load_workers",
+    "max_decisions",
+    "worker_timeout_s",
+    "thread_env",
+    "platform_expectations",
+    "adapter_configs"
+  ],
+  "properties": {
+    "schema_version": {"const": "acquisition-run-config-1.0.0"},
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "engine_binary",
+        "engine_source",
+        "hero_deck",
+        "hero_model",
+        "opponent_deck",
+        "opponent_model"
+      ],
+      "properties": {
+        "engine_binary": {"$ref": "#/$defs/artifact"},
+        "engine_source": {"$ref": "#/$defs/artifact"},
+        "hero_deck": {"$ref": "#/$defs/artifact"},
+        "hero_model": {"$ref": "#/$defs/artifact"},
+        "opponent_deck": {"$ref": "#/$defs/artifact"},
+        "opponent_model": {"$ref": "#/$defs/artifact"}
+      }
+    },
+    "target_cpus": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "integer", "minimum": 0}
+    },
+    "load_workers": {"type": "integer", "minimum": 1},
+    "max_decisions": {"type": "integer", "minimum": 1},
+    "worker_timeout_s": {"type": "number", "exclusiveMinimum": 0},
+    "thread_env": {
+      "type": "object",
+      "required": [
+        "MKL_NUM_THREADS",
+        "NUMEXPR_NUM_THREADS",
+        "OMP_NUM_THREADS",
+        "OPENBLAS_NUM_THREADS",
+        "PYTHONHASHSEED",
+        "VECLIB_MAXIMUM_THREADS"
+      ],
+      "additionalProperties": {"type": "string"},
+      "properties": {
+        "MKL_NUM_THREADS": {"const": "1"},
+        "NUMEXPR_NUM_THREADS": {"const": "1"},
+        "OMP_NUM_THREADS": {"const": "1"},
+        "OPENBLAS_NUM_THREADS": {"const": "1"},
+        "PYTHONHASHSEED": {"type": "string", "pattern": "^[0-9]+$"},
+        "VECLIB_MAXIMUM_THREADS": {"const": "1"}
+      }
+    },
+    "platform_expectations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["system", "machine"],
+      "properties": {
+        "system": {"type": "string", "minLength": 1},
+        "machine": {"type": "string", "minLength": 1}
+      }
+    },
+    "adapter_configs": {
+      "type": "object",
+      "minProperties": 3,
+      "additionalProperties": {"type": "object"}
+    }
+  },
+  "$defs": {
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  }
+}

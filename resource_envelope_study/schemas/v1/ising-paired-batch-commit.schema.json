@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ising-paired-batch-commit.schema.json",
+  "title": "Atomic two-period Ising load-batch commit",
+  "type": "object",
+  "required": [
+    "schema_version", "manifest_content_hash", "load_batch_id", "load_period_order",
+    "case_ids", "case_result_hashes", "resource_episode_hashes", "case_results",
+    "resource_episodes", "terminal_status", "content_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "ising-paired-batch-commit-1.0.0"},
+    "manifest_content_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "load_batch_id": {"type": "string", "minLength": 1},
+    "load_period_order": {"enum": ["idle_then_loaded", "loaded_then_idle"]},
+    "case_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+    "case_result_hashes": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^[0-9a-f]{64}$"}},
+    "resource_episode_hashes": {"type": "array", "minItems": 2, "maxItems": 2, "uniqueItems": true, "items": {"type": "string", "pattern": "^[0-9a-f]{64}$"}},
+    "case_results": {"type": "array", "minItems": 1},
+    "resource_episodes": {"type": "array", "minItems": 2, "maxItems": 2},
+    "terminal_status": {"const": "paired_batch_complete"},
+    "content_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

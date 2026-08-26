@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pokemon-instrumentation-pair-commit.schema.json",
+  "title": "Atomic native Pokemon instrumentation off/on pair commit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "pair_id", "pair_plan_hash", "manifest_content_hash",
+    "manifest_file_sha256", "run_config_content_hash", "run_config_file_sha256",
+    "case_ids", "result_hashes", "resource_episode_hash", "case_results",
+    "resource_episode", "exact_semantic_fingerprint",
+    "throughput_ratio_on_over_off", "terminal_status", "content_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "pokemon-instrumentation-pair-commit-1.0.0"},
+    "pair_id": {"type": "string", "minLength": 1},
+    "pair_plan_hash": {"$ref": "#/$defs/hash"},
+    "manifest_content_hash": {"$ref": "#/$defs/hash"},
+    "manifest_file_sha256": {"$ref": "#/$defs/hash"},
+    "run_config_content_hash": {"$ref": "#/$defs/hash"},
+    "run_config_file_sha256": {"$ref": "#/$defs/hash"},
+    "case_ids": {"type": "array", "minItems": 2, "maxItems": 2, "uniqueItems": true, "items": {"type": "string"}},
+    "result_hashes": {"type": "array", "minItems": 2, "maxItems": 2, "uniqueItems": true, "items": {"$ref": "#/$defs/hash"}},
+    "resource_episode_hash": {"$ref": "#/$defs/hash"},
+    "case_results": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "object"}},
+    "resource_episode": {"type": "object"},
+    "exact_semantic_fingerprint": {"$ref": "#/$defs/hash"},
+    "throughput_ratio_on_over_off": {"type": "number", "exclusiveMinimum": 0},
+    "terminal_status": {"const": "instrumentation_pair_complete"},
+    "content_hash": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {"hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+}

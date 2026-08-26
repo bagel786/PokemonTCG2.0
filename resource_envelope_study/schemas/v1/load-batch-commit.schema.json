@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/resource-envelope-study/schemas/v1/load-batch-commit.schema.json",
+  "title": "Atomic paired-load-batch commit v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "load_batch_id",
+    "batch_status",
+    "case_ids",
+    "result_hashes",
+    "episode_hashes",
+    "content_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "load-batch-commit-1.0.0"},
+    "load_batch_id": {"type": "string", "minLength": 1},
+    "batch_status": {"enum": ["scientific_complete", "infrastructure_invalid"]},
+    "case_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+    "result_hashes": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^[0-9a-f]{64}$"}},
+    "episode_hashes": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "string", "pattern": "^[0-9a-f]{64}$"}},
+    "content_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ising-instrumentation-result.schema.json",
+  "title": "Frozen paired Ising instrumentation result",
+  "type": "object",
+  "required": [
+    "schema_version", "pair_id", "pair_plan_hash", "case_id",
+    "execution_position", "instrumentation_enabled", "budget_mode",
+    "requested_sweeps", "completed_sweeps", "temperature_index", "temperature",
+    "lattice_size", "coupling_j", "burn_in_sweeps", "chain_seed_hash",
+    "search_wall_ns", "scientific_fingerprint", "source_result_artifact_sha256",
+    "record_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "ising-instrumentation-result-1.0.0"},
+    "pair_id": {"type": "string", "minLength": 1},
+    "pair_plan_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "case_id": {"type": "string", "minLength": 1},
+    "execution_position": {"type": "integer", "minimum": 0, "maximum": 1},
+    "instrumentation_enabled": {"type": "boolean"},
+    "budget_mode": {"const": "fixed_sweeps"},
+    "requested_sweeps": {"type": "integer", "minimum": 1},
+    "completed_sweeps": {"type": "integer", "minimum": 1},
+    "temperature_index": {"type": "integer", "minimum": 0, "maximum": 2},
+    "temperature": {"enum": [1.5, 2.269185314213022, 3.5]},
+    "lattice_size": {"type": "integer", "minimum": 2},
+    "coupling_j": {"type": "number", "exclusiveMinimum": 0},
+    "burn_in_sweeps": {"type": "integer", "minimum": 0},
+    "chain_seed_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "search_wall_ns": {"type": "integer", "minimum": 1},
+    "scientific_fingerprint": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "source_result_artifact_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "record_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

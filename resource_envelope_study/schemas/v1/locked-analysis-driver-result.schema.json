@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/resource-envelope-study/schemas/v1/locked-analysis-driver-result.schema.json",
+  "title": "Fail-closed locked-analysis driver result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "analysis_version", "analysis_lock_hash",
+    "schedule_file_sha256", "repeatability_manifest_file_sha256",
+    "main_outcome_hash_manifest_file_sha256",
+    "repeatability_outcome_hash_manifest_file_sha256",
+    "protocol_file_sha256", "analysis_code_file_sha256", "outputs",
+    "summary_content_hash", "content_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "locked-analysis-driver-result-1.0.0"},
+    "analysis_version": {"const": "resource-envelope-analysis-1.2.0"},
+    "analysis_lock_hash": {"$ref": "#/$defs/hash"},
+    "schedule_file_sha256": {"$ref": "#/$defs/hash"},
+    "repeatability_manifest_file_sha256": {"$ref": "#/$defs/hash"},
+    "main_outcome_hash_manifest_file_sha256": {"$ref": "#/$defs/hash"},
+    "repeatability_outcome_hash_manifest_file_sha256": {"$ref": "#/$defs/hash"},
+    "protocol_file_sha256": {"$ref": "#/$defs/hash"},
+    "analysis_code_file_sha256": {"$ref": "#/$defs/hash"},
+    "outputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "confirmatory-point-estimates.json", "main-simultaneous-evidence.json",
+        "state-simultaneous-evidence.json", "locked-analysis-summary.json"
+      ],
+      "properties": {
+        "confirmatory-point-estimates.json": {"$ref": "#/$defs/hash"},
+        "main-simultaneous-evidence.json": {"$ref": "#/$defs/hash"},
+        "state-simultaneous-evidence.json": {"$ref": "#/$defs/hash"},
+        "locked-analysis-summary.json": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "summary_content_hash": {"$ref": "#/$defs/hash"},
+    "content_hash": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {"hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+}

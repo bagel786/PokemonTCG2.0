@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pokemon-instrumentation-attempt.schema.json",
+  "title": "Durable Pokemon instrumentation pair attempt journal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "pair_id", "pair_plan_hash", "manifest_content_hash",
+    "manifest_file_sha256", "run_config_content_hash", "run_config_file_sha256",
+    "case_ids", "status", "attempted_result_hashes", "attempted_results",
+    "resource_episode", "resource_episode_hash", "error_type", "error_message",
+    "failed_worker", "pair_commit_hash", "content_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "pokemon-instrumentation-attempt-1.0.0"},
+    "pair_id": {"type": "string", "minLength": 1},
+    "pair_plan_hash": {"$ref": "#/$defs/hash"},
+    "manifest_content_hash": {"$ref": "#/$defs/hash"},
+    "manifest_file_sha256": {"$ref": "#/$defs/hash"},
+    "run_config_content_hash": {"$ref": "#/$defs/hash"},
+    "run_config_file_sha256": {"$ref": "#/$defs/hash"},
+    "case_ids": {"type": "array", "minItems": 2, "maxItems": 2, "uniqueItems": true, "items": {"type": "string"}},
+    "status": {"enum": ["in_progress", "invalid_stopped", "complete"]},
+    "attempted_result_hashes": {"type": "array", "maxItems": 2, "items": {"$ref": "#/$defs/hash"}},
+    "attempted_results": {"type": "array", "maxItems": 2, "items": {"type": "object"}},
+    "resource_episode": {"type": ["object", "null"]},
+    "resource_episode_hash": {"anyOf": [{"$ref": "#/$defs/hash"}, {"type": "null"}]},
+    "error_type": {"type": "string"},
+    "error_message": {"type": "string"},
+    "failed_worker": {"type": ["object", "null"]},
+    "pair_commit_hash": {"anyOf": [{"$ref": "#/$defs/hash"}, {"type": "null"}]},
+    "content_hash": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {"hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+}

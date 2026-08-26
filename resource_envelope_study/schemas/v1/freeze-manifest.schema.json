@@ -1,0 +1,195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/resource-envelope-study/schemas/v1/freeze-manifest.schema.json",
+  "title": "Resource-envelope protocol freeze manifest v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "status",
+    "base_commit",
+    "branch",
+    "protocol_commit",
+    "human_approval",
+    "final_acquisition_authorized",
+    "unresolved",
+    "pilot_manifest_sha256",
+    "final_manifest_sha256",
+    "reserve_manifest_sha256",
+    "environment_lock_sha256",
+    "engine_binary_sha256",
+    "analysis_sha256",
+    "reaggregation_sha256",
+    "plotting_sha256",
+    "state_panel_manifest_sha256",
+    "ising_manifest_sha256",
+    "artifact_hashes",
+    "inventory",
+    "note"
+  ],
+  "properties": {
+    "schema_version": {"const": "freeze-manifest-1.0.0"},
+    "status": {"enum": ["NOT_FROZEN", "FROZEN"]},
+    "base_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "branch": {"type": "string", "minLength": 1},
+    "protocol_commit": {"type": ["string", "null"], "pattern": "^[0-9a-f]{40}$"},
+    "human_approval": {
+      "anyOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/humanApproval"}
+      ]
+    },
+    "final_acquisition_authorized": {"type": "boolean"},
+    "unresolved": {"type": "array", "items": {"type": "string"}},
+    "pilot_manifest_sha256": {"$ref": "#/$defs/nullableSha256"},
+    "final_manifest_sha256": {"$ref": "#/$defs/nullableSha256"},
+    "reserve_manifest_sha256": {"$ref": "#/$defs/nullableSha256"},
+    "environment_lock_sha256": {"$ref": "#/$defs/nullableSha256"},
+    "engine_binary_sha256": {"$ref": "#/$defs/nullableSha256"},
+    "analysis_sha256": {"$ref": "#/$defs/nullableSha256"},
+    "reaggregation_sha256": {"$ref": "#/$defs/nullableSha256"},
+    "plotting_sha256": {"$ref": "#/$defs/nullableSha256"},
+    "state_panel_manifest_sha256": {"$ref": "#/$defs/nullableSha256"},
+    "ising_manifest_sha256": {"$ref": "#/$defs/nullableSha256"},
+    "artifact_hashes": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": [
+        "engine_binary",
+        "engine_source",
+        "hero_deck",
+        "hero_model",
+        "opponent_deck",
+        "opponent_model",
+        "run_config"
+      ],
+      "properties": {
+        "engine_binary": {"$ref": "#/$defs/sha256"},
+        "engine_source": {"$ref": "#/$defs/sha256"},
+        "hero_deck": {"$ref": "#/$defs/sha256"},
+        "hero_model": {"$ref": "#/$defs/sha256"},
+        "opponent_deck": {"$ref": "#/$defs/sha256"},
+        "opponent_model": {"$ref": "#/$defs/sha256"},
+        "run_config": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "inventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["frozen_inputs", "expected_outputs"],
+      "properties": {
+        "frozen_inputs": {"type": "array", "items": {"$ref": "#/$defs/frozenInput"}},
+        "expected_outputs": {"type": "array", "items": {"$ref": "#/$defs/expectedOutput"}}
+      }
+    },
+    "note": {"type": "string"}
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"const": "NOT_FROZEN"}}},
+      "then": {
+        "properties": {
+          "protocol_commit": {"type": "null"},
+          "human_approval": {"type": "null"},
+          "final_acquisition_authorized": {"const": false}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"status": {"const": "FROZEN"}}},
+      "then": {
+        "properties": {
+          "protocol_commit": {"$ref": "#/$defs/commit"},
+          "base_commit": {"$ref": "#/$defs/commit"},
+          "unresolved": {"type": "array", "maxItems": 0},
+          "pilot_manifest_sha256": {"$ref": "#/$defs/sha256"},
+          "final_manifest_sha256": {"$ref": "#/$defs/sha256"},
+          "reserve_manifest_sha256": {"$ref": "#/$defs/sha256"},
+          "environment_lock_sha256": {"$ref": "#/$defs/sha256"},
+          "engine_binary_sha256": {"$ref": "#/$defs/sha256"},
+          "analysis_sha256": {"$ref": "#/$defs/sha256"},
+          "reaggregation_sha256": {"$ref": "#/$defs/sha256"},
+          "plotting_sha256": {"$ref": "#/$defs/sha256"},
+          "state_panel_manifest_sha256": {"$ref": "#/$defs/sha256"},
+          "ising_manifest_sha256": {"$ref": "#/$defs/sha256"},
+          "artifact_hashes": {"type": "object"},
+          "inventory": {
+            "properties": {
+              "frozen_inputs": {"minItems": 1},
+              "expected_outputs": {"minItems": 1}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {"properties": {"final_acquisition_authorized": {"const": true}}},
+      "then": {"properties": {"human_approval": {"$ref": "#/$defs/humanApproval"}}}
+    }
+  ],
+  "$defs": {
+    "commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "nullableSha256": {"anyOf": [{"$ref": "#/$defs/sha256"}, {"type": "null"}]},
+    "frozenInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["logical_id", "path", "sha256", "role"],
+      "properties": {
+        "logical_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]*$"
+        },
+        "path": {"$ref": "#/$defs/repositoryPath"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "role": {"type": "string", "minLength": 1}
+      }
+    },
+    "expectedOutput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["logical_id", "path", "schema_version", "producer", "phase", "cardinality"],
+      "properties": {
+        "logical_id": {"type": "string", "minLength": 1},
+        "path": {
+          "type": "string",
+          "pattern": "^resource_envelope_study/runs/.+"
+        },
+        "schema_version": {"type": "string", "minLength": 1},
+        "producer": {"type": "string", "minLength": 1},
+        "phase": {"type": "string", "minLength": 1},
+        "cardinality": {"type": "integer", "minimum": 1}
+      }
+    },
+    "repositoryPath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+"
+    },
+    "humanApproval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "approved",
+        "phase",
+        "protocol_commit",
+        "approval_commit",
+        "approval_id",
+        "attestation_path",
+        "attestation_sha256"
+      ],
+      "properties": {
+        "approved": {"const": true},
+        "phase": {"const": "final"},
+        "protocol_commit": {"$ref": "#/$defs/commit"},
+        "approval_commit": {"$ref": "#/$defs/commit"},
+        "approval_id": {"type": "string", "minLength": 1},
+        "attestation_path": {
+          "type": "string",
+          "pattern": "^resource_envelope_study/authorizations/.+"
+        },
+        "attestation_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/resource-envelope-study/schemas/v1/game.schema.json",
+  "title": "Resource-envelope game telemetry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "case_id",
+    "block_id",
+    "agent_id",
+    "score",
+    "winner",
+    "terminal_status",
+    "decision_count",
+    "completed_work_units",
+    "completed_simulations",
+    "completed_nodes",
+    "completed_sweeps",
+    "forward_model_calls",
+    "decision_record_hashes",
+    "error_type",
+    "error_message"
+  ],
+  "properties": {
+    "schema_version": {"const": "game-1.0.0"},
+    "case_id": {"type": "string", "minLength": 1},
+    "block_id": {"type": "string", "minLength": 1},
+    "agent_id": {"type": "string", "minLength": 1},
+    "score": {"type": ["number", "null"], "enum": [0, 0.5, 1, null]},
+    "winner": {"type": ["integer", "null"], "enum": [0, 1, 2, null]},
+    "terminal_status": {
+      "enum": [
+        "completed",
+        "agent_timeout",
+        "agent_error",
+        "illegal_action",
+        "engine_error",
+        "infrastructure_error",
+        "protocol_invalid"
+      ]
+    },
+    "decision_count": {"type": "integer", "minimum": 0},
+    "completed_work_units": {"type": "integer", "minimum": 0},
+    "completed_simulations": {"type": "integer", "minimum": 0},
+    "completed_nodes": {"type": "integer", "minimum": 0},
+    "completed_sweeps": {"type": "integer", "minimum": 0},
+    "forward_model_calls": {"type": "integer", "minimum": 0},
+    "decision_record_hashes": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    },
+    "error_type": {"type": "string"},
+    "error_message": {"type": "string"}
+  }
+}

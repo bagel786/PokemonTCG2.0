@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/resource-envelope-study/schemas/v1/fixed-work-calibration.schema.json",
+  "title": "Block-equal fixed-work calibration v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "bank_id",
+    "selected_deadline_ms",
+    "fixed_work_by_agent",
+    "rounding_rule",
+    "included_block_ids",
+    "excluded_blocks",
+    "per_agent_block_values",
+    "minimum_complete_blocks",
+    "input_manifest_content_hash",
+    "source_states_hash",
+    "input_records_sha256",
+    "deadline_selection_content_hash",
+    "competitive_outcome_fields_consumed",
+    "content_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "fixed-work-calibration-1.0.0"},
+    "bank_id": {"type": "string", "minLength": 1},
+    "selected_deadline_ms": {"enum": [10, 25, 50, 100]},
+    "fixed_work_by_agent": {
+      "type": "object",
+      "minProperties": 3,
+      "maxProperties": 3,
+      "additionalProperties": {"type": "integer", "minimum": 1}
+    },
+    "rounding_rule": {"const": "block_equal_median_even_midpoint_round_half_up"},
+    "included_block_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "excluded_blocks": {"type": "object"},
+    "per_agent_block_values": {"type": "object"},
+    "minimum_complete_blocks": {"type": "integer", "minimum": 1},
+    "input_manifest_content_hash": {"$ref": "#/$defs/hash"},
+    "source_states_hash": {"$ref": "#/$defs/hash"},
+    "input_records_sha256": {"$ref": "#/$defs/hash"},
+    "deadline_selection_content_hash": {"$ref": "#/$defs/hash"},
+    "competitive_outcome_fields_consumed": {"type": "array", "maxItems": 0},
+    "content_hash": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

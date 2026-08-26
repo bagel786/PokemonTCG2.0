@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/resource-envelope-study/schemas/v1/state-panel-summary.schema.json",
+  "title": "State-panel execution summary v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "status", "execution_kind", "manifest_content_hash",
+    "manifest_file_sha256", "run_config_file_sha256", "committed_groups",
+    "resource_episode_count", "machine", "scheduled_cases", "terminal_cases",
+    "scientific_cases", "infrastructure_error_cases", "content_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "state-panel-summary-1.0.0"},
+    "status": {"const": "complete"},
+    "execution_kind": {"enum": ["calibration", "repeatability"]},
+    "manifest_content_hash": {"$ref": "#/$defs/hash"},
+    "manifest_file_sha256": {"$ref": "#/$defs/hash"},
+    "run_config_file_sha256": {"anyOf": [{"$ref": "#/$defs/hash"}, {"type": "null"}]},
+    "committed_groups": {"type": "integer", "minimum": 1},
+    "resource_episode_count": {"type": "integer", "minimum": 1},
+    "machine": {"type": "object"},
+    "scheduled_cases": {"type": "integer", "minimum": 1},
+    "terminal_cases": {"type": "integer", "minimum": 1},
+    "scientific_cases": {"type": "integer", "minimum": 0},
+    "infrastructure_error_cases": {"type": "integer", "minimum": 0},
+    "content_hash": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {"hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+}

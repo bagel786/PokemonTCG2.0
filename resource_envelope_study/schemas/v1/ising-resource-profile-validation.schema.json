@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ising-resource-profile-validation.schema.json",
+  "title": "Ising acquisition resource-profile validation",
+  "type": "object",
+  "required": [
+    "schema_version", "manifest_content_hash", "scientific_validation", "passed",
+    "validated_load_batch_count", "validated_resource_episode_count",
+    "validated_case_result_count", "batch_commit_hashes", "case_result_hashes",
+    "resource_episode_hashes", "validated_instrumentation_pair_count",
+    "instrumentation_pair_commit_hashes", "instrumentation_result_hashes",
+    "instrumentation_resource_episode_hashes", "validator_contract", "report_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "ising-resource-profile-validation-1.0.0"},
+    "manifest_content_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "scientific_validation": {"type": "boolean"},
+    "passed": {"type": "boolean"},
+    "validated_load_batch_count": {"type": "integer", "minimum": 0},
+    "validated_resource_episode_count": {"type": "integer", "minimum": 0},
+    "validated_case_result_count": {"type": "integer", "minimum": 0},
+    "validated_instrumentation_pair_count": {"type": "integer", "minimum": 0},
+    "batch_commit_hashes": {"$ref": "#/$defs/hashArray"},
+    "case_result_hashes": {"$ref": "#/$defs/hashArray"},
+    "resource_episode_hashes": {"$ref": "#/$defs/hashArray"},
+    "instrumentation_pair_commit_hashes": {"$ref": "#/$defs/hashArray"},
+    "instrumentation_result_hashes": {"$ref": "#/$defs/hashArray"},
+    "instrumentation_resource_episode_hashes": {"$ref": "#/$defs/hashArray"},
+    "validator_contract": {"type": "string", "minLength": 1},
+    "report_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  },
+  "$defs": {
+    "hashArray": {
+      "type": "array", "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": "freeze-manifest-1.0.0",
+  "status": "NOT_FROZEN",
+  "base_commit": "af1504c149d462c152eec18472661a844b58988a",
+  "branch": "paper/resource-envelope-search-20260826",
+  "protocol_commit": null,
+  "human_approval": null,
+  "final_acquisition_authorized": false,
+  "unresolved": [
+    "Azure pilot gate decision",
+    "outcome-blind final deadline",
+    "agent-specific fixed-work counts",
+    "final independent block count and reserve count",
+    "final engine/compiler/environment hashes",
+    "repeatability state manifest and semantic replay gate",
+    "analysis multiplicity and equivalence margins",
+    "expected artifact inventory",
+    "APS Ising scope gate"
+  ],
+  "pilot_manifest_sha256": null,
+  "final_manifest_sha256": null,
+  "reserve_manifest_sha256": null,
+  "environment_lock_sha256": null,
+  "engine_binary_sha256": null,
+  "analysis_sha256": null,
+  "reaggregation_sha256": null,
+  "plotting_sha256": null,
+  "state_panel_manifest_sha256": null,
+  "ising_manifest_sha256": null,
+  "artifact_hashes": null,
+  "inventory": {
+    "frozen_inputs": [],
+    "expected_outputs": []
+  },
+  "note": "This placeholder fails closed. It cannot authorize final seeds."
+}

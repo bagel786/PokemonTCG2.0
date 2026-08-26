@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/resource-envelope-study/schemas/v1/deadline-selection.schema.json",
+  "title": "Outcome-blind deadline selection v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "bank_id",
+    "selected_deadline_ms",
+    "deadline_whitelist_ms",
+    "selection_rule",
+    "criteria",
+    "candidate_metrics",
+    "input_manifest_content_hash",
+    "input_records_sha256",
+    "competitive_outcome_fields_consumed",
+    "content_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "deadline-selection-1.0.0"},
+    "bank_id": {"type": "string", "minLength": 1},
+    "selected_deadline_ms": {"enum": [10, 25, 50, 100]},
+    "deadline_whitelist_ms": {"const": [10, 25, 50, 100]},
+    "selection_rule": {"const": "smallest_whitelisted_deadline_passing_every_agent"},
+    "criteria": {"type": "object"},
+    "candidate_metrics": {"type": "object"},
+    "input_manifest_content_hash": {"$ref": "#/$defs/hash"},
+    "input_records_sha256": {"$ref": "#/$defs/hash"},
+    "competitive_outcome_fields_consumed": {"type": "array", "maxItems": 0},
+    "content_hash": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

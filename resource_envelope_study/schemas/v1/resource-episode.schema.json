@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/resource-envelope-study/schemas/v1/resource-episode.schema.json",
+  "title": "Resource intervention episode v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "load_batch_id",
+    "load_seed",
+    "profile",
+    "workers",
+    "benchmark_workers",
+    "before",
+    "after",
+    "cleanup_succeeded",
+    "period_case_ids",
+    "metadata_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "resource-episode-1.0.0"},
+    "load_batch_id": {"type": "string", "minLength": 1},
+    "load_seed": {"type": "integer", "minimum": 0},
+    "profile": {
+      "type": "object",
+      "required": ["condition", "worker_count", "target_cpus"],
+      "properties": {
+        "condition": {"enum": ["idle", "loaded"]},
+        "worker_count": {"type": ["integer", "null"], "minimum": 0},
+        "target_cpus": {
+          "type": ["array", "null"],
+          "items": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "workers": {"type": "array", "items": {"type": "object"}},
+    "benchmark_workers": {"type": "array", "items": {"type": "object"}},
+    "before": {"type": "object"},
+    "after": {"type": "object"},
+    "cleanup_succeeded": {"type": "boolean"},
+    "period_case_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "metadata_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}
