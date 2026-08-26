@@ -1,0 +1,58 @@
+{
+  "A": [
+    "artifact_a_identified",
+    "artifact_b_identified",
+    "declared_seed",
+    "context_declared",
+    "rows_complete",
+    "grouping_correct"
+  ],
+  "B": {
+    "any_of": [
+      "probability_sampled_unit",
+      "repeated_measures_design",
+      "treatment_randomized",
+      "hierarchical_model",
+      "defended_joint_stochastic_model"
+    ],
+    "separate_facts": [
+      "seed_sampled_from_declared_distribution",
+      "treatment_randomized",
+      "evaluation_order_randomized",
+      "repeated_measures_design",
+      "probability_sampled_unit",
+      "hierarchical_model",
+      "defended_joint_stochastic_model"
+    ]
+  },
+  "C1": [
+    "canonical_trace_sha256",
+    "same_context_repeat_tested",
+    "same_context_repeat_stable"
+  ],
+  "C2": [
+    "canonical_trace_sha256",
+    "all_named_contexts_tested",
+    "cross_context_repeat_stable"
+  ],
+  "D1": [
+    "coupling_specified",
+    "shared_and_independent_streams_specified",
+    "marginals_preserved",
+    "no_stream_collision"
+  ],
+  "D2": [
+    "D1_valid",
+    "covariance_estimated",
+    "paired_variance_estimated",
+    "independent_variance_estimated",
+    "variance_ratio_with_uncertainty"
+  ],
+  "E": [
+    "stable_event_ontology",
+    "exogenous_event_ids",
+    "event_values_logged",
+    "event_keyed_rng",
+    "dependence_assumptions"
+  ]
+}

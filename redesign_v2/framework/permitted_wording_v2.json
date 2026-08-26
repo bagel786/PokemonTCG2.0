@@ -1,0 +1,14 @@
+{
+  "A": "schedule-matched descriptive comparison",
+  "B": "paired inference under the declared sampling/design model",
+  "C1": "repeatable in the declared context",
+  "C2": "repeatable across the named contexts",
+  "D1": "valid common-random-number coupling under the declared construction",
+  "D2": "measured variance benefit",
+  "E": "event-aligned stochastic coupling under the declared ontology",
+  "forbidden_without_extra_model": [
+    "causal effect",
+    "counterfactual proof",
+    "all possible failure modes"
+  ]
+}

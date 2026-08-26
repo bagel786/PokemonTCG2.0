@@ -1,0 +1,29 @@
+{
+  "cumulative": false,
+  "routes": {
+    "A": [
+      "A"
+    ],
+    "B": [
+      "B"
+    ],
+    "C": [
+      "C1",
+      "C2"
+    ],
+    "D": [
+      "D1",
+      "D2"
+    ],
+    "E": [
+      "E"
+    ]
+  },
+  "rules": [
+    "B does not depend on C/D/E unless the declared B model explicitly incorporates that evidence",
+    "C scope selects C1 or C2",
+    "D1 does not imply D2",
+    "unknown evidence never strengthens a claim"
+  ],
+  "start": "intended_claim"
+}

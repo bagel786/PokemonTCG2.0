@@ -1,0 +1,39 @@
+{
+  "A": {
+    "name": "matched descriptive",
+    "question": "Did runs share declared schedule fields and denominator?",
+    "subclaims": [
+      "A"
+    ]
+  },
+  "B": {
+    "name": "statistically paired inference",
+    "question": "What sampling/design mechanism makes observations paired units?",
+    "subclaims": [
+      "B"
+    ]
+  },
+  "C": {
+    "name": "replay/repeatability",
+    "question": "Are declared projections repeatable over every context named by the claim?",
+    "subclaims": [
+      "C1",
+      "C2"
+    ]
+  },
+  "D": {
+    "name": "common-random-number coupling",
+    "question": "Is coupling valid, and separately is it beneficial?",
+    "subclaims": [
+      "D1",
+      "D2"
+    ]
+  },
+  "E": {
+    "name": "event-aligned stochastic coupling",
+    "question": "Do corresponding exogenous events receive corresponding random quantities?",
+    "subclaims": [
+      "E"
+    ]
+  }
+}
