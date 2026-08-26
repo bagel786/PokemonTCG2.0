@@ -1,5 +1,5 @@
 {
-  "canonical_report_sha256": "20ecac0afef85a837985201b9084fa950dd19ae75342ff5c06dac1990c84fc0e",
+  "canonical_report_sha256": "937bf6cd28379799bfa272c90834147473b42059aa5ad3bf71a7c1399053589b",
   "final_desk_simulation_sha256": "c10cd80e470cc9fedb583e35c97eb4c35e70cd495690dd24eea1de63f9fb7b6d",
   "generated_by": "paper/final_protocol/scripts/machine_finalize.py",
   "human_gate": {
@@ -43,5 +43,5 @@
   "public_release_candidate_zip_sha256": "576ceb154a8559f532e81223313213eca1c5b43b6e715d9b9c56a6a293acae94",
   "schema_version": "machine-final-reproduction-report-v1",
   "status": "PASS",
-  "subject_head_commit": "302256db8564e19709810688e4fd9be2c00fa5b2"
+  "subject_head_commit": "65b570c9719e931f23a389ae754892b4c439dad2"
 }
