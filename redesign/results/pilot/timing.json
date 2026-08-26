@@ -1,0 +1,32 @@
+{
+  "kind": "PILOT_TIMING (result-excluded; timing only)",
+  "date": "2026-08-26",
+  "per_system_scenario_median_row_seconds": {
+    "holdem/S0": 0.005,
+    "holdem/S1": 0.005,
+    "holdem/S10": 0.007,
+    "holdem/S2": 0.005,
+    "holdem/S3": 0.005,
+    "holdem/S4": 0.0,
+    "holdem/S5": 0.006,
+    "holdem/S6": 0.005,
+    "holdem/S7": 0.006,
+    "holdem/S8": 0.0,
+    "holdem/S9": 0.007,
+    "ising/S0": 1.078,
+    "ising/S1": 1.192,
+    "ising/S10": 1.332,
+    "ising/S2": 1.379,
+    "ising/S3": 0.958,
+    "ising/S4": 1.124,
+    "ising/S5": 1.023,
+    "ising/S6": 1.537,
+    "ising/S7": 1.478,
+    "ising/S8": 1.524,
+    "ising/S9": 0.993
+  },
+  "projection": {
+    "ising_final_N40_minutes": 7.9,
+    "holdem_final_N40_minutes": 0.04
+  }
+}

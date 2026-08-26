@@ -1,0 +1,205 @@
+{
+  "kind": "EXPECTED_DECISION_TABLE",
+  "frozen": "2026-08-26",
+  "source": "generated from benchmark/scenarios.py (canonical)",
+  "scenarios": {
+    "S0": {
+      "name": "clean control",
+      "gt": {
+        "descriptive": "VALID",
+        "paired_inference": "VALID",
+        "replay": "VALID",
+        "crn": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "wording": "full_no_event_claims"
+      },
+      "expected": {
+        "A": "ADMIT",
+        "B": "ADMIT",
+        "C": "ADMIT",
+        "D": "ADMIT",
+        "E": "NOT_APPLICABLE"
+      }
+    },
+    "S1": {
+      "name": "seed namespace conversion (16-bit truncation)",
+      "gt": {
+        "descriptive": "INVALID",
+        "paired_inference": "DOWNGRADE",
+        "replay": "VALID",
+        "crn": "INVALID",
+        "event_alignment": "INVALID",
+        "wording": "randomized_design_only"
+      },
+      "expected": {
+        "A": "SUPPRESS_OR_DOWNGRADE",
+        "B": "DOWNGRADE",
+        "C": "ADMIT",
+        "D": "SUPPRESS_OR_DOWNGRADE",
+        "E": "SUPPRESS_OR_DOWNGRADE"
+      }
+    },
+    "S2": {
+      "name": "stateful draw shift (one extra burn draw in arm B)",
+      "gt": {
+        "descriptive": "VALID",
+        "paired_inference": "DOWNGRADE",
+        "replay": "VALID",
+        "crn": "INVALID",
+        "event_alignment": "INVALID",
+        "wording": "statistical_pairing_no_coupling"
+      },
+      "expected": {
+        "A": "ADMIT",
+        "B": "DOWNGRADE",
+        "C": "ADMIT",
+        "D": "SUPPRESS_OR_DOWNGRADE",
+        "E": "SUPPRESS_OR_DOWNGRADE"
+      }
+    },
+    "S3": {
+      "name": "event-keyed repair",
+      "gt": {
+        "descriptive": "VALID",
+        "paired_inference": "VALID",
+        "replay": "VALID",
+        "crn": "VALID",
+        "event_alignment": "VALID",
+        "wording": "full"
+      },
+      "expected": {
+        "A": "ADMIT",
+        "B": "ADMIT",
+        "C": "ADMIT",
+        "D": "ADMIT",
+        "E": "ADMIT"
+      }
+    },
+    "S4": {
+      "name": "clock-bounded computation (wall-clock think budget)",
+      "gt": {
+        "descriptive": "VALID",
+        "paired_inference": "VALID",
+        "replay": "INVALID",
+        "crn": "VALID",
+        "event_alignment": "INVALID",
+        "wording": "no_replay_or_event_claims"
+      },
+      "expected": {
+        "A": "ADMIT",
+        "B": "ADMIT",
+        "C": "SUPPRESS_OR_DOWNGRADE",
+        "D": "ADMIT",
+        "E": "SUPPRESS_OR_DOWNGRADE"
+      }
+    },
+    "S5": {
+      "name": "process-global mutable state (worker reuse)",
+      "gt": {
+        "descriptive": "VALID",
+        "paired_inference": "DOWNGRADE",
+        "replay": "INVALID",
+        "crn": "INVALID",
+        "event_alignment": "INVALID",
+        "wording": "hierarchical_residual_only"
+      },
+      "expected": {
+        "A": "ADMIT",
+        "B": "DOWNGRADE",
+        "C": "SUPPRESS_OR_DOWNGRADE",
+        "D": "SUPPRESS_OR_DOWNGRADE",
+        "E": "SUPPRESS_OR_DOWNGRADE"
+      }
+    },
+    "S6": {
+      "name": "queue/enqueue order dependence",
+      "gt": {
+        "descriptive": "VALID",
+        "paired_inference": "DOWNGRADE",
+        "replay": "INVALID",
+        "crn": "INVALID",
+        "event_alignment": "INVALID",
+        "wording": "hierarchical_residual_only"
+      },
+      "expected": {
+        "A": "ADMIT",
+        "B": "DOWNGRADE",
+        "C": "SUPPRESS_OR_DOWNGRADE",
+        "D": "SUPPRESS_OR_DOWNGRADE",
+        "E": "SUPPRESS_OR_DOWNGRADE"
+      }
+    },
+    "S7": {
+      "name": "missing/dropped schedule rows before analysis",
+      "gt": {
+        "descriptive": "INVALID",
+        "paired_inference": "DOWNGRADE",
+        "replay": "VALID",
+        "crn": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "wording": "after_denominator_repair"
+      },
+      "expected": {
+        "A": "SUPPRESS_OR_DOWNGRADE",
+        "B": "DOWNGRADE",
+        "C": "ADMIT",
+        "D": "ADMIT",
+        "E": "NOT_APPLICABLE"
+      }
+    },
+    "S8": {
+      "name": "benign residual randomness, valid repeated-measures design",
+      "gt": {
+        "descriptive": "VALID",
+        "paired_inference": "VALID",
+        "replay": "INVALID",
+        "crn": "VALID",
+        "event_alignment": "INVALID",
+        "wording": "no_replay_or_event_claims"
+      },
+      "expected": {
+        "A": "ADMIT",
+        "B": "ADMIT",
+        "C": "SUPPRESS_OR_DOWNGRADE",
+        "D": "ADMIT",
+        "E": "SUPPRESS_OR_DOWNGRADE"
+      }
+    },
+    "S9": {
+      "name": "pseudoreplication (decisions treated as independent replicates)",
+      "gt": {
+        "descriptive": "VALID",
+        "paired_inference": "INVALID",
+        "replay": "VALID",
+        "crn": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "wording": "cluster_aware_only"
+      },
+      "expected": {
+        "A": "ADMIT",
+        "B": "SUPPRESS_OR_DOWNGRADE",
+        "C": "ADMIT",
+        "D": "ADMIT",
+        "E": "NOT_APPLICABLE"
+      }
+    },
+    "S10": {
+      "name": "valid unpaired design (independent seeds, declared)",
+      "gt": {
+        "descriptive": "VALID",
+        "paired_inference": "INVALID",
+        "replay": "VALID",
+        "crn": "INVALID",
+        "event_alignment": "INVALID",
+        "wording": "unpaired_only"
+      },
+      "expected": {
+        "A": "ADMIT",
+        "B": "SUPPRESS_OR_DOWNGRADE",
+        "C": "ADMIT",
+        "D": "SUPPRESS_OR_DOWNGRADE",
+        "E": "SUPPRESS_OR_DOWNGRADE"
+      }
+    }
+  }
+}

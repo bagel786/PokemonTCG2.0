@@ -1,0 +1,54 @@
+{
+  "kind": "SYSTEM_MANIFEST",
+  "frozen": "2026-08-26",
+  "systems": [
+    {
+      "id": "holdem",
+      "role": "game/agent environment",
+      "name": "RLCard limit-holdem",
+      "repository": "https://github.com/datamllab/rlcard",
+      "version_pin": "rlcard==1.2.0",
+      "license": "Apache-2.0 (verified 2026-08-26)",
+      "citation": "Zha, D., Bhat, Z., Lai, K.-H., Yang, F., Jiang, Z., Zhong, S., & Hu, X. (2019). RLCard: A toolkit for reinforcement learning in card games. arXiv:1910.04376.",
+      "state_action_semantics": "2-player limit Texas Hold'em; discrete action set {fold, check/call, raise}; obs vector + raw legal actions per seat",
+      "seed_handling": "env.seed(s) -> game.np_random (legacy RandomState); study spawns dealer/agent substreams via numpy SeedSequence(s).spawn(2)",
+      "stochastic_sources": [
+        "deck shuffle (dealer stream)",
+        "first-dealer pick (dealer stream)",
+        "agent action sampling (agent stream)"
+      ],
+      "trace_definition": "per-hand trajectory tuples (hand, step, player, action) + terminal payoff sum; declared projection = sha256 of trajectory + outcome + step count",
+      "event_ontology": "semantic deal events keyed 'deal|h|step|p'; dealer shuffle fingerprints logged per hand",
+      "arms": "A: seat0 random agent; B: seat1 conservative agent; estimand = chips won by seat-0 agent over 10 hands",
+      "runtime_expectation": "~0.02 s/arm-run at num_hands=10",
+      "limitations": [
+        "limit-holdem betting legality independent of cards simplifies some dynamics",
+        "young API stability"
+      ]
+    },
+    {
+      "id": "ising",
+      "role": "scientific/physical stochastic simulator",
+      "name": "2D Ising Metropolis Monte Carlo",
+      "repository": "https://github.com/ddsyasas/ising-monte-carlo-toolkit",
+      "version_pin": "v0.1.0 sdist sha256 caf24a508ef5f34ea9d8770b991da5f1788b8ea9146545412c505202a8ec08aa; upstream HEAD 93515592d4942af757808a88ce527076cd0706c4",
+      "license": "MIT (verified 2026-08-26 by LICENSE blob decode)",
+      "citation": "Dehigaspetiyage Don, S. Y. (2026). ising-monte-carlo-toolkit v0.1.0 [Computer software]. GitHub.",
+      "state_action_semantics": "L\u00d7L spin lattice {-1,+1}^N; sweep = N single-spin-flip attempts; observables magnetization/energy per measurement interval",
+      "seed_handling": "model.set_seed(s) + MetropolisSampler(model, seed=s); both np.random.Generator; study replaces model._rng with logging/keyed wrappers",
+      "stochastic_sources": [
+        "site selection integers(0,L) \u00d72 per attempt",
+        "acceptance random() per attempt"
+      ],
+      "trace_definition": "|magnetization| trajectory at every 10th post-equilibration sweep; declared projection = trajectory hash + terminal value + count",
+      "event_ontology": "attempt-level events keyed by call counter ('site|k', 'acc|k') in keyed mode; stateful mode logs values+index",
+      "arms": "A: T_a=2.269; B: T_b=2.9; estimand = mean|magnetization| difference over 90 sweeps (equilibration 20)",
+      "runtime_expectation": "~0.7\u20131.5 s/arm-run at L=20",
+      "limitations": [
+        "pure-python path used for draw transparency (~slower)",
+        "critical slowing down near Tc limits equilibrium claims; study compares fixed-budget observables only"
+      ]
+    }
+  ],
+  "third_system_policy": "Mesa ABM added only if pilot wall-clock < 25% of budget; not exercised in this campaign."
+}

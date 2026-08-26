@@ -1,0 +1,173 @@
+{
+  "kind": "FAILURE_INJECTION_MANIFEST",
+  "frozen": "2026-08-26",
+  "source": "generated from benchmark/scenarios.py + benchmark/runner.py mechanics (canonical)",
+  "injections": [
+    {
+      "id": "S0",
+      "name": "clean control",
+      "invalid_claim_expected": false,
+      "gt_labels": {
+        "descriptive": "VALID",
+        "paired_inference": "VALID",
+        "replay": "VALID",
+        "crn": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "wording": "full_no_event_claims"
+      },
+      "implementation": "no injection; substream-separated stateful RNG both arms",
+      "detects": "nothing (control); validates base rates"
+    },
+    {
+      "id": "S1",
+      "name": "seed namespace conversion (16-bit truncation)",
+      "invalid_claim_expected": true,
+      "gt_labels": {
+        "descriptive": "INVALID",
+        "paired_inference": "DOWNGRADE",
+        "replay": "VALID",
+        "crn": "INVALID",
+        "event_alignment": "INVALID",
+        "wording": "randomized_design_only"
+      },
+      "implementation": "arm B effective seed = declared & 0xFFFF (16-bit truncation); seeds drawn from [2^20,2^40) so truncation always bites; arm B only",
+      "detects": "declared-vs-effective seed audit"
+    },
+    {
+      "id": "S2",
+      "name": "stateful draw shift (one extra burn draw in arm B)",
+      "invalid_claim_expected": true,
+      "gt_labels": {
+        "descriptive": "VALID",
+        "paired_inference": "DOWNGRADE",
+        "replay": "VALID",
+        "crn": "INVALID",
+        "event_alignment": "INVALID",
+        "wording": "statistical_pairing_no_coupling"
+      },
+      "implementation": "arm B consumes one extra dealer-stream draw before EVERY hand (recurring shift; robust to RandomState refill realignment)",
+      "detects": "dealer-stream fingerprint comparison across arms"
+    },
+    {
+      "id": "S3",
+      "name": "event-keyed repair",
+      "invalid_claim_expected": false,
+      "gt_labels": {
+        "descriptive": "VALID",
+        "paired_inference": "VALID",
+        "replay": "VALID",
+        "crn": "VALID",
+        "event_alignment": "VALID",
+        "wording": "full"
+      },
+      "implementation": "both arms use SHA-256 counter-based event-keyed draws keyed by (stream, event_id); deck order and actions are pure functions of keys",
+      "validates": "Branch E repair construction; alignment exact by construction"
+    },
+    {
+      "id": "S4",
+      "name": "clock-bounded computation (wall-clock think budget)",
+      "invalid_claim_expected": true,
+      "gt_labels": {
+        "descriptive": "VALID",
+        "paired_inference": "VALID",
+        "replay": "INVALID",
+        "crn": "VALID",
+        "event_alignment": "INVALID",
+        "wording": "no_replay_or_event_claims"
+      },
+      "implementation": "random-policy agent spends a wall-clock think budget per step; budget scales with process rank (0.30ms * (1 + 0.75*(rank%3))) so trajectories vary across execution contexts; think draws on isolated agent stream",
+      "detects": "cross-context replay digest mismatch; coupled-stream fingerprints remain equal (scoped instability)"
+    },
+    {
+      "id": "S5",
+      "name": "process-global mutable state (worker reuse)",
+      "invalid_claim_expected": true,
+      "gt_labels": {
+        "descriptive": "VALID",
+        "paired_inference": "DOWNGRADE",
+        "replay": "INVALID",
+        "crn": "INVALID",
+        "event_alignment": "INVALID",
+        "wording": "hierarchical_residual_only"
+      },
+      "implementation": "module-level cache contamination: reused-worker context burns one dealer draw before hand 0 AND forces first action of hand 0 to last legal id",
+      "detects": "context testing: reused-context dealer fingerprint differs from fresh-context"
+    },
+    {
+      "id": "S6",
+      "name": "queue/enqueue order dependence",
+      "invalid_claim_expected": true,
+      "gt_labels": {
+        "descriptive": "VALID",
+        "paired_inference": "DOWNGRADE",
+        "replay": "INVALID",
+        "crn": "INVALID",
+        "event_alignment": "INVALID",
+        "wording": "hierarchical_residual_only"
+      },
+      "implementation": "queue-order skew: deterministic per-arm draw tax every hand (arm A: rank%3; arm B: (7*rank+1)%3), emulating enqueue-order-dependent worker behavior",
+      "detects": "direct cross-arm desync on many rows + context reorder fingerprint shifts"
+    },
+    {
+      "id": "S7",
+      "name": "missing/dropped schedule rows before analysis",
+      "invalid_claim_expected": true,
+      "gt_labels": {
+        "descriptive": "INVALID",
+        "paired_inference": "DOWNGRADE",
+        "replay": "VALID",
+        "crn": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "wording": "after_denominator_repair"
+      },
+      "implementation": "harness drops every 3rd schedule row after acquisition, before analysis (row index % 3 == 2)",
+      "detects": "rows_complete accounting"
+    },
+    {
+      "id": "S8",
+      "name": "benign residual randomness, valid repeated-measures design",
+      "invalid_claim_expected": false,
+      "gt_labels": {
+        "descriptive": "VALID",
+        "paired_inference": "VALID",
+        "replay": "INVALID",
+        "crn": "VALID",
+        "event_alignment": "INVALID",
+        "wording": "no_replay_or_event_claims"
+      },
+      "implementation": "S4-style clock jitter PLUS repeats_per_seed=3 AND repeated-measures/hierarchical analysis declaration",
+      "validates": "false-suppression trap: replay impossible but paired inference remains valid"
+    },
+    {
+      "id": "S9",
+      "name": "pseudoreplication (decisions treated as independent replicates)",
+      "invalid_claim_expected": true,
+      "gt_labels": {
+        "descriptive": "VALID",
+        "paired_inference": "INVALID",
+        "replay": "VALID",
+        "crn": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "wording": "cluster_aware_only"
+      },
+      "implementation": "analysis declares decision-level unit (pseudoreplication) instead of seed-condition cluster",
+      "detects": "unit_is_cluster audit"
+    },
+    {
+      "id": "S10",
+      "name": "valid unpaired design (independent seeds, declared)",
+      "invalid_claim_expected": true,
+      "gt_labels": {
+        "descriptive": "VALID",
+        "paired_inference": "INVALID",
+        "replay": "VALID",
+        "crn": "INVALID",
+        "event_alignment": "INVALID",
+        "wording": "unpaired_only"
+      },
+      "implementation": "arms use independent seeds (B = A + 1,000,003), independence declared in schedule",
+      "validates": "unpaired-design validity; paired wording must be suppressed"
+    }
+  ],
+  "ground_truth_principle": "All labels follow from construction at the harness level, not from observed outcomes. Label semantics: VALID=claim admissible as worded; DOWNGRADE=only weaker wording supported; INVALID=no admissible version; NOT_APPLICABLE=no such claim asserted under this scenario."
+}
