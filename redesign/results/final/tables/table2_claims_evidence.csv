@@ -1,0 +1,6 @@
+branch,claim,question,required_evidence
+BRANCH_A,Matched descriptive comparison,Do recorded runs share the declared schedule?,artifact_identity; schedule_identity; complete_rows; correct_grouping
+BRANCH_B,Statistically paired inference,Is the reference distribution justified?,"at_least_one_of:[randomized_assignment,probability_sampling,repeated_measures_design,hierarchical_model,defended_joint_stochastic_model]; correct_grouping; complete_rows"
+BRANCH_C,Deterministic replay,Does the declared trace projection repeat?,within_artifact_repeated_executions; declared_trace_projection; context_testing; exact_repeatability_criteria
+BRANCH_D,CRN variance reduction,Does a valid coupling improve precision?,specified_coupling_construction; preserved_marginals; measured_covariance; measured_variance_reduction; synchronization_assumptions
+BRANCH_E,Event-aligned counterfactual,Do corresponding events receive equal values?,stable_event_identifiers; event_value_records; event_keyed_streams_or_validated_equivalent; declared_event_ontology; dependence_assumptions

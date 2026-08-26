@@ -1,0 +1,70 @@
+{
+  "global_rules": [
+    "Wording must name the branch satisfied.",
+    "Statistical wording must name the design feature that justifies it.",
+    "Replay wording must name the projection scope.",
+    "Equivalence requires a prespecified margin; nonsignificance must never be reported as absence of effect."
+  ],
+  "by_branch": {
+    "BRANCH_A": {
+      "permitted": [
+        "the runs shared the declared seed value and schedule fields",
+        "runs were matched on recorded schedule fields",
+        "the schedule was complete for {n}/{n} scheduled rows"
+      ],
+      "forbidden": [
+        "the runs are replicates of one another",
+        "the executions were identical",
+        "paired estimates are valid because seeds match"
+      ]
+    },
+    "BRANCH_B": {
+      "permitted": [
+        "under the randomized/repeated-measures design, the paired difference estimator has a justified reference distribution",
+        "pairing is justified by the declared assignment mechanism",
+        "uncertainty was obtained by the prespecified procedure under assumption X"
+      ],
+      "forbidden": [
+        "seeds were shared, therefore pairing is exact",
+        "paired inference requires no assumptions because seeds match",
+        "the interval is an exact confidence interval (without justified sampling interpretation)"
+      ]
+    },
+    "BRANCH_C": {
+      "permitted": [
+        "K/K repeated executions reproduced the declared projection of the trace exactly",
+        "execution is repeatable under the declared conditions and projection scope",
+        "no mismatch was found in the declared projection across tested contexts"
+      ],
+      "forbidden": [
+        "the system is deterministic (unscoped)",
+        "replay holds, therefore cross-arm comparisons are aligned",
+        "any trace field matches (beyond the declared projection)"
+      ]
+    },
+    "BRANCH_D": {
+      "permitted": [
+        "the declared coupling reduced variance of the paired difference by factor r versus independent sampling",
+        "marginal distributions were preserved under the coupling (verified by test T)",
+        "cross-arm covariance was positive and synchronized as assumed"
+      ],
+      "forbidden": [
+        "CRN applies because seeds match (without marginal preservation and variance evidence)",
+        "variance reduction generalizes beyond the measured scenario",
+        "repeatability alone demonstrates coupling validity"
+      ]
+    },
+    "BRANCH_E": {
+      "permitted": [
+        "for e/e matched event keys, recorded random quantities were identical across arms",
+        "event-level equality held under the declared ontology and keying construction",
+        "counterfactual attribution is supported at event granularity under the declared dependence assumptions"
+      ],
+      "forbidden": [
+        "events were aligned because schedules matched",
+        "event alignment holds without a declared ontology",
+        "post-hoc event matching justifies counterfactual claims"
+      ]
+    }
+  }
+}

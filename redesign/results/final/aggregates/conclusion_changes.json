@@ -1,0 +1,66 @@
+[
+  {
+    "B": 2000,
+    "n": 40,
+    "paired_vs_welch_conclusion_change": 0.492,
+    "scenario": "S0",
+    "status": "EXPLORATORY_BOOTSTRAP",
+    "system": "holdem"
+  },
+  {
+    "B": 2000,
+    "n": 40,
+    "paired_vs_welch_conclusion_change": 0.9975,
+    "scenario": "S3",
+    "status": "EXPLORATORY_BOOTSTRAP",
+    "system": "holdem"
+  },
+  {
+    "B": 2000,
+    "n": 40,
+    "paired_vs_welch_conclusion_change": 0.501,
+    "scenario": "S4",
+    "status": "EXPLORATORY_BOOTSTRAP",
+    "system": "holdem"
+  },
+  {
+    "B": 2000,
+    "n": 40,
+    "paired_vs_welch_conclusion_change": 0.4755,
+    "scenario": "S8",
+    "status": "EXPLORATORY_BOOTSTRAP",
+    "system": "holdem"
+  },
+  {
+    "B": 2000,
+    "n": 40,
+    "paired_vs_welch_conclusion_change": 0.0,
+    "scenario": "S0",
+    "status": "EXPLORATORY_BOOTSTRAP",
+    "system": "ising"
+  },
+  {
+    "B": 2000,
+    "n": 40,
+    "paired_vs_welch_conclusion_change": 0.0,
+    "scenario": "S3",
+    "status": "EXPLORATORY_BOOTSTRAP",
+    "system": "ising"
+  },
+  {
+    "B": 2000,
+    "n": 40,
+    "paired_vs_welch_conclusion_change": 0.0,
+    "scenario": "S4",
+    "status": "EXPLORATORY_BOOTSTRAP",
+    "system": "ising"
+  },
+  {
+    "B": 2000,
+    "n": 40,
+    "paired_vs_welch_conclusion_change": 0.0,
+    "scenario": "S8",
+    "status": "EXPLORATORY_BOOTSTRAP",
+    "system": "ising"
+  }
+]

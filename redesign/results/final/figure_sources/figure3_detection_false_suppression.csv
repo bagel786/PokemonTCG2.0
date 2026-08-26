@@ -1,0 +1,17 @@
+detection,false_suppression,method,system,tradeoff
+0.050826,0.037951,B0_schedule_only,holdem,0.012875
+0.050826,0.037951,B1_outcome_aa,holdem,0.012875
+0.152478,0.037951,B2_trace_aa,holdem,0.114527
+0.25413,0.253321,B3_within_seed_reps,holdem,0.000809
+0.609911,0.658444,B4_unpaired,holdem,-0.048533
+0.101652,0.0,B5_cluster_hier,holdem,0.101652
+0.101652,0.177419,B6_event_keyed_wb,holdem,-0.075768
+0.991105,0.0,B7_csvf_full,holdem,0.991105
+0.050826,0.037951,B0_schedule_only,ising,0.012875
+0.050826,0.037951,B1_outcome_aa,ising,0.012875
+0.050826,0.037951,B2_trace_aa,ising,0.012875
+0.203304,0.253321,B3_within_seed_reps,ising,-0.050017
+0.609911,0.658444,B4_unpaired,ising,-0.048533
+0.101652,0.0,B5_cluster_hier,ising,0.101652
+0.101652,0.177419,B6_event_keyed_wb,ising,-0.075768
+0.796696,0.291271,B7_csvf_full,ising,0.505425

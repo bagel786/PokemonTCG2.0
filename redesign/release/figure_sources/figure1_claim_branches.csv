@@ -1,0 +1,6 @@
+branch,name,question
+BRANCH_A,Matched descriptive comparison,Did recorded runs share the declared schedule?
+BRANCH_B,Statistically paired inference,Is the estimator's reference distribution justified?
+BRANCH_C,Deterministic replay,Does one artifact reproduce its declared projection?
+BRANCH_D,CRN variance reduction,Does a valid coupling reduce variance?
+BRANCH_E,Event-aligned counterfactual / mechanism,Did matched events receive equal random values?

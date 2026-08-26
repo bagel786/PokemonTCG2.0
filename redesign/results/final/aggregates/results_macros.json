@@ -1,0 +1,18 @@
+{
+  "b5_branch_b_detection_pct": 100.0,
+  "b5_branch_b_false_suppression_pct": 0.0,
+  "b7_branch_b_detection_n": 160,
+  "b7_branch_b_detection_pct": 100.0,
+  "b7_branch_b_false_suppression_pct": 37.5,
+  "b7_branch_b_valid_n": 320,
+  "b7_pooled_false_suppression_pct": 14.6,
+  "cross_system_tau": 0.80829,
+  "decision_rows": 34160,
+  "final_seeds": 40,
+  "outcome_pairs": 854,
+  "raw_rows": 35014,
+  "raw_sha256": "ead6dd392c61767c914f9bb1956b7a82213c5889f3e95faf15c4a3f3ec5d2540",
+  "s7_retained_per_system": 27,
+  "scenarios": 11,
+  "systems": 2
+}

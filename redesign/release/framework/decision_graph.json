@@ -1,0 +1,119 @@
+{
+  "entry": "N_ENTRY",
+  "nodes": [
+    {
+      "id": "N_ENTRY",
+      "type": "route",
+      "rule": "Classify the evaluator's intended claim by inferential objective into exactly one branch A-E. If classification fails or is ambiguous after documented adjudication -> D_FAIL_CLOSED."
+    },
+    {
+      "id": "N_A",
+      "type": "branch",
+      "claim_class": "BRANCH_A",
+      "checks": [
+        "artifact_identity",
+        "schedule_identity",
+        "complete_rows",
+        "correct_grouping"
+      ],
+      "pass_to": "D_ADMIT_DESCRIPTIVE",
+      "fail_to": "D_SUPPRESS_OR_DOWNGRADE"
+    },
+    {
+      "id": "N_B",
+      "type": "branch",
+      "claim_class": "BRANCH_B",
+      "checks": [
+        "B_design_justification",
+        "correct_grouping",
+        "complete_rows"
+      ],
+      "pass_to": "D_ADMIT_STATISTICAL",
+      "fail_to": "D_SUPPRESS_OR_DOWNGRADE"
+    },
+    {
+      "id": "N_C",
+      "type": "branch",
+      "claim_class": "BRANCH_C",
+      "checks": [
+        "within_artifact_repeated_executions",
+        "declared_trace_projection",
+        "context_testing",
+        "exact_repeatability_criteria"
+      ],
+      "pass_to": "D_ADMIT_REPLAY",
+      "fail_to": "D_SUPPRESS_OR_DOWNGRADE"
+    },
+    {
+      "id": "N_D",
+      "type": "branch",
+      "claim_class": "BRANCH_D",
+      "checks": [
+        "specified_coupling_construction",
+        "preserved_marginals",
+        "measured_covariance",
+        "measured_variance_reduction",
+        "synchronization_assumptions"
+      ],
+      "pass_to": "D_ADMIT_CRN",
+      "fail_to": "D_SUPPRESS_OR_DOWNGRADE"
+    },
+    {
+      "id": "N_E",
+      "type": "branch",
+      "claim_class": "BRANCH_E",
+      "checks": [
+        "stable_event_identifiers",
+        "event_value_records",
+        "event_keyed_streams_or_validated_equivalent",
+        "declared_event_ontology",
+        "dependence_assumptions"
+      ],
+      "pass_to": "D_ADMIT_EVENT",
+      "fail_to": "D_SUPPRESS_OR_DOWNGRADE"
+    },
+    {
+      "id": "D_ADMIT_DESCRIPTIVE",
+      "type": "decision",
+      "outcome": "ADMIT_AS_DESCRIPTIVE"
+    },
+    {
+      "id": "D_ADMIT_STATISTICAL",
+      "type": "decision",
+      "outcome": "ADMIT_AS_STATISTICAL_PAIRED"
+    },
+    {
+      "id": "D_ADMIT_REPLAY",
+      "type": "decision",
+      "outcome": "ADMIT_AS_REPLAY_SCOPED"
+    },
+    {
+      "id": "D_ADMIT_CRN",
+      "type": "decision",
+      "outcome": "ADMIT_AS_CRN_EVIDENCED"
+    },
+    {
+      "id": "D_ADMIT_EVENT",
+      "type": "decision",
+      "outcome": "ADMIT_AS_EVENT_ALIGNED"
+    },
+    {
+      "id": "D_SUPPRESS_OR_DOWNGRADE",
+      "type": "decision",
+      "outcome": "SUPPRESS_CLAIM_OR_DOWNGRADE_TO_SUPPORTED_BRANCH"
+    },
+    {
+      "id": "D_FAIL_CLOSED",
+      "type": "decision",
+      "outcome": "FAIL_CLOSED_UNCLASSIFIABLE"
+    }
+  ],
+  "invariants": [
+    "result exclusion: classifier inputs exclude final outcome values of the study being validated",
+    "monotonicity: removing any required evidence can never upgrade an admission decision",
+    "fail closed: unknown or ambiguous state yields FAIL_CLOSED_UNCLASSIFIABLE, never admission",
+    "projection scoping: replay admission is scoped to the declared trace projection only",
+    "deterministic classifier: identical evidence inputs yield identical decisions",
+    "branch independence: satisfaction of any branch imposes no requirement from another branch"
+  ]
+}

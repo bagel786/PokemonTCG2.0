@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use this benchmark, cite the archived release after a DOI is assigned."
+title: "Claim-Specific Validation of Seed-Matched Stochastic Comparisons: Release Candidate"
+type: software
+version: 0.1.0-rc1
+date-released: 2026-08-26
+license: MIT
+repository-code: "https://github.com/bagel786/PokemonTCG2.0"
+abstract: >-
+  Open benchmark and analysis release for claim-specific validation strategies
+  across RLCard limit hold'em and two-dimensional Ising Monte Carlo. This release
+  candidate reports a NOT_READY_DO_NOT_SUBMIT outcome and lacks a DOI.
+authors:
+  - name: "Human author metadata pending confirmation"

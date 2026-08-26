@@ -1,0 +1,71 @@
+{
+  "detection_threshold_pass": false,
+  "false_suppression_threshold_pass": false,
+  "framework_branch_detection": {
+    "BRANCH_A": {
+      "estimate": 1.0,
+      "n": 134,
+      "pass": true
+    },
+    "BRANCH_B": {
+      "estimate": 1.0,
+      "n": 160,
+      "pass": true
+    },
+    "BRANCH_C": {
+      "estimate": 0.4875,
+      "n": 320,
+      "pass": false
+    },
+    "BRANCH_D": {
+      "estimate": 0.9925,
+      "n": 400,
+      "pass": true
+    },
+    "BRANCH_E": {
+      "estimate": 1.0,
+      "n": 560,
+      "pass": true
+    }
+  },
+  "framework_pooled_false_suppression": 0.145636,
+  "framework_pooled_false_suppression_n": 307,
+  "framework_pooled_valid_n": 2108,
+  "overall_method_metrics": {
+    "B0_schedule_only": {
+      "detection": 0.05082592121982211,
+      "false_suppression": 0.03795066413662239
+    },
+    "B1_outcome_aa": {
+      "detection": 0.05082592121982211,
+      "false_suppression": 0.03795066413662239
+    },
+    "B2_trace_aa": {
+      "detection": 0.10165184243964422,
+      "false_suppression": 0.03795066413662239
+    },
+    "B3_within_seed_reps": {
+      "detection": 0.22871664548919948,
+      "false_suppression": 0.25332068311195444
+    },
+    "B4_unpaired": {
+      "detection": 0.6099110546378653,
+      "false_suppression": 0.6584440227703985
+    },
+    "B5_cluster_hier": {
+      "detection": 0.10165184243964422,
+      "false_suppression": 0.0
+    },
+    "B6_event_keyed_wb": {
+      "detection": 0.10165184243964422,
+      "false_suppression": 0.1774193548387097
+    },
+    "B7_csvf_full": {
+      "detection": 0.8939008894536213,
+      "false_suppression": 0.14563567362428842
+    }
+  },
+  "reporting_consequence": "Do not recommend B7 as a universal strategy; report branch-specific simpler-method wins.",
+  "simpler_detection_suppression_dominators_before_cost": [],
+  "worth_recommending_gate": false
+}

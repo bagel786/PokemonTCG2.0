@@ -1,0 +1,180 @@
+{
+  "kendall_tau_b_tradeoff": 0.80829,
+  "method_scores": [
+    {
+      "detection": 0.050826,
+      "false_suppression": 0.037951,
+      "method": "B0_schedule_only",
+      "system": "holdem",
+      "tradeoff": 0.012875
+    },
+    {
+      "detection": 0.050826,
+      "false_suppression": 0.037951,
+      "method": "B1_outcome_aa",
+      "system": "holdem",
+      "tradeoff": 0.012875
+    },
+    {
+      "detection": 0.152478,
+      "false_suppression": 0.037951,
+      "method": "B2_trace_aa",
+      "system": "holdem",
+      "tradeoff": 0.114527
+    },
+    {
+      "detection": 0.25413,
+      "false_suppression": 0.253321,
+      "method": "B3_within_seed_reps",
+      "system": "holdem",
+      "tradeoff": 0.000809
+    },
+    {
+      "detection": 0.609911,
+      "false_suppression": 0.658444,
+      "method": "B4_unpaired",
+      "system": "holdem",
+      "tradeoff": -0.048533
+    },
+    {
+      "detection": 0.101652,
+      "false_suppression": 0.0,
+      "method": "B5_cluster_hier",
+      "system": "holdem",
+      "tradeoff": 0.101652
+    },
+    {
+      "detection": 0.101652,
+      "false_suppression": 0.177419,
+      "method": "B6_event_keyed_wb",
+      "system": "holdem",
+      "tradeoff": -0.075768
+    },
+    {
+      "detection": 0.991105,
+      "false_suppression": 0.0,
+      "method": "B7_csvf_full",
+      "system": "holdem",
+      "tradeoff": 0.991105
+    },
+    {
+      "detection": 0.050826,
+      "false_suppression": 0.037951,
+      "method": "B0_schedule_only",
+      "system": "ising",
+      "tradeoff": 0.012875
+    },
+    {
+      "detection": 0.050826,
+      "false_suppression": 0.037951,
+      "method": "B1_outcome_aa",
+      "system": "ising",
+      "tradeoff": 0.012875
+    },
+    {
+      "detection": 0.050826,
+      "false_suppression": 0.037951,
+      "method": "B2_trace_aa",
+      "system": "ising",
+      "tradeoff": 0.012875
+    },
+    {
+      "detection": 0.203304,
+      "false_suppression": 0.253321,
+      "method": "B3_within_seed_reps",
+      "system": "ising",
+      "tradeoff": -0.050017
+    },
+    {
+      "detection": 0.609911,
+      "false_suppression": 0.658444,
+      "method": "B4_unpaired",
+      "system": "ising",
+      "tradeoff": -0.048533
+    },
+    {
+      "detection": 0.101652,
+      "false_suppression": 0.0,
+      "method": "B5_cluster_hier",
+      "system": "ising",
+      "tradeoff": 0.101652
+    },
+    {
+      "detection": 0.101652,
+      "false_suppression": 0.177419,
+      "method": "B6_event_keyed_wb",
+      "system": "ising",
+      "tradeoff": -0.075768
+    },
+    {
+      "detection": 0.796696,
+      "false_suppression": 0.291271,
+      "method": "B7_csvf_full",
+      "system": "ising",
+      "tradeoff": 0.505425
+    }
+  ],
+  "sign_agreement_rows": [
+    {
+      "contrast": "R<1 S0",
+      "sign": false,
+      "system": "holdem"
+    },
+    {
+      "contrast": "R<1 S3",
+      "sign": true,
+      "system": "holdem"
+    },
+    {
+      "contrast": "R<1 S4",
+      "sign": true,
+      "system": "holdem"
+    },
+    {
+      "contrast": "R<1 S8",
+      "sign": false,
+      "system": "holdem"
+    },
+    {
+      "contrast": "R<1 S0",
+      "sign": true,
+      "system": "ising"
+    },
+    {
+      "contrast": "R<1 S3",
+      "sign": true,
+      "system": "ising"
+    },
+    {
+      "contrast": "R<1 S4",
+      "sign": true,
+      "system": "ising"
+    },
+    {
+      "contrast": "R<1 S8",
+      "sign": true,
+      "system": "ising"
+    },
+    {
+      "contrast": "B7_detection_gt_B0",
+      "sign": true,
+      "system": "holdem"
+    },
+    {
+      "contrast": "B5_detection_within_5pp_B7",
+      "sign": false,
+      "system": "holdem"
+    },
+    {
+      "contrast": "B7_detection_gt_B0",
+      "sign": true,
+      "system": "ising"
+    },
+    {
+      "contrast": "B5_detection_within_5pp_B7",
+      "sign": false,
+      "system": "ising"
+    }
+  ],
+  "warning": "M1-M2 is a predeclared ordering device, not a probability or utility estimate."
+}

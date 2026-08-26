@@ -1,0 +1,74 @@
+[
+  {
+    "count_status": "CODE_FACT_FROM_EXHAUSTIVE_CONSTANT",
+    "method": "B0_schedule_only",
+    "needs_event_ontology": false,
+    "needs_repeats": false,
+    "needs_white_box_rng": false,
+    "required_field_count": 3,
+    "required_fields": "declared_seed|context|row_id"
+  },
+  {
+    "count_status": "CODE_FACT_FROM_EXHAUSTIVE_CONSTANT",
+    "method": "B1_outcome_aa",
+    "needs_event_ontology": false,
+    "needs_repeats": true,
+    "needs_white_box_rng": false,
+    "required_field_count": 5,
+    "required_fields": "declared_seed|context|row_id|terminal_outcome|aa_repeat"
+  },
+  {
+    "count_status": "CODE_FACT_FROM_EXHAUSTIVE_CONSTANT",
+    "method": "B2_trace_aa",
+    "needs_event_ontology": false,
+    "needs_repeats": true,
+    "needs_white_box_rng": false,
+    "required_field_count": 6,
+    "required_fields": "declared_seed|context|row_id|trace_projection|projection_rule|aa_repeat"
+  },
+  {
+    "count_status": "CODE_FACT_FROM_EXHAUSTIVE_CONSTANT",
+    "method": "B3_within_seed_reps",
+    "needs_event_ontology": false,
+    "needs_repeats": true,
+    "needs_white_box_rng": false,
+    "required_field_count": 6,
+    "required_fields": "declared_seed|context|row_id|repeat_count|within_seed_variability|analysis_unit"
+  },
+  {
+    "count_status": "CODE_FACT_FROM_EXHAUSTIVE_CONSTANT",
+    "method": "B4_unpaired",
+    "needs_event_ontology": false,
+    "needs_repeats": false,
+    "needs_white_box_rng": false,
+    "required_field_count": 4,
+    "required_fields": "arm_identity|independent_seed_rule|analysis_unit|unpaired_estimator"
+  },
+  {
+    "count_status": "CODE_FACT_FROM_EXHAUSTIVE_CONSTANT",
+    "method": "B5_cluster_hier",
+    "needs_event_ontology": false,
+    "needs_repeats": false,
+    "needs_white_box_rng": false,
+    "required_field_count": 6,
+    "required_fields": "cluster_id|analysis_unit|model_family|random_effect|resampling_unit|uncertainty_rule"
+  },
+  {
+    "count_status": "CODE_FACT_FROM_EXHAUSTIVE_CONSTANT",
+    "method": "B6_event_keyed_wb",
+    "needs_event_ontology": true,
+    "needs_repeats": false,
+    "needs_white_box_rng": true,
+    "required_field_count": 7,
+    "required_fields": "event_ontology|event_id|event_value|stream_key|marginal_check|dependence_assumption|white_box_hook"
+  },
+  {
+    "count_status": "CODE_FACT_FROM_EXHAUSTIVE_CONSTANT",
+    "method": "B7_csvf_full",
+    "needs_event_ontology": true,
+    "needs_repeats": true,
+    "needs_white_box_rng": true,
+    "required_field_count": 16,
+    "required_fields": "claim_class|artifact_identity|schedule_identity|row_completeness|analysis_unit|design_justification|trace_projection|repeat_rule|context_test|coupling_construction|marginal_check|covariance|variance_ratio|event_ontology|event_value|dependence_assumption"
+  }
+]

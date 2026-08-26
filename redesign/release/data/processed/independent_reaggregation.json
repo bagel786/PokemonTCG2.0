@@ -1,0 +1,25 @@
+{
+  "checks": {
+    "b5_branch_b_detection_pct": true,
+    "b5_branch_b_false_suppression_pct": true,
+    "b7_branch_b_detection_n": true,
+    "b7_branch_b_detection_pct": true,
+    "b7_branch_b_false_suppression_pct": true,
+    "b7_branch_b_valid_n": true,
+    "decision_rows": true,
+    "outcome_pairs": true,
+    "raw_rows": true
+  },
+  "observed": {
+    "b5_branch_b_detection_pct": 100.0,
+    "b5_branch_b_false_suppression_pct": 0.0,
+    "b7_branch_b_detection_n": 160,
+    "b7_branch_b_detection_pct": 100.0,
+    "b7_branch_b_false_suppression_pct": 37.5,
+    "b7_branch_b_valid_n": 320,
+    "decision_rows": 34160,
+    "outcome_pairs": 854,
+    "raw_rows": 35014
+  },
+  "status": "PASS"
+}

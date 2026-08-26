@@ -1,0 +1,10 @@
+| method | strategy | implementation_summary | required_field_count |
+| --- | --- | --- | --- |
+| B0 | Schedule matching | Admits descriptive + paired claims whenever declared fields match. | 3 |
+| B1 | Outcome-only A/A | Outcome-only A/A: flags nondeterminism if duplicate outcomes differ. | 5 |
+| B2 | Trace-level A/A | Trace-level A/A: within-artifact projection equality (single context). | 6 |
+| B3 | Within-seed replication | Extra within-seed repeats; empirical variability gates claims. | 6 |
+| B4 | Unpaired analysis | Honest independent-arm analysis; makes no pairing/replay claims. | 4 |
+| B5 | Clustered/hierarchical | Models cluster structure; valid under residual randomness; no coupling verification. Often the strongest simple competitor. | 6 |
+| B6 | Event-keyed white-box | White-box event-keyed coupling: verifies alignment from keyed logs. | 7 |
+| B7 | Full claim-specific framework | Five independent claim gates over the complete evidence bundle. | 16 |

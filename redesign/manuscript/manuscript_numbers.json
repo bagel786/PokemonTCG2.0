@@ -1,0 +1,102 @@
+{
+  "b5_branch_b_false_suppression_pct": {
+    "source": "generated aggregate read by build_manuscript.py",
+    "value": 0.0
+  },
+  "b7_branch_b_detection_n": {
+    "source": "generated aggregate read by build_manuscript.py",
+    "value": 160
+  },
+  "b7_branch_b_detection_pct": {
+    "source": "generated aggregate read by build_manuscript.py",
+    "value": 100.0
+  },
+  "b7_branch_b_false_suppression_pct": {
+    "source": "generated aggregate read by build_manuscript.py",
+    "value": 37.5
+  },
+  "b7_branch_b_valid_n": {
+    "source": "generated aggregate read by build_manuscript.py",
+    "value": 320
+  },
+  "b7_branch_c_detection_pct": {
+    "source": "generated aggregate read by build_manuscript.py",
+    "value": "48.8"
+  },
+  "b7_holdem_detection_pct": {
+    "source": "generated aggregate read by build_manuscript.py",
+    "value": "99.1"
+  },
+  "b7_holdem_fs_pct": {
+    "source": "generated aggregate read by build_manuscript.py",
+    "value": "0.0"
+  },
+  "b7_ising_detection_pct": {
+    "source": "generated aggregate read by build_manuscript.py",
+    "value": "79.7"
+  },
+  "b7_ising_fs_pct": {
+    "source": "generated aggregate read by build_manuscript.py",
+    "value": "29.1"
+  },
+  "b7_overall_detection_pct": {
+    "source": "generated aggregate read by build_manuscript.py",
+    "value": "89.4"
+  },
+  "b7_pooled_false_suppression_pct": {
+    "source": "generated aggregate read by build_manuscript.py",
+    "value": 14.6
+  },
+  "cross_system_tau": {
+    "source": "generated aggregate read by build_manuscript.py",
+    "value": "0.81"
+  },
+  "decision_rows": {
+    "source": "generated aggregate read by build_manuscript.py",
+    "value": 34160
+  },
+  "holdem_overhead_pct": {
+    "source": "generated aggregate read by build_manuscript.py",
+    "value": "32.9"
+  },
+  "holdem_runtime_s": {
+    "source": "generated aggregate read by build_manuscript.py",
+    "value": "0.0064"
+  },
+  "holdem_s0_R": {
+    "source": "generated aggregate read by build_manuscript.py",
+    "value": "1.153"
+  },
+  "holdem_storage_bytes": {
+    "source": "generated aggregate read by build_manuscript.py",
+    "value": "1,694"
+  },
+  "ising_overhead_pct": {
+    "source": "generated aggregate read by build_manuscript.py",
+    "value": "92.2"
+  },
+  "ising_runtime_s": {
+    "source": "generated aggregate read by build_manuscript.py",
+    "value": "1.164"
+  },
+  "ising_s0_R": {
+    "source": "generated aggregate read by build_manuscript.py",
+    "value": "0.858"
+  },
+  "ising_storage_bytes": {
+    "source": "generated aggregate read by build_manuscript.py",
+    "value": "29,009"
+  },
+  "outcome_pairs": {
+    "source": "generated aggregate read by build_manuscript.py",
+    "value": 854
+  },
+  "raw_rows": {
+    "source": "generated aggregate read by build_manuscript.py",
+    "value": 35014
+  },
+  "raw_sha256": {
+    "source": "generated aggregate read by build_manuscript.py",
+    "value": "ead6dd392c61767c914f9bb1956b7a82213c5889f3e95faf15c4a3f3ec5d2540"
+  }
+}

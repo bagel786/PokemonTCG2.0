@@ -1,0 +1,4 @@
+| system | role | version | license | seed_handling | principal_limit |
+| --- | --- | --- | --- | --- | --- |
+| RLCard limit-holdem | game/agent environment | rlcard==1.2.0 | MIT (verified 2026-08-26 from installed rlcard-1.2.0 license file; corrected after freeze in D007) | env.seed(s) -> game.np_random (legacy RandomState); study spawns dealer/agent substreams via numpy SeedSequence(s).spawn(2) | limit-holdem betting legality independent of cards simplifies some dynamics |
+| 2D Ising Metropolis Monte Carlo | scientific/physical stochastic simulator | v0.1.0 sdist sha256 caf24a508ef5f34ea9d8770b991da5f1788b8ea9146545412c505202a8ec08aa; upstream HEAD 93515592d4942af757808a88ce527076cd0706c4 | MIT (verified 2026-08-26 by LICENSE blob decode) | model.set_seed(s) + MetropolisSampler(model, seed=s); both np.random.Generator; study replaces model._rng with logging/keyed wrappers | pure-python path used for draw transparency (~slower) |

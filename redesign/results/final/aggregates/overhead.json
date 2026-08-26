@@ -1,0 +1,29 @@
+{
+  "kind": "M11_TRACE_OVERHEAD",
+  "results": [
+    {
+      "bare_median_s": 0.0012616874882951379,
+      "bare_p95_s": 0.0014400875195860862,
+      "instrumented_median_s": 0.0016772499948274344,
+      "instrumented_p95_s": 0.002267783836578019,
+      "interpretation": "microbenchmark of wrapper instrumentation path; not per-method runtime",
+      "runs": 50,
+      "seed_bank": "analysis-only RNG seed 91720260826; disjoint from pilot/final",
+      "system": "holdem",
+      "trace_overhead_fraction": 0.32937039511569355,
+      "trace_overhead_percent": 32.93703951156935
+    },
+    {
+      "bare_median_s": 0.26316254152334295,
+      "bare_p95_s": 0.26528469388140363,
+      "instrumented_median_s": 0.5059298755368218,
+      "instrumented_p95_s": 0.5290276624815305,
+      "interpretation": "microbenchmark of wrapper instrumentation path; not per-method runtime",
+      "runs": 50,
+      "seed_bank": "analysis-only RNG seed 91720260826; disjoint from pilot/final",
+      "system": "ising",
+      "trace_overhead_fraction": 0.922499579948558,
+      "trace_overhead_percent": 92.2499579948558
+    }
+  ]
+}

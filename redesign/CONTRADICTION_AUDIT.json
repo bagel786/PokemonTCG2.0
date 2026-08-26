@@ -1,0 +1,94 @@
+{
+  "checks": [
+    {
+      "expected": 0,
+      "id": "no_unresolved_tokens",
+      "observed": 0,
+      "pass": true,
+      "pattern": "\\{\\{"
+    },
+    {
+      "expected": 0,
+      "id": "no_preregistered_term",
+      "observed": 0,
+      "pass": true,
+      "pattern": "\\bpreregistered\\b"
+    },
+    {
+      "expected": 0,
+      "id": "no_positive_equivalence",
+      "observed": 0,
+      "pass": true,
+      "pattern": "(establishes|demonstrates|shows).{0,25}equivalen"
+    },
+    {
+      "expected": 0,
+      "id": "no_nonsignificant_no_effect",
+      "observed": 0,
+      "pass": true,
+      "pattern": "nonsignificant.{0,25}no effect"
+    },
+    {
+      "expected": 0,
+      "id": "no_submission_ready_claim",
+      "observed": 0,
+      "pass": true,
+      "pattern": "\\b(?:is|was|deemed) submission-ready\\b"
+    },
+    {
+      "expected": 0,
+      "id": "no_apache_rlcard",
+      "observed": 0,
+      "pass": true,
+      "pattern": "RLCard.{0,30}Apache"
+    },
+    {
+      "id": "explicit_not_ready",
+      "minimum": 1,
+      "observed": 2,
+      "pass": true,
+      "pattern": "NOT_READY_DO_NOT_SUBMIT"
+    },
+    {
+      "id": "explicit_m4_m6_gap",
+      "minimum": 1,
+      "observed": 1,
+      "pass": true,
+      "pattern": "M4.M6.{0,80}(?:not estimable|missing)"
+    }
+  ],
+  "conflicts": [
+    {
+      "detail": "Conceptual framework permits design-based pairing without replay/event alignment; B7 classifier downgrades some such valid cells.",
+      "id": "K001",
+      "status": "DISCLOSED_CONFLICT",
+      "topic": "Branch-B independence"
+    },
+    {
+      "detail": "Frozen labels say replay invalid, but Ising runner does not inject the intended clock residual mechanics.",
+      "id": "K002",
+      "status": "DISCLOSED_CONFLICT",
+      "topic": "Ising S4/S8 construction"
+    },
+    {
+      "detail": "Event-keyed action implementation ignores policy, collapsing the intended arm contrast.",
+      "id": "K003",
+      "status": "DISCLOSED_CONFLICT",
+      "topic": "Hold'em S3 arms"
+    },
+    {
+      "detail": "A/A null banks, S8 repeats, method timers, and bundle bytes promised by the frozen plan were not retained.",
+      "id": "K004",
+      "status": "DISCLOSED_CONFLICT",
+      "topic": "Analysis output contract"
+    },
+    {
+      "detail": "Frozen manifest said Apache-2.0; installed 1.2.0 license is MIT. Corrected in D007.",
+      "id": "K005",
+      "status": "CORRECTED_WITH_LOG",
+      "topic": "RLCard license"
+    }
+  ],
+  "manuscript_sha256": "43c0ba8c86018f8e0e714b3c1e4eabc66a78ed04ac8b0e21dd29fa8b656f6443",
+  "status": "PASS_WITH_DISCLOSED_CONFLICTS"
+}

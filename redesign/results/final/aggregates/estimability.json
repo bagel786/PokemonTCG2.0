@@ -1,0 +1,43 @@
+{
+  "M10_method_storage": {
+    "reason": "Artifact bytes retained; per-method bundle bytes absent.",
+    "status": "PARTIAL_SYSTEM_ARTIFACT_ONLY"
+  },
+  "M11_trace_overhead": {
+    "status": "COMPLETE_ANALYSIS_MICROBENCHMARK"
+  },
+  "M12_complexity": {
+    "status": "COMPLETE_CODE_FACT"
+  },
+  "M13_cross_system": {
+    "status": "COMPLETE_WITH_TWO_SYSTEM_LIMITATION"
+  },
+  "M1_M3": {
+    "source": "decision rows",
+    "status": "CONFIRMATORY_COMPLETE"
+  },
+  "M4_coverage": {
+    "reason": "Runner retained no A/A mirror/equal-temperature banks and no construction-fixed effects; emitted centered empirical-bootstrap diagnostic is not confirmatory coverage.",
+    "status": "NOT_ESTIMABLE_AS_PREDECLARED"
+  },
+  "M5_typeI": {
+    "reason": "No stored known-zero A/A outcome pairs; centered empirical-bootstrap diagnostic is labeled post-freeze proxy.",
+    "status": "NOT_ESTIMABLE_AS_PREDECLARED"
+  },
+  "M6_power": {
+    "reason": "Alternative outcomes exist, but frozen N=80 subsampling without replacement is impossible from N=40 and no fixed-effect construction was stored; replacement bootstrap reported.",
+    "status": "PARTIAL_DIAGNOSTIC_ONLY"
+  },
+  "M7_variance": {
+    "source": "outcome-pair rows",
+    "status": "CONFIRMATORY_COMPLETE_WITH_DECLARED_SHARED_BANK_LIMITATION"
+  },
+  "M8_conclusion_changes": {
+    "source": "paired-vs-Welch bootstrap",
+    "status": "EXPLORATORY_COMPLETE"
+  },
+  "M9_method_runtime": {
+    "reason": "No per-method acquisition or classifier timers were retained.",
+    "status": "NOT_ESTIMABLE_FROM_RAW_SCHEMA"
+  }
+}

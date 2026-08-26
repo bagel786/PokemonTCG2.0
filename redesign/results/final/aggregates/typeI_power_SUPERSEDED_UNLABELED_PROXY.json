@@ -1,0 +1,434 @@
+[
+  {
+    "system": "holdem",
+    "scenario": "S0",
+    "typeI_signflip": 0.064,
+    "typeI_mcse": 0.0055,
+    "power_curve": [
+      {
+        "n": 10,
+        "power": 0.095
+      },
+      {
+        "n": 20,
+        "power": 0.0725
+      },
+      {
+        "n": 40,
+        "power": 0.0
+      }
+    ]
+  },
+  {
+    "system": "holdem",
+    "scenario": "S1",
+    "typeI_signflip": 0.0585,
+    "typeI_mcse": 0.0052,
+    "power_curve": [
+      {
+        "n": 10,
+        "power": 0.0475
+      },
+      {
+        "n": 20,
+        "power": 0.0075
+      },
+      {
+        "n": 40,
+        "power": 0.0
+      }
+    ]
+  },
+  {
+    "system": "holdem",
+    "scenario": "S10",
+    "typeI_signflip": 0.062,
+    "typeI_mcse": 0.0054,
+    "power_curve": [
+      {
+        "n": 10,
+        "power": 0.05
+      },
+      {
+        "n": 20,
+        "power": 0.015
+      },
+      {
+        "n": 40,
+        "power": 0.0
+      }
+    ]
+  },
+  {
+    "system": "holdem",
+    "scenario": "S2",
+    "typeI_signflip": 0.05,
+    "typeI_mcse": 0.0049,
+    "power_curve": [
+      {
+        "n": 10,
+        "power": 0.055
+      },
+      {
+        "n": 20,
+        "power": 0.02
+      },
+      {
+        "n": 40,
+        "power": 0.0
+      }
+    ]
+  },
+  {
+    "system": "holdem",
+    "scenario": "S3",
+    "typeI_signflip": 0.0,
+    "typeI_mcse": 0.0,
+    "power_curve": [
+      {
+        "n": 10,
+        "power": 0.0
+      },
+      {
+        "n": 20,
+        "power": 0.0
+      },
+      {
+        "n": 40,
+        "power": 0.0
+      }
+    ]
+  },
+  {
+    "system": "holdem",
+    "scenario": "S4",
+    "typeI_signflip": 0.055,
+    "typeI_mcse": 0.0051,
+    "power_curve": [
+      {
+        "n": 10,
+        "power": 0.075
+      },
+      {
+        "n": 20,
+        "power": 0.055
+      },
+      {
+        "n": 40,
+        "power": 0.0
+      }
+    ]
+  },
+  {
+    "system": "holdem",
+    "scenario": "S5",
+    "typeI_signflip": 0.059,
+    "typeI_mcse": 0.0053,
+    "power_curve": [
+      {
+        "n": 10,
+        "power": 0.125
+      },
+      {
+        "n": 20,
+        "power": 0.0675
+      },
+      {
+        "n": 40,
+        "power": 0.0
+      }
+    ]
+  },
+  {
+    "system": "holdem",
+    "scenario": "S6",
+    "typeI_signflip": 0.0505,
+    "typeI_mcse": 0.0049,
+    "power_curve": [
+      {
+        "n": 10,
+        "power": 0.06
+      },
+      {
+        "n": 20,
+        "power": 0.05
+      },
+      {
+        "n": 40,
+        "power": 0.0
+      }
+    ]
+  },
+  {
+    "system": "holdem",
+    "scenario": "S7",
+    "typeI_signflip": 0.059,
+    "typeI_mcse": 0.0053,
+    "power_curve": [
+      {
+        "n": 10,
+        "power": 0.0425
+      },
+      {
+        "n": 20,
+        "power": 0.0
+      }
+    ]
+  },
+  {
+    "system": "holdem",
+    "scenario": "S8",
+    "typeI_signflip": 0.0645,
+    "typeI_mcse": 0.0055,
+    "power_curve": [
+      {
+        "n": 10,
+        "power": 0.0625
+      },
+      {
+        "n": 20,
+        "power": 0.075
+      },
+      {
+        "n": 40,
+        "power": 0.0
+      }
+    ]
+  },
+  {
+    "system": "holdem",
+    "scenario": "S9",
+    "typeI_signflip": 0.0485,
+    "typeI_mcse": 0.0048,
+    "power_curve": [
+      {
+        "n": 10,
+        "power": 0.0975
+      },
+      {
+        "n": 20,
+        "power": 0.11
+      },
+      {
+        "n": 40,
+        "power": 0.0
+      }
+    ]
+  },
+  {
+    "system": "ising",
+    "scenario": "S0",
+    "typeI_signflip": 0.0555,
+    "typeI_mcse": 0.0051,
+    "power_curve": [
+      {
+        "n": 10,
+        "power": 1.0
+      },
+      {
+        "n": 20,
+        "power": 1.0
+      },
+      {
+        "n": 40,
+        "power": 1.0
+      }
+    ]
+  },
+  {
+    "system": "ising",
+    "scenario": "S1",
+    "typeI_signflip": 0.055,
+    "typeI_mcse": 0.0051,
+    "power_curve": [
+      {
+        "n": 10,
+        "power": 1.0
+      },
+      {
+        "n": 20,
+        "power": 1.0
+      },
+      {
+        "n": 40,
+        "power": 1.0
+      }
+    ]
+  },
+  {
+    "system": "ising",
+    "scenario": "S10",
+    "typeI_signflip": 0.049,
+    "typeI_mcse": 0.0048,
+    "power_curve": [
+      {
+        "n": 10,
+        "power": 1.0
+      },
+      {
+        "n": 20,
+        "power": 1.0
+      },
+      {
+        "n": 40,
+        "power": 1.0
+      }
+    ]
+  },
+  {
+    "system": "ising",
+    "scenario": "S2",
+    "typeI_signflip": 0.0655,
+    "typeI_mcse": 0.0055,
+    "power_curve": [
+      {
+        "n": 10,
+        "power": 1.0
+      },
+      {
+        "n": 20,
+        "power": 1.0
+      },
+      {
+        "n": 40,
+        "power": 1.0
+      }
+    ]
+  },
+  {
+    "system": "ising",
+    "scenario": "S3",
+    "typeI_signflip": 0.062,
+    "typeI_mcse": 0.0054,
+    "power_curve": [
+      {
+        "n": 10,
+        "power": 1.0
+      },
+      {
+        "n": 20,
+        "power": 1.0
+      },
+      {
+        "n": 40,
+        "power": 1.0
+      }
+    ]
+  },
+  {
+    "system": "ising",
+    "scenario": "S4",
+    "typeI_signflip": 0.06,
+    "typeI_mcse": 0.0053,
+    "power_curve": [
+      {
+        "n": 10,
+        "power": 1.0
+      },
+      {
+        "n": 20,
+        "power": 1.0
+      },
+      {
+        "n": 40,
+        "power": 1.0
+      }
+    ]
+  },
+  {
+    "system": "ising",
+    "scenario": "S5",
+    "typeI_signflip": 0.058,
+    "typeI_mcse": 0.0052,
+    "power_curve": [
+      {
+        "n": 10,
+        "power": 1.0
+      },
+      {
+        "n": 20,
+        "power": 1.0
+      },
+      {
+        "n": 40,
+        "power": 1.0
+      }
+    ]
+  },
+  {
+    "system": "ising",
+    "scenario": "S6",
+    "typeI_signflip": 0.062,
+    "typeI_mcse": 0.0054,
+    "power_curve": [
+      {
+        "n": 10,
+        "power": 1.0
+      },
+      {
+        "n": 20,
+        "power": 1.0
+      },
+      {
+        "n": 40,
+        "power": 1.0
+      }
+    ]
+  },
+  {
+    "system": "ising",
+    "scenario": "S7",
+    "typeI_signflip": 0.054,
+    "typeI_mcse": 0.0051,
+    "power_curve": [
+      {
+        "n": 10,
+        "power": 1.0
+      },
+      {
+        "n": 20,
+        "power": 1.0
+      }
+    ]
+  },
+  {
+    "system": "ising",
+    "scenario": "S8",
+    "typeI_signflip": 0.046,
+    "typeI_mcse": 0.0047,
+    "power_curve": [
+      {
+        "n": 10,
+        "power": 1.0
+      },
+      {
+        "n": 20,
+        "power": 1.0
+      },
+      {
+        "n": 40,
+        "power": 1.0
+      }
+    ]
+  },
+  {
+    "system": "ising",
+    "scenario": "S9",
+    "typeI_signflip": 0.0615,
+    "typeI_mcse": 0.0054,
+    "power_curve": [
+      {
+        "n": 10,
+        "power": 1.0
+      },
+      {
+        "n": 20,
+        "power": 1.0
+      },
+      {
+        "n": 40,
+        "power": 1.0
+      }
+    ]
+  }
+]

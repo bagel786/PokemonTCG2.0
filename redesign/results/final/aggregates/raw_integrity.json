@@ -1,0 +1,170 @@
+{
+  "bad_decision_cell_counts": [],
+  "cell_checks": [
+    {
+      "expected_pairs": 40,
+      "observed_pairs": 40,
+      "scenario": "S0",
+      "status": "PASS",
+      "system": "holdem"
+    },
+    {
+      "expected_pairs": 40,
+      "observed_pairs": 40,
+      "scenario": "S1",
+      "status": "PASS",
+      "system": "holdem"
+    },
+    {
+      "expected_pairs": 40,
+      "observed_pairs": 40,
+      "scenario": "S2",
+      "status": "PASS",
+      "system": "holdem"
+    },
+    {
+      "expected_pairs": 40,
+      "observed_pairs": 40,
+      "scenario": "S3",
+      "status": "PASS",
+      "system": "holdem"
+    },
+    {
+      "expected_pairs": 40,
+      "observed_pairs": 40,
+      "scenario": "S4",
+      "status": "PASS",
+      "system": "holdem"
+    },
+    {
+      "expected_pairs": 40,
+      "observed_pairs": 40,
+      "scenario": "S5",
+      "status": "PASS",
+      "system": "holdem"
+    },
+    {
+      "expected_pairs": 40,
+      "observed_pairs": 40,
+      "scenario": "S6",
+      "status": "PASS",
+      "system": "holdem"
+    },
+    {
+      "expected_pairs": 27,
+      "observed_pairs": 27,
+      "scenario": "S7",
+      "status": "PASS",
+      "system": "holdem"
+    },
+    {
+      "expected_pairs": 40,
+      "observed_pairs": 40,
+      "scenario": "S8",
+      "status": "PASS",
+      "system": "holdem"
+    },
+    {
+      "expected_pairs": 40,
+      "observed_pairs": 40,
+      "scenario": "S9",
+      "status": "PASS",
+      "system": "holdem"
+    },
+    {
+      "expected_pairs": 40,
+      "observed_pairs": 40,
+      "scenario": "S10",
+      "status": "PASS",
+      "system": "holdem"
+    },
+    {
+      "expected_pairs": 40,
+      "observed_pairs": 40,
+      "scenario": "S0",
+      "status": "PASS",
+      "system": "ising"
+    },
+    {
+      "expected_pairs": 40,
+      "observed_pairs": 40,
+      "scenario": "S1",
+      "status": "PASS",
+      "system": "ising"
+    },
+    {
+      "expected_pairs": 40,
+      "observed_pairs": 40,
+      "scenario": "S2",
+      "status": "PASS",
+      "system": "ising"
+    },
+    {
+      "expected_pairs": 40,
+      "observed_pairs": 40,
+      "scenario": "S3",
+      "status": "PASS",
+      "system": "ising"
+    },
+    {
+      "expected_pairs": 40,
+      "observed_pairs": 40,
+      "scenario": "S4",
+      "status": "PASS",
+      "system": "ising"
+    },
+    {
+      "expected_pairs": 40,
+      "observed_pairs": 40,
+      "scenario": "S5",
+      "status": "PASS",
+      "system": "ising"
+    },
+    {
+      "expected_pairs": 40,
+      "observed_pairs": 40,
+      "scenario": "S6",
+      "status": "PASS",
+      "system": "ising"
+    },
+    {
+      "expected_pairs": 27,
+      "observed_pairs": 27,
+      "scenario": "S7",
+      "status": "PASS",
+      "system": "ising"
+    },
+    {
+      "expected_pairs": 40,
+      "observed_pairs": 40,
+      "scenario": "S8",
+      "status": "PASS",
+      "system": "ising"
+    },
+    {
+      "expected_pairs": 40,
+      "observed_pairs": 40,
+      "scenario": "S9",
+      "status": "PASS",
+      "system": "ising"
+    },
+    {
+      "expected_pairs": 40,
+      "observed_pairs": 40,
+      "scenario": "S10",
+      "status": "PASS",
+      "system": "ising"
+    }
+  ],
+  "decision_rows": 34160,
+  "expected_decision_rows": 34160,
+  "expected_outcome_pair_rows": 854,
+  "extra_pair_keys": [],
+  "ground_truth_mismatches": [],
+  "missing_pair_keys": [],
+  "outcome_pair_rows": 854,
+  "raw_rows": 35014,
+  "raw_sha256": "ead6dd392c61767c914f9bb1956b7a82213c5889f3e95faf15c4a3f3ec5d2540",
+  "s7_note": "27/40 retained per system by frozen drop-every-third injection",
+  "status": "PASS"
+}

@@ -1,0 +1,56 @@
+scenario,scenario_name,claim,ground_truth
+S0,clean control,A Descriptive,VALID
+S0,clean control,B Paired,VALID
+S0,clean control,C Replay,VALID
+S0,clean control,D CRN,VALID
+S0,clean control,E Event,NOT_APPLICABLE
+S1,seed namespace conversion (16-bit truncation),A Descriptive,INVALID
+S1,seed namespace conversion (16-bit truncation),B Paired,DOWNGRADE
+S1,seed namespace conversion (16-bit truncation),C Replay,VALID
+S1,seed namespace conversion (16-bit truncation),D CRN,INVALID
+S1,seed namespace conversion (16-bit truncation),E Event,INVALID
+S2,stateful draw shift (one extra burn draw in arm B),A Descriptive,VALID
+S2,stateful draw shift (one extra burn draw in arm B),B Paired,DOWNGRADE
+S2,stateful draw shift (one extra burn draw in arm B),C Replay,VALID
+S2,stateful draw shift (one extra burn draw in arm B),D CRN,INVALID
+S2,stateful draw shift (one extra burn draw in arm B),E Event,INVALID
+S3,event-keyed repair,A Descriptive,VALID
+S3,event-keyed repair,B Paired,VALID
+S3,event-keyed repair,C Replay,VALID
+S3,event-keyed repair,D CRN,VALID
+S3,event-keyed repair,E Event,VALID
+S4,clock-bounded computation (wall-clock think budget),A Descriptive,VALID
+S4,clock-bounded computation (wall-clock think budget),B Paired,VALID
+S4,clock-bounded computation (wall-clock think budget),C Replay,INVALID
+S4,clock-bounded computation (wall-clock think budget),D CRN,VALID
+S4,clock-bounded computation (wall-clock think budget),E Event,INVALID
+S5,process-global mutable state (worker reuse),A Descriptive,VALID
+S5,process-global mutable state (worker reuse),B Paired,DOWNGRADE
+S5,process-global mutable state (worker reuse),C Replay,INVALID
+S5,process-global mutable state (worker reuse),D CRN,INVALID
+S5,process-global mutable state (worker reuse),E Event,INVALID
+S6,queue/enqueue order dependence,A Descriptive,VALID
+S6,queue/enqueue order dependence,B Paired,DOWNGRADE
+S6,queue/enqueue order dependence,C Replay,INVALID
+S6,queue/enqueue order dependence,D CRN,INVALID
+S6,queue/enqueue order dependence,E Event,INVALID
+S7,missing/dropped schedule rows before analysis,A Descriptive,INVALID
+S7,missing/dropped schedule rows before analysis,B Paired,DOWNGRADE
+S7,missing/dropped schedule rows before analysis,C Replay,VALID
+S7,missing/dropped schedule rows before analysis,D CRN,VALID
+S7,missing/dropped schedule rows before analysis,E Event,NOT_APPLICABLE
+S8,"benign residual randomness, valid repeated-measures design",A Descriptive,VALID
+S8,"benign residual randomness, valid repeated-measures design",B Paired,VALID
+S8,"benign residual randomness, valid repeated-measures design",C Replay,INVALID
+S8,"benign residual randomness, valid repeated-measures design",D CRN,VALID
+S8,"benign residual randomness, valid repeated-measures design",E Event,INVALID
+S9,pseudoreplication (decisions treated as independent replicates),A Descriptive,VALID
+S9,pseudoreplication (decisions treated as independent replicates),B Paired,INVALID
+S9,pseudoreplication (decisions treated as independent replicates),C Replay,VALID
+S9,pseudoreplication (decisions treated as independent replicates),D CRN,VALID
+S9,pseudoreplication (decisions treated as independent replicates),E Event,NOT_APPLICABLE
+S10,"valid unpaired design (independent seeds, declared)",A Descriptive,VALID
+S10,"valid unpaired design (independent seeds, declared)",B Paired,INVALID
+S10,"valid unpaired design (independent seeds, declared)",C Replay,VALID
+S10,"valid unpaired design (independent seeds, declared)",D CRN,INVALID
+S10,"valid unpaired design (independent seeds, declared)",E Event,INVALID
