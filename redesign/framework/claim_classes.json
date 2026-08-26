@@ -1,0 +1,155 @@
+{
+  "meta": {
+    "name": "Claim-Specific Validation Framework",
+    "short_name": "CSVF",
+    "version": "1.0.0-prospective",
+    "frozen_date": "2026-08-26",
+    "central_question": "What exact scientific claim does the evaluator want to make?",
+    "core_principle": "Evidence requirements attach to the inferential objective of the claim, not to a universal cumulative ladder. A researcher may legitimately satisfy Branch B without satisfying Branches C or E whenever the statistical design alone supports the paired inference.",
+    "anti_pattern": "The superseded cumulative 'validity ladder' treated deterministic replay and event alignment as prerequisites for every paired claim. This over-requires evidence and suppresses valid analyses."
+  },
+  "claim_classes": [
+    {
+      "id": "BRANCH_A",
+      "order": 1,
+      "name": "Matched Descriptive Comparison",
+      "question": "Do these recorded runs share the declared schedule?",
+      "example_claim": "These recorded runs shared declared schedule fields.",
+      "description": "A descriptive claim that two or more recorded runs used the same declared schedule (seed value, context/opponent, row identity). No statistical or causal inference is made; no replay is implied.",
+      "required_evidence": [
+        "artifact_identity",
+        "schedule_identity",
+        "complete_rows",
+        "correct_grouping"
+      ],
+      "explicitly_not_required": [
+        "exact_replay_of_execution",
+        "identical_trace_projection",
+        "event_alignment"
+      ],
+      "permitted_wording": [
+        "the runs shared the declared seed value and schedule fields",
+        "runs were matched on recorded schedule fields",
+        "the schedule was complete for {n}/{n} scheduled rows"
+      ],
+      "forbidden_wording": [
+        "the runs are replicates of one another",
+        "the executions were identical",
+        "paired estimates are valid because seeds match"
+      ]
+    },
+    {
+      "id": "BRANCH_B",
+      "order": 2,
+      "name": "Statistically Paired Inference",
+      "question": "Does the paired estimator's reference distribution have a justified basis?",
+      "example_claim": "The paired estimator and uncertainty procedure have a justified reference distribution.",
+      "description": "A claim that a paired difference estimator and its uncertainty have a valid statistical justification via randomized assignment, probability sampling, repeated-measures design, hierarchical modeling, or a defended joint stochastic model.",
+      "required_evidence": [
+        "at_least_one_of:[randomized_assignment,probability_sampling,repeated_measures_design,hierarchical_model,defended_joint_stochastic_model]",
+        "correct_grouping",
+        "complete_rows"
+      ],
+      "explicitly_not_required": [
+        "exact_replay_of_execution",
+        "event_alignment"
+      ],
+      "permitted_wording": [
+        "under the randomized/repeated-measures design, the paired difference estimator has a justified reference distribution",
+        "pairing is justified by the declared assignment mechanism",
+        "uncertainty was obtained by the prespecified procedure under assumption X"
+      ],
+      "forbidden_wording": [
+        "seeds were shared, therefore pairing is exact",
+        "paired inference requires no assumptions because seeds match",
+        "the interval is an exact confidence interval (without justified sampling interpretation)"
+      ]
+    },
+    {
+      "id": "BRANCH_C",
+      "order": 3,
+      "name": "Deterministic Replay",
+      "question": "Does repeating the same artifact reproduce the declared trace projection?",
+      "example_claim": "Repeating the same artifact under declared conditions reproduces the declared trace projection exactly.",
+      "description": "A claim about execution repeatability of one artifact: repeated executions under declared conditions produce byte-identical declared trace projections across processes, workers, and contexts.",
+      "required_evidence": [
+        "within_artifact_repeated_executions",
+        "declared_trace_projection",
+        "context_testing",
+        "exact_repeatability_criteria"
+      ],
+      "explicitly_not_required": [
+        "event_alignment",
+        "cross_arm_coupling"
+      ],
+      "permitted_wording": [
+        "K/K repeated executions reproduced the declared projection of the trace exactly",
+        "execution is repeatable under the declared conditions and projection scope",
+        "no mismatch was found in the declared projection across tested contexts"
+      ],
+      "forbidden_wording": [
+        "the system is deterministic (unscoped)",
+        "replay holds, therefore cross-arm comparisons are aligned",
+        "any trace field matches (beyond the declared projection)"
+      ]
+    },
+    {
+      "id": "BRANCH_D",
+      "order": 4,
+      "name": "Common-Random-Number Variance Reduction",
+      "question": "Does shared randomness create a valid coupling that improves comparison precision?",
+      "example_claim": "Shared randomness creates a valid coupling that improves comparison precision.",
+      "description": "A claim that a CRN-style coupling between two configurations preserves marginals, induces measurable positive covariance, and reduces variance of the paired difference relative to independent sampling on the same replication budget.",
+      "required_evidence": [
+        "specified_coupling_construction",
+        "preserved_marginals",
+        "measured_covariance",
+        "measured_variance_reduction",
+        "synchronization_assumptions"
+      ],
+      "explicitly_not_required": [
+        "within_artifact_exact_replay",
+        "semantic_event_equality"
+      ],
+      "permitted_wording": [
+        "the declared coupling reduced variance of the paired difference by factor r versus independent sampling",
+        "marginal distributions were preserved under the coupling (verified by test T)",
+        "cross-arm covariance was positive and synchronized as assumed"
+      ],
+      "forbidden_wording": [
+        "CRN applies because seeds match (without marginal preservation and variance evidence)",
+        "variance reduction generalizes beyond the measured scenario",
+        "repeatability alone demonstrates coupling validity"
+      ]
+    },
+    {
+      "id": "BRANCH_E",
+      "order": 5,
+      "name": "Event-Aligned Counterfactual or Mechanistic Claim",
+      "question": "Did corresponding semantic events receive the same random quantities across divergent arms?",
+      "example_claim": "Corresponding exogenous events received the same random quantities across divergent policies or algorithms.",
+      "description": "A mechanistic/counterfactual claim at event granularity: semantic events identified by a stable ontology received identical random quantities across arms whose behavior diverged, enabling event-level attribution.",
+      "required_evidence": [
+        "stable_event_identifiers",
+        "event_value_records",
+        "event_keyed_streams_or_validated_equivalent",
+        "declared_event_ontology",
+        "dependence_assumptions"
+      ],
+      "explicitly_not_required": [
+        "within_artifact_exact_replay",
+        "trace_projection_equality_everywhere"
+      ],
+      "permitted_wording": [
+        "for e/e matched event keys, recorded random quantities were identical across arms",
+        "event-level equality held under the declared ontology and keying construction",
+        "counterfactual attribution is supported at event granularity under the declared dependence assumptions"
+      ],
+      "forbidden_wording": [
+        "events were aligned because schedules matched",
+        "event alignment holds without a declared ontology",
+        "post-hoc event matching justifies counterfactual claims"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "name": "Claim-Specific Validation Framework",
+    "short_name": "CSVF",
+    "version": "1.0.0-prospective",
+    "frozen_date": "2026-08-26",
+    "central_question": "What exact scientific claim does the evaluator want to make?",
+    "core_principle": "Evidence requirements attach to the inferential objective of the claim, not to a universal cumulative ladder. A researcher may legitimately satisfy Branch B without satisfying Branches C or E whenever the statistical design alone supports the paired inference.",
+    "anti_pattern": "The superseded cumulative 'validity ladder' treated deterministic replay and event alignment as prerequisites for every paired claim. This over-requires evidence and suppresses valid analyses."
+  },
+  "evidence_registry": {
+    "artifact_identity": "Each recorded run carries a verifiable artifact identifier (code version, model/binary hash, configuration hash).",
+    "schedule_identity": "Declared schedule fields (seed, opponent/context condition, row identifiers) match across compared runs.",
+    "complete_rows": "All scheduled rows are present in the analysis denominator; missing rows are detected, not silently dropped.",
+    "correct_grouping": "Runs are grouped into analysis units by the declared grouping key (e.g., seed-condition cluster).",
+    "randomized_assignment": "Conditions were assigned to units by a documented randomization procedure.",
+    "probability_sampling": "Units were drawn by a documented probability sampling scheme from a declared frame.",
+    "repeated_measures_design": "The design declares within-unit repeated measurement whose correlation structure the analysis models.",
+    "hierarchical_model": "The analysis uses a model with explicit cluster/hierarchy structure matching the data-generating process.",
+    "defended_joint_stochastic_model": "A joint stochastic model for paired outcomes is stated and its assumptions defended against the observed design.",
+    "within_artifact_repeated_executions": "The same artifact was executed multiple times under declared identical conditions.",
+    "declared_trace_projection": "A declared, finite projection of the execution trace (fields, ordering, comparison rule) is specified before comparison.",
+    "context_testing": "Execution was repeated across process instances, worker reuse states, and execution contexts to expose nondeterminism.",
+    "exact_repeatability_criteria": "An exact equality criterion on the declared trace projection is declared before testing.",
+    "specified_coupling_construction": "The common-random-number coupling construction is fully specified (which streams, substreams, draws are shared).",
+    "preserved_marginals": "The coupling preserves each arm's marginal distributions (verified empirically or argued structurally).",
+    "measured_covariance": "Cross-arm covariance induced by the coupling is estimated from replicated pairs.",
+    "measured_variance_reduction": "Variance of the paired difference is compared against independent-sampling variance on the same budget.",
+    "synchronization_assumptions": "Assumptions about stream synchronization across arms are declared (and tested where possible).",
+    "stable_event_identifiers": "Semantic events carry identifiers that are stable across policies/algorithms (declared event ontology).",
+    "event_value_records": "Random quantities delivered at each semantic event are recorded with their event keys.",
+    "event_keyed_streams_or_validated_equivalent": "Event-keyed random streams exist, or an equivalent validated construction is documented.",
+    "declared_event_ontology": "The event ontology (what counts as an event, its granularity) is declared before acquisition.",
+    "dependence_assumptions": "Assumptions under which event-level equality implies distribution-level coupling validity are stated."
+  },
+  "requirements_by_class": {
+    "BRANCH_A": [
+      "artifact_identity",
+      "schedule_identity",
+      "complete_rows",
+      "correct_grouping"
+    ],
+    "BRANCH_B": [
+      "at_least_one_of:[randomized_assignment,probability_sampling,repeated_measures_design,hierarchical_model,defended_joint_stochastic_model]",
+      "correct_grouping",
+      "complete_rows"
+    ],
+    "BRANCH_C": [
+      "within_artifact_repeated_executions",
+      "declared_trace_projection",
+      "context_testing",
+      "exact_repeatability_criteria"
+    ],
+    "BRANCH_D": [
+      "specified_coupling_construction",
+      "preserved_marginals",
+      "measured_covariance",
+      "measured_variance_reduction",
+      "synchronization_assumptions"
+    ],
+    "BRANCH_E": [
+      "stable_event_identifiers",
+      "event_value_records",
+      "event_keyed_streams_or_validated_equivalent",
+      "declared_event_ontology",
+      "dependence_assumptions"
+    ]
+  }
+}
