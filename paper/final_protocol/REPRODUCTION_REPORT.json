@@ -9,7 +9,7 @@
     ],
     "file_count": 454,
     "scope": "Final article/release tree, final reviewer bytes, retained protocol/data/synthetic inputs, and invoked scripts/tests",
-    "sha256": "d1a64269beb465920a62a3896451c14c379b634a92c4915753ec937755d9a700"
+    "sha256": "ba772b261e7939a984daab646abc4877c16d00bc51eae83a53e032148b81696c"
   },
   "commands": [
     {
@@ -623,8 +623,8 @@
         },
         {
           "path": "paper/final_protocol/scripts/reproduce_all.py",
-          "sha256": "51e298e137b29640e83e5613d99de2f34e8b4d2af56440e2f9610829286851cc",
-          "size_bytes": 46992
+          "sha256": "95aabbb8c2dc2422270cf76428aea73ab767b0a7af6d6c0b286e23b11737d878",
+          "size_bytes": 47037
         },
         {
           "path": "paper/final_protocol/scripts/verify_reproduction_report.py",
@@ -825,7 +825,7 @@
       ]
     },
     "missing": [],
-    "sha256": "75cd5c1e3afb37b1ea408b09783ee9e077b9f663a2d4fca056401f0f0ffb5639",
+    "sha256": "2823fd189bbb297c52123d5ac5cbac006961964971bcb3dff8648bc86ef1a858",
     "unique_file_count": 56
   },
   "read_only_verifier": {
@@ -845,8 +845,8 @@
   "repository_identity": {
     "boundary": "HEAD/tree identify clean reproduced subject commit S; branch is informational only. The final verifier requires current HEAD E to be S's sole direct child, with exactly the self-excluded canonical report and sidecar as E's committed tree delta.",
     "branch": "paper/apsos-machine-finalization-20260826",
-    "head_commit": "43d7c200309d0e2d0f703fa7f0c78a25fa55e850",
-    "head_tree": "c9e0b93f12f5b496e87594c3ab33909c37c9d8b9",
+    "head_commit": "302256db8564e19709810688e4fd9be2c00fa5b2",
+    "head_tree": "02ef4b13459716c5da1b87f7ab7c56e2ecde6835",
     "non_envelope_dirty_path_count": 0,
     "non_envelope_dirty_pathname_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "non_envelope_worktree_clean": true,
@@ -904,10 +904,10 @@
       "paper/final_protocol/release/"
     ],
     "policy": "Protected tracked files remain byte-identical during the run, and the final Git gate requires every non-envelope tracked or untracked path to match subject commit S.",
-    "protected_file_count_after": 2454,
-    "protected_file_count_before": 2454,
-    "protected_snapshot_sha256_after": "90c1dfab0ecba18573f5abbb2720fd518e0bd0cc04c7cc1bcc40222916b3de96",
-    "protected_snapshot_sha256_before": "90c1dfab0ecba18573f5abbb2720fd518e0bd0cc04c7cc1bcc40222916b3de96",
+    "protected_file_count_after": 2456,
+    "protected_file_count_before": 2456,
+    "protected_snapshot_sha256_after": "fa9362c01436693e831a5ad4b918a02b87c43c2e6f760f5e68947760683e9de7",
+    "protected_snapshot_sha256_before": "fa9362c01436693e831a5ad4b918a02b87c43c2e6f760f5e68947760683e9de7",
     "status": "PASS",
     "unexpected_changes": []
   },
