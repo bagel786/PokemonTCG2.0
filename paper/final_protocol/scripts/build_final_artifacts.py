@@ -510,31 +510,40 @@ def figure_distinctions() -> list[Path]:
         },
     ]
     write_json(FINAL / "source_data/figure_1_distinctions.json", rows)
-    fig, ax = plt.subplots(figsize=(12, 4.8))
-    ax.set_xlim(0, 12)
+    fig, ax = plt.subplots(figsize=(13, 4.8))
+    ax.set_xlim(0, 13)
     ax.set_ylim(0, 4.6)
     ax.axis("off")
     colors = [BLUE, PURPLE, GREEN]
     for index, (row, color) in enumerate(zip(rows, colors, strict=True)):
-        x = 0.25 + index * 4.0
+        x = 0.25 + index * 4.35
         box = FancyBboxPatch(
-            (x, 0.75), 3.25, 3.15,
+            (x, 0.75), 3.35, 3.15,
             boxstyle="round,pad=0.06,rounding_size=0.08",
             linewidth=2.0, edgecolor=color, facecolor="white",
         )
         ax.add_patch(box)
-        ax.text(x + 0.18, 3.58, row["stage"], fontsize=11.2, fontweight="bold", color=INK, va="top")
-        ax.text(x + 0.18, 3.04, row["question"], fontsize=10.8, color=INK, va="top", linespacing=1.25)
-        ax.text(x + 0.18, 2.27, "Evidence", fontsize=9.8, fontweight="bold", color=color, va="top")
-        ax.text(x + 0.18, 1.98, row["evidence"], fontsize=9.2, color=MUTED, va="top", linespacing=1.25)
-        ax.text(x + 0.18, 1.40, "Permits", fontsize=9.8, fontweight="bold", color=color, va="top")
-        ax.text(x + 0.18, 1.11, row["permits"], fontsize=9.2, color=MUTED, va="top", linespacing=1.25)
+        ax.text(x + 0.2, 3.58, row["stage"], fontsize=11.5, fontweight="bold", color=INK, va="top")
+        ax.text(x + 0.2, 3.04, row["question"], fontsize=11, color=INK, va="top", linespacing=1.3)
+        ax.text(x + 0.2, 2.27, "Evidence", fontsize=10.2, fontweight="bold", color=color, va="top")
+        ax.text(x + 0.2, 1.98, row["evidence"], fontsize=9.6, color=MUTED, va="top", linespacing=1.3)
+        ax.text(x + 0.2, 1.40, "Permits", fontsize=10.2, fontweight="bold", color=color, va="top")
+        ax.text(x + 0.2, 1.11, row["permits"], fontsize=9.6, color=MUTED, va="top", linespacing=1.3)
         if index < 2:
-            arrow_x = x + 3.31
-            ax.add_patch(FancyArrowPatch((arrow_x, 2.35), (arrow_x + 0.58, 2.35), arrowstyle="-|>", mutation_scale=14, color=RED, linewidth=1.8))
-            ax.text(arrow_x + 0.29, 2.72, "does not\nimply", ha="center", va="center", color=RED, fontsize=7.7, fontweight="bold")
-    ax.text(0.25, 4.35, "Three distinct validation questions", fontsize=22, fontweight="bold", color=INK)
-    ax.text(0.25, 0.28, "Evidence accumulates left to right; later claims require additional observations rather than stronger wording.", fontsize=10.5, color=MUTED)
+            arrow_x_start = x + 3.47
+            arrow_x_end = x + 4.23
+            arrow_y = 2.32
+            ax.add_patch(FancyArrowPatch(
+                (arrow_x_start, arrow_y), (arrow_x_end, arrow_y),
+                arrowstyle="-|>", mutation_scale=15, color=RED, linewidth=1.8))
+            ax.text(
+                (arrow_x_start + arrow_x_end) / 2, arrow_y + 0.30, "does not\nimply",
+                ha="center", va="bottom", color=RED, fontsize=8.6,
+                fontweight="bold", linespacing=1.15,
+                bbox=dict(boxstyle="round,pad=0.25", facecolor="white",
+                          edgecolor="none"))
+    ax.text(0.25, 4.35, "Three distinct validation questions", fontsize=21, fontweight="bold", color=INK)
+    ax.text(0.25, 0.22, "Evidence accumulates left to right; later claims require additional observations rather than stronger wording.", fontsize=10.5, color=MUTED)
     return save_figure(fig, "figure_1_distinctions")
 
 
@@ -548,6 +557,15 @@ def figure_admission_flow() -> list[Path]:
         ("L6", "Source\naudit"),
         ("L7", "Event\nalignment"),
     ]
+    display_labels = [
+        "Artifact\nidentity",
+        "Seed\nnamespace",
+        "Schedule\nparity",
+        "A/A trace\nparity",
+        "Repeat/worker\nparity",
+        "Source\naudit",
+        "Event\nalignment",
+    ]
     source = {
         "levels": [{"level": level, "label": label.replace("\n", " ")} for level, label in levels],
         "failure_action": "suppress or downgrade the affected claim",
@@ -556,34 +574,54 @@ def figure_admission_flow() -> list[Path]:
         "level_6_boundary": "fixed-battery descriptive contrast and empirical reweighting only",
     }
     write_json(FINAL / "source_data/figure_2_admission_flow.json", source)
-    fig, ax = plt.subplots(figsize=(12, 5.4))
-    ax.set_xlim(0, 12)
+    fig, ax = plt.subplots(figsize=(13, 5.6))
+    ax.set_xlim(0, 13)
     ax.set_ylim(0, 6)
     ax.axis("off")
-    ax.text(0.3, 5.65, "Pairing-assumption protocol and claim admission", fontsize=22, fontweight="bold", color=INK)
+    ax.text(0.3, 5.70, "Pairing-assumption protocol and claim admission", fontsize=20, fontweight="bold", color=INK)
+    box_width = 1.42
+    box_pitch = 1.72
+    box_top = 3.55
+    box_height = 1.45
+    centers = []
     for index, (level, label) in enumerate(levels):
-        x = 0.35 + index * 1.55
+        x = 0.35 + index * box_pitch
+        center = x + box_width / 2
+        centers.append(center)
         color = BLUE if index < 3 else PURPLE if index < 6 else GREEN
-        box = FancyBboxPatch((x, 3.45), 1.25, 1.35, boxstyle="round,pad=0.04", facecolor="white", edgecolor=color, linewidth=2)
+        box = FancyBboxPatch((x, box_top), box_width, box_height, boxstyle="round,pad=0.04", facecolor="white", edgecolor=color, linewidth=2)
         ax.add_patch(box)
-        ax.text(x + 0.625, 4.53, level, ha="center", va="center", color=color, fontweight="bold", fontsize=12)
-        ax.text(x + 0.625, 3.93, label, ha="center", va="center", color=INK, fontsize=8.8)
+        ax.text(center, box_top + box_height - 0.28, level, ha="center", va="center", color=color, fontweight="bold", fontsize=12.5)
+        ax.text(center, box_top + 0.52, display_labels[index], ha="center", va="center", color=INK, fontsize=9.2, linespacing=1.2)
         if index < len(levels) - 1:
-            ax.add_patch(FancyArrowPatch((x + 1.26, 4.12), (x + 1.50, 4.12), arrowstyle="-|>", mutation_scale=11, color=MUTED))
-        if index < 6:
-            ax.add_patch(FancyArrowPatch((x + 0.625, 3.42), (x + 0.625, 2.65), arrowstyle="-|>", mutation_scale=10, color=RED, linewidth=1.2))
-    fail_box = FancyBboxPatch((1.65, 1.35), 6.5, 1.15, boxstyle="round,pad=0.06", facecolor="#FBF1F1", edgecolor=RED, linewidth=2)
+            ax.add_patch(FancyArrowPatch((x + box_width + 0.04, box_top + box_height / 2), (x + box_pitch - 0.06, box_top + box_height / 2), arrowstyle="-|>", mutation_scale=11, color=MUTED))
+    # Restricted-engine annotation: clear of the ladder, arrow down to L7 top.
+    ax.annotate(
+        "Restricted engine:\nL7 unavailable",
+        xy=(centers[6], box_top + box_height + 0.04), xytext=(centers[6], 5.55),
+        ha="center", va="top", color=ORANGE, fontweight="bold", fontsize=9.8,
+        linespacing=1.2,
+        arrowprops=dict(arrowstyle="-|>", color=ORANGE, linewidth=1.6))
+    # Collector rail: every gate feeds one evidence rail; outcomes split cleanly.
+    rail_y = 2.95
+    ax.plot([centers[0], centers[6]], [rail_y, rail_y], color=GRID, linewidth=1.6, zorder=1)
+    for center in centers:
+        ax.add_patch(FancyArrowPatch((center, box_top - 0.03), (center, rail_y + 0.02), arrowstyle="-", mutation_scale=1, color=GRID, linewidth=1.4))
+    fail_box = FancyBboxPatch((1.0, 1.15), 6.9, 1.25, boxstyle="round,pad=0.06", facecolor="#FBF1F1", edgecolor=RED, linewidth=2)
     ax.add_patch(fail_box)
-    ax.text(4.9, 2.10, "Any required failure", ha="center", va="center", color=RED, fontweight="bold", fontsize=12)
-    ax.text(4.9, 1.67, "Suppress or downgrade the affected claim;\nlater statistics cannot repair the gate.", ha="center", va="center", color=INK, fontsize=9.7, linespacing=1.25)
-    admit_box = FancyBboxPatch((8.55, 1.35), 3.0, 1.15, boxstyle="round,pad=0.06", facecolor="#EFF7F3", edgecolor=GREEN, linewidth=2)
+    ax.text(4.45, 2.02, "Any required failure", ha="center", va="center", color=RED, fontweight="bold", fontsize=13)
+    ax.text(4.45, 1.52, "Suppress or downgrade the affected claim;\nlater statistics cannot repair the gate.", ha="center", va="center", color=INK, fontsize=10, linespacing=1.3)
+    admit_box = FancyBboxPatch((9.15, 1.15), 3.35, 1.25, boxstyle="round,pad=0.06", facecolor="#EFF7F3", edgecolor=GREEN, linewidth=2)
     ax.add_patch(admit_box)
-    ax.text(10.05, 2.10, "L8: claim rule", ha="center", va="center", color=GREEN, fontweight="bold", fontsize=11.5)
-    ax.text(10.05, 1.68, "admit / downgrade / suppress", ha="center", va="center", color=INK, fontsize=10.2)
-    ax.add_patch(FancyArrowPatch((10.275, 3.43), (10.05, 2.52), arrowstyle="-|>", mutation_scale=12, color=GREEN, linewidth=2))
-    ax.add_patch(FancyArrowPatch((9.78, 3.46), (8.08, 2.48), arrowstyle="-|>", mutation_scale=10, color=RED, linewidth=1.2))
-    ax.text(10.25, 5.22, "Restricted engine:\nL7 unavailable", color=ORANGE, fontweight="bold", fontsize=9.8, ha="center", va="top", linespacing=1.15)
-    ax.text(0.35, 0.55, "Passes are scoped to tested artifacts and contexts; inferential pairing needs a separate sampling or randomization basis.", fontsize=10.5, color=MUTED)
+    ax.text(10.825, 2.02, "L8: claim rule", ha="center", va="center", color=GREEN, fontweight="bold", fontsize=12)
+    ax.text(10.825, 1.55, "admit / downgrade / suppress", ha="center", va="center", color=INK, fontsize=10)
+    rail_left = (centers[0] + centers[5]) / 2
+    rail_right = centers[6]
+    ax.add_patch(FancyArrowPatch((rail_left, rail_y), (4.45, 2.44), arrowstyle="-|>", mutation_scale=13, color=RED, linewidth=1.8))
+    ax.add_patch(FancyArrowPatch((rail_right, rail_y), (10.825, 2.44), arrowstyle="-|>", mutation_scale=13, color=GREEN, linewidth=1.8))
+    ax.text(rail_left + 0.15, rail_y + 0.10, "any gate fails", ha="left", va="bottom", color=RED, fontsize=9.4, fontweight="bold")
+    ax.text(rail_right - 0.15, rail_y + 0.10, "all gates pass", ha="right", va="bottom", color=GREEN, fontsize=9.4, fontweight="bold")
+    ax.text(0.35, 0.45, "Passes are scoped to tested artifacts and contexts; inferential pairing needs a separate sampling or randomization basis.", fontsize=10.5, color=MUTED)
     return save_figure(fig, "figure_2_admission_flow")
 
 
@@ -619,16 +657,21 @@ def figure_synthetic(payload: dict[str, Any]) -> list[Path]:
         matrix.append(values)
     write_csv(FINAL / "source_data/figure_3_synthetic_matrix.csv", ["mode", "level", "status"], rows)
     from matplotlib.colors import ListedColormap
-    fig, ax = plt.subplots(figsize=(10.8, 5.0))
+    fig, ax = plt.subplots(figsize=(11.5, 5.2))
     cmap = ListedColormap([BLUE, "#D5DDE3", RED, GREEN, ORANGE])
     ax.imshow(matrix, aspect="auto", cmap=cmap, vmin=-0.5, vmax=4.5)
-    ax.set_xticks(range(8), [f"L{i}" for i in range(1, 9)])
-    ax.set_yticks(range(len(modes)), [label for _, label in modes])
-    ax.set_title("Synthetic conformance suite: detected failure and admission", loc="left", fontsize=18, fontweight="bold", color=INK, pad=16)
+    ax.set_xticks(range(8), [f"L{i}" for i in range(1, 9)], fontsize=11.5)
+    ax.set_yticks(range(len(modes)), [label for _, label in modes], fontsize=11.5)
+    ax.set_title("Synthetic conformance suite: detected failure and admission",
+                 loc="left", fontsize=17, fontweight="bold", color=INK, pad=14)
+    ax.set_xticks([x - 0.5 for x in range(1, 8)], minor=True)
+    ax.set_yticks([y - 0.5 for y in range(1, len(modes))], minor=True)
+    ax.grid(which="minor", color="white", linewidth=2)
+    ax.tick_params(which="minor", length=0)
     symbols = {0: "P", 1: "-", 2: "F", 3: "A", 4: "D"}
     for y, row in enumerate(matrix):
         for x, value in enumerate(row):
-            ax.text(x, y, symbols[value], ha="center", va="center", fontweight="bold", color="white" if value != 1 else INK, fontsize=11)
+            ax.text(x, y, symbols[value], ha="center", va="center", fontweight="bold", color="white" if value != 1 else INK, fontsize=12)
     for spine in ax.spines.values():
         spine.set_visible(False)
     legend = [
@@ -636,9 +679,9 @@ def figure_synthetic(payload: dict[str, Any]) -> list[Path]:
         Patch(color=RED, label="fail / suppress"), Patch(color=GREEN, label="admit"),
         Patch(color=ORANGE, label="downgrade"),
     ]
-    ax.legend(handles=legend, ncol=5, frameon=False, bbox_to_anchor=(0, -0.15), loc="upper left")
-    ax.text(0, -0.30, "The event-keyed repair aligns 5/5 shared events; the stateful stream aligns 1/5.", transform=ax.transAxes, color=MUTED, fontsize=10.5)
-    fig.subplots_adjust(bottom=0.26)
+    ax.legend(handles=legend, ncol=5, frameon=False, bbox_to_anchor=(0, -0.09), loc="upper left", fontsize=10.5, columnspacing=1.4)
+    ax.text(0, -0.24, "The event-keyed repair aligns 5/5 shared events; the stateful stream aligns 1/5.", transform=ax.transAxes, color=MUTED, fontsize=10.5, va="top")
+    fig.subplots_adjust(bottom=0.28)
     return save_figure(fig, "figure_3_synthetic_matrix")
 
 
@@ -657,19 +700,28 @@ def figure_stress(stress: dict[str, Any]) -> list[Path]:
         summary = stress["strata"][name]["trace_disagreement"]
         rows.append({"stratum": aliases[name], "clusters": summary["clusters"], "estimate": summary["estimate"], "quantile_2_5": summary["bootstrap_95_ci"][0], "quantile_97_5": summary["bootstrap_95_ci"][1]})
     write_csv(FINAL / "source_data/figure_4_timed_search.csv", ["stratum", "clusters", "estimate", "quantile_2_5", "quantile_97_5"], rows)
-    fig, ax = plt.subplots(figsize=(10.2, 5.4))
+    fig, ax = plt.subplots(figsize=(10.2, 4.6))
     y = list(range(len(rows)))[::-1]
     for index, (position, row) in enumerate(zip(y, rows, strict=True)):
         color = PURPLE if index == 0 else BLUE
-        ax.errorbar(100 * row["estimate"], position, xerr=[[100 * (row["estimate"] - row["quantile_2_5"])], [100 * (row["quantile_97_5"] - row["estimate"])]], fmt="D" if index == 0 else "o", mfc="white", mec=color, mew=2, ms=9, ecolor=color, capsize=5, lw=2)
-    ax.set_yticks(y, [row["stratum"] for row in rows])
-    ax.set_xlim(0, 104)
-    ax.set_xlabel("Seed-condition clusters with trace-projection disagreement (%)", fontsize=11.5)
-    ax.set_title("Timed-search repeat/worker stress test", loc="left", fontsize=19, fontweight="bold", color=INK, pad=14)
+        low = 100 * row["quantile_2_5"]
+        high = 100 * row["quantile_97_5"]
+        estimate = 100 * row["estimate"]
+        ax.errorbar(estimate, position, xerr=[[estimate - low], [high - estimate]], fmt="D" if index == 0 else "o", mfc="white", mec=color, mew=2.2, ms=10, ecolor=color, capsize=6, lw=2.2)
+        ax.annotate(f"{estimate:.1f}%", xy=(estimate, position), xytext=(0, 11),
+                    textcoords="offset points", ha="center", fontsize=10.5,
+                    fontweight="bold", color=color)
+    ax.set_yticks(y, [row["stratum"] for row in rows], fontsize=11.5)
+    ax.set_ylim(-0.7, len(rows) - 0.3)
+    ax.set_xlim(-3, 105)
+    ax.set_xlabel("Seed-condition clusters with trace-projection disagreement (%)", fontsize=12)
+    ax.set_title("Timed-search repeat/worker stress test", loc="left", fontsize=17, fontweight="bold", color=INK, pad=12)
     ax.grid(axis="x", color=GRID, linewidth=1)
     ax.set_axisbelow(True)
     ax.spines[["top", "right"]].set_visible(False)
-    ax.text(0, -0.22, "Bars show frozen pooled or stratum-specific empirical reweighting quantiles; all four profiles stay together.", transform=ax.transAxes, color=MUTED, fontsize=10.2)
+    fig.subplots_adjust(bottom=0.24, left=0.24, right=0.97, top=0.88)
+    ax.text(0, -0.30, "Dots: cluster-level disagreement share; bars: pooled or stratum-specific empirical\nreweighting quantiles of the fixed battery (not confidence intervals). All four execution\nprofiles stay together within a cluster.",
+            transform=ax.transAxes, color=MUTED, fontsize=10, linespacing=1.35, va="top")
     return save_figure(fig, "figure_4_timed_search")
 
 
@@ -686,19 +738,31 @@ def figure_factorial(factorial: dict[str, Any]) -> list[Path]:
         item = factorial["contrasts"][name]
         rows.append({"contrast": labels[name], "estimate_pp": 100 * item["estimate"], "quantile_2_5_pp": 100 * item["bootstrap_95_ci"][0], "quantile_97_5_pp": 100 * item["bootstrap_95_ci"][1], "units": factorial["units"], "reweighting_draws": item["bootstrap_draws"]})
     write_csv(FINAL / "source_data/figure_5_factorial.csv", ["contrast", "estimate_pp", "quantile_2_5_pp", "quantile_97_5_pp", "units", "reweighting_draws"], rows)
-    fig, ax = plt.subplots(figsize=(10.4, 5.2))
+    fig, ax = plt.subplots(figsize=(10.4, 4.4))
     y = list(range(len(rows)))[::-1]
     for index, (position, row) in enumerate(zip(y, rows, strict=True)):
         color = PURPLE if index == 0 else BLUE
-        ax.errorbar(row["estimate_pp"], position, xerr=[[row["estimate_pp"] - row["quantile_2_5_pp"]], [row["quantile_97_5_pp"] - row["estimate_pp"]]], fmt="D" if index == 0 else "o", mfc="white", mec=color, mew=2, ms=9, ecolor=color, capsize=5, lw=2)
+        estimate = row["estimate_pp"]
+        low = row["quantile_2_5_pp"]
+        high = row["quantile_97_5_pp"]
+        ax.errorbar(estimate, position, xerr=[[estimate - low], [high - estimate]], fmt="D" if index == 0 else "o", mfc="white", mec=color, mew=2.2, ms=10, ecolor=color, capsize=6, lw=2.2)
+        ax.annotate(f"{estimate:+.2f} pp", xy=(estimate, position), xytext=(0, 11),
+                    textcoords="offset points", ha="center", fontsize=10.5,
+                    fontweight="bold", color=color)
     ax.axvline(0, color=MUTED, linestyle="--", linewidth=1.5)
-    ax.set_yticks(y, [row["contrast"] for row in rows])
-    ax.set_xlabel("Win-rate contrast (percentage points)", fontsize=11.5)
-    ax.set_title("Admitted fixed-battery factorial description", loc="left", fontsize=19, fontweight="bold", color=INK, pad=14)
+    ax.annotate("no resolved effect", xy=(0, len(rows) - 0.55), xytext=(4, 10),
+                textcoords="offset points", color=MUTED, fontsize=9.5, ha="left")
+    ax.set_yticks(y, [row["contrast"] for row in rows], fontsize=11.5)
+    ax.set_ylim(-0.7, len(rows) - 0.3)
+    ax.set_xlim(-2.8, 5.0)
+    ax.set_xlabel("Win-rate contrast (percentage points)", fontsize=12)
+    ax.set_title("Admitted fixed-battery factorial description", loc="left", fontsize=17, fontweight="bold", color=INK, pad=12)
     ax.grid(axis="x", color=GRID, linewidth=1)
     ax.set_axisbelow(True)
     ax.spines[["top", "right"]].set_visible(False)
-    ax.text(0, -0.22, "2,000 seed-condition units; bars are stratified paired-unit reweighting quantiles, not confidence intervals.", transform=ax.transAxes, color=MUTED, fontsize=10.2)
+    fig.subplots_adjust(bottom=0.26, left=0.22, right=0.97, top=0.88)
+    ax.text(0, -0.32, "2,000 schedule-indexed paired units per cell; bars are stratified paired-unit empirical\nreweighting quantiles of the fixed battery (not confidence intervals). Ranges spanning zero\nsupport no effect, equivalence, or superiority conclusion.",
+            transform=ax.transAxes, color=MUTED, fontsize=10, linespacing=1.35, va="top")
     return save_figure(fig, "figure_5_factorial")
 
 

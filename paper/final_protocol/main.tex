@@ -411,22 +411,18 @@ authoritative historical constraints.
 
 The evidence-bound \texttt{admit} path checks a closed support tree, hashes
 declared regular files, checks trace byte counts, and derives gate states from
-structurally validated records; an explicitly trusted-state classifier is a
-separate interface for formal conformance checks whose caller supplies those
-states as trusted inputs.  The generic rule evaluation receives only the seven
-gate states and declared trace projection; observed outcomes, treatment
-estimates, reweighting quantiles, $p$ values, and result favorability are
-outside its input projection.  The generic verifier does not parse
-engine-specific trace semantics or prove artifact roles or execution-profile
-provenance; those remain caller assertions requiring an independently
-controlled acquisition manifest or equivalent external trust anchor, so machine
-verification of arbitrary external evidence extends fully through the lower
-stages only.  Successful Level 6 and Level 7 demonstrations are currently
-available through the synthetic conformance suite's declared adapters and the
-trusted-state interface; reusable file-bound evidence schemas for completed
-source audits and event-alignment records remain future work, and the bundled
-example marks both upper gates conservatively rather than manufacturing
-stronger evidence.  That engine-independent example passes
+structurally validated records; a trusted-state classifier is a separate
+interface for conformance checks whose caller supplies those states.  The rule
+evaluation receives only the seven gate states and declared trace projection;
+outcomes, estimates, quantiles, $p$ values, and favorability are outside its
+input projection.  It does not parse engine-specific trace semantics or prove
+artifact roles or launch provenance; those remain caller assertions requiring
+an external trust anchor, so machine verification of external evidence extends
+fully through the lower stages only.  Level 6 and 7 demonstrations are
+currently available through the synthetic suite's declared adapters and the
+trusted-state interface; file-bound schemas for completed source audits and
+event-alignment records remain future work, and the bundled example marks both
+upper gates conservatively.  That engine-independent example passes
 declared-file identity, seed, schedule, and identical-arm record checks but
 fails the required repeat/worker gate; it is not evidence that external
 executions occurred.
@@ -686,30 +682,28 @@ represented as independently reproducible.
 
 The later four-cell comparison was acquired only after the deterministic
 preflight passed, and its prespecified repeated-control available-record audit
-had \FactorialControlMismatch{} mismatches.  Under the actual frozen rule this
-gate pass authorized the planned seed-matched estimates, 95\% paired-resampling
+had \FactorialControlMismatch{} mismatches.  Under the frozen rule this gate
+pass authorized the planned seed-matched estimates, 95\% paired-resampling
 intervals, and secondary exact McNemar calculation for \FactorialUnits{} common
 units per cell (\FactorialGames{} engine games).  The qualification preflight
 used a different seed range, so transfer to the same artifacts and contexts is
 an explicit bounded assumption.  The factorial candidate rows were not trace
-repeated and recorded schedule, boundary seed, outcome, error, and decision
-count but no trace digests or semantic event identifiers.  A post-acquisition
-methods audit therefore declines the frozen plan's inferential labels and
-permits only a fixed-battery descriptive seed-indexed contrast and empirical
-reweighting sensitivity.  It admits no population effect, trace-parity,
-event-aligned, counterfactual, or full-CRN wording.
+repeated and contain no trace digests or semantic event identifiers.  A
+post-acquisition methods audit therefore declines the frozen plan's
+inferential labels and permits only a fixed-battery descriptive seed-indexed
+contrast and empirical reweighting sensitivity---no population effect,
+trace-parity, event-aligned, counterfactual, or full-CRN wording.
 
 The total fixed-package contrast on that battery was \PrimaryEstimatePP{}
-\pp{}.  The 2.5th and 97.5th percentiles from the prespecified stratified
-paired-unit resampling algorithm, relabeled as descriptive empirical
-reweighting, were [\PrimaryLowPP{}, \PrimaryHighPP{}].  They span both signs;
-no null test, population effect, or equivalence conclusion is drawn.  Git
-history orders the binary gate commit before retained result artifacts, and
-replacing every outcome value while holding gate evidence fixed leaves that
-gate decision unchanged; this functional invariance does not make the later
-descriptive taxonomy prospective.  The full factorial derivation, table, and
-figure appear in the Appendix because the policy contrast is an admission
-demonstration rather than the protocol's principal result.
+\pp{}, with descriptive empirical reweighting percentiles of
+[\PrimaryLowPP{}, \PrimaryHighPP{}].  They span both signs; no null test,
+population effect, or equivalence conclusion is drawn.  Git history orders the
+binary gate commit before retained result artifacts, and replacing every
+outcome value while holding gate evidence fixed leaves the gate decision
+unchanged; this functional invariance does not make the later taxonomy
+prospective.  The full factorial derivation, table, and figure appear in the
+Appendix because the policy contrast is an admission demonstration rather than
+the protocol's principal result.
 
 \section{Interpretation and permitted claims}
 
@@ -836,18 +830,16 @@ relationships with engine or game rights holders before submission.
 \textbf{Public (with submission, pending rights approval).} The computational
 companion contains the synthetic protocol implementation and fixtures with
 expected outputs, the executable admission engine with generated decision
-tables (including the Stage-6 source-audit rules), and processed historical,
-preflight, stress, and factorial diagnostics, including recovered acting-side
-first-divergence counts and timing aggregates.  The companion also contains
-analysis and verification scripts, protocol transcriptions, figures with
-source data, schemas, hashes, tests, environment declarations, and
-one-command reproduction instructions.
-It is computationally self-contained for the synthetic and processed analyses
-and does not require the game engine. Public archival availability is not yet
-established: ownership, an approved software/data license, archive creators,
-maintainer contact, and a DOI await explicit human authorization, so this
-manuscript does not describe the package as public or promise a later release.
-The unsigned chronology and omission register is included as
+tables, and processed historical, preflight, stress, and factorial
+diagnostics, including recovered acting-side first-divergence counts and
+timing aggregates.  It also contains analysis and verification scripts,
+protocol transcriptions, figures with source data, schemas, hashes, tests,
+environment declarations, and one-command reproduction instructions, and it
+runs without the game engine.  Public archival availability is not yet
+established: ownership, an approved license, archive creators, maintainer
+contact, and a DOI await explicit human authorization, so this manuscript does
+not describe the package as public or promise a later release.  The unsigned
+chronology and omission register is included as
 \texttt{supplement/PROTOCOL\_DEVIATIONS.md}; its pending status is neither an
 amendment nor human approval.
 

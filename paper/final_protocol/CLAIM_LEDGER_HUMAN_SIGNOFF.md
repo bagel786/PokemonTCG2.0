@@ -1,5 +1,11 @@
 # Claim ledger — human signoff worksheet
 
+**Human-facing path:** you do NOT sign rows here. Complete the
+`HUMAN_PORTAL` questionnaire instead; its attestation (Q18-Q20 + CORE
+FACTS page) is recorded as the human-responsibility layer on top of this
+ledger, which stays active and machine-audited. The per-row workflow below
+remains available if the author ever wants it.
+
 **Instruction to the human author:** the machine claim ledger
 (`claim_ledger.csv`) is regenerated on every pipeline run and currently pairs
 33 curated claims with an automatically generated set of remaining prose rows

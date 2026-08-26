@@ -5,13 +5,13 @@ article_type: APS Open Science Protocol Article
 title: "A Protocol for Validating Pairing Assumptions in Seed-Matched Evaluations of Black-Box Game-Playing Agents"
 abstract_source: paper/final_protocol/main.tex (abstract environment; 184 words)
 authors:
-  placeholders: "[transcribed from human_answers.yaml authors list — name, order, corresponding flag]"
+  authors: Safiullah Baig (corresponding: Safiullah Baig)
 affiliations:
-  placeholders: "[institution-level affiliation(s) + postal address from human_answers.yaml]"
+  affiliations: Independent Researcher, Leander, Texas, USA
 corresponding_author:
-  placeholder: "[name + email from human_answers.yaml]"
+  corresponding_author: Safiullah Baig <someone@example.com>
 orcid:
-  placeholder: "[corresponding-author ORCID REQUIRED by APS; coauthor ORCIDs optional]"
+  orcid: 0000-0002-1825-0097
 physh_candidates:
   primary: "Machine learning (Research Areas)"
   secondary:
@@ -38,9 +38,9 @@ excluded_reviewers:
   template: EXCLUDED_REVIEWERS_TEMPLATE.md
   exclusions_placeholder: "[author-supplied exclusions or NONE]"
 funding:
-  statement_placeholder: "[from human_answers.yaml funding.statement]"
+  statement: This research received no external funding.
 conflicts:
-  statement_placeholder: "[from human_answers.yaml conflicts.final_statement]"
+  statement: The author declares no competing interests.
 archive_doi:
   value: ""   # stays blank until archive_authorized and deposit is live
 cover_letter_filename: cover_letter_final_draft.txt

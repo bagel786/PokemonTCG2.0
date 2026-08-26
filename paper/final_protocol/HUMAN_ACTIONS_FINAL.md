@@ -1,5 +1,11 @@
 # HUMAN ACTIONS FINAL — the only remaining blockers are yours
 
+> **SUPERSEDED BY THE HUMAN PORTAL.** The current human workflow is
+> `HUMAN_PORTAL/START_HERE.md`. This file remains as provenance; its blocking
+> decision (the manuscript must not be submitted; NOT_READY_DO_NOT_SUBMIT until
+> human closeout completes) still governs.
+
+
 Status at closeout handoff (2026-08-25):
 **SCIENTIFICALLY_READY_FOR_HUMAN_CLOSEOUT — SUBMISSION_BLOCKED_BY_HUMAN_ACTIONS**
 

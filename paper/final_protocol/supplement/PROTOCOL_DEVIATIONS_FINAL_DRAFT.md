@@ -86,3 +86,6 @@ Signature: ________________________________
 **After signing:** commit the signed file (or hand it back for transcription),
 then run the one-command post-human workflow (`HUMAN_MINIMUM_ACTIONS.md`);
 every machine gate re-executes before submission.
+
+---
+**Transcribed human disposition:** positions_never_recorded=True; actor_counts_recovered=True; timings_recovered=True; redistribution_approved=True; date=2026-08-26; signature_text=Safiullah Baig

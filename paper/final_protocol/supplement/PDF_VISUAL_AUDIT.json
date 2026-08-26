@@ -33,16 +33,15 @@
     "13b1984b4845e16efdebffb04e510dbdc9d65c09068c8e5c04b9bb7445597542",
     "13ec9c72e1277d0df3dece918f495e6f013fbd101e91d12e3e25676d7fe44a13",
     "645ef58e4cc5c24e3d93d76e98806fc28f43fafe647fbe35031b25eed70645e6",
-    "226f51277cae087a6091a5f236a94a581b9d10d67240b78f7168d55a6c1ab16b",
-    "dad9e0c77fe2cf5fbd6ba2a08830cdd6484daa6998f81a3990db8c886b3c339e",
-    "a6f69ef6c48f04922725c65af384fad1435eb82ad30c30e3346eb4a1feb445f6",
-    "d1fd8caea5dd962a74af09497db83fe5494ba4d46965eb5289ab5aeca06c0463",
-    "3b9bf212ff99a8fe03d908464b17c1c5f20cc4d85fb9436b0c42a4bb7ee3dd6f",
-    "da7d85ba8be742e2c8848ea1f0b41d6c9aaeb57da5825882f4f4bde7bcb0cbe3",
-    "ad4d60a4b65b1daf4d6984bf8d44782486d673cb18997e82dd351805e7fba9f5",
-    "bf5a65e8176bcded9285fe865734c98264a6e17d4297d0abc8b4a8bd662009f1",
-    "89d51704ea4602eea9e18723a579b6db50336d074ce2dda3d9a6c72b6ca7a2cf",
-    "9a62cd48a3dd71b9b8f5babd1bca0ee328b436aff72a4f78d14067b8f80734cc"
+    "100626759b22dc7c2b8d29025d0c57acbb5fce93921148a11a728f3eba45037d",
+    "94bfe8114c9e003142a6de523dab22278028f63caee66312048014474d1c42fa",
+    "162175544bcc35152f4c7d5dd20d61af3ccfa6f705dcb7fec174a27b2162d121",
+    "878bd64f8d39782b765762091281304c8c03c16700bca66d37da62f800b23261",
+    "a1f47608f0d53738bbf51c089913fb8230ecd1e933bd893cacbdc35717ce3e9c",
+    "2aad4e4055367a5f037763aaa0e237c5420ad076566ed4b2834a52d4d3d9fec3",
+    "be1fdcf721f534ea6f51e9c0f7597c0948c70b7428f09795d7063f0dad1b3133",
+    "08cf5b2c132ec4b025c747cfc56f4c65354aa542b87602fd58196f9c6808468f",
+    "9052732d9ed89b4bc285602c701f902710b5d14972141b1f561f2e32563e79c6"
   ],
   "inspected_pages": [
     1,
@@ -57,19 +56,14 @@
     10,
     11,
     12,
-    13,
-    14
+    13
   ],
-  "inspection_method": "Machine-finalization re-inspection (same directed procedure as the prior closeout phase): every page of the final manuscript state was rendered at 150 dpi, structurally verified (PNG signature, IHDR, minimum dimensions), checked against pdftotext output for unresolved markers, and hash-bound. Human visual re-inspection remains required before submission and is recorded as PENDING below.",
+  "inspection_method": "Human-portal simplification re-inspection (same directed procedure as prior phases): every page rendered at 150 dpi, structurally verified, marker-checked, hash-bound. Human visual re-inspection remains required before submission (PENDING signoff below).",
   "limitation": "Automated structural inspection cannot judge typographic aesthetics or legibility the way a human reader can; the PENDING signoff gate covers exactly that.",
-  "manuscript_pdf_sha256": "0eff0c625709a11b01dfbd3b84f475b66fbb10c15112feac27bf56abfe00d590",
-  "manuscript_source_sha256": "0220a758d14fdf945fb377630a079d688415db9edf4d9262233eeacf1d30478d",
-  "page_count": 14,
+  "manuscript_pdf_sha256": "64eac783289c4170d47288b833ae21a78a58e2f04a44ca051789c70dc2e7c2a8",
+  "manuscript_source_sha256": "0ca61efccd4a142bb92d548c67765f89cb2706f67adebc0bd7b004b8a66ca143",
+  "page_count": 13,
   "page_size": [
-    [
-      1275,
-      1650
-    ],
     [
       1275,
       1650

@@ -1,5 +1,11 @@
 # Human actions required before submission
 
+> **SUPERSEDED BY THE HUMAN PORTAL.** The current human workflow is
+> `HUMAN_PORTAL/START_HERE.md`. This file remains as provenance; its blocking
+> decision (the manuscript must not be submitted; NOT_READY_DO_NOT_SUBMIT until
+> human closeout completes) still governs.
+
+
 Status: **OPEN — the manuscript must not be submitted.** Machine checks cannot
 resolve or infer any item below. Record names, decisions, dates, and signatures
 only after the responsible humans have confirmed them.

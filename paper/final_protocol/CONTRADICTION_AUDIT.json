@@ -1511,7 +1511,7 @@
       ],
       "message": "Every final claim-ledger row has an allowed evidentiary status.",
       "observed": {
-        "rows": 330,
+        "rows": 327,
         "statuses": [
           "DERIVED_BY_CHECKED_SCRIPT",
           "VERIFIED",
@@ -1533,8 +1533,8 @@
       "message": "The fail-closed scope pass binds every narrative and caption sentence; structured exclusions are enumerated.",
       "observed": {
         "human_verified_yes": 0,
-        "prose_sentence_occurrences": 328,
-        "rows": 330
+        "prose_sentence_occurrences": 325,
+        "rows": 327
       },
       "status": "PASS"
     },
@@ -1587,7 +1587,7 @@
       "evidence": [
         "paper/final_protocol/claim_ledger.csv"
       ],
-      "required_resolution": "The corresponding author must verify all 330 claim-ledger rows; no machine status substitutes for that sign-off.",
+      "required_resolution": "The corresponding author must verify all 327 claim-ledger rows; no machine status substitutes for that sign-off.",
       "status": "OPEN"
     },
     {
@@ -1673,7 +1673,7 @@
       "evidence": [
         "paper/final_protocol/conflict_of_interest.md:17",
         "paper/final_protocol/conflict_of_interest.md:3",
-        "paper/final_protocol/main.tex:829"
+        "paper/final_protocol/main.tex:823"
       ],
       "required_resolution": "Collect and approve every author's financial and nonfinancial disclosure.",
       "status": "OPEN"

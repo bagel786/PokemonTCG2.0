@@ -1,7 +1,7 @@
 {
   "generator": {
     "path": "paper/final_protocol/scripts/build_final_artifacts.py",
-    "sha256": "a2de147756b6e4045a1bc722acd6db590053bdc11f0a9950524fef9e43c7f253"
+    "sha256": "aa5d985ac09734fe755ac55d852f8a69201c4168dca9c7d98ed98651b7ade666"
   },
   "inputs": {
     "combined": {

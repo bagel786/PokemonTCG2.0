@@ -1,5 +1,12 @@
 # Human closeout form — APS Open Science Protocol Article
 
+> **SUPERSEDED BY THE HUMAN PORTAL.** Do not fill this form. The current
+> human workflow is `HUMAN_PORTAL/START_HERE.md` (20-question questionnaire +
+> eight passages + core-facts page). This file is retained only as provenance
+> of the earlier closeout round; its numbers were corrected to the
+> authoritative 210/2,800 and 458/2,800 counts.
+
+
 **Instruction to the human author:** this single document collects every
 question that only a human can answer. Complete every section, initial each
 line, and return the signed file. Machine tooling (including Codex) must not

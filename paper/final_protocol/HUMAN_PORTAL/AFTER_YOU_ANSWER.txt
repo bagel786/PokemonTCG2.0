@@ -1,0 +1,47 @@
+AFTER YOU ANSWER — AGENT WORKFLOW (not for the human)
+=====================================================
+
+When the human returns the completed questionnaire (Google Doc / plain text):
+
+ 1. Save the plain answers verbatim as:
+        paper/final_protocol/HUMAN_RESPONSE.txt
+ 2. Run:
+        python3 paper/final_protocol/scripts/parse_human_response.py
+    It writes paper/final_protocol/human_answers.generated.yaml and lists any
+    missing/ambiguous answers.
+ 3. Ask ONLY unavoidable clarifications (one concise question each; the parser
+    prints them). Never invent an answer.
+ 4. Run:
+        python3 paper/final_protocol/scripts/apply_human_response.py --diff
+    Review the preview, then:
+        python3 paper/final_protocol/scripts/apply_human_response.py --apply
+    This updates the manuscript title block, author list, affiliation, email,
+    ORCID, contribution statement (+ suggested contribution categories for
+    approval), funding, competing interests, acknowledgments, prior-material
+    disclosure, AI disclosure, deviation language, release authorization,
+    license files, CITATION.cff, release status, archive metadata, Data
+    Availability Statement, cover letter, and APS submission metadata.
+ 5. Build the licensed public-release candidate:
+        python3 paper/final_protocol/scripts/build_public_release_candidate.py
+ 6. STOP for archive/DOI authorization if question 15 was "NOT YET".
+    (If YES and a deposit has been made, insert the live DOI via the generated
+    YAML `release_rights.doi`, then re-run step 4.)
+ 7. Rebuild the manuscript:
+        SOURCE_DATE_EPOCH=1787529600 tectonic paper/final_protocol/main.tex
+ 8. Re-run all audits:
+        python3 paper/final_protocol/scripts/machine_finalize.py
+    (covers raw hashes, reaggregation, statistics, synthetic suite, admission
+    properties, tables/figures, claim ledger, novelty/reference audits,
+    chronology + contradiction audits, release rebuild + manifest,
+    clean-environment checks, REVTeX compile, all-page rendering, visual
+    checks, submission bundle, final desk simulation)
+ 9. Render all pages and figures; confirm no overlapping text.
+10. Generate the final APS submission bundle:
+        python3 paper/final_protocol/scripts/build_submission_bundle.py
+11. Output a ONE-PAGE final approval summary for the human containing:
+    final title/byline, the eight passage dispositions, the core-facts
+    confirmation, release/license choices, and the exact APS upload list.
+12. The human inspects the final PDF and manually submits to APS.
+
+Hard rules: never auto-approve authorship, licenses, release, or submission;
+if an answer is ambiguous, stop and ask one concise question.

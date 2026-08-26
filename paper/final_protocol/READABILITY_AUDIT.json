@@ -15,8 +15,8 @@
     "nonabstract_paragraph_words_above": 220
   },
   "sentence_length": {
-    "sentence_count": 366,
-    "mean_words": 19.09,
+    "sentence_count": 363,
+    "mean_words": 19.05,
     "maximum_words": 51,
     "over_40_words": [
       {
@@ -35,59 +35,39 @@
         "sentence": "Stage 4 is within-artifact fresh-process repeatability: byte-identical arms are re-executed in separate fresh processes on the same schedule rows and their records are compared in increasing strength outcome, errors, decision count, and the digest plus byte count of the recorded trace projection."
       },
       {
-        "line": null,
-        "word_count": 45,
-        "sentence": "The evidence-bound admit path checks a closed support tree, hashes declared regular files, checks trace byte counts, and derives gate states from structurally validated records; an explicitly trusted-state classifier is a separate interface for formal conformance checks whose caller supplies those states as trusted inputs."
-      },
-      {
-        "line": 419,
-        "word_count": 45,
-        "sentence": "The generic verifier does not parse engine-specific trace semantics or prove artifact roles or execution-profile provenance; those remain caller assertions requiring an independently controlled acquisition manifest or equivalent external trust anchor, so machine verification of arbitrary external evidence extends fully through the lower stages only."
-      },
-      {
-        "line": 424,
-        "word_count": 49,
-        "sentence": "Successful Level 6 and Level 7 demonstrations are currently available through the synthetic conformance suite's declared adapters and the trusted-state interface; reusable file-bound evidence schemas for completed source audits and event-alignment records remain future work, and the bundled example marks both upper gates conservatively rather than manufacturing stronger evidence."
-      },
-      {
-        "line": 445,
+        "line": 441,
         "word_count": 44,
         "sentence": "Checked property tests back every property replacing all result values, weakening every prerequisite, injecting extreme favorable results after failures, removing trace-projection scope, repeating evaluations, and enumerating every combination of the six evidence states across seven gates and protocol, schema, and claim-class tampering are rejected."
       },
       {
-        "line": 525,
+        "line": 521,
         "word_count": 41,
         "sentence": "The stateful draw-shift fixture repeats exactly within each arm but aligns only one of five shared events after one arm consumes an extra draw; deriving random quantities from the base seed and semantic event key aligns all five logged shared events."
       },
       {
-        "line": 595,
+        "line": 591,
         "word_count": 44,
         "sentence": "Artifact hashes, the boundary seed conversion, schedule rows, trace schema, execution profiles, sample sizes, resampling seeds, and binary failure actions are recorded in that protocol commit, together with the full eight-stage evidence ladder and its planned 95\\% paired-resampling intervals and secondary exact McNemar inference."
       },
       {
-        "line": 626,
+        "line": 622,
         "word_count": 41,
         "sentence": "The preflight and factorial used different frozen seed ranges, so treating this qualification result as applicable to the later factorial is a bounded transfer assumption about the same identified artifacts and five contexts, not direct trace evidence on the factorial rows."
       },
       {
-        "line": 660,
+        "line": 656,
         "word_count": 49,
         "sentence": "A closeout search of retained evidence found acting-side counts at first divergence (all 99 disagreeing clusters localized to the opponent side) and per-profile wall-clock timing summaries in the hash-pinned stress summary; both are now included as processed aggregates with the source digest recorded, pending human approval of their redistribution."
       },
       {
-        "line": 626,
+        "line": 622,
         "word_count": 48,
         "sentence": "The preflight and factorial used different seed ranges, and factorial candidate rows contain no trace digest, so their repeated-control gate compares only the frozen available record and applying the preflight qualification to those rows is a bounded transfer assumption rather than observed trace repeatability on the factorial battery."
       },
       {
-        "line": 796,
+        "line": 790,
         "word_count": 41,
         "sentence": "Its synthetic suite demonstrates the logical failure modes and an event-keyed repair; its restricted case study shows both a failed retrospective historical audit and a passing prospective qualification scope, followed by a deliberately conservative post-acquisition description of the fixed factorial battery."
-      },
-      {
-        "line": 836,
-        "word_count": 42,
-        "sentence": "The computational companion contains the synthetic protocol implementation and fixtures with expected outputs, the executable admission engine with generated decision tables (including the Stage-6 source-audit rules), and processed historical, preflight, stress, and factorial diagnostics, including recovered acting-side first-divergence counts and timing aggregates."
       }
     ],
     "over_55_words": []
@@ -140,14 +120,6 @@
       "count": 5
     },
     {
-      "phrase": "2 5th and 97 5th percentiles",
-      "count": 5
-    },
-    {
-      "phrase": "5th and 97 5th percentiles",
-      "count": 5
-    },
-    {
       "phrase": "are in source data figure",
       "count": 5
     },
@@ -160,47 +132,23 @@
       "count": 5
     },
     {
+      "phrase": "2 5th and 97 5th percentiles",
+      "count": 4
+    },
+    {
+      "phrase": "5th and 97 5th percentiles",
+      "count": 4
+    },
+    {
       "phrase": "2 5th and 97 5th",
-      "count": 5
+      "count": 4
     },
     {
       "phrase": "95 paired-resampling intervals and secondary",
       "count": 3
     },
     {
-      "phrase": "97 5th percentiles from the prespecified",
-      "count": 3
-    },
-    {
-      "phrase": "5th percentiles from the prespecified",
-      "count": 3
-    },
-    {
-      "phrase": "5th and 97 5th percentiles from",
-      "count": 3
-    },
-    {
-      "phrase": "and 97 5th percentiles from the",
-      "count": 3
-    },
-    {
-      "phrase": "97 5th percentiles from the",
-      "count": 3
-    },
-    {
-      "phrase": "and 97 5th percentiles from",
-      "count": 3
-    },
-    {
       "phrase": "in tests test equations py",
-      "count": 3
-    },
-    {
-      "phrase": "the 2 5th and 97 5th",
-      "count": 3
-    },
-    {
-      "phrase": "the 2 5th and 97",
       "count": 3
     }
   ],
@@ -211,14 +159,10 @@
     },
     {
       "value": "2",
-      "count": 14
+      "count": 13
     },
     {
       "value": "0",
-      "count": 8
-    },
-    {
-      "value": "6",
       "count": 8
     },
     {
@@ -238,6 +182,10 @@
       "count": 7
     },
     {
+      "value": "6",
+      "count": 7
+    },
+    {
       "value": "11",
       "count": 6
     },
@@ -254,10 +202,6 @@
       "count": 5
     },
     {
-      "value": "97",
-      "count": 5
-    },
-    {
       "value": "01",
       "count": 4
     },
@@ -267,6 +211,10 @@
     },
     {
       "value": "7",
+      "count": 4
+    },
+    {
+      "value": "97",
       "count": 4
     },
     {
@@ -485,12 +433,12 @@
     },
     {
       "line": null,
-      "word_count": 196,
+      "word_count": 167,
       "inferred_purpose": "scope_or_limitation",
-      "topic_sentence": "The evidence-bound admit path checks a closed support tree, hashes declared regular files, checks trace byte counts, and derives gate states from structurally validated records; an explicitly trusted-state classifier is a separate interface for formal conformance checks whose caller supplies those states as trusted inputs."
+      "topic_sentence": "The evidence-bound admit path checks a closed support tree, hashes declared regular files, checks trace byte counts, and derives gate states from structurally validated records; a trusted-state classifier is a separate interface for conformance checks whose caller supplies those states."
     },
     {
-      "line": 435,
+      "line": 431,
       "word_count": 184,
       "inferred_purpose": "result_or_evidence",
       "topic_sentence": "For any structurally valid evidence record, the implemented admission map is result independent, prerequisite monotone, failure dominant, projection scoped, statelessly deterministic, and fail closed for unknown states."
@@ -502,7 +450,7 @@
       "topic_sentence": "For binary outcome Y (win =1 , nonwin =0 ), the paired difference for unit i is"
     },
     {
-      "line": 463,
+      "line": 459,
       "word_count": 83,
       "inferred_purpose": "scope_or_limitation",
       "topic_sentence": "The superscripts denote intervention and control; each Y and d i is unitless, with d i \\ -1,0,1\\ ."
@@ -520,49 +468,49 @@
       "topic_sentence": "The index I bkj reweights whole schedule-indexed paired-unit identifiers within stratum k by sampling their indices with replacement; arms are never reweighted separately."
     },
     {
-      "line": 499,
+      "line": 495,
       "word_count": 117,
       "inferred_purpose": "method_or_definition",
       "topic_sentence": "OpenAI Codex, using a GPT-5-family model for which the exact deployed snapshot was not exposed, provided substantive research assistance under human direction."
     },
     {
-      "line": 515,
+      "line": 511,
       "word_count": 61,
       "inferred_purpose": "narrative_or_interpretation",
       "topic_sentence": "The standalone standard-library suite supplies an inspectable computational test oracle without the restricted game engine."
     },
     {
-      "line": 523,
+      "line": 519,
       "word_count": 76,
       "inferred_purpose": "narrative_or_interpretation",
       "topic_sentence": "The seed-conversion fixture repeats within arm while failing namespace integrity."
     },
     {
-      "line": 534,
+      "line": 530,
       "word_count": 46,
       "inferred_purpose": "scope_or_limitation",
       "topic_sentence": "Synthetic failure-detection and admission matrix."
     },
     {
-      "line": 542,
+      "line": 538,
       "word_count": 52,
       "inferred_purpose": "narrative_or_interpretation",
       "topic_sentence": "The suite writes complete JSON evidence, a level-by-mode CSV, a JSON Schema, and a SHA-256 manifest."
     },
     {
-      "line": 551,
+      "line": 547,
       "word_count": 62,
       "inferred_purpose": "scope_or_limitation",
       "topic_sentence": "The case study uses a seeded tournament-engine binary, four fixed policy packages, and third-party opponent packages that cannot be redistributed under the currently established rights."
     },
     {
-      "line": 559,
+      "line": 555,
       "word_count": 52,
       "inferred_purpose": "method_or_definition",
       "topic_sentence": "The bounded source audit verified frozen digests for all 13 inventoried artifacts and applied the Python source-pattern scan to 11 package trees; the 2 engine binaries were hash checked but not source assessed."
     },
     {
-      "line": 566,
+      "line": 562,
       "word_count": 76,
       "inferred_purpose": "narrative_or_interpretation",
       "topic_sentence": "The historical study scheduled seven opponents, two actual orders, and 200 seed conditions per opponent-order cell."
@@ -574,139 +522,139 @@
       "topic_sentence": "That projection disagreed on 210/2,800 units when it included win and draw fields and on 458/2,800 units after decision count was added; both mismatch sets were confined to two timed-search opponent packages."
     },
     {
-      "line": 592,
+      "line": 588,
       "word_count": 172,
       "inferred_purpose": "scope_or_limitation",
       "topic_sentence": "The experiment-specific protocol content first appears at commit 803257f1, and the retained result artifacts appear in descendant commits; repository history establishes only that Git ordering, not when a human inspected uncommitted files."
     },
     {
-      "line": 615,
+      "line": 611,
       "word_count": 173,
       "inferred_purpose": "result_or_evidence",
       "topic_sentence": "The preflight covered four arms and five deterministic contexts."
     },
     {
-      "line": 635,
+      "line": 631,
       "word_count": 176,
       "inferred_purpose": "scope_or_limitation",
       "topic_sentence": "The separate diagnostic retained the two timed-search opponents rather than silently excluding them."
     },
     {
-      "line": 659,
+      "line": 655,
       "word_count": 126,
       "inferred_purpose": "scope_or_limitation",
       "topic_sentence": "The frozen stress protocol promised first-divergence positions and acting sides plus timing summaries in the review package."
     },
     {
-      "line": 675,
+      "line": 671,
       "word_count": 62,
       "inferred_purpose": "result_or_evidence",
       "topic_sentence": "Fixed-battery trace-projection disagreement in the timed-search stress test."
     },
     {
-      "line": 687,
-      "word_count": 134,
+      "line": 683,
+      "word_count": 122,
       "inferred_purpose": "result_or_evidence",
       "topic_sentence": "The later four-cell comparison was acquired only after the deterministic preflight passed, and its prespecified repeated-control available-record audit had 0 mismatches."
     },
     {
-      "line": 702,
-      "word_count": 110,
+      "line": 697,
+      "word_count": 95,
       "inferred_purpose": "scope_or_limitation",
-      "topic_sentence": "The total fixed-package contrast on that battery was +0.55 ."
+      "topic_sentence": "The total fixed-package contrast on that battery was +0.55 , with descriptive empirical reweighting percentiles of [-2.05, +3.15]."
     },
     {
-      "line": 716,
+      "line": 710,
       "word_count": 101,
       "inferred_purpose": "scope_or_limitation",
       "topic_sentence": "The evidence supports four bounded conclusions."
     },
     {
-      "line": 728,
+      "line": 722,
       "word_count": 66,
       "inferred_purpose": "scope_or_limitation",
       "topic_sentence": "The synthetic suite supports a stronger event-alignment statement only inside its logged ontology; the restricted engine cannot establish that level."
     },
     {
-      "line": 736,
+      "line": 730,
       "word_count": 36,
       "inferred_purpose": "scope_or_limitation",
       "topic_sentence": "Fail-closed admission preserves useful negative results."
     },
     {
-      "line": 743,
+      "line": 737,
       "word_count": 119,
       "inferred_purpose": "scope_or_limitation",
       "topic_sentence": "The conformance suite contains designed counterexamples and cannot estimate how often these failure modes occur."
     },
     {
-      "line": 757,
+      "line": 751,
       "word_count": 97,
       "inferred_purpose": "scope_or_limitation",
       "topic_sentence": "The trace projection stores hashes of public observations rather than raw observations and omits opaque search input, private simulator state, and semantic random-event identifiers."
     },
     {
-      "line": 768,
+      "line": 762,
       "word_count": 84,
       "inferred_purpose": "scope_or_limitation",
       "topic_sentence": "The unsigned deviation record documents the frozen stress protocol's promised secondary outputs."
     },
     {
-      "line": 778,
+      "line": 772,
       "word_count": 69,
       "inferred_purpose": "scope_or_limitation",
       "topic_sentence": "The engine, third-party opponents, game assets and metadata, private replay observations, policy packages, and restricted raw traces cannot be redistributed under the authority presently established."
     },
     {
-      "line": 786,
+      "line": 780,
       "word_count": 35,
       "inferred_purpose": "narrative_or_interpretation",
       "topic_sentence": "Finally, author identities, affiliations, ORCIDs, CRediT roles, funding, conflicts, acknowledgments, complete historical AI-use confirmation, and permissions to identify organizations or individuals require human approval."
     },
     {
-      "line": 793,
+      "line": 787,
       "word_count": 114,
       "inferred_purpose": "method_or_definition",
       "topic_sentence": "A seed schedule, a repeatable execution, and an event-aligned stochastic coupling are different scientific objects."
     },
     {
-      "line": 808,
+      "line": 802,
       "word_count": 93,
       "inferred_purpose": "narrative_or_interpretation",
       "topic_sentence": "In addition to the research-conduct uses described in Methods, OpenAI Codex assisted with bibliographic verification, manuscript drafting and editing, release-package assembly, reproducibility checklists, and adversarial review."
     },
     {
-      "line": 821,
+      "line": 815,
       "word_count": 40,
       "inferred_purpose": "narrative_or_interpretation",
       "topic_sentence": "Author identities and CRediT roles for conceptualization, methodology, software, validation, formal analysis, investigation, data curation, visualization, writing, supervision, project administration, and funding acquisition require human confirmation."
     },
     {
-      "line": 829,
+      "line": 823,
       "word_count": 34,
       "inferred_purpose": "narrative_or_interpretation",
       "topic_sentence": "No reliable competing-interest statement is established in the repository."
     },
     {
-      "line": 836,
-      "word_count": 150,
+      "line": 830,
+      "word_count": 132,
       "inferred_purpose": "scope_or_limitation",
       "topic_sentence": "Public (with submission, pending rights approval)."
     },
     {
-      "line": 773,
+      "line": 767,
       "word_count": 96,
       "inferred_purpose": "scope_or_limitation",
       "topic_sentence": "Restricted."
     },
     {
-      "line": 869,
+      "line": 861,
       "word_count": 80,
       "inferred_purpose": "method_or_definition",
       "topic_sentence": "Preflight and stress executions record schedule identity, artifact digests, the value passed at the engine boundary, outcome, errors, decision count, and a canonical trace-projection digest with byte count."
     },
     {
-      "line": 881,
+      "line": 873,
       "word_count": 51,
       "inferred_purpose": "narrative_or_interpretation",
       "topic_sentence": "The factorial crossed a representation flag and a separately trained policy update, producing four fixed packages: (neither), (representation only), (training only), and (both)."
@@ -730,31 +678,31 @@
       "topic_sentence": "T is the total fixed-package intervention contrast, R the average representation contrast, G the average training contrast, and J the interaction."
     },
     {
-      "line": 907,
+      "line": 899,
       "word_count": 56,
       "inferred_purpose": "narrative_or_interpretation",
       "topic_sentence": "The representation, training, and interaction contrasts were +0.95, -0.40, and +1.30 , respectively; the empirical reweighting quantiles for all four contrasts span zero."
     },
     {
-      "line": 919,
+      "line": 911,
       "word_count": 57,
       "inferred_purpose": "narrative_or_interpretation",
       "topic_sentence": "Prespecified fixed-battery factorial contrasts and the 2.5th and 97.5th percentiles from the prespecified stratified paired-unit resampling algorithm, reported as empirical reweighting for 2,000 schedule-indexed units."
     },
     {
-      "line": 931,
+      "line": 923,
       "word_count": 65,
       "inferred_purpose": "narrative_or_interpretation",
       "topic_sentence": "The prespecified timed-search resampling algorithm reweights whole seed-condition clusters, retaining all four execution profiles together."
     },
     {
-      "line": 940,
+      "line": 932,
       "word_count": 70,
       "inferred_purpose": "scope_or_limitation",
       "topic_sentence": "The factorial procedure reweights complete schedule-indexed paired-unit identifiers independently within each of ten opponent-by-order strata and recomputes the four cell means and contrasts."
     },
     {
-      "line": 951,
+      "line": 943,
       "word_count": 58,
       "inferred_purpose": "method_or_definition",
       "topic_sentence": "The synthetic conformance logic, processed summaries, source-data files, protocols, and generators are separated from restricted engine and game materials."
