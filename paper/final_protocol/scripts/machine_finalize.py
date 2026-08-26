@@ -21,8 +21,10 @@ import subprocess
 import sys
 from pathlib import Path
 
-FINAL = Path(__file__).resolve().parents[1]
-ROOT = FINAL.parents[2]
+SCRIPT = Path(__file__).resolve()
+SCRIPT = Path(__file__).resolve()
+FINAL = SCRIPT.parents[1]
+ROOT = SCRIPT.parents[3]
 MACHINE_REPORT = FINAL / "REPRODUCTION_REPORT_MACHINE_FINAL.json"
 MACHINE_SIDECAR = FINAL / "REPRODUCTION_REPORT_MACHINE_FINAL.sha256"
 CANONICAL_REPORT = FINAL / "REPRODUCTION_REPORT.json"
