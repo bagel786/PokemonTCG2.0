@@ -25,10 +25,10 @@
     "result": "BLOCKED_PENDING_HUMAN_ACTIONS"
   },
   "closeout_artifact_hashes": {
-    "main_pdf": "0eff0c625709a11b01dfbd3b84f475b66fbb10c15112feac27bf56abfe00d590",
-    "main_tex": "0220a758d14fdf945fb377630a079d688415db9edf4d9262233eeacf1d30478d",
+    "main_pdf": "64eac783289c4170d47288b833ae21a78a58e2f04a44ca051789c70dc2e7c2a8",
+    "main_tex": "0ca61efccd4a142bb92d548c67765f89cb2706f67adebc0bd7b004b8a66ca143",
     "novelty_audit_v2": "6848d4fe2c4dfb2b3b8a63fe8e71276a3978ca10e248f3620c62caa247c23df7",
-    "release_manifest": "63af371974554f3a9b4930a9b5a86997706306f78c8a4fe7471593811ea831ce"
+    "release_manifest": "18ac3a8242b3d7fe9550f5c3426cea8375f00a571d4458b67937458049e5ea3e"
   },
   "combined_decision": {
     "completeness": "BLOCKED_BY_HUMAN_ACTIONS",
