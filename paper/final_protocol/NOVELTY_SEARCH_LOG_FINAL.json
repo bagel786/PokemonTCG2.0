@@ -1,0 +1,83 @@
+{
+  "schema_version": "novelty-search-log-final-v1",
+  "audit_date": "2026-08-25",
+  "timezone": "UTC",
+  "cutoff_statement": "Literature verified and searched through 2026-08-25; no claim of coverage beyond this date.",
+  "source_policy": {
+    "admitted": [
+      "arXiv abstract pages",
+      "publisher/DOI landing pages (INFORMS, ACM, IEEE, JMLR, PMLR, SciTePress, Springer)",
+      "official workshop sites",
+      "NeurIPS proceedings"
+    ],
+    "excluded_as_authority": [
+      "search snippets alone",
+      "blogs",
+      "second-hand citations inside other papers' related-work sections"
+    ],
+    "fail_closed": "Any reference that could not be resolved to a primary source is recorded as UNVERIFIED rather than silently kept or repaired."
+  },
+  "verification_results": {
+    "total": 23,
+    "verified_match": 23,
+    "unverified": 0,
+    "details_file": "REFERENCE_AUDIT_FINAL.csv"
+  },
+  "fresh_searches": [
+    {
+      "query": "common random numbers agent evaluation paired seeds 2026",
+      "purpose": "new CRN pairing work",
+      "notable_new_hits": [
+        "Yadav et al., RLJ 2026 - CRN in simulation-based planning (planning internal, not evaluation claims)"
+      ]
+    },
+    {
+      "query": "seed-paired / deterministic replay evaluation agents 2026",
+      "purpose": "replay/trace work",
+      "notable_new_hits": [
+        "Mudasiru agrepl arXiv:2607.16200 (record/replay proxy)",
+        "GAIATrace/Vidur-Agent arXiv:2606.01725"
+      ]
+    },
+    {
+      "query": "LLM API nondeterminism reproducibility 2026",
+      "purpose": "stochasticity evidence",
+      "notable_new_hits": [
+        "Rover et al., Same Prompt Different Answer (Nature Comms major revision, under review - not citable as published)",
+        "Hydari & Iqbal arXiv:2606.08998"
+      ]
+    },
+    {
+      "query": "evaluation contract / protocol disclosure agent benchmarks 2026",
+      "purpose": "protocol-disclosure adjacency",
+      "notable_new_hits": [
+        "Agentick arXiv:2605.06869 (forced identical eval seeds)",
+        "Liu et al. arXiv:2606.00135"
+      ]
+    },
+    {
+      "query": "preregistered claim downgrade / fault-injection detection suites 2026",
+      "purpose": "suppression/synthetic-suite adjacency",
+      "notable_new_hits": [
+        "Zot 2026 philarchive (claim licensing)",
+        "ReplayBench-PG Zenodo 10.5281/zenodo.20391367"
+      ]
+    }
+  ],
+  "fatal_novelty_test": {
+    "result": "PASS",
+    "strongest_single": "kaliyev2026noisefloor",
+    "strongest_pair_tested": [
+      "kaliyev2026noisefloor",
+      "buffalo2026eventkeyed"
+    ],
+    "missing_from_strongest_pair": [
+      "result-independent executable admission map",
+      "automatic fail-closed suppression wired to gate evidence",
+      "synthetic coupling-failure suite bound to the same rules"
+    ],
+    "qualification": "Contribution is an operational integration, narrowly and conditionally scoped to black-box settings exposing a seeded entry point, hashable artifacts, and recordable projections."
+  },
+  "pivot_recommendation": null,
+  "note": "Second-hand leads observed only inside other papers' related-work sections were recorded but NOT admitted as authority and are excluded from REFERENCE_AUDIT_FINAL.csv."
+}

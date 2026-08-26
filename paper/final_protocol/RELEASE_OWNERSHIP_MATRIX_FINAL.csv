@@ -1,0 +1,18 @@
+component,description,proposed_license,ownership_status,redistribution_status,restricted_alternative
+pevl_bench (synthetic suite + admission engine),Engine-independent synthetic conformance suite, executable admission map, decision tables and schemas,MIT (.proposed),AUTHOR_OWNERSHIP_ASSERTED_PENDING_CONFIRMATION,BLOCKED until YAML approval,n/a
+analysis and verification scripts,verify_release.py, build_figures_tables.py, test suites,MIT (.proposed),AUTHOR_OWNERSHIP_ASSERTED_PENDING_CONFIRMATION,BLOCKED until YAML approval,n/a
+processed historical diagnostics,historical_control_repetition.csv + summary (3 available records per unit only),CC BY 4.0 (.proposed),AUTHOR_ACQUISITION_OWNED_RIGHTS_PENDING,BLOCKED until YAML approval,n/a
+processed preflight diagnostics,preflight_units.csv + summary (digests/byte counts/summaries; no raw observations),CC BY 4.0 (.proposed),AUTHOR_ACQUISITION_OWNED_RIGHTS_PENDING,BLOCKED until YAML approval,n/a
+processed stress diagnostics,timed_search_stress.json incl. recovered actor counts + timing aggregates (source-digest provenance),CC BY 4.0 (.proposed),AUTHOR_ACQUISITION_OWNED_RIGHTS_PENDING,BLOCKED until explicit recovered_secondary_outputs approval; positions never recorded,n/a
+processed factorial diagnostics,factorial_units.csv + summary (schedule/outcome/decision fields; no traces),CC BY 4.0 (.proposed),AUTHOR_ACQUISITION_OWNED_RIGHTS_PENDING,BLOCKED until YAML approval,n/a
+synthetic fixtures + expected outputs,four generated fixtures + admission adapters + manifest,MIT/CC BY 4.0 (.proposed pair),AUTHOR_OWNERSHIP_ASSERTED_PENDING_CONFIRMATION,BLOCKED until YAML approval,n/a
+protocols (sanitized transcriptions),three protocol transcriptions with provenance banners,CC BY 4.0 (.proposed),DERIVED_FROM_AUTHOR_FROZEN_PROTOCOL,BLOCKED until YAML approval,original frozen files remain in private repo
+figures + source data,deterministic plots (PDF/PNG) + JSON/CSV sources,CC BY 4.0 (.proposed),AUTHOR_OWNERSHIP_ASSERTED_PENDING_CONFIRMATION,BLOCKED until YAML approval,no generative imagery
+documentation + README + deviations register,review-package docs incl. D01-D03 register,CC BY 4.0 (.proposed),AUTHOR_OWNERSHIP_ASSERTED_PENDING_CONFIRMATION,BLOCKED until YAML approval,n/a
+environment declarations,requirements-lock.txt + environment.yml (+ recorded transitive snapshot in repo),CC0-equivalent statement pending,FACTUAL_DEPENDENCY_DECLARATIONS,BLOCKED with package until YAML approval,n/a
+tournament engine + engine binaries,restricted game engine,NO LICENSE,THIRD_PARTY/OPERATOR_TERMS — release authority NOT established,EXCLUDED,never redistributable without separate authorization
+third-party opponent packages,external opponents used in case study,NO LICENSE,THIRD_PARTY — rights not established,EXCLUDED,represented only by digests/neutral labels
+game assets and metadata,card/game artwork and data,NO LICENSE,RIGHTS_HOLDER property,EXCLUDED,n/a
+private replay observations,author-observed gameplay details,NO LICENSE,privacy-restricted,EXCLUDED,n/a
+policy packages / model weights,trained policy artifacts,NO LICENSE,AUTHOR but training-data terms unresolved,EXCLUDED from this candidate,n/a
+raw restricted traces,full gameplay trace payloads,NO LICENSE,restricted by organizer/third-party terms,EXCLUDED,only hash digests + bounded aggregates released

@@ -1,0 +1,21 @@
+{
+  "blind": true,
+  "completeness_findings_separated": [
+    "Author identity/affiliation/ORCID placeholders remain (human-only; excluded from scientific judgment).",
+    "No approved license, no DOI, release status unauthorized (rights gate, not science).",
+    "AI-use completeness, D03 disposition, claim-ledger signoffs unsigned (human gates)."
+  ],
+  "desk_decision_scientific": "SEND_TO_REVIEW",
+  "rationale": "Contribution boundary survives a refreshed primary-source novelty audit; empirical demonstration supports the protocol's discriminatory value.",
+  "residual_scientific_notes": [
+    "Single engine build and fixed opponents limit external validity - acknowledged in limitations.",
+    "Recovered actor/timing aggregates await redistribution approval; positions never recorded - consistently disclosed."
+  ],
+  "reviewer_id": "D",
+  "role": "agent evaluation expert (close 2026 prior art, pairing specificity, empirical usefulness)",
+  "scientific_assessment": {
+    "empirical_results": "3,000-execution clean pass vs 99/200 timed-search failures gives a concrete detection contrast; historical suppression shows the rule biting a favorable result.",
+    "pairing_specificity": "Within-arm repetition vs cross-arm alignment vs schedule matching kept distinct throughout; suppression example demonstrates usefulness.",
+    "prior_art_boundary": "Rollout Cards, trace assurance, AEVAL, event-keyed CRN, protocol cards, paired noise-floor all cited with capability-level accuracy; refreshed audit found no covering prior work."
+  }
+}

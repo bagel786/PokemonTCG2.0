@@ -154,22 +154,21 @@ credentials) remain excluded unless you explicitly assert personal legal
 authority to release each one:
 - [ ] Confirmed exclusion of all restricted items above.
 
-## 11. Protocol deviation D03 (missing stress localization/actor/timing outputs)
+## 11. Protocol deviation D03 (stress localization/actor/timing outputs)
 
 The frozen protocol promised public-package outputs: first-divergence positions,
 acting-side/actor localization, and timing summaries for the timed-search stress
-test. They are absent from the release.
+test. Machine closeout (2026-08-25) recovered two of the three from hash-pinned
+retained evidence; first-divergence positions were never recorded.
 
 | # | Question | Answer |
 |---|----------|--------|
-| 11.1 | Were first-divergence positions actually collected at acquisition time? | `[YES/NO/UNSURE—INVESTIGATED]` |
-| 11.2 | Were acting-side/actor outputs collected? | `[YES/NO/UNSURE—INVESTIGATED]` |
-| 11.3 | Were timing summaries collected? | `[YES/NO/UNSURE—INVESTIGATED]` |
-| 11.4 | If yes to any: where do those files exist now (paths/media)? | `[PATHS]` |
-| 11.5 | If unavailable: why — lost, never retained, or legally restricted? | `[EXPLANATION]` |
-| 11.6 | If recoverable and lawful: approve generating sanitized processed outputs and adding them to the release? | `[APPROVE / DENY]` |
-| 11.7 | If not recoverable/lawful: approve the signed deviation/amendment text prepared in `supplement/PROTOCOL_DEVIATIONS.md` (D03)? | `[APPROVE / REQUEST CHANGES]` |
-| 11.8 | Exact date of your disposition | `[YYYY-MM-DD]` |
+| 11.1 | Were first-divergence positions actually collected at acquisition time? Machine finding: **never recorded** in any retained artifact; raw traces remain restricted, so position-level localization cannot be verified. Confirm or correct. | `[CONFIRM / CORRECT]` |
+| 11.2 | Were acting-side/actor outputs collected? Machine finding: **recovered** — `first_divergence_actor_counts` in the hash-pinned stress summary shows all 99 disagreeing clusters diverged on the opponent side. Confirm the recovered counts. | `[CONFIRM / CORRECT]` |
+| 11.3 | Were timing summaries collected? Machine finding: **recovered** — per-opponent, per-profile wall-clock timing aggregates exist in the same hash-pinned summary. Confirm the recovered aggregates. | `[CONFIRM / REJECT]` |
+| 11.4 | Approve redistribution of the recovered acting-side counts and timing aggregates as processed release data? Until approval they remain nonpublic candidate material. | `[APPROVE / DENY]` |
+| 11.5 | Approve the signed deviation/amendment text prepared in `supplement/PROTOCOL_DEVIATIONS_FINAL_DRAFT.md` (positions never recorded; actor counts and timings recovered and pending approval)? | `[APPROVE / REQUEST CHANGES]` |
+| 11.6 | Exact date of your disposition | `[YYYY-MM-DD]` |
 
 Signature: ____________________ Initials/Date: ______
 
@@ -180,7 +179,7 @@ By initialing each line, I affirm personal understanding (not delegation):
 - [ ] 12.1 I understand every displayed equation, its symbols, units, and estimator meaning (`EQUATION_AUDIT.md` EQ01–EQ04).
 - [ ] 12.2 I confirm the method assumptions recorded in `METHOD_ASSUMPTION_AUDIT.md` (M01–M17).
 - [ ] 12.3 I can state the novelty boundary against Rollout Cards, trace-assurance frameworks, AEVAL, event-keyed CRN, paired-seed analysis, CRN theory, streams/substreams, metamorphic testing, and A/A diagnostics.
-- [ ] 12.4 I have verified every central number (0 mismatches / 3,000 executions; 99/200 clusters; 47 outcome; 93 decision-count; 0 error; historical 26/200 and 34/200 available-record counts; factorial contrasts and quantiles).
+- [ ] 12.4 I have verified every central number (deterministic preflight: 0 mismatches / 3,000 executions across 1,000 arm–seed-condition units; timed-search stress: 99/200 trace-digest clusters, 47 outcome, 93 decision-count, 0 error; historical repeated-control audit: 210/2,800 outcome-record disagreements and 458/2,800 full available-record disagreements; factorial contrasts and quantiles).
 - [ ] 12.5 I confirm the empirical-vs-post-acquisition chronology: frozen eight-stage protocol → prospective retained acquisitions under frozen binary rules → post-acquisition generic claim-class taxonomy and descriptive-only Level-6 mapping (a conservative formalization/template, not prospectively validated).
 - [ ] 12.6 I confirm the historical gate was frozen retrospectively after outcomes existed and is not evidence of blinding.
 - [ ] 12.7 I understand the D03 omission and my disposition in Section 11.

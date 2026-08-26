@@ -1,0 +1,79 @@
+{
+  "schema_version": "stale-artifact-audit-v1",
+  "audit_date": "2026-08-25",
+  "branch": "paper/apsos-machine-finalization-20260826",
+  "scope": "All generated and hand-written closeout artifacts on the current branch, plus the known issues A-H from the machine-finalization brief.",
+  "findings": [
+    {
+      "id": "A",
+      "issue": "Release README (and its generator template) claimed no clean-environment build was evidenced and that acting-side localization and timing outputs were omitted.",
+      "authoritative_state": "CLEAN_ENV_REPRODUCTION.json records PASS (fresh venv, Python 3.11.5, numpy 2.4.6, matplotlib 3.10.5, pytest 9.1.1; 60 release tests passed; manifest verification PASS). Acting-side first-divergence counts (99/99 opponent side) and per-profile timing aggregates are present in release/data/processed/timed_search_stress.json with source-digest provenance. First-divergence positions were never recorded. Redistribution approval pending.",
+      "fix": "Updated the SOURCE TEMPLATE inside scripts/build_final_release.py (Quick start, transitive-dependency paragraph, Evidence boundary, D03 paragraphs) and regenerated the release via build_final_release.py; updated release_templates/tests/test_release.py to assert the new truthful state.",
+      "status": "FIXED",
+      "files": [
+        "paper/final_protocol/scripts/build_final_release.py",
+        "paper/final_protocol/release_templates/tests/test_release.py",
+        "paper/final_protocol/release/README.md",
+        "paper/final_protocol/release/RELEASE_STATUS.json"
+      ]
+    },
+    {
+      "id": "B",
+      "issue": "release/RELEASE_STATUS.json recorded clean_environment_build_evidenced=false while CLEAN_ENV_REPRODUCTION.json recorded PASS.",
+      "authoritative_state": "Clean-environment verification passed on 2026-08-25.",
+      "fix": "Builder now emits clean_environment_build_evidenced=true with an evidence pointer to CLEAN_ENV_REPRODUCTION.json, environment_spec_scope upgraded to 'direct_packages_only_with_recorded_transitive_snapshot'. Preserved: publication not authorized (BUILT_FOR_REVIEW_NOT_AUTHORIZED_FOR_PUBLICATION), license NO_LICENSE_GRANTED_PENDING_HUMAN_CONFIRMATION, DOI null, citation metadata incomplete.",
+      "status": "FIXED",
+      "files": ["paper/final_protocol/scripts/build_final_release.py", "paper/final_protocol/release/RELEASE_STATUS.json"]
+    },
+    {
+      "id": "C",
+      "issue": "HUMAN_CLOSEOUT_FORM.md section 12.4 cited 'historical 26/200 and 34/200 available-record counts', contradicting authoritative counts.",
+      "authoritative_state": "Historical repeated-control audit: 210/2,800 outcome-record disagreements; 457/2,800 decision-count disagreements; 458/2,800 full available-record disagreements (results_macros.tex: HistoricalOutcomeMismatch=210, HistoricalAvailableRecordMismatch=458, HistoricalUnits=2,800).",
+      "fix": "Repository-wide search for '26/200' and '34/200' found exactly one current-document occurrence (HUMAN_CLOSEOUT_FORM.md 12.4), corrected to 210/2,800 and 458/2,800. The only other hit ('126/200 Crustle proxy' in docs/sprints/strength_and_a2/EMERGENCY_STRENGTH_SPRINT.md) is an unrelated historical strength-sprint record with independent provenance and was deliberately left untouched.",
+      "status": "FIXED",
+      "files": ["paper/final_protocol/HUMAN_CLOSEOUT_FORM.md"]
+    },
+    {
+      "id": "D",
+      "issue": "Closeout form Section 11 (D03) still asked whether outputs were collected as if recovery had not occurred.",
+      "authoritative_state": "Actor-side counts recovered (all 99 disagreeing clusters opponent-side); timing aggregates recovered; positions never recorded; raw traces restricted; redistribution human-only.",
+      "fix": "Section 11 rewritten to state the machine findings (acting-side counts recovered; timing aggregates recovered; redistribution awaits human approval; first-divergence positions never recorded; raw traces remain restricted) and to route the human to supplement/PROTOCOL_DEVIATIONS_FINAL_DRAFT.md for confirm/approve/sign/date.",
+      "status": "FIXED",
+      "files": ["paper/final_protocol/HUMAN_CLOSEOUT_FORM.md"]
+    },
+    {
+      "id": "E",
+      "issue": "APS_DESK_FIT.md retained pre-final metrics (13-page manuscript, 207-word abstract) without a visible phase label strong enough to prevent misuse.",
+      "authoritative_state": "Current package differs from the assessed one; V2 gate + final five-pass simulation are authoritative.",
+      "fix": "Added prominent SUPERSEDED PRE-FINAL ASSESSMENT banner pointing to DESK_REVIEW_SIMULATION_V2.json, DESK_REVIEW_SIMULATION_FINAL.json, and REPRODUCTION_REPORT.json. All strings required by verify_research_audits.py (title line, NOT READY decision, rights hard-failure language, twelve score rows) preserved so the file remains verifiable provenance.",
+      "status": "FIXED",
+      "files": ["paper/final_protocol/APS_DESK_FIT.md"]
+    },
+    {
+      "id": "F",
+      "issue": "V1 review artifacts lacked an explicit do-not-use marker.",
+      "authoritative_state": "The separated scientific/completeness V2 gate is authoritative.",
+      "fix": "All reviews/reviewer_[a-e].json gained a SUPERSEDED_SCIENTIFIC_REVIEW banner field; DESK_REVIEW_SIMULATION.json (V1 aggregate) gained a matching aggregate-level banner. Review content fields unchanged for provenance; reviews_v2/ untouched.",
+      "status": "FIXED",
+      "files": ["paper/final_protocol/reviews/reviewer_a.json", "paper/final_protocol/reviews/reviewer_b.json", "paper/final_protocol/reviews/reviewer_c.json", "paper/final_protocol/reviews/reviewer_d.json", "paper/final_protocol/reviews/reviewer_e.json", "paper/final_protocol/DESK_REVIEW_SIMULATION.json"]
+    },
+    {
+      "id": "G",
+      "issue": ".venv-clean (144 MB installed virtual environment, thousands of files) was Git-tracked.",
+      "authoritative_state": "Installed environments must not be version-controlled; clean-environment evidence must not depend on committed binaries.",
+      "fix": "git rm -r --cached .venv-clean (local copy preserved on disk); .gitignore now excludes .venv-clean/ and .venv/. Preserved CLEAN_ENV_REPRODUCTION.json (PASS record incl. creation command and transitive freeze) and added CLEAN_ENV_TRANSITIVE_FREEZE.txt (text transitive snapshot + rebuild commands). Release archives exclude the environment by construction (closed allow-list manifest rejects extras); no manuscript claim relies on committed environment binaries — the manuscript cites the recorded reproduction run only.",
+      "status": "FIXED",
+      "files": [".gitignore", "paper/final_protocol/CLEAN_ENV_TRANSITIVE_FREEZE.txt"]
+    },
+    {
+      "id": "H",
+      "issue": "Whether the sanitized release actually contains the recovered secondary outputs (acting-side aggregate, timing aggregate, source digest, provenance record) needed verification before any README claim of inclusion.",
+      "authoritative_state": "Verified present in release/data/processed/timed_search_stress.json: first_divergence_actor_counts_included=true ({opponent: 99}), timing_summaries_included=true for both timed-search contexts across four profiles each, recovered_secondary_outputs_provenance with 64-hex source_sha256 binding to paper/data/pevl/timed_search_stress_summary.json (sha256 40b9f5e17a424742ad8a05739646fe56843b8f3a432b124bfc33f9aed1ab5a4b). verify_release.py and release tests enforce these fields. first_divergence_position_included=false (never recorded). protocol_deviation_status=PENDING_HUMAN_SIGNOFF_UNSIGNED_POSITIONS_UNRECOVERED.",
+      "fix": "No data change needed. Sanitized processed copies already live in the release staging area but remain nonpublic candidate material: RELEASE_STATUS stays BUILT_FOR_REVIEW_NOT_AUTHORIZED_FOR_PUBLICATION and every README/D03 statement marks redistribution as pending explicit human approval. No file is marked public or distributable.",
+      "status": "VERIFIED_PRESENT_PENDING_APPROVAL",
+      "files": ["paper/final_protocol/release/data/processed/timed_search_stress.json", "paper/final_protocol/release/docs/PROTOCOL_DEVIATIONS.md"]
+    }
+  ],
+  "residual_known_stale_issues": [],
+  "verification": "build_final_release.py re-run successfully after template updates; its staged pytest suite (including the updated environment-spec test) passed inside the builder."
+}

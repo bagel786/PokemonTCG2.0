@@ -1,0 +1,129 @@
+# =============================================================================
+# human_answers.template.yaml — THE SINGLE SOURCE FOR ALL HUMAN DECISIONS
+# =============================================================================
+# Fill this file completely. Machine tooling must not fill, infer, or guess any
+# field. Recommended defaults below are RECOMMENDATIONS ONLY, not facts; you
+# must actively confirm each one. Then run:
+#
+#   python3 paper/final_protocol/scripts/validate_human_answers.py
+#   python3 paper/final_protocol/scripts/apply_human_answers.py --diff   # preview
+#   python3 paper/final_protocol/scripts/apply_human_answers.py --apply  # execute
+#
+# Validation rejects placeholders ([...], TODO, <>, ""), incomplete required
+# fields, malformed ORCIDs, missing emails, non-single corresponding author,
+# incoherent license/ownership combos, premature DOIs, undated D03, and
+# non-boolean scientific signoffs. It never infers an answer.
+# =============================================================================
+
+meta:
+  filled_by: "[YOUR LEGAL NAME]"
+  filled_date: "[YYYY-MM-DD]"
+
+authors:
+  - publication_name: "[NAME EXACTLY AS IT SHOULD APPEAR IN THE BYLINE]"
+    initials: "[XX]"
+    email: "[name@example.edu]"            # appears publicly; required for every author
+    orcid: "[0000-0000-0000-0000]"          # or DECLINE (corresponding author MUST supply one)
+    affiliation: "[Institution Name]"       # institution/corporation level per APS rules
+    postal_address: "[Street, City, State/Region, Country]"
+    author_order: 1
+    corresponding_author: false             # exactly one true across all authors
+    coauthor_eligibility_basis: "[one line per author: what qualifies this person per ICMJE/APS criteria]"
+
+credit_roles:
+  # CRediT roles per author, using publication_name spelled identically.
+  # Allowed roles: Conceptualization Methodology Software Validation
+  # Formal_analysis Investigation Data_curation Visualization
+  # Writing_original_draft Writing_review_editing Supervision
+  # Project_administration Funding_acquisition
+  "[YOUR NAME AS ABOVE]":
+    - "[Conceptualization]"
+    - "[Methodology]"
+    - "[Software]"
+  confirmation_ai_not_credited: false       # set true: AI tools are not credited as authors/roles
+
+funding:
+  statement: "[e.g., This research received no external funding.]"
+  sources: "[NONE or funder names]"
+  grants: "[NONE or grant numbers]"
+  sponsor_role: "[NONE or describe any sponsor role in design/execution/reporting]"
+
+conflicts:
+  final_statement: "[e.g., The author declares no competing interests.]"
+  details: "[competition affiliations, employment, sponsorship, platform access, personal relationships — or NONE]"
+
+acknowledgments:
+  final_text: "[people/institutions to acknowledge — or NONE]"
+  permission_confirmed: false               # every named person consented
+
+overlap:
+  kaggle_report: "[exact title/URL/dates and what overlaps — or NONE]"
+  public_writeups: "[list — or NONE]"
+  prior_student_journal_submission: "[venue/status — or NONE]"
+  preprints: "[list — or NONE]"
+  cover_letter_disclosure_text: "[EXACT approved disclosure sentence(s) to appear in the cover letter]"
+
+ai_use:
+  codex_confirmation_complete: false        # repository Codex record is complete
+  chatgpt_confirmation_complete: false      # all ChatGPT uses recorded
+  other_tools: "[list tool/dates/tasks — or NONE]"
+  missing_historical_uses: "[describe any unrecorded substantive uses — or NONE]"
+  confidentiality_confirmation: false       # no confidential/restricted data submitted to AI tools
+  ip_tool_terms_confirmation: false         # tool terms, privacy, IP obligations complied with
+  final_disclosure_approval: false          # approve the two-location disclosure as complete
+
+release_rights:
+  owner_per_component:
+    synthetic_suite: "[author / other]"
+    admission_engine_pevl_bench: "[author / other]"
+    analysis_scripts: "[author / other]"
+    processed_diagnostics: "[author / other]"
+    figures_and_source_data: "[author / other]"
+    schemas_manifests_protocols_docs: "[author / other]"
+  code_redistribution_approved: false
+  processed_data_redistribution_approved: false   # covers historical/preflight/stress/factorial processed rows
+  recovered_secondary_outputs_approved: false     # D03 actor counts + timing aggregates
+  code_license: "[RECOMMENDATION: MIT — confirm or replace]"
+  data_docs_license: "[RECOMMENDATION: CC BY 4.0 — confirm or replace]"
+  archive_authorized: false                # authorizes deposit that mints a DOI
+  archive_creators: "[names exactly as they should appear — or blank until authorized]"
+  maintainer: "[email/contact for archived package]"
+  doi: ""                                  # LEAVE BLANK. Insert only after deposit is live; validator blocks otherwise.
+
+d03:
+  positions_never_recorded_confirmed: false
+  actor_counts_recovered_confirmed: false
+  timings_recovered_confirmed: false
+  redistribution_approved: false           # mirrors release_rights.recovered_secondary_outputs_approved
+  deviation_record_approved: false         # supplement/PROTOCOL_DEVIATIONS_FINAL_DRAFT.md
+  disposition_date: "[YYYY-MM-DD]"
+  signature_text: "[type your initials/name as signature text]"
+
+scientific_signoff:                        # EVERY field must be explicit true/false
+  equations_understood: false              # EQUATION_AUDIT_FINAL.md EQ01-EQ04
+  method_assumptions_confirmed: false      # METHOD_ASSUMPTION_AUDIT.md M01-M17
+  defense_guide_reviewed: false            # AUTHOR_DEFENSE_GUIDE.md 29 questions
+  curated_claim_ledger_reviewed: false     # CLAIM_LEDGER_HUMAN_SIGNOFF.md 33 rows
+  automatic_ledger_coverage_attested: false # coverage script reviewed + >=10 automatic rows spot-checked
+  novelty_boundary_understood: false       # NOVELTY_AUDIT_FINAL.md
+  central_numbers_verified: false          # preflight/stress/historical/factorial headline counts
+  chronology_understood: false             # CHRONOLOGY_AUDIT_V2.json categories A-D
+  final_manuscript_approved: false         # after prose-review packet decisions
+  submission_authorized: false             # authorizes YOU to submit manually; machine never submits
+
+prose_review:
+  passage_decisions:                       # from HUMAN_PROSE_REVIEW.md (1-8): ACCEPT/REWRITE/DISCUSS
+    passage_1: "[ACCEPT]"
+    passage_2: "[ACCEPT]"
+    passage_3: "[ACCEPT]"
+    passage_4: "[ACCEPT]"
+    passage_5: "[ACCEPT]"
+    passage_6: "[ACCEPT]"
+    passage_7: "[ACCEPT]"
+    passage_8: "[ACCEPT]"
+
+suggested_reviewers:
+  approved_candidates: "[select 0-5 from SUGGESTED_REVIEWERS_CANDIDATES.md — human choice]"
+  exclusions: "[any additional people to exclude beyond EXCLUDED_REVIEWERS_TEMPLATE.md]"
+
+data_availability_version: "[A or B]"      # A only when ownership+license+archive+DOI all authorized

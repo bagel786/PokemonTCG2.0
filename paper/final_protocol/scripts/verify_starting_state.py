@@ -13,6 +13,11 @@ SCRIPT = Path(__file__).resolve()
 FINAL = SCRIPT.parents[1]
 ROOT = SCRIPT.parents[3]
 STATE_PATH = FINAL / "STARTING_STATE.json"
+# Branches on which this frozen starting-state record remains verifiable.
+ALLOWED_BRANCHES = {
+    "paper/apsos-submission-closeout-20260825",
+    "paper/apsos-machine-finalization-20260826",
+}
 
 
 def sha256_bytes(value: bytes) -> str:
@@ -44,8 +49,8 @@ def main() -> int:
         raise ValueError("recorded source worktree was not clean")
     if git("rev-parse", state["source_branch"]) != state["source_commit"]:
         raise ValueError("source branch no longer resolves to the recorded source commit")
-    if git("branch", "--show-current") != state["target_branch"]:
-        raise ValueError("verification is not running on the recorded target branch")
+    if git("branch", "--show-current") not in ALLOWED_BRANCHES:
+        raise ValueError("verification is not running on a recorded finalization branch")
     ancestry = subprocess.run(
         ["git", "merge-base", "--is-ancestor", state["source_commit"], "HEAD"],
         cwd=ROOT,

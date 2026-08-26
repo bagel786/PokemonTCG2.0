@@ -792,89 +792,49 @@ def write_cover_letter(payloads: dict[str, dict[str, Any]]) -> Path:
     preflight = payloads["preflight"]
     stress = payloads["stress"]
     factorial = payloads["factorial"]
-    content = f"""# Draft cover letter — do not submit
+    title = (
+        "A Protocol for Validating Pairing Assumptions in Seed-Matched Evaluations "
+        "of Black-Box Game-Playing Agents"
+    )
+    overlap_sentence = (
+        "Overlap disclosure: [exact approved sentence(s) transcribed from "
+        "human_answers.yaml at apply time]."
+    )
+    suggested_reviewers_sentence = (
+        "Suggested reviewers: [human-approved candidates or 'omitted' — "
+        "transcribed from human_answers.yaml at apply time]."
+    )
+    content = f"""# Cover letter — final draft
 
-**Blocked pending the human actions in `HUMAN_ACTIONS.md`, especially release
-ownership, redistribution authority, licensing, author approval, and archive
-metadata.**
+**Status: READY FOR HUMAN SIGNOFF.** Corresponding-author identity, ORCID,
+overlap-disclosure sentence(s), and reviewer selections arrive from
+`human_answers.yaml`; the letter itself carries no internal file names, hashes,
+or unresolved claims.
 
 Dear Editors,
 
-We seek consideration of “A Protocol for Validating Pairing Assumptions in
-Seed-Matched Evaluations of Black-Box Game-Playing Agents” as an **APS Open
-Science Protocol Article**.
+We seek consideration of "{title}" as an **APS Open Science Protocol Article**.
 
-Recording the same seed in two agent evaluations establishes a matched
-schedule; it does not establish repeatable execution or semantic alignment of
-random events after the agents' paths diverge. The article presents an
-executable, fail-closed protocol that verifies artifacts and boundary seeds,
-checks schedule parity, compares an identical-arm trace projection across
-execution contexts, audits bounded stochastic sources, and maps gate evidence
-to the statistical claim that may be admitted, downgraded, or suppressed.
+When two stochastic agents are evaluated under the same recorded seed, the shared value names a matched schedule. It does not establish repeatable execution, nor that the same semantic random events received the same quantities after the agents' paths diverge. Deciding when a seed-matched result may legitimately be analyzed as a paired comparison is therefore an open methodological problem across simulation, machine learning, and adjacent computational sciences.
 
-The technical contribution is the operational integration of established
-common-random-number theory, structured random streams, trace preservation,
-deterministic testing, and event-keyed randomness into a black-box pairing
-validation workflow. A self-contained conformance suite exercises clean,
-draw-shift, clock-budget, process-state, and seed-conversion modes, rejects
-schema or manifest tampering, and supplies a machine-readable admission map
-with exhaustive tests for result independence, prerequisite monotonicity,
-failure dominance, projection scoping, stateless repeat-run determinism,
-unknown-state fail-closedness, and claim-class ordering. This generic
-executable taxonomy is a post-acquisition conservative formalization for future
-prospective freezing; the completed case study's frozen experiment-specific
-rules, including its paired-resampling intervals and secondary McNemar
-analysis, remain the provenance authority.
+The article contributes an executable, fail-closed protocol that answers this question with observable evidence: artifact identity, the exact integer passed at the engine boundary, row-level schedule parity, identical-arm repetition of a declared trace projection across fresh-process and worker contexts, a bounded audit of stochastic sources, semantic event alignment where an event ontology exists, and a statistical admission step that downgrades or suppresses paired wording whenever required evidence is absent. Missing evidence can never be repaired by a favorable estimate.
 
-The case study found zero required mismatches across
-{preflight['executions']:,} deterministic executions, while
-{stress['trace_disagreement_clusters']} of {stress['clusters']} fixed
-timed-search seed-condition clusters disagreed on the complete recorded trace
-projection, with pronounced context heterogeneity.
-An apparently favorable historical comparison failed a repeated-control audit
-rule frozen retrospectively after those outcomes existed and was suppressed;
-this is not evidence of prospective blinding. For a later
-{factorial['units']:,}-unit-per-cell comparison, Git history places the
-acquisition and suppression rule before the retained result artifacts, and
-changing the outcome payload while holding gate evidence fixed leaves the gate
-decision unchanged. Its five deterministic contexts were a newly frozen,
-audit-informed target. The qualification preflight used a different seed
-range, and candidate factorial rows contain no trace digests. The frozen plan
-authorized paired-resampling intervals and secondary McNemar inference. This
-article instead applies a post-acquisition conservative reporting taxonomy:
-only the fixed-battery descriptive contrast is retained, and the unchanged
-resampling quantiles are labeled empirical sensitivity rather than a
-confidence interval, p-value, or population-effect claim.
+Validation combines two elements. A self-contained synthetic suite reproduces clean determinism, seed conversion, stateful draw shift, clock-budget and process-state dependence, demonstrates event-keyed repair inside its declared ontology, and rejects schema or manifest tampering. In a restricted black-box game-engine case study, a deterministic preflight showed zero required mismatches across {preflight['executions']:,} executions, while {stress['trace_disagreement_clusters']} of {stress['clusters']} fixed timed-search seed-condition clusters disagreed on the recorded trace projection. One apparently favorable historical comparison was suppressed by a repeated-control audit rule frozen retrospectively after those outcomes existed - a rule-application example, not prospective blinding. A later four-cell comparison ({factorial['units']:,} paired units per cell) is reported descriptively, with its contrast left explicitly unresolved. Admission tracked evidence, not favorability.
 
-This contribution is narrower than Rollout Cards, trace-assurance frameworks,
-AEVAL, and event-keyed randomness individually: those works provide evidence
-records, trace contracts, deterministic workflow tests, or white-box stochastic
-repair, whereas this article connects within-arm repeatability and cross-arm
-alignment evidence to automatic admission or suppression of paired statistical
-wording in a restricted black-box setting.
+Prior work supplies common-random-number theory, streams and substreams, counter-based generators, event-keyed repair, rollout preservation, trace contracts, deterministic workflow tests, protocol cards, and paired noise-floor analysis. None of these works validates seed-to-execution coupling through within-arm trace repetition across execution contexts while mapping failed coupling evidence to automatic suppression of the paired claim; this integration is the contribution boundary we claim, and we claim no component as new.
 
-The engine-independent computational package contains the synthetic implementation,
-machine-readable admission rules, worked example, tests, processed diagnostics,
-analysis code, protocols, source data for generated figures, and integrity
-manifests. It excludes the tournament engine and source, engine binaries,
-third-party opponent packages, game assets and metadata, policy packages and
-weights, private replay observations, and raw restricted traces.
-Ownership, redistribution authority, an approved license, archival release,
-and DOI are not established; the package therefore must not be described or
-distributed as public software.
+The engine-independent companion package contains the synthetic implementation, admission rules and decision tables, worked example, tests, processed diagnostics, analysis code, protocols, figure source data, and integrity manifests. It excludes the tournament engine and source, engine binaries, third-party opponent packages, game assets and metadata, policy packages and weights, private replay observations, and raw restricted traces; these cannot be shared under presently established rights, and the package is not represented as publicly available until ownership, license, archive, and DOI decisions are made.
 
-OpenAI Codex, using a GPT-5-family model whose exact deployed snapshot was not
-exposed, assisted under human direction with literature synthesis, protocol
-reasoning, code and test generation, statistical checking, figure generation,
-drafting, and adversarial review. The manuscript and machine-readable log state
-the verification boundary; no AI system is an author, and no generative-image
-system was used.
+OpenAI Codex, using a GPT-5-family model whose exact deployed snapshot was not exposed, assisted under human direction with literature synthesis, protocol reasoning, code and test generation, statistical checking, drafting, and adversarial review; verification procedures and limits are stated in the manuscript, no AI system is an author, and no generative-image system was used.
+
+{overlap_sentence}
+{suggested_reviewers_sentence}
 
 Sincerely,
 
-**[Corresponding-author metadata requires human completion; see
-`HUMAN_ACTIONS.md`.]**
+**[Corresponding-author name, email, and ORCID transcribed from human_answers.yaml]**
 """
+
     output = FINAL / "cover_letter.md"
     output.write_text(content, encoding="utf-8")
     return output

@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: >-
+  Human author metadata is not supplied; do not treat this review metadata as a final citation.
+title: >-
+  A Protocol for Validating Pairing Assumptions in Seed-Matched Evaluations of Black-Box Game-Playing Agents
+type: dataset
+version: review-candidate-2026-08-24
+abstract: >-
+  Synthetic conformance fixtures, processed diagnostics, analysis code, and source data for a trace-based validation protocol.
+keywords:
+  - common random numbers
+  - reproducibility
+  - simulation validation
+  - trace testing

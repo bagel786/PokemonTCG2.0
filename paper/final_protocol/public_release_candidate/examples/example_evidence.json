@@ -1,0 +1,183 @@
+{
+  "admission_evidence_sha256": "874660e851ed4f86e90f1da6b33fed363d42ec891d36c570343c127397c9d59e",
+  "gate_evidence": {
+    "artifact_identity": {
+      "artifacts": [
+        {
+          "path": "evidence/candidate_agent.txt",
+          "role": "candidate_agent",
+          "sha256": "c91eebc977c86f09b06e89e4620e23645b604d51e30412892baac88bf6277e03"
+        },
+        {
+          "path": "evidence/control_agent.txt",
+          "role": "control_agent",
+          "sha256": "613fcc298e8778949a9c940c904f61f3e709997ed77d0400c821953fa4051180"
+        },
+        {
+          "path": "evidence/engine.txt",
+          "role": "engine",
+          "sha256": "888f576527c630b81f924c599b71289b32f1cabc1c4a4295711c8853e1341e1b"
+        },
+        {
+          "path": "evidence/protocol.txt",
+          "role": "protocol",
+          "sha256": "148b877e1f9b622e19a9004b3ab9560cb65729bbbb4b08d6308ab296a70cea22"
+        },
+        {
+          "path": "evidence/runner.txt",
+          "role": "runner",
+          "sha256": "a8ce5dd5e881b038c2958d337bbd21ae8676a9130e3b3e9a337e9e5222042102"
+        }
+      ],
+      "configuration_path": "evidence/configuration.json",
+      "configuration_sha256": "4b5286a99998123cebe17044ae47fae6e2a97a119e34048fcdbae21f3b75465c"
+    },
+    "cross_arm_event_alignment": {
+      "reason": "No declared semantic event ontology or alignment record is included.",
+      "status": "not_applicable"
+    },
+    "execution_profiles": {
+      "identical_arm_profiles": [
+        "fresh-process-1",
+        "fresh-process-2"
+      ],
+      "records": [
+        {
+          "arm": "candidate",
+          "decision_count": 12,
+          "error_count": 0,
+          "outcome": "win",
+          "pair_id": "pair-001",
+          "profile": "fresh-process-1",
+          "trace_bytes": 93,
+          "trace_path": "evidence/candidate_trace.txt",
+          "trace_sha256": "823f6cbcb0b4f5d239a8e2300d0b3e4224f87282743ffc3483e741a52de0de56"
+        },
+        {
+          "arm": "candidate",
+          "decision_count": 12,
+          "error_count": 0,
+          "outcome": "win",
+          "pair_id": "pair-001",
+          "profile": "fresh-process-2",
+          "trace_bytes": 93,
+          "trace_path": "evidence/candidate_trace.txt",
+          "trace_sha256": "823f6cbcb0b4f5d239a8e2300d0b3e4224f87282743ffc3483e741a52de0de56"
+        },
+        {
+          "arm": "candidate",
+          "decision_count": 12,
+          "error_count": 0,
+          "outcome": "win",
+          "pair_id": "pair-001",
+          "profile": "workers-8-reverse",
+          "trace_bytes": 93,
+          "trace_path": "evidence/candidate_trace.txt",
+          "trace_sha256": "823f6cbcb0b4f5d239a8e2300d0b3e4224f87282743ffc3483e741a52de0de56"
+        },
+        {
+          "arm": "control",
+          "decision_count": 11,
+          "error_count": 0,
+          "outcome": "loss",
+          "pair_id": "pair-001",
+          "profile": "fresh-process-1",
+          "trace_bytes": 90,
+          "trace_path": "evidence/control_trace_fresh.txt",
+          "trace_sha256": "28ef1f96a38645b06bc05d7c43b765f10f5aab8efd5c0f3d027e2679b219f813"
+        },
+        {
+          "arm": "control",
+          "decision_count": 11,
+          "error_count": 0,
+          "outcome": "loss",
+          "pair_id": "pair-001",
+          "profile": "fresh-process-2",
+          "trace_bytes": 90,
+          "trace_path": "evidence/control_trace_fresh.txt",
+          "trace_sha256": "28ef1f96a38645b06bc05d7c43b765f10f5aab8efd5c0f3d027e2679b219f813"
+        },
+        {
+          "arm": "control",
+          "decision_count": 11,
+          "error_count": 0,
+          "outcome": "loss",
+          "pair_id": "pair-001",
+          "profile": "workers-8-reverse",
+          "trace_bytes": 90,
+          "trace_path": "evidence/control_trace_worker.txt",
+          "trace_sha256": "05c8e1879651c04f746f57fdd012f88fdf7e75b2d3f8380febf31901dedc31a3"
+        }
+      ],
+      "repeat_worker_profiles": [
+        "fresh-process-1",
+        "fresh-process-2",
+        "workers-8-reverse"
+      ]
+    },
+    "schedule": {
+      "conversion_rule": "engine_seed_uint32 = requested_seed modulo 2**32",
+      "paired_fields": [
+        "pair_id",
+        "requested_seed",
+        "engine_seed_uint32",
+        "condition_sha256",
+        "actual_order",
+        "physical_seat",
+        "initial_state_sha256"
+      ],
+      "rows": [
+        {
+          "actual_order": "first",
+          "arm": "candidate",
+          "condition_path": "evidence/condition.txt",
+          "condition_sha256": "208fce2b6b5a080b22edf3733a1a83b21458f7acdeaf2e5e82bc195544106822",
+          "engine_seed_uint32": 17,
+          "initial_state_path": "evidence/initial_state.txt",
+          "initial_state_sha256": "af3f10de7f19622ccae0b331b7ecec560ce112b1936021119d8ecbaef86bac00",
+          "pair_id": "pair-001",
+          "physical_seat": 0,
+          "requested_seed": 17
+        },
+        {
+          "actual_order": "first",
+          "arm": "control",
+          "condition_path": "evidence/condition.txt",
+          "condition_sha256": "208fce2b6b5a080b22edf3733a1a83b21458f7acdeaf2e5e82bc195544106822",
+          "engine_seed_uint32": 17,
+          "initial_state_path": "evidence/initial_state.txt",
+          "initial_state_sha256": "af3f10de7f19622ccae0b331b7ecec560ce112b1936021119d8ecbaef86bac00",
+          "pair_id": "pair-001",
+          "physical_seat": 0,
+          "requested_seed": 17
+        }
+      ]
+    },
+    "stochastic_source_audit": {
+      "reason": "No machine-verifiable bounded source inventory is included.",
+      "status": "unavailable"
+    }
+  },
+  "input_kind": "file_bound_record_evidence_bundle",
+  "protocol_id": "pevl-admission-formalization-2026-08",
+  "result_data": {
+    "confidence_interval": [
+      0.72,
+      0.99
+    ],
+    "observed_treatment_effect": 0.91,
+    "p_value": 1e-12,
+    "result_favorability": "apparently_favorable"
+  },
+  "schema_version": "admission-evidence-bundle-2.0.0",
+  "trace_projection": {
+    "fields": [
+      "decision_index",
+      "public_state",
+      "selected_action",
+      "error_record"
+    ],
+    "id": "minimal-public-trace",
+    "version": "1.0.0"
+  }
+}

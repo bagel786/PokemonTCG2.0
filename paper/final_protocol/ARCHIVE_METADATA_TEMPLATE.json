@@ -1,0 +1,49 @@
+{
+  "schema_version": "archive-metadata-template-v1",
+  "status": "TEMPLATE \u2014 fill via human_answers.yaml; nothing deposited without authorization",
+  "title": "A Protocol for Validating Pairing Assumptions in Seed-Matched Evaluations of Black-Box Game-Playing Agents (companion package)",
+  "description": "Synthetic conformance suite, executable admission engine, processed neutralized diagnostics, sanitized protocol transcriptions, figure/table source data, schemas, manifests, and reproduction commands for the pairing-assumption validation protocol. Engine-free by construction.",
+  "creators": [
+    {
+      "name": "[AUTHOR NAME REQUIRES HUMAN CONFIRMATION]",
+      "orcid": "[ORCID OR BLANK]"
+    }
+  ],
+  "contributors": [],
+  "publication_date": "[YYYY-MM-DD after authorization]",
+  "license": {
+    "code": "[MIT pending confirmation \u2014 LICENSE.code.proposed]",
+    "data_docs": "[CC BY 4.0 pending confirmation \u2014 LICENSE.data-docs.proposed]"
+  },
+  "related_identifiers": [
+    {
+      "relation": "isSupplementTo",
+      "identifier": "[ARTICLE DOI AFTER PUBLICATION]",
+      "resource_type": "journal-article"
+    }
+  ],
+  "keywords": [
+    "common random numbers",
+    "reproducibility",
+    "agent evaluation",
+    "simulation validation",
+    "paired seeds",
+    "trace testing"
+  ],
+  "access_right": "open (only after human authorization)",
+  "doi_requested": true,
+  "doi": "",
+  "manifest": "MANIFEST.sha256 covers every payload file except itself",
+  "exclusions_confirmed": [
+    "restricted engine/binaries",
+    "third-party opponent packages",
+    "game assets/metadata",
+    "private observations",
+    "policy weights",
+    "raw restricted traces",
+    "credentials",
+    "git history",
+    "virtual environments",
+    "nested archives"
+  ]
+}

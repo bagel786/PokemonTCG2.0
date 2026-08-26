@@ -1,0 +1,14 @@
+Scope inquiry - APS Open Science (Protocol Article)
+
+Title: A Protocol for Validating Pairing Assumptions in Seed-Matched Evaluations of Black-Box Game-Playing Agents
+
+Dear Editors,
+
+We are considering a Protocol Article and would welcome your scope view. It asks: when two stochastic agents are evaluated under the same recorded seed, what observable evidence is required before the result may legitimately be analyzed as a paired comparison?
+
+We contribute an executable, fail-closed protocol linking artifact identity, boundary seeds, schedule parity, identical-arm trace repetition across execution contexts, stochastic-source auditing, event alignment where an ontology exists, and claim admission that suppresses paired wording when evidence is absent. An open synthetic suite demonstrates the failure modes; a black-box game-engine case study shows 3,000 deterministic executions passing cleanly while 99 of 200 timed-search clusters fail repeatability. The evidence interfaces serve simulation methodology, machine-learning benchmarking, and adjacent computational sciences.
+
+Is this in scope as a Protocol Article?
+
+Sincerely,
+[Corresponding author - placeholder]

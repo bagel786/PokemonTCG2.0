@@ -1,0 +1,101 @@
+{
+  "schema_version": "chronology-audit-v3-machine-finalization",
+  "generated": "2026-08-25",
+  "branch": "paper/apsos-machine-finalization-20260826",
+  "method": {
+    "principle": "Every chronology sentence in the manuscript maps to (commit, file, status). Git establishes commit ordering only; it never establishes when a human viewed uncommitted results. Categories: FROZEN_PROTOCOL (in protocol commit), PROSPECTIVE_RETAINED_ACQUISITION (results committed after frozen commit under frozen rules), POST_ACQUISITION_FORMALIZATION (added later; narrows claims; not prospectively validated), HISTORICAL_AUDIT (outcomes predate rule freezing; auditable, not blinded).",
+    "verification": "git merge-base --is-ancestor 803257f102232763fc88d28c14b668f9b62eb277 HEAD (exit 0 enforced by reproduce_all.py); statement-to-file bindings checked by audit_contradictions.check_protocol_reporting_provenance."
+  },
+  "key_commits": [
+    {
+      "commit": "803257f102232763fc88d28c14b668f9b62eb277",
+      "short": "803257f1",
+      "role": "FROZEN_PROTOCOL_COMMIT",
+      "contents": [
+        "paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md (eight-stage evidence ladder, binary gates, planned 95% paired-resampling intervals, secondary exact two-sided McNemar)",
+        "paper/release/synthetic/pevl_synthetic.py (synthetic conformance suite)",
+        "paper/data/stochastic_source_audit.json",
+        "paper/scripts/analyze_pevl.py"
+      ]
+    },
+    {
+      "commit": "23b9106 (descendant of 803257f1)",
+      "role": "PROSPECTIVE_RETAINED_RESULTS_COMMIT",
+      "contents": [
+        "paper/data/pevl/trace_preflight_summary.json",
+        "paper/data/pevl/timed_search_stress_summary.json (hash-pinned source of recovered actor counts and timing aggregates)",
+        "paper/data/pevl/factorial_summary.json",
+        "paper/data/pevl/factorial/units.csv"
+      ]
+    },
+    {
+      "commit": "5bc4d6418b1d8debfb94eddedf52eb608222ff49 (closeout branch head at machine-finalization start)",
+      "role": "CLOSEOUT_STATE",
+      "contents": ["post-acquisition taxonomy files, release package, audits, closeout forms"]
+    }
+  ],
+  "statements": [
+    {
+      "id": "CHRON-V2-01",
+      "category": "FROZEN_PROTOCOL",
+      "statement": "The frozen eight-stage protocol already contained the evidence ladder, binary acquisition gates, suppression consequences, planned paired-resampling intervals, and secondary McNemar analysis.",
+      "commit": "803257f102232763fc88d28c14b668f9b62eb277",
+      "file": "paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md",
+      "status": "VERIFIED_IN_ANCESTOR_COMMIT",
+      "manuscript_binding": "Prospective validation results paragraph 1; Stages 1-8; audit_contradictions provenance boundary frozen_* keys."
+    },
+    {
+      "id": "CHRON-V2-02",
+      "category": "PROSPECTIVE_RETAINED_ACQUISITION",
+      "statement": "The retained preflight (1,000 units / 3,000 executions), timed-search stress (200 clusters / 800 executions), and factorial (2,000 units per cell) acquisitions were committed after the frozen protocol commit and executed under its binary rules.",
+      "commit": "23b9106 (and descendants)",
+      "file": "paper/data/pevl/* summaries and units.csv",
+      "status": "ORDERING_VERIFIED_GIT_ONLY",
+      "limitation": "Git ordering does not prove when a human viewed every uncommitted result.",
+      "manuscript_binding": "Prospective validation results paragraph 1 sentence 1-2."
+    },
+    {
+      "id": "CHRON-V2-03",
+      "category": "POST_ACQUISITION_FORMALIZATION",
+      "statement": "The generic claim classes, the completed-case descriptive-only Level-6 reporting taxonomy with empirical-reweighting relabeling, and the digest-plus-byte integrity extension were formalized after acquisition; they narrow claims and are not prospectively validated in this empirical case.",
+      "commit": "post-closeout working tree (no single frozen commit claimed)",
+      "file": "release/protocol/{admission_rules,claim_classes}.json; main.tex Definitions/Stages 7-8; supplement/PROTOCOL_DEVIATIONS.md D01/D02",
+      "status": "DISCLOSED_NOT_PROSPECTIVE",
+      "manuscript_binding": "'None of these later additions is attributed to that commit, and the completed case does not prospectively validate them'; digest-byte later-extension window; prohibited phrases enforced by test_protocol_reporting_provenance.py."
+    },
+    {
+      "id": "CHRON-V2-04",
+      "category": "HISTORICAL_AUDIT",
+      "statement": "The historical repeated-control outcomes existed before the available-record audit gate was frozen for retrospective reanalysis. The rule uses only repeated control records, is independent of candidate-effect magnitude/direction/favorability, is not literally outcome blind, and is not evidence of prospective blinding. It suppressed an apparently favorable comparison (210/2,800 outcome-record; 458/2,800 available-record disagreements).",
+      "commit": "retained historical acquisition predates the closeout freeze of the retrospective rule",
+      "file": "release/data/processed/historical_control_repetition.csv + historical_summary.json; main.tex case-study section",
+      "status": "RETROSPECTIVE_AUDITABLE_NOT_BLINDED",
+      "manuscript_binding": "'That audit rule was frozen only for retrospective reanalysis after the historical outcomes already existed ... not evidence of prospective blinding'."
+    },
+    {
+      "id": "CHRON-V2-05",
+      "category": "POST_ACQUISITION_RECOVERY_D03",
+      "statement": "The frozen stress protocol promised first-divergence positions, actor localization, and timing summaries in the public package. At machine finalization: acting-side counts (99/99 opponent side) and per-profile timing aggregates are RECOVERED from the hash-pinned stress summary but redistribution remains PENDING_HUMAN_APPROVAL; first-divergence positions were NEVER_RECORDED in any retained artifact; raw traces remain restricted.",
+      "commit": "source data pinned at 40b9f5e17a424742ad8a05739646fe56843b8f3a432b124bfc33f9aed1ab5a4b (timed_search_stress_summary.json)",
+      "file": "paper/data/pevl/timed_search_stress_summary.json -> release/data/processed/timed_search_stress.json (recovered_secondary_outputs_provenance)",
+      "status": "PARTIALLY_RECOVERED_PENDING_APPROVAL_PLUS_NEVER_RECORDED",
+      "manuscript_binding": "Stress-test D03 paragraph; Limitations paragraph 3; PROTOCOL_DEVIATIONS_FINAL_DRAFT.md."
+    },
+    {
+      "id": "CHRON-V2-06",
+      "category": "PROSPECTIVE_RETAINED_ACQUISITION",
+      "statement": "The five deterministic preflight contexts were a newly frozen, audit-informed target recorded in the experiment-specific protocol before the retained artifacts; the preflight used a different seed range from the factorial, making transfer a bounded assumption rather than trace-level evidence on factorial rows.",
+      "commit": "803257f1 (contexts) -> 23b9106 (results)",
+      "file": "paper/protocol/PEVL_PROSPECTIVE_PROTOCOL.md; paper/data/pevl/trace_preflight_summary.json",
+      "status": "ORDERING_VERIFIED_TRANSFER_ASSUMPTION_DISCLOSED",
+      "manuscript_binding": "Deterministic-preflight subsection; Limitations paragraph 2."
+    }
+  ],
+  "prohibited_conclusions": [
+    "Do not describe the historical repeated-control gate as prospectively blinded or preregistered.",
+    "Do not attribute the generic claim-class taxonomy, descriptive-only Level-6 mapping, or byte-count extension to the frozen protocol commit.",
+    "Do not call reweighting quantiles confidence intervals or admitted inference.",
+    "Do not present recovered actor/timing aggregates as released at acquisition time, or positions as recoverable.",
+    "Do not claim human inspection of uncommitted intermediate results from Git metadata."
+  ]
+}

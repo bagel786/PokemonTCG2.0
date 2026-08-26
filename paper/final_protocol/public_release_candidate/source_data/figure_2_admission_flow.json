@@ -1,0 +1,36 @@
+{
+  "failure_action": "suppress or downgrade the affected claim",
+  "level_6_boundary": "fixed-battery descriptive contrast and empirical reweighting only",
+  "levels": [
+    {
+      "label": "Artifact identity",
+      "level": "L1"
+    },
+    {
+      "label": "Seed namespace",
+      "level": "L2"
+    },
+    {
+      "label": "Schedule parity",
+      "level": "L3"
+    },
+    {
+      "label": "A/A trace- projection parity",
+      "level": "L4"
+    },
+    {
+      "label": "Repeat/worker parity",
+      "level": "L5"
+    },
+    {
+      "label": "Source audit",
+      "level": "L6"
+    },
+    {
+      "label": "Event alignment",
+      "level": "L7"
+    }
+  ],
+  "restricted_engine_boundary": "Level 7 unavailable",
+  "success_action": "apply the current post-acquisition map"
+}

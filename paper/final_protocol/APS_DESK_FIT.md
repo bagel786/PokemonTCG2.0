@@ -1,5 +1,14 @@
 # APS Open Science desk-fit audit
 
+> **SUPERSEDED PRE-FINAL ASSESSMENT — DO NOT USE FOR CURRENT READINESS.**
+> This file is retained for provenance only. Its metrics describe the earlier
+> 13-page manuscript with its 207-word abstract and the pre-final release; the
+> current package differs. The authoritative readiness gates are
+> `DESK_REVIEW_SIMULATION_V2.json` (scientific) plus
+> `DESK_REVIEW_SIMULATION_FINAL.json` (final five-pass simulation) and
+> `REPRODUCTION_REPORT.json`. The scores below are frozen historical
+> judgments, not a current assessment.
+
 Audit date: 2026-08-24  
 Target: APS Open Science, Protocol Article  
 Frozen title for this assessment: **A Protocol for Validating Pairing Assumptions in Seed-Matched Evaluations of Black-Box Game-Playing Agents**  

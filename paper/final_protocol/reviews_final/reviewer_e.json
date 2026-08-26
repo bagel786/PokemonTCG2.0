@@ -1,0 +1,17 @@
+{
+  "blind": true,
+  "completeness_findings_separated": [
+    "Author identity/affiliation/ORCID placeholders remain (human-only; excluded from scientific judgment).",
+    "No approved license, no DOI, release status unauthorized (rights gate, not science).",
+    "AI-use completeness, D03 disposition, claim-ledger signoffs unsigned (human gates)."
+  ],
+  "desk_decision_scientific": "SEND_TO_REVIEW",
+  "rationale": "I attempted to find an unsupported evidentiary statement or hidden strengthening of claims and could not; remaining blockers are human/legal by design.",
+  "reviewer_id": "E",
+  "role": "hostile integrity / general reader",
+  "scientific_assessment": {
+    "honesty_core": "Retrospective historical gate, post-acquisition taxonomy, digest+byte extension, and never-recorded positions are all volunteered, not extracted; favorable comparison was suppressed by the frozen rule.",
+    "integrity_mechanics": "Claim ledger binds every sentence to evidence identities; contradiction audit fails closed; human signoffs pending everywhere understanding is required - nothing pre-signed.",
+    "readability": "Dense but navigable; definitions section carries the load; abstract within bounds; prose-audit packet isolates the eight hardest passages for human ownership."
+  }
+}

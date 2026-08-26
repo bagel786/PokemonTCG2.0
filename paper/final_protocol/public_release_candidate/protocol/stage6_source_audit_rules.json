@@ -1,0 +1,91 @@
+{
+  "schema_version": "stage6-source-audit-rules-1.0.0",
+  "title": "Stage 6 stochastic-source audit outcome rules",
+  "purpose": "Classify the outcome of a bounded static stochastic-source audit. A static hit does not prove execution dependence and a clean scan does not prove determinism; these rules map audit inputs and recorded dynamic dispositions to one of five outcomes with required remediation.",
+  "input_fields": {
+    "source_access": "one of: available, unavailable_black_box",
+    "inventory_declared": "boolean; scanner version, categories scanned, and scan scope are declared",
+    "hits": "list of records with fields: category, executes_dynamically, changes_execution_relation, bounded_or_disabled, evidence_recorded"
+  },
+  "outcomes": [
+    {
+      "id": "CONTROLLED",
+      "meaning": "A stochastic mechanism was found and its influence on the compared executions was bounded or disabled with recorded evidence.",
+      "claim_effect": "Supports treating the audited mechanism as controlled for the exercised schedule; does not by itself prove determinism."
+    },
+    {
+      "id": "RESIDUAL",
+      "meaning": "A mechanism remains possible and was not shown estimand-changing, so claims are downgraded rather than suppressed.",
+      "claim_effect": "Paired wording may not assert mechanistic equivalence; repeatability claims rest only on Stages 4-5 evidence."
+    },
+    {
+      "id": "ESTIMAND_CHANGING",
+      "meaning": "A mechanism directly changes the execution relation needed by the comparison.",
+      "claim_effect": "Paired mechanistic claims are suppressed for the affected comparison."
+    },
+    {
+      "id": "UNAVAILABLE",
+      "meaning": "Source was unavailable or the boundary is black-box, blocking any source-level claim.",
+      "claim_effect": "Stronger source-level claims are blocked; lower-stage evidence stands unchanged."
+    },
+    {
+      "id": "UNRESOLVED",
+      "meaning": "A hit exists but the recorded evidence is insufficient to classify it; no automatic pass exists.",
+      "claim_effect": "Claims are downgraded until remediation produces a classification."
+    }
+  ],
+  "rules": [
+    {
+      "priority": 1,
+      "id": "black_box_boundary",
+      "when": {"source_access": "unavailable_black_box"},
+      "outcome": "UNAVAILABLE",
+      "remediation": "None available at this boundary; record the uninspected boundary explicitly and rely on Stages 4-5 behavioral evidence."
+    },
+    {
+      "priority": 2,
+      "id": "undeclared_inventory",
+      "when": {"source_access": "available", "inventory_declared": false},
+      "outcome": "UNRESOLVED",
+      "remediation": "Rerun the audit with a declared scanner version, category list, and scope; an undeclared inventory invalidates the stage."
+    },
+    {
+      "priority": 3,
+      "id": "estimand_changing_hit",
+      "when": {"source_access": "available", "inventory_declared": true, "any_hit": {"executes_dynamically": true, "changes_execution_relation": true}},
+      "outcome": "ESTIMAND_CHANGING",
+      "remediation": "Disable or bound the mechanism, re-verify Stages 4-5 on the modified configuration, and re-acquire before any paired claim."
+    },
+    {
+      "priority": 4,
+      "id": "controlled_hit",
+      "when": {"source_access": "available", "inventory_declared": true, "any_hit": {"executes_dynamically": true, "changes_execution_relation": false, "bounded_or_disabled": true, "evidence_recorded": true}},
+      "outcome": "CONTROLLED",
+      "remediation": "Record the bounding intervention and its evidence in the audit log; monitor for scope drift on future artifacts."
+    },
+    {
+      "priority": 5,
+      "id": "unbounded_executing_hit",
+      "when": {"source_access": "available", "inventory_declared": true, "any_hit": {"executes_dynamically": true, "changes_execution_relation": false, "bounded_or_disabled": false}},
+      "outcome": "RESIDUAL",
+      "remediation": "Bound or disable the executing mechanism with recorded dynamic evidence, then reclassify under rule controlled_hit."
+    },
+    {
+      "priority": 6,
+      "id": "dormant_or_unproven_hit",
+      "when": {"source_access": "available", "inventory_declared": true, "any_hit": {}},
+      "outcome": "UNRESOLVED",
+      "remediation": "Collect dynamic evidence showing whether the branch executes and whether its effect is bounded; no automatic pass exists for any hit."
+    },
+    {
+      "priority": 7,
+      "id": "clean_scan_no_proof",
+      "when": {"source_access": "available", "inventory_declared": true, "any_hit": null},
+      "outcome": "RESIDUAL",
+      "remediation": "No remediation can convert a clean static scan into a determinism proof; rely on Stage 4-5 repeatability evidence for the exercised contexts and state the residual risk.",
+      "note": "A zero-hit scan never yields CONTROLLED because control requires a found-and-bounded mechanism."
+    }
+  ],
+  "default_outcome": "UNRESOLVED",
+  "fail_closed_note": "Unrecognized inputs, missing fields, and out-of-order evaluation default to UNRESOLVED."
+}

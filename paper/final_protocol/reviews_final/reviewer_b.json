@@ -1,0 +1,21 @@
+{
+  "blind": true,
+  "completeness_findings_separated": [
+    "Author identity/affiliation/ORCID placeholders remain (human-only; excluded from scientific judgment).",
+    "No approved license, no DOI, release status unauthorized (rights gate, not science).",
+    "AI-use completeness, D03 disposition, claim-ledger signoffs unsigned (human gates)."
+  ],
+  "desk_decision_scientific": "SEND_TO_REVIEW",
+  "rationale": "Statistical claims are scoped to the realized batteries and independently recomputable; no inferential overreach detected.",
+  "residual_scientific_notes": [
+    "Cluster resampling composition sensitivity properly disclosed (pooled vs fixed-composition quantiles).",
+    "Preflight-to-factorial seed-range transfer flagged as bounded assumption rather than trace evidence."
+  ],
+  "reviewer_id": "B",
+  "role": "stochastic simulation expert (CRN, event alignment, clustering, resampling, chronology)",
+  "scientific_assessment": {
+    "chronology": "Frozen/post-acquisition boundary explicit; Git-ordering limits honestly stated.",
+    "crn_treatment": "Correctly conditional: seed reuse never equated with coupling; streams/substreams and event-keyed repair treated as prior art.",
+    "statistics": "Paired difference, equally-weighted stratum-mean reweighting (unequal n_k handled), descriptive-only labels verified against raw rows; McNemar quarantined as audit-only."
+  }
+}

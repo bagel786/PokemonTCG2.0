@@ -1,0 +1,2214 @@
+{
+  "analysis_id": "timed_search_stress",
+  "cluster_rows": [
+    {
+      "actual_order": "first",
+      "cluster_index": 0,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 1,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 2,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 3,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 4,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 5,
+      "context": "timed-search-A",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 6,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 7,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 8,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 9,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 10,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 11,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 12,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 13,
+      "context": "timed-search-A",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 14,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 15,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 16,
+      "context": "timed-search-A",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 17,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 18,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 19,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 20,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 21,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 22,
+      "context": "timed-search-A",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 23,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 24,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 25,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 26,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 27,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 28,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 29,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 30,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 31,
+      "context": "timed-search-A",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 32,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 33,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 34,
+      "context": "timed-search-A",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 35,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 36,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 37,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 38,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 39,
+      "context": "timed-search-A",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 40,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 41,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 42,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 43,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 44,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 45,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 46,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 47,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 48,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 49,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 0,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 1,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 2,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 3,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 4,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 5,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 6,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 7,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 8,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 9,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 10,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 11,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 12,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 13,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 14,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 15,
+      "context": "timed-search-A",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 16,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 17,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 18,
+      "context": "timed-search-A",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 19,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 20,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 21,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 22,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 23,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 24,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 25,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 26,
+      "context": "timed-search-A",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 27,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 28,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 29,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 30,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 31,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 32,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 33,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 34,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 35,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 36,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 37,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 38,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 39,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 40,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 41,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 42,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 43,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 44,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 45,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 46,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 47,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 48,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 49,
+      "context": "timed-search-A",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": true,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 0,
+      "context": "timed-search-B",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 1,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 2,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 3,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 4,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 5,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 6,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 7,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 8,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 9,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 10,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 11,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 12,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 13,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 14,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 15,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 16,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 17,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 18,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 19,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 20,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 21,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 22,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 23,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 24,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 25,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 26,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 27,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 28,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 29,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 30,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 31,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 32,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 33,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 34,
+      "context": "timed-search-B",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 35,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 36,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 37,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 38,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 39,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 40,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 41,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 42,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 43,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 44,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 45,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 46,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 47,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 48,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "first",
+      "cluster_index": 49,
+      "context": "timed-search-B",
+      "decision_count_disagreement": true,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 0,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 1,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 2,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 3,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 4,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 5,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 6,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 7,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 8,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 9,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 10,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 11,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 12,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 13,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 14,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 15,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 16,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 17,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 18,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 19,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 20,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 21,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 22,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 23,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 24,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 25,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 26,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 27,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 28,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 29,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 30,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 31,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 32,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 33,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 34,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 35,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 36,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 37,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 38,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 39,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": true
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 40,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 41,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 42,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 43,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 44,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 45,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 46,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 47,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 48,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    },
+    {
+      "actual_order": "second",
+      "cluster_index": 49,
+      "context": "timed-search-B",
+      "decision_count_disagreement": false,
+      "error_disagreement": false,
+      "outcome_disagreement": false,
+      "policy_error_present": false,
+      "trace_disagreement": false
+    }
+  ],
+  "clusters": 200,
+  "decision_count_disagreement_clusters": 93,
+  "error_disagreement_clusters": 0,
+  "executions": 800,
+  "first_divergence_actor_counts": {
+    "opponent": 99
+  },
+  "first_divergence_actor_counts_included": true,
+  "first_divergence_position_included": false,
+  "first_divergence_position_reason": "First-divergence positions were never recorded in the retained artifacts; only acting-side counts at first divergence were summarized. Raw trace payloads are restricted and are not redistributed, so independent position-level localization remains impossible.",
+  "fixed_battery_scope": "four fixed timed-search opponent-by-order strata; 50 clusters per stratum",
+  "fixed_composition_reweighting_sensitivity": {
+    "estimate": 0.495,
+    "inferential_status": "post-acquisition descriptive sensitivity; not a confidence interval or population inference",
+    "quantiles_2_5_97_5": [
+      0.45999999999999996,
+      0.53
+    ],
+    "reweighting_draws": 100000,
+    "reweighting_seed": 2026083118,
+    "reweighting_unit": "whole seed-condition cluster retaining all four profiles",
+    "role": "post-acquisition fixed-composition descriptive sensitivity applied to the pooled resampling computation prespecified in the frozen plan",
+    "stratum_disagreement_counts": {
+      "timed-search-A/first": 44,
+      "timed-search-A/second": 48,
+      "timed-search-B/first": 4,
+      "timed-search-B/second": 3
+    },
+    "stratum_weighting": "equal with fixed 50-cluster composition"
+  },
+  "outcome_disagreement_clusters": 47,
+  "pevl_level_6_boundary": "recorded trace mismatches and bounded source inspection identify plausible mechanisms in the exercised executions; no retained evidence supports an earliest-divergence localization or a unique causal source",
+  "policy_error_present_clusters": 0,
+  "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",
+  "protocol_deviation_status": "PENDING_HUMAN_SIGNOFF_UNSIGNED_POSITIONS_UNRECOVERED",
+  "recovered_secondary_outputs_provenance": {
+    "note": "Acting-side counts at first divergence and per-profile wall-clock timing summaries were recovered from the hash-pinned retained stress summary; they are processed aggregates of the author's own acquisition runs.",
+    "source_role": "stress_summary",
+    "source_sha256": "40b9f5e17a424742ad8a05739646fe56843b8f3a432b124bfc33f9aed1ab5a4b"
+  },
+  "schema_version": 1,
+  "status": "TRACE_DIVERGENCE",
+  "strata": {
+    "timed-search-A/first": {
+      "decision_count_disagreement_count": 43,
+      "error_disagreement_count": 0,
+      "outcome_disagreement_count": 19,
+      "policy_error_present_count": 0,
+      "trace_disagreement": {
+        "clusters": 50,
+        "estimate": 0.88,
+        "inferential_status": "descriptive empirical reweighting of a fixed battery; not a confidence interval or population inference",
+        "quantiles_2_5_97_5": [
+          0.78,
+          0.96
+        ],
+        "reweighting_draws": 100000,
+        "reweighting_seed": 2026083118,
+        "role": "stratum-specific whole-cluster empirical reweighting"
+      }
+    },
+    "timed-search-A/second": {
+      "decision_count_disagreement_count": 47,
+      "error_disagreement_count": 0,
+      "outcome_disagreement_count": 28,
+      "policy_error_present_count": 0,
+      "trace_disagreement": {
+        "clusters": 50,
+        "estimate": 0.96,
+        "inferential_status": "descriptive empirical reweighting of a fixed battery; not a confidence interval or population inference",
+        "quantiles_2_5_97_5": [
+          0.9,
+          1.0
+        ],
+        "reweighting_draws": 100000,
+        "reweighting_seed": 2026083118,
+        "role": "stratum-specific whole-cluster empirical reweighting"
+      }
+    },
+    "timed-search-B/first": {
+      "decision_count_disagreement_count": 3,
+      "error_disagreement_count": 0,
+      "outcome_disagreement_count": 0,
+      "policy_error_present_count": 0,
+      "trace_disagreement": {
+        "clusters": 50,
+        "estimate": 0.08,
+        "inferential_status": "descriptive empirical reweighting of a fixed battery; not a confidence interval or population inference",
+        "quantiles_2_5_97_5": [
+          0.02,
+          0.16
+        ],
+        "reweighting_draws": 100000,
+        "reweighting_seed": 2026083118,
+        "role": "stratum-specific whole-cluster empirical reweighting"
+      }
+    },
+    "timed-search-B/second": {
+      "decision_count_disagreement_count": 0,
+      "error_disagreement_count": 0,
+      "outcome_disagreement_count": 0,
+      "policy_error_present_count": 0,
+      "trace_disagreement": {
+        "clusters": 50,
+        "estimate": 0.06,
+        "inferential_status": "descriptive empirical reweighting of a fixed battery; not a confidence interval or population inference",
+        "quantiles_2_5_97_5": [
+          0.0,
+          0.14
+        ],
+        "reweighting_draws": 100000,
+        "reweighting_seed": 2026083118,
+        "role": "stratum-specific whole-cluster empirical reweighting"
+      }
+    }
+  },
+  "timing_summaries": {
+    "timed-search-A": {
+      "parallel_forward": {
+        "games": 100,
+        "interquartile_range_seconds": [
+          1.8642033755168086,
+          6.270759291262948
+        ],
+        "mean_seconds": 4.976272546223481,
+        "median_seconds": 3.554023270495236
+      },
+      "parallel_reverse": {
+        "games": 100,
+        "interquartile_range_seconds": [
+          2.3101948642652133,
+          6.540734583511949
+        ],
+        "mean_seconds": 4.988991698710306,
+        "median_seconds": 4.1271392710041255
+      },
+      "serial_forward": {
+        "games": 100,
+        "interquartile_range_seconds": [
+          1.5273192297609057,
+          3.966065000000526
+        ],
+        "mean_seconds": 3.49493781462108,
+        "median_seconds": 2.624310916507966
+      },
+      "serial_reverse": {
+        "games": 100,
+        "interquartile_range_seconds": [
+          1.5154848852471332,
+          3.569495781499427
+        ],
+        "mean_seconds": 2.9663995341802365,
+        "median_seconds": 2.383258771005785
+      }
+    },
+    "timed-search-B": {
+      "parallel_forward": {
+        "games": 100,
+        "interquartile_range_seconds": [
+          3.662127916009922,
+          8.32776906224899
+        ],
+        "mean_seconds": 6.150488563670369,
+        "median_seconds": 5.978141853993293
+      },
+      "parallel_reverse": {
+        "games": 100,
+        "interquartile_range_seconds": [
+          3.6068740732516744,
+          8.156083353758731
+        ],
+        "mean_seconds": 6.007744385391998,
+        "median_seconds": 5.703379729005974
+      },
+      "serial_forward": {
+        "games": 100,
+        "interquartile_range_seconds": [
+          1.7592044784978498,
+          4.033817854258814
+        ],
+        "mean_seconds": 3.0245111903484214,
+        "median_seconds": 2.794863583505503
+      },
+      "serial_reverse": {
+        "games": 100,
+        "interquartile_range_seconds": [
+          1.955961864492565,
+          4.318227812756959
+        ],
+        "mean_seconds": 3.2347162146214394,
+        "median_seconds": 3.0331923955091042
+      }
+    }
+  },
+  "timing_summaries_included": true,
+  "trace_disagreement": {
+    "clusters": 200,
+    "estimate": 0.495,
+    "inferential_status": "descriptive empirical reweighting of a fixed battery; not a confidence interval or population inference",
+    "quantiles_2_5_97_5": [
+      0.425,
+      0.565
+    ],
+    "reweighting_draws": 100000,
+    "reweighting_seed": 2026083118,
+    "role": "prespecified pooled whole-cluster reweighting; context composition may vary"
+  },
+  "trace_disagreement_clusters": 99,
+  "trace_payloads_included": false
+}

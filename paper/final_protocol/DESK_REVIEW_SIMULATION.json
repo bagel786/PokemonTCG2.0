@@ -1,4 +1,5 @@
 {
+  "SUPERSEDED": "SUPERSEDED SCIENTIFIC REVIEW AGGREGATE - DO NOT USE FOR CURRENT READINESS. V1 conflated scientific and completeness gates; the authoritative separated gates are DESK_REVIEW_SIMULATION_V2.json (closeout) and DESK_REVIEW_SIMULATION_FINAL.json (machine finalization).",
   "aps_staff_editor_verdict": "DESK_REJECT",
   "desk_gate": "FAIL",
   "fatal_review_findings": [

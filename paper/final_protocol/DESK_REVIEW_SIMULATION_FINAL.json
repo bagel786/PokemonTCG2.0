@@ -1,0 +1,70 @@
+{
+  "SCIENTIFIC_DESK_GATE": {
+    "checks": {
+      "aps_reviewer_no_worse_than_borderline_due_only_to_scope": true,
+      "at_least_four_of_five_send_to_review": true,
+      "no_fatal_scientific_issue": true,
+      "no_unsupported_evidentiary_statement": true,
+      "novelty_survives_refreshed_audit": true,
+      "readability_passes": true,
+      "technical_correctness_passes": true
+    },
+    "result": "PASS_SCIENTIFICALLY_SEND_TO_REVIEW",
+    "threshold_note": "Required: no fatal scientific issue; >=4/5 SEND_TO_REVIEW; A no worse than BORDERLINE due only to scope; novelty/technical/readability pass."
+  },
+  "SUBMISSION_COMPLETENESS_GATE": {
+    "blockers": [
+      "author name / corresponding email / affiliation / postal address placeholders",
+      "CRediT, funding, conflicts, acknowledgments unresolved",
+      "AI-use completeness unconfirmed",
+      "claim-ledger signoff worksheet unsigned (33 curated + automatic attestation)",
+      "equation/method/defense comprehension signoffs unsigned",
+      "release ownership/license approvals pending; DOI absent",
+      "D03 deviation unsigned (recovered aggregates pending approval; positions never recorded)"
+    ],
+    "result": "BLOCKED_PENDING_HUMAN_ACTIONS"
+  },
+  "blind_to_each_other": true,
+  "combined_decision": {
+    "completeness": "BLOCKED_BY_HUMAN_ACTIONS",
+    "overall_submission_status": "NOT_READY_DO_NOT_SUBMIT_UNTIL_HUMAN_CLOSEOUT_COMPLETE",
+    "scientific": "SCIENTIFICALLY_SEND_TO_REVIEW"
+  },
+  "generated": "2026-08-25",
+  "review_count": 5,
+  "review_files": {
+    "A": {
+      "decision": "BORDERLINE",
+      "path": "reviews_final/reviewer_a.json",
+      "sha256": "373e20193cb174000c43685202f1856a927ae6390937f61b4e8c7e5cb80f54d5"
+    },
+    "B": {
+      "decision": "SEND_TO_REVIEW",
+      "path": "reviews_final/reviewer_b.json",
+      "sha256": "91e3cff0aa2955547ac899faaea757d8db15f74649dafe4974dc884a40e0cc05"
+    },
+    "C": {
+      "decision": "SEND_TO_REVIEW",
+      "path": "reviews_final/reviewer_c.json",
+      "sha256": "5414bc6eccc0a4a3e258e33287669f5259255197585acc78c1ffba32be9e5059"
+    },
+    "D": {
+      "decision": "SEND_TO_REVIEW",
+      "path": "reviews_final/reviewer_d.json",
+      "sha256": "499445f3590b6ccc85714daaf2c92f7bc93ab6a0b12611167be4ce07816448ee"
+    },
+    "E": {
+      "decision": "SEND_TO_REVIEW",
+      "path": "reviews_final/reviewer_e.json",
+      "sha256": "651247f05c62ece35b80dacc564dcfc2395476baf4205d9ce11a8eb7cca9e549"
+    }
+  },
+  "schema_version": "desk-review-simulation-final-1.0.0",
+  "simulation_label": "EXPLICIT AI SIMULATIONS - five independent passes; not human referees; not APS editorial judgment",
+  "status": "PASS",
+  "verdict_counts_scientific": {
+    "BORDERLINE": 1,
+    "DESK_REJECT": 0,
+    "SEND_TO_REVIEW": 4
+  }
+}

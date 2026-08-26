@@ -1,0 +1,48 @@
+schema_version: submission-metadata-draft-v1
+status: DRAFT — placeholders filled only by apply_human_answers.py after validation
+journal: APS Open Science (APSO)
+article_type: APS Open Science Protocol Article
+title: "A Protocol for Validating Pairing Assumptions in Seed-Matched Evaluations of Black-Box Game-Playing Agents"
+abstract_source: paper/final_protocol/main.tex (abstract environment; 184 words)
+authors:
+  placeholders: "[transcribed from human_answers.yaml authors list — name, order, corresponding flag]"
+affiliations:
+  placeholders: "[institution-level affiliation(s) + postal address from human_answers.yaml]"
+corresponding_author:
+  placeholder: "[name + email from human_answers.yaml]"
+orcid:
+  placeholder: "[corresponding-author ORCID REQUIRED by APS; coauthor ORCIDs optional]"
+physh_candidates:
+  primary: "Machine learning (Research Areas)"
+  secondary:
+    - "Reinforcement learning"
+    - "Artificial intelligence"
+    - "Monte Carlo methods"
+    - "Statistical methods (verify facet in widget)"
+  source: PHYSH_CANDIDATES.md (checked 2026-08-25)
+data_availability_statement:
+  current_version: B
+  selection_rule: "Version A only when ownership+license+archive+live DOI authorized (see data_availability_versions.md)"
+ai_disclosure_location:
+  methods_section: "AI-assisted research methods (research conduct uses)"
+  acknowledgment_section: "Artificial-intelligence assistance (drafting/editing/packaging/bibliographic/adversarial review)"
+  cover_letter: "pointer paragraph required by APS predecessor policy"
+  log: supplement/AI_USE_LOG.csv
+related_material_disclosure:
+  computational_companion: "review package now; public archive only after authorization"
+  overlapping_reports: "[exact Kaggle/writeup/preprint disclosure transcribed from human_answers.yaml]"
+suggested_reviewers:
+  candidates_file: SUGGESTED_REVIEWERS_CANDIDATES.md
+  selection_placeholder: "[human-approved subset or NONE]"
+excluded_reviewers:
+  template: EXCLUDED_REVIEWERS_TEMPLATE.md
+  exclusions_placeholder: "[author-supplied exclusions or NONE]"
+funding:
+  statement_placeholder: "[from human_answers.yaml funding.statement]"
+conflicts:
+  statement_placeholder: "[from human_answers.yaml conflicts.final_statement]"
+archive_doi:
+  value: ""   # stays blank until archive_authorized and deposit is live
+cover_letter_filename: cover_letter_final_draft.txt
+manuscript_filename: manuscript.pdf
+supplemental_material_status: "not used — appendices keep the manuscript self-contained; see submission_bundle_draft/APS_SUPPLEMENTAL_EVALUATION.md"

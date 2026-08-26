@@ -26,6 +26,7 @@ Those are Stages 4–7, which must be evidenced separately.
 a schedule field disagreed, the matched-schedule description itself would fail;
 any paired wording would then be unsupported.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 2. Why can identical agents differ?
 
 **Short answer:** Because the engine's behavior can depend on things the seed
@@ -47,6 +48,7 @@ that actually differ), disagreement could hide; conversely, if serialization
 were non-canonical, false disagreements could appear. Canonicalization is an
 assumption recorded in M04.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 3. What exactly is the recorded trace projection?
 
 **Short answer:** A canonical digest over each decision's public-observation
@@ -66,6 +68,7 @@ and both give 99/200.
 agree while true trajectories differed — agreement is scoped, never proof about
 omitted state.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 4. Why is outcome agreement weaker than trace agreement?
 
 **Short answer:** Many different games end in the same winner. Identical
@@ -83,6 +86,7 @@ is necessary but nowhere near sufficient for it.
 **Failure mode:** The inference direction matters: trace disagreement implies
 execution difference; trace agreement does not prove hidden-state equality.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 5. What is one seed-condition cluster?
 
 **Short answer:** One scheduled seed condition together with all of its
@@ -101,6 +105,7 @@ A missing profile invalidates the gate rather than shrinking the denominator
 **Failure mode:** Treating profiles as independent replicates would inflate
 the evidence; the equation deliberately prevents that.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 6. Why are execution profiles not independent?
 
 **Short answer:** They are planned variations of the same seed condition under
@@ -117,6 +122,7 @@ letting pooled resampling drift context composition.
 **Failure mode:** Any claim like “X% of executions fail” would wrongly treat a
 deterministic engineering battery as a probability sample.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 7. What did the historical audit show?
 
 **Short answer:** Re-running three separately executed control arms over the
@@ -137,6 +143,7 @@ would have changed the target population and was explicitly not used.
 as outcome-blind (it consumes control-arm records; it is independent of
 candidate-effect magnitude/direction/favorability only).
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 8. Why was the historical gate retrospective?
 
 **Short answer:** Because the historical outcomes already existed when the
@@ -152,6 +159,7 @@ this limitation directly rather than claiming preregistration.
 **Failure mode:** If any document could show the rule predated acquisition, the
 stronger claim might be defensible — no such document exists in the repository.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 9. What was prospectively frozen later?
 
 **Short answer:** The retained experiment's protocol: acquisition conditions,
@@ -171,6 +179,7 @@ mismatches suppress all contrasts. Conditional on passes, the plan prescribed
 **Failure mode:** Git proves commit ordering, not when a human inspected
 uncommitted files — the manuscript says exactly this.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 10. What was added post-acquisition?
 
 **Short answer:** Three things only: the generic completed-case claim-class
@@ -189,6 +198,7 @@ users must freeze them before collecting outcomes.
 additions) as post-acquisition would overstate the departure — the earlier
 manuscript draft did and was corrected.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 11. What does event alignment mean?
 
 **Short answer:** After the two policies branch, every shared modeled exogenous
@@ -206,6 +216,7 @@ re-randomized noise.
 **Failure mode:** Within-arm repetition cannot establish it: identical arms
 follow the same path and consume the same stream positions trivially.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 12. Why can the real engine not establish it?
 
 **Short answer:** Its interface exposes a seeded entry point but no stable
@@ -223,6 +234,7 @@ stage evidence intact.
 **Failure mode:** Any wording implying equal random quantities for shared
 events in the real case would contradict this recorded boundary.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 13. What does the synthetic event-keyed example prove?
 
 **Short answer:** Inside a fully declared synthetic ontology, keying random
@@ -241,6 +253,7 @@ that produce within-arm disagreement.
 distribution; porting it requires declaring an ontology and validating the
 assignment — exactly what the real engine cannot currently support.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 14. What does it not prove?
 
 **Short answer:** It does not prove that external simulators contain these
@@ -256,6 +269,7 @@ estimate. No empirical frequency claim is made anywhere.
 **Failure mode:** Reading detection rates in the suite as failure rates in the
 wild.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 15. Why is the factorial descriptive?
 
 **Short answer:** Opponents, orders, seeds, and profiles are fixed engineering
@@ -275,6 +289,7 @@ are all absent.
 **Failure mode:** Calling it causal, counterfactual, equivalence, superiority,
 or full-CRN — all forbidden wording in the claim classes.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 16. What do the empirical reweighting quantiles mean?
 
 **Short answer:** How much the fixed-battery contrast moves when schedule-
@@ -293,6 +308,7 @@ resampling, equally weighted stratum means, 100,000 draws, frozen seed
 **Failure mode:** Reading them as confidence intervals or tests — the manuscript
 labels them descriptive everywhere.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 17. Why does crossing zero not mean equivalence?
 
 **Short answer:** Quantiles spanning zero mean the data cannot distinguish the
@@ -309,6 +325,7 @@ support equivalence”); claim_classes.json forbidden_wording.
 
 **Failure mode:** Any “the policies are identical up to noise” statement.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 18. What prior work already existed?
 
 **Short answer:** CRN theory, streams/substreams, counter-based parallel RNGs,
@@ -325,6 +342,7 @@ workshop papers added during closeout).
 **Failure mode:** Overlooking a close work — the fatal novelty test is
 re-run at closeout precisely to catch that.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 19. What exactly is the contribution?
 
 **Short answer:** An executable, fail-closed workflow that decides which
@@ -342,6 +360,7 @@ factorial reported descriptively); and explicit chronology discipline.
 **Failure mode:** Sliding into component-priority claims (CRN, replay, etc.)
 that belong to prior work.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 20. How does this differ from Rollout Cards?
 
 **Short answer:** Rollout Cards preserve and disclose rollout evidence and
@@ -357,6 +376,7 @@ an automatic admission decision with suppression consequences.
 
 **Failure mode:** Equating preservation with validation.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 21. How does this differ from Trace Assurance?
 
 **Short answer:** Message–Action Trace contracts verify implementation
@@ -371,6 +391,7 @@ fail-closed downgrade/suppression semantics derived from pairing evidence.
 
 **Failure mode:** Conflating trace fidelity with coupling validity.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 22. How does this differ from AEVAL?
 
 **Short answer:** AEVAL makes agent-workflow changes deterministically testable
@@ -385,6 +406,7 @@ comparative statistics and maps evidence to permitted wording mechanically.
 
 **Failure mode:** Presenting contract testing as coupling validation.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 23. What is Stage 6?
 
 **Short answer:** A bounded static audit of package sources for stochastic
@@ -404,6 +426,7 @@ covering all seven rules including the clean-scan-is-not-proof rule.
 
 **Failure mode:** Treating a hit as cause, or a clean scan as determinism.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 24. Why does a static hit not prove cause?
 
 **Short answer:** Code containing a clock pattern may never execute that branch
@@ -418,6 +441,7 @@ so the stage stays honest about its uninspected boundary (2 binaries unassessed)
 
 **Failure mode:** Asserting “timing caused divergence X” from scan output.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 25. Why does a clean scan not prove determinism?
 
 **Short answer:** The scanner covers declared Python trees only — not binaries,
@@ -433,6 +457,7 @@ behavior is only ever established behaviorally, by Stages 4–5 repetition.
 
 **Failure mode:** Upgrading to CONTROLLED on a zero-hit inventory.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 26. What can another researcher reproduce?
 
 **Short answer:** Everything engine-free: regenerate and verify the synthetic
@@ -450,6 +475,7 @@ stated, not promised.
 **Failure mode:** Promising end-to-end gameplay replication that rights
 boundaries forbid.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 27. What remains restricted?
 
 **Short answer:** The engine and binaries, third-party opponent packages, game
@@ -466,6 +492,7 @@ RELEASE_OWNERSHIP_MATRIX.csv.
 
 **Failure mode:** Any wording implying availability beyond the review package.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 28. How was AI used?
 
 **Short answer:** OpenAI Codex (GPT-5-family; exact snapshot not exposed)
@@ -484,6 +511,7 @@ policy. Completeness and tool-terms compliance require human confirmation
 **Failure mode:** Discovering substantive unrecorded AI use would invalidate
 the disclosure and require correction before submission.
 
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______
 ## 29. What would make the paper scientifically invalid?
 
 **Short answer:** Any of: a fabricated or miscounted central number; a
@@ -504,3 +532,5 @@ correction.
 
 **Failure mode:** This guide itself becoming stale relative to the manuscript;
 the pipeline re-verifies textual-number consistency on every run.
+
+**Human comprehension checkbox:** [ ] I can deliver this answer in my own words, and I understand what would falsify it. Initials/Date: ______

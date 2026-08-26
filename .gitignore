@@ -155,3 +155,7 @@ artifacts/anti_meta_20260816/*
 !artifacts/anti_meta_20260816/*.json
 !artifacts/anti_meta_20260816/*.jsonl.gz
 !artifacts/anti_meta_20260816/*.jsonl
+
+# Installed virtual environments must not be version-controlled.
+.venv-clean/
+.venv/

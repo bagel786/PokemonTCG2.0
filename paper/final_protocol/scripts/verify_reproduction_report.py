@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -15,6 +16,8 @@ from typing import Any
 
 from reproduce_all import (
     FINAL,
+    MACHINE_FINAL_REPORT,
+    MACHINE_FINAL_SIDECAR,
     REPORT,
     REPORT_SIDECAR,
     REPORT_ENVELOPE_PATHS,
@@ -315,7 +318,7 @@ def verify_repository_identity_boundary(
     paths = {item.decode("utf-8", errors="surrogateescape") for item in changed.split(b"\0") if item}
     if paths != REPORT_ENVELOPE_PATHS:
         raise ValueError(
-            "report commit E tree delta must contain exactly both canonical envelope paths; got: "
+            "report commit E tree delta must contain exactly the canonical envelope paths; got: "
             + ", ".join(sorted(paths))
         )
     _verify_committed_envelope_file(
@@ -326,6 +329,42 @@ def verify_repository_identity_boundary(
         root=root, head=current_head,
         relative_path=CANONICAL_SIDECAR_RELATIVE.as_posix(), path=sidecar_path, label="sidecar",
     )
+    _verify_machine_final_envelope(
+        root=root, head=current_head,
+        subject_head=subject_head, report_digest=sha256(report_path),
+    )
+
+
+def _verify_machine_final_envelope(
+    *, root: Path, head: str, subject_head: str, report_digest: str,
+) -> None:
+    """Verify the machine-finalization aggregate committed alongside the report."""
+    machine_relative = MACHINE_FINAL_REPORT.relative_to(ROOT).as_posix()
+    sidecar_relative = MACHINE_FINAL_SIDECAR.relative_to(ROOT).as_posix()
+    raw = _git_bytes(root, ["show", f"{head}:{machine_relative}"])
+    sidecar_text = _git_bytes(root, ["show", f"{head}:{sidecar_relative}"]).decode("ascii")
+    if parse_sidecar(sidecar_text, MACHINE_FINAL_REPORT.name) != hashlib.sha256(raw).hexdigest():
+        raise ValueError("machine-final report SHA-256 does not match its sidecar")
+    try:
+        payload = json.loads(raw.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise ValueError(f"machine-final report is not valid JSON: {exc}") from exc
+    if canonical_json_bytes(payload) != raw:
+        raise ValueError("machine-final report is not strict canonical JSON")
+    if payload.get("schema_version") != "machine-final-reproduction-report-v1":
+        raise ValueError("machine-final report schema version is unexpected")
+    if payload.get("status") != "PASS":
+        raise ValueError("machine-final report status is not PASS")
+    if payload.get("subject_head_commit") != subject_head:
+        raise ValueError("machine-final report does not bind the reproduced subject commit")
+    if payload.get("canonical_report_sha256") != report_digest:
+        raise ValueError("machine-final report does not bind the canonical report digest")
+    gate = payload.get("human_gate", {})
+    if (
+        not isinstance(gate, dict)
+        or gate.get("overall_submission_status") != "NOT_READY_DO_NOT_SUBMIT_UNTIL_HUMAN_CLOSEOUT_COMPLETE"
+    ):
+        raise ValueError("machine-final report does not preserve the fail-closed human gate")
 
 
 def verify(report_path: Path = REPORT, sidecar_path: Path = REPORT_SIDECAR) -> dict[str, Any]:
@@ -335,6 +374,8 @@ def verify(report_path: Path = REPORT, sidecar_path: Path = REPORT_SIDECAR) -> d
     )
     _require_regular_non_symlink(report_path, label="report")
     _require_regular_non_symlink(sidecar_path, label="sidecar")
+    _require_regular_non_symlink(MACHINE_FINAL_REPORT, label="machine-final report")
+    _require_regular_non_symlink(MACHINE_FINAL_SIDECAR, label="machine-final sidecar")
     raw = report_path.read_bytes()
     sidecar_digest = parse_sidecar(sidecar_path.read_text(encoding="ascii"), report_path.name)
     actual_digest = sha256(report_path)

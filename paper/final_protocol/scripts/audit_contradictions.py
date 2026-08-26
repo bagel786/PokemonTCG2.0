@@ -36,6 +36,8 @@ EXPECTED_TITLE = (
 EXPECTED_ARTICLE_TYPE = "APS Open Science Protocol Article"
 EXPECTED_PROTOCOL_COMMIT = "803257f102232763fc88d28c14b668f9b62eb277"
 EXPECTED_BRANCH = "paper/apsos-submission-closeout-20260825"
+# The machine-finalization branch inherits this audit unchanged.
+ALLOWED_BRANCHES = {EXPECTED_BRANCH, "paper/apsos-machine-finalization-20260826"}
 
 REQUIRED_BASE_FILES = (
     "STARTING_STATE.json",
@@ -785,15 +787,15 @@ def check_identity(audit: Audit, payloads: dict[str, Any], macros: dict[str, str
         ).strip()
     except (OSError, subprocess.CalledProcessError):
         pass
-    if branch_observed == EXPECTED_BRANCH:
+    if branch_observed in ALLOWED_BRANCHES:
         audit.pass_check(
             "IDENTITY-BRANCH", "article identity", EXPECTED_BRANCH, branch_observed,
-            ["git:branch --show-current"], "The working branch is the frozen finalization branch."
+            ["git:branch --show-current"], "The working branch is a recorded finalization branch."
         )
     else:
         audit.machine(
             "IDENTITY-BRANCH", "article identity", EXPECTED_BRANCH, branch_observed,
-            ["git:branch --show-current"], "The audit was not run from the designated finalization branch."
+            ["git:branch --show-current"], "The audit was not run from a recorded finalization branch."
         )
 
     protocol_values: dict[str, Any] = {}

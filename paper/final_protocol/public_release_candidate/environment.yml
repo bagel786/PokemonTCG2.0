@@ -1,0 +1,9 @@
+# Direct package snapshot only; not a transitive dependency lock.
+name: trace-validation-review
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11.5
+  - numpy=2.4.6
+  - matplotlib=3.10.5
+  - pytest=9.1.1

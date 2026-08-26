@@ -68,12 +68,37 @@ def _write_envelope(repo: Path) -> tuple[Path, Path]:
         f"{hashlib.sha256(payload).hexdigest()}  {REPORT_RELATIVE.name}\n",
         encoding="ascii",
     )
+    # Machine-finalization aggregate: minimal structurally valid record bound to
+    # the synthetic subject/report digests, derived from the shared constant.
+    machine_relative = Path("paper/final_protocol/REPRODUCTION_REPORT_MACHINE_FINAL.json")
+    machine_sidecar_relative = Path("paper/final_protocol/REPRODUCTION_REPORT_MACHINE_FINAL.sha256")
+    identity = verifier.repository_identity(
+        root=repo,
+        report_envelope_paths=reproduction.REPORT_ENVELOPE_PATHS,
+    )
+    machine_payload = {
+        "canonical_report_sha256": hashlib.sha256(payload).hexdigest(),
+        "generated_by": "scripts/machine_finalize.py (test fixture)",
+        "human_gate": {
+            "overall_submission_status": "NOT_READY_DO_NOT_SUBMIT_UNTIL_HUMAN_CLOSEOUT_COMPLETE",
+        },
+        "schema_version": "machine-final-reproduction-report-v1",
+        "status": "PASS",
+        "subject_head_commit": identity["head_commit"],
+    }
+    serialized = json.dumps(machine_payload, indent=2, sort_keys=True) + "\n"
+    machine = repo / machine_relative
+    machine.write_text(serialized, encoding="utf-8")
+    (repo / machine_sidecar_relative).write_text(
+        f"{hashlib.sha256(serialized.encode('utf-8')).hexdigest()}  {machine_relative.name}\n",
+        encoding="ascii",
+    )
     return report, sidecar
 
 
 def _commit_envelope(repo: Path, *, extra: bool = False) -> tuple[Path, Path]:
     report, sidecar = _write_envelope(repo)
-    paths = [REPORT_RELATIVE.as_posix(), SIDECAR_RELATIVE.as_posix()]
+    paths = sorted(reproduction.REPORT_ENVELOPE_PATHS)
     if extra:
         extra_path = repo / "unexpected.txt"
         extra_path.write_text("unexpected\n", encoding="utf-8")

@@ -1,17 +1,21 @@
 # Claim ledger — human signoff worksheet
 
 **Instruction to the human author:** the machine claim ledger
-(`claim_ledger.csv`) currently contains 368 rows (33 curated, 335 automatic).
-Signing every row individually is impractical and would produce rubber-stamp
-signatures rather than verification. This worksheet replaces per-row signing
-with a two-part workflow. It does **not** delete or weaken the ledger; the
-ledger continues to be regenerated and machine-audited on every pipeline run,
-and this amendment is recorded here transparently.
+(`claim_ledger.csv`) is regenerated on every pipeline run and currently pairs
+33 curated claims with an automatically generated set of remaining prose rows
+(the live count is printed by `scripts/build_claim_ledger.py` and recorded in
+`source_data/claim_scope_audit.json`, so it stays correct as the manuscript
+evolves). Signing every row individually is impractical and would produce
+rubber-stamp signatures rather than verification. This worksheet replaces
+per-row signing with a two-part workflow. It does **not** delete or weaken the
+ledger; the ledger continues to be regenerated and machine-audited on every
+pipeline run, and this amendment is recorded here transparently.
 
 Amendment record: prior gate required one human signature per row. Closeout
 gate requires (A) sentence-by-sentence signoff of all 33 curated claims below
-and (B) one explicit attestation covering the 335 automatic rows plus their
-coverage script. Status of this amendment: **PENDING HUMAN SIGNATURE**.
+and (B) one explicit attestation covering every automatic row (current count
+per `claim_ledger.csv`) plus their coverage script. Status of this amendment:
+**PENDING HUMAN SIGNATURE**.
 
 ---
 
@@ -56,7 +60,7 @@ its number(s), its source, its allowed reading, and its forbidden readings.
 | 32 | rights | Public archival availability NOT established (no license/DOI confirmed) | — | honest restriction | public-package claim | |
 | 33 | rights | Engine/opponents/assets/traces unavailable under established rights | — | restricted list | reasonable-request promise | |
 
-## Part B — Automatic coverage attestation (335 rows)
+## Part B — Automatic coverage attestation (every remaining automatic row)
 
 The remaining rows were added mechanically by `scripts/build_claim_ledger.py`
 (deterministic prose-scope pass). Each binds an exact manuscript sentence to

@@ -1,9 +1,10 @@
 {
   "article_type": "APS Open Science Protocol Article",
   "citation_metadata": "INCOMPLETE_HUMAN_AUTHOR_METADATA",
-  "clean_environment_build_evidenced": false,
+  "clean_environment_build_evidenced": true,
+  "clean_environment_evidence": "CLEAN_ENV_REPRODUCTION.json (article repository): fresh venv, 60 release tests passed, manifest verification PASS",
   "doi": null,
-  "environment_spec_scope": "direct_packages_only_not_transitive_locks",
+  "environment_spec_scope": "direct_packages_only_with_recorded_transitive_snapshot",
   "license": "NO_LICENSE_GRANTED_PENDING_HUMAN_CONFIRMATION",
   "machine_verification_scope": "technical internal consistency only; not human, legal, licensing, archival, or publication readiness",
   "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",

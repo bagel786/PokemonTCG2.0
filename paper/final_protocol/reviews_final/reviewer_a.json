@@ -1,0 +1,31 @@
+{
+  "blind": true,
+  "completeness_findings_separated": [
+    "Author identity/affiliation/ORCID placeholders remain (human-only; excluded from scientific judgment).",
+    "No approved license, no DOI, release status unauthorized (rights gate, not science).",
+    "AI-use completeness, D03 disposition, claim-ledger signoffs unsigned (human gates)."
+  ],
+  "desk_decision_scientific": "BORDERLINE",
+  "rationale": "Methodologically strong protocol article; would send once the scope inquiry answer is favorable. Missing author metadata and rights do not enter this scientific verdict.",
+  "reviewed_artifacts": [
+    "main.tex/main.pdf (14 pp)",
+    "NOVELTY_AUDIT_FINAL.md + REFERENCE_AUDIT_FINAL.csv",
+    "DESK_REVIEW_SIMULATION_V2.json",
+    "STALE_ARTIFACT_AUDIT.json",
+    "APS_REQUIREMENTS_CURRENT.md/.json"
+  ],
+  "reviewer_id": "A",
+  "role": "APS staff editor",
+  "scientific_assessment": {
+    "protocol_fit": "Stepwise evidence ladder, binary gates, claim map, conformance suite, and case study match a computational Protocol Article definition.",
+    "readiness": "Self-contained PDF, honest restrictions, AI disclosure in two locations per current policy superset.",
+    "scope_question": "Game-engine case is adjacent-field; manuscript argues transferability to simulation/ML benchmarking but cannot demonstrate adoption."
+  },
+  "scope_only_borderline": true,
+  "scope_risk": {
+    "assessment": "Borderline on scope only: the validated instance is a restricted game engine; APSO scope explicitly reaches methodological work in AI/computational science, so fit is arguable rather than clear-cut.",
+    "counts_as_scope_only": true,
+    "mitigation": "Pre-submission scope inquiry drafted (unsent); introduction and interpretation foreground experimental-design generality; PhySH candidates route to ML/AI/computational areas."
+  },
+  "would_send_after_scope_answer_and_completeness": true
+}

@@ -1,0 +1,8 @@
+# Prior/overlapping disclosure (DRAFT - exact language transcribed by apply_human_answers.py)
+
+[Approved overlap disclosure sentence(s) - transcribed by apply script]
+
+Facts to disclose once confirmed: any Kaggle competition report or public
+write-up covering part of this work; any preprint posting; any prior
+student-journal submission and its status. Nothing here is asserted without
+the author's confirmation because the repository cannot establish it.

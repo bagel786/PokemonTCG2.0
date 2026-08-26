@@ -1,0 +1,4 @@
+manuscript_source_for_acceptance.zip contains REVTeX source, bibliography,
+generated tables/macros, and figures. Per current APS guidance, only the
+compiled PDF is required at initial submission; upload this zip at the
+acceptance stage when APS requests source files.

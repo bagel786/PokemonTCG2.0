@@ -686,8 +686,11 @@ packages, private observations, raw restricted traces, credentials, or archives.
 
 ## Quick start
 
-The commands below were exercised in the builder's existing environment. They
-do not evidence a fresh clean-environment build.
+Clean-environment verification passed: a fresh virtual environment built from
+`requirements-lock.txt` (Python 3.11.5, NumPy 2.4.6, Matplotlib 3.10.5,
+pytest 9.1.1) ran every command below successfully; see
+`CLEAN_ENV_REPRODUCTION.json` in the article repository for the recorded
+transitive freeze, platform scope, and commands.
 
 For a new conda environment:
 
@@ -709,9 +712,13 @@ python -B -m pytest -q -p no:cacheprovider
 ```
 
 `requirements-lock.txt` and `environment.yml` pin the directly requested
-packages only. Neither file is a transitive dependency lock, and no successful
-fresh clean-environment construction from either file is evidenced by this
-review package.
+packages only; neither is a transitive dependency lock. The recorded clean run
+observed the transitive versions listed in `CLEAN_ENV_REPRODUCTION.json`
+(contourpy 1.3.3, cycler 0.12.1, fonttools 4.63.0, iniconfig 2.3.0,
+kiwisolver 1.5.0, packaging 26.3, pillow 12.3.0, pluggy 1.6.0,
+Pygments 2.21.0, pyparsing 3.3.2, python-dateutil 2.9.0.post0, six 1.17.0)
+on macOS arm64 with CPython 3.11.5; universal cross-platform portability is
+not claimed.
 
 From this directory:
 
@@ -770,18 +777,24 @@ gate-to-claim mapping, estimands, and uncertainty rules before data acquisition.
 The historical CSV retains only the three available control records (win, draw,
 and decision count), not complete traces. The preflight CSV retains trace digests
 and byte counts plus outcome/error/decision summaries, not raw observations or
-opaque search state. The stress file retains cluster-level disagreement flags and
-explicitly omits unverifiable earliest-event or actor localization, not raw traces. The factorial CSV retains schedule,
+opaque search state. The stress file retains cluster-level disagreement flags,
+recovered acting-side first-divergence counts, and per-profile wall-clock timing
+aggregates; it contains no raw trace lines. The factorial CSV retains schedule,
 outcome, and decision-count fields; trace digests were not captured for that
 acquisition. Neutral context labels are stable within this package but are not
 external entity identifiers.
 
 The frozen stress protocol also promised first-divergence positions and actors
-and timing summaries. This package omits both localization and timing, and it
-contains no raw trace lines from which localization can be verified. Therefore
-it makes no localization or timing claims. The omission does not change the
-primary complete-trace digest mismatch count, but it is a reporting/access
-deviation pending human signoff; see `docs/PROTOCOL_DEVIATIONS.md`.
+and timing summaries. Acting-side first-divergence counts (all 99 disagreeing
+clusters localized to the opponent side) and timing aggregates were recovered
+from hash-pinned retained evidence and are included as processed aggregates with
+their source digest recorded; their public redistribution still awaits explicit
+human approval. First-divergence positions were never recorded in any retained
+artifact, and raw trace payloads remain restricted, so position-level
+localization cannot be verified from this package and no position-level claim
+is made. The omitted positions do not change the primary complete-trace digest
+mismatch count; the omission remains a reporting/access deviation pending human
+signoff; see `docs/PROTOCOL_DEVIATIONS.md`.
 
 ## Integrity and status
 
@@ -843,8 +856,9 @@ no DOI is supplied and `LICENSE` grants no permission. Do not cite the incomplet
         "doi": None,
         "license": "NO_LICENSE_GRANTED_PENDING_HUMAN_CONFIRMATION",
         "machine_verification_scope": "technical internal consistency only; not human, legal, licensing, archival, or publication readiness",
-        "clean_environment_build_evidenced": False,
-        "environment_spec_scope": "direct_packages_only_not_transitive_locks",
+        "clean_environment_build_evidenced": True,
+        "clean_environment_evidence": "CLEAN_ENV_REPRODUCTION.json (article repository): fresh venv, 60 release tests passed, manifest verification PASS",
+        "environment_spec_scope": "direct_packages_only_with_recorded_transitive_snapshot",
         "protocol_commit": PROTOCOL_COMMIT,
         "release_status": "BUILT_FOR_REVIEW_NOT_AUTHORIZED_FOR_PUBLICATION",
         "restricted_material_included": False,

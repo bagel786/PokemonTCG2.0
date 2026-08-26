@@ -25,7 +25,7 @@
     "figures/figure_5_factorial.png"
   ],
   "generated_sha256": {
-    "cover_letter.md": "7a1a6f7fb6b1016738d691852288d1e34879b711a714efda730cfd10baabe5f0",
+    "cover_letter.md": "483e776143defdc391b0164a62a02590a9c5b7125c44314c0ce557d856db3e79",
     "figures/figure_1_distinctions.pdf": "323de33170990cb4ef46addb990c2e1aadcb79b3781ddfddccf782cefc7d64d2",
     "figures/figure_1_distinctions.png": "86da3809819396d96abc762f1840661d9ea451983d71d7ec22b03a15a5a9d6e9",
     "figures/figure_2_admission_flow.pdf": "57448b07871d32039dae2319cb8ec535c33fe41738a0af5e5f1e777f6a86bbdd",
@@ -37,7 +37,7 @@
     "figures/figure_5_factorial.pdf": "ca20fc4da7f70491ad2b2f3ca7e45f0447c670fd95f4fb25b3efd850355218da",
     "figures/figure_5_factorial.png": "edd6ab9d309cc53e4ea3cea6ab97e9069aa0c930bab4b5d1a6a593acf5148854",
     "results_macros.tex": "a909963f9811877c412630b6579847bff5447cd2287a96dd4ad1b8180650f70d",
-    "source_data/artifact_identity.json": "22c8c7934177b84d934c788a6af59d943a2ffeaf40fe4e40373da1c825519d4f",
+    "source_data/artifact_identity.json": "1951c7fd27b20a88ff9ffe4103f17a1783ead7fe993d7a8bd0794bd797e109dd",
     "source_data/processed_factorial.json": "3cbec1b68ff2a11f79b64bf2aae4d2d8208e7f3ee71477a0adec4057ac50cf21",
     "source_data/processed_preflight.json": "02ba1678955326af07b5e476532f456c6626c38a3292d2e58018d7552e557c23",
     "source_data/processed_seed_namespace_audit.json": "9ea538be53ca4558231732669df422980d38d974aa851a644321fea5214e46d8",

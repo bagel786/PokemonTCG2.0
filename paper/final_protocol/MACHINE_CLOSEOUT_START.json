@@ -1,0 +1,74 @@
+{
+  "schema_version": "machine-closeout-start-v1",
+  "purpose": "Frozen snapshot recorded before any machine-finalization edits on branch paper/apsos-machine-finalization-20260826.",
+  "recorded_at_utc": "2026-08-25T23:37:18Z",
+  "source_branch": "paper/apsos-submission-closeout-20260825",
+  "source_commit": "5bc4d6418b1d8debfb94eddedf52eb608222ff49",
+  "source_tree_hash": "8bd30d5efe4073f62eb7c316a7bc717110a3e36b",
+  "worktree_state_at_start": {
+    "tracked_clean": true,
+    "untracked_non_envelope_files": [
+      "CODEX_APSOS_MACHINE_CLOSEOUT_HANDOFF.md"
+    ],
+    "note": "Single untracked handoff note retained untracked; no tracked file was dirty at branch creation."
+  },
+  "new_branch": "paper/apsos-machine-finalization-20260826",
+  "current_manuscript_pdf_hash": {
+    "path": "paper/final_protocol/main.pdf",
+    "sha256": "92d1658338f668f80ed82dd1c4fa2cf315e6255e1f146949107b826bf837351a"
+  },
+  "current_release_manifest_hash": {
+    "path": "paper/final_protocol/release/MANIFEST.sha256",
+    "sha256": "cb4ab12640cd5b35aa833f611ea960ce61bf2b17609d4093b87e48eb1812a014"
+  },
+  "current_reproduction_report_hash": {
+    "path": "paper/final_protocol/REPRODUCTION_REPORT.json",
+    "sha256": "80b242ecf32ae2e4eac0974cf2e1a748ded47ee9373a836d673999a9ac8ffbd8"
+  },
+  "current_v2_desk_review_aggregate": {
+    "path": "paper/final_protocol/DESK_REVIEW_SIMULATION_V2.json",
+    "sha256": "7841fdb19e16c198c67b5510e72f51227b4ea0a26b1f05da09512a513fea1be9",
+    "scientific_desk_gate": "PASS_SCIENTIFICALLY_SEND_TO_REVIEW",
+    "verdicts": { "SEND_TO_REVIEW": 4, "BORDERLINE": 1, "DESK_REJECT": 0 },
+    "submission_completeness_gate": "BLOCKED_PENDING_HUMAN_ACTIONS",
+    "overall": "NOT_READY_DO_NOT_SUBMIT_UNTIL_HUMAN_CLOSEOUT_COMPLETE"
+  },
+  "current_human_blockers": [
+    "author name / corresponding email / affiliation / postal address placeholders",
+    "CRediT roles, funding, conflicts, acknowledgments unresolved",
+    "AI-use completeness unconfirmed by human",
+    "claim-ledger curated signoff worksheet unsigned (33 curated rows + automatic coverage attestation)",
+    "equation, method-assumption, and defense-guide comprehension signoffs unsigned",
+    "release ownership matrix approvals pending; no approved license; RELEASE_STATUS unauthorized",
+    "no archive deposit or DOI authorization",
+    "D03 deviation record unsigned pending disposition of recovered aggregates and never-recorded positions",
+    "redistribution approval pending for recovered acting-side counts and timing aggregates"
+  ],
+  "current_stale_artifact_findings": [
+    "A: release/README.md and its generator template still deny clean-environment evidence and say localization+timing outputs are omitted",
+    "B: release/RELEASE_STATUS.json records clean_environment_build_evidenced=false while CLEAN_ENV_REPRODUCTION.json records PASS",
+    "C: HUMAN_CLOSEOUT_FORM.md cites 'historical 26/200 and 34/200' instead of authoritative 210/2800 outcome-record and 458/2800 available-record disagreement counts",
+    "D: HUMAN_CLOSEOUT_FORM.md D03 section predates recovery of actor-side counts and timing aggregates",
+    "E: APS_DESK_FIT.md retains pre-final metrics (13-page manuscript, 207-word abstract) without a strong SUPERSEDED phase label",
+    "F: V1 review artifacts (reviews/, DESK_REVIEW_SIMULATION.json) lack an explicit DO-NOT-USE banner",
+    "G: .venv-clean (144 MB installed virtual environment) is Git-tracked",
+    "H: recovered secondary outputs verified present in release/data/processed/timed_search_stress.json with source-digest provenance; redistribution still pending human approval"
+  ],
+  "operating_environment": {
+    "os": "macOS 26.1 (Darwin 25.1.0, arm64)",
+    "python": "3.11.5 (CPython)",
+    "git_repository": "bagel786/PokemonTCG2.0",
+    "toolchain": "tectonic + poppler (pdftoppm/pdfinfo/pdftotext) for manuscript build and visual audit"
+  },
+  "constraints_acknowledged": [
+    "Never rewrite historical commits",
+    "Never modify immutable raw acquisition rows",
+    "Never delete frozen protocols",
+    "Never run new policy-training, selection, or outcome-driven experiments",
+    "Never upload or submit to APS",
+    "Never create a DOI without human authorization",
+    "Never add author metadata from Git accounts, paths, emails, or inference",
+    "Never silently select a license",
+    "Fail closed whenever a human/legal/scientific requirement cannot be satisfied"
+  ]
+}

@@ -1,0 +1,230 @@
+{
+  "$defs": {
+    "audit": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "level": {
+                "maximum": 7
+              }
+            },
+            "required": [
+              "level"
+            ]
+          },
+          "then": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "blocked",
+                  "fail",
+                  "pass"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "level": {
+                "const": 8
+              }
+            },
+            "required": [
+              "level"
+            ]
+          },
+          "then": {
+            "properties": {
+              "catches_failure": {
+                "const": false
+              },
+              "status": {
+                "enum": [
+                  "admit",
+                  "downgrade",
+                  "suppress"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "properties": {
+        "catches_failure": {
+          "type": "boolean"
+        },
+        "evidence": {
+          "type": "object"
+        },
+        "evidence_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "level": {
+          "maximum": 8,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "level_name": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "admit",
+            "blocked",
+            "downgrade",
+            "fail",
+            "pass",
+            "suppress"
+          ]
+        },
+        "summary": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "catches_failure",
+        "evidence",
+        "evidence_sha256",
+        "level",
+        "level_name",
+        "status",
+        "summary"
+      ],
+      "type": "object"
+    },
+    "level": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "admission_decision",
+            "evidence_gate"
+          ]
+        },
+        "level": {
+          "maximum": 8,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "level_name": {
+          "type": "string"
+        },
+        "valid_statuses": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "level",
+        "level_name",
+        "valid_statuses"
+      ],
+      "type": "object"
+    },
+    "mode": {
+      "additionalProperties": false,
+      "properties": {
+        "audit": {
+          "items": {
+            "$ref": "#/$defs/audit"
+          },
+          "maxItems": 8,
+          "minItems": 8,
+          "type": "array"
+        },
+        "caught_by_levels": {
+          "items": {
+            "maximum": 7,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "description": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "object"
+        },
+        "first_catching_level": {
+          "maximum": 7,
+          "minimum": 1,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "mode": {
+          "enum": [
+            "clean_deterministic",
+            "process_global_state",
+            "stateful_draw_shift",
+            "uint32_seed_conversion",
+            "wall_clock_search"
+          ]
+        }
+      },
+      "required": [
+        "audit",
+        "caught_by_levels",
+        "description",
+        "evidence",
+        "first_catching_level",
+        "mode"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "urn:pevl:synthetic-results:1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "framework": {
+      "const": "Paired Evaluation Validity Ladder"
+    },
+    "levels": {
+      "items": {
+        "$ref": "#/$defs/level"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array"
+    },
+    "modes": {
+      "items": {
+        "$ref": "#/$defs/mode"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "schema_version": {
+      "const": "1.1.0"
+    },
+    "status_semantics": {
+      "type": "object"
+    },
+    "testbed": {
+      "const": "pevl_synthetic_coupling_validation"
+    }
+  },
+  "required": [
+    "framework",
+    "levels",
+    "modes",
+    "schema_version",
+    "status_semantics",
+    "testbed"
+  ],
+  "title": "PEVL synthetic coupling-validation results",
+  "type": "object"
+}

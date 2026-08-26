@@ -1,0 +1,27 @@
+Data Availability Statement (Version B — public companion not yet approved)
+**Data Availability Statement.** For review, the manuscript is accompanied by
+an engine-independent computational companion containing the synthetic
+protocol implementation and fixtures with expected outputs, the executable
+admission engine with generated decision tables (including Stage-6
+source-audit rules), processed historical, preflight, stress, and factorial
+diagnostics — including recovered acting-side first-divergence counts and
+timing aggregates pending redistribution approval — analysis and verification
+scripts, protocol transcriptions, figures with source data, schemas, hashes,
+tests, environment declarations, and reproduction instructions. It runs
+without the game engine. Public archival availability is not yet established:
+ownership, an approved software/data license, archive creators, maintainer
+contact, and a DOI await explicit human authorization, so this statement does
+not describe the package as public and no later release is promised here.
+
+The tournament engine and source, engine binaries, third-party opponent
+packages, game assets and metadata, private replay observations, policy
+packages, and restricted raw traces are unavailable because of organizer
+terms, third-party rights, privacy constraints, and unresolved release
+authority. They are not offered on request because no legal authority or
+controlled-access mechanism is established; this limitation is flagged as an
+editorial-risk item rather than resolved by wording. Their identities are
+represented only by approved digests and bounded processed summaries, and
+exact restricted gameplay regeneration requires separately authorized access
+this article cannot provide.
+
+---

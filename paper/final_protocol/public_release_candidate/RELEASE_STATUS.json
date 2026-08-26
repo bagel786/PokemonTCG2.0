@@ -1,0 +1,69 @@
+{
+  "article_type": "APS Open Science Protocol Article",
+  "candidate_note": "Public-release candidate assembled from the verified review package. License files are .proposed placeholders; no license is granted and no DOI exists until the human author authorizes them via human_answers.yaml.",
+  "citation_metadata": "INCOMPLETE_HUMAN_AUTHOR_METADATA",
+  "clean_environment_build_evidenced": true,
+  "clean_environment_evidence": "CLEAN_ENV_REPRODUCTION.json (article repository): fresh venv, 60 release tests passed, manifest verification PASS",
+  "doi": null,
+  "environment_spec_scope": "direct_packages_only_with_recorded_transitive_snapshot",
+  "license": "NO_LICENSE_GRANTED_PENDING_HUMAN_CONFIRMATION",
+  "machine_verification_scope": "technical internal consistency only; not human, legal, licensing, archival, or publication readiness",
+  "protocol_commit": "803257f102232763fc88d28c14b668f9b62eb277",
+  "release_status": "CANDIDATE_NOT_AUTHORIZED",
+  "restricted_material_included": false,
+  "source_inputs": {
+    "factorial_summary": {
+      "role": "factorial_summary",
+      "sha256": "c7df75c7ae0f76a007d866947ad5262242d86c0c90cb0c8631d201dedd023e59"
+    },
+    "factorial_units": {
+      "role": "factorial_units",
+      "sha256": "62fe1fc3657ccd783e4f068042f201ceae0d7fc02d694a8ee5943d3f5c52e3eb"
+    },
+    "historical_units": {
+      "role": "historical_units",
+      "sha256": "eca841487814c50acccb7f885207e679b906179bb77e6818dfaa430af47e6fcc"
+    },
+    "preflight_summary": {
+      "role": "preflight_summary",
+      "sha256": "c6295f9f3981d346d0cbcb38327e575b560aaf0950bd52f52594cfb8f9cc56b3"
+    },
+    "protocol_fresh": {
+      "role": "protocol_fresh",
+      "sha256": "deedad087ee8cc6b2863499ab5d3dcb6017b9b96f51bacf15bd74960bc31fa19"
+    },
+    "protocol_pevl": {
+      "role": "protocol_pevl",
+      "sha256": "8b9329b948a054fc7252b9c2662490890e0a8439ad852393c6e25f537c8b887e"
+    },
+    "protocol_representation": {
+      "role": "protocol_representation",
+      "sha256": "b838a881061027a80d78acbca0958b050bec339ccb0f78f35681036832069e3f"
+    },
+    "stress_summary": {
+      "role": "stress_summary",
+      "sha256": "40b9f5e17a424742ad8a05739646fe56843b8f3a432b124bfc33f9aed1ab5a4b"
+    },
+    "synthetic_implementation": {
+      "role": "synthetic_implementation",
+      "sha256": "3b85d01c37bf522008b5fb1a20192ddfb1141db801b275093e0aa7f779bc3f86"
+    },
+    "synthetic_manifest": {
+      "role": "synthetic_manifest",
+      "sha256": "0a6eade794c4434275663315442a8e5528a8c3c602f42da5de3ecd0b34792621"
+    },
+    "synthetic_matrix": {
+      "role": "synthetic_matrix",
+      "sha256": "bb79fd2f4f70415948f659b3837b68371814da63a3942ab9bf672cc5e11ec465"
+    },
+    "synthetic_results": {
+      "role": "synthetic_results",
+      "sha256": "d34a2ea1546a0a88e90a5ca58b49f1085edfcaf753f70ed49e0f04202e9ba6f9"
+    },
+    "synthetic_schema": {
+      "role": "synthetic_schema",
+      "sha256": "d173b3255a19b985bf5d0c102b67bfebcddcec6911b38d18a77048b74f63aafb"
+    }
+  },
+  "title": "A Protocol for Validating Pairing Assumptions in Seed-Matched Evaluations of Black-Box Game-Playing Agents"
+}

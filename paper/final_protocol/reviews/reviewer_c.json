@@ -1,23 +1,6 @@
 {
-  "reviewer_id": "C",
-  "reviewer_role": "software testing and reproducibility expert",
-  "verdict": "DESK_REJECT",
+  "SUPERSEDED": "SUPERSEDED SCIENTIFIC REVIEW - DO NOT USE FOR CURRENT READINESS. Retained for provenance of the pre-closeout V1 gate only. The authoritative scientific gate is the separated V2 aggregate in DESK_REVIEW_SIMULATION_V2.json built from reviews_v2/.",
   "confidence": 0.97,
-  "fatal_issues": [
-    "The manuscript is not submission-capable as rendered: the author name, corresponding-author email, affiliation, CRediT roles, conflicts, and related human attestations remain explicit placeholders or pending items, and the manuscript itself calls them submission blockers.",
-    "The companion is not authorized for distribution: LICENSE grants no rights, RELEASE_STATUS.json says publication is unauthorized, and ownership, processed-data redistribution authority, maintainer metadata, and a DOI remain unresolved. A no-license local review tree cannot satisfy the article's open-science companion obligation.",
-    "The frozen stress protocol promised first-divergence positions/actors and timing summaries, but the release omits them and contains no raw trace lines from which localization can be reconstructed; the deviation record remains unsigned and pending human disposition. Transparency preserves the primary 99/200 result, but it does not cure the unresolved protocol/reporting departure for submission as-is."
-  ],
-  "major_issues": [
-    "The standalone release does not operationalize the full advertised protocol for external evidence. Its public file-bound admit path can derive only Levels 1-5 and hard-codes the source audit as unavailable and event alignment as not applicable; Levels 6-7 can be reached only through caller-trusted states or the in-memory synthetic adapter. The general Stage-6 source scanner and a file-bound Level-6/7 evidence verifier are absent from the exact release tree.",
-    "The machine implementation does not cleanly separate the Stage-4 A/A relation from Stage-5 repeat/worker metamorphism. In pevl_bench/evidence.py, Level 4 compares the first two fresh-process records within each policy, while Level 5 compares that same nested record set plus the worker profile; artifact-role, byte-identical-arm, fresh-process, and enqueue provenance remain caller assertions. Either encode and verify the distinct A/A construction or narrow the Stage-4 wording to the implemented within-arm fresh-process repeat check.",
-    "Restricted-engine acquisition is not independently reproducible: the released package reaggregates processed rows and verifies hashes, but cannot replay trajectories, inspect the two engine binaries, validate raw trace serialization, or authenticate that declared roles and execution profiles arose from the claimed acquisition. This is honestly disclosed, yet materially limits the empirical validation strength of an executable black-box protocol article."
-  ],
-  "minor_issues": [
-    "A fresh Python 3.13.2 virtual environment created during this review successfully installed the direct pins, passed the externally pinned 76-entry exact-tree verifier, and passed all 49 release tests. Nevertheless, requirements-lock.txt and environment.yml are direct-package snapshots rather than transitive locks, so this successful present-day macOS/arm64 run does not establish durable or cross-platform reconstruction.",
-    "The report --json interface retains the bare factorial status ADMITTED_SEED_MATCHED even though adjacent fields impose the later descriptive-only restriction. Rename or qualify that status to avoid machine consumers promoting the frozen-plan label over the current fixed-battery interpretation.",
-    "The seven named safety properties are well exercised, including all 6^7 gate-state vectors and stateless repeat-run determinism rather than mathematical idempotence, but the proposition should state its exact input domain and evidence-strength relation more formally so that overlapping notions such as prerequisite monotonicity and failure dominance are not mistaken for independent general theorems."
-  ],
   "exact_manuscript_locations": [
     "main.tex:26-29, title block: author, email, and affiliation placeholders remain visible in main.pdf page 1.",
     "main.tex:326-338, Stages 4-6: the source-audit implementation and its bounded scope are described, but the standalone release lacks the general scanner.",
@@ -28,6 +11,29 @@
     "release/README.md:36-38 and RELEASE_STATUS.json:4-8: dependency files are not transitive locks and no clean-environment build was part of the retained package evidence.",
     "release/pevl_bench/evidence.py:294-358: Level-4 and Level-5 checks are nested within-arm profile comparisons, with no machine-authenticated launch provenance."
   ],
+  "fatal_issues": [
+    "The manuscript is not submission-capable as rendered: the author name, corresponding-author email, affiliation, CRediT roles, conflicts, and related human attestations remain explicit placeholders or pending items, and the manuscript itself calls them submission blockers.",
+    "The companion is not authorized for distribution: LICENSE grants no rights, RELEASE_STATUS.json says publication is unauthorized, and ownership, processed-data redistribution authority, maintainer metadata, and a DOI remain unresolved. A no-license local review tree cannot satisfy the article's open-science companion obligation.",
+    "The frozen stress protocol promised first-divergence positions/actors and timing summaries, but the release omits them and contains no raw trace lines from which localization can be reconstructed; the deviation record remains unsigned and pending human disposition. Transparency preserves the primary 99/200 result, but it does not cure the unresolved protocol/reporting departure for submission as-is."
+  ],
+  "general_reader_answers": {
+    "contribution": "The defensible contribution is integration of prior CRN, A/A, metamorphic, trace, and event-keyed ideas into a claim-admission workflow with a deterministic synthetic conformance suite; the component methods are prior art and the generic taxonomy is explicitly post-acquisition.",
+    "effectiveness_result": "The synthetic suite exercises five controlled modes and an event-keyed repair; the restricted case reports 0 mismatches in 3,000 deterministic-preflight executions, 99 trace-projection disagreements among 200 timed-search clusters, suppression of a favorable historical comparison, and an unresolved +0.55 percentage-point factorial contrast whose descriptive reweighting quantiles span both signs. The pinned release verifier and 49 tests passed, including a fresh Python 3.13.2 virtual-environment run and cross-process deterministic CLI hashes under varied PYTHONHASHSEED values.",
+    "limitation": "The restricted engine exposes no semantic event identifiers and cannot be replayed from the release; raw observations/traces and several packages are unavailable, preflight evidence transfers to different factorial seeds only by assumption, the reporting taxonomy is post-acquisition, promised stress outputs are omitted, and rights plus human submission metadata remain unresolved.",
+    "problem": "A recorded seed matches a schedule field but may not make either execution repeatable or assign equal random quantities to the same semantic events after policies diverge; the paper asks what evidence is required before a paired claim is legitimate.",
+    "protocol": "TRACE-ADMIT is an eight-stage fail-closed ladder covering artifact identity, boundary-seed namespace, schedule parity, identical-artifact trace repetition, repeat/worker contexts, bounded stochastic-source audit, cross-arm event alignment, and result-independent claim admission."
+  },
+  "independence_attestation": "I completed this assessment independently and without access to another reviewer or to any prohibited review conclusion.",
+  "major_issues": [
+    "The standalone release does not operationalize the full advertised protocol for external evidence. Its public file-bound admit path can derive only Levels 1-5 and hard-codes the source audit as unavailable and event alignment as not applicable; Levels 6-7 can be reached only through caller-trusted states or the in-memory synthetic adapter. The general Stage-6 source scanner and a file-bound Level-6/7 evidence verifier are absent from the exact release tree.",
+    "The machine implementation does not cleanly separate the Stage-4 A/A relation from Stage-5 repeat/worker metamorphism. In pevl_bench/evidence.py, Level 4 compares the first two fresh-process records within each policy, while Level 5 compares that same nested record set plus the worker profile; artifact-role, byte-identical-arm, fresh-process, and enqueue provenance remain caller assertions. Either encode and verify the distinct A/A construction or narrow the Stage-4 wording to the implemented within-arm fresh-process repeat check.",
+    "Restricted-engine acquisition is not independently reproducible: the released package reaggregates processed rows and verifies hashes, but cannot replay trajectories, inspect the two engine binaries, validate raw trace serialization, or authenticate that declared roles and execution profiles arose from the claimed acquisition. This is honestly disclosed, yet materially limits the empirical validation strength of an executable black-box protocol article."
+  ],
+  "minor_issues": [
+    "A fresh Python 3.13.2 virtual environment created during this review successfully installed the direct pins, passed the externally pinned 76-entry exact-tree verifier, and passed all 49 release tests. Nevertheless, requirements-lock.txt and environment.yml are direct-package snapshots rather than transitive locks, so this successful present-day macOS/arm64 run does not establish durable or cross-platform reconstruction.",
+    "The report --json interface retains the bare factorial status ADMITTED_SEED_MATCHED even though adjacent fields impose the later descriptive-only restriction. Rename or qualify that status to avoid machine consumers promoting the frozen-plan label over the current fixed-battery interpretation.",
+    "The seven named safety properties are well exercised, including all 6^7 gate-state vectors and stateless repeat-run determinism rather than mathematical idempotence, but the proposition should state its exact input domain and evidence-strength relation more formally so that overlapping notions such as prerequisite monotonicity and failure dominance are not mistaken for independent general theorems."
+  ],
   "required_fixes": [
     "Replace every author/contact/affiliation placeholder and obtain corresponding-author confirmation of authorship, CRediT roles, conflicts, funding, AI disclosure, and submission approval.",
     "Resolve ownership and redistribution authority, apply author-approved software/data licenses, finalize citation/maintainer metadata, and create or remove any DOI claim only after a real archival deposit exists.",
@@ -37,18 +43,13 @@
     "Provide a transitive lock or reproducible environment export plus clean CI evidence on the supported platform matrix; retain the present direct-pin files only as documented snapshots.",
     "Qualify the machine-readable factorial status so it cannot be read as inferential admission, and formally define the domain and weakening relation for the seven safety properties."
   ],
-  "general_reader_answers": {
-    "problem": "A recorded seed matches a schedule field but may not make either execution repeatable or assign equal random quantities to the same semantic events after policies diverge; the paper asks what evidence is required before a paired claim is legitimate.",
-    "protocol": "TRACE-ADMIT is an eight-stage fail-closed ladder covering artifact identity, boundary-seed namespace, schedule parity, identical-artifact trace repetition, repeat/worker contexts, bounded stochastic-source audit, cross-arm event alignment, and result-independent claim admission.",
-    "contribution": "The defensible contribution is integration of prior CRN, A/A, metamorphic, trace, and event-keyed ideas into a claim-admission workflow with a deterministic synthetic conformance suite; the component methods are prior art and the generic taxonomy is explicitly post-acquisition.",
-    "effectiveness_result": "The synthetic suite exercises five controlled modes and an event-keyed repair; the restricted case reports 0 mismatches in 3,000 deterministic-preflight executions, 99 trace-projection disagreements among 200 timed-search clusters, suppression of a favorable historical comparison, and an unresolved +0.55 percentage-point factorial contrast whose descriptive reweighting quantiles span both signs. The pinned release verifier and 49 tests passed, including a fresh Python 3.13.2 virtual-environment run and cross-process deterministic CLI hashes under varied PYTHONHASHSEED values.",
-    "limitation": "The restricted engine exposes no semantic event identifiers and cannot be replayed from the release; raw observations/traces and several packages are unavailable, preflight evidence transfers to different factorial seeds only by assumption, the reporting taxonomy is post-acquisition, promised stress outputs are omitted, and rights plus human submission metadata remain unresolved."
-  },
   "reviewed_artifact_hashes": {
-    "main_tex": "bb2df31e61bf2585e89f2d7d8aed98b5b3b2bbba0ab5b80e26635db713d1d8e0",
     "main_pdf": "33cc0f2fe9dd2cfdadb7e85d7fd2e6ba4ba4b03cccceb9749538a4d69815cce8",
+    "main_tex": "bb2df31e61bf2585e89f2d7d8aed98b5b3b2bbba0ab5b80e26635db713d1d8e0",
     "novelty_audit": "3f32a11e3efb2c528aad7e85839f76991541eb6bac167aab40b11979cf7952e1",
     "release_manifest": "ddd49c5ae62237adb842e0cac5ffff3ecfaabc950379b307acde86d6a8d132f1"
   },
-  "independence_attestation": "I completed this assessment independently and without access to another reviewer or to any prohibited review conclusion."
+  "reviewer_id": "C",
+  "reviewer_role": "software testing and reproducibility expert",
+  "verdict": "DESK_REJECT"
 }

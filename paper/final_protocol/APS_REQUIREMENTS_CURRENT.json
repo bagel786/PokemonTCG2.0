@@ -1,0 +1,140 @@
+{
+  "schema_version": "aps-requirements-current-v1",
+  "checked_date": "2026-08-25",
+  "method_statement": "Official APS sources only; live fetches blocked by HTTP 403 in this environment, so dated Wayback captures of the official pages were used where available. Items lacking any official-page evidence are explicitly marked UNVERIFIED and fail closed.",
+  "unverified_items": [
+    "/apsos/about journal-scope page wording",
+    "Protocol Article definition (/apsos/authors unreachable)",
+    "Current appropriate-use-ai-tools wording after the 2026-06-17 update",
+    "Explicit extension of the DAS policy text to APSO",
+    "APSO title/abstract word limits",
+    "physichub.org (transport failure; physh.org is the official site per APS links)"
+  ],
+  "differences_from_repository_guidance": [
+    "Waiver deadline 2026-09-01 newly recorded; repository guidance previously had no deadline",
+    "June 2026 AI-policy update noted; disclosure strategy built to satisfy stricter superset",
+    "No conflicts with existing repository guidance on file requirements, DAS, cover letter, or PhySH"
+  ],
+  "requirements": [
+    {
+      "id": "R01",
+      "requirement": "APSO journal identity, ISSN 3070-2240, open access CC BY 4.0 with Crossref DOIs",
+      "official_source": "https://journals.aps.org/apsos/ (Wayback capture 2026-07-14); launch press release archived 2025-12-03",
+      "date_checked": "2026-08-25",
+      "stage": "initial",
+      "verification_method": "official page via dated archive capture (live fetch HTTP 403)",
+      "current_project_status": "article type declared APS Open Science Protocol Article",
+      "action_needed": "human re-checks live journal page at submission"
+    },
+    {
+      "id": "R02",
+      "requirement": "APC waived for all submissions and transfers received before 01 Sept 2026",
+      "official_source": "https://journals.aps.org/apsos/ banner (Wayback capture 2026-07-14)",
+      "date_checked": "2026-08-25",
+      "stage": "initial",
+      "verification_method": "official page via dated archive capture",
+      "current_project_status": "submission timing must respect the waiver deadline or budget an APC",
+      "action_needed": "human decides submission date"
+    },
+    {
+      "id": "R03",
+      "requirement": "Scope: physics and adjacent fields incl. methodological/technical developments, replication studies, negative/null results",
+      "official_source": "https://www.aps.org/about/news/2025/12/open-science-expand-global-participation (archived 2025-12-03); https://www.aps.org/about/news/2026/04/open-science-publishes-first-papers (archived 2026-05-21); /apsos/about UNVERIFIED (403 live, no capture)",
+      "date_checked": "2026-08-25",
+      "stage": "initial",
+      "verification_method": "official press releases via archive; journal scope page unverified",
+      "current_project_status": "methodology-first framing; scope inquiry drafted but unsent",
+      "action_needed": "optional human decision to send scope inquiry"
+    },
+    {
+      "id": "R04",
+      "requirement": "Protocol Article definition and APSO article-type list",
+      "official_source": "UNVERIFIED: https://journals.aps.org/apsos/authors was 403 live; only capture (2025-12-20) returned 404; no official page containing 'Protocol' retrieved",
+      "date_checked": "2026-08-25",
+      "stage": "initial",
+      "verification_method": "attempted live + full archive search; failed closed",
+      "current_project_status": "repository operating definition retained but flagged unverified",
+      "action_needed": "human confirms Protocol Article definition from live authors page before submission"
+    },
+    {
+      "id": "R05",
+      "requirement": "Initial submission is PDF-only single file; supplemental material as separate PDF; source files only at acceptance (REVTeX preferred)",
+      "official_source": "https://journals.aps.org/authors/web-submission-guidelines-physical-review (capture 2025-05-28); https://journals.aps.org/authors/submission-faq (capture 2025-12-05)",
+      "date_checked": "2026-08-25",
+      "stage": "initial/review/acceptance",
+      "verification_method": "official pages via dated archive captures",
+      "current_project_status": "manuscript.pdf prepared as single self-contained file; source zip marked NOT REQUIRED FOR INITIAL SUBMISSION",
+      "action_needed": "final PDF inspection by human"
+    },
+    {
+      "id": "R06",
+      "requirement": "Cover letter required; suitability statement; optional referee suggestions; AI-use disclosure to editors",
+      "official_source": "web-submission guidelines + FAQ captures (2025-05-28/2025-12-05); predecessor AI policy (capture 2025-11-11)",
+      "date_checked": "2026-08-25",
+      "stage": "initial",
+      "verification_method": "official pages via dated archive captures",
+      "current_project_status": "cover_letter_final_draft.md/.txt prepared (~400-550 words)",
+      "action_needed": "human review of cover letter"
+    },
+    {
+      "id": "R07",
+      "requirement": "Email + institution-level affiliation for every author; exactly one corresponding author; corresponding author ORCID required; co-author ORCID links emailed post-submission",
+      "official_source": "https://journals.aps.org/authors/web-submission-guidelines-physical-review (capture 2025-05-28); FAQ (capture 2025-12-05)",
+      "date_checked": "2026-08-25",
+      "stage": "initial",
+      "verification_method": "official pages via dated archive captures",
+      "current_project_status": "all author fields placeholders; single-YAML human answer file prepared",
+      "action_needed": "human completes human_answers.template.yaml"
+    },
+    {
+      "id": "R08",
+      "requirement": "DAS mandatory for all published articles; public artifacts cited in reference list and named in DAS; embargoes allowed; private sharing on reasonable request when not public; SM not a FAIR substitute",
+      "official_source": "https://journals.aps.org/authors/data-availability-statements (capture 2026-04-04); explicit extension to APSO UNVERIFIED",
+      "date_checked": "2026-08-25",
+      "stage": "initial/publication",
+      "verification_method": "official page via dated archive capture",
+      "current_project_status": "two DAS candidate versions prepared (A: public companion approved; B: not approved, honest restrictions)",
+      "action_needed": "human selects version A only with ownership+license+archive+DOI authorized"
+    },
+    {
+      "id": "R09",
+      "requirement": "AI policy: updated 17 June 2026; current text UNVERIFIED (403, no archive). Predecessor policy: no AI authorship; writing-tool disclosure in cover letter; substantive research use described reproducibly in Methods (tool, version, manufacturer); generative-AI images prohibited",
+      "official_source": "https://journals.aps.org/authors/appropriate-use-ai-tools (unfetchable); announcement https://www.aps.org/about/news/2026/06/releases-updated-ai-policy-journals (linked from APSO home, unfetchable); predecessor https://journals.aps.org/authors/ai-based-writing-tools (capture 2025-11-11)",
+      "date_checked": "2026-08-25",
+      "stage": "initial/publication",
+      "verification_method": "predecessor verified via archive; current wording failed closed",
+      "current_project_status": "two-location disclosure (Methods research uses; Acknowledgments drafting/editing/packaging) satisfies stricter superset; completeness pending human confirmation",
+      "action_needed": "human confirms AI-use completeness; re-check live policy page"
+    },
+    {
+      "id": "R10",
+      "requirement": "Supplemental Material: nonessential only; separate publication-ready files; README.TXT mandatory; cite in main reference list; all SM references also in main bibliography",
+      "official_source": "https://journals.aps.org/authors/supplemental-material-instructions (capture 2025-08-22); editorial-policies-submissions (capture 2025-05-28)",
+      "date_checked": "2026-08-25",
+      "stage": "initial/publication",
+      "verification_method": "official pages via dated archive captures",
+      "current_project_status": "evaluated: appendices keep the paper self-contained; separate SM PDF judged unnecessary; decision recorded in bundle",
+      "action_needed": "none unless human overrides"
+    },
+    {
+      "id": "R11",
+      "requirement": "PhySH classification mandatory at submission; minimum one concept, star exactly one primary; primary usually Research Areas facet; 3-8 typical",
+      "official_source": "https://physh.aps.org (live 200 on 2026-08-25); https://journals.aps.org/authors/physh (capture 2024-08-24); term records at https://physh.org/concepts/<uuid> (live)",
+      "date_checked": "2026-08-25",
+      "stage": "initial",
+      "verification_method": "live official fetches",
+      "current_project_status": "PHYSH_CANDIDATES.md with primary Machine learning + four secondaries",
+      "action_needed": "human stars terms in submission widget"
+    },
+    {
+      "id": "R12",
+      "requirement": "Submission metadata: title, abstract, authors/affiliations/corresponding author/ORCID, PhySH, DAS questionnaire, funding/conflicts as requested, suggested/excluded reviewers optional; APSO-specific title/abstract word limits UNVERIFIED (length guide predates APSO)",
+      "official_source": "https://journals.aps.org/authors/length-guide (capture 2025-05-28, no APSO row); web-submission guidelines (capture 2025-05-28)",
+      "date_checked": "2026-08-25",
+      "stage": "initial",
+      "verification_method": "official pages via dated archive captures",
+      "current_project_status": "SUBMISSION_METADATA_DRAFT.yaml with placeholders; abstract held to 175-210 words internally",
+      "action_needed": "human fills YAML then runs apply script"
+    }
+  ]
+}

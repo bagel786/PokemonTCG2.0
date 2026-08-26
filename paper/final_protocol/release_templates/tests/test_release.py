@@ -125,7 +125,7 @@ def test_protocol_deviation_is_explicit_and_unsigned() -> None:
     )
 
 
-def test_environment_specs_are_direct_only_and_unevidenced_as_clean_build() -> None:
+def test_environment_specs_are_direct_only_with_clean_build_evidenced() -> None:
     readme = (RELEASE / "README.md").read_text(encoding="utf-8")
     readme_words = " ".join(readme.split())
     requirements = (RELEASE / "requirements-lock.txt").read_text(encoding="utf-8")
@@ -133,11 +133,11 @@ def test_environment_specs_are_direct_only_and_unevidenced_as_clean_build() -> N
     status = json.loads((RELEASE / "RELEASE_STATUS.json").read_text())
     assert "conda env create --file environment.yml" in readme
     assert "python3 -m venv ../trace-validation-review-venv" in readme
-    assert "Neither file is a transitive dependency lock" in readme_words
-    assert "no successful fresh clean-environment construction" in readme_words
+    assert "neither is a transitive dependency lock" in readme_words
+    assert "Clean-environment verification passed" in readme_words
     assert "not a transitive dependency lock" in requirements
     assert "not a transitive dependency lock" in environment
-    assert status["clean_environment_build_evidenced"] is False
+    assert status["clean_environment_build_evidenced"] is True
 
 
 def test_admission_decision_table_is_generated_from_rules() -> None:

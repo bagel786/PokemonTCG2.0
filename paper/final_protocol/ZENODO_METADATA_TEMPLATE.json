@@ -1,0 +1,39 @@
+{
+  "schema_version": "zenodo-metadata-template-v1",
+  "status": "TEMPLATE \u2014 do not deposit until archive_authorized=true in human_answers.yaml",
+  "upload_type": "dataset",
+  "title": "A Protocol for Validating Pairing Assumptions in Seed-Matched Evaluations of Black-Box Game-Playing Agents (companion package)",
+  "creators": [
+    {
+      "name": "[AUTHOR NAME REQUIRES HUMAN CONFIRMATION]",
+      "orcid": "[ORCID OR BLANK]"
+    }
+  ],
+  "description": "Synthetic conformance suite, executable admission engine, processed neutralized diagnostics, sanitized protocol transcriptions, figure/table source data, schemas, manifests, and reproduction commands for the pairing-assumption validation protocol. Engine-free by construction. Companion to the APS Open Science Protocol Article of the same title.",
+  "access_right": "open",
+  "license": {
+    "id": "[cc-by-4.0 pending confirmation for data/docs; code license recorded in file headers]"
+  },
+  "communities": [
+    {
+      "identifier": "[optional]"
+    }
+  ],
+  "grants": [],
+  "related_identifiers": [
+    {
+      "relation": "isSupplementTo",
+      "identifier": "[ARTICLE DOI AFTER PUBLICATION]",
+      "resource_type": "journal-article"
+    }
+  ],
+  "version": "[v1.0.0 after authorization]",
+  "prerequisites": [
+    "human_answers.yaml: code_redistribution_approved=true",
+    "human_answers.yaml: processed_data_redistribution_approved=true",
+    "human_answers.yaml: recovered_secondary_outputs_approved=true (for stress aggregates)",
+    "human_answers.yaml: archive_authorized=true; creators+maintainer supplied",
+    "LICENSE.code / LICENSE.data-docs written from approved choices (apply script does this)",
+    "DOI left blank until deposit is live; then insert via apply script"
+  ]
+}

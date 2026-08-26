@@ -33,10 +33,17 @@ FINAL = SCRIPT.parents[1]
 ROOT = SCRIPT.parents[3]
 REPORT = FINAL / "REPRODUCTION_REPORT.json"
 REPORT_SIDECAR = FINAL / "REPRODUCTION_REPORT.sha256"
+MACHINE_FINAL_REPORT = FINAL / "REPRODUCTION_REPORT_MACHINE_FINAL.json"
+MACHINE_FINAL_SIDECAR = FINAL / "REPRODUCTION_REPORT_MACHINE_FINAL.sha256"
+# The self-excluded envelope now carries both the canonical technical report
+# and the machine-finalization aggregate written after the run by
+# scripts/machine_finalize.py. Commit E's tree delta must be exactly this set.
 REPORT_ENVELOPE_PATHS = frozenset(
     {
         str(REPORT.relative_to(ROOT)),
         str(REPORT_SIDECAR.relative_to(ROOT)),
+        str(MACHINE_FINAL_REPORT.relative_to(ROOT)),
+        str(MACHINE_FINAL_SIDECAR.relative_to(ROOT)),
     }
 )
 VISUAL_AUDIT = FINAL / "supplement/PDF_VISUAL_AUDIT.json"

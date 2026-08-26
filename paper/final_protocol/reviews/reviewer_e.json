@@ -1,25 +1,6 @@
 {
-  "reviewer_id": "E",
-  "reviewer_role": "hostile integrity and general-reader reviewer",
-  "verdict": "DESK_REJECT",
+  "SUPERSEDED": "SUPERSEDED SCIENTIFIC REVIEW - DO NOT USE FOR CURRENT READINESS. Retained for provenance of the pre-closeout V1 gate only. The authoritative scientific gate is the separated V2 aggregate in DESK_REVIEW_SIMULATION_V2.json built from reviews_v2/.",
   "confidence": 0.99,
-  "fatal_issues": [
-    "The submitted artifact is knowingly incomplete: the PDF still contains author, corresponding-email, and affiliation placeholders; authorship, contributions, funding, conflicts, acknowledgments, AI-use completeness, manuscript approval, and every scientific-comprehension sign-off remain pending. This is not a legally or scientifically attributable submission.",
-    "The companion cannot be distributed as supplied. Ownership and redistribution authority are unresolved, LICENSE explicitly grants no permission, citation metadata are incomplete, no archive or DOI exists, and RELEASE_STATUS marks the package unauthorized for publication. A reproducibility package that reviewers and readers have no permission to copy is incompatible with a submission-ready open-science protocol package.",
-    "The frozen plan promised first-divergence position, actor/acting-side localization, and timing summaries, yet the release omits all of them and contains no raw trace lines from which localization can be reconstructed. The deviation record is explicitly UNRESOLVED and UNSIGNED/PENDING, with no amendment or author disposition. Honest disclosure preserves the 99/200 digest result but does not cure incomplete protocol reporting."
-  ],
-  "major_issues": [
-    "The generic evidence-to-claim taxonomy and completed-case Level-6 descriptive mapping are post-acquisition. The manuscript discloses this, but the completed case therefore validates only the earlier binary acquisition/suppression rules, not the central generic taxonomy as a prospectively frozen protocol; the contribution must be framed as a retrospective conservative formalization and future-use template.",
-    "The restricted case cannot test semantic event alignment, cannot be replayed end to end, and does not release raw observations or traces. Moreover, factorial candidate rows have no trace digests and use a different seed battery from the qualifying preflight. The fixed-battery factorial is consequently only a bounded illustration, not evidence that the full eight-stage protocol works on the reported policy comparison.",
-    "The prose reads like an AI-generated compliance dossier rather than a general scientific article. Repeated templates such as frozen, bounded, post-acquisition, does not, and cannot, plus long schema/CLI/property-test passages, bury the simple scientific question and result. This is especially concerning because the package records extensive substantive Codex drafting and reasoning while all human comprehension and disclosure confirmations remain unsigned.",
-    "The technical reproduction PASS is narrower than a reader may infer: it reruns synthetic and processed analyses in the builder's existing environment, not the restricted acquisition, and no fresh environment or transitive dependency lock is evidenced. The paper and release must distinguish internal consistency from independent reproducibility more prominently."
-  ],
-  "minor_issues": [
-    "Calling the retrospective historical classifier outcome independent is literally inaccurate because its gate compares control win/draw outcomes. The defensible statement is that the gate is independent of candidate-effect magnitude or favorability.",
-    "The statement that the named Level taxonomy was added after acquisition is too broad: the frozen protocol already enumerated Levels 1-8. Only the generic claim classes and completed-case Level-6 descriptive mapping were added later.",
-    "The overall timed-search reweighting is described as a prespecified pooled procedure, but the frozen prose says results are stratified without expressly defining overall pooling; pooling is resolved by the frozen executable and changes realized context composition. Attribute this choice explicitly to the frozen analyzer.",
-    "No numerical, sign, or indexing error was found in Equations (1)-(4), and the focused equation/statistical tests passed. Equation (3) should nevertheless call its target an equally weighted mean of stratum means rather than an unqualified fixed-battery mean when generic n_k may differ."
-  ],
   "exact_manuscript_locations": [
     "main.tex lines 26-28 and main.pdf page 1: unresolved author, email, and affiliation placeholders.",
     "main.tex lines 31-55: abstract compresses gate taxonomy, historical/prospective chronology, resampling relabeling, and event alignment into jargon-heavy prose.",
@@ -34,6 +15,31 @@
     "main.tex lines 805-828: no public archival availability, license, DOI, controlled access, or end-to-end regeneration.",
     "main.tex lines 896-912: pooled versus fixed-composition stress reweighting and post-acquisition interpretation."
   ],
+  "fatal_issues": [
+    "The submitted artifact is knowingly incomplete: the PDF still contains author, corresponding-email, and affiliation placeholders; authorship, contributions, funding, conflicts, acknowledgments, AI-use completeness, manuscript approval, and every scientific-comprehension sign-off remain pending. This is not a legally or scientifically attributable submission.",
+    "The companion cannot be distributed as supplied. Ownership and redistribution authority are unresolved, LICENSE explicitly grants no permission, citation metadata are incomplete, no archive or DOI exists, and RELEASE_STATUS marks the package unauthorized for publication. A reproducibility package that reviewers and readers have no permission to copy is incompatible with a submission-ready open-science protocol package.",
+    "The frozen plan promised first-divergence position, actor/acting-side localization, and timing summaries, yet the release omits all of them and contains no raw trace lines from which localization can be reconstructed. The deviation record is explicitly UNRESOLVED and UNSIGNED/PENDING, with no amendment or author disposition. Honest disclosure preserves the 99/200 digest result but does not cure incomplete protocol reporting."
+  ],
+  "general_reader_answers": {
+    "contribution": "The defensible contribution is operational integration of existing CRN, stream, trace, A/A, event-key, and reproducibility ideas into an executable fail-closed evidence-to-wording workflow, plus synthetic failure fixtures and a restricted-engine illustration; the generic completed-case taxonomy itself was formalized only after acquisition.",
+    "effectiveness_result": "The synthetic suite detects its injected failure modes; the deterministic preflight had zero required mismatches across 3,000 executions, while the timed-search battery disagreed in 99 of 200 clusters and the retrospective historical comparison was suppressed. The later factorial contrast was only +0.55 percentage points with empirical reweighting quantiles from -2.05 to +3.15, so the policy comparison remained unresolved.",
+    "limitation": "The real engine exposes no semantic event identifiers, raw restricted traces are unavailable, promised localization and timing outputs are missing, the factorial was not trace-repeated, the batteries are not probability samples, and rights currently prevent a licensed public companion or independent end-to-end replay.",
+    "problem": "Using the same recorded seed for two agents does not guarantee that either execution repeats or that both agents receive the same random value for the same real-world game event after their behavior diverges; unsupported paired statistics can therefore look more credible than they are.",
+    "protocol": "The proposed workflow hashes artifacts and boundary seeds, checks complete schedules, repeats identical arms across process and worker contexts using a declared trace projection, inventories visible stochastic mechanisms, tests event alignment when event identities are observable, and admits, downgrades, or suppresses wording according to the evidence obtained."
+  },
+  "independence_attestation": "I completed this assessment independently, without access to another reviewer or any review aggregate or conclusion, and inspected only the permitted hash-pinned manuscript, audits, provenance records, release artifacts, executable checks, and rendered pages.",
+  "major_issues": [
+    "The generic evidence-to-claim taxonomy and completed-case Level-6 descriptive mapping are post-acquisition. The manuscript discloses this, but the completed case therefore validates only the earlier binary acquisition/suppression rules, not the central generic taxonomy as a prospectively frozen protocol; the contribution must be framed as a retrospective conservative formalization and future-use template.",
+    "The restricted case cannot test semantic event alignment, cannot be replayed end to end, and does not release raw observations or traces. Moreover, factorial candidate rows have no trace digests and use a different seed battery from the qualifying preflight. The fixed-battery factorial is consequently only a bounded illustration, not evidence that the full eight-stage protocol works on the reported policy comparison.",
+    "The prose reads like an AI-generated compliance dossier rather than a general scientific article. Repeated templates such as frozen, bounded, post-acquisition, does not, and cannot, plus long schema/CLI/property-test passages, bury the simple scientific question and result. This is especially concerning because the package records extensive substantive Codex drafting and reasoning while all human comprehension and disclosure confirmations remain unsigned.",
+    "The technical reproduction PASS is narrower than a reader may infer: it reruns synthetic and processed analyses in the builder's existing environment, not the restricted acquisition, and no fresh environment or transitive dependency lock is evidenced. The paper and release must distinguish internal consistency from independent reproducibility more prominently."
+  ],
+  "minor_issues": [
+    "Calling the retrospective historical classifier outcome independent is literally inaccurate because its gate compares control win/draw outcomes. The defensible statement is that the gate is independent of candidate-effect magnitude or favorability.",
+    "The statement that the named Level taxonomy was added after acquisition is too broad: the frozen protocol already enumerated Levels 1-8. Only the generic claim classes and completed-case Level-6 descriptive mapping were added later.",
+    "The overall timed-search reweighting is described as a prespecified pooled procedure, but the frozen prose says results are stratified without expressly defining overall pooling; pooling is resolved by the frozen executable and changes realized context composition. Attribute this choice explicitly to the frozen analyzer.",
+    "No numerical, sign, or indexing error was found in Equations (1)-(4), and the focused equation/statistical tests passed. Equation (3) should nevertheless call its target an equally weighted mean of stratum means rather than an unqualified fixed-battery mean when generic n_k may differ."
+  ],
   "required_fixes": [
     "Replace every title-page and declaration placeholder with verified human metadata; obtain final author approval; complete authorship, CRediT, funding, conflicts, acknowledgments, AI-use, and all equation/method/defense sign-offs.",
     "Resolve component ownership and redistribution authority, install an author-approved license with explicit software/data scope, complete citation metadata, and create or accurately document an authorized persistent archive before presenting the companion as an open-science artifact.",
@@ -45,18 +51,13 @@
     "Demonstrate the companion from a fresh clean environment with a transitive lock or sharply limit all reproducibility claims to internal reaggregation of processed evidence.",
     "Clarify Equation (3)'s equal-stratum estimand for unequal n_k and retain the current tested signs and whole-paired-unit resampling rule."
   ],
-  "general_reader_answers": {
-    "problem": "Using the same recorded seed for two agents does not guarantee that either execution repeats or that both agents receive the same random value for the same real-world game event after their behavior diverges; unsupported paired statistics can therefore look more credible than they are.",
-    "protocol": "The proposed workflow hashes artifacts and boundary seeds, checks complete schedules, repeats identical arms across process and worker contexts using a declared trace projection, inventories visible stochastic mechanisms, tests event alignment when event identities are observable, and admits, downgrades, or suppresses wording according to the evidence obtained.",
-    "contribution": "The defensible contribution is operational integration of existing CRN, stream, trace, A/A, event-key, and reproducibility ideas into an executable fail-closed evidence-to-wording workflow, plus synthetic failure fixtures and a restricted-engine illustration; the generic completed-case taxonomy itself was formalized only after acquisition.",
-    "effectiveness_result": "The synthetic suite detects its injected failure modes; the deterministic preflight had zero required mismatches across 3,000 executions, while the timed-search battery disagreed in 99 of 200 clusters and the retrospective historical comparison was suppressed. The later factorial contrast was only +0.55 percentage points with empirical reweighting quantiles from -2.05 to +3.15, so the policy comparison remained unresolved.",
-    "limitation": "The real engine exposes no semantic event identifiers, raw restricted traces are unavailable, promised localization and timing outputs are missing, the factorial was not trace-repeated, the batteries are not probability samples, and rights currently prevent a licensed public companion or independent end-to-end replay."
-  },
   "reviewed_artifact_hashes": {
-    "main_tex": "bb2df31e61bf2585e89f2d7d8aed98b5b3b2bbba0ab5b80e26635db713d1d8e0",
     "main_pdf": "33cc0f2fe9dd2cfdadb7e85d7fd2e6ba4ba4b03cccceb9749538a4d69815cce8",
+    "main_tex": "bb2df31e61bf2585e89f2d7d8aed98b5b3b2bbba0ab5b80e26635db713d1d8e0",
     "novelty_audit": "3f32a11e3efb2c528aad7e85839f76991541eb6bac167aab40b11979cf7952e1",
     "release_manifest": "ddd49c5ae62237adb842e0cac5ffff3ecfaabc950379b307acde86d6a8d132f1"
   },
-  "independence_attestation": "I completed this assessment independently, without access to another reviewer or any review aggregate or conclusion, and inspected only the permitted hash-pinned manuscript, audits, provenance records, release artifacts, executable checks, and rendered pages."
+  "reviewer_id": "E",
+  "reviewer_role": "hostile integrity and general-reader reviewer",
+  "verdict": "DESK_REJECT"
 }
