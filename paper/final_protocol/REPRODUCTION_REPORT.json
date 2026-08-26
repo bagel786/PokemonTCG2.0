@@ -7,9 +7,9 @@
       "paper/final_protocol/REPRODUCTION_REPORT.sha256",
       "compiler/cache transients (*.aux, *.blg, *.log, *.out, *.synctex.gz, *.pyc, __pycache__, .pytest_cache)"
     ],
-    "file_count": 454,
+    "file_count": 455,
     "scope": "Final article/release tree, final reviewer bytes, retained protocol/data/synthetic inputs, and invoked scripts/tests",
-    "sha256": "ba44663f41fe5cbf33ab787f92f66ad0de37f534a0dbcb61d25a361860f87b75"
+    "sha256": "dfbc8bdd3a0d199d05bf55aa622d1ea5b8a5c1c7c840e614d7681fe13c953127"
   },
   "commands": [
     {
@@ -845,8 +845,8 @@
   "repository_identity": {
     "boundary": "HEAD/tree identify clean reproduced subject commit S; branch is informational only. The final verifier requires current HEAD E to be S's sole direct child, with exactly the self-excluded canonical report and sidecar as E's committed tree delta.",
     "branch": "paper/apsos-machine-finalization-20260826",
-    "head_commit": "65b570c9719e931f23a389ae754892b4c439dad2",
-    "head_tree": "ba3de2d14b5597cbb167b08b3b495d502144bff7",
+    "head_commit": "54da0beffc9e1f955f0eca9c5a66df1617ce208d",
+    "head_tree": "e8c4a6efd857ec6b11466bd64af37f965ecac658",
     "non_envelope_dirty_path_count": 0,
     "non_envelope_dirty_pathname_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "non_envelope_worktree_clean": true,
@@ -904,10 +904,10 @@
       "paper/final_protocol/release/"
     ],
     "policy": "Protected tracked files remain byte-identical during the run, and the final Git gate requires every non-envelope tracked or untracked path to match subject commit S.",
-    "protected_file_count_after": 2454,
-    "protected_file_count_before": 2454,
-    "protected_snapshot_sha256_after": "be1180f7764ce4368a12f3e49b967a9b5277af37e8cf666f38f2a67aecc9adf5",
-    "protected_snapshot_sha256_before": "be1180f7764ce4368a12f3e49b967a9b5277af37e8cf666f38f2a67aecc9adf5",
+    "protected_file_count_after": 2455,
+    "protected_file_count_before": 2455,
+    "protected_snapshot_sha256_after": "cf00a4898c3166168944d98b66b1307e33e5ccab0f717affad27c0f098cd6a4d",
+    "protected_snapshot_sha256_before": "cf00a4898c3166168944d98b66b1307e33e5ccab0f717affad27c0f098cd6a4d",
     "status": "PASS",
     "unexpected_changes": []
   },
