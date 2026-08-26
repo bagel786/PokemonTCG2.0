@@ -370,6 +370,9 @@ def protected_tracked_snapshot() -> dict[str, str]:
     for relative_path in git_tracked_paths():
         if is_generated_path(relative_path):
             continue
+        # Envelope files describe the subject; they are not part of it.
+        if relative_path in REPORT_ENVELOPE_PATHS:
+            continue
         path = ROOT / relative_path
         result[relative_path] = sha256(path) if path.is_file() else "MISSING"
     return result
