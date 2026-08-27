@@ -39,19 +39,22 @@ class _KeyedDealerAdapter:
         self.ek = ek
         self.hand_counter = 0
         self._misc = 0
-        self.collision_namespace = False  # set True only under G16 mechanics
+        self.collision_namespace = False  # True only under G16 mechanics
 
     def _misc_key(self):
         if self.collision_namespace:
-            # deliberate shared key space with shuffle events -> duplicates
-            k = f"ev|{self.ek.draw_counter_total()}"
+            # INDEPENDENT counters inside one SHARED id space: both streams
+            # start counting at 0 => genuine cross-stream event-id collisions
+            k = f"ev|{self._misc}"
         else:
             k = f"misc|{self._misc}"
             self._misc += 1
+            k = k  # non-collision: unique namespace
         return k
 
     def randint(self, low, high=None, size=None, dtype=None):
         u = float(self.ek.draw(self._misc_key()))
+        self._misc += 1 if self.collision_namespace else 0
         span = int(high) - int(low) if high is not None else 1
         v = int(low) + min(int(u * max(span, 1)), max(span - 1, 0))
         if size is not None:
@@ -77,10 +80,14 @@ class _KeyedDealerAdapter:
     def shuffle(self, deck):
         h = self.hand_counter
         self.hand_counter += 1
+        self._shuf = getattr(self, "_shuf", 0)
         n = len(deck)
         for i in range(n - 1, 0, -1):
-            key = (f"ev|{self.ek.draw_counter_total()}"
-                   if self.collision_namespace else f"hand{h}|shuffle|{i}")
+            if self.collision_namespace:
+                key = f"ev|{self._shuf}"
+                self._shuf += 1
+            else:
+                key = f"hand{h}|shuffle|{i}"
             u = float(self.ek.draw(key))
             j = min(int(u * (i + 1)), i)
             deck[i], deck[j] = deck[j], deck[i]

@@ -87,11 +87,13 @@ def build_bundle(system: str, spec: ExecutionSpec, art_a: Dict, art_b: Dict,
         [r["projection_digest"] for r in repeat_arts_a]
     b.repeats_digests_equal_primary = len(set(dgs)) == 1 and len(dgs) >= 2
     b.contexts = context_records
-    fps = {c.get("dealer_fp") for c in context_records
+    def _fp_key(v):
+        return tuple(v) if isinstance(v, list) else v
+    fps = {_fp_key(c.get("dealer_fp")) for c in context_records
            if c.get("dealer_fp") is not None}
     primary_fp = art_a.get("dealer_first_fp")
-    coupled_desync = primary_fp is not None and any(f != primary_fp
-                                                    for f in fps)
+    coupled_desync = primary_fp is not None and any(
+        f != _fp_key(primary_fp) for f in fps)
     b.context_instability_coupled_stream = (None if primary_fp is None
                                             else coupled_desync)
     b.context_desync_of_coupled_stream = b.context_instability_coupled_stream

@@ -42,14 +42,17 @@ def input_hashes() -> dict:
 
 
 def write_freeze_record(freeze_sha: str, branch: str, tag: str,
-                        remote_url: str) -> dict:
+                        remote_url: str, tag_sha: str) -> dict:
     rec = {
         "kind": "FREEZE_RECORD", "campaign": "prospective-repair",
         "freeze_sha": freeze_sha, "branch": branch, "tag": tag,
+        "tag_sha": tag_sha,
         "remote": remote_url,
-        "registration_status": "timestamped freeze on PRIVATE remote; NOT public preregistration",
+        "registration_status": ("timestamped freeze on PRIVATE remote; "
+                                 "NOT public preregistration"),
         "frozen_input_hashes": input_hashes(),
-        "order_of_operations": "this record committed+pushed BEFORE any final-holdout outcome exists",
+        "order_of_operations": ("this record committed+pushed BEFORE any "
+                                "final-holdout outcome exists"),
     }
     (ROOT / "protocol" / "FREEZE_RECORD.json").write_text(
         json.dumps(rec, indent=2, sort_keys=True) + "\n")
@@ -67,8 +70,15 @@ def verify(require_remote: bool = True) -> None:
     if not rec_path.exists():
         raise SystemExit("[freeze_guard] FREEZE_RECORD.json missing — refusing.")
     rec = json.loads(rec_path.read_text())
-    if head != rec["freeze_sha"]:
-        problems.append(f"HEAD {head} != freeze SHA {rec['freeze_sha']}")
+    # The freeze SHA must be reachable (ancestor) from HEAD so bookkeeping
+    # commits after the freeze are allowed — but any change to frozen INPUTS
+    # below is not.
+    anc = subprocess.run(["git", "merge-base", "--is-ancestor",
+                          rec["freeze_sha"], head], cwd=ROOT.parent,
+                         capture_output=True)
+    if anc.returncode != 0:
+        problems.append(f"freeze SHA {rec['freeze_sha']} not ancestor of "
+                        f"HEAD {head}")
     if branch != rec["branch"]:
         problems.append(f"branch {branch} != frozen {rec['branch']}")
     diffs = {p: h for p, h in input_hashes().items()
@@ -77,16 +87,23 @@ def verify(require_remote: bool = True) -> None:
         problems.append(f"frozen inputs changed post-freeze: {list(diffs)[:5]}")
     if require_remote:
         _git("fetch", "origin", "--prune")
+        def _is_ancestor(a, b):
+            return subprocess.run(
+                ["git", "merge-base", "--is-ancestor", a, b],
+                cwd=ROOT.parent, capture_output=True).returncode == 0
         try:
             r_branch = _git("rev-parse", f"origin/{rec['branch']}")
             r_tag = _git("rev-parse", f"{rec['tag']}^{{commit}}")
         except subprocess.CalledProcessError as e:
             problems.append(f"remote verification failed: {e}")
         else:
-            if r_branch != rec["freeze_sha"]:
-                problems.append("origin branch tip != freeze SHA")
-            if r_tag != rec["freeze_sha"]:
-                problems.append("origin tag peel != freeze SHA")
+            if not _is_ancestor(rec["freeze_sha"], r_branch):
+                problems.append("freeze SHA not reachable from origin branch")
+            if r_tag != rec["tag_sha"]:
+                problems.append(f"origin tag peel {r_tag} != recorded "
+                                f"{rec['tag_sha']}")
+            if not _is_ancestor(rec["freeze_sha"], r_tag):
+                problems.append("freeze SHA not reachable from pushed tag")
     if problems:
         print("[freeze_guard] REFUSING:", file=sys.stderr)
         for p in problems:

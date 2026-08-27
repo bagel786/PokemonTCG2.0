@@ -170,15 +170,17 @@ def truncated_seed(declared_seed: int, bits: int) -> int:
 
 def effective_seed_for(spec: ExecutionSpec, arm: str) -> int:
     s = int(spec.declared_seed)
+    # Cross-process persistence shifts the WHOLE execution environment
+    # (any arm/context replica running later sees the shifted state):
+    if spec.persistent_state_cross_proc:
+        ps = getattr(spec, "_persistent_state", None)
+        off = ps.offset_if_present(s) if ps is not None else 0
+        s += off
     if arm == "B":
         if spec.truncate_bits_b:
             return truncated_seed(s, spec.truncate_bits_b)
         if spec.independent_seeds_b_delta:
             return s + spec.independent_seeds_b_delta
-        if spec.persistent_state_cross_proc:
-            ps = getattr(spec, "_persistent_state", None)
-            off = ps.offset_if_present(s) if ps is not None else 0
-            return s + off
     return s
 
 

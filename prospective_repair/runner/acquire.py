@@ -76,6 +76,7 @@ def _flat_spec(cid: str, seed: int):
 def run_pair(system_name: str, w, spec: ExecutionSpec, seed: int,
              state_dir: Path, root: str):
     """Primary pair + repeats + contexts for one system/cell."""
+    cache = HC_CACHE if system_name == "holdem" else IS_CACHE
     if system_name == "holdem":
         art_a = w.run_arm(seed=seed, arm="A", spec=spec, repeat_id="r0",
                           context_id="primary", process_rank=0)
@@ -116,16 +117,16 @@ def run_pair(system_name: str, w, spec: ExecutionSpec, seed: int,
         if reused_worker:
             # simulate executing on a worker whose persistent cache carries
             # prior-task state: ANY unit it runs next becomes contaminated
-            (hw_cache if system_name == "holdem" else is_cache).contaminate()
+            cache.contaminate()
         else:
-            (hw_cache if system_name == "holdem" else is_cache).clear()
+            cache.clear()
         if system_name == "holdem":
             r = w.run_arm(seed=seed, arm="A", spec=spec, repeat_id="ctx",
                           context_id=label, process_rank=rank)
         else:
             r = w.run_arm(seed=seed, temperature_arm="A", spec=spec,
                           repeat_id="ctx", context_id=label, process_rank=rank)
-        (hw_cache if system_name == "holdem" else is_cache).clear()
+        cache.clear()
         ctx_records.append({"context_label": label, "pid": os.getpid(),
                             "proc_start_time": time.time(),
                             "digest": r["projection_digest"],
@@ -143,8 +144,15 @@ def run_pair(system_name: str, w, spec: ExecutionSpec, seed: int,
 
 
 def _view_payload(method: str, bundle: EvidenceBundle, aa_extras: Dict) -> Dict:
+    if method == FULL_FRAMEWORK:
+        # The router consumed the full bundle; its per-branch predicate traces
+        # are persisted inside audit_payload.bundle.predicate_trace.
+        return {"router": "full_bundle",
+                "predicate_trace_present":
+                    bool(bundle.predicate_trace)}
     from framework.evidence import MethodView
-    v = MethodView(method, bundle, aa_extras if method == "B1_outcome_aa" else {})
+    v = MethodView(method, bundle, aa_extras if method == "B1_outcome_aa"
+                   else {})
     return v.as_dict()
 
 
@@ -241,8 +249,11 @@ def acquire(bank: str, out_dir: Path, roots: Dict, seeds: list,
                                                          art_a[
                                                              "projection_digest"])
 
-                decisions_all = {m: fn(bundle) for m, fn in
-                                 BASELINE_FUNCS.items()}
+                decisions_all = {}
+                for m, fn in BASELINE_FUNCS.items():
+                    decisions_all[m] = (fn(bundle, getattr(bundle, "aa_extras",
+                                                           {}))
+                                        if m == "B1_outcome_aa" else fn(bundle))
                 decisions_all[FULL_FRAMEWORK] = classify_all(bundle)
 
                 gt_map = gt_for(cdef)
@@ -315,65 +326,68 @@ COST_EXTRA_EXECUTIONS = {
 
 
 def acquire_cost(seeds: list, reps: int = 3, constructions=("G01", "G07"),
-                 out_dir: Path | None = None):
-    import numpy as np
-    rng = random.Random(20260827)
+                 out_dir=None):
     out_dir.mkdir(parents=True, exist_ok=True)
     path = out_dir / "cost_rows.jsonl"
     fh = open(path, "w")
-    wrappers = {"holdem": HoldemWrapper(num_hands=10), "ising": IsingWrapper()}
+    wrappers = {"holdem": HoldemWrapper(num_hands=10),
+                "ising": IsingWrapper()}
     methods = list(BASELINE_FUNCS.keys()) + [FULL_FRAMEWORK]
+    rng_order = random.Random(20260827)
     for system_name in ("holdem", "ising"):
         for cid in constructions:
             for seed in seeds:
                 order = methods[:]
-                rng.shuffle(order)
+                rng_order.shuffle(order)
                 for rep in range(reps):
-                for mi, method in enumerate(order):
-                    spec = _flat_spec(cid, seed)
-                    t0, c0 = time.perf_counter(), time.process_time()
-                    need_exec = bool(COST_EXTRA_EXECUTIONS.get(method))
-                    art_a = art_b = None
-                    ra = rb = ctx = xp = []
-                    if need_exec:
-                        art_a, art_b, ra, rb, ctx, xp = run_pair(
-                            system_name, wrappers[system_name], spec, seed,
-                            out_dir, str(ROOT))
-                    bundle = build_bundle(
-                        system_name, spec,
-                        art_a or {}, art_b or {}, ra, rb, ctx,
-                        {"rows_scheduled": 1, "rows_present_recorded": 1,
-                         "ids_unique": True}, CONS[cid]) \
-                        if art_a else EvidenceBundle()
-                    tc = time.perf_counter_ns()
-                    dec = (BASELINE_FUNCS[method](bundle)
-                           if method in BASELINE_FUNCS
-                           else classify_all(bundle))
-                    cls_ns = time.perf_counter_ns() - tc
-                    if cls_ns <= 0:
-                        # real classification work cannot take zero time; a zero
-                        # here means a broken clock, not a fast method.
-                        raise RuntimeError("classifier timing resolution failure")
-                    cls_wall = cls_ns / 1e9
-                    wall = time.perf_counter() - t0
-                    cpu = time.process_time() - c0
-                    fh.write(json.dumps({
-                        "level": "cost", "method": method,
-                        "system": system_name, "construction": cid,
-                        "seed": seed, "timing_rep": rep,
-                        "randomized_order_index": mi,
-                        "exec_count_by_type":
-                            {k: n for k, n in
-                             COST_EXTRA_EXECUTIONS.get(method, [])},
-                        "evidence_acq_wall_s": wall,
-                        "evidence_acq_cpu_s": cpu,
-                        "classifier_wall_s": cls_wall,
-                        "bundle_bytes": len(json.dumps(
-                            bundle.to_audit_payload())),
-                        "artifact_bytes_total":
-                            (art_a or {}).get("artifact_bytes", 0) +
-                            (art_b or {}).get("artifact_bytes", 0),
-                    }) + "\n")
+                    for mi, method in enumerate(order):
+                        spec = _flat_spec(cid, seed)
+                        t0, c0 = time.perf_counter(), time.process_time()
+                        need_exec = bool(COST_EXTRA_EXECUTIONS.get(method))
+                        art_a = art_b = None
+                        ra = rb = ctx = xp = []
+                        if need_exec:
+                            art_a, art_b, ra, rb, ctx, xp = run_pair(
+                                system_name, wrappers[system_name], spec,
+                                seed, out_dir, str(ROOT))
+                        bundle = build_bundle(
+                            system_name, spec,
+                            art_a or {}, art_b or {}, ra, rb, ctx,
+                            {"rows_scheduled": 1, "rows_present_recorded": 1,
+                             "ids_unique": True}, CONS[cid]) \
+                            if art_a else EvidenceBundle()
+                        tc = time.perf_counter_ns()
+                        if method == "B1_outcome_aa":
+                            dec = BASELINE_FUNCS[method](
+                                bundle, {"aa_bank_reps_available": 2,
+                                         "aa_outcome_dispersion_indicator": 0})
+                        elif method in BASELINE_FUNCS:
+                            dec = BASELINE_FUNCS[method](bundle)
+                        else:
+                            dec = classify_all(bundle)
+                        cls_ns = time.perf_counter_ns() - tc
+                        if cls_ns <= 0:
+                            raise RuntimeError(
+                                "classifier timing resolution failure")
+                        wall = time.perf_counter() - t0
+                        cpu = time.process_time() - c0
+                        fh.write(json.dumps({
+                            "level": "cost", "method": method,
+                            "system": system_name, "construction": cid,
+                            "seed": seed, "timing_rep": rep,
+                            "randomized_order_index": mi,
+                            "exec_count_by_type":
+                                {k: n for k, n in
+                                 COST_EXTRA_EXECUTIONS.get(method, [])},
+                            "evidence_acq_wall_s": wall,
+                            "evidence_acq_cpu_s": cpu,
+                            "classifier_wall_s": cls_ns / 1e9,
+                            "bundle_bytes": len(json.dumps(
+                                bundle.to_audit_payload())),
+                            "artifact_bytes_total":
+                                (art_a or {}).get("artifact_bytes", 0) +
+                                (art_b or {}).get("artifact_bytes", 0),
+                        }) + "\n")
     fh.close()
     print(f"[cost] rows written to {path}")
 

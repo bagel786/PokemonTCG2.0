@@ -1,0 +1,11 @@
+{
+  "bank": "pilot_mechanics",
+  "raw_sha256": "77dbdba945035a1c98eed083405692687cee33479b2c96fed70d910c90ab9ddf",
+  "rows_decision": 23680,
+  "rows_outcome": 1440,
+  "missing_cells": 0,
+  "problems": [],
+  "mechanism_checks_total": 304,
+  "mechanism_check_failures": {},
+  "status": "PASS"
+}

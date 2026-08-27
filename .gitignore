@@ -159,3 +159,8 @@ artifacts/anti_meta_20260816/*
 # Installed virtual environments must not be version-controlled.
 .venv-clean/
 .venv/
+
+# prospective-repair: acquired banks stay local until authorized release packaging
+prospective_repair/results/**
+!prospective_repair/results/**/
+!prospective_repair/results/pilot_mechanics/aggregates/mechanics_verification.json
