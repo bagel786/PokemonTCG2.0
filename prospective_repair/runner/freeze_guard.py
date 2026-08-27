@@ -28,11 +28,15 @@ FROZEN_INPUTS = [
     "protocol/SYSTEM_MANIFEST.json", "protocol/SEED_MANIFEST.json",
     "protocol/BASELINE_SPECS.md", "protocol/METRICS_AND_GATES.md",
     "protocol/ANALYSIS_PLAN.md", "protocol/OUTPUT_SCHEMAS.json",
+    "protocol/EXPECTED_DECISION_TABLE.json",
     "framework/constants.py", "framework/evidence.py",
     "framework/classifier.py", "framework/baselines.py", "framework/scoring.py",
     "systems/rng.py", "systems/mechanics.py", "systems/holdem_wrapper.py",
     "systems/ising_wrapper.py", "systems/subprocess_context.py",
     "runner/freeze_guard.py", "runner/acquire.py",
+    "analysis/schema_validators.py", "analysis/stats.py",
+    "analysis/analyze.py", "analysis/independent_reaggregate.py",
+    "analysis/make_figures_tables.py", "PREFREEZE_VALIDATION_REPORT.md",
 ]
 
 
