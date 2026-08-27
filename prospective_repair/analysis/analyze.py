@@ -9,7 +9,6 @@ outputs exist anywhere (schema validator enforces).
 from __future__ import annotations
 
 import json
-import math
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -20,13 +19,12 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from analysis.schema_validators import validate_stream, validate_aggregate  # noqa: E402
-from analysis.stats import (wilson_interval, exact_mcnemar,          # noqa: E402
-                            signflip_permutation_p, paired_risk_difference_ci,
-                            holm, variance_ratio_benefit)
-from framework.constants import BRANCHES                             # noqa: E402
+from analysis.stats import (wilson_interval,                     # noqa: E402
+                            signflip_permutation_p,
+                            paired_risk_difference_ci, holm,
+                            variance_ratio_benefit)
+from framework.constants import BRANCHES                         # noqa: E402
 
-GRAMMAR = {c["id"]: c for c in json.loads(
-    (ROOT / "protocol" / "FAULT_GRAMMAR.json").read_text())["constructions"]}
 METHODS = ["B0_schedule_only", "B1_outcome_aa", "B2_trace_aa",
            "B3_within_seed_reps", "B4_unpaired_analysis",
            "B5_cluster_hierarchical", "B6_event_keyed_whitebox",
@@ -36,7 +34,7 @@ METHODS = ["B0_schedule_only", "B1_outcome_aa", "B2_trace_aa",
 def load_raw(raw_path: Path):
     decisions, outcomes, costs, missing = [], [], [], []
     with raw_path.open() as f:
-        for line_no, line in enumerate(f, 1):
+        for line in f:
             row = json.loads(line)
             lvl = row["level"]
             {"decision": decisions, "outcome": outcomes, "cost": costs,
@@ -45,135 +43,93 @@ def load_raw(raw_path: Path):
     return decisions, outcomes, costs, missing
 
 
-def aggregate(bank_dir: Path) -> dict:
-    raw = bank_dir / "raw_rows.jsonl"
-    if not raw.exists() and bank_dir.name == "final":
-        raise SystemExit("final raw missing")
-    decisions, outcomes, costs, missing = load_raw(raw)
-
-    fam_of = {cid: c.get("novel_vs_v1") and cid or cid
-              for cid in GRAMMAR}
-    out = {"bank": bank_dir.name}
-
-    # ---------------- decision metrics per method × branch × system --------
-    cells = defaultdict(lambda: defaultdict(int))
-    cases = defaultdict(lambda: defaultdict(set))   # case -> method -> seeds ok
-    fs_cases = defaultdict(lambda: defaultdict(set))
+def metric_rows(decisions) -> list:
+    per_key = defaultdict(list)
     for r in decisions:
-        m, br, sysn = r["method"], r["branch"], r["system"]
-        cls, gt = r["score_class"], r["gt"]
-        key = (m, br, sysn)
-        c = cells[key]
-        c["gt_" + gt] += 1
-        if cls == "ABSTAINED":
-            c["abstain"] += 1
-        else:
-            c["covered"] += 1
-            if cls == "CORRECT":
-                c["correct"] += 1
-            elif cls.startswith("FALSE_SUPPRESSION"):
-                c["fs"] += 1
-                c["fs_hard" if cls.endswith("HARD") else "fs_soft"] += 1
-            elif cls == "MISSED_FAILURE":
-                c["missed"] += 1
-            elif cls in ("CAVEAT_ONLY_MISS", "DETECTED_WITH_CAVEAT"):
-                c["caveat"] += 1
-    table = []
-    for (m, br, sysn), c in sorted(cells.items()):
-        n_inv = c.get("gt_INVALID", 0) - c.get("abstain", 0) * (
-            c.get("gt_INVALID", 0) and None or 0)
-        # denominators exclude abstained cells proportionally? Simpler & exact:
-        covered_invalid = sum(1 for r in decisions
-                              if (r["method"], r["branch"], r["system"]) ==
-                              (m, br, sysn) and r["gt"] == "INVALID"
-                              and r["score_class"] != "ABSTAINED")
-        covered_valid = sum(1 for r in decisions
-                            if (r["method"], r["branch"], r["system"]) ==
-                            (m, br, sysn) and r["gt"] == "VALID"
-                            and r["score_class"] != "ABSTAINED")
-        strict_det = sum(1 for r in decisions
-                         if (r["method"], r["branch"], r["system"]) ==
-                         (m, br, sysn) and r["gt"] == "INVALID"
-                         and r["score_class"] == "CORRECT")
-        fs_any = c.get("fs", 0)
-        app = [r for r in decisions
-               if (r["method"], r["branch"], r["system"]) == (m, br, sysn)]
-        p1, l1, h1 = wilson_interval(strict_det, max(covered_invalid, 1)) \
-            if covered_invalid else (None, None, None)
-        p2, l2, h2 = wilson_interval(fs_any, max(covered_valid, 1)) \
-            if covered_valid else (None, None, None)
-        table.append({
+        per_key[(r["method"], r["branch"], r["system"])].append(r)
+    rows = []
+    for (m, br, sysn), app in sorted(per_key.items()):
+        covered = [r for r in app if r["score_class"] != "ABSTAINED"]
+        inv = [r for r in covered if r["gt"] == "INVALID"]
+        val = [r for r in covered if r["gt"] == "VALID"]
+        strict = [r for r in inv if r["score_class"] == "CORRECT"]
+        fs_rows = [r for r in val
+                   if r["score_class"].startswith("FALSE_SUPPRESSION")]
+        p1, l1, h1 = wilson_interval(len(strict), len(inv)) if inv else \
+            (None, None, None)
+        p2, l2, h2 = wilson_interval(len(fs_rows), len(val)) if val else \
+            (None, None, None)
+        rows.append({
             "method": m, "branch": br, "system": sysn,
             "applicable_cells": len(app),
-            "abstained": c.get("abstain", 0),
-            "coverage": round((c.get("covered", 0)) / len(app), 4),
-            "det_strict_n": strict_det, "invalid_covered": covered_invalid,
+            "abstained": len(app) - len(covered),
+            "coverage": round(len(covered) / len(app), 4) if app else 0.0,
+            "det_strict_n": len(strict), "invalid_covered": len(inv),
             "det_rate": p1, "det_lo": l1, "det_hi": h1,
-            "fs_soft": c.get("fs_soft", 0), "fs_hard": c.get("fs_hard", 0),
-            "fs_total": fs_any, "valid_covered": covered_valid,
+            "fs_soft": sum(1 for r in fs_rows
+                           if r["score_class"].endswith("SOFT")),
+            "fs_hard": sum(1 for r in fs_rows
+                           if r["score_class"].endswith("HARD")),
+            "fs_total": len(fs_rows), "valid_covered": len(val),
             "fs_rate": p2, "fs_lo": l2, "fs_hi": h2,
-            "missed_failure": c.get("missed", 0),
-            "caveat_only": c.get("caveat", 0)})
-    out["decision_metrics"] = table
+            "missed_failure": sum(1 for r in inv
+                                  if r["score_class"] == "MISSED_FAILURE"),
+            "caveat_only": sum(1 for r in covered if
+                               r["score_class"] in ("CAVEAT_ONLY_MISS",
+                                                    "DETECTED_WITH_CAVEAT"))})
+    return rows
 
-    # ---------------- case-level summaries ---------------------------------
-    case_rows = []
+
+def case_table(decisions) -> list:
     by_case = defaultdict(list)
     for r in decisions:
         by_case[(r["system"], r["construction"])].append(r)
+    out = []
     for (sysn, cid), rows in sorted(by_case.items()):
-        gdef = GRAMMAR[cid]["gt"]
         entry = {"system": sysn, "construction": cid}
         for m in METHODS:
-            mrows = [r for r in rows if r["method"] == m]
-            ok_seed_sets = {}
+            counts = {}
             for br in BRANCHES:
-                brows = [r for r in mrows if r["branch"] == br and
-                         r["gt"] != "NOT_APPLICABLE"]
-                good = {r["seed"] for r in brows
-                        if r["score_class"] == "CORRECT"}
-                ok_seed_sets[br] = good
-            entry[m] = {br: len(s) for br, s in ok_seed_sets.items()}
-        case_rows.append(entry)
-    out["case_seed_correct_counts"] = case_rows
+                brows = [r for r in rows if r["method"] == m and
+                         r["branch"] == br and r["gt"] != "NOT_APPLICABLE"]
+                counts[br] = len({r["seed"] for r in brows
+                                  if r["score_class"] == "CORRECT"})
+            entry[m] = counts
+        out.append(entry)
+    return out
 
-    # macro over constructions per system × branch × method (rate of seeds)
-    macros = defaultdict(list)
-    n_seeds_bank = len({r["seed"] for r in decisions}) or 1
-    for entry in case_rows:
+
+def macro_block(case_rows, n_seeds: int) -> dict:
+    acc = defaultdict(list)
+    for e in case_rows:
         for m in METHODS:
-            for br, cnt in entry[m].items():
-                macros[(entry["system"], m, br)].append(cnt / n_seeds_bank)
-    out["macro_case_detection_by_branch"] = {
-        f"{k[0]}|{k[1]}|{k[2]}": round(float(np.mean(v)), 4)
-        for k, v in macros.items()}
+            for br, cnt in e[m].items():
+                acc[(e["system"], m, br)].append(cnt / max(n_seeds, 1))
+    return {f"{k[0]}|{k[1]}|{k[2]}": round(float(np.mean(v)), 4)
+            for k, v in acc.items()}
 
-    # ---------------- method contrasts (B5 vs B7, each vs B7) ---------------
-    contrasts = []
-    b7map = {(r["system"], r["construction"], r["seed"], r["branch"],
-              r["score_class"]) for r in decisions if r["method"] ==
-             "B7_csvf_full"}
 
-    def indicator(rows, method, kind):
-        """case-level paired indicators: detection / false-suppression."""
-        idx = defaultdict(lambda: defaultdict(int))
-        sel = (r for r in rows if r["method"] == method)
-        for r in sel:
-            if r["score_class"] == "ABSTAINED" or \
-                    r["gt"] == "NOT_APPLICABLE":
+def contrasts_block(decisions) -> list:
+    def indicator(method, kind):
+        idx = defaultdict(dict)
+        for r in decisions:
+            if r["method"] != method or r["gt"] == "NOT_APPLICABLE" or \
+                    r["score_class"] == "ABSTAINED":
                 continue
-            good = ((kind == "detect" and r["gt"] == "INVALID"
-                     and r["score_class"] == "CORRECT") or
-                    (kind == "fs" and r["gt"] == "VALID"
-                     and r["score_class"].startswith("FALSE_SUPPRESSION")))
-            k = (r["system"], r["construction"])
-            idx[k][r["seed"]] += int(good)
-        return {k: np.mean(list(v.values())) for k, v in idx.items()}
+            good = ((kind == "detect" and r["gt"] == "INVALID" and
+                     r["score_class"] == "CORRECT") or
+                    (kind == "fs" and r["gt"] == "VALID" and
+                     r["score_class"].startswith("FALSE_SUPPRESSION")))
+            idx[(r["system"], r["construction"])][r["seed"]] = \
+                idx[(r["system"], r["construction"])].get(r["seed"], 0) + \
+                int(good)
+        return {k: float(np.mean(list(v.values()))) for k, v in idx.items()}
 
+    contrasts = []
     for other in METHODS[:-1]:
         for kind in ("detect", "fs"):
-            a = indicator(decisions, other, kind)
-            b = indicator(decisions, "B7_csvf_full", kind)
+            a = indicator(other, kind)
+            b = indicator("B7_csvf_full", kind)
             keys = sorted(set(a) & set(b))
             diffs = np.array([a[k] - b[k] for k in keys])
             if len(diffs) < 3 or not np.any(diffs):
@@ -184,79 +140,106 @@ def aggregate(bank_dir: Path) -> dict:
                 "contrast": f"{other} - B7 [{kind}]",
                 "n_cases": len(keys),
                 "mean_risk_diff": round(mean, 4), "ci_lo": lo, "ci_hi": hi,
-                "p_signflip": p_perm,
-                "note": "case-level paired sign-flip permutation; "
-                        "cluster(seed)-bootstrap CI"})
+                "p_signflip": p_perm})
     ps = [c["p_signflip"] for c in contrasts]
     if ps:
         for c, adj in zip(contrasts, holm(ps)):
             c["p_holm"] = adj
-    out["contrasts"] = contrasts
+    return contrasts
 
-    # ---------------- costs --------------------------------------------------
+
+def cost_block(costs) -> list:
     per = defaultdict(list)
     for r in costs:
         per[r["method"]].append(r)
-    cost_rows = []
-    all_pairs = defaultdict(list)
-    for m, rows in per.items():
-        walls = [r["evidence_acq_wall_s"] for r in rows]
-        clss = [r["classifier_wall_s"] for r in rows]
-        bts = [r["bundle_bytes"] for r in rows]
-        axs = [sum(r["exec_count_by_type"].values()) for r in rows]
-        cost_rows.append({
-            "method": m, "n": len(rows),
-            "acq_wall_median_s": float(np.median(walls)),
-            "acq_wall_p95_s": float(np.percentile(walls, 95)),
-            "wall_spread_iqr": float(np.percentile(walls, 75) -
-                                     np.percentile(walls, 25)),
-            "cpu_median_s": float(np.median([r["evidence_acq_cpu_s"]
-                                             for r in rows])),
-            "classifier_median_s": float(np.median(clss)),
-            "bundle_bytes_median": float(np.median(bts)),
-            "extra_execs_max": int(max(axs))}
-        for r in rows:
-            all_pairs[r["system"]].append(r["evidence_acq_wall_s"])
-    out["cost_summary"] = cost_rows
+    rows = []
+    for m in METHODS:
+        rs = per.get(m, [])
+        if not rs:
+            continue
+        walls = [r["evidence_acq_wall_s"] for r in rs]
+        bts = [r["bundle_bytes"] for r in rs]
+        axs = [sum(r["exec_count_by_type"].values()) for r in rs]
+        rows.append({"method": m, "n": len(rs),
+                     "acq_wall_median_s": round(float(np.median(walls)), 6),
+                     "acq_wall_p95_s": round(float(np.percentile(walls, 95)),
+                                             6),
+                     "wall_spread_iqr": round(float(np.percentile(walls, 75) -
+                                                   np.percentile(walls, 25)),
+                                              6),
+                     "cpu_median_s": round(float(np.median(
+                         [r["evidence_acq_cpu_s"] for r in rs])), 6),
+                     "classifier_median_s": round(float(np.median(
+                         [r["classifier_wall_s"] for r in rs])), 8),
+                     "bundle_bytes_median": float(np.median(bts)),
+                     "extra_execs_max": int(max(axs))})
+    return rows
 
-    # ---------------- exploratory CRN benefit (G01/G02 holdout outcomes) ----
-    benefit = []
+
+def benefit_block(outcomes) -> list:
     pairmap = defaultdict(lambda: ([], []))
     seen = set()
     for r in outcomes:
-        if r["construction"] not in ("G01", "G02"):
+        if r["construction"] not in ("G01", "G02") or \
+                r["context_id"] != "primary":
             continue
-        if (r["system"], r["construction"], r["seed"], r["repeat_id"],
-                r["context_id"]) in seen:
+        k = (r["system"], r["construction"], r["seed"], r["repeat_id"])
+        if k in seen:
             continue
-        seen.add((r["system"], r["construction"], r["seed"], r["repeat_id"],
-                  r["context_id"]))
-        lst = pairmap[(r["system"], r["construction"], r["seed"],
-                       r["repeat_id"], r["context_id"])]
+        seen.add(k)
+        lst = pairmap[k]
         (lst[0] if r["arm"] == "A" else lst[1]).append(r["outcome_value"])
-    for k, (A, Bv) in sorted(pairmap.items()):
-        if len(A) >= 8 and len(Bv) >= 8:
+    rows = []
+    for k in sorted(pairmap):
+        A, Bv = pairmap[k]
+        if min(len(A), len(Bv)) >= 8:
             res = variance_ratio_benefit(A, Bv)
-            if isinstance(res["R"], dict) and res["R"].get("degenerate"):
-                res["status"] = "DEGENERATE_NOT_BENEFIT"
-            benefit.append({"system": k[0], "construction": k[1],
-                            "seed": k[2], **res})
-    out["crn_benefit_exploratory"] = benefit
+            status = res.pop("status")
+            R = res["R"]
+            if isinstance(R, dict) and R.get("degenerate"):
+                status = "DEGENERATE_NOT_BENEFIT"
+                R = None
+            rows.append({"system": k[0], "construction": k[1],
+                         "seed": k[2], "repeat": k[3], **res,
+                         "status": status})
+    return rows
 
+
+def aggregate(bank_dir: Path) -> dict:
+    raw = bank_dir / "raw_rows.jsonl"
+    if not raw.exists():
+        raise SystemExit(f"raw missing: {raw}")
+    decisions, outcomes, costs, missing = load_raw(raw)
+    n_seeds = len({(r["system"], r["seed"]) for r in decisions}) // 2
+
+    out = {
+        "bank": bank_dir.name,
+        "counts": {"decision": len(decisions), "outcome": len(outcomes),
+                   "cost": len(costs), "missing_cell": len(missing)},
+        "decision_metrics": metric_rows(decisions),
+        "case_seed_correct_counts": case_table(decisions),
+    }
+    out["macro_case_detection_by_branch"] = macro_block(
+        out["case_seed_correct_counts"],
+        len({r["seed"] for r in decisions}))
+    out["contrasts"] = contrasts_block(decisions)
+    out["cost_summary"] = cost_block(costs)
+    out["crn_benefit_exploratory"] = benefit_block(outcomes)
     out["missing_cells"] = missing
-    out["counts"] = counts
+
+    for section in ("contrasts", "cost_summary"):
+        for row in out[section]:
+            validate_aggregate(row)
+
     agg_path = bank_dir / "aggregates"
     agg_path.mkdir(exist_ok=True)
-    # validate no forbidden aggregates sneak in
-    for name in ("contrasts", "cost_summary"):
-        for row in out[name]:
-            validate_aggregate(row)
-    (agg_path / "results_aggregates.json").write_text(json.dumps(out, indent=2))
+    (agg_path / "results_aggregates.json").write_text(
+        json.dumps(out, indent=2))
     return out
 
 
 if __name__ == "__main__":
     target = Path(sys.argv[1]) if len(sys.argv) > 1 else \
         ROOT / "results" / "final"
-    print(f"writing aggregates under {target/'aggregates'}")
     aggregate(target)
+    print("aggregates written:", target / "aggregates")

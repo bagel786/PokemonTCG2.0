@@ -1,0 +1,5 @@
+claim_id,section,claim,raw_source,source_hash,unit,value,allowed_wording,forbidden_wording
+R001,Abstract/7,Holdout raw rows=125600,results/final/raw_rows.jsonl,792b6fd0a830c0c1b357becb0e7be661a8ceb9147b3a6ec2faadf604c5e447b1,rows,125600,exact count of retained raw rows,imply analytic sample size
+R002,7.1,B7 pooled strict detection 0.861 (3720/4320); false suppression 0.1245 (747/6000),aggregates/results_aggregates.json decision_metrics,792b6fd0a830c0c1…derived,covered cells,det .861 fs .1245,as-contracted B7 fails predeclared thresholds,defect-free framework performance claim (D-R2)
+R003,7.1,"Branch-B repaired on holdout: det 320/320, fs 0/720 (B7)",independent_reaggregation.json,recompute-verified PASS,covered BRANCH_B cells,1.000 / 0.000,evidence where contract was sound,whole-framework recommendation
+R004,Gates,Machine status NOT_READY_DO_NOT_SUBMIT due D-R2 contract defects,machine_gates.json + DEVIATIONS_LOG D-R2,see files,gates,"integrity FAIL (contract), rec FAIL",fail-closed protocol behavior,submit despite defects

@@ -11,7 +11,7 @@ numpy/scipy per installed lock). Tests bootstrap that site-packages via
 | layer | command | result |
 |---|---|---|
 | unit/property/integration suite | `python3 -m pytest prospective_repair/tests/ -q` | **47 passed** |
-| analysis-pipeline fixtures | included above (`test_analysis_pipeline.py`) | 4 passed |
+| analysis-pipeline fixtures | included above (`tests/test_analysis_pipeline.py`) | 4 passed |
 
 Coverage highlights enforced by named tests: Branch-B independence (6 required
 regressions incl. shared-seed-alone suppression + unknown-evidence fail-closed),
