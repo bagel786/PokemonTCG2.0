@@ -1,0 +1,34 @@
+{
+  "kind": "SYSTEM_MANIFEST",
+  "campaign": "prospective-repair",
+  "systems": [
+    {
+      "id": "holdem",
+      "role": "game/agent environment",
+      "name": "RLCard limit-holdem",
+      "repository": "https://github.com/datamllab/rlcard",
+      "version_pin": "rlcard==1.2.0",
+      "license": "MIT (installed rlcard-1.2.0 license file; historical Apache label was corrected upstream-in-campaign under old D007)",
+      "citation": "Zha, D., Bhat, Z., Lai, K.-H., Yang, F., Jiang, Z., Zhong, S., & Hu, X. (2019). RLCard: A toolkit for reinforcement learning in card games. arXiv:1910.04376.",
+      "seed_handling": "env.seed disabled; dealer stream = SeedSequence(seed).spawn child via RandomState-compatible logging/keyed wrapper installed BEFORE env reset; agent stream = spawned sibling",
+      "arms": "A: seat0 random policy; B: seat1 conservative policy; estimand = chips won by seat-0 agent over num_hands",
+      "policy_preservation_requirement": "under event-keyed constructions the requested per-arm policy MUST still govern action choice (random uses keyed uniforms; conservative uses its rule); enforced by tests"
+    },
+    {
+      "id": "ising",
+      "role": "scientific stochastic simulator",
+      "name": "2D Ising Metropolis Monte Carlo",
+      "repository": "https://github.com/ddsyasas/ising-monte-carlo-toolkit",
+      "version_pin": "v0.1.0 sdist sha256 caf24a508ef5f34ea9d8770b991da5f1788b8ea9146545412c505202a8ec08aa; upstream HEAD 93515592d4942af757808a88ce527076cd0706c4",
+      "license": "MIT",
+      "citation": "Dehigaspetiyage Don, S. Y. (2026). ising-monte-carlo-toolkit v0.1.0 [Computer software]. GitHub.",
+      "lattice": "L=20; sweeps=90 measured + 20 equilibration; pure-python draw-transparent path",
+      "arms": "A: T=2.269; B: T=2.9; estimand = mean|magnetization| difference over measured sweeps",
+      "rng_contract": "wrapper replaces the sampler's RNG source BEFORE construction and integration tests assert the sampler actually consumes it (draw-count audit); if impossible under the pinned toolkit the affected keyed constructions are DELETED for this system before freeze rather than faked"
+    }
+  ],
+  "notes": [
+    "Identical fault mechanics implemented once in harness layer shared by both system wrappers (truncate/burn/think-budget/module-cache/queue-tax/dup-rows/persistent-state/collision/drift/repeat plumbing).",
+    "Third-system policy: none in this campaign."
+  ]
+}

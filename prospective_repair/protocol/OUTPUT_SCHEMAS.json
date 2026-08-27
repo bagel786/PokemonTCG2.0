@@ -1,0 +1,28 @@
+{
+  "kind": "OUTPUT_SCHEMAS",
+  "campaign": "prospective-repair",
+  "raw_rows": {
+    "decision_row_required_fields": ["level","system","construction","seed","method","branch","decision","gt","score_class","coverage_flag","reason_codes","bundle_payload_sha256"],
+    "decision_bundle_payload_embedded": true,
+    "bundle_payload_note": "Each decision row embeds the FULL evaluated evidence bundle (typed view granted to that method) plus the predicate evaluation trace; auditors reconstruct every decision without re-running classification.",
+    "outcome_pair_row_fields": ["level","system","construction","seed","arm_a","arm_b","outcome_a","outcome_b","wall_a_s","cpu_a_s","wall_b_s","cpu_b_s","sweeps_or_hands_a","sweeps_or_hands_b","effective_seed_a","effective_seed_b","declared_seed","repeat_id","context_id","artifact_bytes_a","artifact_bytes_b","n_draws_a","n_draws_b","draw_events_note"],
+    "context_record_fields": ["level=record","system","construction","seed","context_label","pid","proc_start_time","digest","dealer_fp","process_separated"],
+    "cost_row_fields": ["level=cost","method","system","construction","seed","timing_rep","randomized_order_index","exec_count_by_type","evidence_acq_wall_s","evidence_acq_cpu_s","classifier_wall_s","bundle_bytes","artifact_bytes_total"]
+  },
+  "forbidden_aggregates": [
+    "coverage_rate_result","typeI_error_result","power_curve_result","N80_subsample_of_N40",
+    "two_proportion_z_test_columns","delta_method_independent_variance_ratio_interval"
+  ],
+  "aggregate_files_expected": [
+    "decision_metrics.csv|json","case_detection_table.csv","contrast_tests.csv|json","cost_summary.csv|json",
+    "variance_benefit_exploratory.json","conclusion_changes_descriptive.csv","results_macros.json",
+    "estimability.json","integrity_report.json"
+  ],
+  "validation_rules": {
+    "timings_positive": "every wall/cpu duration > 0 for executed work; zero/placeholder => schema FAIL",
+    "keys_unique": "(system,construction,seed,arm,repeat_id,context) unique for outcomes; (system,construction,seed,method,branch) unique for decisions",
+    "provenance_present": "no decision row without embedded bundle payload + predicate trace",
+    "mcnemar_only_paired_secondary": "z-test columns rejected at parse time",
+    "freeze_binding": "final runner refuses to execute unless freeze_guard passes: clean tree, frozen input hashes match, freeze SHA reachable on origin"
+  }
+}

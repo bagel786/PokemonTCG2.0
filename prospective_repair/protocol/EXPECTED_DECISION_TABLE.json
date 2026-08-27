@@ -1,0 +1,2486 @@
+{
+  "campaign": "prospective-repair",
+  "kind": "EXPECTED_DECISION_TABLE",
+  "rows": [
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ADMIT",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ADMIT",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G01",
+      "gt": {
+        "crn": "VALID",
+        "descriptive": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "VALID",
+        "replay": "VALID"
+      },
+      "system": "holdem"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ADMIT",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ADMIT",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G01",
+      "gt": {
+        "crn": "VALID",
+        "descriptive": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "VALID",
+        "replay": "VALID"
+      },
+      "system": "ising"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ADMIT",
+        "BRANCH_E": "ADMIT"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ADMIT",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ADMIT",
+        "BRANCH_E": "ADMIT"
+      },
+      "construction": "G02",
+      "gt": {
+        "crn": "VALID",
+        "descriptive": "VALID",
+        "event_alignment": "VALID",
+        "paired_inference": "VALID",
+        "replay": "VALID"
+      },
+      "system": "holdem"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ADMIT",
+        "BRANCH_E": "ADMIT"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ADMIT",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ADMIT",
+        "BRANCH_E": "ADMIT"
+      },
+      "construction": "G02",
+      "gt": {
+        "crn": "VALID",
+        "descriptive": "VALID",
+        "event_alignment": "VALID",
+        "paired_inference": "VALID",
+        "replay": "VALID"
+      },
+      "system": "ising"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G03",
+      "gt": {
+        "crn": "INVALID",
+        "descriptive": "INVALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "DOWNGRADE",
+        "replay": "VALID"
+      },
+      "system": "holdem"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G03",
+      "gt": {
+        "crn": "INVALID",
+        "descriptive": "INVALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "DOWNGRADE",
+        "replay": "VALID"
+      },
+      "system": "ising"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G04",
+      "gt": {
+        "crn": "INVALID",
+        "descriptive": "INVALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "DOWNGRADE",
+        "replay": "VALID"
+      },
+      "system": "holdem"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G04",
+      "gt": {
+        "crn": "INVALID",
+        "descriptive": "INVALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "DOWNGRADE",
+        "replay": "VALID"
+      },
+      "system": "ising"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G05",
+      "gt": {
+        "crn": "INVALID",
+        "descriptive": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "DOWNGRADE",
+        "replay": "VALID"
+      },
+      "system": "holdem"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G05",
+      "gt": {
+        "crn": "INVALID",
+        "descriptive": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "DOWNGRADE",
+        "replay": "VALID"
+      },
+      "system": "ising"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G06",
+      "gt": {
+        "crn": "INVALID",
+        "descriptive": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "DOWNGRADE",
+        "replay": "VALID"
+      },
+      "system": "holdem"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G06",
+      "gt": {
+        "crn": "INVALID",
+        "descriptive": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "DOWNGRADE",
+        "replay": "VALID"
+      },
+      "system": "ising"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "FAIL_CLOSED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "FAIL_CLOSED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ADMIT",
+        "BRANCH_C": "SUPPRESS",
+        "BRANCH_D": "ADMIT",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G07",
+      "gt": {
+        "crn": "VALID",
+        "descriptive": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "VALID",
+        "replay": "INVALID"
+      },
+      "system": "holdem"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "FAIL_CLOSED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "FAIL_CLOSED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ADMIT",
+        "BRANCH_C": "SUPPRESS",
+        "BRANCH_D": "ADMIT",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G07",
+      "gt": {
+        "crn": "VALID",
+        "descriptive": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "VALID",
+        "replay": "INVALID"
+      },
+      "system": "ising"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "FAIL_CLOSED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "FAIL_CLOSED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "SUPPRESS",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G08",
+      "gt": {
+        "crn": "INVALID",
+        "descriptive": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "DOWNGRADE",
+        "replay": "INVALID"
+      },
+      "system": "holdem"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "FAIL_CLOSED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "FAIL_CLOSED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "SUPPRESS",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G08",
+      "gt": {
+        "crn": "INVALID",
+        "descriptive": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "DOWNGRADE",
+        "replay": "INVALID"
+      },
+      "system": "ising"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "FAIL_CLOSED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "FAIL_CLOSED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "SUPPRESS",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G09",
+      "gt": {
+        "crn": "INVALID",
+        "descriptive": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "DOWNGRADE",
+        "replay": "INVALID"
+      },
+      "system": "holdem"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "FAIL_CLOSED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "FAIL_CLOSED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "SUPPRESS",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G09",
+      "gt": {
+        "crn": "INVALID",
+        "descriptive": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "DOWNGRADE",
+        "replay": "INVALID"
+      },
+      "system": "ising"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "SUPPRESS",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ADMIT",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G10",
+      "gt": {
+        "crn": "VALID",
+        "descriptive": "INVALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "DOWNGRADE",
+        "replay": "VALID"
+      },
+      "system": "holdem"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "SUPPRESS",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ADMIT",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G10",
+      "gt": {
+        "crn": "VALID",
+        "descriptive": "INVALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "DOWNGRADE",
+        "replay": "VALID"
+      },
+      "system": "ising"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "SUPPRESS",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "FAIL_CLOSED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ADMIT",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ADMIT",
+        "BRANCH_C": "SUPPRESS",
+        "BRANCH_D": "ADMIT",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G11",
+      "gt": {
+        "crn": "VALID",
+        "descriptive": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "VALID",
+        "replay": "INVALID"
+      },
+      "system": "holdem"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "SUPPRESS",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "FAIL_CLOSED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ADMIT",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ADMIT",
+        "BRANCH_C": "SUPPRESS",
+        "BRANCH_D": "ADMIT",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G11",
+      "gt": {
+        "crn": "VALID",
+        "descriptive": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "VALID",
+        "replay": "INVALID"
+      },
+      "system": "ising"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "SUPPRESS",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "SUPPRESS",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ADMIT",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G12",
+      "gt": {
+        "crn": "VALID",
+        "descriptive": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "INVALID",
+        "replay": "VALID"
+      },
+      "system": "holdem"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "SUPPRESS",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "SUPPRESS",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ADMIT",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G12",
+      "gt": {
+        "crn": "VALID",
+        "descriptive": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "INVALID",
+        "replay": "VALID"
+      },
+      "system": "ising"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "SUPPRESS",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "SUPPRESS",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G13",
+      "gt": {
+        "crn": "INVALID",
+        "descriptive": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "INVALID",
+        "replay": "VALID"
+      },
+      "system": "holdem"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "SUPPRESS",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "SUPPRESS",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G13",
+      "gt": {
+        "crn": "INVALID",
+        "descriptive": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "INVALID",
+        "replay": "VALID"
+      },
+      "system": "ising"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "SUPPRESS",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ADMIT",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G14",
+      "gt": {
+        "crn": "VALID",
+        "descriptive": "INVALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "DOWNGRADE",
+        "replay": "VALID"
+      },
+      "system": "holdem"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "SUPPRESS",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ADMIT",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G14",
+      "gt": {
+        "crn": "VALID",
+        "descriptive": "INVALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "DOWNGRADE",
+        "replay": "VALID"
+      },
+      "system": "ising"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "FAIL_CLOSED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "SUPPRESS",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G15",
+      "gt": {
+        "crn": "INVALID",
+        "descriptive": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "DOWNGRADE",
+        "replay": "INVALID"
+      },
+      "system": "holdem"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "FAIL_CLOSED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "SUPPRESS",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G15",
+      "gt": {
+        "crn": "INVALID",
+        "descriptive": "VALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "DOWNGRADE",
+        "replay": "INVALID"
+      },
+      "system": "ising"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G16",
+      "gt": {
+        "crn": "INVALID",
+        "descriptive": "VALID",
+        "event_alignment": "INVALID",
+        "paired_inference": "DOWNGRADE",
+        "replay": "VALID"
+      },
+      "system": "holdem"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G16",
+      "gt": {
+        "crn": "INVALID",
+        "descriptive": "VALID",
+        "event_alignment": "INVALID",
+        "paired_inference": "DOWNGRADE",
+        "replay": "VALID"
+      },
+      "system": "ising"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G17",
+      "gt": {
+        "crn": "INVALID",
+        "descriptive": "INVALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "DOWNGRADE",
+        "replay": "VALID"
+      },
+      "system": "holdem"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G17",
+      "gt": {
+        "crn": "INVALID",
+        "descriptive": "INVALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "DOWNGRADE",
+        "replay": "VALID"
+      },
+      "system": "ising"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "FAIL_CLOSED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "FAIL_CLOSED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "SUPPRESS",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "SUPPRESS",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G18",
+      "gt": {
+        "crn": "INVALID",
+        "descriptive": "INVALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "DOWNGRADE",
+        "replay": "INVALID"
+      },
+      "system": "holdem"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "FAIL_CLOSED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "FAIL_CLOSED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "SUPPRESS",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "SUPPRESS",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "SUPPRESS",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G18",
+      "gt": {
+        "crn": "INVALID",
+        "descriptive": "INVALID",
+        "event_alignment": "NOT_APPLICABLE",
+        "paired_inference": "DOWNGRADE",
+        "replay": "INVALID"
+      },
+      "system": "ising"
+    },
+    {
+      "B0_schedule_only": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "FAIL_CLOSED",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_E": "ABSTAIN_NOT_EVALUATED"
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_B": "DOWNGRADE",
+        "BRANCH_C": "ABSTAIN_NOT_EVALUATED",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": "ADMIT",
+        "BRANCH_B": "ADMIT",
+        "BRANCH_C": "ADMIT",
+        "BRANCH_D": "SUPPRESS",
+        "BRANCH_E": "SUPPRESS"
+      },
+      "construction": "G19",
+      "gt": {
+        "crn": "INVALID",
+        "descriptive": "VALID",
+        "event_alignment": "INVALID",
+        "paired_inference": "VALID",
+        "replay": "VALID"
+      },
+      "system": "holdem"
+    }
+  ],
+  "source": "generated by runner/gen_expected_table.py \u2014 do not edit"
+}
