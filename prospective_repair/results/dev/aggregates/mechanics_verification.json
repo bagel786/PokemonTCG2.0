@@ -1,0 +1,11 @@
+{
+  "bank": "dev",
+  "raw_sha256": "4e0a012c5ef9f6804d312738658c6984a32333702ae36323570209ee870c4955",
+  "rows_decision": 17760,
+  "rows_outcome": 1080,
+  "missing_cells": 0,
+  "problems": [],
+  "mechanism_checks_total": 228,
+  "mechanism_check_failures": {},
+  "status": "PASS"
+}

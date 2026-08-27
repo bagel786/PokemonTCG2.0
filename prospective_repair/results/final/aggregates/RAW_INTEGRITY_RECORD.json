@@ -1,0 +1,37 @@
+{
+  "kind": "RAW_INTEGRITY_RECORD",
+  "note": "raw JSONL kept on disk AND committed as xz; each archive verified by decompress-and-hash against pre-compression digest",
+  "files": {
+    "final/raw_rows.jsonl": {
+      "uncompressed_sha256": "792b6fd0a830c0c1b357becb0e7be661a8ceb9147b3a6ec2faadf604c5e447b1",
+      "compressed": "final/raw_rows.jsonl.xz",
+      "compressed_sha256": "b22ad70dfe9732990184e0a8ee117193bb385dca92388f2ea236c8092b04919b",
+      "bytes_uncompressed": 493373725,
+      "role": "PRIMARY CONFIRMATORY HOLDOUT"
+    },
+    "final/cost_rows.jsonl": {
+      "uncompressed_sha256": "17c1f296bf6821ea5638109e329e0122f6e40fc3528c04f56935c9fb4a2e8237",
+      "compressed": "final/cost_rows.jsonl.xz",
+      "compressed_sha256": "e1cf7efaaa3cb14abdeef3bed05e81d9fe720c8f3aefac857aa2d741ef11589b",
+      "bytes_uncompressed": 1775728
+    },
+    "dev/raw_rows.jsonl": {
+      "uncompressed_sha256": "4e0a012c5ef9f6804d312738658c6984a32333702ae36323570209ee870c4955",
+      "compressed": "dev/raw_rows.jsonl.xz",
+      "compressed_sha256": "859a8f8a17f54fce1cd984a893808750b972ddd02db7b5c0592131f240c839e8",
+      "bytes_uncompressed": 74017942
+    },
+    "pilot_mechanics/raw_rows.jsonl": {
+      "uncompressed_sha256": "77dbdba945035a1c98eed083405692687cee33479b2c96fed70d910c90ab9ddf",
+      "compressed": "pilot_mechanics/raw_rows.jsonl.xz",
+      "compressed_sha256": "e4f04f9835ad5045e6606b771761356ed68c3e2847547b5f909ccfc5ddb85d2e",
+      "bytes_uncompressed": 98696177
+    },
+    "cost_smoke/cost_rows.jsonl": {
+      "uncompressed_sha256": "5bf0e3458db554a2f487204148a5d54c946a9c1f7773796660420c1cd86d47eb",
+      "compressed": "cost_smoke/cost_rows.jsonl.xz",
+      "compressed_sha256": "f5a698244ad27f294f338944526f9ee67a365a4e69e8bf2438816090c7eaf1d4",
+      "bytes_uncompressed": 105968
+    }
+  }
+}

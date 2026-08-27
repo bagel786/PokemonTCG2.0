@@ -1,0 +1,105 @@
+{
+  "kind": "MACHINE_GATES",
+  "registration_status": "private-remote timestamped freeze; NOT public preregistration",
+  "integrity_gate": {
+    "mechanics_match_labels": true,
+    "independent_reaggregate_agrees": true,
+    "provenance_complete": true,
+    "timings_real": true,
+    "crash_count_zero": true,
+    "contract_defect_free": false,
+    "PASS": false
+  },
+  "recommendation_gate": {
+    "b7_detection_met": false,
+    "b7_fs_met": false,
+    "b7_not_pareto_dominated": true,
+    "PASS": false,
+    "b7_det": 0.8611111111111112,
+    "b7_fs": 0.1245,
+    "pooled_by_method": [
+      {
+        "method": "B0_schedule_only",
+        "det": 0.875,
+        "fs": 0.16,
+        "coverage": 0.373,
+        "cost_med_s": null,
+        "pareto_dominated_by": [
+          "B2_trace_aa"
+        ]
+      },
+      {
+        "method": "B1_outcome_aa",
+        "det": 0.0,
+        "fs": 0.15254237288135594,
+        "coverage": 0.773,
+        "cost_med_s": null,
+        "pareto_dominated_by": [
+          "B7_csvf_full"
+        ]
+      },
+      {
+        "method": "B2_trace_aa",
+        "det": 1.0,
+        "fs": 0.0,
+        "coverage": 0.373,
+        "cost_med_s": null,
+        "pareto_dominated_by": []
+      },
+      {
+        "method": "B3_within_seed_reps",
+        "det": 0.6,
+        "fs": 1.0,
+        "coverage": 0.373,
+        "cost_med_s": null,
+        "pareto_dominated_by": [
+          "B4_unpaired_analysis",
+          "B5_cluster_hierarchical",
+          "B0_schedule_only",
+          "B2_trace_aa",
+          "B7_csvf_full"
+        ]
+      },
+      {
+        "method": "B4_unpaired_analysis",
+        "det": 1.0,
+        "fs": 1.0,
+        "coverage": 0.373,
+        "cost_med_s": null,
+        "pareto_dominated_by": [
+          "B5_cluster_hierarchical",
+          "B2_trace_aa"
+        ]
+      },
+      {
+        "method": "B5_cluster_hierarchical",
+        "det": 1.0,
+        "fs": 0.7777777777777778,
+        "coverage": 0.373,
+        "cost_med_s": null,
+        "pareto_dominated_by": [
+          "B2_trace_aa"
+        ]
+      },
+      {
+        "method": "B6_event_keyed_whitebox",
+        "det": 1.0,
+        "fs": 0.42857142857142855,
+        "coverage": 0.2541,
+        "cost_med_s": null,
+        "pareto_dominated_by": [
+          "B2_trace_aa"
+        ]
+      },
+      {
+        "method": "B7_csvf_full",
+        "det": 0.8611111111111112,
+        "fs": 0.1245,
+        "coverage": 1.0,
+        "cost_med_s": null,
+        "pareto_dominated_by": []
+      }
+    ]
+  },
+  "machine_status": "NOT_READY_DO_NOT_SUBMIT"
+}

@@ -164,3 +164,12 @@ artifacts/anti_meta_20260816/*
 prospective_repair/results/**
 !prospective_repair/results/**/
 !prospective_repair/results/pilot_mechanics/aggregates/mechanics_verification.json
+# ...but DO track immutable acquired-bank archives (xz) + their integrity records
+!prospective_repair/results/**/*.xz
+!prospective_repair/results/**/*.sha256.pre
+!prospective_repair/results/**/aggregates/**
+!prospective_repair/results/**/run_meta.json
+!prospective_repair/results/**/SHA256SUMS
+!prospective_repair/results/**/figures/**
+!prospective_repair/results/**/table_sources/**
+!prospective_repair/results/**/figure_sources/**

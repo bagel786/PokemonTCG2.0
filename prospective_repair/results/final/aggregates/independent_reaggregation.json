@@ -1,0 +1,20 @@
+{
+  "raw_rows_decision": 118400,
+  "raw_rows_outcome": 7200,
+  "provenance_missing": 0,
+  "zero_or_negative_timing_rows": 0,
+  "b7_branchB_detection": [
+    320,
+    320
+  ],
+  "b7_branchB_false_suppression": [
+    0,
+    720
+  ],
+  "b5_branchB_detection": [
+    320,
+    320
+  ],
+  "status": "PASS",
+  "problems": []
+}

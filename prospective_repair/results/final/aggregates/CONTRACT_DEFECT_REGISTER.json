@@ -1,0 +1,5 @@
+{"contract_defects":[{"id":"D-R2","status":"OPEN_DISCOVERED_POST_OUTCOME",
+  "affected":["BRANCH_C routing for G08/G09/G18","BRANCH_E coverage denominator",
+              "ISING BRANCH_D stateful sync verification"],
+  "remedy":"new frozen campaign only; confirmatory patch-rerun forbidden"}],
+ "final_raw_sha256":"792b6fd0a830c0c1b357becb0e7be661a8ceb9147b3a6ec2faadf604c5e447b1"}

@@ -1,0 +1,17 @@
+system,method,mean_det_rate,mean_fs_rate
+holdem,B0_schedule_only,0.875,0.1538
+holdem,B1_outcome_aa,0.0,1.0
+holdem,B2_trace_aa,1.0,0.0
+holdem,B3_within_seed_reps,1.0,1.0
+holdem,B4_unpaired_analysis,1.0,1.0
+holdem,B5_cluster_hierarchical,1.0,0.8
+holdem,B6_event_keyed_whitebox,2.0,1.0
+holdem,B7_csvf_full,4.375,1.1126
+ising,B0_schedule_only,0.875,0.1667
+ising,B1_outcome_aa,0.0,1.0
+ising,B2_trace_aa,1.0,0.0
+ising,B3_within_seed_reps,1.0,1.0
+ising,B4_unpaired_analysis,1.0,1.0
+ising,B5_cluster_hierarchical,1.0,0.75
+ising,B6_event_keyed_whitebox,2.0,1.0
+ising,B7_csvf_full,4.375,1.3065

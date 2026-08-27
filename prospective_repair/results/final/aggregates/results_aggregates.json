@@ -1,0 +1,4197 @@
+{
+  "bank": "final",
+  "counts": {
+    "decision": 118400,
+    "outcome": 7200,
+    "cost": 0,
+    "missing_cell": 0
+  },
+  "decision_metrics": [
+    {
+      "method": "B0_schedule_only",
+      "branch": "BRANCH_A",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 420,
+      "invalid_covered": 480,
+      "det_rate": 0.875,
+      "det_lo": 0.842404330072403,
+      "det_hi": 0.9016410455189457,
+      "fs_soft": 0,
+      "fs_hard": 160,
+      "fs_total": 160,
+      "valid_covered": 1040,
+      "fs_rate": 0.15384615384615385,
+      "fs_lo": 0.13319536734970025,
+      "fs_hi": 0.17704471377177852,
+      "missed_failure": 60,
+      "caveat_only": 0
+    },
+    {
+      "method": "B0_schedule_only",
+      "branch": "BRANCH_A",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 420,
+      "invalid_covered": 480,
+      "det_rate": 0.875,
+      "det_lo": 0.842404330072403,
+      "det_hi": 0.9016410455189457,
+      "fs_soft": 0,
+      "fs_hard": 160,
+      "fs_total": 160,
+      "valid_covered": 960,
+      "fs_rate": 0.16666666666666666,
+      "fs_lo": 0.1444300350537333,
+      "fs_hi": 0.19156034583024495,
+      "missed_failure": 60,
+      "caveat_only": 0
+    },
+    {
+      "method": "B0_schedule_only",
+      "branch": "BRANCH_B",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 1520,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B0_schedule_only",
+      "branch": "BRANCH_B",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 1440,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B0_schedule_only",
+      "branch": "BRANCH_C",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 1520,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B0_schedule_only",
+      "branch": "BRANCH_C",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 1440,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B0_schedule_only",
+      "branch": "BRANCH_D",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 1520,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B0_schedule_only",
+      "branch": "BRANCH_D",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 1440,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B0_schedule_only",
+      "branch": "BRANCH_E",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 240,
+      "coverage": 0.8421,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B0_schedule_only",
+      "branch": "BRANCH_E",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 160,
+      "coverage": 0.8889,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B1_outcome_aa",
+      "branch": "BRANCH_A",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 0,
+      "invalid_covered": 480,
+      "det_rate": 0.0,
+      "det_lo": 0.0,
+      "det_hi": 0.007939499211535013,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 1040,
+      "fs_rate": 0.0,
+      "fs_lo": 0.0,
+      "fs_hi": 0.0036801171754693115,
+      "missed_failure": 480,
+      "caveat_only": 0
+    },
+    {
+      "method": "B1_outcome_aa",
+      "branch": "BRANCH_A",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 0,
+      "invalid_covered": 480,
+      "det_rate": 0.0,
+      "det_lo": 0.0,
+      "det_hi": 0.007939499211535013,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 960,
+      "fs_rate": 0.0,
+      "fs_lo": 0.0,
+      "fs_hi": 0.003985571325967524,
+      "missed_failure": 480,
+      "caveat_only": 0
+    },
+    {
+      "method": "B1_outcome_aa",
+      "branch": "BRANCH_B",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 0,
+      "invalid_covered": 160,
+      "det_rate": 0.0,
+      "det_lo": 0.0,
+      "det_hi": 0.02344619553271408,
+      "fs_soft": 400,
+      "fs_hard": 0,
+      "fs_total": 400,
+      "valid_covered": 400,
+      "fs_rate": 1.0,
+      "fs_lo": 0.9904877055170676,
+      "fs_hi": 1.0,
+      "missed_failure": 0,
+      "caveat_only": 160
+    },
+    {
+      "method": "B1_outcome_aa",
+      "branch": "BRANCH_B",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 0,
+      "invalid_covered": 160,
+      "det_rate": 0.0,
+      "det_lo": 0.0,
+      "det_hi": 0.02344619553271408,
+      "fs_soft": 320,
+      "fs_hard": 0,
+      "fs_total": 320,
+      "valid_covered": 320,
+      "fs_rate": 1.0,
+      "fs_lo": 0.9881378409837756,
+      "fs_hi": 0.9999999999999998,
+      "missed_failure": 0,
+      "caveat_only": 160
+    },
+    {
+      "method": "B1_outcome_aa",
+      "branch": "BRANCH_C",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 0,
+      "invalid_covered": 480,
+      "det_rate": 0.0,
+      "det_lo": 0.0,
+      "det_hi": 0.007939499211535013,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 1040,
+      "fs_rate": 0.0,
+      "fs_lo": 0.0,
+      "fs_hi": 0.0036801171754693115,
+      "missed_failure": 480,
+      "caveat_only": 0
+    },
+    {
+      "method": "B1_outcome_aa",
+      "branch": "BRANCH_C",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 0,
+      "invalid_covered": 480,
+      "det_rate": 0.0,
+      "det_lo": 0.0,
+      "det_hi": 0.007939499211535013,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 960,
+      "fs_rate": 0.0,
+      "fs_lo": 0.0,
+      "fs_hi": 0.003985571325967524,
+      "missed_failure": 480,
+      "caveat_only": 0
+    },
+    {
+      "method": "B1_outcome_aa",
+      "branch": "BRANCH_D",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 1520,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B1_outcome_aa",
+      "branch": "BRANCH_D",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 1440,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B1_outcome_aa",
+      "branch": "BRANCH_E",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 240,
+      "coverage": 0.8421,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B1_outcome_aa",
+      "branch": "BRANCH_E",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 160,
+      "coverage": 0.8889,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B2_trace_aa",
+      "branch": "BRANCH_A",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 1520,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B2_trace_aa",
+      "branch": "BRANCH_A",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 1440,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B2_trace_aa",
+      "branch": "BRANCH_B",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 1520,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B2_trace_aa",
+      "branch": "BRANCH_B",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 1440,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B2_trace_aa",
+      "branch": "BRANCH_C",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 480,
+      "invalid_covered": 480,
+      "det_rate": 1.0,
+      "det_lo": 0.9920605007884652,
+      "det_hi": 1.0,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 1040,
+      "fs_rate": 0.0,
+      "fs_lo": 0.0,
+      "fs_hi": 0.0036801171754693115,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B2_trace_aa",
+      "branch": "BRANCH_C",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 480,
+      "invalid_covered": 480,
+      "det_rate": 1.0,
+      "det_lo": 0.9920605007884652,
+      "det_hi": 1.0,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 960,
+      "fs_rate": 0.0,
+      "fs_lo": 0.0,
+      "fs_hi": 0.003985571325967524,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B2_trace_aa",
+      "branch": "BRANCH_D",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 1520,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B2_trace_aa",
+      "branch": "BRANCH_D",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 1440,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B2_trace_aa",
+      "branch": "BRANCH_E",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 240,
+      "coverage": 0.8421,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B2_trace_aa",
+      "branch": "BRANCH_E",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 160,
+      "coverage": 0.8889,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B3_within_seed_reps",
+      "branch": "BRANCH_A",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 1520,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B3_within_seed_reps",
+      "branch": "BRANCH_A",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 1440,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B3_within_seed_reps",
+      "branch": "BRANCH_B",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 240,
+      "coverage": 0.8421,
+      "det_strict_n": 0,
+      "invalid_covered": 160,
+      "det_rate": 0.0,
+      "det_lo": 0.0,
+      "det_hi": 0.02344619553271408,
+      "fs_soft": 240,
+      "fs_hard": 0,
+      "fs_total": 240,
+      "valid_covered": 240,
+      "fs_rate": 1.0,
+      "fs_lo": 0.9842460798138267,
+      "fs_hi": 1.0,
+      "missed_failure": 0,
+      "caveat_only": 160
+    },
+    {
+      "method": "B3_within_seed_reps",
+      "branch": "BRANCH_B",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 240,
+      "coverage": 0.8333,
+      "det_strict_n": 0,
+      "invalid_covered": 160,
+      "det_rate": 0.0,
+      "det_lo": 0.0,
+      "det_hi": 0.02344619553271408,
+      "fs_soft": 160,
+      "fs_hard": 0,
+      "fs_total": 160,
+      "valid_covered": 160,
+      "fs_rate": 1.0,
+      "fs_lo": 0.976553804467286,
+      "fs_hi": 1.0,
+      "missed_failure": 0,
+      "caveat_only": 160
+    },
+    {
+      "method": "B3_within_seed_reps",
+      "branch": "BRANCH_C",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 1280,
+      "coverage": 0.1579,
+      "det_strict_n": 240,
+      "invalid_covered": 240,
+      "det_rate": 1.0,
+      "det_lo": 0.9842460798138267,
+      "det_hi": 1.0,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B3_within_seed_reps",
+      "branch": "BRANCH_C",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 1200,
+      "coverage": 0.1667,
+      "det_strict_n": 240,
+      "invalid_covered": 240,
+      "det_rate": 1.0,
+      "det_lo": 0.9842460798138267,
+      "det_hi": 1.0,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B3_within_seed_reps",
+      "branch": "BRANCH_D",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 1520,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B3_within_seed_reps",
+      "branch": "BRANCH_D",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 1440,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B3_within_seed_reps",
+      "branch": "BRANCH_E",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 240,
+      "coverage": 0.8421,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B3_within_seed_reps",
+      "branch": "BRANCH_E",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 160,
+      "coverage": 0.8889,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B4_unpaired_analysis",
+      "branch": "BRANCH_A",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 1520,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B4_unpaired_analysis",
+      "branch": "BRANCH_A",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 1440,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B4_unpaired_analysis",
+      "branch": "BRANCH_B",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 160,
+      "invalid_covered": 160,
+      "det_rate": 1.0,
+      "det_lo": 0.976553804467286,
+      "det_hi": 1.0,
+      "fs_soft": 0,
+      "fs_hard": 400,
+      "fs_total": 400,
+      "valid_covered": 400,
+      "fs_rate": 1.0,
+      "fs_lo": 0.9904877055170676,
+      "fs_hi": 1.0,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B4_unpaired_analysis",
+      "branch": "BRANCH_B",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 160,
+      "invalid_covered": 160,
+      "det_rate": 1.0,
+      "det_lo": 0.976553804467286,
+      "det_hi": 1.0,
+      "fs_soft": 0,
+      "fs_hard": 320,
+      "fs_total": 320,
+      "valid_covered": 320,
+      "fs_rate": 1.0,
+      "fs_lo": 0.9881378409837756,
+      "fs_hi": 0.9999999999999998,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B4_unpaired_analysis",
+      "branch": "BRANCH_C",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 1520,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B4_unpaired_analysis",
+      "branch": "BRANCH_C",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 1440,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B4_unpaired_analysis",
+      "branch": "BRANCH_D",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 1520,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B4_unpaired_analysis",
+      "branch": "BRANCH_D",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 1440,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B4_unpaired_analysis",
+      "branch": "BRANCH_E",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 240,
+      "coverage": 0.8421,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B4_unpaired_analysis",
+      "branch": "BRANCH_E",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 160,
+      "coverage": 0.8889,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B5_cluster_hierarchical",
+      "branch": "BRANCH_A",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 1520,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B5_cluster_hierarchical",
+      "branch": "BRANCH_A",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 1440,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B5_cluster_hierarchical",
+      "branch": "BRANCH_B",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 160,
+      "invalid_covered": 160,
+      "det_rate": 1.0,
+      "det_lo": 0.976553804467286,
+      "det_hi": 1.0,
+      "fs_soft": 320,
+      "fs_hard": 0,
+      "fs_total": 320,
+      "valid_covered": 400,
+      "fs_rate": 0.8,
+      "fs_lo": 0.7580296827814696,
+      "fs_hi": 0.8362629405287709,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B5_cluster_hierarchical",
+      "branch": "BRANCH_B",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 160,
+      "invalid_covered": 160,
+      "det_rate": 1.0,
+      "det_lo": 0.976553804467286,
+      "det_hi": 1.0,
+      "fs_soft": 240,
+      "fs_hard": 0,
+      "fs_total": 240,
+      "valid_covered": 320,
+      "fs_rate": 0.75,
+      "fs_lo": 0.6997803679197236,
+      "fs_hi": 0.7942885525721641,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B5_cluster_hierarchical",
+      "branch": "BRANCH_C",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 1520,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B5_cluster_hierarchical",
+      "branch": "BRANCH_C",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 1440,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B5_cluster_hierarchical",
+      "branch": "BRANCH_D",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 1520,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B5_cluster_hierarchical",
+      "branch": "BRANCH_D",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 1440,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B5_cluster_hierarchical",
+      "branch": "BRANCH_E",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 240,
+      "coverage": 0.8421,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B5_cluster_hierarchical",
+      "branch": "BRANCH_E",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 160,
+      "coverage": 0.8889,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B6_event_keyed_whitebox",
+      "branch": "BRANCH_A",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 1520,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B6_event_keyed_whitebox",
+      "branch": "BRANCH_A",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 1440,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B6_event_keyed_whitebox",
+      "branch": "BRANCH_B",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 1280,
+      "coverage": 0.1579,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 160,
+      "fs_hard": 0,
+      "fs_total": 160,
+      "valid_covered": 160,
+      "fs_rate": 1.0,
+      "fs_lo": 0.976553804467286,
+      "fs_hi": 1.0,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B6_event_keyed_whitebox",
+      "branch": "BRANCH_B",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 1280,
+      "coverage": 0.1111,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 80,
+      "fs_hard": 0,
+      "fs_total": 80,
+      "valid_covered": 80,
+      "fs_rate": 1.0,
+      "fs_lo": 0.9541818697747756,
+      "fs_hi": 0.9999999999999999,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B6_event_keyed_whitebox",
+      "branch": "BRANCH_C",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 1520,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B6_event_keyed_whitebox",
+      "branch": "BRANCH_C",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 1440,
+      "coverage": 0.0,
+      "det_strict_n": 0,
+      "invalid_covered": 0,
+      "det_rate": null,
+      "det_lo": null,
+      "det_hi": null,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 0,
+      "fs_rate": null,
+      "fs_lo": null,
+      "fs_hi": null,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B6_event_keyed_whitebox",
+      "branch": "BRANCH_D",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 1280,
+      "coverage": 0.1579,
+      "det_strict_n": 160,
+      "invalid_covered": 160,
+      "det_rate": 1.0,
+      "det_lo": 0.976553804467286,
+      "det_hi": 1.0,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 80,
+      "fs_rate": 0.0,
+      "fs_lo": 0.0,
+      "fs_hi": 0.04581813022522419,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B6_event_keyed_whitebox",
+      "branch": "BRANCH_D",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 1280,
+      "coverage": 0.1111,
+      "det_strict_n": 80,
+      "invalid_covered": 80,
+      "det_rate": 1.0,
+      "det_lo": 0.9541818697747756,
+      "det_hi": 0.9999999999999999,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 80,
+      "fs_rate": 0.0,
+      "fs_lo": 0.0,
+      "fs_hi": 0.04581813022522419,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B6_event_keyed_whitebox",
+      "branch": "BRANCH_E",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 160,
+      "invalid_covered": 160,
+      "det_rate": 1.0,
+      "det_lo": 0.976553804467286,
+      "det_hi": 1.0,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 80,
+      "fs_rate": 0.0,
+      "fs_lo": 0.0,
+      "fs_hi": 0.04581813022522419,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B6_event_keyed_whitebox",
+      "branch": "BRANCH_E",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 80,
+      "invalid_covered": 80,
+      "det_rate": 1.0,
+      "det_lo": 0.9541818697747756,
+      "det_hi": 0.9999999999999999,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 80,
+      "fs_rate": 0.0,
+      "fs_lo": 0.0,
+      "fs_hi": 0.04581813022522419,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B7_csvf_full",
+      "branch": "BRANCH_A",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 420,
+      "invalid_covered": 480,
+      "det_rate": 0.875,
+      "det_lo": 0.842404330072403,
+      "det_hi": 0.9016410455189457,
+      "fs_soft": 0,
+      "fs_hard": 80,
+      "fs_total": 80,
+      "valid_covered": 1040,
+      "fs_rate": 0.07692307692307693,
+      "fs_lo": 0.06224015243367431,
+      "fs_hi": 0.09471994671479972,
+      "missed_failure": 60,
+      "caveat_only": 0
+    },
+    {
+      "method": "B7_csvf_full",
+      "branch": "BRANCH_A",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 420,
+      "invalid_covered": 480,
+      "det_rate": 0.875,
+      "det_lo": 0.842404330072403,
+      "det_hi": 0.9016410455189457,
+      "fs_soft": 0,
+      "fs_hard": 80,
+      "fs_total": 80,
+      "valid_covered": 960,
+      "fs_rate": 0.08333333333333333,
+      "fs_lo": 0.06746654844271116,
+      "fs_hi": 0.10252142766226177,
+      "missed_failure": 60,
+      "caveat_only": 0
+    },
+    {
+      "method": "B7_csvf_full",
+      "branch": "BRANCH_B",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 160,
+      "invalid_covered": 160,
+      "det_rate": 1.0,
+      "det_lo": 0.976553804467286,
+      "det_hi": 1.0,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 400,
+      "fs_rate": 0.0,
+      "fs_lo": 0.0,
+      "fs_hi": 0.009512294482932589,
+      "missed_failure": 0,
+      "caveat_only": 60
+    },
+    {
+      "method": "B7_csvf_full",
+      "branch": "BRANCH_B",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 160,
+      "invalid_covered": 160,
+      "det_rate": 1.0,
+      "det_lo": 0.976553804467286,
+      "det_hi": 1.0,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 320,
+      "fs_rate": 0.0,
+      "fs_lo": 0.0,
+      "fs_hi": 0.01186215901622431,
+      "missed_failure": 0,
+      "caveat_only": 60
+    },
+    {
+      "method": "B7_csvf_full",
+      "branch": "BRANCH_C",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 240,
+      "invalid_covered": 480,
+      "det_rate": 0.5,
+      "det_lo": 0.45544806622733697,
+      "det_hi": 0.5445519337726631,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 1040,
+      "fs_rate": 0.0,
+      "fs_lo": 0.0,
+      "fs_hi": 0.0036801171754693115,
+      "missed_failure": 240,
+      "caveat_only": 0
+    },
+    {
+      "method": "B7_csvf_full",
+      "branch": "BRANCH_C",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 240,
+      "invalid_covered": 480,
+      "det_rate": 0.5,
+      "det_lo": 0.45544806622733697,
+      "det_hi": 0.5445519337726631,
+      "fs_soft": 0,
+      "fs_hard": 0,
+      "fs_total": 0,
+      "valid_covered": 960,
+      "fs_rate": 0.0,
+      "fs_lo": 0.0,
+      "fs_hi": 0.003985571325967524,
+      "missed_failure": 240,
+      "caveat_only": 0
+    },
+    {
+      "method": "B7_csvf_full",
+      "branch": "BRANCH_D",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 960,
+      "invalid_covered": 960,
+      "det_rate": 1.0,
+      "det_lo": 0.9960144286740324,
+      "det_hi": 1.0,
+      "fs_soft": 0,
+      "fs_hard": 20,
+      "fs_total": 20,
+      "valid_covered": 560,
+      "fs_rate": 0.03571428571428571,
+      "fs_lo": 0.023236576816555957,
+      "fs_hi": 0.05451836331906437,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B7_csvf_full",
+      "branch": "BRANCH_D",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 880,
+      "invalid_covered": 880,
+      "det_rate": 1.0,
+      "det_lo": 0.9956536787874171,
+      "det_hi": 1.0,
+      "fs_soft": 0,
+      "fs_hard": 454,
+      "fs_total": 454,
+      "valid_covered": 560,
+      "fs_rate": 0.8107142857142857,
+      "fs_lo": 0.7761939409040802,
+      "fs_hi": 0.8410008299282353,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B7_csvf_full",
+      "branch": "BRANCH_E",
+      "system": "holdem",
+      "applicable_cells": 1520,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 160,
+      "invalid_covered": 160,
+      "det_rate": 1.0,
+      "det_lo": 0.976553804467286,
+      "det_hi": 1.0,
+      "fs_soft": 0,
+      "fs_hard": 80,
+      "fs_total": 80,
+      "valid_covered": 80,
+      "fs_rate": 1.0,
+      "fs_lo": 0.9541818697747756,
+      "fs_hi": 0.9999999999999999,
+      "missed_failure": 0,
+      "caveat_only": 0
+    },
+    {
+      "method": "B7_csvf_full",
+      "branch": "BRANCH_E",
+      "system": "ising",
+      "applicable_cells": 1440,
+      "abstained": 0,
+      "coverage": 1.0,
+      "det_strict_n": 80,
+      "invalid_covered": 80,
+      "det_rate": 1.0,
+      "det_lo": 0.9541818697747756,
+      "det_hi": 0.9999999999999999,
+      "fs_soft": 0,
+      "fs_hard": 33,
+      "fs_total": 33,
+      "valid_covered": 80,
+      "fs_rate": 0.4125,
+      "fs_lo": 0.3110585753931505,
+      "fs_hi": 0.5219595973962636,
+      "missed_failure": 0,
+      "caveat_only": 0
+    }
+  ],
+  "case_seed_correct_counts": [
+    {
+      "system": "holdem",
+      "construction": "G01",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "holdem",
+      "construction": "G02",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 80,
+        "BRANCH_E": 80
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "holdem",
+      "construction": "G03",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "holdem",
+      "construction": "G04",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "holdem",
+      "construction": "G05",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "holdem",
+      "construction": "G06",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "holdem",
+      "construction": "G07",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "holdem",
+      "construction": "G08",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "holdem",
+      "construction": "G09",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "holdem",
+      "construction": "G10",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "holdem",
+      "construction": "G11",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "holdem",
+      "construction": "G12",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "holdem",
+      "construction": "G13",
+      "B0_schedule_only": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "holdem",
+      "construction": "G14",
+      "B0_schedule_only": {
+        "BRANCH_A": 20,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 20,
+        "BRANCH_B": 20,
+        "BRANCH_C": 80,
+        "BRANCH_D": 60,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "holdem",
+      "construction": "G15",
+      "B0_schedule_only": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "holdem",
+      "construction": "G16",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 80,
+        "BRANCH_E": 80
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 80,
+        "BRANCH_E": 80
+      }
+    },
+    {
+      "system": "holdem",
+      "construction": "G17",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "holdem",
+      "construction": "G18",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "holdem",
+      "construction": "G19",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 80,
+        "BRANCH_E": 80
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 80,
+        "BRANCH_E": 80
+      }
+    },
+    {
+      "system": "ising",
+      "construction": "G01",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 7,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "ising",
+      "construction": "G02",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 80,
+        "BRANCH_E": 80
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 80,
+        "BRANCH_E": 47
+      }
+    },
+    {
+      "system": "ising",
+      "construction": "G03",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "ising",
+      "construction": "G04",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "ising",
+      "construction": "G05",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "ising",
+      "construction": "G06",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "ising",
+      "construction": "G07",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "ising",
+      "construction": "G08",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "ising",
+      "construction": "G09",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "ising",
+      "construction": "G10",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 7,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "ising",
+      "construction": "G11",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "ising",
+      "construction": "G12",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 7,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "ising",
+      "construction": "G13",
+      "B0_schedule_only": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "ising",
+      "construction": "G14",
+      "B0_schedule_only": {
+        "BRANCH_A": 20,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 20,
+        "BRANCH_B": 20,
+        "BRANCH_C": 80,
+        "BRANCH_D": 5,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "ising",
+      "construction": "G15",
+      "B0_schedule_only": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "ising",
+      "construction": "G16",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 80,
+        "BRANCH_E": 80
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 80,
+        "BRANCH_E": 80
+      }
+    },
+    {
+      "system": "ising",
+      "construction": "G17",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 80,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    },
+    {
+      "system": "ising",
+      "construction": "G18",
+      "B0_schedule_only": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B1_outcome_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B2_trace_aa": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 80,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B3_within_seed_reps": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B4_unpaired_analysis": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B5_cluster_hierarchical": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B6_event_keyed_whitebox": {
+        "BRANCH_A": 0,
+        "BRANCH_B": 0,
+        "BRANCH_C": 0,
+        "BRANCH_D": 0,
+        "BRANCH_E": 0
+      },
+      "B7_csvf_full": {
+        "BRANCH_A": 80,
+        "BRANCH_B": 80,
+        "BRANCH_C": 0,
+        "BRANCH_D": 80,
+        "BRANCH_E": 0
+      }
+    }
+  ],
+  "macro_case_detection_by_branch": {
+    "holdem|B0_schedule_only|BRANCH_A": 0.8553,
+    "holdem|B0_schedule_only|BRANCH_B": 0.0,
+    "holdem|B0_schedule_only|BRANCH_C": 0.0,
+    "holdem|B0_schedule_only|BRANCH_D": 0.0,
+    "holdem|B0_schedule_only|BRANCH_E": 0.0,
+    "holdem|B1_outcome_aa|BRANCH_A": 0.6842,
+    "holdem|B1_outcome_aa|BRANCH_B": 0.6316,
+    "holdem|B1_outcome_aa|BRANCH_C": 0.6842,
+    "holdem|B1_outcome_aa|BRANCH_D": 0.0,
+    "holdem|B1_outcome_aa|BRANCH_E": 0.0,
+    "holdem|B2_trace_aa|BRANCH_A": 0.0,
+    "holdem|B2_trace_aa|BRANCH_B": 0.0,
+    "holdem|B2_trace_aa|BRANCH_C": 1.0,
+    "holdem|B2_trace_aa|BRANCH_D": 0.0,
+    "holdem|B2_trace_aa|BRANCH_E": 0.0,
+    "holdem|B3_within_seed_reps|BRANCH_A": 0.0,
+    "holdem|B3_within_seed_reps|BRANCH_B": 0.5789,
+    "holdem|B3_within_seed_reps|BRANCH_C": 0.1579,
+    "holdem|B3_within_seed_reps|BRANCH_D": 0.0,
+    "holdem|B3_within_seed_reps|BRANCH_E": 0.0,
+    "holdem|B4_unpaired_analysis|BRANCH_A": 0.0,
+    "holdem|B4_unpaired_analysis|BRANCH_B": 0.1053,
+    "holdem|B4_unpaired_analysis|BRANCH_C": 0.0,
+    "holdem|B4_unpaired_analysis|BRANCH_D": 0.0,
+    "holdem|B4_unpaired_analysis|BRANCH_E": 0.0,
+    "holdem|B5_cluster_hierarchical|BRANCH_A": 0.0,
+    "holdem|B5_cluster_hierarchical|BRANCH_B": 0.7895,
+    "holdem|B5_cluster_hierarchical|BRANCH_C": 0.0,
+    "holdem|B5_cluster_hierarchical|BRANCH_D": 0.0,
+    "holdem|B5_cluster_hierarchical|BRANCH_E": 0.0,
+    "holdem|B6_event_keyed_whitebox|BRANCH_A": 0.0,
+    "holdem|B6_event_keyed_whitebox|BRANCH_B": 0.0526,
+    "holdem|B6_event_keyed_whitebox|BRANCH_C": 0.0,
+    "holdem|B6_event_keyed_whitebox|BRANCH_D": 0.1579,
+    "holdem|B6_event_keyed_whitebox|BRANCH_E": 0.1579,
+    "holdem|B7_csvf_full|BRANCH_A": 0.9079,
+    "holdem|B7_csvf_full|BRANCH_B": 0.9605,
+    "holdem|B7_csvf_full|BRANCH_C": 0.8421,
+    "holdem|B7_csvf_full|BRANCH_D": 0.9868,
+    "holdem|B7_csvf_full|BRANCH_E": 0.1053,
+    "ising|B0_schedule_only|BRANCH_A": 0.8472,
+    "ising|B0_schedule_only|BRANCH_B": 0.0,
+    "ising|B0_schedule_only|BRANCH_C": 0.0,
+    "ising|B0_schedule_only|BRANCH_D": 0.0,
+    "ising|B0_schedule_only|BRANCH_E": 0.0,
+    "ising|B1_outcome_aa|BRANCH_A": 0.6667,
+    "ising|B1_outcome_aa|BRANCH_B": 0.6667,
+    "ising|B1_outcome_aa|BRANCH_C": 0.6667,
+    "ising|B1_outcome_aa|BRANCH_D": 0.0,
+    "ising|B1_outcome_aa|BRANCH_E": 0.0,
+    "ising|B2_trace_aa|BRANCH_A": 0.0,
+    "ising|B2_trace_aa|BRANCH_B": 0.0,
+    "ising|B2_trace_aa|BRANCH_C": 1.0,
+    "ising|B2_trace_aa|BRANCH_D": 0.0,
+    "ising|B2_trace_aa|BRANCH_E": 0.0,
+    "ising|B3_within_seed_reps|BRANCH_A": 0.0,
+    "ising|B3_within_seed_reps|BRANCH_B": 0.6111,
+    "ising|B3_within_seed_reps|BRANCH_C": 0.1667,
+    "ising|B3_within_seed_reps|BRANCH_D": 0.0,
+    "ising|B3_within_seed_reps|BRANCH_E": 0.0,
+    "ising|B4_unpaired_analysis|BRANCH_A": 0.0,
+    "ising|B4_unpaired_analysis|BRANCH_B": 0.1111,
+    "ising|B4_unpaired_analysis|BRANCH_C": 0.0,
+    "ising|B4_unpaired_analysis|BRANCH_D": 0.0,
+    "ising|B4_unpaired_analysis|BRANCH_E": 0.0,
+    "ising|B5_cluster_hierarchical|BRANCH_A": 0.0,
+    "ising|B5_cluster_hierarchical|BRANCH_B": 0.8333,
+    "ising|B5_cluster_hierarchical|BRANCH_C": 0.0,
+    "ising|B5_cluster_hierarchical|BRANCH_D": 0.0,
+    "ising|B5_cluster_hierarchical|BRANCH_E": 0.0,
+    "ising|B6_event_keyed_whitebox|BRANCH_A": 0.0,
+    "ising|B6_event_keyed_whitebox|BRANCH_B": 0.0556,
+    "ising|B6_event_keyed_whitebox|BRANCH_C": 0.0,
+    "ising|B6_event_keyed_whitebox|BRANCH_D": 0.1111,
+    "ising|B6_event_keyed_whitebox|BRANCH_E": 0.1111,
+    "ising|B7_csvf_full|BRANCH_A": 0.9028,
+    "ising|B7_csvf_full|BRANCH_B": 0.9583,
+    "ising|B7_csvf_full|BRANCH_C": 0.8333,
+    "ising|B7_csvf_full|BRANCH_D": 0.6847,
+    "ising|B7_csvf_full|BRANCH_E": 0.0882
+  },
+  "contrasts": [
+    {
+      "contrast": "B0_schedule_only - B7 [detect]",
+      "n_cases": 37,
+      "mean_risk_diff": -0.973,
+      "ci_lo": -1.1891891891891893,
+      "ci_hi": -0.7837837837837838,
+      "p_signflip": 9.999000099990002e-05,
+      "p_holm": 0.0012998700129987003
+    },
+    {
+      "contrast": "B0_schedule_only - B7 [fs]",
+      "n_cases": 37,
+      "mean_risk_diff": -0.1443,
+      "ci_lo": -0.29163006756756754,
+      "ci_hi": 0.0024239864864861642,
+      "p_signflip": 0.07929207079292071,
+      "p_holm": 0.4757524247575242
+    },
+    {
+      "contrast": "B1_outcome_aa - B7 [detect]",
+      "n_cases": 37,
+      "mean_risk_diff": -1.2568,
+      "ci_lo": -1.4663851351351351,
+      "ci_hi": -1.0337837837837838,
+      "p_signflip": 9.999000099990002e-05,
+      "p_holm": 0.0012998700129987003
+    },
+    {
+      "contrast": "B1_outcome_aa - B7 [fs]",
+      "n_cases": 37,
+      "mean_risk_diff": -0.0091,
+      "ci_lo": -0.17603040540540538,
+      "ci_hi": 0.14903716216216187,
+      "p_signflip": 0.8873112688731127,
+      "p_holm": 1.0
+    },
+    {
+      "contrast": "B2_trace_aa - B7 [detect]",
+      "n_cases": 37,
+      "mean_risk_diff": -0.9324,
+      "ci_lo": -1.1893581081081082,
+      "ci_hi": -0.6756756756756757,
+      "p_signflip": 9.999000099990002e-05,
+      "p_holm": 0.0012998700129987003
+    },
+    {
+      "contrast": "B2_trace_aa - B7 [fs]",
+      "n_cases": 37,
+      "mean_risk_diff": -0.2524,
+      "ci_lo": -0.38891891891891894,
+      "ci_hi": -0.11991554054054063,
+      "p_signflip": 0.0017998200179982,
+      "p_holm": 0.0125987401259874
+    },
+    {
+      "contrast": "B3_within_seed_reps - B7 [detect]",
+      "n_cases": 37,
+      "mean_risk_diff": -1.0946,
+      "ci_lo": -1.337837837837838,
+      "ci_hi": -0.8581081081081081,
+      "p_signflip": 9.999000099990002e-05,
+      "p_holm": 0.0012998700129987003
+    },
+    {
+      "contrast": "B3_within_seed_reps - B7 [fs]",
+      "n_cases": 37,
+      "mean_risk_diff": -0.1172,
+      "ci_lo": -0.2766976351351352,
+      "ci_hi": 0.035827702702702614,
+      "p_signflip": 0.1414858514148585,
+      "p_holm": 0.7074292570742925
+    },
+    {
+      "contrast": "B4_unpaired_analysis - B7 [detect]",
+      "n_cases": 37,
+      "mean_risk_diff": -1.1486,
+      "ci_lo": -1.3717905405405406,
+      "ci_hi": -0.9121621621621622,
+      "p_signflip": 9.999000099990002e-05,
+      "p_holm": 0.0012998700129987003
+    },
+    {
+      "contrast": "B4_unpaired_analysis - B7 [fs]",
+      "n_cases": 37,
+      "mean_risk_diff": -0.0091,
+      "ci_lo": -0.17603040540540538,
+      "ci_hi": 0.14903716216216187,
+      "p_signflip": 0.8873112688731127,
+      "p_holm": 1.0
+    },
+    {
+      "contrast": "B5_cluster_hierarchical - B7 [detect]",
+      "n_cases": 37,
+      "mean_risk_diff": -1.1486,
+      "ci_lo": -1.3717905405405406,
+      "ci_hi": -0.9121621621621622,
+      "p_signflip": 9.999000099990002e-05,
+      "p_holm": 0.0012998700129987003
+    },
+    {
+      "contrast": "B5_cluster_hierarchical - B7 [fs]",
+      "n_cases": 37,
+      "mean_risk_diff": -0.0632,
+      "ci_lo": -0.23211993243243245,
+      "ci_hi": 0.09663006756756752,
+      "p_signflip": 0.4326567343265673,
+      "p_holm": 1.0
+    },
+    {
+      "contrast": "B6_event_keyed_whitebox - B7 [fs]",
+      "n_cases": 5,
+      "mean_risk_diff": 0.3175,
+      "ci_lo": 0.0,
+      "ci_hi": 0.6711874999999936,
+      "p_signflip": 0.5,
+      "p_holm": 1.0
+    }
+  ],
+  "cost_summary": [],
+  "crn_benefit_exploratory": [],
+  "missing_cells": []
+}
