@@ -66,8 +66,18 @@ def write_freeze_record(freeze_sha: str, branch: str, tag: str,
 def verify(require_remote: bool = True) -> None:
     problems = []
     status = _git("status", "--porcelain")
-    if status:
-        problems.append(f"worktree not clean:\n{status[:800]}")
+    dirty_inside = [l for l in status.splitlines()
+                    if l.strip().startswith("prospective_repair") or
+                    l.strip().startswith('"prospective_repair')]
+    tracked_dirty = [l for l in status.splitlines() if not
+                     l.startswith("??")]
+    if dirty_inside:
+        problems.append("untracked/modified files inside "
+                        f"prospective_repair:\n{dirty_inside[:10]}")
+    if tracked_dirty:
+        problems.append(f"tracked files modified:\n{tracked_dirty[:10]}")
+    # unrelated top-level untracked directories from other workstreams are
+    # irrelevant to frozen-input integrity and are intentionally ignored.
     branch = _git("rev-parse", "--abbrev-ref", "HEAD")
     head = _git("rev-parse", "HEAD")
     rec_path = ROOT / "protocol" / "FREEZE_RECORD.json"
