@@ -36,5 +36,5 @@
   "registration_status": "timestamped freeze on PRIVATE remote; NOT public preregistration",
   "remote": "https://github.com/bagel786/PokemonTCG2.0.git",
   "tag": "claim-specific-prospective-repair-freeze-20260827",
-  "tag_sha": "PENDING_AFTER_TAG_CREATION"
+  "tag_sha": "2bf3cea7a8a31b8e06dda814200ae83c20a163a0"
 }
