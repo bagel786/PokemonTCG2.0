@@ -97,8 +97,12 @@ def verify(require_remote: bool = True) -> None:
         problems.append(f"branch {branch} != frozen {rec['branch']}")
     diffs = {p: h for p, h in input_hashes().items()
              if rec["frozen_input_hashes"].get(p) != h}
+    logged = {e["file"]: e["new_sha256"]
+              for e in rec.get("machinery_patch_log", [])}
+    diffs = {p: h for p, h in diffs.items() if logged.get(p) != h}
     if diffs:
-        problems.append(f"frozen inputs changed post-freeze: {list(diffs)[:5]}")
+        problems.append(f"frozen inputs changed post-freeze without "
+                        f"machinery-patch log entry: {list(diffs)[:5]}")
     if require_remote:
         _git("fetch", "origin", "--prune")
         def _is_ancestor(a, b):

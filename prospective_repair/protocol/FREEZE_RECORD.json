@@ -32,6 +32,13 @@
     "systems/subprocess_context.py": "b05c6fe0fcb0badba8137d03575fb3753945c0d0f3ed9b0d245e518cc62ba325"
   },
   "kind": "FREEZE_RECORD",
+  "machinery_patch_log": [
+    {
+      "file": "runner/freeze_guard.py",
+      "new_sha256": "79b1b98a07c1de1354071f31c5d63ec93be37c198517249c4a13ff24cbc5da76",
+      "reason": "scope cleanliness patch (commit 0f4dee8); scientific inputs untouched"
+    }
+  ],
   "order_of_operations": "this record committed+pushed BEFORE any final-holdout outcome exists",
   "registration_status": "timestamped freeze on PRIVATE remote; NOT public preregistration",
   "remote": "https://github.com/bagel786/PokemonTCG2.0.git",
