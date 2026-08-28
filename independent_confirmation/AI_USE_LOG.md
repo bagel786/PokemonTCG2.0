@@ -56,3 +56,14 @@ Append-only. Times are UTC. This log covers this new campaign only; the failed c
 - Scientific decisions influenced: preserved the earlier campaign rather than rewriting its requested paths; omitted experimental, venue, manuscript, figure, and submission artifacts because their prerequisite novelty gate was not met
 - Verification: parsed all JSON and CSV files; checked exact schemas and row counts; decompressed and hashed historical raw archives; compared the failed-campaign tree with the branch base; validated historical tag identity; checked blank human boxes; ran `git diff --check`; scanned the new campaign for common credential patterns
 - Disposition: accepted as a stop record, pending clean-checkout reproduction and human review
+
+## 2026-08-28T00:55:00Z - OpenAI Codex primary agent, clean reproduction
+
+- Provider/tool: OpenAI Codex with local Git and shell access
+- Model/version: GPT-5 family; exact serving build not exposed
+- Purpose: reproduce the committed stop package from a clean detached Git worktree
+- Prompt reference: takeover specification section 18, applied to the stop record because no new scientific campaign exists
+- Files created or modified: `independent_confirmation/CLEAN_REPRODUCTION.md` and final manifest/closeout records only
+- Scientific decisions influenced: none; this verifies preservation and fail-closed state rather than scientific results
+- Verification: checked package commit `f41cc33a7ff2675a0ad01f737682e7565585ef2f` with Python 3.13.2 and Git 2.39.5; verifier passed in 1.21 seconds wall time; failed-campaign tree diff was empty; clean worktree status was empty; key artifact hashes matched
+- Disposition: accepted; temporary detached worktree removed after successful verification
