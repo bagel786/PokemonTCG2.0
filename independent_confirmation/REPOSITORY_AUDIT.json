@@ -1,0 +1,52 @@
+{
+  "kind": "REPOSITORY_AUDIT",
+  "audit_utc": "2026-08-28T00:31:30Z",
+  "repository": "bagel786/PokemonTCG2.0",
+  "repository_url": "https://github.com/bagel786/PokemonTCG2.0",
+  "remote_url": "https://github.com/bagel786/PokemonTCG2.0.git",
+  "visibility": "PRIVATE",
+  "audited_branch": "paper/claim-specific-prospective-repair-20260827",
+  "audited_local_sha": "91ad7fa9571ee0ca10200fd7fe7b589589e8b794",
+  "audited_remote_sha": "91ad7fa9571ee0ca10200fd7fe7b589589e8b794",
+  "previously_audited_sha": "91ad7fa9571ee0ca10200fd7fe7b589589e8b794",
+  "ahead": 0,
+  "behind": 0,
+  "base_tree": "2da5dc0a0d9de11c042ee252fecaa88f7faf177c",
+  "new_branch": "paper/claim-specific-independent-confirmation-20260828",
+  "new_branch_base_sha": "91ad7fa9571ee0ca10200fd7fe7b589589e8b794",
+  "freeze": {
+    "input_sha": "cfeef395ed708ef640ff8e7322b8f2e1ec7550cb",
+    "record_sha": "2bf3cea7a8a31b8e06dda814200ae83c20a163a0",
+    "tag": "claim-specific-prospective-repair-freeze-20260827",
+    "tag_object_sha": "cb88ce6f27739bc71c2aa434e9c3a5d602bd2de3",
+    "peeled_sha": "2bf3cea7a8a31b8e06dda814200ae83c20a163a0",
+    "remote_verified": true,
+    "frozen_input_hashes_checked": 27,
+    "frozen_input_hashes_matched": 27,
+    "description": "private Git-timestamped prospective freeze; not public preregistration"
+  },
+  "raw_holdout": {
+    "rows": 125600,
+    "uncompressed_sha256": "792b6fd0a830c0c1b357becb0e7be661a8ceb9147b3a6ec2faadf604c5e447b1",
+    "compressed_sha256": "b22ad70dfe9732990184e0a8ee117193bb385dca92388f2ea236c8092b04919b",
+    "xz_test_passed": true
+  },
+  "cost_bank": {
+    "rows": 4800,
+    "uncompressed_sha256": "17c1f296bf6821ea5638109e329e0122f6e40fc3528c04f56935c9fb4a2e8237",
+    "compressed_sha256": "e1cf7efaaa3cb14abdeef3bed05e81d9fe720c8f3aefac857aa2d741ef11589b",
+    "xz_test_passed": true
+  },
+  "original_worktree_untracked": [
+    {
+      "path": "resource_envelope_study/runs/smoke_local/raw_cases.jsonl",
+      "bytes": 2898342,
+      "sha256": "fbd14392f6dd852b0d456291c6cb376df386ab48e231fee810a71a2b85138dba",
+      "disposition": "UNTOUCHED_UNRELATED_USER_FILE"
+    }
+  ],
+  "prior_campaign_status": "NOT_READY_DO_NOT_SUBMIT",
+  "lineage_resolved": true,
+  "raw_data_resolved": true,
+  "freeze_history_resolved": true
+}
