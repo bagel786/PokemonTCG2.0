@@ -33,4 +33,15 @@ Append-only. Times are UTC. This log covers this new campaign only; the failed c
 - Files created or modified: none
 - Scientific decisions influenced: novelty evidence only; no authority to decide the gate
 - Verification: primary agent independently opens every source used in the final novelty matrix
-- Disposition: pending receipt at this entry
+- Disposition: rejected/no findings used. The subagent did not return a usable report before interruption; the primary agent performed and documented the full source search and verification directly.
+
+## 2026-08-28T00:45:00Z - OpenAI Codex primary agent, novelty decision
+
+- Provider/tool: OpenAI Codex with web and local repository access
+- Model/version: GPT-5 family; exact serving build not exposed
+- Purpose: conduct the hostile novelty search, resolve flagged prior-work names, inspect full texts, compare proposed contributions against prior art, and decide the mandatory pre-acquisition novelty gate
+- Prompt reference: takeover specification sections 4 and 7; source-by-source queries are preserved in `literature/SEARCH_LOG.md`
+- Files created or modified: `independent_confirmation/literature/SEARCH_LOG.md`, `FULL_TEXT_VERIFICATION.csv`, `NOVELTY_CLAIM_MATRIX.md`, `NOVELTY_VERDICT.json`, and `PROHIBITED_NOVELTY_WORDING.md`
+- Scientific decisions influenced: the campaign status is `NOT_READY_NOVELTY_FAILURE`; no implementation, new freeze, confirmatory acquisition, analysis, venue selection, or manuscript generation is authorized
+- Verification: inspected relevant sections or pages of 13 primary or official full-text sources; reconciled current titles and publication status for the four explicitly flagged names; parsed the verification ledger and JSON mechanically
+- Disposition: accepted as a fail-closed gate decision, pending human review of the cited literature and inference

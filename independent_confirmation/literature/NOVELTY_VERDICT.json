@@ -1,0 +1,33 @@
+{
+  "kind": "NOVELTY_VERDICT",
+  "evaluated_utc": "2026-08-28T00:45:00Z",
+  "status": "NOT_READY_NOVELTY_FAILURE",
+  "novelty_gate_pass": false,
+  "confirmatory_acquisition_authorized": false,
+  "exact_surviving_contribution": null,
+  "central_reason": "The claim classes, purpose-specific evidence principle, paired-inference distinction, replay distinction, CRN validity/benefit distinction, event alignment, multi-criterion tool comparison, and planted-fault validator benchmarking are established. The remaining integration is a deterministic router tested against truth generated from the same contract, leaving only packaging and application to another domain.",
+  "hard_failures_triggered": [
+    "central contribution is packaging of established components",
+    "framework properties follow from hard-coded rules",
+    "benchmark grammar and classifier share the same semantic source",
+    "no externally sourced or independently adjudicated confirmatory corpus exists",
+    "the surviving distinction is application to paired stochastic evaluations"
+  ],
+  "narrow_reframe_attempted": true,
+  "narrow_reframe": "externally sourced software-quality benchmark of stochastic claim authorization",
+  "narrow_reframe_result": "FAILED_FOR_CURRENT_CAMPAIGN",
+  "narrow_reframe_reason": "The repository contains no independent external gold-standard corpus. A role-separated synthetic bank would remain derived from the router contract, and the benchmark architecture is already represented by published multi-tool and sabotage/fault-injection studies.",
+  "important_sources_full_text_verified": 13,
+  "flagged_name_resolution": {
+    "Sabot": "VERIFIED_NON_PEER_REVIEWED_REPOSITORY",
+    "ASMR-Bench": "VERIFIED_ARXIV_ID_2604_16286_CURRENT_PDF_TITLE_DIFFERS",
+    "MLE-Sabotage": "VERIFIED_AS_BENCHMARK_WITHIN_CTRL_ALT_DECEIT_NOT_SEPARATE_PAPER",
+    "entrapment-FDR": "VERIFIED_NATURE_METHODS_ARTICLE_DOI_10_1038_S41592_025_02719_X"
+  },
+  "outcome_exposure": {
+    "new_campaign_outcomes_created": false,
+    "new_campaign_outcomes_viewed": false,
+    "old_failed_campaign_outcomes_already_exposed": true
+  },
+  "required_next_action": "STOP_BEFORE_IMPLEMENTATION_FREEZE_AND_ACQUISITION"
+}
