@@ -45,3 +45,14 @@ Append-only. Times are UTC. This log covers this new campaign only; the failed c
 - Scientific decisions influenced: the campaign status is `NOT_READY_NOVELTY_FAILURE`; no implementation, new freeze, confirmatory acquisition, analysis, venue selection, or manuscript generation is authorized
 - Verification: inspected relevant sections or pages of 13 primary or official full-text sources; reconciled current titles and publication status for the four explicitly flagged names; parsed the verification ledger and JSON mechanically
 - Disposition: accepted as a fail-closed gate decision, pending human review of the cited literature and inference
+
+## 2026-08-28T00:50:00Z - OpenAI Codex primary agent, stop-package construction
+
+- Provider/tool: OpenAI Codex with local repository and Git access
+- Model/version: GPT-5 family; exact serving build not exposed
+- Purpose: translate the failed novelty gate into a precise machine-readable status, complete fail-closed report, claim ledger, human-accountability portal, disclosure, release disposition, and dependency-minimal verifier
+- Prompt reference: takeover specification sections 19-24 and 27-30
+- Files created or modified: the non-literature status, report, disclosure, reproduction, portal, release, ledger, and verifier artifacts under `independent_confirmation/`
+- Scientific decisions influenced: preserved the earlier campaign rather than rewriting its requested paths; omitted experimental, venue, manuscript, figure, and submission artifacts because their prerequisite novelty gate was not met
+- Verification: parsed all JSON and CSV files; checked exact schemas and row counts; decompressed and hashed historical raw archives; compared the failed-campaign tree with the branch base; validated historical tag identity; checked blank human boxes; ran `git diff --check`; scanned the new campaign for common credential patterns
+- Disposition: accepted as a stop record, pending clean-checkout reproduction and human review

@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "kind": "FAIL_CLOSED_FINAL_STATUS",
+  "evaluated_utc": "2026-08-28T00:50:00Z",
+  "status": "NOT_READY_NOVELTY_FAILURE",
+  "publication_defensible": false,
+  "confirmatory_acquisition_authorized": false,
+  "submission_authorized": false,
+  "repository": {
+    "name": "bagel786/PokemonTCG2.0",
+    "visibility": "PRIVATE",
+    "branch": "paper/claim-specific-independent-confirmation-20260828",
+    "starting_sha": "91ad7fa9571ee0ca10200fd7fe7b589589e8b794",
+    "status_record_parent_sha": "880e4e87d3e94b45a809b887ff4d3b3f3eb35528"
+  },
+  "preserved_failed_campaign": {
+    "path": "prospective_repair",
+    "base_sha": "91ad7fa9571ee0ca10200fd7fe7b589589e8b794",
+    "recorded_status": "NOT_READY_DO_NOT_SUBMIT",
+    "freeze_input_sha": "cfeef395ed708ef640ff8e7322b8f2e1ec7550cb",
+    "freeze_record_commit": "2bf3cea7a8a31b8e06dda814200ae83c20a163a0",
+    "freeze_tag": "claim-specific-prospective-repair-freeze-20260827",
+    "freeze_tag_object_sha": "cb88ce6f27739bc71c2aa434e9c3a5d602bd2de3",
+    "freeze_tag_peeled_sha": "2bf3cea7a8a31b8e06dda814200ae83c20a163a0",
+    "remote_tag_verified": true,
+    "frozen_paths_checked": 27,
+    "frozen_paths_matched": 27,
+    "raw_rows": 125600,
+    "raw_uncompressed_sha256": "792b6fd0a830c0c1b357becb0e7be661a8ceb9147b3a6ec2faadf604c5e447b1",
+    "cost_rows": 4800,
+    "cost_uncompressed_sha256": "17c1f296bf6821ea5638109e329e0122f6e40fc3528c04f56935c9fb4a2e8237"
+  },
+  "new_campaign": {
+    "exact_surviving_contribution": null,
+    "important_sources_full_text_verified": 13,
+    "defects_registered": 55,
+    "confirmatory_constructions": 0,
+    "confirmatory_rows": 0,
+    "confirmatory_outcomes_created": false,
+    "confirmatory_outcomes_viewed": false,
+    "new_freeze_created": false,
+    "new_freeze_tag_created": false,
+    "new_cost_measurements": 0,
+    "new_crn_estimator_replications": 0
+  },
+  "gates": {
+    "repository_lineage": "PASS",
+    "failed_campaign_preservation": "PASS",
+    "novelty": "FAIL",
+    "independence_separation": "NOT_REACHED",
+    "new_campaign_integrity": "NOT_REACHED",
+    "statistical": "NOT_REACHED",
+    "reproduction": "PASS_STOP_RECORD_ONLY",
+    "manuscript": "NOT_REACHED",
+    "venue_and_ethics": "NOT_REACHED"
+  },
+  "stop_reason": "No central contribution survived direct comparison with full-text prior work. The proposed taxonomy and evidence routing package established distinctions; its deterministic router and rule-derived benchmark would test a semantic contract against fixtures produced from the same contract; the only remaining distinction was application to paired stochastic-evaluation claims.",
+  "required_human_actions": [
+    "Review the source-by-source novelty matrix and full-text ledger.",
+    "Confirm the repository lineage, prior-campaign preservation, and defect dispositions.",
+    "Decide whether to abandon this publication plan or authorize a materially different future project with an externally sourced and independently adjudicated corpus.",
+    "Do not submit, register, or release this campaign as a completed study."
+  ],
+  "external_actions": {
+    "journal_submission": false,
+    "journal_portal_access": false,
+    "registration": false,
+    "doi_creation": false,
+    "public_release": false,
+    "external_upload": false,
+    "editor_or_reviewer_contact": false,
+    "fee_or_apc_purchase": false
+  }
+}
