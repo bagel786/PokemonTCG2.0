@@ -22,7 +22,7 @@ Append-only. Times are UTC. This log covers this new campaign only; the failed c
 - Files created or modified: none
 - Scientific decisions influenced: repository-audit completeness only
 - Verification: primary agent independently recomputed all material Git, tag, hash, row-count, and provenance facts
-- Disposition: pending receipt at this entry
+- Disposition: accepted in part after primary verification. The analysis rewrite, omitted bundle-builder freeze coverage, post-outcome gate creation, narrow reaggregation, schema no-op, and missing claimed output were rechecked directly; no outcome-blind assertions were accepted without verification.
 
 ## 2026-08-28T00:25:00Z - OpenAI Codex clean-context hostile-novelty subagent
 

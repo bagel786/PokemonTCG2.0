@@ -69,6 +69,13 @@ The first prospective-repair campaign is preserved at the base commit with D-R1 
 
 The takeover audit independently confirmed additional contradictions in the failed package: `results/final/run_meta.json` records `freeze_sha: null`; the manuscript contains effects outside `[-1,1]`; the cost table is empty; the CRN-benefit section has no eligible cells; and the five-row claim ledger is incomplete. These facts must not be reinterpreted as a valid negative result about the proposed framework.
 
+An independent clean-context inventory then identified two more central integrity failures, both rechecked directly against Git history by the primary auditor:
+
+- Frozen `analysis/analyze.py` had SHA-256 `f31ba00f9bf73f8aed5c3bea41de7735dd77b96a42aafc9c8bd6426cbec481c2` at `cfeef395...`. The current file has SHA-256 `b8f8ef5a4f8bc00bf22c9e4bfffa0c038dc2371bcad24d74ffbe6658c66e5933` after a 151-line-addition/168-line-deletion rewrite in closeout commit `246e2dec...`, after final acquisition ended. That rewrite is not covered by the sole logged machinery exception for `runner/freeze_guard.py`.
+- `runner/bundle_builder.py`, which constructs the evidence consumed by the router and contains two D-R2 root causes, is absent from both the guard's `FROZEN_INPUTS` and the freeze record. Git indicates that it did not change after the freeze, but the prospective guard could not have detected such a change.
+
+The post-outcome gate generator was also added only in closeout commit `246e2dec...`; it hardcodes `provenance_complete = True`, silently assigns identical fallback costs when costs are missing, and claims a conclusion-change CSV exists when it does not. The so-called independent reaggregator contains dead placeholders and verifies only a small Branch-B subset. These facts independently require the old campaign to remain an integrity failure even apart from D-R2.
+
 ## Integrity conclusion
 
-Repository lineage, remote authority, freeze ancestry, tag identity, and raw-data hashes are resolved. The new campaign may therefore record a novelty decision without altering the failed campaign. No confirmatory outcome for a new campaign exists or was accessed.
+Repository lineage, remote authority, freeze ancestry, tag identity, and raw-data hashes are resolved. The freeze history is reconstructable but the old campaign's scientific freeze was not honored by its analysis/closeout path. The new campaign may therefore record a novelty decision without altering or rehabilitating the failed campaign. No confirmatory outcome for a new campaign exists or was accessed.
